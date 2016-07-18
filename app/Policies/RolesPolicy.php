@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Role;
-use App\Libraries\Policy\BasePolicy;
 
 class RolesPolicy extends BasePolicy
 {

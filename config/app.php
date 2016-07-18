@@ -1,11 +1,15 @@
 <?php
 
 return [
-    
-    /**
-     * Application Name - usually shown on the title bar
-     */
-    'name' => 'Laravel Base',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'name' => 'Asasi',
 
 
     /*
@@ -132,13 +136,11 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        // Illuminate\Routing\ControllerServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -157,42 +159,36 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Asasi Service Providers
+         */
+
+        Sands\Asasi\Booted\BootedServiceProvider::class,
+        Sands\Asasi\Foundation\FoundationServiceProvider::class,
+
+        /*
          * Application Service Providers
          */
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Application Libraries 
-         */
-        App\Libraries\Generator\GeneratorServiceProvider::class,
-        App\Libraries\Validate\ValidateProvider::class,
-        App\Libraries\Policy\PolicyProvider::class,
-        App\Libraries\Menu\MenuProvider::class,
-        App\Libraries\Language\LanguageProvider::class,
-        App\Libraries\Menu\AuthMenuServiceProvider::class,
-        App\Libraries\Booted\BootedProvider::class,
-        App\Libraries\FKMigrator\FKMigratorProvider::class,
-        
-        /*
-         * 3rd Party Service Providers
+         * Packages Service Providers
          */
         Former\FormerServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Irazasyed\LaravelIdenticon\ServiceProvider::class,
 
         /*
-         * Modules
+         * Asasi Core ServiceProviders
          */
-        App\Providers\Modules\UsersProvider::class,
-        App\Providers\Modules\UserBlacklistsProvider::class,
-        App\Providers\Modules\RolesProvider::class,
-        App\Providers\Modules\PermissionGroupsProvider::class,
-        App\Providers\Modules\PermissionsProvider::class,
-        App\Providers\Modules\AuthLogsProvider::class,
+        App\Providers\Asasi\UsersProvider::class,
+        App\Providers\Asasi\UserBlacklistsProvider::class,
+        App\Providers\Asasi\RolesProvider::class,
+        App\Providers\Asasi\PermissionGroupsProvider::class,
+        App\Providers\Asasi\PermissionsProvider::class,
+        App\Providers\Asasi\AuthLogsProvider::class,
 
     ],
 

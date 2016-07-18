@@ -8,7 +8,7 @@ class UserBlacklistsValidators extends BaseValidator
     {
         return [
             'until' => 'required',
-            'name' => 'required',
+            'name'  => 'required',
         ];
     }
 
@@ -16,7 +16,7 @@ class UserBlacklistsValidators extends BaseValidator
     {
         return [
             'until' => 'required',
-            'name' => 'required',
+            'name'  => 'required',
         ];
     }
 }

@@ -18,7 +18,7 @@ class AuthLogSeeder extends Seeder
         $authLogs = [];
 
         foreach ($authLogs as $authLogData) {
-            AuthLogsRepository::create(new AuthLog, $authLogData);
+            AuthLogsRepository::create(new AuthLog(), $authLogData);
         }
     }
 }

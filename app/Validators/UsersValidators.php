@@ -7,8 +7,8 @@ class UsersValidators extends BaseValidator
     public function store($data)
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users',
             'password' => app('config')->get('auth.password.rules'),
         ];
     }
@@ -16,16 +16,16 @@ class UsersValidators extends BaseValidator
     public function update($data)
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $data['users']->id,
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email,'.$data['users']->id,
         ];
     }
 
     public function doChangePassword($data)
     {
         return [
-            'existing_password' => 'required|matchesHashedPassword:' . auth()->user()->password,
-            'password' => app('config')->get('auth.password.rules') . '|confirmed',
+            'existing_password'     => 'required|matchesHashedPassword:'.auth()->user()->password,
+            'password'              => app('config')->get('auth.password.rules').'|confirmed',
             'password_confirmation' => 'required',
         ];
     }
@@ -33,8 +33,8 @@ class UsersValidators extends BaseValidator
     public function doEditProfile($data)
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
+            'name'       => 'required',
+            'email'      => 'required',
             'avatar_url' => 'url',
         ];
     }

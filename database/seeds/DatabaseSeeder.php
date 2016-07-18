@@ -15,13 +15,15 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         try {
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         $this->call(LaravelBaseSeeder::class);
 
         Model::reguard();
         try {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
     }
 }

@@ -1,18 +1,20 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class PermissionGroup extends Model implements SluggableInterface {
-
+class PermissionGroup extends Model implements SluggableInterface
+{
     use SluggableTrait;
     use RevisionableTrait;
 
-    protected $revisionEnabled = true;
-    protected $revisionCleanup = true;
-    protected $historyLimit = 100;
+    protected $revisionEnabled          = true;
+    protected $revisionCleanup          = true;
+    protected $historyLimit             = 100;
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
@@ -33,5 +35,4 @@ class PermissionGroup extends Model implements SluggableInterface {
     {
         parent::boot();
     }
-
 }

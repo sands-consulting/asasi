@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Permission;
-use App\Libraries\Policy\BasePolicy;
 
 class PermissionsPolicy extends BasePolicy
 {

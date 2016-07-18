@@ -22,9 +22,9 @@ class User extends Model implements AuthenticatableContract,
         RevisionableTrait,
         EntrustUserTrait;
 
-    protected $revisionEnabled = true;
-    protected $revisionCleanup = true;
-    protected $historyLimit = 100;
+    protected $revisionEnabled          = true;
+    protected $revisionCleanup          = true;
+    protected $historyLimit             = 100;
     protected $revisionCreationsEnabled = true;
 
     /**
@@ -33,11 +33,11 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $fillable = [
-        'name', 
-        'email', 
+        'name',
+        'email',
         'password',
         'avatar_url',
-        'is_active'
+        'is_active',
     ];
 
     /**
@@ -61,7 +61,7 @@ class User extends Model implements AuthenticatableContract,
     public function getRevisionFormattedFields()
     {
         return [
-            'is_active' => 'boolean:' . trans('users.inactive') . '|' . trans('users.active'),
+            'is_active' => 'boolean:'.trans('users.inactive').'|'.trans('users.active'),
         ];
     }
 
@@ -72,7 +72,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function status()
     {
-        if($blacklist = $this->getActiveBlacklist()) {
+        if ($blacklist = $this->getActiveBlacklist()) {
             return trans('users.blacklisted_until', ['until' => $blacklist->until]);
         }
         return $this->is_active ? trans('users.active') : trans('users.inactive');
@@ -90,10 +90,11 @@ class User extends Model implements AuthenticatableContract,
 
     public function getAvatarUrl()
     {
-        if($this->avatar_url)
+        if ($this->avatar_url) {
             return $this->avatar_url;
-        else 
+        } else {
             return app('identicon')->getImageDataUri($this->email, 128);
+        }
     }
 
     public static function boot()

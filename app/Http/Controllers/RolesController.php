@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Repositories\RolesRepository;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Html\Builder;
@@ -36,8 +34,8 @@ class RolesController extends Controller
     {
         return app('datatables')
             ->of(Role::whereNotNull('name'))
-            ->editColumn('name', function($role){
-                if(app('policy')->check('App\Http\Controllers\RolesController', 'show', [$role->slug])) {
+            ->editColumn('name', function ($role) {
+                if (app('policy')->check('App\Http\Controllers\RolesController', 'show', [$role->slug])) {
                     return link_to_action('RolesController@show', $role->name, $role->slug);
                 }
                 return $role->name;
@@ -59,11 +57,12 @@ class RolesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $role = RolesRepository::create(new Role, $request->all());
+        $role = RolesRepository::create(new Role(), $request->all());
         $role->perms()->sync($request->get('permissions', []));
         return redirect()->action('RolesController@index')->with('success', trans('roles.created', ['name' => $role->name]));
     }
@@ -72,6 +71,7 @@ class RolesController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
@@ -83,6 +83,7 @@ class RolesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
@@ -95,6 +96,7 @@ class RolesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Role $role)
@@ -108,12 +110,13 @@ class RolesController extends Controller
      * Duplicates the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function duplicate(Role $role)
     {
-        $role->name = $role->name . '-' . str_random(4);
-        $role = RolesRepository::duplicate($role);
+        $role->name = $role->name.'-'.str_random(4);
+        $role       = RolesRepository::duplicate($role);
         return redirect()->action('RolesController@edit', $role->slug)->with('success', trans('roles.created', ['name' => $role->name]));
     }
 
@@ -121,6 +124,7 @@ class RolesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)

@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar_url')->nullable();
             $table->boolean('is_active')->default(1);
             $table->rememberToken();
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\AuthLog;
-use App\Libraries\Policy\BasePolicy;
 
 class AuthLogsPolicy extends BasePolicy
 {

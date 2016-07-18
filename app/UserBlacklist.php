@@ -1,18 +1,20 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class UserBlacklist extends Model implements SluggableInterface {
-
+class UserBlacklist extends Model implements SluggableInterface
+{
     use SluggableTrait;
     use RevisionableTrait;
 
-    protected $revisionEnabled = true;
-    protected $revisionCleanup = true;
-    protected $historyLimit = 100;
+    protected $revisionEnabled          = true;
+    protected $revisionCleanup          = true;
+    protected $historyLimit             = 100;
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
@@ -24,16 +26,16 @@ class UserBlacklist extends Model implements SluggableInterface {
     {
         return [
             'user_id'  => trans('user-blacklists.user_id'),
-            'until'  => trans('user-blacklists.until'),
-            'name'  => trans('user-blacklists.name'),
+            'until'    => trans('user-blacklists.until'),
+            'name'     => trans('user-blacklists.name'),
         ];
     }
 
     public function getRevisionFormattedFields()
     {
         return [
-            'User'  => 'string:%s',
-            'Until'  => 'string:%s',
+            'User'    => 'string:%s',
+            'Until'   => 'string:%s',
             'Reason'  => 'string:%s',
         ];
     }
@@ -43,7 +45,8 @@ class UserBlacklist extends Model implements SluggableInterface {
         return static::orderBy('name')->lists('name', 'id');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
@@ -51,5 +54,4 @@ class UserBlacklist extends Model implements SluggableInterface {
     {
         parent::boot();
     }
-
 }

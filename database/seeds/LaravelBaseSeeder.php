@@ -31,48 +31,48 @@ class LaravelBaseSeeder extends Seeder
 
         $roles = [
             [
-                'id' => 1,
-                'name' => 'Admin',
+                'id'           => 1,
+                'name'         => 'Admin',
                 'display_name' => 'Admin',
-                'description' => 'System Administrator. Can do everything.'
-            ]
+                'description'  => 'System Administrator. Can do everything.',
+            ],
         ];
 
         foreach ($roles as $roleData) {
-            RolesRepository::create(new Role, $roleData);
+            RolesRepository::create(new Role(), $roleData);
         }
 
         $users = [
             [
-                'id' => 1,
-                'name' => 'Admin',
-                'email' => 'admin@example.com',
-                'password' => 'admin',
-                'is_active' => true
-            ]
+                'id'        => 1,
+                'name'      => 'Admin',
+                'email'     => 'admin@example.com',
+                'password'  => 'admin',
+                'is_active' => true,
+            ],
         ];
 
         foreach ($users as $userData) {
             $userData['password'] = app()->make('hash')->make($userData['password']);
-            $user = UsersRepository::create(new User, $userData);
+            $user                 = UsersRepository::create(new User(), $userData);
         }
 
         User::find(1)->attachRole(1);
 
         $permissionGroups = [
             [
-                'name' => 'Auth Logs'
+                'name' => 'Auth Logs',
             ],
             [
-                'name' => 'Permissions and Roles'
+                'name' => 'Permissions and Roles',
             ],
             [
-                'name' => 'Users'
+                'name' => 'Users',
             ],
         ];
 
         foreach ($permissionGroups as $permissionGroupData) {
-            PermissionGroupsRepository::create(new PermissionGroup, $permissionGroupData);
+            PermissionGroupsRepository::create(new PermissionGroup(), $permissionGroupData);
         }
 
         $permissions = [
@@ -98,16 +98,16 @@ class LaravelBaseSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission, [
+            PermissionsRepository::create(new Permission(), [
                 'permission_group_id' => $permissionData[0],
-                'name' => $permissionData[1],
-                'display_name' => $permissionData[2],
+                'name'                => $permissionData[1],
+                'display_name'        => $permissionData[2],
             ]);
         }
 
-        $permissionGroup = PermissionGroupsRepository::create(new PermissionGroup, ['name' => 'User Blacklists']);
+        $permissionGroup = PermissionGroupsRepository::create(new PermissionGroup(), ['name' => 'User Blacklists']);
 
-        $permissionGroup->permissions()->saveMany(array_map(function($permissionData){
+        $permissionGroup->permissions()->saveMany(array_map(function ($permissionData) {
             return new Permission($permissionData);
         }, [
             ['name' => 'UserBlacklist:List', 'display_name' => 'List User Blacklist'],
@@ -118,6 +118,5 @@ class LaravelBaseSeeder extends Seeder
             ['name' => 'UserBlacklist:Revisions', 'display_name' => 'View Revisions For User Blacklist'],
             ['name' => 'UserBlacklist:Delete', 'display_name' => 'Delete Existing User Blacklist'],
         ]));
-
     }
 }

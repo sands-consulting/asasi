@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Repositories\UserBlacklistsRepository;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Html\Builder;
@@ -36,8 +34,8 @@ class UserBlacklistsController extends Controller
     {
         return app('datatables')
             ->of(UserBlacklist::where('user_id', $user->id))
-            ->editColumn('name', function($userBlacklist) use ($user) {
-                if(app('policy')->check('App\Http\Controllers\UserBlacklistsController', 'show', [$userBlacklist->slug])) {
+            ->editColumn('name', function ($userBlacklist) use ($user) {
+                if (app('policy')->check('App\Http\Controllers\UserBlacklistsController', 'show', [$userBlacklist->slug])) {
                     return link_to_action('UserBlacklistsController@show', $userBlacklist->name, [$user->slug, $userBlacklist->slug]);
                 }
                 return $userBlacklist->name;
@@ -59,13 +57,14 @@ class UserBlacklistsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, User $user)
     {
-        $data = $request->all();
+        $data            = $request->all();
         $data['user_id'] = $user->id;
-        $userBlacklist = UserBlacklistsRepository::create(new UserBlacklist, $data);
+        $userBlacklist   = UserBlacklistsRepository::create(new UserBlacklist(), $data);
         return redirect()
             ->action('UserBlacklistsController@index', $user->slug)
             ->with('success', trans('user-blacklists.created', ['name' => $userBlacklist->name]));
@@ -75,6 +74,7 @@ class UserBlacklistsController extends Controller
      * Display the specified resource.
      *
      * @param  UserBlacklist  $userBlacklist
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(User $user, UserBlacklist $userBlacklist)
@@ -86,6 +86,7 @@ class UserBlacklistsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  UserBlacklist  $userBlacklist
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user, UserBlacklist $userBlacklist)
@@ -98,6 +99,7 @@ class UserBlacklistsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  UserBlacklist  $userBlacklist
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user, UserBlacklist $userBlacklist)
@@ -112,12 +114,13 @@ class UserBlacklistsController extends Controller
      * Duplicates the specified resource.
      *
      * @param  UserBlacklist  $userBlacklist
+     *
      * @return \Illuminate\Http\Response
      */
     public function duplicate(User $user, UserBlacklist $userBlacklist)
     {
-        $userBlacklist->name = $userBlacklist->name . '-' . str_random(4);
-        $userBlacklist = UserBlacklistsRepository::duplicate($userBlacklist);
+        $userBlacklist->name = $userBlacklist->name.'-'.str_random(4);
+        $userBlacklist       = UserBlacklistsRepository::duplicate($userBlacklist);
         return redirect()
             ->action('UserBlacklistsController@edit', [$user->slug, $userBlacklist->slug])
             ->with('success', trans('user-blacklists.created', ['name' => $userBlacklist->name]));
@@ -127,6 +130,7 @@ class UserBlacklistsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  UserBlacklist  $userBlacklist
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user, UserBlacklist $userBlacklist)
@@ -141,6 +145,7 @@ class UserBlacklistsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  UserBlacklist  $userBlacklist
+     *
      * @return \Illuminate\Http\Response
      */
     public function delete(User $user, UserBlacklist $userBlacklist)
@@ -152,6 +157,7 @@ class UserBlacklistsController extends Controller
      * Displays the revisions of the specified resource.
      *
      * @param  UserBlacklist  $userBlacklist
+     *
      * @return \Illuminate\Http\Response
      */
     public function revisions(User $user, UserBlacklist $userBlacklist)

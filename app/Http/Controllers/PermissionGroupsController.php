@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Repositories\PermissionGroupsRepository;
+<<<<<<< HEAD
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Html\Builder;
+=======
+use yajra\Datatables\Html\Builder;
+>>>>>>> d180ac2... Update to 5.2
 use App\PermissionGroup;
 
 class PermissionGroupsController extends Controller
@@ -34,8 +36,8 @@ class PermissionGroupsController extends Controller
     {
         return app('datatables')
             ->of(PermissionGroup::whereNotNull('name'))
-            ->editColumn('name', function($permissionGroup){
-                if(app('policy')->check('App\Http\Controllers\PermissionGroupsController', 'show', [$permissionGroup->slug])) {
+            ->editColumn('name', function ($permissionGroup) {
+                if (app('policy')->check('App\Http\Controllers\PermissionGroupsController', 'show', [$permissionGroup->slug])) {
                     return link_to_action('PermissionGroupsController@show', $permissionGroup->name, $permissionGroup->slug);
                 }
                 return $permissionGroup->name;
@@ -57,11 +59,12 @@ class PermissionGroupsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $permissionGroup = PermissionGroupsRepository::create(new PermissionGroup, $request->all());
+        $permissionGroup = PermissionGroupsRepository::create(new PermissionGroup(), $request->all());
         return redirect()
             ->action('PermissionGroupsController@index')
             ->with('success', trans('permission-groups.created', ['name' => $permissionGroup->name]));
@@ -71,6 +74,7 @@ class PermissionGroupsController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(PermissionGroup $permissionGroup)
@@ -82,6 +86,7 @@ class PermissionGroupsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(PermissionGroup $permissionGroup)
@@ -94,6 +99,7 @@ class PermissionGroupsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, PermissionGroup $permissionGroup)
@@ -108,12 +114,13 @@ class PermissionGroupsController extends Controller
      * Duplicates the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function duplicate(PermissionGroup $permissionGroup)
     {
-        $permissionGroup->name = $permissionGroup->name . '-' . str_random(4);
-        $permissionGroup = PermissionGroupsRepository::duplicate($permissionGroup);
+        $permissionGroup->name = $permissionGroup->name.'-'.str_random(4);
+        $permissionGroup       = PermissionGroupsRepository::duplicate($permissionGroup);
         return redirect()
             ->action('PermissionGroupsController@edit', $permissionGroup->slug)
             ->with('success', trans('permission-groups.created', ['name' => $permissionGroup->name]));
@@ -123,6 +130,7 @@ class PermissionGroupsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(PermissionGroup $permissionGroup)

@@ -9,14 +9,14 @@ class RolesValidators extends BaseValidator
         return [
             'name'         => 'required|unique:roles',
             'display_name' => 'required',
-            'description' => 'required',
+            'description'  => 'required',
         ];
     }
 
     public function update($data)
     {
         return [
-            'name'         => 'required|unique:roles,id,' . $data['roles']->id,
+            'name'         => 'required|unique:roles,id,'.$data['roles']->id,
             'display_name' => 'required',
             'description'  => 'required',
         ];

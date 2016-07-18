@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Repositories\UsersRepository;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Html\Builder;
@@ -36,13 +34,13 @@ class UsersController extends Controller
     {
         return app('datatables')
             ->of(User::whereNotNull('name'))
-            ->editColumn('name', function($user){
-                if(app('policy')->check('App\Http\Controllers\UsersController', 'show', [$user->slug])) {
+            ->editColumn('name', function ($user) {
+                if (app('policy')->check('App\Http\Controllers\UsersController', 'show', [$user->slug])) {
                     return link_to_action('UsersController@show', $user->name, $user->slug);
                 }
                 return $user->name;
             })
-            ->editColumn('is_active', function($user){
+            ->editColumn('is_active', function ($user) {
                 return $user->status();
             })
             ->make(true);
@@ -62,15 +60,17 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        $input             = $request->all();
         $input['password'] = app('hash')->make($input['password']);
-        $user = UsersRepository::create(new User, $input);
-        if($roles = $request->get('roles'))
+        $user              = UsersRepository::create(new User(), $input);
+        if ($roles = $request->get('roles')) {
             $user->roles()->sync($roles);
+        }
         return redirect()
             ->action('UsersController@index')
             ->with('success', trans('users.created', ['name' => $user->name]));
@@ -80,6 +80,7 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -91,6 +92,7 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -103,13 +105,15 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
         $user = UsersRepository::update($user, $request->all());
-        if($roles = $request->get('roles'))
+        if ($roles = $request->get('roles')) {
             $user->roles()->sync($roles);
+        }
         return redirect()
             ->action('UsersController@edit', $user->slug)
             ->with('success', trans('users.updated', ['name' => $user->name]));
@@ -119,14 +123,15 @@ class UsersController extends Controller
      * Duplicates the specified resource.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function duplicate(User $user)
     {
         $rand = str_random(4);
         $user = UsersRepository::duplicate($user, [
-            'name' => $user->name . '-' . $rand,
-            'email' => $rand . '-' . $user->email,
+            'name'  => $user->name.'-'.$rand,
+            'email' => $rand.'-'.$user->email,
         ]);
         return redirect()
             ->action('UsersController@edit', $user->slug)
@@ -137,6 +142,7 @@ class UsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -148,9 +154,10 @@ class UsersController extends Controller
     }
 
     /**
-     * Deletes the resource
+     * Deletes the resource.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function delete(User $user)
@@ -162,6 +169,7 @@ class UsersController extends Controller
      * Display the specified resource revisions.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function revisions(User $user)
@@ -173,6 +181,7 @@ class UsersController extends Controller
      * Login as user.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function assume(User $user)
@@ -265,6 +274,7 @@ class UsersController extends Controller
      * Activates a user.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function activate(User $user)
@@ -278,6 +288,7 @@ class UsersController extends Controller
      * Deactivates a user.
      *
      * @param  App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function deactivate(User $user)

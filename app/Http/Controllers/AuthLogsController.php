@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Repositories\AuthLogsRepository;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Html\Builder;
@@ -55,11 +53,12 @@ class AuthLogsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $authLog = AuthLogsRepository::create(new AuthLog, $request->all());
+        $authLog = AuthLogsRepository::create(new AuthLog(), $request->all());
         return redirect()
             ->action('AuthLogsController@index')
             ->with('success', trans('auth-logs.created', ['name' => $authLog->name]));
@@ -69,6 +68,7 @@ class AuthLogsController extends Controller
      * Display the specified resource.
      *
      * @param  AuthLog  $authLog
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(AuthLog $authLog)
@@ -80,6 +80,7 @@ class AuthLogsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  AuthLog  $authLog
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(AuthLog $authLog)
@@ -92,6 +93,7 @@ class AuthLogsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  AuthLog  $authLog
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, AuthLog $authLog)
@@ -106,12 +108,13 @@ class AuthLogsController extends Controller
      * Duplicates the specified resource.
      *
      * @param  AuthLog  $authLog
+     *
      * @return \Illuminate\Http\Response
      */
     public function duplicate(AuthLog $authLog)
     {
-        $authLog->name = $authLog->name . '-' . str_random(4);
-        $authLog = AuthLogsRepository::duplicate($authLog);
+        $authLog->name = $authLog->name.'-'.str_random(4);
+        $authLog       = AuthLogsRepository::duplicate($authLog);
         return redirect()
             ->action('AuthLogsController@edit', $authLog->slug)
             ->with('success', trans('auth-logs.created', ['name' => $authLog->name]));
@@ -121,6 +124,7 @@ class AuthLogsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  AuthLog  $authLog
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(AuthLog $authLog)
@@ -135,6 +139,7 @@ class AuthLogsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  AuthLog  $authLog
+     *
      * @return \Illuminate\Http\Response
      */
     public function delete(AuthLog $authLog)
@@ -146,6 +151,7 @@ class AuthLogsController extends Controller
      * Displays the revisions of the specified resource.
      *
      * @param  AuthLog  $authLog
+     *
      * @return \Illuminate\Http\Response
      */
     public function revisions(AuthLog $authLog)

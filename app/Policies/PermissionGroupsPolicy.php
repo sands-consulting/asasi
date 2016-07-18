@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\PermissionGroup;
-use App\Libraries\Policy\BasePolicy;
 
 class PermissionGroupsPolicy extends BasePolicy
 {

@@ -8,8 +8,8 @@ class PermissionsValidators extends BaseValidator
     {
         return [
             'permission_group_id' => 'required',
-            'name' => 'required',
-            'display_name' => 'required',
+            'name'                => 'required',
+            'display_name'        => 'required',
         ];
     }
 
@@ -17,8 +17,8 @@ class PermissionsValidators extends BaseValidator
     {
         return [
             'permission_group_id' => 'required',
-            'name' => 'required',
-            'display_name' => 'required',
+            'name'                => 'required',
+            'display_name'        => 'required',
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\User;
-use App\Libraries\Policy\BasePolicy;
 
 class UsersPolicy extends BasePolicy
 {

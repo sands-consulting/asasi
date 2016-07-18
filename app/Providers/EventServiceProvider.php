@@ -13,14 +13,21 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'auth.login' => ['App\Handlers\Events\AuthEventHandler@handleLogin'],
-        'auth.logout' => ['App\Handlers\Events\AuthEventHandler@handleLogout'],
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\UserLogin',
+        ],
+
+        'Illuminate\Auth\Events\Logout' => [
+            'App\Listeners\UserLogout',
+            'App\Listeners\UnsetApiToken',
+        ],
     ];
 
     /**
      * Register any other events for your application.
      *
      * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     *
      * @return void
      */
     public function boot(DispatcherContract $events)

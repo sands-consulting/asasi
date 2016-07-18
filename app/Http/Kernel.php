@@ -27,15 +27,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth'       => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'role' => Zizaco\Entrust\Middleware\EntrustRole::class,
+        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'role'       => Zizaco\Entrust\Middleware\EntrustRole::class,
         'permission' => Zizaco\Entrust\Middleware\EntrustPermission::class,
-        'ability' => Zizaco\Entrust\Middleware\EntrustAbility::class,
-        'policy' => \App\Http\Middleware\PolicyMiddleware::class,
-        'validate' => \App\Http\Middleware\ValidationMiddleware::class,
-        'menu' => \App\Http\Middleware\MenuMiddleware::class,
-        'title' => \App\Http\Middleware\TitleMiddleware::class,
+        'ability'    => Zizaco\Entrust\Middleware\EntrustAbility::class,
+        'policy'     => \App\Http\Middleware\PolicyMiddleware::class,
+        'validate'   => \App\Http\Middleware\ValidationMiddleware::class,
+        'menu'       => \App\Http\Middleware\MenuMiddleware::class,
+        'title'      => \App\Http\Middleware\TitleMiddleware::class,
     ];
 }

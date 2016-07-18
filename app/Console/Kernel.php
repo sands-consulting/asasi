@@ -13,16 +13,14 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Libraries\Installer\InstallerCommand::class,
-        \App\Libraries\Generator\GeneratorCommand::class,
-        \App\Libraries\Degenerator\DegeneratorCommand::class,
-        \App\Libraries\FKMigrator\FKMigratorCommand::class,
+        \Sands\Asasi\Foundation\Console\InstallerCommand::class,
     ];
 
     /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)
