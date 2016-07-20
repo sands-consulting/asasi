@@ -2,34 +2,25 @@
 
 namespace App;
 
-use Zizaco\Entrust\EntrustRole;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Venturecraft\Revisionable\RevisionableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends EntrustRole implements SluggableInterface
+class Role extends Model
 {
-    use SluggableTrait;
-    use RevisionableTrait;
-
-    protected $revisionEnabled          = true;
-    protected $revisionCleanup          = true;
-    protected $historyLimit             = 100;
-    protected $revisionCreationsEnabled = true;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
         'display_name',
-        'description',
+        'description'
     ];
 
-    public function scopeOptions()
+    public function permissions()
     {
-        return static::orderBy('name')->lists('name', 'id');
+        return $this->belongsToMany(Permission::class);
     }
 
-    public static function boot()
+    public function users()
     {
-        parent::boot();
+        return $this->belongsToMany(User::class);
     }
 }

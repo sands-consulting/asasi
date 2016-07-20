@@ -1,104 +1,67 @@
-<?php
+<?php namespace App;
 
-namespace App;
-
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class User extends Model implements AuthenticatableContract,
-                                    CanResetPasswordContract,
-                                    SluggableInterface
+class User extends Authenticatable
 {
-    use Authenticatable,
-        CanResetPassword,
-        SluggableTrait,
-        RevisionableTrait,
-        EntrustUserTrait;
+    use RevisionableTrait, SoftDeletes;
 
-    protected $revisionEnabled          = true;
-    protected $revisionCleanup          = true;
-    protected $historyLimit             = 100;
-    protected $revisionCreationsEnabled = true;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'avatar_url',
-        'is_active',
+        'status'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    public function getRevisionFormattedFieldNames()
-    {
-        return [
-            'name'       => trans('users.name'),
-            'email'      => trans('users.email'),
-            'password'   => trans('users.password'),
-            'avatar_url' => trans('users.avatar'),
-            'is_active'  => trans('users.is_active'),
-        ];
-    }
+    protected $attributes = [
+        'status' => 'inactive',
+    ];
 
-    public function getRevisionFormattedFields()
+    public function logs()
     {
-        return [
-            'is_active' => 'boolean:'.trans('users.inactive').'|'.trans('users.active'),
-        ];
-    }
-
-    public function scopeOptions()
-    {
-        return static::orderBy('name')->lists('name', 'id');
-    }
-
-    public function status()
-    {
-        if ($blacklist = $this->getActiveBlacklist()) {
-            return trans('users.blacklisted_until', ['until' => $blacklist->until]);
-        }
-        return $this->is_active ? trans('users.active') : trans('users.inactive');
-    }
-
-    public function getActiveBlacklist()
-    {
-        return $this->blacklists()->where('until', '>', date('Y-m-d H:i:s'))->first();
+        return $this->hasMany(UserLog::class);
     }
 
     public function blacklists()
     {
-        return $this->hasMany(UserBlacklist::class, 'user_id');
+        return $this->hasMany(UserBlacklist::class);
     }
 
-    public function getAvatarUrl()
+    public function roles()
     {
-        if ($this->avatar_url) {
-            return $this->avatar_url;
-        } else {
-            return app('identicon')->getImageDataUri($this->email, 128);
-        }
+        return $this->belongsToMany(Role::class);
     }
 
-    public static function boot()
+    public function hasRole($role)
     {
-        parent::boot();
+        return $this->roles()->whereName($role)->count() == 1;
+    }
+
+    public function hasRoles($roles)
+    {
+        return $this->roles()->whereName($roles)->count() > 0;
+    }
+
+    public function hasPermission($permission)
+    {
+        return in_array($permission, $this->cachedPermissions());
+    }
+
+    protected function cachedPermissions()
+    {
+        $that = $this;
+        return Cache::rememberForever('user_permissions_'.$this->getKey(), function () use ($that) {
+            return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
+                                        ->where('permission_role.role_id', $that->roles->lists('id')->toArray())
+                                        ->lists('name')
+                                        ->toArray();
+        });
     }
 }
