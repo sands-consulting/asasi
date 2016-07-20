@@ -9,7 +9,7 @@ return [
     |
     */
 
-    'name' => 'Asasi',
+    'name' => 'Prompt',
 
 
     /*
@@ -23,7 +23,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,12 +182,12 @@ return [
 
         /*
          * Asasi Core ServiceProviders
-         */
+         *
         App\Providers\Asasi\UsersProvider::class,
         App\Providers\Asasi\UserBlacklistsProvider::class,
         App\Providers\Asasi\UserLogsProvider::class,
         App\Providers\Asasi\RolesProvider::class,
-        App\Providers\Asasi\PermissionsProvider::class,
+        App\Providers\Asasi\PermissionsProvider::class, */
     ],
 
     /*

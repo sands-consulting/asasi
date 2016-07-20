@@ -1,4 +1,6 @@
 {
-  "assets/build.css": "assets/build-99720f9d2e.css",
-  "assets/build.js": "assets/build-6da9c393c7.js"
+  "assets/css/admin.css": "assets/css/admin-31e4a4d985.css",
+  "assets/css/public.css": "assets/css/public-e2155c859a.css",
+  "assets/js/admin.js": "assets/js/admin-84ce7084ee.js",
+  "assets/js/public.js": "assets/js/public-e5fc94b378.js"
 }

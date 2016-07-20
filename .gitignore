@@ -1,9 +1,12 @@
-/vendor
+/database/design.mwb.bak
+/database/design.mwb
 /node_modules
+/resources/assets/vendor
+/resources/assets/js/*.map
+/resources/assets/js/*-build.js
+/storage/*.sqlite
+/vendor
 Homestead.yaml
 Homestead.json
 .env
 .DS_Store
-database/design.mwb.bak
-database/design.mwb
-storage/database.sqlite

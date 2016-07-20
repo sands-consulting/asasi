@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ config('app.name') }}</title>
+<link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
+</head>
+<body class="layout-boxed navbar-top">
+<div class="navbar navbar-inverse bg-indigo navbar-fixed-top">
+	<div class="navbar-boxed">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name') }}
+            </a>
+
+			<ul class="nav navbar-nav visible-xs-block">
+				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+			</ul>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-mobile">
+			<ul class="nav navbar-nav navbar-right">
+				@if(Auth::guest())
+				<li><a href="{{ url('login') }}">{{ trans('app.nav.login') }}</a></li>
+				<li><a href="{{ url('register') }}">{{ trans('app.nav.register') }}</a></li>
+				@else
+				<li class="dropdown dropdown-user">
+					<a class="dropdown-toggle" data-toggle="dropdown">
+						<img src="assets/images/placeholder.jpg" alt="">
+						<span>{{ Auth::user()->name }}</span>
+						<i class="caret"></i>
+					</a>
+
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="{{ url('account') }}"><i class="fa fa-user"></i> {{ trans('app.nav.my_account') }}</a></li>
+						<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('app.nav.sign_out') }}</a></li>
+					</ul>
+				</li>
+				@endif
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="navbar navbar-default" id="navbar-second">
+	<div class="navbar-boxed">
+		<ul class="nav navbar-nav no-border visible-xs-block">
+			<li>
+				<a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle">
+					<span class="sr-only">{{ trans('app.nav.toggle') }}</span>
+                	<span class="icon-bar"></span>
+                	<span class="icon-bar"></span>
+                	<span class="icon-bar"></span>
+				</a>
+			</li>
+		</ul>
+
+		<div class="navbar-collapse collapse" id="navbar-second-toggle">
+			<ul class="nav navbar-nav">
+				<li><a href="{{ url('/') }}">{{ trans('app.nav.home') }}</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+@yield('content')
+
+<div class="footer footer-boxed text-muted">{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}</div>
+
+<script src="{{ elixir('assets/js/public.js') }}"></script>
+</body>
+</html>
