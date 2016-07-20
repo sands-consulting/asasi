@@ -185,11 +185,9 @@ return [
          */
         App\Providers\Asasi\UsersProvider::class,
         App\Providers\Asasi\UserBlacklistsProvider::class,
+        App\Providers\Asasi\UserLogsProvider::class,
         App\Providers\Asasi\RolesProvider::class,
-        App\Providers\Asasi\PermissionGroupsProvider::class,
         App\Providers\Asasi\PermissionsProvider::class,
-        App\Providers\Asasi\AuthLogsProvider::class,
-
     ],
 
     /*
