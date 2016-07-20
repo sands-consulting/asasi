@@ -1,0 +1,40 @@
+{
+  "name": "prompt",
+  "version": "1.0.0",
+  "authors": [
+    "Ariff Azraai <azraai@my-sands.com>",
+    "Amin Adha <amin@my-sands.com>"
+  ],
+  "description": "Procurement Management for Projects & Tenders",
+  "keywords": [
+    "prompt",
+    "tender",
+    "procurement"
+  ],
+  "license": "MIT",
+  "homepage": "prompt.sands.consulting",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/vendor",
+    "tests"
+  ],
+  "dependencies": {
+    "blockUI": "blockui#*",
+    "bootstrap-daterangepicker": "^2.1.24",
+    "bootstrap-multiselect": "^0.9.13",
+    "c3": "^0.4.11",
+    "d3": "^4.1.1",
+    "jquery-ui": "jquery.ui#^1.12.0",
+    "jquery.nicescroll": "nicescroll#^3.6.8",
+    "jquery": "^3.1.0",
+    "PACE": "pace#^1.0.2",
+    "switchery": "^0.8.1",
+    "vue": "^1.0.26",
+    "jquery.uniform": "^3.0.0",
+    "legitripple": "^1.1.0",
+    "datatables": "^1.10.12"
+  }
+}

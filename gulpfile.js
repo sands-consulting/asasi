@@ -14,28 +14,36 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
   // styles
   mix
-    .sass('app.scss', 'public/assets/css/app.css')
-    // .less('app.less', 'public/assets/css/app.css')
-    .styles([
-        'bootstrap/dist/css/bootstrap.min.css',
-        'font-awesome/css/font-awesome.min.css',
-        'datatables-bootstrap3-plugin/media/css/datatables-bootstrap3.min.css',
-        'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
-        '../public/assets/css/app.css',
-    ], 'public/assets/build.css', 'node_modules/');
+    .less('public.less', 'public/assets/css/public.css')
+    .less('admin.less', 'public/assets/css/admin.css');
 
   mix
     .scripts([
-        'jquery/dist/jquery.min.js',
-        'bootstrap/dist/js/bootstrap.min.js',
-        'datatables/media/js/jquery.dataTables.min.js',
-        'datatables-bootstrap3-plugin/media/js/datatables-bootstrap3.min.js',
-        'bootbox/bootbox.min.js',
-        'eonasdan-bootstrap-datetimepicker/node_modules/moment/min/moment-with-locales.min.js',
-        'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
-        '../resources/assets/scripts/app.js',
-    ], 'public/assets/build.js', 'node_modules/');
+        '../vendor/PACE/pace.js',
+        '../vendor/jquery/dist/jquery.js',
+        '../vendor/bootstrap/dist/js/bootstrap.js',
+        '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
+        '../vendor/d3/d3.js',
+        '../vendor/c3/c3.js',
+        'public.js',
+    ], 'public/assets/js/public.js');
 
   mix
-    .version(['assets/build.js', 'assets/build.css']);
+    .scripts([
+        '../vendor/PACE/pace.js',
+        '../vendor/jquery/dist/jquery.js',
+        '../vendor/bootstrap/dist/js/bootstrap.js',
+        '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
+        '../vendor/d3/d3.js',
+        '../vendor/c3/c3.js',
+        'admin.js',
+    ], 'public/assets/js/admin.js');
+
+  mix
+    .version([
+        'assets/css/public.css',
+        'assets/css/admin.css',
+        'assets/js/public.js',
+        'assets/js/admin.js',
+    ]);
 });
