@@ -8,6 +8,4 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class Model extends Eloquent
 {
 	use RevisionableTrait;
-
-	protected $revisionCreationsEnabled = true;
 }

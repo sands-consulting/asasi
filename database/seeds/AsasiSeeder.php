@@ -27,12 +27,13 @@ class AsasiSeeder extends Seeder
         DB::table('user_blacklists')->truncate();
         DB::table('password_resets')->truncate();
         DB::table('users')->truncate();
+        DB::table('revisions')->truncate();
 
         $roles = [
             [
-                'name'         => 'admin',
-                'display_name' => 'Admin',
-                'description'  => 'System Administrator. Should be able to do everything.',
+                'name'          => 'admin',
+                'display_name'  => 'Admin',
+                'description'   => 'System Administrator. Should be able to do everything.',
             ],
         ];
 
@@ -44,7 +45,8 @@ class AsasiSeeder extends Seeder
             [
                 'name'      => 'Super Admin',
                 'email'     => 'admin@example.com',
-                'password'  => 'admin123'
+                'password'  => 'admin123',
+                'status'    => 'active',
             ],
         ];
 

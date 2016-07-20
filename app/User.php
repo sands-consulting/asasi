@@ -2,11 +2,10 @@
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
-    use RevisionableTrait, SoftDeletes;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
