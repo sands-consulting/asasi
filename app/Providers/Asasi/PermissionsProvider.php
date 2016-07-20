@@ -51,7 +51,6 @@ class PermissionsProvider extends ServiceProvider
 
     public function booted()
     {
-        // register menus
-        app('menu')->register($this->controller, 'App\Menus\PermissionsMenu');
+        //
     }
 }
