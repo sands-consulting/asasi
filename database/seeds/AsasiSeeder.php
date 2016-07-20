@@ -53,35 +53,36 @@ class AsasiSeeder extends Seeder
             UsersRepository::create(new User(), $userData);
         }
 
-        User::find(1)->attachRole(1);
+        User::find(1)->roles()->attach(Role::first());
 
         $permissions = [
-            ['permission:list',     'List all permissions'],
+            ['permission:index',        'List all permissions'],
 
-            ['role:list',           'List all roles'],
-            ['role:show',           'View role details'],
-            ['role:create',         'Create new role'],
-            ['role:update',         'Update exisiting role'],
-            ['role:revisions',      'View role revisions'],
-            ['role:delete',         'Delete exisiting role'],
+            ['role:index',              'List all roles'],
+            ['role:show',               'View role details'],
+            ['role:create',             'Create new role'],
+            ['role:update',             'Update exisiting role'],
+            ['role:revisions',          'View role revisions'],
+            ['role:delete',             'Delete exisiting role'],
 
-            ['user:list',           'List all users'],
-            ['user:show',           'View user details'],
-            ['user:create',         'Create new user'],
-            ['user:update',         'Update exisiting user'],
-            ['user:revisions',      'View user revisions'],
-            ['user:duplicate',      'Duplicate exisiting user'],
-            ['user:delete',         'Delete existing user'],
+            ['user:index',              'List all users'],
+            ['user:show',               'View user details'],
+            ['user:create',             'Create new user'],
+            ['user:update',             'Update exisiting user'],
+            ['user:revisions',          'View user revisions'],
+            ['user:duplicate',          'Duplicate exisiting user'],
+            ['user:delete',             'Delete existing user'],
+            ['user:assume',             'Login as another user'],
+            ['user:activate',           'Activate a user'],
+            ['user:suspend',            'Suspend a user'],
 
-            ['3', 'User:List', 'List Users'],
-            ['3', 'User:Show', 'View User Details'],
-            ['3', 'User:Create', 'Create New User'],
-            ['3', 'User:Update', 'Update New User'],
-            ['3', 'User:Duplicate', 'Duplicate Existing User'],
-            ['3', 'User:Revisions', 'View User Revisions'],
-            ['3', 'User:Delete', 'Delete Existing User'],
-            ['3', 'User:Assume', 'Login As Another User'],
-            ['3', 'User:Activate', 'Set User Active / Inactive'],
+            ['user-blacklist:index',        'List all user blacklists'],
+            ['user-blacklist:show',         'View blacklist details'],
+            ['user-blacklist:create',       'Blacklist a user'],
+            ['user-blacklist:update',       'Update user blacklist'],
+            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
+            ['user-blacklist:revisions',    'List blacklist revisions'],
+            ['user-blacklist:delete',       'Delete existing user blacklist']
         ];
 
         foreach ($permissions as $permissionData) {
@@ -91,18 +92,6 @@ class AsasiSeeder extends Seeder
             ]);
         }
 
-        $permissionGroup = PermissionGroupsRepository::create(new PermissionGroup(), ['name' => 'User Blacklists']);
-
-        $permissionGroup->permissions()->saveMany(array_map(function ($permissionData) {
-            return new Permission($permissionData);
-        }, [
-            ['name' => 'UserBlacklist:List', 'display_name' => 'List User Blacklist'],
-            ['name' => 'UserBlacklist:Show', 'display_name' => 'View User Blacklist Details'],
-            ['name' => 'UserBlacklist:Create', 'display_name' => 'Create New User Blacklist'],
-            ['name' => 'UserBlacklist:Update', 'display_name' => 'Update Existing User Blacklist'],
-            ['name' => 'UserBlacklist:Duplicate', 'display_name' => 'Duplicate Existing User Blacklist'],
-            ['name' => 'UserBlacklist:Revisions', 'display_name' => 'View Revisions For User Blacklist'],
-            ['name' => 'UserBlacklist:Delete', 'display_name' => 'Delete Existing User Blacklist'],
-        ]));
+        Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
     }
 }

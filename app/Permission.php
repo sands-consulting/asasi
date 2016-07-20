@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Permission extends Model
 {
-    use SoftDeletets;
+    use SoftDeletes;
 
     protected $fillable = [
         'group',
@@ -19,7 +19,7 @@ class Permission extends Model
         return $this->belongsToMany(Role::class);
     }
 
-    protected static function boot()
+    public static function boot()
     {
         parent::boot();
 
