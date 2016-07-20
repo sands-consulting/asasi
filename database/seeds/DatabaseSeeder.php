@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         } catch (Exception $e) {
         }
 
-        $this->call(LaravelBaseSeeder::class);
+        $this->call(AsasiSeeder::class);
 
         Model::reguard();
         try {

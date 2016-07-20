@@ -10,7 +10,7 @@ use App\Permission;
 use App\User;
 use App\Role;
 
-class LaravelBaseSeeder extends Seeder
+class AsasiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,22 +19,20 @@ class LaravelBaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('role_user')->truncate();
         DB::table('permission_role')->truncate();
-        DB::table('users')->truncate();
-        DB::table('roles')->truncate();
+        DB::table('role_user')->truncate();
         DB::table('permissions')->truncate();
-        DB::table('permission_groups')->truncate();
-        DB::table('password_resets')->truncate();
-        DB::table('auth_logs')->truncate();
+        DB::table('roles')->truncate();
+        DB::table('user_logs')->truncate();
         DB::table('user_blacklists')->truncate();
+        DB::table('password_resets')->truncate();
+        DB::table('users')->truncate();
 
         $roles = [
             [
-                'id'           => 1,
-                'name'         => 'Admin',
+                'name'         => 'admin',
                 'display_name' => 'Admin',
-                'description'  => 'System Administrator. Can do everything.',
+                'description'  => 'System Administrator. Should be able to do everything.',
             ],
         ];
 
@@ -44,48 +42,37 @@ class LaravelBaseSeeder extends Seeder
 
         $users = [
             [
-                'id'        => 1,
-                'name'      => 'Admin',
+                'name'      => 'Super Admin',
                 'email'     => 'admin@example.com',
-                'password'  => 'admin',
-                'is_active' => true,
+                'password'  => 'admin123'
             ],
         ];
 
         foreach ($users as $userData) {
             $userData['password'] = app()->make('hash')->make($userData['password']);
-            $user                 = UsersRepository::create(new User(), $userData);
+            UsersRepository::create(new User(), $userData);
         }
 
         User::find(1)->attachRole(1);
 
-        $permissionGroups = [
-            [
-                'name' => 'Auth Logs',
-            ],
-            [
-                'name' => 'Permissions and Roles',
-            ],
-            [
-                'name' => 'Users',
-            ],
-        ];
-
-        foreach ($permissionGroups as $permissionGroupData) {
-            PermissionGroupsRepository::create(new PermissionGroup(), $permissionGroupData);
-        }
-
         $permissions = [
-            ['1', 'AuthLog:List', 'Lists Auth Logs'],
-            ['2', 'PermissionGroup:List', 'List Permission Groups'],
-            ['2', 'Permission:List', 'List Permissions'],
-            ['2', 'Role:List', 'List Role'],
-            ['2', 'Role:Show', 'View Role Details'],
-            ['2', 'Role:Create', 'Create New Role'],
-            ['2', 'Role:Update', 'Update Existing Roles'],
-            ['2', 'Role:Duplicate', 'Duplicate Existing Role'],
-            ['2', 'Role:Revisions', 'View Role Revisions'],
-            ['2', 'Role:Delete', 'Delete Role'],
+            ['permission:list',     'List all permissions'],
+
+            ['role:list',           'List all roles'],
+            ['role:show',           'View role details'],
+            ['role:create',         'Create new role'],
+            ['role:update',         'Update exisiting role'],
+            ['role:revisions',      'View role revisions'],
+            ['role:delete',         'Delete exisiting role'],
+
+            ['user:list',           'List all users'],
+            ['user:show',           'View user details'],
+            ['user:create',         'Create new user'],
+            ['user:update',         'Update exisiting user'],
+            ['user:revisions',      'View user revisions'],
+            ['user:duplicate',      'Duplicate exisiting user'],
+            ['user:delete',         'Delete existing user'],
+
             ['3', 'User:List', 'List Users'],
             ['3', 'User:Show', 'View User Details'],
             ['3', 'User:Create', 'Create New User'],
@@ -99,9 +86,8 @@ class LaravelBaseSeeder extends Seeder
 
         foreach ($permissions as $permissionData) {
             PermissionsRepository::create(new Permission(), [
-                'permission_group_id' => $permissionData[0],
-                'name'                => $permissionData[1],
-                'display_name'        => $permissionData[2],
+                'name'          => $permissionData[0],
+                'description'   => $permissionData[1],
             ]);
         }
 

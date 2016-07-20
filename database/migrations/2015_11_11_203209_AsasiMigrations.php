@@ -80,8 +80,7 @@ class AsasiMigrations extends Migration
             $table->increments('id');
             $table->string('group');
             $table->string('name');
-            $table->string('display_name');
-            $table->string('description')->nullable();
+            $table->string('description');
             $table->nullableTimestamps();
             $table->softDeletes();
             
