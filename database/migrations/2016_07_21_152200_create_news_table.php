@@ -38,27 +38,6 @@ class CreateNewsTable extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::create('news_logs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('action')->index();
-            $table->string('ip_address')->index();
-            $table->unsignedInteger('news_id');
-            $table->unsignedInteger('user_id');
-            $table->nullableTimestamps();
-
-            $table->foreign('news_id')
-                ->references('id')
-                ->on('news')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-        });
-
         Schema::create('banners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
@@ -84,7 +63,6 @@ class CreateNewsTable extends Migration
     public function down()
     {
         Schema::drop('banners');
-        Schema::drop('news_logs');
         Schema::drop('news');
         Schema::drop('news_categories');
     }
