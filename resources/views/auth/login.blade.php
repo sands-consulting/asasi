@@ -15,14 +15,14 @@
 				<div class="form-group has-feedback has-feedback-left">
 					<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
 					<div class="form-control-feedback">
-						<i class="glyphicon glyphicon-user"></i>
+						<i class="icon-user text-muted"></i>
 					</div>
 				</div>
 
 				<div class="form-group has-feedback has-feedback-left">
 					<input type="password" class="form-control" name="password" placeholder="{{ trans('auth.password') }}">
 					<div class="form-control-feedback">
-						<i class="glyphicon glyphicon-lock"></i>
+						<i class="icon-lock2 text-muted"></i>
 					</div>
 				</div>
 
