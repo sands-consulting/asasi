@@ -16,11 +16,11 @@ function flash_messages()
 {
     $content = '';
     if (session('notice')) {
-        $content .= '<script type="text/javascript">flash.notice("'.session('notice').'");</script>';
+        $content .= '<script type="text/javascript">$(function() { flash.notice("'.session('notice').'"); });</script>';
     }
 
     if (session('alert')) {
-        $content .= '<script type="text/javascript">flash.alert("'.session('alert').'");</script>';
+        $content .= '<script type="text/javascript">$(function() { flash.alert("'.session('alert').'"); });</script>';
     }
 
     return $content;

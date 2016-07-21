@@ -78,4 +78,10 @@ class AuthController extends Controller
 
         return redirect()->intended($this->redirectTo);
     }
+
+    protected function sendFailedLoginResponse($request)
+    {
+        return redirect()->back()
+            ->with('alert', $this->getFailedLoginMessage());
+    }
 }

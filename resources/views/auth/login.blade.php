@@ -7,17 +7,6 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">{{trans('auth.login')}}</div>
 				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							{!! trans('auth.problem_input') !!}<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
-
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 						{!! csrf_field() !!}
 
