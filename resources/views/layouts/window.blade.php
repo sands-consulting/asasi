@@ -29,7 +29,7 @@
 				@else
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="assets/images/placeholder.jpg" alt="">
+						{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
 						<span>{{ Auth::user()->name }}</span>
 						<i class="caret"></i>
 					</a>

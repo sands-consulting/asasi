@@ -16,7 +16,8 @@
         "irazasyed/laravel-identicon": "~1.1",
         "yajra/laravel-datatables-oracle": "~6.0",
         "yetanotherape/diff-match-patch": "^1.0",
-        "orchestra/support": "3.2.*"
+        "orchestra/support": "3.2.*",
+        "thomaswelton/laravel-gravatar": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
