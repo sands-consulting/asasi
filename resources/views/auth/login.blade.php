@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 		<div class="panel panel-body login-form">
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+			<form class="form-horizontal" role="form" method="POST" action="{{ url('login') }}">
 				{!! csrf_field() !!}
 
 				<div class="text-center">

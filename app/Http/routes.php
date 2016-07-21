@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::controller('auth', 'Auth\AuthController');
-Route::controller('password', 'Auth\PasswordController');
-
 Route::auth();
+
+Route::get('/', [
+	'uses' => 'HomeController@index',
+	'as' => 'root'
+]);

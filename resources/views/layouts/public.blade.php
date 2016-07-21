@@ -24,8 +24,8 @@
 		<div class="navbar-collapse collapse" id="navbar-mobile">
 			<ul class="nav navbar-nav navbar-right">
 				@if(Auth::guest())
-				<li><a href="{{ url('login') }}">{{ trans('app.nav.login') }}</a></li>
-				<li><a href="{{ url('register') }}">{{ trans('app.nav.register') }}</a></li>
+				<li><a href="{{ url('login') }}">{{ trans('menu.login') }}</a></li>
+				<li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
 				@else
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
@@ -35,8 +35,8 @@
 					</a>
 
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="{{ url('account') }}"><i class="fa fa-user"></i> {{ trans('app.nav.my_account') }}</a></li>
-						<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('app.nav.sign_out') }}</a></li>
+						<li><a href="{{ url('account') }}"><i class="fa fa-user"></i> {{ trans('menu.my_account') }}</a></li>
+						<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('menu.sign_out') }}</a></li>
 					</ul>
 				</li>
 				@endif
@@ -50,7 +50,7 @@
 		<ul class="nav navbar-nav no-border visible-xs-block">
 			<li>
 				<a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle">
-					<span class="sr-only">{{ trans('app.nav.toggle') }}</span>
+					<span class="sr-only">{{ trans('menu.toggle') }}</span>
                 	<span class="icon-bar"></span>
                 	<span class="icon-bar"></span>
                 	<span class="icon-bar"></span>
@@ -60,7 +60,7 @@
 
 		<div class="navbar-collapse collapse" id="navbar-second-toggle">
 			<ul class="nav navbar-nav navbar-nav-material">
-				<li><a href="{{ url('/') }}" class="legitRipple">{{ trans('app.nav.home') }}</a></li>
+				<li><a href="{{ url('/') }}" class="legitRipple">{{ trans('menu.home') }}</a></li>
 			</ul>
 		</div>
 	</div>
