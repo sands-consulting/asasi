@@ -8,4 +8,9 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class Model extends Eloquent
 {
 	use RevisionableTrait;
+
+	public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 }

@@ -7,12 +7,14 @@ use App\User;
 
 class UserLogsRepository extends BaseRepository
 {
-    public static function log(User $user, $action, $ip=null)
+    public static function log(User $user, $action, $item, $ip_address)
     {
         static::create(new UserLog, [
             'user_id' => $user->id,
-            'ip_address' => $ip,
-            'action' => $action
+            'action' => $action,
+            'actionable_id' => $item->id,
+            'actionable_type' => get_class($item),
+            'ip_address' => $ip_address
         ]);
     }
 }
