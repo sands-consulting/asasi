@@ -69,16 +69,13 @@ class AuthController extends Controller
 
     protected function authenticated($request, $user)
     {
-        if($blacklist = $user->getActiveBlacklist()) {
-            app('auth')->logout();
+        if(!$user->active)
+        {
+            Auth::logout();
             return redirect()->action('Auth\AuthController@getLogin')
-                ->with('danger', trans('users.blacklisted_until', ['until' => $blacklist->until]));
+                                ->with('alert', trans('users.login_not_active'));
         }
-        if(!$user->is_active) {
-            app('auth')->logout();
-            return redirect()->action('Auth\AuthController@getLogin')
-                ->with('danger', trans('users.login_not_active'));
-        }
+
         return redirect()->intended($this->redirectTo);
     }
 }
