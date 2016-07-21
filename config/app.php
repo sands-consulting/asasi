@@ -175,7 +175,7 @@ return [
          * Packages Service Providers
          */
         Former\FormerServiceProvider::class,
-        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Irazasyed\LaravelIdenticon\ServiceProvider::class,

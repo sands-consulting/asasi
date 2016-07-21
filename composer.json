@@ -11,7 +11,7 @@
         "sands/asasi-foundation": "~1.0.3",
         "laravelcollective/html": "5.2.*",
         "anahkiasen/former": "^4.0",
-        "cviebrock/eloquent-sluggable": "^3.1",
+        "cviebrock/eloquent-sluggable": "^4.0",
         "venturecraft/revisionable": "1.*",
         "irazasyed/laravel-identicon": "~1.1",
         "yajra/laravel-datatables-oracle": "~6.0",
