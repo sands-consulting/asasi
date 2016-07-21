@@ -38,6 +38,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function getActiveAttribute()
+    {
+        return $this->status == 'active';
+    }
+
     public function hasRole($role)
     {
         return $this->roles()->whereName($role)->count() == 1;
