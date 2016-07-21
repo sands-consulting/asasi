@@ -8,7 +8,7 @@
 <title>{{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
 </head>
-<body class="layout-boxed navbar-top">
+<body class="navbar-top login-container">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
 	<div class="navbar-boxed">
 		<div class="navbar-header">
@@ -45,30 +45,11 @@
 	</div>
 </div>
 
-<div class="navbar navbar-default" id="navbar-second">
-	<div class="navbar-boxed">
-		<ul class="nav navbar-nav no-border visible-xs-block">
-			<li>
-				<a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle">
-					<span class="sr-only">{{ trans('app.nav.toggle') }}</span>
-                	<span class="icon-bar"></span>
-                	<span class="icon-bar"></span>
-                	<span class="icon-bar"></span>
-				</a>
-			</li>
-		</ul>
-
-		<div class="navbar-collapse collapse" id="navbar-second-toggle">
-			<ul class="nav navbar-nav navbar-nav-material">
-				<li><a href="{{ url('/') }}" class="legitRipple">{{ trans('app.nav.home') }}</a></li>
-			</ul>
-		</div>
-	</div>
-</div>
-
 @yield('content')
 
-<div class="footer footer-boxed text-muted">{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}</div>
+<div class="footer footer-boxed text-muted text-center">
+	{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}
+</div>
 
 @yield('scripts')
 <script src="{{ elixir('assets/js/public.js') }}"></script>
