@@ -43,6 +43,15 @@ class User extends Authenticatable
         return $this->status == 'active';
     }
 
+    public function getBlacklistedAttribute()
+    {
+        return $this->blacklists()->active()->count() > 0;
+    }
+
+    /*
+     * ACL functions
+     */
+
     public function hasRole($role)
     {
         return $this->roles()->whereName($role)->count() == 1;
@@ -56,6 +65,16 @@ class User extends Authenticatable
     public function hasPermission($permission)
     {
         return in_array($permission, $this->cachedPermissions());
+    }
+
+    public function hasPermissions($permissions=[])
+    {
+        return count(array_intersect($this->cachedPermissions(), $permissions)) > 0;
+    }
+
+     public function hasAllPermissions($permissions=[])
+    {
+        return count(array_intersect($this->cachedPermissions(), $permissions)) == count($permissions);
     }
 
     protected function cachedPermissions()
