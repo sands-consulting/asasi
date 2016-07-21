@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Orchestra\Support\Traits\QueryFilter;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,17 @@ class User extends Authenticatable
 
     protected $attributes = [
         'status' => 'inactive',
+    ];
+
+    protected $searchable = [
+        'name',
+        'email'
+    ];
+
+    protected $sortable = [
+        'name',
+        'email',
+        'status'
     ];
 
     public function logs()
@@ -46,6 +58,22 @@ class User extends Authenticatable
     public function getBlacklistedAttribute()
     {
         return $this->blacklists()->active()->count() > 0;
+    }
+
+    /*
+     * Wildcard Serch
+     */
+    public function scopeSearch($query, $keyword = '')
+    {
+        return $this->setupWildcardQueryFilter($query, $keyword, $this->searchable);
+    }
+
+    public function scopeSort($query, $inputs)
+    {
+        $orderBy    = $this->getBasicQueryOrderBy($inputs);
+        $direction  = $this->getBasicQueryDirection($inputs);
+        ! empty($orderBy) && $query->orderBy($orderBy, $direction);
+        return $query;
     }
 
     /*
