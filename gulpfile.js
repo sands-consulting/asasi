@@ -21,6 +21,7 @@ elixir(function(mix) {
     .scripts([
         '../vendor/PACE/pace.js',
         '../vendor/jquery/dist/jquery.js',
+        '../vendor/jquery-ujs/src/rails.js',
         '../vendor/bootstrap/dist/js/bootstrap.js',
         '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
         '../vendor/d3/d3.js',
@@ -32,6 +33,7 @@ elixir(function(mix) {
     .scripts([
         '../vendor/PACE/pace.js',
         '../vendor/jquery/dist/jquery.js',
+        '../vendor/jquery-ujs/src/rails.js',
         '../vendor/bootstrap/dist/js/bootstrap.js',
         '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
         '../vendor/d3/d3.js',
