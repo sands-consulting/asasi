@@ -29,12 +29,14 @@
     "d3": "^4.1.1",
     "jquery-ui": "jquery.ui#^1.12.0",
     "jquery.nicescroll": "nicescroll#^3.6.8",
-    "jquery": "^3.1.0",
+    "jquery": "2.2.4",
     "PACE": "pace#^1.0.2",
     "switchery": "^0.8.1",
     "vue": "^1.0.26",
     "jquery.uniform": "^3.0.0",
     "legitripple": "^1.1.0",
-    "datatables": "^1.10.12"
+    "datatables": "^1.10.12",
+    "noty": "^2.3.8",
+    "pnotify": "^3.0.0"
   }
 }
