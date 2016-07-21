@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -83,5 +84,19 @@ class AuthController extends Controller
     {
         return redirect()->back()
             ->with('alert', $this->getFailedLoginMessage());
+    }
+
+    protected function validateLogin(Request $request)
+    {
+
+        $validator = Validator::make($request->only($this->loginUsername(), 'password'), [
+            $this->loginUsername() => 'required',
+            'password' => 'required'
+        ]);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->with('alert', trans('auth.required'));
+        }
     }
 }
