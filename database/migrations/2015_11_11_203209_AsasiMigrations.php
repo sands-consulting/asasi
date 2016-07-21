@@ -30,6 +30,7 @@ class AsasiMigrations extends Migration
         Schema::create('user_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('action');
+            $table->text('remarks');
             $table->string('actionable_type')->nullable();
             $table->integer('actionable_id')->nullable();
             $table->string('ip_address')->nullable();
