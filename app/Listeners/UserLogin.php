@@ -14,6 +14,6 @@ class UserLogin
 
     public function handle($event)
     {
-        UserLogsRepository::log($user, 'login', $this->request->getClientIp());
+        UserLogsRepository::log($event->user, 'login', $this->request->getClientIp());
     }
 }
