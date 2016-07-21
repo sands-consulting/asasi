@@ -48,8 +48,7 @@ elixir(function(mix) {
     ])
     .copy([
       'resources/assets/fonts',
-      'resources/assets/vendor/bootstrap/fonts',
-      'resources/assets/vendor/icomoon-bower/fonts'
+      'resources/assets/vendor/bootstrap/fonts'
     ], 'public/assets/fonts')
     .copy('resources/assets/images', 'public/assets/images')
 });
