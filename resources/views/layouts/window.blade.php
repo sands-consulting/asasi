@@ -45,7 +45,13 @@
 	</div>
 </div>
 
-@yield('content')
+<div class="page-container">
+	<div class="page-content">
+		<div class="content-wrapper">
+			@yield('content')
+		</div>
+	</div>
+</div>
 
 <div class="footer footer-boxed text-muted text-center">
 	{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}
