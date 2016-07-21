@@ -7,7 +7,7 @@ class UserLog extends Model
     protected $fillable = [
         'action',
         'remarks',
-        'ip_adddress',
+        'ip_address',
         'user_id'
     ];
 
