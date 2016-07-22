@@ -29,4 +29,23 @@ class News extends Model
     {
         return $this->belongsTo(NewsCategory::class, 'category_id');
     }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+    public function getRouteKeyName()
+    {   
+        return 'slug';
+    }
 }

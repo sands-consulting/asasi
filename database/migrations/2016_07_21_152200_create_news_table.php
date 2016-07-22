@@ -26,6 +26,7 @@ class CreateNewsTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->unsignedInteger('category_id');
+            $table->unsignedInteger('organization_id');
             $table->string('slug')->index();
             $table->string('status')->index();
             $table->nullableTimestamps();
@@ -34,6 +35,11 @@ class CreateNewsTable extends Migration
             $table->foreign('category_id')
                 ->references('id')
                 ->on('news_categories')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('organization_id')
+                ->references('id')
+                ->on('organizations')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
