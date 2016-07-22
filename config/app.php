@@ -176,10 +176,11 @@ return [
          * Packages Service Providers
          */
         Former\FormerServiceProvider::class,
-        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Irazasyed\LaravelIdenticon\ServiceProvider::class,
+        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
 
         /*
          * Asasi Core ServiceProviders
@@ -189,6 +190,8 @@ return [
         App\Providers\Asasi\UserLogsProvider::class,
         App\Providers\Asasi\RolesProvider::class,
         App\Providers\Asasi\PermissionsProvider::class, */
+
+        App\Providers\Modules\NewsProvider::class,
     ],
 
     /*
@@ -244,7 +247,7 @@ return [
         'Form'       => Collective\Html\FormFacade::class,
         'Datatables' => Yajra\Datatables\Datatables::class,
         'Former'     => Former\Facades\Former::class,
-
+        'Gravatar'   => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
     ],
 
 ];

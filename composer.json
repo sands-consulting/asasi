@@ -11,12 +11,13 @@
         "sands/asasi-foundation": "~1.0.3",
         "laravelcollective/html": "5.2.*",
         "anahkiasen/former": "^4.0",
-        "cviebrock/eloquent-sluggable": "^3.1",
+        "cviebrock/eloquent-sluggable": "^4.0",
         "venturecraft/revisionable": "1.*",
         "irazasyed/laravel-identicon": "~1.1",
         "yajra/laravel-datatables-oracle": "~6.0",
         "yetanotherape/diff-match-patch": "^1.0",
-        "orchestra/support": "3.2.*"
+        "orchestra/support": "3.2.*",
+        "thomaswelton/laravel-gravatar": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -26,19 +26,19 @@
 		<div class="navbar-collapse collapse" id="navbar-mobile">
 			<ul class="nav navbar-nav navbar-right">
 				@if(Auth::guest())
-				<li><a href="{{ url('login') }}">{{ trans('app.nav.login') }}</a></li>
-				<li><a href="{{ url('register') }}">{{ trans('app.nav.register') }}</a></li>
+				<li><a href="{{ url('login') }}">{{ trans('menu.login') }}</a></li>
+				<li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
 				@else
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="assets/images/placeholder.jpg" alt="">
+						{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
 						<span>{{ Auth::user()->name }}</span>
 						<i class="caret"></i>
 					</a>
 
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="{{ url('account') }}"><i class="fa fa-user"></i> {{ trans('app.nav.my_account') }}</a></li>
-						<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('app.nav.sign_out') }}</a></li>
+						<li><a href="{{ url('account') }}"><i class="fa fa-user"></i> {{ trans('menu.my_account') }}</a></li>
+						<li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('menu.sign_out') }}</a></li>
 					</ul>
 				</li>
 				@endif

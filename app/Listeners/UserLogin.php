@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\User;
 use App\Repositories\UserLogsRepository;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,9 @@ class UserLogin
 
     public function handle($event)
     {
-        UserLogsRepository::log($event->user, 'login', $this->request->getClientIp());
+    	$user = $this->request->session()->has('original_user_id') ?
+    				User::find($this->request->session()->get('original_user_id')) :
+    				$event->user;
+        UserLogsRepository::log($event->user, 'login', $user, $this->request->getClientIp());
     }
 }
