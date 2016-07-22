@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3ff6fa7b92db9c76a34d3e88256f5943",
-    "content-hash": "cd08afb4b26f85f010dea6f567cd6bf7",
+    "hash": "f26520e826e843e1773056a6c0903b1d",
+    "content-hash": "05d47b3566f963286d26d53370da062a",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -4245,6 +4245,49 @@
                 "xunit"
             ],
             "time": "2015-10-02 06:51:40"
+        },
+        {
+            "name": "sands/asasi-scaffold",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sands-consulting/asasi-scaffold.git",
+                "reference": "4566e3decab9c69c27a82c908b34609ebc303207"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-scaffold/zipball/4566e3decab9c69c27a82c908b34609ebc303207",
+                "reference": "4566e3decab9c69c27a82c908b34609ebc303207",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sands\\Asasi\\Scaffold\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zulfa Juniadi",
+                    "email": "zulfajuniadi@gmail.com",
+                    "homepage": "https://github.com/zulfajuniadi"
+                },
+                {
+                    "name": "Amin Adha",
+                    "email": "aminadha@gmail.com",
+                    "homepage": "https://github.com/aminadha"
+                }
+            ],
+            "description": "Scaffold Generator",
+            "time": "2016-07-22 04:56:30"
         },
         {
             "name": "sebastian/comparator",
