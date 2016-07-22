@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use Cache;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Support\Traits\QueryFilter;

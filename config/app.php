@@ -178,17 +178,14 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Irazasyed\LaravelIdenticon\ServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
 
         /*
          * Asasi Core ServiceProviders
-         *
-        App\Providers\Asasi\UsersProvider::class,
-        App\Providers\Asasi\UserBlacklistsProvider::class,
-        App\Providers\Asasi\UserLogsProvider::class,
-        App\Providers\Asasi\RolesProvider::class,
-        App\Providers\Asasi\PermissionsProvider::class, */
+         */
+        App\Providers\Asasi\UsersServiceProvider::class,
+        App\Providers\Asasi\RolesServiceProvider::class,
+        App\Providers\Asasi\PermissionsServiceProvider::class,
 
         App\Providers\Modules\NewsProvider::class,
     ],

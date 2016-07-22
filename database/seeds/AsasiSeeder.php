@@ -72,6 +72,7 @@ class AsasiSeeder extends Seeder
             ['user:create',             'Create new user'],
             ['user:update',             'Update exisiting user'],
             ['user:revisions',          'View user revisions'],
+            ['user:logs',               'View user logs'],
             ['user:duplicate',          'Duplicate exisiting user'],
             ['user:delete',             'Delete existing user'],
             ['user:assume',             'Login as another user'],

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\User;
+use Sands\Asasi\Foundation\Repository\Exceptions\RepositoryException;
 
 class UsersRepository extends BaseRepository
 {
@@ -15,27 +16,39 @@ class UsersRepository extends BaseRepository
     public static function resume()
     {
         $user = User::find(app('session')->pull('original_user_id'));
-        if ($user) {
+        if ($user)
+        {
             app('auth')->login($user);
             return $user;
         }
     }
 
-    public static function setActivation(User $user, $activation = false)
+    public static function activate(User $user)
     {
-        $user->is_active = $activation;
+        if($user->status == 'active')
+        {
+            throw new RepositoryException('Activating ' . User::class, $user);
+        }
+
+        $user->status = 'active';
         $user->save();
     }
 
-    public static function changePassword(User $user, $newPassword)
+    public static function suspend(User $user)
     {
-        $user->update([
-            'password' => app('hash')->make($newPassword),
-        ]);
+        if($user->status == 'suspended')
+        {
+            throw new RepositoryException('Suspending ' . User::class, $user);
+        }
+
+        $user->status = 'suspended';
+        $user->save();
     }
 
-    public static function updateProfile(User $user, $data)
+    public static function updatePassword(User $user, $password)
     {
-        $user->update($data);
+        $user->update([
+            'password' => brcypt($password)
+        ]);
     }
 }

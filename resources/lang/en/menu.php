@@ -10,4 +10,11 @@ return [
     'sign_out'      => 'Sign Out',
 
     'home'			=> 'Home',
+    'dashboard'		=> 'Dashboard',
+
+    'administration'	=> 'Administration',
+    'users'				=> 'Users',
+    'roles'				=> 'Roles',
+    'permissions'		=> 'Permissions',
+    'organizations'		=> 'Organizations'
 ];

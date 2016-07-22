@@ -8,22 +8,17 @@ class UsersPolicy extends BasePolicy
 {
     public function index()
     {
-        return $this->user->ability(['Admin'], ['User:List']);
-    }
-
-    public function data()
-    {
-        return $this->index();
+        return $this->user->hasPermission('user:index');
     }
 
     public function show()
     {
-        return $this->user->ability(['Admin'], ['User:Show']);
+        return $this->user->hasPermission('user:show');
     }
 
     public function create()
     {
-        return $this->user->ability(['Admin'], ['User:Create']);
+        return $this->user->hasPermission('user:create');
     }
 
     public function store()
@@ -33,7 +28,7 @@ class UsersPolicy extends BasePolicy
 
     public function edit(User $user)
     {
-        return $this->user->ability(['Admin'], ['User:Update']);
+        return $this->user->hasPermission('user:update');
     }
 
     public function update(User $user)
@@ -41,68 +36,38 @@ class UsersPolicy extends BasePolicy
         return $this->edit($user);
     }
 
+    public function destroy(User $user)
+    {
+        return $this->user->hasPermission('user:delete');
+    }
+
     public function duplicate(User $user)
     {
-        return $this->user->ability(['Admin'], ['User:Duplicate']);
+        return $this->user->hasPermission('user:duplicate');
     }
 
     public function revisions(User $user)
     {
-        return $this->user->ability(['Admin'], ['User:Revisions']);
+        return $this->user->hasPermission('user:revisions');
     }
 
-    public function destroy(User $user)
+    public function logs(User $user)
     {
-        return $this->user->ability(['Admin'], ['User:Delete']);
+        return $this->user->hasPermission('user:logs');
     }
 
     public function assume(User $user)
     {
-        return $this->user->ability(['Admin'], ['User:Assume']) && $this->user->id != $user->id;
+        return $this->user->hasPermission('user:assume');
     }
 
     public function activate(User $user)
     {
-        return $this->user->ability(['Admin'], ['User:Activate']);
+        return $this->user->hasPermission('user:activate');
     }
 
     public function deactivate(User $user)
     {
-        return $this->user->ability(['Admin'], ['User:Activate']);
-    }
-
-    public function resume()
-    {
-        return app('session')->has('original_user');
-    }
-
-    public function delete(User $user)
-    {
-        return $this->destroy($user);
-    }
-
-    public function profile()
-    {
-        return app('auth')->check();
-    }
-
-    public function editProfile()
-    {
-        return app('auth')->check();
-    }
-
-    public function doEditProfile()
-    {
-        return $this->editProfile();
-    }
-
-    public function changePassword()
-    {
-        return app('auth')->check();
-    }
-
-    public function doChangePassword()
-    {
-        return $this->changePassword();
+        return $this->user->hasPermission('user:deactivate');
     }
 }

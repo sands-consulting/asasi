@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Libraries\Policy;
+namespace App\Policies;
 
 use App\User;
-use Illuminate\Auth\AuthManager;
+use Illuminate\Contracts\Auth\Guard;
 
 class BasePolicy
 {
-    public function __construct(AuthManager $auth)
+	protected $auth;
+	protected $user;
+
+    public function __construct(Guard $auth)
     {
         $this->auth    = $auth;
         $this->user    = $this->auth->check() ? $this->auth->user() : new User();

@@ -13,6 +13,10 @@
 
 Route::auth();
 Route::get('/', [
-	'uses' => 'HomeController@index',
-	'as' => 'root'
+	'uses' 	=> 'HomeController@index',
+	'as' 	=> 'root'
+]);
+Route::get('admin', [
+	'uses'	=> 'Admin\UsersController@index',
+	'as'	=> 'admin.root'
 ]);
