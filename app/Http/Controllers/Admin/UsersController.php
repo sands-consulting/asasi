@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
@@ -14,9 +15,9 @@ class UsersController extends Controller
         $this->middleware('policy');
     }
 
-    public function index(Request $request)
+    public function index(UsersDataTable $table)
     {
-        return view('admin.users.index');
+        return $table->render('admin.users.index');
     }
 
     public function create(Request $request)
@@ -84,19 +85,19 @@ class UsersController extends Controller
             ->with('notice', trans('users.notices.assumed', ['name' => $user->name]));
     }
 
-    public function activate(User $user)
+    public function activate(Request $request, User $user)
     {
         UsersRepository::activate($user);
         return redirect()
-            ->route('admin.users.show', $user->id)
-            ->with('success', trans('users.notices.activated', ['name' => $user->name]));
+            ->to($request->input('redirect_to', route('admin.users.show', $user->id)))
+            ->with('notice', trans('users.notices.activated', ['name' => $user->name]));
     }
 
-    public function suspend(User $user)
+    public function suspend(Request $request, User $user)
     {
         UsersRepository::suspend($user);
         return redirect()
-            ->route('admin.users.show', $user->id)
-            ->with('success', trans('users.notices.suspended', ['name' => $user->name]));
+            ->to($request->input('redirect_to', route('admin.users.show', $user->id)))
+            ->with('notice', trans('users.notices.suspended', ['name' => $user->name]));
     }
 }

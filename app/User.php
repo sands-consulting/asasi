@@ -73,6 +73,10 @@ class User extends Authenticatable
     }
 
     /*
+     * Status Control
+     */
+
+    /*
      * ACL functions
      */
 
@@ -106,7 +110,7 @@ class User extends Authenticatable
         $that = $this;
         return Cache::rememberForever('user_permissions_'.$this->getKey(), function () use ($that) {
             return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
-                                        ->where('permission_role.role_id', $that->roles->lists('id')->toArray())
+                                        ->whereIn('permission_role.role_id', $that->roles->lists('id')->toArray())
                                         ->lists('name')
                                         ->toArray();
         });

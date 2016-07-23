@@ -66,8 +66,8 @@ class UsersPolicy extends BasePolicy
         return $this->user->hasPermission('user:activate');
     }
 
-    public function deactivate(User $user)
+    public function suspend(User $user)
     {
-        return $this->user->hasPermission('user:deactivate');
+        return $this->user->hasPermission('user:suspend');
     }
 }

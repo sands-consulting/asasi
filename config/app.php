@@ -241,7 +241,6 @@ return [
         'Entrust'    => Zizaco\Entrust\EntrustFacade::class,
         'Html'       => Collective\Html\HtmlFacade::class,
         'Form'       => Collective\Html\FormFacade::class,
-        'Datatables' => Yajra\Datatables\Datatables::class,
         'Former'     => Former\Facades\Former::class,
         'Gravatar'   => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
     ],

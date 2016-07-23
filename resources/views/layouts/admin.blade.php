@@ -5,6 +5,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-param" content="_token">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
@@ -94,7 +96,7 @@
                                 <a href="{{ route('admin.root') }}"><i class="icon-home4"></i><span>{{ trans('menu.dashboard') }}</span></a>
                             </li>
                             <li class="navigation-header">                               
-                                <span>{{ trans('menu.administration') }}</span> <i class="icon-menu" title="" data-original-title="Forms"></i>
+                                <span>{{ trans('menu.administration') }}</span> <i class="icon-menu" title="{{ trans('menu.administration') }}" data-original-title="{{ trans('menu.administration') }}"></i>
                             </li>
                             @if(Auth::user()->hasPermission('user:index'))
                             <li class="{{ is_path_active('admin/users*') }}">
@@ -141,8 +143,8 @@
     </div>
 </div>
 
-@yield('scripts')
 <script src="{{ elixir('assets/js/admin.js') }}"></script>
+@yield('scripts')
 {!! flash_messages() !!}
 </body>
 </html>

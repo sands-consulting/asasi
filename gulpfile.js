@@ -28,6 +28,7 @@ elixir(function(mix) {
         '../vendor/c3/c3.js',
         '../vendor/pnotify/dist/pnotify.js',
         '../vendor/legitripple/js/ripple.js',
+        'vendor/pnotify.js',
         'public.js',
     ], 'public/assets/js/public.js')
     .scripts([
@@ -35,12 +36,14 @@ elixir(function(mix) {
         '../vendor/jquery/dist/jquery.js',
         '../vendor/jquery-ujs/src/rails.js',
         '../vendor/bootstrap/dist/js/bootstrap.js',
+        '../vendor/datatables/media/js/jquery.dataTables.js',
         '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
         '../vendor/d3/d3.js',
         '../vendor/c3/c3.js',
         '../vendor/pnotify/dist/pnotify.js',
         '../vendor/legitripple/js/ripple.js',
         'vendor/limitless-one.js',
+        'vendor/pnotify.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
     .version([
