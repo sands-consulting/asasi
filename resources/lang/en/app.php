@@ -3,6 +3,6 @@
 return [
 
 	'confirmation' => 'Are you sure?',
-    'footer' => '&copy;:year :name'
+    'footer' => '&copy;:year :name',
 
 ];

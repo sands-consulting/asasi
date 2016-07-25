@@ -45,8 +45,23 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="{{ url('account') }}"><i class="fa fa-user"></i> {{ trans('menu.my_account') }}</a></li>
-                        <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> {{ trans('menu.sign_out') }}</a></li>
+                        <li>
+                            <a href="{{ route('account') }}">
+                                <i class="icon-user"></i> {{ trans('menu.my_account') }}
+                            </a>
+                        </li>
+                        @if(session('original_user_id'))
+                        <li>
+                            <a href="{{ route('account.resume') }}" data-method="POST">
+                                <i class="icon-user-cancel"></i> {{ trans('menu.release_user') }}
+                            </a>
+                        </li>
+                        @endif
+                        <li>
+                            <a href="{{ url('logout') }}">
+                                <i class="icon-switch2"></i> {{ trans('menu.sign_out') }}
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 @endif
@@ -75,11 +90,17 @@
                     <div class="navigation-wrapper collapse" id="user-nav">
                         <ul class="navigation">
                             <li>
-                                <a href="{{ url('account') }}">
-                                    <i class="icon-user-plus"></i> <span>{{ trans('menu.my_account') }}</span>
+                                <a href="{{ route('account') }}">
+                                    <i class="icon-user"></i> <span>{{ trans('menu.my_account') }}</span>
                                 </a>
                             </li>
-                            <li class="divider"></li>
+                            @if(session('original_user_id'))
+                            <li>
+                                <a href="{{ route('account.resume') }}" data-method="POST">
+                                    <i class="icon-user-cancel"></i> {{ trans('menu.release_user') }}
+                                </a>
+                            </li>
+                            @endif
                             <li>
                                 <a href="{{ url('logout') }}">
                                     <i class="icon-switch2"></i> <span>{{ trans('menu.sign_out') }}</span>

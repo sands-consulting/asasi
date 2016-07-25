@@ -14,6 +14,7 @@ class UsersServiceProvider extends ServiceProvider
     public function boot()
     {
         app('policy')->register('App\Http\Controllers\Admin\UsersController', 'App\Policies\UsersPolicy');
+        app('policy')->register('App\Http\Controllers\AccountController', 'App\Policies\AccountPolicy');
     }
 
     /**
@@ -66,7 +67,7 @@ class UsersServiceProvider extends ServiceProvider
                 'uses'  => 'AccountController@edit'
             ]);
             $router->put('account', 'AccountController@update');
-            $router->put('account/resume', [
+            $router->post('account/resume', [
                 'as'    => 'account.resume',
                 'uses'  => 'AccountController@resume'
             ]);
