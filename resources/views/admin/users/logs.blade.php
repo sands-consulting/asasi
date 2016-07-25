@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 
+@section('page-title', implode(' | ', [
+	trans('user-logs.title'),
+	$user->name,
+	trans('users.title')
+]))
+
 @section('header')
 <div class="page-title">
 	<h4>

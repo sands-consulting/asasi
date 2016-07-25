@@ -1,5 +1,7 @@
 @extends('layouts.public')
 
+@section('page-title', trans('account.title'))
+
 @section('content')
 <div class="panel panel-flat">
 	<div class="panel-heading">

@@ -1,5 +1,7 @@
 @extends('layouts.window')
 
+@section('page-title', trans('auth.login'))
+
 @section('content')
 <div class="row">
 	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
