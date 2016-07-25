@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "975c25c93ce731821d42607598b67b2f",
-    "content-hash": "3fabe9a9a80d79d16a300a01e686cdc4",
+    "hash": "623602d63749478932430fa009b8fbae",
+    "content-hash": "6c757bfba7d71c87dc0c1e8513a67a52",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -2107,12 +2107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-foundation.git",
-                "reference": "552a8ccef25f10b86d5626160df1031c9176086c"
+                "reference": "2c45ceaf5ce8aed31dcac5bab94ada9b8eda612a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-foundation/zipball/552a8ccef25f10b86d5626160df1031c9176086c",
-                "reference": "552a8ccef25f10b86d5626160df1031c9176086c",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-foundation/zipball/2c45ceaf5ce8aed31dcac5bab94ada9b8eda612a",
+                "reference": "2c45ceaf5ce8aed31dcac5bab94ada9b8eda612a",
                 "shasum": ""
             },
             "require": {
@@ -4357,6 +4357,49 @@
                 "xunit"
             ],
             "time": "2015-10-02 06:51:40"
+        },
+        {
+            "name": "sands/asasi-scaffold",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sands-consulting/asasi-scaffold.git",
+                "reference": "4566e3decab9c69c27a82c908b34609ebc303207"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-scaffold/zipball/4566e3decab9c69c27a82c908b34609ebc303207",
+                "reference": "4566e3decab9c69c27a82c908b34609ebc303207",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sands\\Asasi\\Scaffold\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zulfa Juniadi",
+                    "email": "zulfajuniadi@gmail.com",
+                    "homepage": "https://github.com/zulfajuniadi"
+                },
+                {
+                    "name": "Amin Adha",
+                    "email": "aminadha@gmail.com",
+                    "homepage": "https://github.com/aminadha"
+                }
+            ],
+            "description": "Scaffold Generator",
+            "time": "2016-07-22 04:56:30"
         },
         {
             "name": "sebastian/comparator",
