@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\DataTables\UsersDataTable;
+use App\DataTables\RevisionsDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\UsersRepository;
@@ -86,9 +87,10 @@ class UsersController extends Controller
         return view('admin.users.logs', compact('user'));
     }
 
-    public function revisions(User $user)
+    public function revisions(User $user, RevisionsDataTable $table)
     {
-        return view('admin.users.revisions', compact('user'));
+        $table->setRevisionable($user);
+        return $table->render('admin.users.revisions', compact('user'));
     }
 
     public function assume(User $user)

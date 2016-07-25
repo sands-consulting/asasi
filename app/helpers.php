@@ -25,3 +25,8 @@ function flash_messages()
 
     return $content;
 }
+
+function blank_icon($value=null)
+{
+    return empty($value) ? '<i class="icon-cross2"></i>' : $value;
+}

@@ -6,6 +6,12 @@
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
+		@if(Auth::user()->hasPermission('user:revisions'))
+		<a href="{{ route('admin.users.revisions', $user->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+			<i class="icon-database-time2"></i> <span>{{ trans('revisions.title') }}</span>
+		</a>
+		@endif
+
 		@if(Auth::user()->status == 'active' && Auth::user()->hasPermission('user:activate'))
 		<a href="{{ route('admin.users.suspend', $user->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
 			<i class="icon-user-block"></i> <span>{{ trans('actions.suspend') }}</span>
