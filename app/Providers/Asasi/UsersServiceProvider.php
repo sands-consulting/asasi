@@ -54,8 +54,7 @@ class UsersServiceProvider extends ServiceProvider
                     'as'    => 'admin.users.duplicate',
                     'uses'  => 'UsersController@duplicate'
                 ]);
-                $router->resource('users',              'UsersController');
-                $router->resource('users.blacklists',   'UserBlacklistsController');
+                $router->resource('users', 'UsersController');
             });
 
             $router->get('account', [
