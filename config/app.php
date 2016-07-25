@@ -164,6 +164,7 @@ return [
 
         Sands\Asasi\Booted\BootedServiceProvider::class,
         Sands\Asasi\Foundation\FoundationServiceProvider::class,
+        Sands\Asasi\Scaffold\ScaffoldServiceProvider::class,
 
         /*
          * Application Service Providers
