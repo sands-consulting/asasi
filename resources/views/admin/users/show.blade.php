@@ -25,7 +25,7 @@
 		@endif
 
 		@if(Auth::user()->id != $user->id && Auth::user()->hasPermission('user:assume'))
-		<a href="{{ route('admin.users.assume', $user->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-warning legitRipple">
+		<a href="{{ route('admin.users.assume', $user->id) }}" data-method="POST" class="btn btn-link btn-float text-size-small has-text text-warning legitRipple">
 			<i class="icon-user-lock"></i> <span>{{ trans('users.buttons.assume') }}</span>
 		</a>
 		@endif
