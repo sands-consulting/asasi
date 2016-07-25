@@ -9,7 +9,7 @@ return [
         'status' => 'Status',
         'roles' => 'Roles',
         'password' => 'Password',
-        'confirm_password' => 'Confirm Password',
+        'password_confirmation' => 'Confirm Password',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
     ],
@@ -17,7 +17,8 @@ return [
     'buttons' => [
         'create' => 'Create New User',
         'edit' => 'Edit User',
-        'assume' => 'Login As This User'
+        'assume' => 'Login As This User',
+        'all' => 'All Users',
     ],
 
     'notices' => [
@@ -38,8 +39,10 @@ return [
         'show' => [
         ],
         'create' => [
+            'title' => 'New User',
         ],
         'edit' => [
+            'title' => 'Edit'
         ]
     ]
 ];

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "baa463b831ffd9a25af30182c618cbc0",
-    "content-hash": "48e8e6f6e06ffe5900ad41461f2bbd8e",
+    "hash": "975c25c93ce731821d42607598b67b2f",
+    "content-hash": "3fabe9a9a80d79d16a300a01e686cdc4",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -2103,16 +2103,16 @@
         },
         {
             "name": "sands/asasi-foundation",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-foundation.git",
-                "reference": "af183259465aa6e881f371e0e533b0ec580e77ac"
+                "reference": "552a8ccef25f10b86d5626160df1031c9176086c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-foundation/zipball/af183259465aa6e881f371e0e533b0ec580e77ac",
-                "reference": "af183259465aa6e881f371e0e533b0ec580e77ac",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-foundation/zipball/552a8ccef25f10b86d5626160df1031c9176086c",
+                "reference": "552a8ccef25f10b86d5626160df1031c9176086c",
                 "shasum": ""
             },
             "require": {
@@ -2148,7 +2148,7 @@
                 "boot",
                 "laravel"
             ],
-            "time": "2016-07-22 11:01:25"
+            "time": "2016-07-25 04:07:22"
         },
         {
             "name": "swiftmailer/swiftmailer",

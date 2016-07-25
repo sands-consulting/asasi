@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "doctrine/dbal": "^2.5",
-        "sands/asasi-foundation": "~1.0.4",
+        "sands/asasi-foundation": "1.0.5",
         "laravelcollective/html": "5.2.*",
         "anahkiasen/former": "^4.0",
         "cviebrock/eloquent-sluggable": "^4.0",

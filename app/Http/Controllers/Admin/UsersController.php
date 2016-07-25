@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 
@@ -22,17 +23,20 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.users.create');
+        return view('admin.users.create', ['user' => new User]);
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $input             = $request->all();
-        $input['password'] = app('hash')->make($input['password']);
-        $user              = UsersRepository::create(new User(), $input);
-        if ($roles = $request->get('roles')) {
+        $inputs             = $request->only('name', 'email', 'password');
+        $inputs['password'] = bcrypt($request->input('password'));
+        $user               = UsersRepository::create(new User, $inputs);
+
+        if ($roles = $request->get('roles', []))
+        {
             $user->roles()->sync($roles);
         }
+
         return redirect()
             ->route('admin.users.show', $user->id)
             ->with('notice', trans('users.notices.created', ['name' => $user->name]));
@@ -48,12 +52,22 @@ class UsersController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $user = UsersRepository::update($user, $request->all());
-        if ($roles = $request->get('roles')) {
+        $inputs = $request->only('name', 'email');
+
+        if($request->has('password'))
+        {
+            $inputs['password'] = bcrypt($request->input('password'));
+        }
+
+        $user = UsersRepository::update($user, $inputs);
+
+        if ($roles = $request->get('roles', []))
+        {
             $user->roles()->sync($roles);
         }
+
         return redirect()
             ->route('admin.users.edit', $user->id)
             ->with('notice', trans('users.notices.updated', ['name' => $user->name]));
