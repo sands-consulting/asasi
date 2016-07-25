@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\User;
-use Yajra\Datatables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
@@ -30,6 +29,11 @@ class UsersDataTable extends DataTable
     {
         $query = User::with('roles');
 
+        if($this->datatables->request->input('q', null))
+        {
+            $query->search($this->datatables->request->input('q', []));
+        }
+
         return $this->applyScopes($query);
     }
 
@@ -45,22 +49,33 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'email',
-            'roles',
-            'status',
+            [
+                'data'  => 'name',
+                'name'  => 'users.name',
+                'title' => trans('users.attributes.name'),
+            ],
+            [
+                'data'  => 'email',
+                'name'  => 'users.email',
+                'title' => trans('users.attributes.email'),
+            ],
+            [
+                'data'          => 'roles',
+                'name'          => 'roles',
+                'searchable'    => false,
+                'orderable'     => false,
+                'title'         => trans('users.attributes.roles'),
+            ],
+            [
+                'data'  => 'status',
+                'name'  => 'status',
+                'title' => trans('users.attributes.status'),
+            ]
         ];
     }
 
     protected function filename()
     {
-        return 'userstables_' . time();
-    }
-
-    protected function getBuilderParameters()
-    {
-        return [
-            'dom' => '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>'
-        ];
+        return 'users_dt_' . time();
     }
 }

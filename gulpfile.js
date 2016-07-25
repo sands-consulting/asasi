@@ -26,8 +26,10 @@ elixir(function(mix) {
         '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
         '../vendor/d3/d3.js',
         '../vendor/c3/c3.js',
+        '../vendor/vue/dist/vue.js',
         '../vendor/pnotify/dist/pnotify.js',
         '../vendor/legitripple/js/ripple.js',
+        '../vendor/select2/dist/js/select2.js',
         'vendor/pnotify.js',
         'public.js',
     ], 'public/assets/js/public.js')
@@ -40,10 +42,13 @@ elixir(function(mix) {
         '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
         '../vendor/d3/d3.js',
         '../vendor/c3/c3.js',
+        '../vendor/vue/dist/vue.js',
         '../vendor/pnotify/dist/pnotify.js',
         '../vendor/legitripple/js/ripple.js',
+        '../vendor/select2/dist/js/select2.js',
         'vendor/limitless-one.js',
         'vendor/pnotify.js',
+        'app.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
     .version([

@@ -3,7 +3,6 @@
 use Cache;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Orchestra\Support\Traits\QueryFilter;
 
 class User extends Authenticatable
 {
@@ -57,24 +56,41 @@ class User extends Authenticatable
     }
 
     /*
-     * Wildcard Serch
+     * Search scopes
      */
-    public function scopeSearch($query, $keyword = '')
+
+    public function scopeSearch($query, $queries = [])
     {
-        return $this->setupWildcardQueryFilter($query, $keyword, $this->searchable);
+        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
+            $keywords = $queries['keywords'];
+            foreach ($this->searchable as $column) {
+                $query->orWhere($column, 'LIKE', "%$keywords%");
+            }
+            unset($queries['keywords']);
+        }
+
+        if (isset($queries['role']) && !empty($queries['role'])) {
+            $role   = $queries['role'];
+            $query->whereHas('roles', function ($roles) use ($role) {
+                $roles->whereId($role);
+            });
+            unset($queries['role']);
+        }
+
+        foreach ($queries as $key => $value) {
+            if (empty($value)) {
+                continue;
+            }
+            $query->orWhere($key, $value);
+        }
     }
 
-    public function scopeSort($query, $inputs)
+    public function scopeSort($query, $column, $direction)
     {
-        $orderBy    = $this->getBasicQueryOrderBy($inputs);
-        $direction  = $this->getBasicQueryDirection($inputs);
-        ! empty($orderBy) && $query->orderBy($orderBy, $direction);
-        return $query;
+        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
+            $query->orderBy($column, $direction);
+        }
     }
-
-    /*
-     * Status Control
-     */
 
     /*
      * ACL functions

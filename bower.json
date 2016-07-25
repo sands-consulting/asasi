@@ -38,6 +38,7 @@
     "datatables": "^1.10.12",
     "noty": "^2.3.8",
     "pnotify": "^3.0.0",
-    "jquery-ujs": "^1.2.1"
+    "jquery-ujs": "^1.2.1",
+    "select2": "^4.0.3"
   }
 }

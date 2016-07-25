@@ -31,9 +31,11 @@ return [
 
     'views' => [
         'index' => [
+            'keywords' => 'Search Name or Email',
+            'role' => 'By Role',
+            'status' => 'By Status'
         ],
         'show' => [
-            'no_roles' => 'No roles assigned'
         ],
         'create' => [
         ],
