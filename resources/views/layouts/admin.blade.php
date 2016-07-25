@@ -130,6 +130,12 @@
                     @yield('header')
                     <a class="heading-elements-toggle"><i class="icon-more"></i></a>
                 </div>
+                @hasSection('secondary-header')
+                <div class="breadcrumb-line">
+                    @yield('secondary-header')
+                    <a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+                </div>
+                @endif
             </div>
 
             <div class="content">

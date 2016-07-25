@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\DataTables\UsersDataTable;
+use App\DataTables\UserLogsDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
@@ -82,9 +83,10 @@ class UsersController extends Controller
             ->with('notice', trans('users.notices.deleted', ['name' => $user->name]));
     }
 
-    public function logs(User $user)
+    public function logs(User $user, UserLogsDataTable $table)
     {
-        return view('admin.users.logs', compact('user'));
+        $table->setActionable($user);
+        return $table->render('admin.users.logs', compact('user'));
     }
 
     public function revisions(User $user, RevisionsDataTable $table)
