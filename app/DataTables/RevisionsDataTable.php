@@ -77,6 +77,6 @@ class RevisionsDataTable extends DataTable
 
     protected function filename()
     {
-        return 'user_revisions_dt_' . time();
+        return 'revisions_dt_' . time();
     }
 }
