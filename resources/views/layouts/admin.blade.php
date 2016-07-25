@@ -114,7 +114,7 @@
                     <div class="category-content no-padding">
                         <ul class="navigation navigation-main navigation-accordion">
                             <li class="{{ is_path_active('admin') }}">
-                                <a href="{{ route('admin.root') }}"><i class="icon-home4"></i><span>{{ trans('menu.dashboard') }}</span></a>
+                                <a href="{{ route('admin') }}"><i class="icon-home4"></i><span>{{ trans('menu.dashboard') }}</span></a>
                             </li>
                             <li class="navigation-header">                               
                                 <span>{{ trans('menu.administration') }}</span> <i class="icon-menu" title="{{ trans('menu.administration') }}" data-original-title="{{ trans('menu.administration') }}"></i>
