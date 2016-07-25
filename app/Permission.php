@@ -2,17 +2,27 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Permission extends Model
 {
-    use SoftDeletes;
+    use RevisionableTrait,
+        SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'group',
         'name',
         'description'
     ];
+
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 
     public function roles()
     {

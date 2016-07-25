@@ -1,10 +1,17 @@
-<?php namespace App;
+<?php
 
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Setting extends Model
 {
-    use SoftDeletes;
+    use RevisionableTrait,
+        SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'key',
@@ -14,6 +21,11 @@ class Setting extends Model
     protected $attributes = [
         'status' => 'active',
     ];
+
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 
     public function item()
     {

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
+
 class UserLog extends Model
 {
     protected $fillable = [
@@ -21,5 +23,10 @@ class UserLog extends Model
     public function actionable()
     {
         return $this->morphTo();
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }

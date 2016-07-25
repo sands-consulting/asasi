@@ -2,12 +2,18 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class NewsCategory extends Model
 {
-    use Sluggable, SoftDeletes;
+    use RevisionableTrait,
+        Sluggable,
+        SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'name',
@@ -21,5 +27,10 @@ class NewsCategory extends Model
     public function news()
     {
         return $this->hasMany(News::class, 'category_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }

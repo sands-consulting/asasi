@@ -7,7 +7,10 @@ use Venturecraft\Revisionable\RevisionableTrait;
 
 class Organization extends Node
 {
-    use RevisionableTrait, SoftDeletes;
+    use RevisionableTrait,
+        SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'name',
@@ -23,6 +26,11 @@ class Organization extends Node
         'name',
         'short_name',
     ];
+
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 
     public function users()
     {
@@ -50,5 +58,10 @@ class Organization extends Node
         $direction  = $this->getBasicQueryDirection($inputs);
         ! empty($orderBy) && $query->orderBy($orderBy, $direction);
         return $query;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }

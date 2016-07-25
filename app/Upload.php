@@ -1,10 +1,15 @@
-<?php namespace App;
+<?php
 
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Upload extends Model
 {
     use SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'name',
@@ -13,6 +18,11 @@ class Upload extends Model
     protected $attributes = [
         'status' => 'active',
     ];
+
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 
     public function uploadable()
     {

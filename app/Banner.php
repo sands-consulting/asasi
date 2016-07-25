@@ -2,11 +2,16 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Banner extends Model
 {
-    use SoftDeletes;
+    use RevisionableTrait,
+        SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'description',
@@ -19,8 +24,18 @@ class Banner extends Model
         'status' => 'active',
     ];
 
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
+
     public function news()
     {
         return $this->belongsTo(News::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }

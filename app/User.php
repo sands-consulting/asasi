@@ -3,10 +3,14 @@
 use Cache;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
-    use SoftDeletes;
+    use RevisionableTrait,
+        SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'name',
@@ -34,6 +38,11 @@ class User extends Authenticatable
         'email',
         'status'
     ];
+
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 
     public function blacklists()
     {
@@ -130,5 +139,10 @@ class User extends Authenticatable
                                         ->lists('name')
                                         ->toArray();
         });
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }

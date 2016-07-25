@@ -3,11 +3,17 @@
 namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class News extends Model
 {
-    use Sluggable, SoftDeletes;
+    use RevisionableTrait,
+        Sluggable,
+        SoftDeletes;
+
+    protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'title',
@@ -19,6 +25,11 @@ class News extends Model
     protected $attributes = [
         'status' => 'draft',
     ];
+
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 
     public function banner()
     {
@@ -47,5 +58,10 @@ class News extends Model
     public function getRouteKeyName()
     {   
         return 'slug';
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }
