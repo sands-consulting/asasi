@@ -65,6 +65,7 @@ class AsasiSeeder extends Seeder
             ['role:create',             'Create new role'],
             ['role:update',             'Update exisiting role'],
             ['role:revisions',          'View role revisions'],
+            ['role:logs',               'View role logs'],
             ['role:delete',             'Delete exisiting role'],
 
             ['user:index',              'List all users'],
@@ -79,13 +80,14 @@ class AsasiSeeder extends Seeder
             ['user:activate',           'Activate a user'],
             ['user:suspend',            'Suspend a user'],
 
-            ['user_blacklist:index',        'List all user blacklists'],
-            ['user_blacklist:show',         'View blacklist details'],
-            ['user_blacklist:create',       'Blacklist a user'],
-            ['user_blacklist:update',       'Update user blacklist'],
-            ['user_blacklist:duplicate',    'Duplicate a blacklist'],
-            ['user_blacklist:revisions',    'List blacklist revisions'],
-            ['user_blacklist:delete',       'Delete existing user blacklist']
+            ['user-blacklist:index',        'List all user blacklists'],
+            ['user-blacklist:show',         'View blacklist details'],
+            ['user-blacklist:create',       'Blacklist a user'],
+            ['user-blacklist:update',       'Update user blacklist'],
+            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
+            ['user-blacklist:revisions',    'List blacklist revisions'],
+            ['user-blacklist:logs',         'View blacklist logs'],
+            ['user-blacklist:delete',       'Delete existing user blacklist']
         ];
 
         foreach ($permissions as $permissionData) {
