@@ -42,6 +42,13 @@
 								<i class="icon-user"></i> {{ trans('menu.my_account') }}
 							</a>
 						</li>
+						@if(Auth::user()->hasPermission('access:admin'))
+						<li>
+							<a href="{{ route('admin') }}">
+								<i class="icon-cog52"></i> {{ trans('menu.admin_area') }}
+							</a>
+						</li>
+						@endif
 						@if(session('original_user_id'))
 						<li>
 							<a href="{{ route('account.resume') }}" data-method="POST">

@@ -6,6 +6,7 @@ return [
 
     'login'         => 'Login',
     'register'      => 'Register',
+    'admin_area'    => 'Admin Area',
     'release_user'  => 'Release User',
     'my_account'    => 'My Account',
     'sign_out'      => 'Sign Out',

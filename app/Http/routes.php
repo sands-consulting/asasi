@@ -18,5 +18,5 @@ Route::get('/', [
 ]);
 Route::get('admin', [
 	'uses'	=> 'Admin\UsersController@index',
-	'as'	=> 'admin.root'
+	'as'	=> 'admin'
 ]);
