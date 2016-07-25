@@ -58,6 +58,9 @@ class AsasiSeeder extends Seeder
         User::find(1)->roles()->attach(Role::first());
 
         $permissions = [
+            ['access:admin',            'Access admin area'],
+            ['access:report',           'Access reporting module'],
+
             ['permission:index',        'List all permissions'],
 
             ['role:index',              'List all roles'],
