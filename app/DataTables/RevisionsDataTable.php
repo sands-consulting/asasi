@@ -55,6 +55,10 @@ class RevisionsDataTable extends DataTable
     {
         return [
             [
+                'data'  => 'key',
+                'title' => trans('revisions.attributes.key')
+            ],
+            [
                 'data'  => 'old_value',
                 'title' => trans('revisions.attributes.old_value'),
             ],
