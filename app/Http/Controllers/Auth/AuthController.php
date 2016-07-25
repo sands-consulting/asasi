@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -24,7 +23,12 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    public $redirectTo = '/';
+    /**
+     * Where to redirect users after login / registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -33,22 +37,21 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
-     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => app('config')->get('auth.password.rules').'|confirmed',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
     }
 
@@ -56,47 +59,14 @@ class AuthController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     *
      * @return User
      */
     protected function create(array $data)
     {
-        return UsersRepository::create(new User(), [
-            'name'     => $data['name'],
-            'email'    => $data['email'],
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
-
-    protected function authenticated($request, $user)
-    {
-        if(!$user->active)
-        {
-            Auth::logout();
-            return redirect()->action('Auth\AuthController@getLogin')
-                                ->with('alert', trans('users.login_not_active'));
-        }
-
-        return redirect()->intended($this->redirectTo);
-    }
-
-    protected function sendFailedLoginResponse($request)
-    {
-        return redirect()->back()
-            ->with('alert', $this->getFailedLoginMessage());
-    }
-
-    protected function validateLogin(Request $request)
-    {
-
-        $validator = Validator::make($request->only($this->loginUsername(), 'password'), [
-            $this->loginUsername() => 'required',
-            'password' => 'required'
-        ]);
-
-        if($validator->fails())
-        {
-            return redirect()->back()->with('alert', trans('auth.required'));
-        }
     }
 }
