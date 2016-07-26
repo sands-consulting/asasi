@@ -7,7 +7,7 @@ use App\Http\Requests\AccountRequest;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
-class AccountController extends Controller
+class ProfileController extends Controller
 {
     public function __construct()
     {
@@ -16,12 +16,12 @@ class AccountController extends Controller
 
     public function show(Guard $auth)
     {
-        return view('account.show', ['user' => $auth->user()]);
+        return view('profile.show', ['user' => $auth->user()]);
     }
 
     public function edit(Guard $auth)
     {
-        return view('account.edit', ['user' => $auth->user()]);
+        return view('profile.edit', ['user' => $auth->user()]);
     }
 
     public function update(AccountRequest $request, Guard $auth)
@@ -34,8 +34,8 @@ class AccountController extends Controller
 
         $user = UsersRepository::update($auth->user(), $inputs);
         return redirect()
-            ->route('account')
-            ->with('notice', trans('account.notices.updated'));
+            ->route('profile')
+            ->with('notice', trans('profile.notices.updated'));
     }
 
     public function resume(Request $request, Guard $auth)
@@ -44,6 +44,6 @@ class AccountController extends Controller
         $original_user = UsersRepository::resume();
         return redirect()
                 ->route('admin.users.show', $current_user->id)
-                ->with('notice', trans('account.notices.resumed', ['name' => $original_user->name]));
+                ->with('notice', trans('profile.notices.resumed', ['name' => $original_user->name]));
     }
 }

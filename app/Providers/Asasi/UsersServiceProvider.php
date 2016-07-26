@@ -14,7 +14,7 @@ class UsersServiceProvider extends ServiceProvider
     public function boot()
     {
         app('policy')->register('App\Http\Controllers\Admin\UsersController', 'App\Policies\UsersPolicy');
-        app('policy')->register('App\Http\Controllers\AccountController', 'App\Policies\AccountPolicy');
+        app('policy')->register('App\Http\Controllers\ProfileController', 'App\Policies\ProfilePolicy');
     }
 
     /**
@@ -57,18 +57,18 @@ class UsersServiceProvider extends ServiceProvider
                 $router->resource('users', 'UsersController');
             });
 
-            $router->get('account', [
-                'as'    => 'account',
-                'uses'  => 'AccountController@show'
+            $router->get('profile', [
+                'as'    => 'profile',
+                'uses'  => 'ProfileController@show'
             ]);
-            $router->get('account/edit', [
-                'as'    => 'account.edit',
-                'uses'  => 'AccountController@edit'
+            $router->get('profile/edit', [
+                'as'    => 'profile.edit',
+                'uses'  => 'ProfileController@edit'
             ]);
-            $router->put('account', 'AccountController@update');
-            $router->post('account/resume', [
-                'as'    => 'account.resume',
-                'uses'  => 'AccountController@resume'
+            $router->put('profile', 'ProfileController@update');
+            $router->post('profile/resume', [
+                'as'    => 'profile.resume',
+                'uses'  => 'ProfileController@resume'
             ]);
         });
     }

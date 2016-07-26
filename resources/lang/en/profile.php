@@ -1,11 +1,11 @@
 <?php
 
 return [
-	'title' => 'My Account',
+	'title' => 'My Profile',
 
 	'attributes' => [
 		'name' => 'Your Name',
-		'email' => 'Your Password',
+		'email' => 'Your Email',
 		'password' => 'Password',
 		'password_confirmation' => 'Confirm Password',
 		'current_password' => 'Current Password',
@@ -15,7 +15,7 @@ return [
 	],
 
 	'notices' => [
-		'updated' => 'Your account succesfully updated',
+		'updated' => 'Your profile succesfully updated',
 		'resumed' => 'Resuming as :name',
 	],
 

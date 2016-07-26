@@ -46,13 +46,13 @@
 
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li>
-                            <a href="{{ route('account') }}">
-                                <i class="icon-user"></i> {{ trans('menu.my_account') }}
+                            <a href="{{ route('profile') }}">
+                                <i class="icon-user"></i> {{ trans('menu.my_profile') }}
                             </a>
                         </li>
                         @if(session('original_user_id'))
                         <li>
-                            <a href="{{ route('account.resume') }}" data-method="POST">
+                            <a href="{{ route('profile.resume') }}" data-method="POST">
                                 <i class="icon-user-cancel"></i> {{ trans('menu.release_user') }}
                             </a>
                         </li>
@@ -90,13 +90,13 @@
                     <div class="navigation-wrapper collapse" id="user-nav">
                         <ul class="navigation">
                             <li>
-                                <a href="{{ route('account') }}">
-                                    <i class="icon-user"></i> <span>{{ trans('menu.my_account') }}</span>
+                                <a href="{{ route('profile') }}">
+                                    <i class="icon-user"></i> <span>{{ trans('menu.my_profile') }}</span>
                                 </a>
                             </li>
                             @if(session('original_user_id'))
                             <li>
-                                <a href="{{ route('account.resume') }}" data-method="POST">
+                                <a href="{{ route('profile.resume') }}" data-method="POST">
                                     <i class="icon-user-cancel"></i> {{ trans('menu.release_user') }}
                                 </a>
                             </li>
