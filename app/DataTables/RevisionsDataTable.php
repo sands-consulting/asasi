@@ -16,10 +16,12 @@ class RevisionsDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->editColumn('old_value', function($revision) {
-                return blank_icon($revision->old_value);
+                $string = wordwrap($revision->old_value, 20, "<br>\n", true);
+                return blank_icon($string);
             })
             ->editColumn('new_value', function($revision) {
-                return blank_icon($revision->new_value);
+                $string = wordwrap($revision->new_value, 20, "<br>\n", true);
+                return blank_icon($string);
             })
             ->editColumn('created_at', function($revision) {
                 return $revision->created_at->format('d/m/Y H:i:s');
