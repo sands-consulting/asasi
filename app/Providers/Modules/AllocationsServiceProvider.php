@@ -31,7 +31,7 @@ class AllocationsServiceProvider extends ServiceProvider
                     'uses'  => 'AllocationsControllerr@deactivate'
                 ]);
                 $router->get('allocations/{allocations}/deactivate', [
-                    'as'    => 'admin.allocations.activate',
+                    'as'    => 'admin.allocations.deactivate',
                     'uses'  => 'AllocationsControllerr@deactivate'
                 ]);
                 $router->resource('allocations', 'AllocationsController');

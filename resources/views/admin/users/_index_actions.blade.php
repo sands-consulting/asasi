@@ -12,7 +12,7 @@
 			@endif
 
 			@if($user->canSuspend() && Auth::user()->hasPermission('user:suspend'))
-			<li><a href="{{ route('admin.users.suspend', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
+			<li><a href="{{ route('admin.users.suspend', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.suspend') }}</a></li>
 			@endif
 		</ul>
 	</li>

@@ -119,7 +119,7 @@ class AsasiSeeder extends Seeder
             ['place:activate',          'Activate existing place'],
             ['place:deactivate',        'Deactivate existing place'],
             ['place:delete',            'Delete existing place'],
-            ['place:revisons',          'View place revisions'],
+            ['place:revisions',         'View place revisions'],
             ['place:logs',              'View place logs']
         ];
 

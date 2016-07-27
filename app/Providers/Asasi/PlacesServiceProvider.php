@@ -33,7 +33,15 @@ class PlacesServiceProvider extends ServiceProvider
                     'as'    => 'admin.places.revisions',
                     'uses'  => 'PlacesController@revisions'
                 ]);
-                $router->resource('places',  'PlacesController');
+                $router->put('places/{places}/activate', [
+                    'as'    => 'admin.places.activate',
+                    'uses'  => 'PlacesController@activate'
+                ]);
+                $router->put('places/{places}/deactivate', [
+                    'as'    => 'admin.places.deactivate',
+                    'uses'  => 'PlacesController@deactivate'
+                ]);
+                $router->resource('places', 'PlacesController');
             });
         });
     }

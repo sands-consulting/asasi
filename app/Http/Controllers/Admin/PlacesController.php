@@ -23,16 +23,10 @@ class PlacesController extends Controller
 
     public function store(PlaceRequest $request)
     {
-        $inputs = $request->only('name', 'code_2', 'code_3', 'parent_id');
-        $place   = PlacesRepository::create(new Place, $inputs);
-
-        if ($permissions = $request->get('permissions', []))
-        {
-            $place->permissions()->sync($permissions);
-        }
-
+        $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id');
+        $place  = PlacesRepository::create(new Place, $inputs);
         return redirect()
-            ->route('admin.places.index')
+            ->route('admin.places.show', $place->id)
             ->with('notice', trans('places.notices.created', ['name' => $place->name]));
     }
 
@@ -48,16 +42,10 @@ class PlacesController extends Controller
 
     public function update(PlaceRequest $request, Place $place)
     {
-        $inputs = $request->only('name', 'code_2', 'code_3', 'parent_id');
-        $place   = PlacesRepository::update($place, $inputs);
-
-        if ($permissions = $request->get('permissions', []))
-        {
-            $place->permissions()->sync($permissions);
-        }
-
+        $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id');
+        $place  = PlacesRepository::update($place, $inputs);
         return redirect()
-            ->route('admin.places.index')
+            ->route('admin.places.show', $place->id)
             ->with('notice', trans('places.notices.updated', ['name' => $place->name]));
     }
 
@@ -91,7 +79,7 @@ class PlacesController extends Controller
 
     public function deactivate(Request $request, Place $place)
     {
-        PlacesRepository::suspend($place);
+        PlacesRepository::deactivate($place);
         return redirect()
             ->to($request->input('redirect_to', route('admin.places.show', $place->id)))
             ->with('notice', trans('places.notices.deactivated', ['name' => $place->name]));

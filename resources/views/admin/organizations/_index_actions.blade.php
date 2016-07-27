@@ -8,7 +8,7 @@
 			<li><a href="{{ route('admin.organizations.edit', $organization->id) }}">{{ trans('actions.edit') }}</a></li>
 
 			@if($organization->canActivate() && Auth::user()->hasPermission('organization:activate'))
-			<li><a href="{{ route('admin.organizations.activate', [$organization->id, 'redirect_to' => route('admin.organizations.index')]) }}" data-method="PUT">{{ trans('actions.suspend') }}</a></li>
+			<li><a href="{{ route('admin.organizations.activate', [$organization->id, 'redirect_to' => route('admin.organizations.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
 			@endif
 
 			@if($organization->canDeactivate() && Auth::user()->hasPermission('organization:deactivate'))
