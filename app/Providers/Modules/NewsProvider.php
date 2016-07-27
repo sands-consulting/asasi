@@ -15,12 +15,26 @@ class NewsProvider extends ServiceProvider
 
     public function register()
     {
-        # Register admin routing
-        app('router')->group([
-            'namespace' => 'App\Http\Controllers'
-        ], function($router) {
+        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
             $router->model('news', 'App\News');
+
             $router->resource('news', 'NewsController', ['only' => ['index', 'show']]);
+
+            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+                $router->get('news/{news}/revisions', [
+                    'as'    => 'admin.news.revisions',
+                    'uses'  => 'NewsController@revisions'
+                ]);
+                $router->get('news/{news}/publish', [
+                    'as'    => 'admin.news.publish',
+                    'uses'  => 'NewsController@publish'
+                ]);
+                $router->get('news/{news}/unpublish', [
+                    'as'    => 'admin.news.unpublish',
+                    'uses'  => 'NewsController@unpublish'
+                ]);
+                $router->resource('news',  'NewsController');
+            });
         });
     }
 }

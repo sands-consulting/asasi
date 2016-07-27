@@ -28,7 +28,7 @@ class AllocationSeeder extends Seeder
                 'revisions' => 'View allocation revisions',
                 'logs' => 'View allocation logs'
             ],
-            'allocation-types' => [
+            'allocation-type' => [
                 'index' => 'List all allocation types',
                 'show' => 'View allocation type details',
                 'create' => 'Create new allocation type',
