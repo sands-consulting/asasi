@@ -5,4 +5,6 @@ return [
 	'draft' => 'Draft',
 	'inactive' => 'Inactive',
 	'suspended' => 'Suspended',
+
+    'pending-confirmation' => 'Pending Confirm',
 ];

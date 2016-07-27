@@ -20,6 +20,10 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\UserLogout',
         ],
+
+        'App\Events\VendorRegistered' => [
+            'App\Listeners\EmailVendorActivationLink',
+        ],
     ];
 
     /**

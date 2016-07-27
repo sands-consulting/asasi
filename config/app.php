@@ -188,7 +188,11 @@ return [
         App\Providers\Asasi\RolesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,
 
+        /*
+         * Modules
+         */
         App\Providers\Modules\NewsProvider::class,
+        App\Providers\Modules\VendorsProvider::class,
     ],
 
     /*
