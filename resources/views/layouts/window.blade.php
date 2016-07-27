@@ -29,6 +29,27 @@
 				<li><a href="{{ url('login') }}">{{ trans('menu.login') }}</a></li>
 				<li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
 				@else
+				<li>
+                    <a href="{{ route('root') }}">
+                        <i class="icon-atom2"></i> {{ trans('menu.public_site') }}
+                    </a>
+                </li>
+
+				@if(Auth::user()->hasPermission('access:admin'))
+				<li>
+					<a href="{{ route('admin') }}">
+						<i class="icon-cog52"></i> {{ trans('menu.admin_area') }}
+					</a>
+				</li>
+				@endif
+
+				@if(Auth::user()->hasPermission('access:report'))
+				<li>
+					<a href="{{ route('admin') }}">
+						<i class="icon-file-text"></i> {{ trans('menu.report') }}
+					</a>
+				</li>
+				@endif
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
@@ -42,13 +63,6 @@
 								<i class="icon-user"></i> {{ trans('menu.my_profile') }}
 							</a>
 						</li>
-						@if(Auth::user()->hasPermission('access:admin'))
-						<li>
-							<a href="{{ route('admin') }}">
-								<i class="icon-cog52"></i> {{ trans('menu.admin_area') }}
-							</a>
-						</li>
-						@endif
 						@if(session('original_user_id'))
 						<li>
 							<a href="{{ route('profile.resume') }}" data-method="POST">

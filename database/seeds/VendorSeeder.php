@@ -20,17 +20,17 @@ class VendorSeeder extends Seeder
         DB::table('vendors')->truncate();
 
         $permissions = [
-            ['vendors:index',                  'List all vendors'],
-            ['vendors:show',                   'View a vendors'],
-            ['vendors:create',                 'Create new vendors'],
-            ['vendors:update',                 'Update existing vendors'],
-            ['vendors:delete',                 'Delete exisiting vendors'],
+            ['vendor:index',                  'List all vendors'],
+            ['vendor:show',                   'View a vendors'],
+            ['vendor:create',                 'Create new vendors'],
+            ['vendor:update',                 'Update existing vendors'],
+            ['vendor:delete',                 'Delete exisiting vendors'],
 
-            ['vendor_types:index',         'List all vendor types'],
-            ['vendor_types:show',          'View a vendor types'],
-            ['vendor_types:create',        'Create new vendor category'],
-            ['vendor_types:update',        'Update existing vendor category'],
-            ['vendor_types:delete',        'Delete existing vendor category'],
+            ['vendor_type:index',         'List all vendor types'],
+            ['vendor_type:show',          'View a vendor types'],
+            ['vendor_type:create',        'Create new vendor category'],
+            ['vendor_type:update',        'Update existing vendor category'],
+            ['vendor_type:delete',        'Delete existing vendor category'],
 
         ];
 

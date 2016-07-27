@@ -1,12 +1,15 @@
 <?php
 
 return [
-    'site_admin' => 'Site Admin',
-    'language' => 'Language',
+    'site_admin'    => 'Site Admin',
+    'language'      => 'Language',
+
+    'public_site'   => 'Public Site',
+    'admin_area'    => 'Admin Area',
+    'report'        => 'Reporting Module',
 
     'login'         => 'Login',
     'register'      => 'Register',
-    'admin_area'    => 'Admin Area',
     'release_user'  => 'Release User',
     'my_profile'    => 'My Profile',
     'sign_out'      => 'Sign Out',
@@ -14,10 +17,26 @@ return [
     'home'			=> 'Home',
     'dashboard'		=> 'Dashboard',
 
-    'administration'	=> 'Administration',
-    'users'				=> 'Users',
-    'roles'				=> 'Roles',
-    'permissions'		=> 'Permissions',
-    'organizations'     => 'Organizations',
-    'vendors'		    => 'Vendors'
+    'admin' => [
+        'administration' => [
+            'title'             => 'Administration',
+
+            'users'				=> 'Users',
+            'roles'				=> 'Roles',
+            'permissions'		=> 'Permissions',
+            'organizations'		=> 'Organizations',
+            'places'            => 'Places',
+
+            'qualification_codes'   => 'Qualification Codes',
+            'allocation-types'      => 'Allocation Types',
+            'payment-gateways'      => 'Payment Gateways',
+        ],
+        'manage' => [
+            'title'         => 'Manage',
+
+            'allocations'   => 'Allocations',
+            'vendors'       => 'Vendors',
+            'news'          => 'News',
+        ]
+    ]
 ];

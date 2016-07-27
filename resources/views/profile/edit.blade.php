@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.window')
 
 @section('page-title', implode(' | ', [trans('actions.edit'), trans('profile.title')]))
 

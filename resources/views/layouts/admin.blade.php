@@ -37,6 +37,19 @@
                 <li><a href="{{ url('login') }}">{{ trans('menu.login') }}</a></li>
                 <li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
                 @else
+                <li>
+                    <a href="{{ route('root') }}">
+                        <i class="icon-atom2"></i> {{ trans('menu.public_site') }}
+                    </a>
+                </li>
+
+                @if(Auth::user()->hasPermission('access:report'))
+                <li>
+                    <a href="{{ route('admin') }}">
+                        <i class="icon-file-text"></i> {{ trans('menu.report') }}
+                    </a>
+                </li>
+                @endif
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         {!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
@@ -116,34 +129,66 @@
                             <li class="{{ is_path_active('admin') }}">
                                 <a href="{{ route('admin') }}"><i class="icon-home4"></i><span>{{ trans('menu.dashboard') }}</span></a>
                             </li>
+
                             <li class="navigation-header">                               
-                                <span>{{ trans('menu.administration') }}</span> <i class="icon-menu" title="{{ trans('menu.administration') }}" data-original-title="{{ trans('menu.administration') }}"></i>
+                                <span>{{ trans('menu.admin.manage.title') }}</span> <i class="icon-menu" title="{{ trans('menu.admin.manage.title') }}" data-original-title="{{ trans('menu.admin.manage.title') }}"></i>
                             </li>
-                            @if(Auth::user()->hasPermission('user:index'))
-                            <li class="{{ is_path_active('admin/users*') }}">
-                                <a href="{{ route('admin.users.index') }}"><i class="icon-users"></i> <span>{{ trans('menu.users') }}</span></a>
-                            </li>
-                            @endif
-                            @if(Auth::user()->hasPermission('role:index'))
-                            <li class="{{ is_path_active('admin/roles*') }}">
-                                <a href="{{ route('admin.roles.index') }}"><i class="icon-user-tie"></i> <span>{{ trans('menu.roles') }}</span></a>
-                            </li>
-                            @endif
-                            @if(Auth::user()->hasPermission('permission:index'))
-                            <li class="{{ is_path_active('admin/permissions*') }}">
-                                <a href="{{ route('admin.permissions.index') }}"><i class="icon-unlocked2"></i> <span>{{ trans('menu.permissions') }}</span></a>
-                            </li>
-                            @endif
-                            @if(Auth::user()->hasPermission('organization:index'))
-                            <li class="{{ is_path_active('admin/organizations*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.organizations') }}</span></a>
-                            </li>
-                            @endif
+
                             @if(Auth::user()->hasPermission('vendors:index'))
                             <li class="{{ is_path_active('admin/vendors*') }}">
-                                <a href="{{ route('admin.vendors.index') }}"><i class="icon-people"></i> <span>{{ trans('menu.vendors') }}</span></a>
+                                <a href="{{ route('admin.vendors.index') }}"><i class="icon-people"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span></a>
                             </li>
                             @endif
+
+
+                            <li class="{{ is_path_active('admin/news*') }}">
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.manage.news') }}</span></a>
+                            </li>
+
+                            <li class="{{ is_path_active('admin/allocations*') }}">
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.manage.allocations') }}</span></a>
+                            </li>
+
+                            <li class="navigation-header">                               
+                                <span>{{ trans('menu.admin.administration.title') }}</span> <i class="icon-menu" title="{{ trans('menu.admin.administration.title') }}" data-original-title="{{ trans('menu.admin.administration.title') }}"></i>
+                            </li>
+
+                            @if(Auth::user()->hasPermission('user:index'))
+                            <li class="{{ is_path_active('admin/users*') }}">
+                                <a href="{{ route('admin.users.index') }}"><i class="icon-users"></i> <span>{{ trans('menu.admin.administration.users') }}</span></a>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->hasPermission('role:index'))
+                            <li class="{{ is_path_active('admin/roles*') }}">
+                                <a href="{{ route('admin.roles.index') }}"><i class="icon-user-tie"></i> <span>{{ trans('menu.admin.administration.roles') }}</span></a>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->hasPermission('permission:index'))
+                            <li class="{{ is_path_active('admin/permissions*') }}">
+                                <a href="{{ route('admin.permissions.index') }}"><i class="icon-unlocked2"></i> <span>{{ trans('menu.admin.administration.permissions') }}</span></a>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->hasPermission('organization:index'))
+                            <li class="{{ is_path_active('admin/organizations*') }}">
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.admin.administration.organizations') }}</span></a>
+                            </li>
+                            @endif
+
+                            <li class="{{ is_path_active('admin/places*') }}">
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
+                            </li>
+
+                            <li class="{{ is_path_active('admin/allocation-types*') }}">
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.allocation-types') }}</span></a>
+                            </li>
+
+                            <li class="{{ is_path_active('admin/payment-gateways*') }}">
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.payment-gateways') }}</span></a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
