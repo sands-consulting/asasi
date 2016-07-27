@@ -49,6 +49,9 @@ return [
             'title' => 'New Place',
         ],
         'edit' => [
+        ],
+        'form' => [
+            'select_parent' => 'Select Parent Place'
         ]
     ]
 ];

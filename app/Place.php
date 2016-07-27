@@ -20,7 +20,7 @@ class Place extends Model
         'type',
         'code_2',
         'code_3',
-        'place_id',
+        'parent_id',
         'status'
     ];
 
@@ -69,9 +69,11 @@ class Place extends Model
     {
         if (isset($queries['keywords']) && !empty($queries['keywords'])) {
             $keywords = $queries['keywords'];
-            foreach ($this->searchable as $column) {
-                $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
-            }
+            $query->where(function($query) use($keywords) {
+                foreach ($this->searchable as $column) {
+                    $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
+                }
+            });
             unset($queries['keywords']);
         }
 
@@ -79,7 +81,7 @@ class Place extends Model
             if (empty($value)) {
                 continue;
             }
-            $query->orWhere("{$this->getTable()}.{$key}", $value);
+            $query->where("{$this->getTable()}.{$key}", $value);
         }
     }
 
