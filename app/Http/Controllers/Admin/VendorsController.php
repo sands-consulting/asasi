@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Vendor;
 use App\DataTables\VendorsDataTable;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\VendorRequest;
 use App\Repositories\VendorsRepository;
 use Illuminate\Http\Request;
@@ -28,8 +27,8 @@ class VendorsController extends Controller
 
     public function store(VendorRequest $request)
     {
-        $inputs             = $request->all();
-        $vendor              = VendorsRepository::create(new Vendor, $inputs);
+        $inputs = $request->all();
+        $vendor = VendorsRepository::create(new Vendor, $inputs);
 
         return redirect()
             ->route('vendors.pending', $vendor->id)

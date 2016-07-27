@@ -6,6 +6,8 @@ use Closure;
 
 class PolicyMiddleware
 {
+    protected $redirectTo = '/';
+
     /**
      * Handle an incoming request.
      *
@@ -21,8 +23,8 @@ class PolicyMiddleware
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()
-                    ->to('/')
-                    ->with('danger', trans('auth.unauthorized'));
+                    ->to($this->redirectTo)
+                    ->with('alert', trans('auth.unauthorized'));
             }
         }
         return $next($request);

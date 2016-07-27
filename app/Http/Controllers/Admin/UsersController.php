@@ -6,18 +6,12 @@ use App\User;
 use App\DataTables\UsersDataTable;
 use App\DataTables\UserLogsDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('policy');
-    }
-
     public function index(UsersDataTable $table)
     {
         return $table->render('admin.users.index');
