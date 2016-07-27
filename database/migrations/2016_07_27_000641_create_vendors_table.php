@@ -74,6 +74,23 @@ class CreateVendorsTable extends Migration
             $table->index('contact_person_telephone');
             $table->index('status');
         });
+
+        Schema::create('user_vendor', function (Blueprint $table) {
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('vendor_id');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('vendor_id')
+                ->references('id')
+                ->on('vendors')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->primary(['user_id', 'vendor_id']);
+        });
     }
 
     /**
@@ -83,6 +100,7 @@ class CreateVendorsTable extends Migration
      */
     public function down()
     {
+        Schema::drop('user_vendor');
         Schema::drop('vendors');
     }
 }
