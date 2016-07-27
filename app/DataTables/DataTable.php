@@ -9,7 +9,7 @@ abstract class DataTable extends DataTableService
 	protected function getBuilderParameters()
     {
         return [
-            'dom' => '<"datatable-header"li><"datatable-scroll"t><"datatable-footer"p>',
+            'dom' => '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             'language' => [
             	'search' => '<span>Filter:</span> _INPUT_',
             	'lengthMenu' => '<span>Show:</span> _MENU_',

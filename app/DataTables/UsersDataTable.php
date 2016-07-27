@@ -78,4 +78,12 @@ class UsersDataTable extends DataTable
     {
         return 'users_dt_' . time();
     }
+
+
+    protected function getBuilderParameters()
+    {
+        $data = parent::getBuilderParameters();
+        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        return $data;
+    }
 }
