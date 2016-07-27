@@ -7,11 +7,11 @@
 			<li><a href="{{ route('admin.users.show', $user->id) }}">{{ trans('actions.view') }}</a></li>
 			<li><a href="{{ route('admin.users.edit', $user->id) }}">{{ trans('actions.edit') }}</a></li>
 
-			@if(Auth::user()->status == 'active')
+			@if($user->status == 'active' && Auth::user()->hasPermission('user:suspend'))
 			<li><a href="{{ route('admin.users.suspend', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.suspend') }}</a></li>
 			@endif
 
-			@if(Auth::user()->status != 'active')
+			@if($user->status != 'active' && Auth::user()->hasPermission('user:activate'))
 			<li><a href="{{ route('admin.users.activate', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
 			@endif
 		</ul>
