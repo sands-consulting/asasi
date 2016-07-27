@@ -21,18 +21,27 @@ class VendorSeeder extends Seeder
         DB::table('vendors')->truncate();
 
         $permissions = [
-            ['vendor:index',        'List all vendors'],
-            ['vendor:show',         'View a vendors'],
-            ['vendor:create',       'Create new vendors'],
-            ['vendor:update',       'Update existing vendors'],
-            ['vendor:delete',       'Delete exisiting vendors'],
+            ['vendor:index',             'List all vendors'],
+            ['vendor:show',              'View vendor details'],
+            ['vendor:create',            'Create new vendor'],
+            ['vendor:update',            'Update existing vendor'],
+            ['vendor:duplicate',         'Duplicate existing vendor'],
+            ['vendor:activate',          'Activate existing vendor'],
+            ['vendor:deactivate',        'Deactivate existing vendor'],
+            ['vendor:delete',            'Delete existing vendor'],
+            ['vendor:revisons',          'View vendor revisions'],
+            ['vendor:logs',              'View vendor logs'],
 
-            ['vendor_type:index',   'List all vendor types'],
-            ['vendor_type:show',    'View a vendor types'],
-            ['vendor_type:create',  'Create new vendor category'],
-            ['vendor_type:update',  'Update existing vendor category'],
-            ['vendor_type:delete',  'Delete existing vendor category'],
-
+            ['vendor-type:index',             'List all vendor types'],
+            ['vendor-type:show',              'View vendor type details'],
+            ['vendor-type:create',            'Create new vendor type'],
+            ['vendor-type:update',            'Update existing vendor type'],
+            ['vendor-type:duplicate',         'Duplicate existing vendor type'],
+            ['vendor-type:activate',          'Activate existing vendor type'],
+            ['vendor-type:deactivate',        'Deactivate existing vendor type'],
+            ['vendor-type:delete',            'Delete existing vendor type'],
+            ['vendor-type:revisons',          'View vendor type revisions'],
+            ['vendor-type:logs',              'View vendor type logs']
         ];
 
         foreach ($permissions as $permissionData) {
