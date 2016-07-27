@@ -134,20 +134,23 @@
                                 <span>{{ trans('menu.admin.manage.title') }}</span> <i class="icon-menu" title="{{ trans('menu.admin.manage.title') }}" data-original-title="{{ trans('menu.admin.manage.title') }}"></i>
                             </li>
 
-                            @if(Auth::user()->hasPermission('vendors:index'))
+                            @if(Auth::user()->hasPermission('vendor:index'))
                             <li class="{{ is_path_active('admin/vendors*') }}">
                                 <a href="{{ route('admin.vendors.index') }}"><i class="icon-people"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span></a>
                             </li>
                             @endif
 
-
+                            @if(Auth::user()->hasPermission('news:index'))
                             <li class="{{ is_path_active('admin/news*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.manage.news') }}</span></a>
+                                <a href="{{ route('admin.news.index') }}"><i class="icon-newspaper"></i> <span>{{ trans('menu.admin.manage.news') }}</span></a>
                             </li>
+                            @endif
 
+                            @if(Auth::user()->hasPermission('allocation:index'))
                             <li class="{{ is_path_active('admin/allocations*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.manage.allocations') }}</span></a>
+                                <a href="{{ route('admin.allocations.index') }}"><i class="icon-coins"></i> <span>{{ trans('menu.admin.manage.allocations') }}</span></a>
                             </li>
+                            @endif
 
                             <li class="navigation-header">                               
                                 <span>{{ trans('menu.admin.administration.title') }}</span> <i class="icon-menu" title="{{ trans('menu.admin.administration.title') }}" data-original-title="{{ trans('menu.admin.administration.title') }}"></i>
@@ -177,24 +180,33 @@
                             </li>
                             @endif
 
+                            @if(Auth::user()->hasPermission('place:index'))
                             <li class="{{ is_path_active('admin/places*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
+                                <a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
+                            </li>
+                            @endif
+
+                            <li class="{{ is_path_active('admin/payment-gateways*') }}">
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-credit-card"></i> <span>{{ trans('menu.admin.administration.payment-gateways') }}</span></a>
                             </li>
 
+                            @if(Auth::user()->hasPermission('allocation-type:index'))
                             <li class="{{ is_path_active('admin/allocation-types*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.allocation-types') }}</span></a>
+                                <a href="{{ route('admin.allocation-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.allocation-types') }}</span></a>
                             </li>
+                            @endif
+
+                            @if(Auth::user()->hasPermission('qualification-code:index'))
+                            <li class="{{ is_path_active('admin/qualification-codes*') }}">
+                                <a href="{{ route('admin.qualification-codes.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.qualification-codes') }}</span></a>
+                            </li>
+                            @endif
 
                             @if(Auth::user()->hasPermission('vendor-type:index'))
                             <li class="{{ is_path_active('admin/vendor-types*') }}">
                                 <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.vendor-types') }}</span></a>
                             </li>
                             @endif
-
-                            <li class="{{ is_path_active('admin/payment-gateways*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.payment-gateways') }}</span></a>
-                            </li>
-
                         </ul>
                     </div>
                 </div>

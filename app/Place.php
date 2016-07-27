@@ -59,11 +59,6 @@ class Place extends Model
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public static function boot()
-    {
-        parent::boot();
-    }
-
     public function sluggable()
     {
         return [
@@ -72,4 +67,23 @@ class Place extends Model
             ]
         ];
     }
+
+    /* 
+     * State controls 
+     */
+    public function canActivate()
+    {
+        return $this->status != 'active';
+    }
+
+    public function canDeactivate()
+    {
+        return $this->status != 'inactive';
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+    }
+
 }

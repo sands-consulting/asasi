@@ -188,10 +188,13 @@ return [
         App\Providers\Asasi\RolesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,
         App\Providers\Asasi\OrganizationsServiceProvider::class,
+        App\Providers\Asasi\PlacesServiceProvider::class,
 
         /*
          * Modules
          */
+        App\Providers\Modules\AllocationsServiceProvider::class,
+        App\Providers\Modules\QualificationCodesServiceProvider::class,
         App\Providers\Modules\NewsProvider::class,
         App\Providers\Modules\VendorsProvider::class,
         App\Providers\Modules\VendorTypesProvider::class,

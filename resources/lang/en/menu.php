@@ -27,7 +27,7 @@ return [
             'organizations'		=> 'Organizations',
             'places'            => 'Places',
 
-            'qualification_codes'   => 'Qualification Codes',
+            'qualification-codes'   => 'Qualification Codes',
             'allocation-types'      => 'Allocation Types',
             'vendor-types'          => 'Vendor Types',
             'payment-gateways'      => 'Payment Gateways',
