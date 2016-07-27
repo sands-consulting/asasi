@@ -6,30 +6,29 @@ use App\Vendor;
 
 class VendorsPolicy extends BasePolicy
 {
-    public function index()
+     public function index()
     {
-        return $this->user->ability(['Admin'], ['Vendor:List']);
+        return $this->user->hasPermission('vendor:index');
     }
 
     public function show()
     {
-        return $this->user->ability(['Admin'], ['Vendor:Show']);
+        return $this->user->hasPermission('vendor:show');
     }
 
     public function create()
     {
-        return $this->user->ability(['Admin'], ['Vendor:Create']);
+        return $this->user->hasPermission('vendor:create');
     }
 
     public function store()
     {
-        return true;
         return $this->create();
     }
 
     public function edit(Vendor $vendor)
     {
-        return $this->user->ability(['Admin'], ['Vendor:Update']) && $vendor->name != 'Admin';
+        return $this->user->hasPermission('vendor:update');
     }
 
     public function update(Vendor $vendor)
@@ -37,23 +36,33 @@ class VendorsPolicy extends BasePolicy
         return $this->edit($vendor);
     }
 
+    public function destroy(Vendor $vendor)
+    {
+        return $this->user->hasPermission('vendor:delete');
+    }
+
     public function duplicate(Vendor $vendor)
     {
-        return $this->user->ability(['Admin'], ['Vendor:Duplicate']);
+        return $this->user->hasPermission('vendor:duplicate');
     }
 
     public function revisions(Vendor $vendor)
     {
-        return $this->user->ability(['Admin'], ['Vendor:Revisions']);
+        return $this->user->hasPermission('vendor:revisions');
     }
 
-    public function destroy(Vendor $vendor)
+    public function logs(Vendor $vendor)
     {
-        return $this->user->ability(['Admin'], ['Vendor:Delete']) && $vendor->name != 'Admin';
+        return $this->user->hasPermission('vendor:logs');
     }
 
-    public function delete(Vendor $vendor)
+    public function activate(Vendor $vendor)
     {
-        return $this->destroy($vendor);
+        return $this->user->hasPermission('vendor:activate') && $vendor->canActivate();
+    }
+
+    public function deactivate(Vendor $vendor)
+    {
+        return $this->user->hasPermission('vendor:deactivate') && $vendor->canDeactivate();
     }
 }
