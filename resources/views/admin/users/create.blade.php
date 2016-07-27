@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title', implode(' | ', [
-	trans('users.buttons.create'),
+	trans('users.views.index.title'),
 	trans('users.title')
 ]))
 

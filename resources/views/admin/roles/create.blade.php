@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title', implode(' | ', [
-	trans('roles.buttons.views.title'),
+	trans('roles.views.create.title'),
 	trans('roles.title')
 ]))
 
@@ -9,7 +9,7 @@
 <div class="page-title">
 	<h4>
 		{{ link_to_route('admin.roles.index', trans('roles.title')) }} /
-		<span class="text-semibold">{{ trans('roles.buttons.views.title') }}</span>
+		<span class="text-semibold">{{ trans('roles.views.create.title') }}</span>
 	</h4>
 </div>
 <div class="heading-elements">

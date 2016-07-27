@@ -42,7 +42,6 @@ return [
             'title' => 'New User',
         ],
         'edit' => [
-            'title' => 'Edit'
         ]
     ]
 ];
