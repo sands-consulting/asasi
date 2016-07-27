@@ -8,6 +8,6 @@ class Controller extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('policy.admin');
+        $this->middleware('policy');
     }
 }

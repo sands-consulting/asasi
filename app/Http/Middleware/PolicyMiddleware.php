@@ -23,7 +23,7 @@ class PolicyMiddleware
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()
-                    ->to($this->redirectTo)
+                    ->back()
                     ->with('alert', trans('auth.unauthorized'));
             }
         }
