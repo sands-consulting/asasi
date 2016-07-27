@@ -2,7 +2,6 @@
 
 use Baum\Node;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Orchestra\Support\Traits\QueryFilter;
 use Venturecraft\Revisionable\RevisionableTrait;
 
 class Organization extends Node
@@ -15,6 +14,7 @@ class Organization extends Node
     protected $fillable = [
         'name',
         'short_name',
+        'parent_id',
         'status',
     ];
 
@@ -25,6 +25,14 @@ class Organization extends Node
     protected $searchable = [
         'name',
         'short_name',
+    ];
+
+    protected $sortable = [
+        'name',
+        'short_name',
+        'parent.name',
+        'parent.short_name',
+        'status'
     ];
 
     public function logs()
@@ -45,19 +53,46 @@ class Organization extends Node
     }
 
     /*
-     * Wildcard Serch
+     * Search scopes
      */
-    public function scopeSearch($query, $keyword = '')
+
+    public function scopeSearch($query, $queries = [])
     {
-        return $this->setupWildcardQueryFilter($query, $keyword, $this->searchable);
+        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
+            $keywords = $queries['keywords'];
+            foreach ($this->searchable as $column) {
+                $query->orWhere($column, 'LIKE', "%$keywords%");
+            }
+            unset($queries['keywords']);
+        }
+
+        if (isset($queries['role']) && !empty($queries['role'])) {
+            $role   = $queries['role'];
+            $query->whereHas('roles', function ($roles) use ($role) {
+                $roles->whereId($role);
+            });
+            unset($queries['role']);
+        }
+
+        if(isset($queries['parent_id']) && !empty($queries['parent_id'])) {
+            $parent_id = $queries['parent_id'];
+            $query->where('parent_id', $parent_id);
+            unset($queries['parent_id']);
+        }
+
+        foreach ($queries as $key => $value) {
+            if (empty($value)) {
+                continue;
+            }
+            $query->orWhere($key, $value);
+        }
     }
 
-    public function scopeSort($query, $inputs)
+    public function scopeSort($query, $column, $direction)
     {
-        $orderBy    = $this->getBasicQueryOrderBy($inputs);
-        $direction  = $this->getBasicQueryDirection($inputs);
-        ! empty($orderBy) && $query->orderBy($orderBy, $direction);
-        return $query;
+        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
+            $query->orderBy($column, $direction);
+        }
     }
 
     public static function boot()

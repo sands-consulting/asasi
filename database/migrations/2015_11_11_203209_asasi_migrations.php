@@ -124,6 +124,100 @@ class AsasiMigrations extends Migration
                 ->onDelete('cascade');
             $table->primary(['permission_id', 'role_id']);
         });
+
+        Schema::create('uploads', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('path');
+            $table->string('type');
+            $table->integer('size');
+            $table->string('uploadable_type');
+            $table->unsignedInteger('uploadable_id');
+            $table->unsignedInteger('user_id');
+            $table->string('status')->index();
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('settings', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('key')->index();
+            $table->text('value');
+            $table->string('item_type')->nullable()->index();
+            $table->unsignedInteger('item_id')->nullable()->index();
+            $table->nullableTimestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('organizations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('parent_id')->nullable();
+            $table->integer('lft')->nullable();
+            $table->integer('rgt')->nullable();
+            $table->integer('depth');
+            $table->string('name');
+            $table->string('short_name');
+            $table->string('status');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('organizations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->index('short_name');
+            $table->index('lft');
+            $table->index('rgt');
+            $table->index('depth');
+            $table->index('status');
+        });
+
+        Schema::create('organization_user', function (Blueprint $table) {
+            $table->unsignedInteger('organization_id');
+            $table->unsignedInteger('user_id');
+
+            $table->foreign('organization_id')
+                ->references('id')
+                ->on('organizations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('places', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('type');
+            $table->string('code_2')->nullable();
+            $table->string('code_3')->nullable();
+            $table->unsignedInteger('parent_id')->nullable();
+            $table->string('slug');
+            $table->string('status');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('places')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->index('type');
+            $table->index('code_2');
+            $table->index('code_3');
+            $table->index('status');
+            $table->unique('slug');
+        });
     }
 
     /**
@@ -133,6 +227,11 @@ class AsasiMigrations extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('places');
+        Schema::dropIfExists('organization_user');
+        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('settings');
+        Schema::dropIfExists('uploads');
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('role_user');
         Schema::dropIfExists('permissions');
