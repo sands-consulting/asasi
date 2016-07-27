@@ -136,6 +136,41 @@ class Place extends Model
         return $options;
     }
 
+    /*
+     * Helpers 
+     */
+
+    public static function cityOptions()
+    {
+        // Fixme: Temp code to select state
+        $cities = static::where('status', 'active')
+            ->where('type', 'city')
+            ->lists('name', 'id');
+
+        return ['' => 'Select city ...'] + $cities->toArray();
+    }
+
+    public static function stateOptions()
+    {
+        // Fixme: Temp code to select state
+        $states = static::where('status', 'active')
+            ->where('type', 'state')
+            ->lists('name', 'id');
+
+        return ['' => 'Select state ...'] + $states->toArray();
+    }
+
+    public static function countryOptions()
+    {
+        // Fixme: Temp code to select state
+        $countries = static::where('status', 'active')
+            ->where('type', 'country')
+            ->lists('name', 'id');
+
+        return ['' => 'Select country ...'] + $countries->toArray();
+    }
+
+
     public static function boot()
     {
         parent::boot();

@@ -35,6 +35,17 @@ class VendorType extends Model
     ];
 
     /*
+     * Helpers
+     */
+
+    public static function options()
+    {
+        $options = static::select(\DB::raw('CONCAT(incorporation_authority, \' - \', incorporation_type) as display_name'), 'id')
+            ->lists('display_name', 'id');
+        return ['' => 'Select vendor type ...'] + $options->toArray();
+    }
+
+    /*
      * Search scopes
      */
 

@@ -13,7 +13,7 @@ return [
         'address_city_id' => 'City',
         'address_state_id' => 'State',
         'address_country_id' => 'Country',
-        'contact_name' => 'Contact Name',
+        'contact_person_name' => 'Contact Person Name',
         'contact_telephone' => 'Telephone Number',
         'contact_fax' => 'Fax Number',
         'contact_email' => 'Contact Email',
@@ -36,6 +36,10 @@ return [
     ],
 
     'notices' => [
+        'public' => [
+            'saved' => 'Your application has been saved.',
+            'submitted' => 'Your application has been submitted.',
+        ],
         'created' => 'Vendor :name created',
         'updated' => 'Vendor :name updated',
         'deleted' => 'Vendor :name deleted',
@@ -54,7 +58,10 @@ return [
         'edit' => [
             'title' => 'Edit',
         ],
-        'pending' => [
+        'apply' => [
+            'title' => 'Apply Vendor',
+        ],
+        'pending' => [ 
             'title' => 'Application Pending Approval',
         ]
 	]

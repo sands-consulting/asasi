@@ -9,8 +9,8 @@ class VendorsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        # Register admin policy
         app('policy')->register('App\Http\Controllers\Admin\VendorsController', 'App\Policies\VendorsPolicy');
+        app('policy')->register('App\Http\Controllers\VendorsController', 'App\Policies\VendorsPolicy');
     }
     /**
      * Register the application services.
