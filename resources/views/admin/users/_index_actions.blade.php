@@ -7,12 +7,12 @@
 			<li><a href="{{ route('admin.users.show', $user->id) }}">{{ trans('actions.view') }}</a></li>
 			<li><a href="{{ route('admin.users.edit', $user->id) }}">{{ trans('actions.edit') }}</a></li>
 
-			@if($user->status == 'active' && Auth::user()->hasPermission('user:suspend'))
-			<li><a href="{{ route('admin.users.suspend', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.suspend') }}</a></li>
+			@if($user->canActivate() && Auth::user()->hasPermission('user:activate'))
+			<li><a href="{{ route('admin.users.activate', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
 			@endif
 
-			@if($user->status != 'active' && Auth::user()->hasPermission('user:activate'))
-			<li><a href="{{ route('admin.users.activate', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
+			@if($user->canSuspend() && Auth::user()->hasPermission('user:suspend'))
+			<li><a href="{{ route('admin.users.suspend', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
 			@endif
 		</ul>
 	</li>

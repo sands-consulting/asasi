@@ -11,15 +11,15 @@
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
-		@if(Auth::user()->status == 'active' && Auth::user()->hasPermission('user:activate'))
-		<a href="{{ route('admin.users.suspend', $user->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
-			<i class="icon-user-block"></i> <span>{{ trans('actions.suspend') }}</span>
+		@if($user->canActivate() && Auth::user()->hasPermission('user:activate'))
+		<a href="{{ route('admin.users.activate', $user->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-blue legitRipple">
+			<i class="icon-user-block"></i> <span>{{ trans('actions.activate') }}</span>
 		</a>
 		@endif
 
-		@if(Auth::user()->status != 'active' && Auth::user()->hasPermission('user:suspend'))
-		<a href="{{ route('admin.users.activate', $user->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-primary legitRipple">
-			<i class="icon-user-check"></i> <span>{{ trans('actions.activate') }}</span>
+		@if($user->canSuspend() && Auth::user()->hasPermission('user:suspend'))
+		<a href="{{ route('admin.users.suspend', $user->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
+			<i class="icon-user-check"></i> <span>{{ trans('actions.suspend') }}</span>
 		</a>
 		@endif
 
