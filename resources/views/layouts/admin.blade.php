@@ -185,6 +185,12 @@
                                 <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.allocation-types') }}</span></a>
                             </li>
 
+                            @if(Auth::user()->hasPermission('vendor-type:index'))
+                            <li class="{{ is_path_active('admin/vendor-types*') }}">
+                                <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.vendor-types') }}</span></a>
+                            </li>
+                            @endif
+
                             <li class="{{ is_path_active('admin/payment-gateways*') }}">
                                 <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.payment-gateways') }}</span></a>
                             </li>

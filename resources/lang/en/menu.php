@@ -29,6 +29,7 @@ return [
 
             'qualification_codes'   => 'Qualification Codes',
             'allocation-types'      => 'Allocation Types',
+            'vendor-types'          => 'Vendor Types',
             'payment-gateways'      => 'Payment Gateways',
         ],
         'manage' => [
