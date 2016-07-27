@@ -6,7 +6,7 @@
         <div class="content-wrapper">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <div class="panel panel-flat">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-12">

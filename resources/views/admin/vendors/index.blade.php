@@ -2,7 +2,7 @@
 
 @section('header')
 <div class="page-title">
-	<h4>{{ trans('vendors.title') }}</h4>
+	<h4>{{ trans('vendors.index.title') }}</h4>
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
@@ -19,7 +19,7 @@
 		<input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('vendors.views.index.keywords') }}" v-model="q.keywords">
 		<select name="q[status]" class="form-control input-sm" v-model="q.status">
 			<option value="" selected="selected">{{ trans('vendors.views.index.status') }}</option>
-			@foreach(collect(trans('statuses'))->only('active', 'suspended', 'inactive') as $key => $value)<option value="{{ $key }}">{{ $value }}</option>@endforeach
+			@foreach(collect(trans('statuses'))->only('pending-confirmation', 'confirmed','suspended') as $key => $value)<option value="{{ $key }}">{{ $value }}</option>@endforeach
 		</select>
 		<a href="#" class="btn btn-sm btn-primary" v-on:click="perform_search">{{ trans('actions.search') }}</a>
 		<a href="#" class="btn btn-sm btn-default" v-show="searching" v-on:click="clear_search">{{ trans('actions.clear') }}</a>

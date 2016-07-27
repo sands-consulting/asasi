@@ -1,18 +1,8 @@
-<div class="panel panel-flat">
+<div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
             <div class="col-sm-12">
                 <h5 class="panel-title">{{ trans('vendors.views.create.public.title') }}</h5>
-                {{-- 
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
-                <a class="heading-elements-toggle"><i class="icon-more"></i></a>
-                --}}
             </div>
         </div>
     </div>
@@ -20,6 +10,33 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-12">
+                <fieldset>
+                    <legend class="text-semibold">
+                        <i class="icon-user position-left"></i>
+                        Create Account
+                        <a class="control-arrow" data-toggle="collapse" data-target="#account">
+                            <i class="icon-circle-down2"></i>
+                        </a>
+                    </legend>
+
+                    <div class="collapse in" id="account">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                {!! Former::email('contact_email')
+                                    ->label('vendors.attributes.contact_email')
+                                    ->placeholder('Eg: vendor@example.com') !!}
+                            </div>
+                            <div class="col-sm-4">
+                                {!! Former::text('password')
+                                    ->label('auth.password') !!}
+                            </div>
+                            <div class="col-sm-4">
+                                {!! Former::text('password_confirmation')
+                                    ->label('auth.confirm_password') !!}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
                 <fieldset>
                     <legend class="text-semibold">
                         <i class="icon-file-text2 position-left"></i>
@@ -58,11 +75,11 @@
                     <legend class="text-semibold">
                         <i class="icon-location3 position-left"></i>
                         Address
-                        <a class="control-arrow" data-toggle="collapse" data-target="#contacts">
+                        <a class="control-arrow" data-toggle="collapse" data-target="#address">
                             <i class="icon-circle-down2"></i>
                         </a>
                     </legend>
-                    <div class="collapse in" id="contacts">
+                    <div class="collapse in" id="address">
                         {!! Former::text('address_1')
                             ->label('vendors.attributes.address_1')
                             ->placeholder('Eg: Lot 10, Jalan A2') !!}
@@ -112,21 +129,14 @@
                                     ->label('vendors.attributes.contact_name') !!}
                             </div>
                             <div class="col-sm-6">
-                                {!! Former::email('contact_email')
-                                    ->label('vendors.attributes.contact_email')
-                                    ->placeholder('Eg: vendor@example.com') !!}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
                                 {!! Former::text('contact_telephone')
                                     ->label('vendors.attributes.contact_telephone') !!}
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 {!! Former::text('contact_fax')
                                     ->label('vendors.attributes.contact_fax') !!}
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 {!! Former::text('contact_website')
                                     ->label('vendors.attributes.contact_website')
                                     ->prepend('http://') !!}
@@ -160,7 +170,8 @@
                         </div>
                     </div>
                 </fieldset>
-
+                
+                
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary legitRipple">Submit form <i class="icon-arrow-right14 position-right"></i></button>
                 </div>

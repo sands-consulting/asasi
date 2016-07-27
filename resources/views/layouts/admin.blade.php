@@ -139,6 +139,11 @@
                                 <a href="{{ route('admin.organizations.index') }}"><i class="icon-office"></i> <span>{{ trans('menu.organizations') }}</span></a>
                             </li>
                             @endif
+                            @if(Auth::user()->hasPermission('vendors:index'))
+                            <li class="{{ is_path_active('admin/vendors*') }}">
+                                <a href="{{ route('admin.vendors.index') }}"><i class="icon-people"></i> <span>{{ trans('menu.vendors') }}</span></a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

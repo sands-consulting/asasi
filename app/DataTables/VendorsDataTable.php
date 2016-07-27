@@ -24,7 +24,7 @@ class VendorsDataTable extends DataTable
 
     public function query()
     {
-        $query = Vendor::whereNotNull('name');
+        $query = Vendor::with('user');
 
         if($this->datatables->request->input('q', null))
         {
@@ -52,9 +52,9 @@ class VendorsDataTable extends DataTable
                 'title' => trans('vendors.attributes.name'),
             ],
             [
-                'data'  => 'contact_email',
-                'name'  => 'vendors.contact_email',
-                'title' => trans('vendors.attributes.contact_email'),
+                'data'  => 'user.email',
+                'name'  => 'user.email',
+                'title' => trans('users.attributes.email'),
             ],
             [
                 'data'  => 'status',
@@ -67,5 +67,12 @@ class VendorsDataTable extends DataTable
     protected function filename()
     {
         return 'vendors_dt_' . time();
+    }
+
+    protected function getBuilderParameters()
+    {
+        $data = parent::getBuilderParameters();
+        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        return $data;
     }
 }

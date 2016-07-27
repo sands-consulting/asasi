@@ -21,8 +21,8 @@ class VendorsController extends Controller
 
     public function store(VendorRequest $request)
     {
-        $inputs             = $request->all();
-        $vendor               = VendorsRepository::create(new Vendor, $inputs);
+        $inputs = $request->all();
+        $vendor = VendorsRepository::create(new Vendor, $inputs);
 
         return redirect()
             ->route('vendors.pending', $vendor->id)

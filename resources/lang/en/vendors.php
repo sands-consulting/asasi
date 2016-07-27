@@ -27,6 +27,13 @@ return [
         'deleted_at' => 'Deleted At',
     ],
 
+    'buttons' => [
+        'create' => 'Create New Vendor',
+        'edit' => 'Edit Vendor',
+        'assume' => 'Login As This Vendor',
+        'all' => 'All Vendors',
+    ],
+
     'notices' => [
         'created' => 'Vendor :name created',
         'updated' => 'Vendor :name updated',
@@ -35,14 +42,13 @@ return [
 
 	'views' => [
 		'index' => [
-            'admin' => [
-                'title' => 'Vendors',
-            ],
-			'panels' => [
-				'vendors' => [
-					'title' => 'Vendors'
-				]
-			]
+            'title' => 'Vendors',
+            'status' => 'Status',
+            'panels' => [
+                'vendors' => [
+                    'title' => 'Vendors'
+                ]
+            ]
 		],
         'show' => [
             'admin' => [

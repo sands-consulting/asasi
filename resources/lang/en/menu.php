@@ -18,5 +18,6 @@ return [
     'users'				=> 'Users',
     'roles'				=> 'Roles',
     'permissions'		=> 'Permissions',
-    'organizations'		=> 'Organizations'
+    'organizations'     => 'Organizations',
+    'vendors'		    => 'Vendors'
 ];

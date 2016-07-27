@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(AsasiSeeder::class);
+        $this->call(VendorSeeder::class);
 
         Model::reguard();
         try {

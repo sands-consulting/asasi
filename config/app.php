@@ -193,6 +193,7 @@ return [
          */
         App\Providers\Modules\NewsProvider::class,
         App\Providers\Modules\VendorsProvider::class,
+        App\Providers\Modules\VendorTypesProvider::class,
     ],
 
     /*
