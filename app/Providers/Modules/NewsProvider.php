@@ -17,10 +17,13 @@ class NewsProvider extends ServiceProvider
     {
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
             $router->model('news', 'App\News');
-
             $router->resource('news', 'NewsController', ['only' => ['index', 'show']]);
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+                $router->bind('news', function ($value) {
+                    return News::find($value);
+                });
+
                 $router->get('news/{news}/revisions', [
                     'as'    => 'admin.news.revisions',
                     'uses'  => 'NewsController@revisions'
