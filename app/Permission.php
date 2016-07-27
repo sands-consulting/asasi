@@ -78,7 +78,7 @@ class Permission extends Model
 
     public static function getGroupOptions()
     {
-        return static::distinct('group')->lists('group');
+        return static::distinct('group')->orderBy('group')->lists('group');
     }
 
     public static function boot()
