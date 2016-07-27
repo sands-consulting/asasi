@@ -8,56 +8,51 @@ class PermissionsPolicy extends BasePolicy
 {
     public function index()
     {
-        return $this->user->ability(['Admin'], ['Permission:List']);
-    }
-
-    public function data()
-    {
-        return $this->index();
+        return $this->user->hasPermission('permission:index');
     }
 
     public function show()
     {
-        return false;
+        return $this->user->hasPermission('permission:show');
     }
 
     public function create()
     {
-        return false;
+        return $this->user->hasPermission('permission:create');
     }
 
     public function store()
     {
-        return false;
+        return $this->create();
     }
 
     public function edit(Permission $permission)
     {
-        return false;
+        return $this->user->hasPermission('permission:update') && $permission->name != 'admin';
     }
 
     public function update(Permission $permission)
     {
-        return false;
-    }
-
-    public function duplicate(Permission $permission)
-    {
-        return false;
-    }
-
-    public function revisions(Permission $permission)
-    {
-        return false;
+        return $this->edit($permission);
     }
 
     public function destroy(Permission $permission)
     {
-        return false;
+        return $this->user->hasPermission('permission:delete') && $permission->name != 'admin';
     }
 
-    public function delete(Permission $permission)
+    public function duplicate(Permission $permission)
     {
-        return false;
+        return $this->user->hasPermission('permission:duplicate');
+    }
+
+    public function revisions(Permission $permission)
+    {
+        return $this->user->hasPermission('permission:revisions');
+    }
+
+    public function logs(Permission $permission)
+    {
+        return $this->user->hasPermission('permission:logs');
     }
 }

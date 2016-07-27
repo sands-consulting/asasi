@@ -29,19 +29,7 @@ class PermissionsServiceProvider extends ServiceProvider
             $router->model('permissions', 'App\Permission');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->get('permissions/{permissions}/logs', [
-                    'as'    => 'admin.permissions.logs',
-                    'uses'  => 'PermissionsController@logs'
-                ]);
-                $router->get('permissions/{permissions}/revisions', [
-                    'as'    => 'admin.permissions.revisions',
-                    'uses'  => 'PermissionsController@revisions'
-                ]);
-                $router->post('permissions/{permissions}/duplicate', [
-                    'as'    => 'admin.permissions.duplicate',
-                    'uses'  => 'PermissionsController@duplicate'
-                ]);
-                $router->resource('permissions',  'PermissionsController');
+                $router->resource('permissions',  'PermissionsController', ['only' => 'index']);
             });
         });
     }
