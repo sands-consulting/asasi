@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(AsasiSeeder::class);
+        $this->call(AllocationSeeder::class);
+        $this->call(QualificationCodeSeeder::class);
         $this->call(NewsSeeder::class);
         $this->call(VendorSeeder::class);
 
