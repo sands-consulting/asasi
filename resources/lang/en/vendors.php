@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Vendors',
     'attributes' => [
         'name' => 'Vendor Name',
         'registration_number' => 'Registration Number',
@@ -42,53 +43,19 @@ return [
 
 	'views' => [
 		'index' => [
-            'title' => 'Vendors',
-            'status' => 'Status',
-            'panels' => [
-                'vendors' => [
-                    'title' => 'Vendors'
-                ]
-            ]
+            'status'   => 'Status',
+            'keywords' => 'Keywords',
 		],
         'show' => [
-            'admin' => [
-                'title' => 'View',
-            ],
-            'panels' => [
-                'vendors' => [
-                    'title' => 'Vendors'
-                ]
-            ]
         ],
         'create' => [
-            'admin' => [
-                'title' => 'Create New Vendor',
-            ],
-            'public' => [
-                'title' => 'Vendor Application Form',
-                'panels' => [
-                   
-                ]
-            ],
+            'title' => 'Create New Vendor',
         ],
         'edit' => [
-            'admin' => [
-                'title' => 'Edit',
-            ],
-            'public' => [
-                'title' => 'Vendor Application Form',
-                'panels' => [
-                   
-                ]
-            ],
+            'title' => 'Edit',
         ],
         'pending' => [
             'title' => 'Application Pending Approval',
-            'panels' => [
-                'vendors' => [
-                    'title' => 'Vendor\'s Registration',
-                ]
-            ]
         ]
 	]
 ];
