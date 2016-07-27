@@ -29,7 +29,7 @@ class VendorSeeder extends Seeder
             ['vendor:activate',          'Activate existing vendor'],
             ['vendor:deactivate',        'Deactivate existing vendor'],
             ['vendor:delete',            'Delete existing vendor'],
-            ['vendor:revisons',          'View vendor revisions'],
+            ['vendor:revisions',         'View vendor revisions'],
             ['vendor:logs',              'View vendor logs'],
 
             ['vendor-type:index',             'List all vendor types'],
@@ -40,7 +40,7 @@ class VendorSeeder extends Seeder
             ['vendor-type:activate',          'Activate existing vendor type'],
             ['vendor-type:deactivate',        'Deactivate existing vendor type'],
             ['vendor-type:delete',            'Delete existing vendor type'],
-            ['vendor-type:revisons',          'View vendor type revisions'],
+            ['vendor-type:revisions',         'View vendor type revisions'],
             ['vendor-type:logs',              'View vendor type logs']
         ];
 

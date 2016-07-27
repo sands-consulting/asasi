@@ -29,6 +29,15 @@ class NewsCategory extends Model
         return $this->hasMany(News::class, 'category_id');
     }
 
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
     public static function boot()
     {
         parent::boot();

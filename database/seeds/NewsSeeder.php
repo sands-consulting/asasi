@@ -3,9 +3,11 @@
 use App\Banner;
 use App\News;
 use App\NewsCategory;
+use App\Permission;
 use App\Repositories\BannerRepository;
 use App\Repositories\NewsRepository;
 use App\Repositories\NewsCategoryRepository;
+use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
 class NewsSeeder extends Seeder
@@ -17,9 +19,9 @@ class NewsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('news')->truncate();
-        DB::table('news_category')->truncate();
+        DB::table('news_categories')->truncate();
         DB::table('banners')->truncate();
+        DB::table('news')->truncate();
 
         $permissions = [
             ['news:index',                  'List all news'],
@@ -29,13 +31,21 @@ class NewsSeeder extends Seeder
             ['news:delete',                 'Delete exisiting news'],
             ['news:publish',                'Publish existing news'],
             ['news:unpublish',              'Unpublish existing news'],
+            ['news:revisions',               'View news revisions'],
+            ['news:logs',                   'View news logs'],
+            
             ['news:index:organization',     'List all news by organization'],
 
             ['news_category:index',         'List all news categories'],
             ['news_category:show',          'View a news category'],
             ['news_category:create',        'Create new news category'],
             ['news_category:update',        'Update existing news category'],
+            ['news_category:duplicate',     'Duplicate existing new category'],
             ['news_category:delete',        'Delete existing news category'],
+            ['news_category:activate',      'Activate news category'],
+            ['news_category:deactivate',    'Deactivate news category'],
+            ['news_category:revisions',     'View news category revisions'],
+            ['news_category:logs',          'View news category logs'],
 
             ['banner:index',                'List all banners'],
             ['banner:show',                 'View a banner'],
@@ -44,6 +54,8 @@ class NewsSeeder extends Seeder
             ['banner:delete',               'Delete existing banner'],
             ['banner:publish',              'Publish a banner'],
             ['banner:unpublish',            'Unpublish a banner'],
+            ['banner:revisions',            'View banner revisions'],
+            ['banner:logs',                 'View banner logs']
         ];
 
         foreach ($permissions as $permissionData) {
@@ -55,19 +67,20 @@ class NewsSeeder extends Seeder
 
         $news_categories = [
             [
-                'title' => 'News'
+                'name' => 'Announcement'
             ]
         ];
 
         foreach($news_categories as $category)
         {
-            NewsCategoryRepository::create($category);
+            NewsCategoryRepository::create(new NewsCategory, $category);
         }
 
-        NewsRepository::create([
+        $news = NewsRepository::create(new News, [
             'title' => 'PROMPT 1.0',
             'content' => "<p>This is PROMPT 1.0 developed by Sands Consulting",
-            'category_id' => NewsCategory::first()->id;
+            'category_id' => NewsCategory::first()->id,
+            'status' => 'published'
         ]);
     }
 }
