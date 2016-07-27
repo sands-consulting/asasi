@@ -36,15 +36,13 @@ class Vendor extends Authenticatable
         'user_id',
     ];
 
-    protected $hidden = [];
-
     protected $attributes = [
-        'status' => 'pending-confirmation',
-        'type_id' => 1,
+        'status' => 'draft'
     ];
 
     protected $searchable = [
         'name',
+        'registration_number',
         'contact_email'
     ];
 

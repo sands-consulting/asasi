@@ -13,19 +13,25 @@ class VendorType extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'name'
+        'incorporation_authority',
+        'incorporation_type',
+        'status'
     ];
 
-    protected $hidden = [];
-
-    protected $attributes = [];
+    protected $attributes = [
+        'status' => 'active'
+    ];
 
     protected $searchable = [
-        'name',
+        'incorporation_authority',
+        'incorporation_type',
+        'status'
     ];
 
     protected $sortable = [
-        'name'
+        'incorporation_authority',
+        'incorporation_type',
+        'status'
     ];
 
     /*
@@ -40,14 +46,6 @@ class VendorType extends Model
                 $query->orWhere($column, 'LIKE', "%$keywords%");
             }
             unset($queries['keywords']);
-        }
-
-        if (isset($queries['role']) && !empty($queries['role'])) {
-            $role   = $queries['role'];
-            $query->whereHas('roles', function ($roles) use ($role) {
-                $roles->whereId($role);
-            });
-            unset($queries['role']);
         }
 
         foreach ($queries as $key => $value) {

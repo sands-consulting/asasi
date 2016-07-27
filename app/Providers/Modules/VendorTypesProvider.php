@@ -24,15 +24,24 @@ class VendorTypesProvider extends ServiceProvider
             $router->model('vendor_types', 'App\VendorType');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+                $router->put('vendor-types/{vendor_types}/activate', [
+                    'as'    => 'admin.vendor-types.activate',
+                    'uses'  => 'VendorTypesController@activate'
+                ]);
+                $router->put('vendor-types/{vendor_types}/deactivate', [
+                    'as'    => 'admin.vendor-types.deactivate',
+                    'uses'  => 'VendorTypesController@deactivate'
+                ]);
+                $router->get('vendor-types/{vendor_types}/revisions', [
+                    'as'    => 'admin.vendor-types.revisions',
+                    'uses'  => 'VendorTypesController@revisions'
+                ]);
+                $router->post('vendor-types/{vendor_types}/duplicate', [
+                    'as'    => 'admin.vendor-types.duplicate',
+                    'uses'  => 'VendorTypesController@duplicate'
+                ]);
                 $router->resource('vendor-types', 'VendorTypesController');
             });
-            
-            $router->get('vendor-types/{vendor_types}/pending', [
-                'as'    => 'vendor-types.pending',
-                'uses'  => 'VendorTypesController@pending'
-            ]);
-
-            $router->resource('vendor-types', 'VendorTypesController');
         });
     }
 }
