@@ -24,15 +24,15 @@ class AllocationsServiceProvider extends ServiceProvider
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
                 $router->get('allocations/{allocations}/revisions', [
                     'as'    => 'admin.allocations.revisions',
-                    'uses'  => 'AllocationsControllerr@revisions'
+                    'uses'  => 'AllocationsController@revisions'
                 ]);
                 $router->get('allocations/{allocations}/activate', [
                     'as'    => 'admin.allocations.activate',
-                    'uses'  => 'AllocationsControllerr@deactivate'
+                    'uses'  => 'AllocationsController@deactivate'
                 ]);
                 $router->get('allocations/{allocations}/deactivate', [
                     'as'    => 'admin.allocations.deactivate',
-                    'uses'  => 'AllocationsControllerr@deactivate'
+                    'uses'  => 'AllocationsController@deactivate'
                 ]);
                 $router->resource('allocations', 'AllocationsController');
 
