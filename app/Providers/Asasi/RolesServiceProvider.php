@@ -33,10 +33,6 @@ class RolesServiceProvider extends ServiceProvider
                     'as'    => 'admin.roles.revisions',
                     'uses'  => 'RolesController@revisions'
                 ]);
-                $router->post('roles/{roles}/duplicate', [
-                    'as'    => 'admin.roles.duplicate',
-                    'uses'  => 'RolesController@duplicate'
-                ]);
                 $router->resource('roles',  'RolesController');
             });
         });
