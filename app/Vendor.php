@@ -59,25 +59,19 @@ class Vendor extends Authenticatable
     {
         if (isset($queries['keywords']) && !empty($queries['keywords'])) {
             $keywords = $queries['keywords'];
-            foreach ($this->searchable as $column) {
-                $query->orWhere($column, 'LIKE', "%$keywords%");
-            }
-            unset($queries['keywords']);
-        }
-
-        if (isset($queries['role']) && !empty($queries['role'])) {
-            $role   = $queries['role'];
-            $query->whereHas('roles', function ($roles) use ($role) {
-                $roles->whereId($role);
+            $query->where(function($query) use($keywords) {
+                foreach ($this->searchable as $column) {
+                    $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
+                }
             });
-            unset($queries['role']);
+            unset($queries['keywords']);
         }
 
         foreach ($queries as $key => $value) {
             if (empty($value)) {
                 continue;
             }
-            $query->orWhere($key, $value);
+            $query->where("{$this->getTable()}.{$key}", $value);
         }
     }
 
