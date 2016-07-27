@@ -110,6 +110,17 @@ class AsasiSeeder extends Seeder
             ['organization:delete',     'Delete exisitign organization'],
             ['organization:revisions',  'View organization revisions'],
             ['organization:logs',       'View organization logs'],
+
+            ['place:index',             'List all places'],
+            ['place:show',              'View place details'],
+            ['place:create',            'Create new place'],
+            ['place:update',            'Update existing place'],
+            ['place:duplicate',         'Duplicate existing place'],
+            ['place:activate',          'Activate existing place'],
+            ['place:deactivate',        'Deactivate existing place'],
+            ['place:delete',            'Delete existing place'],
+            ['place:revisons',          'View place revisions'],
+            ['place:logs',              'View place logs']
         ];
 
         foreach ($permissions as $permissionData) {
