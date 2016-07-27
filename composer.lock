@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "623602d63749478932430fa009b8fbae",
-    "content-hash": "6c757bfba7d71c87dc0c1e8513a67a52",
+    "hash": "446afe9b2bb8b38fe75af66caee875b2",
+    "content-hash": "97d59cec58ce0e5fe82de1745926f180",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -104,6 +104,61 @@
             ],
             "description": "A set of classes to create and manipulate HTML objects abstractions",
             "time": "2015-03-04 17:12:08"
+        },
+        {
+            "name": "baum/baum",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/etrepat/baum.git",
+                "reference": "9290bed862d329aaaef666a71e0a2734afc28286"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/etrepat/baum/zipball/9290bed862d329aaaef666a71e0a2734afc28286",
+                "reference": "9290bed862d329aaaef666a71e0a2734afc28286",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.*",
+                "illuminate/database": "5.*",
+                "illuminate/events": "5.*",
+                "illuminate/filesystem": "5.*",
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "d11wtq/boris": "~1.0.10",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Baum": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Estanislau Trepat",
+                    "email": "estanis@etrepat.com",
+                    "homepage": "http://etrepat.com"
+                }
+            ],
+            "description": "Baum is an implementation of the Nested Set pattern for Eloquent models.",
+            "keywords": [
+                "Laravel 4",
+                "database",
+                "eloquent",
+                "laravel",
+                "laravel 5",
+                "nested set"
+            ],
+            "time": "2015-03-04 12:07:54"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -2055,16 +2110,16 @@
         },
         {
             "name": "sands/asasi-booted",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-booted.git",
-                "reference": "20a76b2c2b27f4612c2b07bf621a6e827ffcff89"
+                "reference": "281cbbb7022a1ee411ddfc01805e05a8dfa06f22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-booted/zipball/20a76b2c2b27f4612c2b07bf621a6e827ffcff89",
-                "reference": "20a76b2c2b27f4612c2b07bf621a6e827ffcff89",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-booted/zipball/281cbbb7022a1ee411ddfc01805e05a8dfa06f22",
+                "reference": "281cbbb7022a1ee411ddfc01805e05a8dfa06f22",
                 "shasum": ""
             },
             "require": {
@@ -2099,26 +2154,26 @@
                 "boot",
                 "laravel"
             ],
-            "time": "2016-07-18 15:45:00"
+            "time": "2016-07-27 03:24:43"
         },
         {
             "name": "sands/asasi-foundation",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-foundation.git",
-                "reference": "2c45ceaf5ce8aed31dcac5bab94ada9b8eda612a"
+                "reference": "9e331df9b40257668b4601e9de70a686c7299dca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-foundation/zipball/2c45ceaf5ce8aed31dcac5bab94ada9b8eda612a",
-                "reference": "2c45ceaf5ce8aed31dcac5bab94ada9b8eda612a",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-foundation/zipball/9e331df9b40257668b4601e9de70a686c7299dca",
+                "reference": "9e331df9b40257668b4601e9de70a686c7299dca",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "~5.2.0",
                 "php": ">=5.6.4",
-                "sands/asasi-booted": "1.0.0"
+                "sands/asasi-booted": "~1.0.0"
             },
             "type": "library",
             "autoload": {
@@ -2148,7 +2203,7 @@
                 "boot",
                 "laravel"
             ],
-            "time": "2016-07-25 04:07:22"
+            "time": "2016-07-27 03:28:45"
         },
         {
             "name": "swiftmailer/swiftmailer",

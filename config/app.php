@@ -187,6 +187,7 @@ return [
         App\Providers\Asasi\UsersServiceProvider::class,
         App\Providers\Asasi\RolesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,
+        App\Providers\Asasi\OrganizationsServiceProvider::class,
 
         /*
          * Modules

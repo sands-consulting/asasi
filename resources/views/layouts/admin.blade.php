@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-param" content="_token">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
+<title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
 <body class="navbar-top">
@@ -136,7 +136,7 @@
                             @endif
                             @if(Auth::user()->hasPermission('organization:index'))
                             <li class="{{ is_path_active('admin/organizations*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-office"></i> <span>{{ trans('menu.organizations') }}</span></a>
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.organizations') }}</span></a>
                             </li>
                             @endif
                             @if(Auth::user()->hasPermission('vendors:index'))

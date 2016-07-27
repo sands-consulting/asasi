@@ -1,14 +1,16 @@
 <?php
 
-use App\Repositories\PermissionGroupsRepository;
-use App\Repositories\PermissionsRepository;
-use App\Repositories\UsersRepository;
-use App\Repositories\RolesRepository;
-use Illuminate\Database\Seeder;
-use App\PermissionGroup;
+use App\Organization;
+use App\Place;
 use App\Permission;
-use App\User;
 use App\Role;
+use App\User;
+use App\Repositories\OrganizationsRepository;
+use App\Repositories\PlacesRepository;
+use App\Repositories\PermissionsRepository;
+use App\Repositories\RolesRepository;
+use App\Repositories\UsersRepository;
+use Illuminate\Database\Seeder;
 
 class AsasiSeeder extends Seeder
 {
@@ -19,6 +21,10 @@ class AsasiSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('organization_user')->truncate();
+        DB::table('organizations')->truncate();
+        DB::table('settings')->truncate();
+        DB::table('uploads')->truncate();
         DB::table('permission_role')->truncate();
         DB::table('role_user')->truncate();
         DB::table('permissions')->truncate();
@@ -28,6 +34,7 @@ class AsasiSeeder extends Seeder
         DB::table('password_resets')->truncate();
         DB::table('users')->truncate();
         DB::table('revisions')->truncate();
+        DB::table('places')->truncate();
 
         $roles = [
             [
@@ -67,30 +74,42 @@ class AsasiSeeder extends Seeder
             ['role:show',               'View role details'],
             ['role:create',             'Create new role'],
             ['role:update',             'Update exisiting role'],
+            ['role:delete',             'Delete exisiting role'],
             ['role:revisions',          'View role revisions'],
             ['role:logs',               'View role logs'],
-            ['role:delete',             'Delete exisiting role'],
 
             ['user:index',              'List all users'],
             ['user:show',               'View user details'],
             ['user:create',             'Create new user'],
             ['user:update',             'Update exisiting user'],
-            ['user:revisions',          'View user revisions'],
-            ['user:logs',               'View user logs'],
             ['user:duplicate',          'Duplicate exisiting user'],
-            ['user:delete',             'Delete existing user'],
             ['user:assume',             'Login as another user'],
             ['user:activate',           'Activate a user'],
             ['user:suspend',            'Suspend a user'],
+            ['user:delete',             'Delete existing user'],
+            ['user:revisions',          'View user revisions'],
+            ['user:logs',               'View user logs'],
 
             ['user-blacklist:index',        'List all user blacklists'],
             ['user-blacklist:show',         'View blacklist details'],
             ['user-blacklist:create',       'Blacklist a user'],
             ['user-blacklist:update',       'Update user blacklist'],
             ['user-blacklist:duplicate',    'Duplicate a blacklist'],
+            ['user-blacklist:delete',       'Delete existing user blacklist'],
             ['user-blacklist:revisions',    'List blacklist revisions'],
             ['user-blacklist:logs',         'View blacklist logs'],
-            ['user-blacklist:delete',       'Delete existing user blacklist']
+
+            ['organization:index',      'List all organization'],
+            ['organization:show',       'View organization details'],
+            ['organization:create',     'Create new organization'],
+            ['organization:update',     'Update exisiting organization'],
+            ['organization:duplicate',  'Duplicate exisiting organization'],
+            ['organization:activate',   'Activate an organization'],
+            ['organization:deactivate', 'Deactivate an organization'],
+            ['organization:suspend',    'Suspend an organization'],
+            ['organization:delete',     'Delete exisitign organization'],
+            ['organization:revisions',  'View organization revisions'],
+            ['organization:logs',       'View organization logs'],
         ];
 
         foreach ($permissions as $permissionData) {
@@ -101,5 +120,45 @@ class AsasiSeeder extends Seeder
         }
 
         Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
+
+        OrganizationsRepository::create(new Organization, [
+            'name' => 'Sands Consulting',
+            'short_name' => 'SANDS'
+        ]);
+
+        $places = [
+            ['Malaysia',        'MY',   'MAS',  'country',  null],     #1
+
+            ['Johor',           null,   'JHR',  'state', 1],    #2
+            ['Kedah',           null,   'KDH',  'state', 1],    #3
+            ['Kelantan',        null,   'KEL',  'state', 1],    #4
+            ['WP Kuala Lumpur', null,   'KUL',  'state', 1],    #5
+            ['WP Labuan',       null,   'LBN',  'state', 1],    #6
+            ['Melaka',          null,   'MEL',  'state', 1],    #7
+            ['Negeri Sembilan', null,   'NEG',  'state', 1],    #8
+            ['Pahang',          null,   'PHG',  'state', 1],    #9
+            ['Pulau Pinang',    null,   'PNG',  'state', 1],    #10
+            ['WP Putrajaya',    null,   'PUJ',  'state', 1],    #11
+            ['Perak',           null,   'PRK',  'state', 1],    #12
+            ['Perlis',          null,   'PER',  'state', 1],    #13
+            ['Sabah',           null,   'SBH',  'state', 1],    #14
+            ['Sarawak',         null,   'SWK',  'state', 1],    #15
+            ['Selangor',        null,   'SEL',  'state', 1],    #16
+            ['Terengganu',      null,   'TRG',  'state', 1],    #17
+
+            ['Kuala Lumpur',    null,   null,   'city', 5],
+            ['Shah Alam',       null,   null,   'city', 16]
+        ];
+
+        foreach($places as $place) {
+            PlacesRepository::create(new Place(), [
+                'name'      => $place[0],
+                'code_2'    => $place[1],
+                'code_3'    => $place[2],
+                'type'      => $place[3],
+                'parent_id' => $place[4]
+            ]);
+        }
+
     }
 }

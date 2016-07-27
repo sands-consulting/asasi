@@ -101,6 +101,19 @@ class User extends Authenticatable
         }
     }
 
+    /* 
+     * State controls 
+     */
+    public function canActivate()
+    {
+        return $this->status != 'active';
+    }
+
+    public function canSuspend()
+    {
+        return $this->status != 'suspended';
+    }
+
     /*
      * ACL functions
      */

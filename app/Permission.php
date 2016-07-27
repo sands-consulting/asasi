@@ -20,14 +20,15 @@ class Permission extends Model
     ];
 
     protected $searchable = [
+        'group',
         'name',
-        'email'
+        'description'
     ];
 
     protected $sortable = [
+        'group',
         'name',
-        'email',
-        'status'
+        'description'
     ];
 
 

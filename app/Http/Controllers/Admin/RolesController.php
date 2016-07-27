@@ -5,18 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Role;
 use App\DataTables\RolesDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Repositories\RolesRepository;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('policy');
-    }
-
     public function index(RolesDataTable $table)
     {
         return $table->render('admin.roles.index');
