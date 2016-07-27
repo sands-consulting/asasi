@@ -34,6 +34,12 @@
 			<i class="icon-pencil5"></i> <span>{{ trans('users.buttons.edit') }}</span>
 		</a>
 		@endif
+
+		@if(Auth::user()->id != $user->id && Auth::user()->hasPermission('user:delete'))
+		<a href="{{ route('admin.users.destroy', $user->id) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
+			<i class="icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
+		</a>
+		@endif
 	</div>
 </div>
 @endsection

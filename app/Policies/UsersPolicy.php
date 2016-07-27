@@ -38,7 +38,7 @@ class UsersPolicy extends BasePolicy
 
     public function destroy(User $user)
     {
-        return $this->user->hasPermission('user:delete');
+        return $this->user->hasPermission('user:delete') && $this->user->id != $user->id;
     }
 
     public function duplicate(User $user)
