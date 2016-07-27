@@ -4360,21 +4360,22 @@
         },
         {
             "name": "sands/asasi-scaffold",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-scaffold.git",
-                "reference": "4566e3decab9c69c27a82c908b34609ebc303207"
+                "reference": "e60fdb57ce90e974180ec75e9ab7f245d240d27b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-scaffold/zipball/4566e3decab9c69c27a82c908b34609ebc303207",
-                "reference": "4566e3decab9c69c27a82c908b34609ebc303207",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-scaffold/zipball/e60fdb57ce90e974180ec75e9ab7f245d240d27b",
+                "reference": "e60fdb57ce90e974180ec75e9ab7f245d240d27b",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "~5.0",
-                "php": ">=5.5.9"
+                "php": ">=5.5.9",
+                "yetanotherape/diff-match-patch": "^1.0"
             },
             "type": "library",
             "autoload": {
@@ -4398,8 +4399,8 @@
                     "homepage": "https://github.com/aminadha"
                 }
             ],
-            "description": "Scaffold Generator",
-            "time": "2016-07-22 04:56:30"
+            "description": "Scaffold Generator For Asasi",
+            "time": "2016-07-26 14:53:19"
         },
         {
             "name": "sebastian/comparator",
