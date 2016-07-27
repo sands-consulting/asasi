@@ -8,22 +8,17 @@ class RolesPolicy extends BasePolicy
 {
     public function index()
     {
-        return $this->user->ability(['Admin'], ['Role:List']);
-    }
-
-    public function data()
-    {
-        return $this->index();
+        return $this->user->hasPermission('role:index');
     }
 
     public function show()
     {
-        return $this->user->ability(['Admin'], ['Role:Show']);
+        return $this->user->hasPermission('role:show');
     }
 
     public function create()
     {
-        return $this->user->ability(['Admin'], ['Role:Create']);
+        return $this->user->hasPermission('role:create');
     }
 
     public function store()
@@ -33,7 +28,7 @@ class RolesPolicy extends BasePolicy
 
     public function edit(Role $role)
     {
-        return $this->user->ability(['Admin'], ['Role:Update']) && $role->name != 'Admin';
+        return $this->user->hasPermission('role:update');
     }
 
     public function update(Role $role)
@@ -41,23 +36,23 @@ class RolesPolicy extends BasePolicy
         return $this->edit($role);
     }
 
+    public function destroy(Role $role)
+    {
+        return $this->user->hasPermission('role:delete') && $role->name != 'admin';
+    }
+
     public function duplicate(Role $role)
     {
-        return $this->user->ability(['Admin'], ['Role:Duplicate']);
+        return $this->user->hasPermission('role:duplicate');
     }
 
     public function revisions(Role $role)
     {
-        return $this->user->ability(['Admin'], ['Role:Revisions']);
+        return $this->user->hasPermission('role:revisions');
     }
 
-    public function destroy(Role $role)
+    public function logs(Role $role)
     {
-        return $this->user->ability(['Admin'], ['Role:Delete']) && $role->name != 'Admin';
-    }
-
-    public function delete(Role $role)
-    {
-        return $this->destroy($role);
+        return $this->user->hasPermission('role:logs');
     }
 }

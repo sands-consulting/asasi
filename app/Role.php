@@ -37,5 +37,9 @@ class Role extends Model
     public static function boot()
     {
         parent::boot();
+
+        static::saving(function($role) {
+            $role->name = str_slug($role->name);
+        });
     }
 }
