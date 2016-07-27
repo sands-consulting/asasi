@@ -136,7 +136,7 @@
                             @endif
                             @if(Auth::user()->hasPermission('organization:index'))
                             <li class="{{ is_path_active('admin/organizations*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-office"></i> <span>{{ trans('menu.organizations') }}</span></a>
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.organizations') }}</span></a>
                             </li>
                             @endif
                         </ul>

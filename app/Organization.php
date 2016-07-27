@@ -95,6 +95,24 @@ class Organization extends Node
         }
     }
 
+    /* 
+     * State controls 
+     */
+    public function canActivate()
+    {
+        return $this->status != 'active';
+    }
+
+    public function canDeactivate()
+    {
+        return $this->status != 'inactive';
+    }
+
+    public function canSuspend()
+    {
+        return $this->status != 'suspended';
+    }
+
     public static function boot()
     {
         parent::boot();
