@@ -31,6 +31,7 @@ elixir(function(mix) {
         '../vendor/legitripple/js/ripple.js',
         '../vendor/select2/dist/js/select2.js',
         'vendor/pnotify.js',
+        'app.js',
         'public.js',
     ], 'public/assets/js/public.js')
     .scripts([
