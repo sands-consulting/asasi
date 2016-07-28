@@ -6,7 +6,7 @@
     	<div class="content-wrapper">
     		<div class="row">
     			<div class="col-xs-12 col-sm-12">
-                    {!! Former::open_vertical(action('VendorsController@update', $vendor->id))->method('POST') !!}
+                    {!! Former::open_vertical(action('VendorsController@update', $vendor->id))->method('PUT') !!}
                         {!! Former::populate($vendor) !!}
                         <div class="panel panel-default">
                             <div class="panel-heading">

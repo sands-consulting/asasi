@@ -24,7 +24,7 @@ class Vendor extends Authenticatable
         'address_city_id',
         'address_state_id',
         'address_country_id',
-        'contact_name',
+        'contact_person_name',
         'contact_telephone',
         'contact_fax',
         'contact_email',
