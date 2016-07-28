@@ -29,16 +29,20 @@ return [
     ],
 
     'buttons' => [
-        'create' => 'Create New Vendor',
-        'edit' => 'Edit Vendor',
-        'assume' => 'Login As This Vendor',
         'all' => 'All Vendors',
+        'assume' => 'Login As This Vendor',
+        'create' => 'Create New Vendor',
+        'create-application' => 'Create New Vendor Application',
+        'edit' => 'Edit Vendor',
+        'edit-application' => 'Edit Application',
+        'complete-application' => 'Send Application',
+        'cancel-application' => 'Cancel Application',
     ],
 
     'notices' => [
         'public' => [
             'saved' => 'Your application has been saved.',
-            'submitted' => 'Your application has been submitted.',
+            'completed' => 'Your application has been submitted.',
         ],
         'created' => 'Vendor :name created',
         'updated' => 'Vendor :name updated',
