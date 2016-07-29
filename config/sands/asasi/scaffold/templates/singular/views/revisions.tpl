@@ -1,36 +1,34 @@
-@extends('app')
+@extends('layouts.admin')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {!! app('menu')->handler('model-names.panel-buttons.revisions')->render('inline') !!}
-                    <h4>
-                        {{trans('model-names.view_revisions', ['name' => $modelName->name])}}
-                    </h4>
-                </div>
-                <div class="panel-body">
+@section('page-title', implode(' | ', [
+    trans('revisions.title'),
+    $modelName->name,
+    trans('model-names.title')
+]))
 
-                    <dl class="timeline">
-                    @foreach($modelName->revisionHistory->reverse() as $history)
-                        @if($history->key == 'created_at' && !$history->old_value)
-                            <dt class="create">{{ $history->userResponsible() ? $history->userResponsible()->name : 'System' }} <div class="text-muted">{{ $history->created_at->diffForHumans() }}</div></dt>
-                            <dd>{{trans('model-names.created_this')}}</dd>
-                        @else
-                            <dt>{{ $history->userResponsible() ? $history->userResponsible()->name : 'System' }} <div class="text-muted">{{ $history->created_at->diffForHumans() }}</div></dt>
-                            <dd>{{trans('model-names.changed_from_to', [
-                                'field' => $history->fieldName(),
-                                'from' => $history->oldValue(),
-                                'to' => $history->newValue()
-                            ])}}</dd>
-                        @endif
-                    @endforeach
-                    </dl>
-                </div>
-            </div>
-        </div>
+@section('header')
+<div class="page-title">
+    <h4>
+        {{ link_to_route('admin.model-names.index', trans('model-names.title')) }} /
+        {{ link_to_route('admin.model-names.show', $modelName->name, $modelName->id) }} /
+        <span class="text-semibold">{{ trans('revisions.title') }}</span>
+    </h4>
+</div>
+<div class="heading-elements">
+    <div class="heading-btn-group">
+        <a href="{{ route('admin.model-names.show', $modelName->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+            <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
+        </a>
     </div>
 </div>
+@endsection
+
+@section('content')
+<div class="panel panel-flat">
+    {!! $dataTable->table() !!}
+</div>
+@endsection
+
+@section('scripts')
+{!! $dataTable->scripts() !!}
 @endsection

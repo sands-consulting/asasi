@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Providers\Modules;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class ModelNamesProvider extends ServiceProvider
+class ModelNamesServiceProvider extends ServiceProvider
 {
-    protected $controller = 'App\Http\Controllers\ModelNamesController';
-
     /**
      * Bootstrap the application services.
      *
@@ -15,7 +13,8 @@ class ModelNamesProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('policy')->register($this->controller, 'App\Policies\ModelNamesPolicy');
+        app('policy')->register('App\Http\Controllers\ModelNamesController', 'App\Policies\ModelNamesPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\ModelNamesController', 'App\Policies\ModelNamesPolicy');
     }
 
     /**
@@ -25,27 +24,27 @@ class ModelNamesProvider extends ServiceProvider
      */
     public function register()
     {
+
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            // $router->bind('model_names', function($slug) {
-            //     if(!$modelName = (ModelName::whereSlug($slug)->first() ?: ModelName::find($slug)))
-            //         app()->abort(404);
-            //     return $modelName;
-            // });
-            $router->model('model_name', 'App\ModelName');
+            $router->model('model_names', 'App\ModelName');
 
-            $router->get('model-names/{model_name}/logs', [
-                'as'    => 'model-names.logs',
-                'uses'  => 'ModelNamesController@logs'
-            ]);
-            $router->get('model-names/{model_name}/revisions', [
-                'as'    => 'model-names.revisions',
-                'uses'  => 'ModelNamesController@revisions'
-            ]);
-            $router->post('model-names/{model_name}/duplicate', [
-                'as'    => 'model-names.duplicate',
-                'uses'  => 'ModelNamesController@duplicate'
-            ]);
+            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+                $router->get('model-names/{model_names}/revisions', [
+                    'as'    => 'admin.model-names.revisions',
+                    'uses'  => 'ModelNamesController@revisions'
+                ]);
+                $router->put('model-names/{model_names}/activate', [
+                    'as'    => 'admin.model-names.activate',
+                    'uses'  => 'ModelNamesController@activate'
+                ]);
+                $router->put('model-names/{model_names}/deactivate', [
+                    'as'    => 'admin.model-names.deactivate',
+                    'uses'  => 'ModelNamesController@deactivate'
+                ]);
+                $router->resource('model-names', 'ModelNamesController');
+            });
+
             $router->resource('model-names', 'ModelNamesController');
         });
     }

@@ -8,10 +8,10 @@ class ModelNamesPolicy extends BasePolicy
 {
     public function index()
     {
-        return $this->user->hasPermission('model-name:list');
+        return $this->user->hasPermission('model-name:index');
     }
 
-    public function show(ModelName $modelName)
+    public function show()
     {
         return $this->user->hasPermission('model-name:show');
     }
@@ -36,6 +36,11 @@ class ModelNamesPolicy extends BasePolicy
         return $this->edit($modelName);
     }
 
+    public function destroy(ModelName $modelName)
+    {
+        return $this->user->hasPermission('model-name:delete');
+    }
+
     public function duplicate(ModelName $modelName)
     {
         return $this->user->hasPermission('model-name:duplicate');
@@ -46,8 +51,18 @@ class ModelNamesPolicy extends BasePolicy
         return $this->user->hasPermission('model-name:revisions');
     }
 
-    public function destroy(ModelName $modelName)
+    public function logs(ModelName $modelName)
     {
-        return $this->user->hasPermission('model-name:delete');
+        return $this->user->hasPermission('model-name:logs');
+    }
+
+    public function activate(ModelName $modelName)
+    {
+        return $this->user->hasPermission('model-name:activate') && $modelName->canActivate();
+    }
+
+    public function deactivate(ModelName $modelName)
+    {
+        return $this->user->hasPermission('model-name:deactivate') && $modelName->canDeactivate();
     }
 }

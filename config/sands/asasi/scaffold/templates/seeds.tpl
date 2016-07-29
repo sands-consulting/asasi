@@ -1,14 +1,10 @@
 <?php
 
-use App\Banner;
-use App\News;
-use App\NewsCategory;
-use App\Repositories\BannerRepository;
-use App\Repositories\NewsRepository;
-use App\Repositories\NewsCategoryRepository;
+use App\Permission;
+use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
-class NewsSeeder extends Seeder
+class AllocationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,25 +13,30 @@ class NewsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('model-names')->truncate();
+        DB::table('model_names')->truncate();
 
         $permissions = [
-            ['model-names:index',                  'List all model names'],
-            ['model-names:show',                   'View a model names'],
-            ['model-names:create',                 'Create new model names'],
-            ['model-names:update',                 'Update existing model names'],
-            ['model-names:delete',                 'Delete exisiting model names'],
+            'allocation' => [
+                'index' => 'List all model names',
+                'show' => 'View model name details',
+                'create' => 'Create new model name',
+                'update' => 'Update existing model name',
+                'delete' => 'Delete existing model name',
+                'activate' => 'Activate model name',
+                'deactivate' => 'Deactivate model name',
+                'revisions' => 'View model name revisions',
+                'logs' => 'View model name logs'
+            ]
         ];
 
-        foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
-                'name'          => $permissionData[0],
-                'description'   => $permissionData[1],
-            ]);
+        foreach ($permissions as $group => $data) {
+            foreach($data as $action => $description) {
+                PermissionsRepository::create(new Permission(), [
+                    'name'          => $group . ':' . $action,
+                    'description'   => $description
+                ]);
+            }
         }
-
-        ModelNamesRepository::create([
-            // Your master data
-        ]);
     }
 }
+

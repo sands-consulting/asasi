@@ -38,28 +38,9 @@ FILLABLECOLUMN
 FILLABLECOLUMN
     ];
 
-    public function getRevisionFormattedFieldNames()
+    public function logs()
     {
-        return [
-REVISIONABLENAME
-        ];
-    }
-
-    public function getRevisionFormattedFields()
-    {
-        return [
-REVISIONABLEVALUE
-        ];
-    }
-
-    public function blacklists()
-    {
-        return $this->hasMany(UserBlacklist::class);
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
+        return $this->morphMany(UserLog::class, 'actionable');
     }
 
     public function getActiveAttribute()
@@ -118,44 +99,26 @@ REVISIONABLEVALUE
         }
     }
 
-    /*
-     * ACL functions
+    /* 
+     * State controls 
      */
-
-    public function hasRole($role)
+    public function canActivate()
     {
-        return $this->roles()->whereName($role)->count() == 1;
+        return $this->status != 'active';
     }
 
-    public function hasRoles($roles)
+    public function canDeactivate()
     {
-        return $this->roles()->whereName($roles)->count() > 0;
+        return $this->status != 'inactive';
     }
 
-    public function hasPermission($permission)
+    public function sluggable()
     {
-        return in_array($permission, $this->cachedPermissions());
-    }
-
-    public function hasPermissions($permissions=[])
-    {
-        return count(array_intersect($this->cachedPermissions(), $permissions)) > 0;
-    }
-
-     public function hasAllPermissions($permissions=[])
-    {
-        return count(array_intersect($this->cachedPermissions(), $permissions)) == count($permissions);
-    }
-
-    protected function cachedPermissions()
-    {
-        $that = $this;
-        return Cache::rememberForever('user_permissions_'.$this->getKey(), function () use ($that) {
-            return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
-                                        ->whereIn('permission_role.role_id', $that->roles->lists('id')->toArray())
-                                        ->lists('name')
-                                        ->toArray();
-        });
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 
 FKMODELMETHODS
