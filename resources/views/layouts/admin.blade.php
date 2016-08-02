@@ -204,6 +204,12 @@
                             </li>
                             @endif
 
+                            @if(Auth::user()->hasPermission('news-category:index'))
+                            <li class="{{ is_path_active('admin/news-categories*') }}">
+                                <a href="{{ route('admin.news-categories.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.news-categories') }}</span></a>
+                            </li>
+                            @endif
+
                             @if(Auth::user()->hasPermission('vendor-type:index'))
                             <li class="{{ is_path_active('admin/vendor-types*') }}">
                                 <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.vendor-types') }}</span></a>

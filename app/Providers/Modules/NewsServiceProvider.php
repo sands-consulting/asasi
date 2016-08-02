@@ -3,6 +3,7 @@
 namespace App\Providers\Modules;
 
 use App\News;
+use App\NewsCategory;
 use Illuminate\Support\ServiceProvider;
 
 class NewsServiceProvider extends ServiceProvider
@@ -10,7 +11,7 @@ class NewsServiceProvider extends ServiceProvider
     public function boot()
     {
         app('policy')->register('App\Http\Controllers\Admin\NewsController', 'App\Policies\NewsPolicy');
-        app('policy')->register('App\Http\Controllers\Admin\NewsCategoryController', 'App\Policies\NewsCategoryPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\NewsCategoriesController', 'App\Policies\NewsCategoriesPolicy');
     }
 
     public function register()
@@ -23,7 +24,6 @@ class NewsServiceProvider extends ServiceProvider
                 $router->bind('news', function ($id) {
                     return News::find($id);
                 });
-
                 $router->get('news/{news}/revisions', [
                     'as'    => 'admin.news.revisions',
                     'uses'  => 'NewsController@revisions'
@@ -40,7 +40,20 @@ class NewsServiceProvider extends ServiceProvider
                     'as'    => 'admin.news.unpublish',
                     'uses'  => 'NewsController@unpublish'
                 ]);
-                $router->resource('news',  'NewsController', ['except' => 'show']);
+                $router->resource('news', 'NewsController', ['except' => 'show']);
+                
+                $router->bind('news_categories', function($id) {
+                    return NewsCategory::find($id);
+                });
+                $router->get('news-categories/{news_categories}/revisions', [
+                    'as'    => 'admin.news-categories.revisions',
+                    'uses'  => 'NewsCategoriesController@revisions'
+                ]);
+                $router->get('news-categories/{news_categories}/logs', [
+                    'as'    => 'admin.news-categories.logs',
+                    'uses'  => 'NewsCategoriesController@logs'
+                ]);
+                $router->resource('news-categories', 'NewsCategoriesController', ['except' => 'show']);
             });
         });
     }
