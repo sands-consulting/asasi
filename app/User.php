@@ -59,6 +59,15 @@ class User extends Authenticatable
         return $this->hasOne(Vendor::class);
     }
 
+    public function organizations()
+    {
+        return $this->belongsToMany(Organization::class);
+    }
+
+    /*
+     * Custom Attributes
+     */
+
     public function getActiveAttribute()
     {
         return $this->status == 'active';
@@ -145,20 +154,44 @@ class User extends Authenticatable
         return count(array_intersect($this->cachedPermissions(), $permissions)) > 0;
     }
 
-     public function hasAllPermissions($permissions=[])
+    public function hasAllPermissions($permissions=[])
     {
         return count(array_intersect($this->cachedPermissions(), $permissions)) == count($permissions);
     }
 
-    protected function cachedPermissions()
+    /*
+     * Permissions caching
+     */
+
+    public function cachedPermissions()
     {
+        if( ! Cache::has($this->permissions_cache_key) )
+        {
+            $this->cachePermissions();
+        }
+
+        return Cache::get($this->permissions_cache_key);
+    }
+
+    public function cachePermissions()
+    {
+        if(Cache::has('user_'))
+        {
+            Cache::forget($this->permissions_cache_key);
+        }
+
         $that = $this;
-        return Cache::rememberForever('user_permissions_'.$this->getKey(), function () use ($that) {
+        Cache::rememberForever($this->permissions_cache_key, function () use ($that) {
             return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
                                         ->whereIn('permission_role.role_id', $that->roles->lists('id')->toArray())
                                         ->lists('name')
                                         ->toArray();
         });
+    }
+
+    protected function getPermissionsCacheKeyAttribute()
+    {
+        return 'user_permissions_' . $this->getKey();
     }
 
     public static function boot()
