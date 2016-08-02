@@ -24,10 +24,6 @@ class VendorsServiceProvider extends ServiceProvider
             $router->model('vendors', 'App\Vendor');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->get('vendors/{vendors}/revisions', [
-                    'as'    => 'admin.vendors.revisions',
-                    'uses'  => 'VendorsController@revisions'
-                ]);
                 $router->put('vendors/{vendors}/activate', [
                     'as'    => 'admin.vendors.activate',
                     'uses'  => 'VendorsController@activate'
@@ -40,7 +36,11 @@ class VendorsServiceProvider extends ServiceProvider
                     'as'    => 'admin.vendors.deactivate',
                     'uses'  => 'VendorsController@deactivate'
                 ]);
-
+                $router->get('vendors/{vendors}/revisions', [
+                    'as'    => 'admin.vendors.revisions',
+                    'uses'  => 'VendorsController@revisions'
+                ]);
+                
                 $router->resource('vendors', 'VendorsController');
             });
             

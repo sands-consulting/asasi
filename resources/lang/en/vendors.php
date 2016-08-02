@@ -52,11 +52,15 @@ return [
 
 	'views' => [
 		'index' => [
+            'title' => 'Vendors',
             'status'   => 'Status',
             'keywords' => 'Keywords',
 		],
         'show' => [
-            'title' => 'View'
+            'title' => 'View',
+            'admin' => [
+                'title' => 'View Vendor'
+            ],
         ],
         'create' => [
             'title' => 'Create New Vendor',

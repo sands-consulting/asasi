@@ -27,20 +27,23 @@
         ->label('vendors.attributes.address_2')
         ->required() !!}
 
-    {!! Former::text('address_city_id')
+    {!! Former::select('address_city_id')
+        ->options(App\Place::cityOptions())
         ->label('vendors.attributes.address_city_id') !!}
 
-    {!! Former::text('address_state_id')
+    {!! Former::select('address_state_id')
+        ->options(App\Place::stateOptions())
         ->label('vendors.attributes.address_state_id') !!}
 
-    {!! Former::text('address_country_id')
+    {!! Former::select('address_country_id')
+        ->options(App\Place::countryOptions())
         ->label('vendors.attributes.address_country_id') !!}
 </fieldset>
 
 <fieldset>
     <legend class="text-semibold">Contacts</legend>
-    {!! Former::text('contact_name')
-        ->label('vendors.attributes.contact_name')
+    {!! Former::text('contact_person_name')
+        ->label('vendors.attributes.contact_person_name')
         ->required() !!}
 
     {!! Former::text('contact_telephone')
