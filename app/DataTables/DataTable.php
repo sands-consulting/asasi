@@ -2,10 +2,18 @@
 
 namespace App\DataTables;
 
+use Illuminate\Http\Request;
 use Yajra\Datatables\Services\DataTable as DataTableService;
 
 abstract class DataTable extends DataTableService
 {
+    protected $user;
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
 	protected function getBuilderParameters()
     {
         return [

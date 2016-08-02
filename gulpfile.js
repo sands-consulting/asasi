@@ -31,7 +31,7 @@ elixir(function(mix) {
         '../vendor/legitripple/js/ripple.js',
         '../vendor/select2/dist/js/select2.js',
         'vendor/pnotify.js',
-        'app.js',
+        'vendor/nicescroll.js',
         'public.js',
     ], 'public/assets/js/public.js')
     .scripts([
@@ -49,7 +49,7 @@ elixir(function(mix) {
         '../vendor/select2/dist/js/select2.js',
         'vendor/limitless-one.js',
         'vendor/pnotify.js',
-        'app.js',
+        'vendor/nicescroll.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
     .version([
@@ -63,4 +63,5 @@ elixir(function(mix) {
       'resources/assets/vendor/bootstrap/fonts'
     ], 'public/assets/fonts')
     .copy('resources/assets/images', 'public/assets/images')
+    .copy('resources/assets/vendor/ckeditor', 'public/assets/ckeditor');
 });

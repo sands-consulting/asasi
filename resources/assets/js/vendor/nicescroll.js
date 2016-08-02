@@ -1,10 +1,4 @@
 $(function() {
-
-  $('select.select2').select2();
-
-  // Nice scroll
-    // ------------------------------
-
 	// Setup
 	function initScroll() {
 	    $(".sidebar-fixed .sidebar-content").niceScroll({
@@ -48,5 +42,4 @@ $(function() {
             }
         }, 100);
     }).resize();
-
 });

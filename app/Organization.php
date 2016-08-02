@@ -115,6 +115,11 @@ class Organization extends Node
         return $this->status != 'suspended';
     }
 
+    public static function getOptions($label='name')
+    {
+        return static::lists($label, 'id')->toArray();
+    }
+
     public static function boot()
     {
         parent::boot();

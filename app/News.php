@@ -46,6 +46,16 @@ class News extends Model
         return $this->belongsTo(Organization::class);
     }
 
+    public function canPublish()
+    {
+        return $this->status != 'published';
+    }
+
+    public function canUnpublish()
+    {
+        return $this->status != 'not-published';
+    }
+
     public function sluggable()
     {
         return [

@@ -110,7 +110,7 @@
                             @if(session('original_user_id'))
                             <li>
                                 <a href="{{ route('profile.resume') }}" data-method="POST">
-                                    <i class="icon-user-cancel"></i> {{ trans('menu.release_user') }}
+                                    <i class="icon-user-cancel"></i> <span>{{ trans('menu.release_user') }}</span>
                                 </a>
                             </li>
                             @endif
@@ -136,7 +136,9 @@
 
                             @if(Auth::user()->hasPermission('vendor:index'))
                             <li class="{{ is_path_active('admin/vendors*') }}">
-                                <a href="{{ route('admin.vendors.index') }}"><i class="icon-people"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span></a>
+                                <a href="{{ route('admin.vendors.index') }}" class="legitRipple">
+                                    <i class="icon-people"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span>
+                                </a>
                             </li>
                             @endif
 

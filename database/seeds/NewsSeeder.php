@@ -1,9 +1,11 @@
 <?php
 
 use App\Banner;
+use App\Organization;
 use App\News;
 use App\NewsCategory;
 use App\Permission;
+use App\Role;
 use App\Repositories\BannerRepository;
 use App\Repositories\NewsRepository;
 use App\Repositories\NewsCategoryRepository;
@@ -33,8 +35,7 @@ class NewsSeeder extends Seeder
             ['news:unpublish',              'Unpublish existing news'],
             ['news:revisions',               'View news revisions'],
             ['news:logs',                   'View news logs'],
-            
-            ['news:index:organization',     'List all news by organization'],
+            ['news:organization',           'Allow to manage news within user organization'],
 
             ['news_category:index',         'List all news categories'],
             ['news_category:show',          'View a news category'],
@@ -59,10 +60,15 @@ class NewsSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            $perm = PermissionsRepository::create(new Permission(), [
                 'name'          => $permissionData[0],
                 'description'   => $permissionData[1],
             ]);
+
+            if($perm->name != 'news:organization')
+            {
+                $perm->roles()->attach(Role::first());
+            }
         }
 
         $news_categories = [
@@ -80,6 +86,7 @@ class NewsSeeder extends Seeder
             'title' => 'PROMPT 1.0',
             'content' => "<p>This is PROMPT 1.0 developed by Sands Consulting",
             'category_id' => NewsCategory::first()->id,
+            'organization_id' => Organization::first()->id,
             'status' => 'published'
         ]);
     }

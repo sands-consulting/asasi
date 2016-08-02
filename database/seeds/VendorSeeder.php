@@ -3,6 +3,7 @@
 use App\Vendor;
 use App\VendorType;
 use App\Permission;
+use App\Role;
 use App\Repositories\VendorsRepository;
 use App\Repositories\VendorTypesRepository;
 use App\Repositories\PermissionsRepository;
@@ -45,10 +46,11 @@ class VendorSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            $perm = PermissionsRepository::create(new Permission(), [
                 'name'          => $permissionData[0],
                 'description'   => $permissionData[1],
             ]);
+            $perm->roles()->attach(Role::first());
         }
 
         $vendor_types = [

@@ -1,6 +1,7 @@
 <?php
 
 use App\Permission;
+use App\Role;
 use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
@@ -43,10 +44,11 @@ class QualificationCodeSeeder extends Seeder
 
         foreach ($permissions as $group => $data) {
             foreach($data as $action => $description) {
-                PermissionsRepository::create(new Permission(), [
+                $perm = PermissionsRepository::create(new Permission(), [
                     'name'          => $group . ':' . $action,
                     'description'   => $description
                 ]);
+                $perm->roles()->attach(Role::first());
             }
         }
     }

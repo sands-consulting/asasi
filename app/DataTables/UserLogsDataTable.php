@@ -4,7 +4,7 @@ namespace App\DataTables;
 
 class UserLogsDataTable extends DataTable
 {
-    protected $logable;
+    protected $actionable;
 
     public function setActionable($actionable)
     {

@@ -2,9 +2,11 @@
 
 return [
 	'active' => 'Active',
-    'confirmed' => 'Confirmed',
-    'draft' => 'Draft',
-    'inactive' => 'Inactive',
-    'suspended' => 'Suspended',
-    'pending-approval' => 'Pending Approval',
+	'confirmed' => 'Confirmed',
+	'draft' => 'Draft',
+	'inactive' => 'Inactive',
+	'not-published' => 'Not Published',
+	'pending-confirmation' => 'Pending Confirmation',
+	'published' => 'Published',
+	'suspended' => 'Suspended'
 ];

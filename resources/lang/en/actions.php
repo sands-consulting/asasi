@@ -12,8 +12,10 @@ return [
 	'edit' => 'Edit',
 	'login' => 'Login',
 	'logout' => 'Logout',
+	'publish' => 'Publish',
 	'save' => 'Save',
 	'search' => 'Search',
 	'suspend' => 'Suspend',
+	'unpublish' => 'Unpublish',
 	'view' => 'View',
 ];

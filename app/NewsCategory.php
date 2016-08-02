@@ -38,6 +38,11 @@ class NewsCategory extends Model
         ];
     }
 
+    public static function getOptions($label='name')
+    {
+        return static::lists($label, 'id')->toArray();
+    }
+
     public static function boot()
     {
         parent::boot();
