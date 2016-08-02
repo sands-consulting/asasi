@@ -1,0 +1,50 @@
+<?php
+
+return [
+    'title' => 'Packages',
+
+    'attributes' => [
+        'name' => 'Name',
+        'validity_type' => 'Validity Type',
+        'validity_quantity' => 'Validity Quantity',
+        'meta' => 'Meta',
+        'fee_amount' => 'Fee Amount',
+        'fee_tax_code' => 'Fee Tax Code',
+        'fee_tax_rate' => 'Fee Tax Rate',
+        'status' => 'Status',
+        'created_at' => 'Created At',
+        'updated_at' => 'Last Updated At',
+    ],
+
+    'buttons' => [
+        'create' => 'Create New Package',
+        'edit' => 'Edit Package',
+        'all' => 'All Packages',
+    ],
+
+    'notices' => [
+        'created' => 'Package :name created',
+        'updated' => 'Package :name updated',
+        'deleted' => 'Package :name deleted',
+        'activated' => 'Package :name activated',
+        'deactivated' => 'Package :name deactivated'
+    ],
+    
+    'views' => [
+        'index' => [
+            'title' => 'Packages',
+        ],
+        'show' => [
+            'title' => 'View',
+        ],
+        'create' => [
+            'title' => 'New',
+        ],
+        'edit' => [
+            'title' => 'Edit',
+        ],
+        'revisions' => [
+
+        ]
+    ],
+];
