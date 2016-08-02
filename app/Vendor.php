@@ -82,6 +82,19 @@ class Vendor extends Authenticatable
         }
     }
 
+    /* 
+     * State controls 
+     */
+    public function canActivate()
+    {
+        return $this->status != 'active';
+    }
+
+    public function canDeactivate()
+    {
+        return $this->status != 'inactive';
+    }
+    
     /*
      * Relationship
      */
@@ -89,6 +102,21 @@ class Vendor extends Authenticatable
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Place::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(Place::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Place::class);
     }
     
     public static function boot()

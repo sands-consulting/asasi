@@ -50,4 +50,50 @@ class VendorsController extends Controller
             ->route('admin.vendors.edit', $vendor->id)
             ->with('notice', trans('vendors.notices.updated', ['name' => $vendor->name]));
     }
+
+    public function destroy(Vendor $vendor)
+    {
+        VendorsRepository::delete($vendor);
+        return redirect()
+            ->route('admin.vendors.index')
+            ->with('notice', trans('vendors.notices.deleted', ['name' => $vendor->name]));
+    }
+
+    public function logs(Vendor $vendor, VendorLogsDataTable $table)
+    {
+        $table->setActionable($vendor);
+        return $table->render('admin.vendors.logs', compact('place'));
+    }
+
+    public function revisions(Vendor $vendor, RevisionsDataTable $table)
+    {
+        $table->setRevisionable($vendor);
+        return $table->render('admin.vendors.revisions', compact('place'));
+    }
+
+    public function activate(Request $request, Vendor $vendor)
+    {
+        VendorsRepository::activate($vendor);
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
+    }
+
+    public function deactivate(Request $request, Vendor $vendor)
+    {
+        VendorsRepository::deactivate($vendor);
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.deactivated', ['name' => $vendor->name]));
+    }
+
+    public function approve(Request $request, Vendor $vendor)
+    {
+        $inputs = $request->only(['redirect_to']);
+        VendorsRepository::update($vendor, $inputs, ['status' => 'approved']);
+
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));        
+    }
 }

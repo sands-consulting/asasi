@@ -30,10 +30,11 @@ return [
 
     'buttons' => [
         'all' => 'All Vendors',
+        'approve' => 'Approve',
         'assume' => 'Login As This Vendor',
         'create' => 'Create New Vendor',
         'create-application' => 'Create New Vendor Application',
-        'edit' => 'Edit Vendor',
+        'edit' => 'Edit',
         'edit-application' => 'Edit Application',
         'complete-application' => 'Send Application',
         'cancel-application' => 'Cancel Application',
@@ -55,6 +56,7 @@ return [
             'keywords' => 'Keywords',
 		],
         'show' => [
+            'title' => 'View'
         ],
         'create' => [
             'title' => 'Create New Vendor',
