@@ -29,7 +29,7 @@ class QualificationCodeSeeder extends Seeder
                 'revisions' => 'View qualification code revisions',
                 'logs' => 'View qualification code logs'
             ],
-            'qualification-code-types' => [
+            'qualification-code-type' => [
                 'index' => 'List all qualifiction code types',
                 'show' => 'View qualification code type details',
                 'create' => 'Create new qualification code type',

@@ -29,6 +29,7 @@ return [
 
             'qualification-codes'   => 'Qualification Codes',
             'allocation-types'      => 'Allocation Types',
+            'news-categories'       => 'News Categories',
             'vendor-types'          => 'Vendor Types',
             'payment-gateways'      => 'Payment Gateways',
         ],

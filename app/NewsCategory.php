@@ -24,6 +24,11 @@ class NewsCategory extends Model
         'status' => 'active',
     ];
 
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
+
     public function news()
     {
         return $this->hasMany(News::class, 'category_id');
