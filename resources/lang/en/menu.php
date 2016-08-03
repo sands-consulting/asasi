@@ -19,15 +19,20 @@ return [
 
     'admin' => [
         'administration' => [
-            'title'             => 'Administration',
+            'title'                 => 'Administration',
 
-            'users'				=> 'Users',
-            'roles'				=> 'Roles',
-            'permissions'		=> 'Permissions',
-            'organizations'		=> 'Organizations',
-            'places'            => 'Places',
-
+            'users'                 => 'Users',
+            'roles'                 => 'Roles',
+            'permissions'           => 'Permissions',
+            'organizations'         => 'Organizations',
+            'places'                => 'Places',
             'qualification-codes'   => 'Qualification Codes',
+        ],
+        'settings' => [
+            'title'                 => 'Settings',
+
+            'global-settings'       => 'Global Settings',
+            'licensing'             => 'Licensing',
             'allocation-types'      => 'Allocation Types',
             'news-categories'       => 'News Categories',
             'vendor-types'          => 'Vendor Types',

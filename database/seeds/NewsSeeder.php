@@ -8,7 +8,7 @@ use App\Permission;
 use App\Role;
 use App\Repositories\BannerRepository;
 use App\Repositories\NewsRepository;
-use App\Repositories\NewsCategoryRepository;
+use App\Repositories\NewsCategoriesRepository;
 use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
@@ -79,7 +79,7 @@ class NewsSeeder extends Seeder
 
         foreach($news_categories as $category)
         {
-            NewsCategoryRepository::create(new NewsCategory, $category);
+            NewsCategoriesRepository::create(new NewsCategory, $category);
         }
 
         $news = NewsRepository::create(new News, [

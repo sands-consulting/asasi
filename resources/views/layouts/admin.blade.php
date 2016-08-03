@@ -188,31 +188,35 @@
                             </li>
                             @endif
 
+                            @if(Auth::user()->hasPermission('qualification-code:index'))
+                            <li class="{{ is_path_active('admin/qualification-codes*') }}">
+                                <a href="{{ route('admin.qualification-codes.index') }}"><i class="icon-drawer3"></i> <span>{{ trans('menu.admin.administration.qualification-codes') }}</span></a>
+                            </li>
+                            @endif
+
+                            <li class="navigation-header">                               
+                                <span>{{ trans('menu.admin.settings.title') }}</span> <i class="icon-cogs" title="{{ trans('menu.admin.settings.title') }}" data-original-title="{{ trans('menu.admin.settings.title') }}"></i>
+                            </li>
+
                             <li class="{{ is_path_active('admin/payment-gateways*') }}">
-                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-credit-card"></i> <span>{{ trans('menu.admin.administration.payment-gateways') }}</span></a>
+                                <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.settings.payment-gateways') }}</span></a>
                             </li>
 
                             @if(Auth::user()->hasPermission('allocation-type:index'))
                             <li class="{{ is_path_active('admin/allocation-types*') }}">
-                                <a href="{{ route('admin.allocation-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.allocation-types') }}</span></a>
-                            </li>
-                            @endif
-
-                            @if(Auth::user()->hasPermission('qualification-code:index'))
-                            <li class="{{ is_path_active('admin/qualification-codes*') }}">
-                                <a href="{{ route('admin.qualification-codes.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.qualification-codes') }}</span></a>
+                                <a href="{{ route('admin.allocation-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.settings.allocation-types') }}</span></a>
                             </li>
                             @endif
 
                             @if(Auth::user()->hasPermission('news-category:index'))
                             <li class="{{ is_path_active('admin/news-categories*') }}">
-                                <a href="{{ route('admin.news-categories.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.news-categories') }}</span></a>
+                                <a href="{{ route('admin.news-categories.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.settings.news-categories') }}</span></a>
                             </li>
                             @endif
 
                             @if(Auth::user()->hasPermission('vendor-type:index'))
                             <li class="{{ is_path_active('admin/vendor-types*') }}">
-                                <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.administration.vendor-types') }}</span></a>
+                                <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.settings.vendor-types') }}</span></a>
                             </li>
                             @endif
                         </ul>

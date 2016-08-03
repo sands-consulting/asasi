@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NewsSeeder::class);
         $this->call(PackageSeeder::class);
         $this->call(VendorSeeder::class);
+        $this->call(PaymentGatewaySeeder::class);
 
         Model::reguard();
         try {
