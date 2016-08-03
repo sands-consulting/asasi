@@ -154,6 +154,12 @@
                             </li>
                             @endif
 
+                            @if(Auth::user()->hasPermission('package:index'))
+                            <li class="{{ is_path_active('admin/packages*') }}">
+                                <a href="{{ route('admin.packages.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.manage.packages') }}</span></a>
+                            </li>
+                            @endif
+
                             <li class="navigation-header">                               
                                 <span>{{ trans('menu.admin.administration.title') }}</span> <i class="icon-menu" title="{{ trans('menu.admin.administration.title') }}" data-original-title="{{ trans('menu.admin.administration.title') }}"></i>
                             </li>

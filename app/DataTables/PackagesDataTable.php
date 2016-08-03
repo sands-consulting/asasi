@@ -73,4 +73,11 @@ class PackagesDataTable extends DataTable
     {
         return 'packages_dt_' . time();
     }
+
+    protected function getBuilderParameters()
+    {
+        $data = parent::getBuilderParameters();
+        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        return $data;
+    }
 }

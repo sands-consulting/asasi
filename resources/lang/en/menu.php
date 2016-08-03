@@ -44,6 +44,7 @@ return [
             'allocations'   => 'Allocations',
             'vendors'       => 'Vendors',
             'news'          => 'News',
+            'packages'      => 'Packages',
         ]
     ]
 ];

@@ -7,10 +7,6 @@
 {!! Former::text('validity_quantity')
     ->label('packages.attributes.validity_quantity')
     ->required() !!}
-{!! Former::textarea('meta')
-    ->label('packages.attributes.meta')
-    ->rows(4)
-    ->required() !!}
 {!! Former::text('fee_amount')
     ->label('packages.attributes.fee_amount')
     ->required() !!}

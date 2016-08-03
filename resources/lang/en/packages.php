@@ -33,6 +33,8 @@ return [
     'views' => [
         'index' => [
             'title' => 'Packages',
+            'keywords' => 'Keywords',
+            'status' => 'Status',
         ],
         'show' => [
             'title' => 'View',
