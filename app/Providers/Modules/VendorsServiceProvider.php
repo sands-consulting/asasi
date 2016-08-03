@@ -2,7 +2,6 @@
 
 namespace App\Providers\Modules;
 
-use App\Vendors;
 use Illuminate\Support\ServiceProvider;
 
 class VendorsServiceProvider extends ServiceProvider

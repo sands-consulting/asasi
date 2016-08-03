@@ -6,7 +6,7 @@ use App\Vendor;
 
 class VendorsPolicy extends BasePolicy
 {
-     public function index()
+    public function index()
     {
         return $this->user->hasPermission('vendor:index');
     }
