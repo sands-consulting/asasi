@@ -6,7 +6,7 @@ return [
 	'draft' => 'Draft',
 	'inactive' => 'Inactive',
 	'not-published' => 'Not Published',
-	'pending-confirmation' => 'Pending Confirmation',
+	'pending-approval' => 'Pending Approval',
 	'published' => 'Published',
 	'suspended' => 'Suspended'
 ];

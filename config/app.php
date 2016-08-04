@@ -197,6 +197,7 @@ return [
         App\Providers\Modules\PackagesServiceProvider::class,
         App\Providers\Modules\NewsServiceProvider::class,
         App\Providers\Modules\QualificationCodesServiceProvider::class,
+        App\Providers\Modules\SubscriptionsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
         App\Providers\Modules\VendorTypesProvider::class,
     ],

@@ -15,7 +15,8 @@ return [
     'sign_out'      => 'Sign Out',
 
     'home'			=> 'Home',
-    'dashboard'		=> 'Dashboard',
+    'dashboard'     => 'Dashboard',
+    'subscriptions'	=> 'Subscriptions',
 
     'admin' => [
         'administration' => [
