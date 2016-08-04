@@ -71,7 +71,7 @@ class SubscriptionHitoriesDataTable extends DataTable
             ],
             [
                 'data'  => 'status',
-                'name'  => 'status',
+                'name'  => 'subscriptions.status',
                 'title' => trans('subscriptions.attributes.status'),
             ]
         ];
@@ -82,10 +82,11 @@ class SubscriptionHitoriesDataTable extends DataTable
         return 'subscriptions_dt_' . time();
     }
 
-    // protected function getBuilderParameters()
-    // {
-    //     $data = parent::getBuilderParameters();
-    //     $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
-    //     return $data;
-    // }
+    protected function getBuilderParameters()
+    {
+        $data = parent::getBuilderParameters();
+        $data['dom'] = '<"datatable-header"Bl><"datatable-scroll"t><"datatable-footer"ip>';
+        $data['buttons'] = ['excel', 'print', 'pdf'];
+        return $data;
+    }
 }
