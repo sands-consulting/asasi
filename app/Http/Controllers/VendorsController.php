@@ -12,7 +12,7 @@ class VendorsController extends Controller
 {
     public function index()
     {
-        return view('vendors.index');
+        return view('vendors.create');
     }
 
     public function create()
@@ -45,7 +45,7 @@ class VendorsController extends Controller
             ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
     }
 
-    public function completeApplication(VendorRequest $request, Vendor $vendor)
+    public function completeApplication(Request $request, Vendor $vendor)
     {
         // Fixme: find how to validate if only form want to be submmited to approver.
         $inputs = $request->all();

@@ -37,6 +37,25 @@
                 ->label('vendors.attributes.tax_2_number') !!}
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-6">
+                {!! Former::text('contact_telephone')
+                ->label('vendors.attributes.contact_telephone') !!}
+            </div>
+            <div class="col-sm-6">
+                {!! Former::text('contact_fax')
+                ->label('vendors.attributes.contact_fax') !!}
+            </div>
+            <div class="col-sm-6">
+                {!! Former::text('contact_email')
+                ->label('vendors.attributes.contact_email') !!}
+            </div>
+            <div class="col-sm-6">
+                {!! Former::text('contact_website')
+                ->label('vendors.attributes.contact_website')
+                ->prepend('http://') !!}
+            </div>
+        </div>
     </div>
 </fieldset>
 <fieldset>
@@ -95,26 +114,21 @@
     </legend>
     <div class="collapse in" id="contacts">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-1">
+                {!! Former::text('contact_person_designation')
+                ->label('vendors.attributes.contact_person_designation') !!}
+            </div>
+            <div class="col-sm-4">
                 {!! Former::text('contact_person_name')
                 ->label('vendors.attributes.contact_person_name') !!}
             </div>
-            <div class="col-sm-6">
-                {!! Former::text('contact_email')
-                ->label('vendors.attributes.contact_email') !!}
-            </div>
             <div class="col-sm-4">
-                {!! Former::text('contact_telephone')
-                ->label('vendors.attributes.contact_telephone') !!}
+                {!! Former::text('contact_person_email')
+                ->label('vendors.attributes.contact_person_email') !!}
             </div>
-            <div class="col-sm-4">
-                {!! Former::text('contact_fax')
-                ->label('vendors.attributes.contact_fax') !!}
-            </div>
-            <div class="col-sm-4">
-                {!! Former::text('contact_website')
-                ->label('vendors.attributes.contact_website')
-                ->prepend('http://') !!}
+            <div class="col-sm-3">
+                {!! Former::text('contact_person_telephone')
+                ->label('vendors.attributes.contact_person_telephone') !!}
             </div>
         </div>
     </div>
