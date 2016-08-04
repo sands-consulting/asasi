@@ -1,9 +1,11 @@
 <?php
 
+use App\User;
 use App\Vendor;
 use App\VendorType;
 use App\Permission;
 use App\Role;
+use App\Repositories\UsersRepository;
 use App\Repositories\VendorsRepository;
 use App\Repositories\VendorTypesRepository;
 use App\Repositories\PermissionsRepository;
@@ -82,6 +84,49 @@ class VendorSeeder extends Seeder
             ]);
         }
 
-        // VendorsRepository::create();
+        $users = [
+            [
+                'id'        => 2,
+                'name'      => 'Amin Adha',
+                'email'     => 'amin@my-sands.com',
+                'password'  => 'amin123',
+                'status'    => 'active',
+            ],
+        ];
+
+        foreach ($users as $userData) {
+            $userData['password'] = app()->make('hash')->make($userData['password']);
+            UsersRepository::create(new User(), $userData);
+        }
+
+        VendorsRepository::create(new Vendor, [
+            'name' => 'Sands Consulting Sdn Bhd',
+            'registration_number' => 'M123123',
+            'tax_1_number' => '1231234',
+            'tax_2_number' => '1231235',
+            'address_1' => '11-2-2A, Jalan Pusat Bandar 2A',
+            'address_2' => 'Seksyen 9',
+            'address_postcode' => '43650',
+            'address_city_id' => 18,
+            'address_state_id' => 5,
+            'address_country_id' => 1,
+            'contact_telephone' => '+60123456789',
+            'contact_fax' => '+60323456788',
+            'contact_email' => 'support@my-sands.com',
+            'contact_website' => 'www.sands.consulting',
+            'contact_person_name' => 'Amin Adha',
+            'contact_person_designation' => 'Mr',
+            'contact_person_telephone' => '+60123456788',
+            'contact_person_email' => 'amin@my-sands.com',
+            'capital_currency' => '1000000',
+            'capital_authorized' => '500000',
+            'capital_paid_up' => '250000',
+            'type_id' => 4,
+            'user_id' => 2,
+            'status' => 'pending-approval',
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'deleted_at' => null
+        ]);
     }
 }

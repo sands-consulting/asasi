@@ -52,9 +52,9 @@ class VendorsDataTable extends DataTable
                 'title' => trans('vendors.attributes.name'),
             ],
             [
-                'data'  => 'user.email',
-                'name'  => 'user.email',
-                'title' => trans('users.attributes.email'),
+                'data'  => 'contact_email',
+                'name'  => 'vendors.contact_email',
+                'title' => trans('vendors.attributes.contact_email'),
             ],
             [
                 'data'  => 'status',
