@@ -14,7 +14,7 @@
 Route::auth();
 Route::get('/', [
 	'uses' 	=> 'HomeController@index',
-	'as' 	=> 'root'
+	'as' 	=> 'home.index'
 ]);
 Route::get('admin', [
 	'uses'	=> 'Admin\UsersController@index',

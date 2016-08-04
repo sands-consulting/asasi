@@ -52,7 +52,7 @@ class VendorsController extends Controller
         $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending-approval']);
 
         return redirect()
-            ->route('home.index', $vendor->id)
+            ->route('home.index')
             ->with('notice', trans('vendors.notices.public.complete-application', ['name' => $vendor->name]));
     }
 

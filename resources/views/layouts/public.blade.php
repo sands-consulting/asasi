@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,6 +94,7 @@
 		<div class="navbar-collapse collapse" id="navbar-second-toggle">
 			<ul class="nav navbar-nav navbar-nav-material">
 				<li><a href="{{ url('/') }}" class="legitRipple">{{ trans('menu.home') }}</a></li>
+				<li><a href="{{ route('subscriptions.index') }}" class="legitRipple">{{ trans('menu.subscriptions') }}</a></li>
 			</ul>
 		</div>
 	</div>
@@ -110,8 +110,8 @@
 
 <div class="footer footer-boxed text-muted">{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}</div>
 
-@yield('scripts')
 <script src="{{ elixir('assets/js/public.js') }}"></script>
+@yield('scripts')
 {!! flash_messages() !!}
 </body>
 </html>

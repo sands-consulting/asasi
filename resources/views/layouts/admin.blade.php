@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +37,7 @@
                 <li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
                 @else
                 <li>
-                    <a href="{{ route('root') }}">
+                    <a href="{{ route('home.index') }}">
                         <i class="icon-atom2"></i> {{ trans('menu.public_site') }}
                     </a>
                 </li>
