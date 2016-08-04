@@ -54,8 +54,8 @@ return [
         'apply' => [
             'title' => 'Subscription Application Form',
         ],
-        'pending' => [ 
-            'title' => 'Application Pending Approval',
+        'history' => [ 
+            'title' => 'Your subscriptions history',
         ]
 	]
 ];

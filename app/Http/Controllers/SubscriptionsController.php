@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Subscription;
-use App\DataTables\SubscriptionsDataTable;
+use App\DataTables\SubscriptionHitoriesDataTable;
 use App\Http\Requests\SubscriptionRequest;
 use App\Repositories\SubscriptionsRepository;
 use Auth;
@@ -11,9 +11,10 @@ use Illuminate\Http\Request;
 
 class SubscriptionsController extends Controller
 {
-    public function index(SubscriptionsDataTable $table)
+    public function index()
     {
-        return $table->render('subscriptions.index');
+        $subscription = Auth::user()->subscriptions()->where('subscriptions.status','active')->first();
+        return view('subscriptions.index', compact('subscription'));
     }
 
     public function create()
@@ -44,5 +45,10 @@ class SubscriptionsController extends Controller
         return redirect()
             ->route('subscriptions.edit', $subscription->id)
             ->with('notice', trans('subscriptions.notices.public.saved', ['name' => $subscription->name]));
+    }
+
+    public function history(SubscriptionHitoriesDataTable $table)
+    {
+        return $table->render('subscriptions.history');
     }
 }

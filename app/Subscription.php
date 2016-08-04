@@ -34,6 +34,8 @@ class Subscription extends Authenticatable
         'status'
     ];
 
+    protected $dates = ['started_at', 'expired_at'];
+
     /*
      * Search scopes
      */

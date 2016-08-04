@@ -64,6 +64,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Organization::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasManyThrough(Subscription::class, Vendor::class);
+    }
     /*
      * Custom Attributes
      */

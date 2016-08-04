@@ -12,7 +12,42 @@
                         </div>
 
                         <div class="panel-body">
-                            {!! $dataTable->table() !!}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label"><strong>{{ trans('subscriptions.attributes.name') }}</strong>:</label>
+                                        <div class="form-control-static">{{ $subscription->package->name }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label"><strong>{{ trans('subscriptions.attributes.status') }}</strong>:</label>
+                                        <div class="form-control-static">
+                                            @if($subscription->status == 'active')
+                                            <span class="label label-success">
+                                            @elseif($subscription->status == 'suspended')
+                                            <span class="label label-danger">
+                                            @else
+                                            <span class="label label-default">
+                                            @endif
+                                            {{ trans('statuses.' . $subscription->status) }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label"><strong>{{ trans('subscriptions.attributes.started_at') }}</strong>:</label>
+                                        <div class="form-control-static">{{ $subscription->started_at->format('m/d/Y') }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label"><strong>{{ trans('subscriptions.attributes.expired_at') }}</strong>:</label>
+                                        <div class="form-control-static">{{ $subscription->expired_at->format('m/d/Y') }}  - {{ $subscription->expired_at->diffForHumans() }}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 				</div>
@@ -21,7 +56,3 @@
     </div>
 </div>
 @stop
-
-@section('scripts')
-{!! $dataTable->scripts() !!}
-@endsection

@@ -92,9 +92,25 @@
 		</ul>
 
 		<div class="navbar-collapse collapse" id="navbar-second-toggle">
+
 			<ul class="nav navbar-nav navbar-nav-material">
-				<li><a href="{{ url('/') }}" class="legitRipple">{{ trans('menu.home') }}</a></li>
-				<li><a href="{{ route('subscriptions.index') }}" class="legitRipple">{{ trans('menu.subscriptions') }}</a></li>
+				<li class="{{ is_path_active('/') }}">
+					<a href="{{ url('/') }}" class="legitRipple">{{ trans('menu.home') }}</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-envelop5 position-left"></i> Subscriptions <span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu">
+						<li class="{{ is_path_active('subscriptions') }}">
+							<a href="{{ route('subscriptions.index') }}"><i class="icon-stack3"></i> My Package</a>
+						</li>
+						<li class="{{ is_path_active('subscriptions/history') }}">
+							<a href="{{ route('subscriptions.history') }}"><i class="icon-history"></i> Histories</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>

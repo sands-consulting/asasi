@@ -25,6 +25,10 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 $router->resource('subscriptions', 'SubscriptionsController');
             });
             
+            $router->get('subscriptions/history', [
+                'as'  => 'subscriptions.history',
+                'uses' => 'SubscriptionsController@history'
+            ]);
             $router->resource('subscriptions', 'SubscriptionsController');
         });
     }
