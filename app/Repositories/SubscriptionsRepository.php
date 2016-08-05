@@ -29,4 +29,18 @@ class SubscriptionsRepository extends BaseRepository
         $subscription->status = 'expired';
         $subscription->save();
     }
+
+    public static function updateStatusExpired()
+    {
+        $subscriptions = Subscription::all();
+        if (!$subscriptions->isEmpty()) {
+            foreach ($subscriptions as $subscription) {
+                if ($subscription->isExpired()) {
+                    static::update($subscription, ['status' => 'expired']);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 }

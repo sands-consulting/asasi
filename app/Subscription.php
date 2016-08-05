@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -96,5 +97,14 @@ class Subscription extends Authenticatable
     public static function boot()
     {
         parent::boot();
+    }
+
+    /*
+     * Helpers
+     */
+
+    public function isExpired()
+    {
+        return Carbon::today()->toDateString() >= $this->expired_at;
     }
 }
