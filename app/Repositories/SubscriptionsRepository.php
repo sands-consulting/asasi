@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use Event;
+use App\Events\SubscriptionStatusChanged;
 use App\Subscription;
 use Illuminate\Database\Eloquent\Model;
 use Sands\Asasi\Foundation\Repository\Exceptions\RepositoryException;
@@ -32,11 +34,14 @@ class SubscriptionsRepository extends BaseRepository
 
     public static function updateStatusExpired()
     {
-        $subscriptions = Subscription::all();
+        $subscriptions = Subscription::whereStatus('active')->get();
         if (!$subscriptions->isEmpty()) {
             foreach ($subscriptions as $subscription) {
+                $vendor = $subscription->vendor;
+                $status = 'expired';
                 if ($subscription->isExpired()) {
-                    static::update($subscription, ['status' => 'expired']);
+                    static::update($subscription, ['status' => $status]);
+                    Event::fire(new SubscriptionStatusChanged($vendor->user, $status));
                 }
             }
             return true;
