@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
-use Event;
 use App\Events\SubscriptionStatusChanged;
 use App\Subscription;
+use Carbon\Carbon;
+use Event;
 use Illuminate\Database\Eloquent\Model;
 use Sands\Asasi\Foundation\Repository\Exceptions\RepositoryException;
 
@@ -47,5 +48,26 @@ class SubscriptionsRepository extends BaseRepository
             return true;
         }
         return false;
+    }
+
+    /**
+     * @param  array/numeric $days
+     * @return [type]
+     */
+    public static function getSubscriptionsExpiredIn($filter)
+    {
+        if (!is_array($filter)) {
+            $filter = (array) $filter;
+        }
+
+        foreach ($filter as $days) {
+            $expired_dates[] = Carbon::today()->addDays($days);
+        }
+
+        $subscriptions = Subscription::whereStatus('active')
+            ->whereIn('expired_at', $expired_dates)
+            ->get();
+
+        return $subscriptions;
     }
 }

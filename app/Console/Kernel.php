@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \Sands\Asasi\Foundation\Console\InstallerCommand::class,
         \App\Console\Commands\SubscriptionUpdateStatus::class,
+        \App\Console\Commands\SubscriptionExpireReminderCommand::class,
     ];
 
     /**
@@ -27,7 +28,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Update expired subscription status
-        $schedule->command('subscriptions:update-status')
+        $schedule->command('subscription:update-status')
+            ->dailyAt('00:00');
+        // Send reminder for subscription that will be expired
+        $schedule->command('subscription:expire-reminder')
             ->dailyAt('00:00');
     }
 }

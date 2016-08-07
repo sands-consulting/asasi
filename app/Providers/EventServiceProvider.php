@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SubscriptionStatusChanged' => [
             'App\Listeners\EmailSubscriptionStatusChanged',
         ],
+        'App\Events\SubscriptionExpireReminder' => [
+            'App\Listeners\EmailSubscriptionExpireReminder',
+        ],
     ];
 
     /**
