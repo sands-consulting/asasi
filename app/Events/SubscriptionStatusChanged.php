@@ -11,7 +11,16 @@ class SubscriptionStatusChanged extends Event
 {
     use SerializesModels;
 
+    /**
+     * @var User
+     */
     public $user;
+
+    /**
+     * @var string $status
+     */
+    public $status;
+
     /**
      * Create a new event instance.
      *

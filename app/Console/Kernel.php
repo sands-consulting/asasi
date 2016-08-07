@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \Sands\Asasi\Foundation\Console\InstallerCommand::class,
-        \App\Console\Commands\SubscriptionUpdateStatus::class,
+        \App\Console\Commands\SubscriptionUpdateStatusCommand::class,
         \App\Console\Commands\SubscriptionExpireReminderCommand::class,
     ];
 

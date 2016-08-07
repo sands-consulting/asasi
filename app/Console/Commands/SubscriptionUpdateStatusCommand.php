@@ -6,7 +6,7 @@ use App\Subscription;
 use App\Repositories\SubscriptionsRepository;
 use Illuminate\Console\Command;
 
-class SubscriptionUpdateStatus extends Command
+class SubscriptionUpdateStatusCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -39,8 +39,6 @@ class SubscriptionUpdateStatus extends Command
      */
     public function handle()
     {
-        if (SubscriptionsRepository::updateStatusExpired()) {
-            $this->info('Subscriptions Updated');
-        }
+        SubscriptionsRepository::updateStatusExpired();
     }
 }
