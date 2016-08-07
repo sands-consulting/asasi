@@ -84,9 +84,10 @@ class Subscription extends Authenticatable
     /*
      * Relationship
      */
+
     public function package()
     {
-        return $this->belongsTo(package::class);
+        return $this->belongsTo(Package::class);
     }
 
     public function vendor()
