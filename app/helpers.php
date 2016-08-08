@@ -30,3 +30,14 @@ function blank_icon($value=null)
 {
     return empty($value) ? '<i class="icon-cross2"></i>' : $value;
 }
+
+function is_complete_form($attributes)
+{
+    foreach ($attributes as $key => $value) {
+        if (empty($value) && $key != 'deleted_at') {
+            return false;
+        }
+    }
+
+    return true;
+}

@@ -47,9 +47,10 @@ class VendorsController extends Controller
 
     public function completeApplication(Request $request, Vendor $vendor)
     {
-        // Fixme: find how to validate if only form want to be submmited to approver.
         $inputs = $request->all();
-        $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending-approval']);
+        if (is_complete_form($inputs)) {
+            $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending-approval']);
+        }
 
         return redirect()
             ->route('home.index')
