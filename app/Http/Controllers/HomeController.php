@@ -25,7 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $vendor = Auth::user()->vendor;
+        if(!$vendor = Auth::user()->vendor) {
+            return redirect()
+                ->route('vendors.create')
+                ->with('notice', trans('vendors.notices.public.no-vendor'));
+        }
         return view('home.index', ['vendor' => $vendor]);
     }
 }
