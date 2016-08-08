@@ -17,32 +17,32 @@ class CreateVendorsTable extends Migration
             $table->string('name');
             $table->string('registration_number');
             
-            $table->string('tax_1_number');
-            $table->string('tax_2_number');
+            $table->string('tax_1_number')->nullable();
+            $table->string('tax_2_number')->nullable();
             
-            $table->string('address_1');
-            $table->string('address_2');
-            $table->string('address_postcode');
-            $table->unsignedInteger('address_city_id');
-            $table->unsignedInteger('address_state_id');
-            $table->unsignedInteger('address_country_id');
+            $table->string('address_1')->nullable();
+            $table->string('address_2')->nullable();
+            $table->string('address_postcode')->nullable();
+            $table->unsignedInteger('address_city_id')->nullable()->default(null);
+            $table->unsignedInteger('address_state_id')->nullable()->default(null);
+            $table->unsignedInteger('address_country_id')->nullable()->default(null);
 
-            $table->string('contact_telephone');
-            $table->string('contact_fax');
-            $table->string('contact_email');
-            $table->string('contact_website');
+            $table->string('contact_telephone')->nullable();
+            $table->string('contact_fax')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_website')->nullable();
 
-            $table->string('contact_person_name');
-            $table->string('contact_person_designation');
-            $table->string('contact_person_telephone');
-            $table->string('contact_person_email');
+            $table->string('contact_person_name')->nullable();
+            $table->string('contact_person_designation')->nullable();
+            $table->string('contact_person_telephone')->nullable();
+            $table->string('contact_person_email')->nullable();
 
-            $table->string('capital_currency');
-            $table->string('capital_authorized');
-            $table->string('capital_paid_up');
+            $table->string('capital_currency')->nullable();
+            $table->string('capital_authorized')->nullable();
+            $table->string('capital_paid_up')->nullable();
             
-            $table->unsignedInteger('type_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('type_id')->nullable()->default(null);
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('status');
             
             $table->nullableTimestamps();
@@ -50,19 +50,24 @@ class CreateVendorsTable extends Migration
 
             $table->foreign('address_city_id')
                 ->references('id')
-                ->on('places');
+                ->on('places')
+                ->onDelete(null);
             $table->foreign('address_state_id')
                 ->references('id')
-                ->on('places');
+                ->on('places')
+                ->onDelete(null);
             $table->foreign('address_country_id')
                 ->references('id')
-                ->on('places');
+                ->on('places')
+                ->onDelete(null);
             $table->foreign('type_id')
                 ->references('id')
-                ->on('vendor_types');
+                ->on('vendor_types')
+                ->onDelete(null);
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete(null);
 
             $table->index('name');
             $table->index('registration_number');

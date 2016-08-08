@@ -61,7 +61,7 @@ class VendorsController extends Controller
     {
         VendorsRepository::delete($vendor);
         return redirect()
-            ->route('vendors.index')
+            ->route('vendors.create')
             ->with('notice', trans('vendors.notices.deleted', ['name' => $vendor->name]));
     }
 

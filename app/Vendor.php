@@ -125,5 +125,11 @@ class Vendor extends Authenticatable
     public static function boot()
     {
         parent::boot();
+
+        static::saving(function($model){
+            foreach ($model->toArray() as $key => $value) {
+                $model->{$key} = empty($value) ? null : $value;
+            }
+        });
     }
 }

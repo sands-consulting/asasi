@@ -47,6 +47,7 @@ return [
         'public' => [
             'saved' => 'Your application has been saved.',
             'completed' => 'Your application has been submitted.',
+            'no-vendor' => 'You must apply for vendor first.'
         ],
         'created' => 'Vendor :name created',
         'updated' => 'Vendor :name updated',

@@ -23,8 +23,7 @@
                 {!! Former::select('type_id')
                 ->options(App\VendorType::options())
                 ->label('vendors.attributes.type_id')
-                ->addClass('select-search')
-                ->required() !!}
+                ->addClass('select-search') !!}
             </div>
         </div>
         <div class="row">
@@ -79,8 +78,7 @@
             <div class="col-sm-6">
                 {!! Former::select('address_city_id')
                 ->label('vendors.attributes.address_city_id')
-                ->options(App\Place::cityOptions()) 
-                ->required() !!}
+                ->options(App\Place::cityOptions()) !!}
             </div>
             <div class="col-sm-6">
                 {!! Former::text('address_postcode')
@@ -92,14 +90,12 @@
             <div class="col-sm-6">
                 {!! Former::select('address_state_id')
                 ->label('vendors.attributes.address_state_id')
-                ->options(App\Place::stateOptions()) 
-                ->required() !!}
+                ->options(App\Place::stateOptions()) !!}
             </div>
             <div class="col-sm-6">
                 {!! Former::select('address_country_id')
                 ->label('vendors.attributes.address_country_id') 
-                ->options(App\Place::countryOptions()) 
-                ->required() !!}
+                ->options(App\Place::countryOptions()) !!}
             </div>
         </div>
     </div>
