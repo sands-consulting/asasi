@@ -41,7 +41,7 @@ return [
         ],
         'manage' => [
             'title'         => 'Manage',
-
+            'notices'       => 'Notices',
             'allocations'   => 'Allocations',
             'vendors'       => 'Vendors',
             'news'          => 'News',

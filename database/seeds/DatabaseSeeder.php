@@ -22,8 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AllocationSeeder::class);
         $this->call(QualificationCodeSeeder::class);
         $this->call(NewsSeeder::class);
+        $this->call(NoticeSeeder::class);
         $this->call(PackageSeeder::class);
         $this->call(VendorSeeder::class);
+        $this->call(SettingSeeder::class);
         $this->call(SubscriptionSeeder::class);
         $this->call(PaymentGatewaySeeder::class);
 

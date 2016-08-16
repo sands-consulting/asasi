@@ -133,11 +133,9 @@
                                 <span>{{ trans('menu.admin.manage.title') }}</span> <i class="icon-menu" title="{{ trans('menu.admin.manage.title') }}" data-original-title="{{ trans('menu.admin.manage.title') }}"></i>
                             </li>
 
-                            @if(Auth::user()->hasPermission('vendor:index'))
-                            <li class="{{ is_path_active('admin/vendors*') }}">
-                                <a href="{{ route('admin.vendors.index') }}" class="legitRipple">
-                                    <i class="icon-people"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span>
-                                </a>
+                            @if(Auth::user()->hasPermission('allocation:index'))
+                            <li class="{{ is_path_active('admin/allocations*') }}">
+                                <a href="{{ route('admin.allocations.index') }}"><i class="icon-coins"></i> <span>{{ trans('menu.admin.manage.allocations') }}</span></a>
                             </li>
                             @endif
 
@@ -146,16 +144,24 @@
                                 <a href="{{ route('admin.news.index') }}"><i class="icon-newspaper"></i> <span>{{ trans('menu.admin.manage.news') }}</span></a>
                             </li>
                             @endif
-
-                            @if(Auth::user()->hasPermission('allocation:index'))
-                            <li class="{{ is_path_active('admin/allocations*') }}">
-                                <a href="{{ route('admin.allocations.index') }}"><i class="icon-coins"></i> <span>{{ trans('menu.admin.manage.allocations') }}</span></a>
+                            
+                            @if(Auth::user()->hasPermission('notice:index'))
+                            <li class="{{ is_path_active('admin/notices*') }}">
+                                <a href="{{ route('admin.notices.index') }}"><i class="icon-clipboard3"></i> <span>{{ trans('menu.admin.manage.notices') }}</span></a>
                             </li>
                             @endif
 
                             @if(Auth::user()->hasPermission('package:index'))
                             <li class="{{ is_path_active('admin/packages*') }}">
                                 <a href="{{ route('admin.packages.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.manage.packages') }}</span></a>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->hasPermission('vendor:index'))
+                            <li class="{{ is_path_active('admin/vendors*') }}">
+                                <a href="{{ route('admin.vendors.index') }}" class="legitRipple">
+                                    <i class="icon-people"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span>
+                                </a>
                             </li>
                             @endif
 
