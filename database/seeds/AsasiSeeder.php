@@ -38,9 +38,16 @@ class AsasiSeeder extends Seeder
 
         $roles = [
             [
+                'id'            => 1,
                 'name'          => 'admin',
                 'display_name'  => 'Admin',
                 'description'   => 'System Administrator. Should be able to do everything.',
+            ],
+            [
+                'id'            => 2,
+                'name'          => 'vendor',
+                'display_name'  => 'Vendor',
+                'description'   => 'Vendor. Fixed role for vendor.',
             ],
         ];
 
@@ -67,6 +74,7 @@ class AsasiSeeder extends Seeder
         $permissions = [
             ['access:admin',            'Access admin area'],
             ['access:report',           'Access reporting module'],
+            ['access:vendor',           'Access vendor module'],
 
             ['permission:index',        'List all permissions'],
 

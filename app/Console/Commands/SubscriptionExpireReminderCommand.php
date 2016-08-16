@@ -42,6 +42,7 @@ class SubscriptionExpireReminderCommand extends Command
      */
     public function handle()
     {
+        // Fixme: find better solution to get days var for array value.
         $days = 30;
         $subscriptions = SubscriptionsRepository::getSubscriptionsExpiredIn($days);
         foreach ($subscriptions as $subscription) {

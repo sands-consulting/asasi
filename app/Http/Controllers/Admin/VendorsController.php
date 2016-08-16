@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Vendor;
 use App\DataTables\VendorsDataTable;
 use App\Http\Requests\VendorRequest;
 use App\Repositories\VendorsRepository;
+use App\Setting;
+use App\User;
+use App\Vendor;
 use Illuminate\Http\Request;
 
 class VendorsController extends Controller
@@ -91,6 +93,9 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         VendorsRepository::update($vendor, $inputs, ['status' => 'approved']);
+
+        $role_id = Setting::where('key', 'vendor_role_id')->first()->value;
+        User::find($vendor->user->id)->roles()->attach($role_id);
 
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))

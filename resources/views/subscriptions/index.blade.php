@@ -16,7 +16,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="control-label"><strong>{{ trans('subscriptions.attributes.name') }}</strong>:</label>
-                                        <div class="form-control-static">{{ $subscription->package->name }}</div>
+                                        <div class="form-control-static">{{ $subscription->package ? $subscription->package->name: 'No' }}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
