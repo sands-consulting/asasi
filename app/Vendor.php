@@ -28,6 +28,7 @@ class Vendor extends Authenticatable
         'address_city_id',
         'address_state_id',
         'address_country_id',
+        'contact_person_designation',
         'contact_person_name',
         'contact_person_telephone',
         'contact_person_email',
@@ -98,6 +99,16 @@ class Vendor extends Authenticatable
         return $this->status != 'inactive';
     }
     
+    public function canApprove()
+    {
+        return $this->status != 'approved' && $this->status != 'rejected';
+    }
+
+    public function canReject()
+    {
+        return $this->status != 'rejected' && $this->status != 'approved';
+    }
+
     /*
      * Relationship
      */
@@ -109,17 +120,17 @@ class Vendor extends Authenticatable
 
     public function city()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(Place::class, 'address_city_id');
     }
 
     public function state()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(Place::class, 'address_state_id');
     }
 
     public function country()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(Place::class, 'address_country_id');
     }
     
     public static function boot()

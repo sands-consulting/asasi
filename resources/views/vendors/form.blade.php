@@ -110,19 +110,19 @@
     </legend>
     <div class="collapse in" id="contacts">
         <div class="row">
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 {!! Former::text('contact_person_designation')
                 ->label('vendors.attributes.contact_person_designation') !!}
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-10">
                 {!! Former::text('contact_person_name')
                 ->label('vendors.attributes.contact_person_name') !!}
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 {!! Former::text('contact_person_email')
                 ->label('vendors.attributes.contact_person_email') !!}
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                 {!! Former::text('contact_person_telephone')
                 ->label('vendors.attributes.contact_person_telephone') !!}
             </div>

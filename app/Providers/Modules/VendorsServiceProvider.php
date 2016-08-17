@@ -31,6 +31,10 @@ class VendorsServiceProvider extends ServiceProvider
                     'as'    => 'admin.vendors.approve',
                     'uses'  => 'VendorsController@approve'
                 ]);
+                $router->put('vendors/{vendors}/reject', [
+                    'as'    => 'admin.vendors.reject',
+                    'uses'  => 'VendorsController@reject'
+                ]);
                 $router->put('vendors/{vendors}/deactivate', [
                     'as'    => 'admin.vendors.deactivate',
                     'uses'  => 'VendorsController@deactivate'

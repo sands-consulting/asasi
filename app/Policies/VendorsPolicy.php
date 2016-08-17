@@ -61,6 +61,11 @@ class VendorsPolicy extends BasePolicy
         return $this->user->hasPermission('vendor:approve');
     }
 
+    public function reject()
+    {
+        return $this->user->hasPermission('vendor:reject');
+    }
+
     public function activate(Vendor $vendor)
     {
         return $this->user->hasPermission('vendor:activate') && $vendor->canActivate();

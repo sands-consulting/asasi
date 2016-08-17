@@ -30,6 +30,7 @@ class VendorSeeder extends Seeder
             ['vendor:update',            'Update existing vendor'],
             ['vendor:duplicate',         'Duplicate existing vendor'],
             ['vendor:approve',           'Approve vendor\'s applications'],
+            ['vendor:reject',           'Reject vendor\'s applications'],
             ['vendor:activate',          'Activate existing vendor'],
             ['vendor:deactivate',        'Deactivate existing vendor'],
             ['vendor:delete',            'Delete existing vendor'],

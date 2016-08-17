@@ -9,5 +9,6 @@ return [
     'not-published' => 'Not Published',
     'pending-approval' => 'Pending Approval',
     'published' => 'Published',
-    'suspended' => 'Suspended'
+    'suspended' => 'Suspended',
+    'approved' => 'Approved',
 ];

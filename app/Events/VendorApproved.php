@@ -3,17 +3,14 @@
 namespace App\Events;
 
 use App\Events\Event;
+use App\User;
+use App\Vendor;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class VendorRegistered extends Event
+class VendorApproved extends Event
 {
     use SerializesModels;
-
-    /**
-     * @var User
-     */
-    public $user;
 
     /**
      * Create a new event instance.
@@ -22,7 +19,8 @@ class VendorRegistered extends Event
      */
     public function __construct(User $user, Vendor $vendor)
     {
-        //
+        $this->user = $user;
+        $this->vendor = $vendor;
     }
 
     /**

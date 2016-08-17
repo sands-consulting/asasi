@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\VendorsDataTable;
+use App\Events\VendorApproved;
+use App\Events\VendorRejected;
 use App\Http\Requests\VendorRequest;
 use App\Repositories\VendorsRepository;
 use App\Setting;
 use App\User;
 use App\Vendor;
+use Auth;
+use Event;
 use Illuminate\Http\Request;
 
 class VendorsController extends Controller
@@ -97,8 +101,22 @@ class VendorsController extends Controller
         $role_id = Setting::where('key', 'vendor_role_id')->first()->value;
         User::find($vendor->user->id)->roles()->attach($role_id);
 
+        Event::fire(new VendorApproved(Auth::user(), $vendor));
+
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
-            ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));        
+            ->with('notice', trans('vendors.notices.approved', ['name' => $vendor->name]));
+    }
+
+    public function reject(Request $request, Vendor $vendor)
+    {
+        $inputs = $request->only(['redirect_to', 'remarks']);
+        VendorsRepository::update($vendor, $inputs, ['status' => 'rejected']);
+
+        Event::fire(new VendorRejected(Auth::user(), $vendor, $inputs['remarks']));
+        
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.rejected', ['name' => $vendor->name]));
     }
 }

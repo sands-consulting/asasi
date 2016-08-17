@@ -30,6 +30,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SubscriptionExpireReminder' => [
             'App\Listeners\EmailSubscriptionExpireReminder',
         ],
+        'App\Events\VendorApproved' => [
+            'App\Listeners\VendorApplicationApproved',
+        ],
+        'App\Events\VendorRejected' => [
+            'App\Listeners\VendorApplicationRejected',
+        ],
     ];
 
     /**

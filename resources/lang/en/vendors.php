@@ -24,6 +24,7 @@ return [
         'capital_currency' => 'Capital Currency',
         'capital_authorized' => 'Capital Authorized',
         'capital_paid_up' => 'Capital Paid Up',
+        'remarks' => 'Remarks',
         'type_id' => 'Vendor Type',
         'status' => 'Status',
         'created_at' => 'Created At',
@@ -41,6 +42,7 @@ return [
         'edit-application' => 'Edit Application',
         'complete-application' => 'Send Application',
         'cancel-application' => 'Cancel Application',
+        'reject' => 'Reject',
     ],
 
     'notices' => [
