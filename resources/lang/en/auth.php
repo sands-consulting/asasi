@@ -32,6 +32,7 @@ return [
     'problem_input' => '<strong>Whoops!</strong> There were some problems with your input.',
     'notices' => [
         'confirm' => 'Please confirm your email address.',
-        'confirmed' => 'You are now confirmed. Please login.'
+        'confirmed' => 'You are now confirmed. Please login.',
+        'not_verified' => 'Your account is not verified. Please check your email and click the confirmation link.'
     ],
 ];

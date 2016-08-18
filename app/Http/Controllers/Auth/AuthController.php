@@ -11,6 +11,7 @@ use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -60,6 +61,44 @@ class AuthController extends Controller
     }
 
     /**
+     * Override Login Function.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        // Check if account is verified
+        if (Auth::guard($this->getGuard())->validate(['email' => $request->email, 'password' => $request->password, 'verified' => 0])) {
+            return redirect('/login')
+                ->withInput($request->only('email', 'remember'))
+                ->with('alert', trans('auth.notices.not_verified'));
+        }
+
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+
+        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        $credentials = $this->getCredentials($request);
+
+        if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
+
+        if ($throttles && ! $lockedOut) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -96,6 +135,20 @@ class AuthController extends Controller
         
         return redirect('/login')
             ->with('notice', trans('auth.notices.confirm'));
+    }
+
+    /**
+     * Override from AuthenticatesUsers Trait
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function getCredentials(Request $request)
+    {
+        $credentials = $request->only($this->loginUsername(), 'password');
+        $credentials = array_add($credentials, 'verified', '1');
+
+        return $credentials;
     }
 
     /**
