@@ -22,7 +22,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'App\Events\VendorRegistered' => [
-            'App\Listeners\EmailVendorActivationLink',
+            'App\Listeners\EmailConfirmationLink',
         ],
         'App\Events\SubscriptionStatusChanged' => [
             'App\Listeners\EmailSubscriptionStatusChanged',

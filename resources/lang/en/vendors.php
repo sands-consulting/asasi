@@ -51,9 +51,11 @@ return [
             'completed' => 'Your application has been submitted.',
             'no-vendor' => 'You must apply for vendor first.'
         ],
-        'created' => 'Vendor :name created',
-        'updated' => 'Vendor :name updated',
-        'deleted' => 'Vendor :name deleted',
+        'approved' => 'Vendor :name has been approved',
+        'created'  => 'Vendor :name created',
+        'updated'  => 'Vendor :name updated',
+        'deleted'  => 'Vendor :name deleted',
+        'rejected' => 'Vendor :name has been rejected',
     ],
 
 	'views' => [

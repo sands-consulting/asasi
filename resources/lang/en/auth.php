@@ -30,5 +30,8 @@ return [
     'reset_password' => 'Reset Password',
     'click_here_reset_password' => 'Click here to reset your password',
     'problem_input' => '<strong>Whoops!</strong> There were some problems with your input.',
-
+    'notices' => [
+        'confirm' => 'Please confirm your email address.',
+        'confirmed' => 'You are now confirmed. Please login.'
+    ],
 ];

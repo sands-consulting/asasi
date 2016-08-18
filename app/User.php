@@ -16,7 +16,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'status'
+        'status',
+        'token',
+        'verified',
     ];
 
     protected $hidden = [
@@ -196,6 +198,16 @@ class User extends Authenticatable
     protected function getPermissionsCacheKeyAttribute()
     {
         return 'user_permissions_' . $this->getKey();
+    }
+
+    /*
+     * Helpers
+     */
+    public function confirmEmail()
+    {
+        $this->verified = true;
+        $this->token = null;
+        $this->save();
     }
 
     public static function boot()

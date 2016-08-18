@@ -3,19 +3,20 @@
 namespace App\Listeners;
 
 use App\Events\VendorRegistered;
+use App\Mailers\AppMailer;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailVendorActivationLink
+class EmailConfirmationLink
 {
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AppMailer $mailer)
     {
-        //
+        $this->mailer = $mailer;
     }
 
     /**
@@ -26,6 +27,6 @@ class EmailVendorActivationLink
      */
     public function handle(VendorRegistered $event)
     {
-        
+        $this->mailer->sendEmailConfirmationTo($event->user);
     }
 }
