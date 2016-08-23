@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Notice;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (!!Auth::user()->hasPermission('access:admin')) {
             return redirect()
@@ -35,6 +36,11 @@ class HomeController extends Controller
                 ->route('vendors.create')
                 ->with('notice', trans('vendors.notices.public.no-vendor'));
         }
-        return view('home.index', ['vendor' => $vendor]);
+
+        $type = $request->get('type', 1);
+        $notice_types = Notice::distinct('notice_type_id')->get();
+        $notices = Notice::whereStatus('active')->whereNoticeTypeId($type)->get();
+
+        return view('home.index', compact('vendor', 'notices', 'notice_types', 'type'));
     }
 }

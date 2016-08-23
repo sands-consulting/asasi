@@ -114,6 +114,11 @@ class Notice extends Model
         return $this->belongsTo(NoticeType::class, 'notice_type_id');
     }
 
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'organization_id');
+    }
+
     /*
      * Helpers
      */

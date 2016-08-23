@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8eae241330eaa2da1d8bc3e81c5146be",
-    "content-hash": "432a10074798bc39a385cb1dde930854",
+    "hash": "f5f1dd546369ccd65cc0591c6dd60354",
+    "content-hash": "9659b1b03332a4685237eb1b4981ad7b",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -871,6 +871,56 @@
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
             "time": "2015-12-07 04:07:13"
+        },
+        {
+            "name": "gloudemans/shoppingcart",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
+                "reference": "3e6195d46cff321cef959231f7e94dc2eda569d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/3e6195d46cff321cef959231f7e94dc2eda569d0",
+                "reference": "3e6195d46cff321cef959231f7e94dc2eda569d0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/events": "5.1.*|5.2.*",
+                "illuminate/session": "5.1.*|5.2.*",
+                "illuminate/support": "5.1.*|5.2.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.0",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "gloudemans/notify": "Simple flash notifications for Laravel"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gloudemans\\Shoppingcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Gloudemans",
+                    "email": "info@robgloudemans.nl"
+                }
+            ],
+            "description": "Laravel Shoppingcart",
+            "keywords": [
+                "laravel",
+                "shoppingcart"
+            ],
+            "time": "2016-07-14 08:07:48"
         },
         {
             "name": "irazasyed/laravel-identicon",

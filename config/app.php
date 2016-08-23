@@ -180,6 +180,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         /*
          * Asasi Core ServiceProviders
@@ -201,6 +202,7 @@ return [
         App\Providers\Modules\SubscriptionsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
         App\Providers\Modules\VendorTypesProvider::class,
+        App\Providers\Modules\CartsServiceProvider::class,
     ],
 
     /*
@@ -256,6 +258,7 @@ return [
         'Form'       => Collective\Html\FormFacade::class,
         'Former'     => Former\Facades\Former::class,
         'Gravatar'   => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'Cart'       => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];

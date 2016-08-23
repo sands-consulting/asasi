@@ -18,7 +18,8 @@
         "yetanotherape/diff-match-patch": "^1.0",
         "thomaswelton/laravel-gravatar": "~1.0",
         "baum/baum": "^1.1",
-        "sands/asasi-booted": "1.0.1"
+        "sands/asasi-booted": "1.0.1",
+        "gloudemans/shoppingcart": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
