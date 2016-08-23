@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Carts',
 	'views' => [
 		'index' => [
 			'panels' => [

@@ -10,7 +10,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h5 class="panel-title">{{ trans('vendors.views.cart.title') }}</h5>
+                                    <h5 class="panel-title">{{ trans('carts.title') }}</h5>
                                 </div>
                             </div>
                         </div>
