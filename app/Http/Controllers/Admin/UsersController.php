@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use App\User;
 use App\DataTables\UsersDataTable;
 use App\DataTables\UserLogsDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\UserRequest;
 use App\Repositories\UsersRepository;
+use App\Repositories\UserLogsRepository;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -32,6 +34,8 @@ class UsersController extends Controller
         {
             $user->roles()->sync($roles);
         }
+
+        UserLogsRepository::log(Auth::user(), 'Create', $user, $request->getClientIp());
 
         return redirect()
             ->route('admin.users.show', $user->id)
@@ -64,14 +68,18 @@ class UsersController extends Controller
             $user->roles()->sync($roles);
         }
 
+        UserLogsRepository::log(Auth::user(), 'Update', $user, $request->getClientIp());
+
         return redirect()
             ->route('admin.users.edit', $user->id)
             ->with('notice', trans('users.notices.updated', ['name' => $user->name]));
     }
 
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
         UsersRepository::delete($user);
+        UserLogsRepository::log(Auth::user(), 'Delete', $user, $request->getClientIp());
+
         return redirect()
             ->route('admin.users.index')
             ->with('notice', trans('users.notices.deleted', ['name' => $user->name]));
@@ -89,9 +97,10 @@ class UsersController extends Controller
         return $table->render('admin.users.revisions', compact('user'));
     }
 
-    public function assume(User $user)
+    public function assume(Request $request, User $user)
     {
         UsersRepository::assume($user);
+
         return redirect()
             ->to('/')
             ->with('notice', trans('users.notices.assumed', ['name' => $user->name]));

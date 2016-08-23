@@ -17,10 +17,10 @@ class VendorApproved extends Event
      *
      * @return void
      */
-    public function __construct(User $user, Vendor $vendor)
+    public function __construct(User $user, Vendor $item)
     {
         $this->user = $user;
-        $this->vendor = $vendor;
+        $this->item = $item;
     }
 
     /**

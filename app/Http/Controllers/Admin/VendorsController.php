@@ -7,6 +7,7 @@ use App\Events\VendorApproved;
 use App\Events\VendorRejected;
 use App\Http\Requests\VendorRequest;
 use App\Repositories\VendorsRepository;
+use App\Repositories\UserLogsRepository;
 use App\Setting;
 use App\User;
 use App\Vendor;
@@ -101,6 +102,8 @@ class VendorsController extends Controller
         $role_id = Setting::where('key', 'vendor_role_id')->first()->value;
         User::find($vendor->user->id)->roles()->attach($role_id);
 
+        UserLogsRepository::log(Auth::user(), 'Approve Vendor', $vendor, $request->getClientIp());
+
         Event::fire(new VendorApproved(Auth::user(), $vendor));
 
         return redirect()
@@ -112,6 +115,8 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
         VendorsRepository::update($vendor, $inputs, ['status' => 'rejected']);
+
+        UserLogsRepository::log($event->user, 'Reject Vendor', $event->vendor, $this->request->getClientIp(), $inputs['remarks']);
 
         Event::fire(new VendorRejected(Auth::user(), $vendor, $inputs['remarks']));
         

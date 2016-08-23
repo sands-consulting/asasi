@@ -16,11 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Login' => [
             'App\Listeners\UserLogin',
         ],
-
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\UserLogout',
         ],
-
         'App\Events\VendorRegistered' => [
             'App\Listeners\EmailConfirmationLink',
         ],
@@ -31,10 +29,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EmailSubscriptionExpireReminder',
         ],
         'App\Events\VendorApproved' => [
-            'App\Listeners\VendorApplicationApproved',
+            'App\Listeners\VendorApprovedListener',
         ],
         'App\Events\VendorRejected' => [
-            'App\Listeners\VendorApplicationRejected',
+            'App\Listeners\VendorRejectedListener',
         ],
     ];
 

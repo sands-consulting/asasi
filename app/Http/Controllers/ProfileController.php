@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UsersRepository;
+use App\Repositories\UserLogsRepository;
 use App\Http\Requests\AccountRequest;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
@@ -33,6 +35,9 @@ class ProfileController extends Controller
         }
 
         $user = UsersRepository::update($auth->user(), $inputs);
+
+        UserLogsRepository::log(Auth::user(), 'Update-Profile', $user, $request->getClientIp());
+
         return redirect()
             ->route('profile')
             ->with('notice', trans('profile.notices.updated'));

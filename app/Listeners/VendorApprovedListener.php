@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 
-class VendorApplicationApproved
+class VendorApprovedListener
 {
     /**
      * Create the event listener.
@@ -28,11 +28,6 @@ class VendorApplicationApproved
      */
     public function handle(VendorApproved $event)
     {
-        UserLogsRepository::log(
-            $event->user,
-            'approve-vendor',
-            $event->vendor,
-            $this->request->getClientIp()
-        );
+        UserLogsRepository::log($event->user, 'approve', $event->item, $this->request->getClientIp());
     }
 }

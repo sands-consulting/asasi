@@ -14,6 +14,10 @@
 			@if($user->canSuspend() && Auth::user()->hasPermission('user:suspend'))
 			<li><a href="{{ route('admin.users.suspend', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="PUT">{{ trans('actions.suspend') }}</a></li>
 			@endif
+
+			@if(Auth::user()->hasPermission('user:delete'))
+			<li><a href="{{ route('admin.users.destroy', [$user->id, 'redirect_to' => route('admin.users.index')]) }}" data-method="DELETE">{{ trans('actions.delete') }}</a></li>
+			@endif
 		</ul>
 	</li>
 </ul>

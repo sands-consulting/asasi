@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 
-class VendorApplicationRejected
+class VendorRejectedListener
 {
     /**
      * Create the event listener.
@@ -28,12 +28,6 @@ class VendorApplicationRejected
      */
     public function handle(VendorRejected $event)
     {
-        UserLogsRepository::log(
-            $event->user,
-            'reject',
-            $event->vendor,
-            $this->request->getClientIp(),
-            $event->remarks
-        );
+        UserLogsRepository::log($event->user, 'reject', $event->vendor, $this->request->getClientIp(), $event->remarks);
     }
 }
