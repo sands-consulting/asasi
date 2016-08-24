@@ -41,19 +41,39 @@ class NoticeSeeder extends Seeder
          // Assign admin role to all permission.
         App\Role::first()->permissions()->sync(App\Permission::all()->lists('id')->toArray());
 
-        NoticesRepository::create(new Notice(), [
-            'name' => 'Notice 1',
-            'number' => '0000001',
-            'description' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
-            'rules' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
-            'price' =>  '250.00',
-            'published_at' => '2016-08-01',
-            'expired_at' => '2017-08-01',
-            'purchased_at' => '2016-10-01',
-            'submission_at' => '2016-12-01',
-            'notice_type_id' => '1',
-            'organization_id' => '1',
-            'status' => 'active'
-        ]);
+        $noticeData = [
+            [
+                'name' => 'Notice Tender',
+                'number' => '0000001',
+                'description' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
+                'rules' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
+                'price' =>  '250.00',
+                'published_at' => '2016-08-01',
+                'expired_at' => '2017-08-01',
+                'purchased_at' => '2016-10-01',
+                'submission_at' => '2016-12-01',
+                'notice_type_id' => '1',
+                'organization_id' => '1',
+                'status' => 'active'
+            ],
+            [
+                'name' => 'Notice Quotation',
+                'number' => '0000001',
+                'description' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
+                'rules' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
+                'price' =>  '150.00',
+                'published_at' => '2016-08-01',
+                'expired_at' => '2017-08-01',
+                'purchased_at' => '2016-10-01',
+                'submission_at' => '2016-12-01',
+                'notice_type_id' => '2',
+                'organization_id' => '1',
+                'status' => 'active'
+            ],
+        ];
+
+        foreach ($noticeData as $notice) {
+            NoticesRepository::create(new Notice(), $notice);
+        }
     }
 }

@@ -74,12 +74,12 @@ class CreateNoticesTable extends Migration
         Schema::create('notice_events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('status');
             $table->string('event_at');
             $table->string('location');
             $table->boolean('required');
             $table->unsignedInteger('notice_id')->nullable();
             $table->unsignedInteger('notice_event_type_id')->nullable();
+            $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
 
