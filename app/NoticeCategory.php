@@ -75,8 +75,13 @@ class NoticeCategory extends Model
         return $this->status != 'active';
     }
 
-    public function canInactivate()
+    public function canDeactivate()
     {
         return $this->status != 'inactive';
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }

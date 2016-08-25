@@ -29,6 +29,7 @@ return [
             'places'                => 'Places',
             'qualification-codes'   => 'Qualification Codes',
             'notice-types'          => 'Notice Types',
+            'notice-categories'     => 'Notice Categories',
         ],
         'settings' => [
             'title'                 => 'Settings',

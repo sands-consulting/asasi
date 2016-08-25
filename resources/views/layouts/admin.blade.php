@@ -210,6 +210,11 @@
                                 <a href="{{ route('admin.notice-types.index') }}"><i class="icon-clipboard"></i> <span>{{ trans('menu.admin.administration.notice-types') }}</span></a>
                             </li>
                             @endif
+                            @if(Auth::user()->hasPermission('notice-category:index'))
+                            <li class="{{ is_path_active('admin/notice_categories*') }}">
+                                <a href="{{ route('admin.notice-categories.index') }}"><i class="icon-clipboard"></i> <span>{{ trans('menu.admin.administration.notice-categories') }}</span></a>
+                            </li>
+                            @endif
 
                             <li class="navigation-header">                               
                                 <span>{{ trans('menu.admin.settings.title') }}</span> <i class="icon-cogs" title="{{ trans('menu.admin.settings.title') }}" data-original-title="{{ trans('menu.admin.settings.title') }}"></i>
