@@ -3,6 +3,7 @@
 return [
 	'views' => [
 		'index' => [
+            'title' => 'Home',
 			'panels' => [
 				'news' => [
 					'title' => 'Recent News'

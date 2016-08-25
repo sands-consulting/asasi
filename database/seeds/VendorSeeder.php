@@ -101,6 +101,9 @@ class VendorSeeder extends Seeder
             UsersRepository::create(new User(), $userData);
         }
 
+        Role::find(2)->permissions()->attach(3);
+        User::find(2)->roles()->attach(2);
+
         VendorsRepository::create(new Vendor, [
             'name' => 'Sands Consulting Sdn Bhd',
             'registration_number' => 'M123123',

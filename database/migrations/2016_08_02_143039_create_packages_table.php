@@ -16,6 +16,7 @@ class CreatePackagesTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('name');
+            $table->text('description');
             $table->string('validity_type');
             $table->string('validity_quantity');
             $table->text('meta');

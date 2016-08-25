@@ -142,7 +142,9 @@
 
 			<ul class="nav navbar-nav navbar-nav-material">
 				<li class="{{ is_path_active('/') }}">
-					<a href="{{ url('/') }}" class="legitRipple">{{ trans('menu.home') }}</a>
+					<a href="{{ url('/') }}" class="legitRipple">
+						<i class="icon-home2 position-left"></i> {{ trans('menu.home') }}
+					</a>
 				</li>
 				@if(Auth::user() && Auth::user()->hasPermission('access:vendor'))
 				<li class="dropdown">
@@ -152,7 +154,7 @@
 
 					<ul class="dropdown-menu">
 						<li class="{{ is_path_active('subscriptions') }}">
-							<a href="{{ route('subscriptions.index') }}"><i class="icon-stack3"></i> My Package</a>
+							<a href="{{ route('subscriptions.current') }}"><i class="icon-stack3"></i> My Package</a>
 						</li>
 						<li class="{{ is_path_active('subscriptions/history') }}">
 							<a href="{{ route('subscriptions.history') }}"><i class="icon-history"></i> Histories</a>
@@ -162,6 +164,12 @@
 				@endif
 			</ul>
 		</div>
+	</div>
+</div>
+
+<div class="page-header">
+	<div class="page-header-content">
+		@yield('header')
 	</div>
 </div>
 

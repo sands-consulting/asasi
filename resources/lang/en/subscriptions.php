@@ -31,12 +31,13 @@ return [
 
 	'views' => [
 		'index' => [
-            'title' => 'Subscriptions',
+            'title'    => 'Subscriptions',
             'status'   => 'Status',
             'keywords' => 'Keywords',
             
             'public' => [
-                'title' => 'Your Subscriptions',
+                'title' => 'Subscription Packages',
+                'details' => 'Subscription Details',
             ]
 		],
         'show' => [
@@ -54,8 +55,12 @@ return [
         'apply' => [
             'title' => 'Subscription Application Form',
         ],
+        'current' => [
+            'title' => 'Your Subscription'
+        ],
         'history' => [ 
-            'title' => 'Your subscriptions history',
+            'title' => 'Subscriptions history',
+            'list'  => 'List of Subscription History'
         ]
 	]
 ];
