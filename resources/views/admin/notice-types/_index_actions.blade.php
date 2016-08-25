@@ -19,6 +19,10 @@
                   @if($noticeType->canDeactivate() && Auth::user()->hasPermission('notice-type:deactivate'))
                   <li><a href="{{ route('admin.notice-types.deactivate', [$noticeType->id, 'redirect_to' => route('admin.notice-types.index')]) }}" data-method="PUT">{{ trans('actions.deactivate') }}</a></li>
                   @endif
+
+                  @if(Auth::user()->hasPermission('notice-type:delete'))
+                  <li><a href="{{ route('admin.notice-types.destroy', [$noticeType->id, 'redirect_to' => route('admin.notice-types.index')]) }}" data-method="DELETE">{{ trans('actions.delete') }}</a></li>
+                  @endif
 		</ul>
 	</li>
 </ul>

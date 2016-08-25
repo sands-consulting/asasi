@@ -23,10 +23,7 @@ class NoticeTypesController extends Controller
 
     public function store(NoticeTypeRequest $request)
     {
-        $inputs = $request->only(
-            'name',
-            'status'
-        );
+        $inputs = $request->only('name');
 
         $noticeType  = NoticeTypesRepository::create(new NoticeType, $inputs);
         return redirect()
