@@ -28,6 +28,6 @@ class VendorRejectedListener
      */
     public function handle(VendorRejected $event)
     {
-        UserLogsRepository::log($event->user, 'reject', $event->vendor, $this->request->getClientIp(), $event->remarks);
+        // UserLogsRepository::log($event->user, 'reject', $event->vendor, $this->request->getClientIp(), $event->remarks);
     }
 }

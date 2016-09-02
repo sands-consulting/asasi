@@ -47,22 +47,33 @@ class VendorsController extends Controller
 
     public function completeApplication(Request $request, Vendor $vendor)
     {
-        $inputs = $request->all();
-        if (is_complete_form($inputs)) {
-            $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending-approval']);
+        if (is_complete_form($vendor)) {
+            $vendor = VendorsRepository::update($vendor, [], ['status' => 'pending-approval']);
+            return redirect()
+                ->route('home.index')
+                ->with('notice', trans('vendors.notices.public.complete-application', ['name' => $vendor->name]));
+        } else {
+            return redirect()
+                ->route('vendors.edit', $vendor->id)
+                ->with('alert', trans('vendors.notices.public.incomplete-application', ['name' => $vendor->name]));
         }
-
-        return redirect()
-            ->route('home.index')
-            ->with('notice', trans('vendors.notices.public.complete-application', ['name' => $vendor->name]));
     }
 
     public function cancelApplication(Vendor $vendor)
     {
-        VendorsRepository::delete($vendor);
-        return redirect()
-            ->route('vendors.create')
-            ->with('notice', trans('vendors.notices.deleted', ['name' => $vendor->name]));
+        if ($vendor->status == 'pending-approval') {
+            VendorsRepository::update($vendor, ['status' => 'draft']);
+
+            return redirect()
+                ->route('vendors.edit', $vendor->id)
+                ->with('notice', trans('vendors.notices.public.canceled', ['name' => $vendor->name]));
+        } else {
+            return redirect()
+                ->route('home.index')
+                ->with('alert', trans('vendors.notices.public.cancel-fail'));
+        }
+
+        
     }
 
     public function pending(Vendor $vendor)

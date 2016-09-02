@@ -11,4 +11,5 @@ return [
     'published' => 'Published',
     'suspended' => 'Suspended',
     'approved' => 'Approved',
+    'rejected' => 'Rejected',
 ];

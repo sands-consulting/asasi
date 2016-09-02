@@ -47,9 +47,15 @@ return [
 
     'notices' => [
         'public' => [
-            'saved' => 'Your application has been saved.',
+            'approved' => 'Your application already been approved. You cannot cancel your application.',
+            'canceled' => 'Your application has been canceled.',
+            'cancel-failed' => 'Your application has been changed. Please check current status of your application.',
             'completed' => 'Your application has been submitted.',
-            'no-vendor' => 'You must apply for vendor first.'
+            'complete-application' => 'Your application has been submitted for approval.',
+            'incomplete-application' => 'Your application is not complete. Please fill all input to submit your application.',
+            'no-vendor' => 'You must apply for vendor first.',
+            'rejected' => 'Your application has been rejected.',
+            'saved' => 'Your application has been saved.',
         ],
         'approved' => 'Vendor :name has been approved',
         'created'  => 'Vendor :name created',

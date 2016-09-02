@@ -148,11 +148,18 @@
 													->addClass('btn-block bg-blue')
 													->data_confirm(trans('app.confirmation'))
 													->formaction(route('vendors.complete-application', $vendor->id)) !!}
-											@else
+											@endif
+											@if($vendor->status == 'pending-approval')
 												{!! Former::submit(trans('vendors.buttons.cancel-application'))
 													->addClass('btn-block btn-danger')
 													->data_confirm(trans('app.confirmation'))
 													->formaction(route('vendors.cancel-application', $vendor->id)) !!}
+											@endif
+											@if($vendor->status == 'rejected')
+												{!! Former::submit(trans('vendors.buttons.create-application'))
+													->addClass('btn-block bg-blue')
+													->data_confirm(trans('app.confirmation'))
+													->formaction(route('vendors.create')) !!}
 											@endif
 											</div>
 										</div>

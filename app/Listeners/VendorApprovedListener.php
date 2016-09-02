@@ -28,6 +28,6 @@ class VendorApprovedListener
      */
     public function handle(VendorApproved $event)
     {
-        UserLogsRepository::log($event->user, 'approve', $event->item, $this->request->getClientIp());
+        // UserLogsRepository::log($event->user, 'approve', $event->item, $this->request->getClientIp());
     }
 }

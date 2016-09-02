@@ -33,8 +33,9 @@ function blank_icon($value=null)
 
 function is_complete_form($attributes)
 {
-    foreach ($attributes as $key => $value) {
-        if (empty($value) && $key != 'deleted_at') {
+    $ignore = ['created_at', 'updated_at', 'deleted_at'];
+    foreach ($attributes->getAttributes() as $key => $value) {
+        if (empty($value) && !in_array($key, $ignore)) {
             return false;
         }
     }

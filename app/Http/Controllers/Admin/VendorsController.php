@@ -116,7 +116,7 @@ class VendorsController extends Controller
         $inputs = $request->only(['redirect_to', 'remarks']);
         VendorsRepository::update($vendor, $inputs, ['status' => 'rejected']);
 
-        UserLogsRepository::log($event->user, 'Reject Vendor', $event->vendor, $this->request->getClientIp(), $inputs['remarks']);
+        UserLogsRepository::log(Auth::user(), 'Reject Vendor', $vendor, $request->getClientIp(), $inputs['remarks']);
 
         Event::fire(new VendorRejected(Auth::user(), $vendor, $inputs['remarks']));
         
