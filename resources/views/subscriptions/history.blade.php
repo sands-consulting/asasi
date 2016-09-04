@@ -12,7 +12,7 @@
 
     <div class="heading-elements">
         <div class="heading-btn-group">
-            <a href="{{ route('subscriptions.current') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-man text-indigo-400"></i> <span>Current</span></a>
+            <a href="{{ route('subscriptions.current') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-stack text-indigo-400"></i> <span>My Package</span></a>
             <a href="{{ route('subscriptions.index') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-stack3 text-indigo-400"></i> <span>Packages</span></a>
         </div>
     </div>

@@ -28,6 +28,7 @@
                 </div>
 
                 <div class="panel-body">
+                    @if ($subscription)
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -64,6 +65,13 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-control-static">{{ trans('subscriptions.views.current.no-subscription') }}</div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
     	</div>

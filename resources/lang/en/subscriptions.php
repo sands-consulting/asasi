@@ -56,7 +56,8 @@ return [
             'title' => 'Subscription Application Form',
         ],
         'current' => [
-            'title' => 'Your Subscription'
+            'title' => 'Your Subscription',
+            'no-subscription' => 'You have not subscribed to any package yet.'
         ],
         'history' => [ 
             'title' => 'Subscriptions history',
