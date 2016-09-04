@@ -203,12 +203,23 @@ class User extends Authenticatable
     /*
      * Helpers
      */
+    
     public function confirmEmail()
     {
         $this->verified = true;
         $this->token = null;
         $this->save();
     }
+
+    public function canBuy()
+    {
+        // Rules to allow buying notice
+        return $this->subscriptions()->active()->count() > 0;
+    }
+
+    /**
+     * Boot
+     */
 
     public static function boot()
     {

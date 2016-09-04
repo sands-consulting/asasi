@@ -38,8 +38,8 @@ class HomeController extends Controller
         }
 
         $type = $request->get('type', 1);
-        $notice_types = Notice::distinct('notice_type_id')->get();
-        $notices = Notice::whereStatus('active')->whereNoticeTypeId($type)->get();
+        $notice_types = Notice::published()->distinct('notice_type_id')->get();
+        $notices = Notice::published()->whereNoticeTypeId($type)->get();
 
         return view('home.index', compact('vendor', 'notices', 'notice_types', 'type'));
     }

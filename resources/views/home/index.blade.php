@@ -9,19 +9,101 @@
             <li class="active">{{ trans('subscriptions.views.history.title') }}</li>
         </ul> --}}
     </div>
-
-    {{-- <div class="heading-elements">
+	
+	@if(Auth::user() && Auth::user()->hasPermission('access:vendor'))
+    <div class="heading-elements">
         <div class="heading-btn-group">
-            <a href="{{ route('subscriptions.index') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-man text-indigo-400"></i> <span>Current</span></a>
-            <a href="#" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-calendar5 text-indigo-400"></i> <span>Packages</span></a>
+			<a href="{{ route('subscriptions.current') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-stack text-indigo-400"></i> <span>My Package</span></a>
         </div>
     </div>
-    <a class="heading-elements-toggle"><i class="icon-more"></i></a> --}}
+	@endif
 @stop
 
 @section('content')
 	<div class="row">
 		<div class="col-sm-8">
+			<div class="panel panel-flat">
+				<div class="panel-heading">
+					<h6 class="panel-title">{{ trans('home.views.index.panels.news.title') }}</h6>
+				</div>
+
+				<div class="panel-body">
+					<div class="content-group-xs" id="bullets"></div>
+
+					<ul class="media-list">
+						<li class="media">
+							<div class="media-body">
+								Stats for July, 6: 1938 orders, $4220 revenue
+								<div class="media-annotation">2 hours ago</div>
+							</div>
+
+							<div class="media-right">
+								<a href="#"><i class="icon-arrow-right13"></i></a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h6 class="panel-title">{{ trans('home.views.index.panels.vendors.title') }}</h6>
+				</div>
+
+				<div class="panel-body">
+					@if (!empty($vendor))
+						{!! Former::setOption('TwitterBootstrap3.labelWidths', array('large' => 5, 'small' => 5)) !!}
+						{!! Former::open_horizontal()->method('POST') !!}
+							{!! Former::populate($vendor) !!}
+							
+							{!! Former::text('name')
+								->label('vendors.attributes.name')
+								->readonly() !!}
+
+							{!! Former::text('created_at')
+								->label('vendors.attributes.created_at')
+								->forceValue($vendor->created_at->format('d-m-Y'))
+								->readonly() !!}
+
+							{!! Former::text('status')
+								->label('vendors.attributes.status')
+								->forceValue(trans("statuses.$vendor->status"))
+								->readonly() !!}
+							@if ($vendor->status != 'approved')
+								<div class="form-group">
+									<div class="col-sm-12">
+									@if ($vendor->status == 'draft')
+										{!! link_to_route('vendors.edit', trans('vendors.buttons.edit-application'), $vendor->id, ['class' => 'btn btn-default btn-block']) !!}
+										{!! Former::submit(trans('vendors.buttons.complete-application'))
+											->addClass('btn-block bg-blue')
+											->data_confirm(trans('app.confirmation'))
+											->formaction(route('vendors.complete-application', $vendor->id)) !!}
+									@endif
+									@if($vendor->status == 'pending-approval')
+										{!! Former::submit(trans('vendors.buttons.cancel-application'))
+											->addClass('btn-block btn-danger')
+											->data_confirm(trans('app.confirmation'))
+											->formaction(route('vendors.cancel-application', $vendor->id)) !!}
+									@endif
+									@if($vendor->status == 'rejected')
+										{!! link_to_route('vendors.create', trans('vendors.buttons.create-application'), [], ['class' => 'btn btn-default bg-blue btn-block']) !!}
+									@endif
+									</div>
+								</div>
+							@endif
+						@else
+							{!! link_to_route('vendors.create', trans('vendors.buttons.create-application')) !!}
+						@endif
+					{!! Former::close() !!}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h6 class="panel-title">Notice</h6>
@@ -60,17 +142,28 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($notices as $notice)
-									<tr>
-										<td>{{ link_to_route('admin.notices.show', $notice->organization->name, $notice->id) }}</td>
-										<td>
-											<p>{{ $notice->name }}</p>
-											<p><small>{{ str_limit($notice->description, 100) }}</small></p>
-										</td>
-										<td>{{ $notice->price }}</td>
-										<td><a href="{{ route('carts.add', $notice->id) }}" class="btn btn-sm" data-method="POST">Add To Cart</a></td>
-									</tr>
-									@endforeach
+									@if(!$notices->isEmpty())
+										@foreach($notices as $notice)
+										<tr>
+											<td>{{ link_to_route('admin.notices.show', $notice->organization->short_name, $notice->id) }}</td>
+											<td>
+												<p>{{ $notice->name }}</p>
+												<p><small>{{ str_limit($notice->description, 100) }}</small></p>
+											</td>
+											<td>{{ $notice->price }}</td>
+											<td>
+											@if(Auth::user()->canBuy())
+												<a href="{{ route('carts.add', $notice->id) }}" class="btn btn-sm" data-method="POST">Add To Cart</a></td>
+											@else
+												<i>Let vendor use cart and force to subscribe before paying</i>
+											@endif
+										</tr>
+										@endforeach
+									@else
+										<tr>
+											<td colspan="4">Sorry, there is no notice with this type published yet.</td>
+										</tr>
+									@endif
 								</tbody>
 							</table>
 						</div>
@@ -82,93 +175,6 @@
 							<i class="icon-arrow-right14 position-right"></i></a> 
 						</div>
 						<a class="heading-elements-toggle"><i class="icon-more"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="panel panel-flat">
-						<div class="panel-heading">
-							<h6 class="panel-title">{{ trans('home.views.index.panels.news.title') }}</h6>
-						</div>
-
-						<div class="panel-body">
-							<div class="content-group-xs" id="bullets"></div>
-
-							<ul class="media-list">
-								<li class="media">
-									<div class="media-body">
-										Stats for July, 6: 1938 orders, $4220 revenue
-										<div class="media-annotation">2 hours ago</div>
-									</div>
-
-									<div class="media-right">
-										<a href="#"><i class="icon-arrow-right13"></i></a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h6 class="panel-title">{{ trans('home.views.index.panels.vendors.title') }}</h6>
-						</div>
-
-						<div class="panel-body">
-							@if (!empty($vendor))
-								{!! Former::setOption('TwitterBootstrap3.labelWidths', array('large' => 5, 'small' => 5)) !!}
-								{!! Former::open_horizontal()->method('POST') !!}
-									{!! Former::populate($vendor) !!}
-									
-									{!! Former::text('name')
-										->label('vendors.attributes.name')
-										->readonly() !!}
-
-									{!! Former::text('created_at')
-										->label('vendors.attributes.created_at')
-										->forceValue($vendor->created_at->format('d-m-Y'))
-										->readonly() !!}
-
-									{!! Former::text('status')
-										->label('vendors.attributes.status')
-										->forceValue(trans("statuses.$vendor->status"))
-										->readonly() !!}
-									@if ($vendor->status != 'approved')
-										<div class="form-group">
-											<div class="col-sm-12">
-											@if ($vendor->status == 'draft')
-												{!! link_to_route('vendors.edit', trans('vendors.buttons.edit-application'), $vendor->id, ['class' => 'btn btn-default btn-block']) !!}
-												{!! Former::submit(trans('vendors.buttons.complete-application'))
-													->addClass('btn-block bg-blue')
-													->data_confirm(trans('app.confirmation'))
-													->formaction(route('vendors.complete-application', $vendor->id)) !!}
-											@endif
-											@if($vendor->status == 'pending-approval')
-												{!! Former::submit(trans('vendors.buttons.cancel-application'))
-													->addClass('btn-block btn-danger')
-													->data_confirm(trans('app.confirmation'))
-													->formaction(route('vendors.cancel-application', $vendor->id)) !!}
-											@endif
-											@if($vendor->status == 'rejected')
-												{!! Former::submit(trans('vendors.buttons.create-application'))
-													->addClass('btn-block bg-blue')
-													->data_confirm(trans('app.confirmation'))
-													->formaction(route('vendors.create')) !!}
-											@endif
-											</div>
-										</div>
-									@endif
-								@else
-									{!! link_to_route('vendors.create', trans('vendors.buttons.create-application')) !!}
-								@endif
-							{!! Former::close() !!}
-						</div>
 					</div>
 				</div>
 			</div>

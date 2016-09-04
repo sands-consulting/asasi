@@ -7,6 +7,8 @@ use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeRequest;
 use App\Repositories\NoticesRepository;
+use App\Repositories\UserLogsRepository;
+use Auth;
 use Illuminate\Http\Request;
 
 class NoticesController extends Controller
@@ -40,6 +42,7 @@ class NoticesController extends Controller
         );
 
         $notice  = NoticesRepository::create(new Notice, $inputs);
+        UserLogsRepository::log(Auth::user(), 'Create', $notice, $request->getClientIp());
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.created', ['name' => $notice->name]));
@@ -74,6 +77,7 @@ class NoticesController extends Controller
         );
         
         $notice  = NoticesRepository::update($notice, $inputs);
+        UserLogsRepository::log(Auth::user(), 'Update', $notice, $request->getClientIp());
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.updated', ['name' => $notice->name]));
@@ -82,6 +86,7 @@ class NoticesController extends Controller
     public function destroy(Notice $notice)
     {
         NoticesRepository::delete($notice);
+        UserLogsRepository::log(Auth::user(), 'Delete', $notice, $request->getClientIp());
         return redirect()
             ->route('admin.notices.index')
             ->with('notice', trans('notices.notices.deleted', ['name' => $notice->name]));
@@ -102,6 +107,7 @@ class NoticesController extends Controller
     public function publish(Request $request, Notice $notice)
     {
         NoticesRepository::publish($notice);
+        UserLogsRepository::log(Auth::user(), 'Publish', $notice, $request->getClientIp());
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.published', ['name' => $notice->name]));
@@ -110,8 +116,9 @@ class NoticesController extends Controller
     public function unpublish(Request $request, Notice $notice)
     {
         NoticesRepository::unpublish($notice);
+        UserLogsRepository::log(Auth::user(), 'Unpublish', $notice, $request->getClientIp());
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
-            ->with('notice', trans('notices.notices.not-publish', ['name' => $notice->name]));
+            ->with('notice', trans('notices.notices.unpublished', ['name' => $notice->name]));
     }
 }

@@ -2,31 +2,31 @@
 
 namespace App\Repositories;
 
-use App\Place;
+use App\Notice;
 use Sands\Asasi\Foundation\Repository\Exceptions\RepositoryException;
 
 class NoticesRepository extends BaseRepository 
 {
-	public static function publish(Place $place)
+	public static function publish(Notice $notice)
     {
-        if($place->status == 'published')
+        if($notice->status == 'published')
         {
-            throw new RepositoryException('Publishing ' . Place::class, $place);
+            throw new RepositoryException('Publishing ' . Notice::class, $notice);
         }
 
-        $place->status = 'published';
-        $place->save();
+        $notice->status = 'published';
+        $notice->save();
     }
 
-    public static function unpublish(Place $place)
+    public static function unpublish(Notice $notice)
     {
-        if($place->status == 'not-publish')
+        if($notice->status == 'not-publish')
         {
-            throw new RepositoryException('Unpublishing ' . Place::class, $place);
+            throw new RepositoryException('Unpublishing ' . Notice::class, $notice);
         }
 
-        $place->status = 'not-publish';
-        $place->save();
+        $notice->status = 'not-publish';
+        $notice->save();
     }
 
 }

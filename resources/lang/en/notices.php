@@ -29,11 +29,13 @@ return [
     ],
 
     'notices' => [
-        'created' => 'Notice :name created',
-        'updated' => 'Notice :name updated',
-        'deleted' => 'Notice :name deleted',
-        'activated' => 'Notice :name activated',
-        'deactivated' => 'Notice :name deactivated'
+        'created' => 'Notice :name created.',
+        'updated' => 'Notice :name updated.',
+        'deleted' => 'Notice :name deleted.',
+        'activated' => 'Notice :name activated.',
+        'deactivated' => 'Notice :name deactivated.',
+        'published' => 'Notice :name published.',
+        'unpublished' => 'Notice :name unpublished.',
     ],
     
     'views' => [

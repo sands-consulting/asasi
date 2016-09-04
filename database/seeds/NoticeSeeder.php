@@ -26,6 +26,8 @@ class NoticeSeeder extends Seeder
             ['notice:duplicate', 'Duplicate existing notice'],
             ['notice:activate', 'Activate existing notice'],
             ['notice:deactivate', 'Deactivate existing notice'],
+            ['notice:publish', 'Publish existing notice'],
+            ['notice:unpublish', 'Unpublish existing notice'],
             ['notice:delete', 'Delete existing notice'],
             ['notice:revisions', 'View notice revisions'],
             ['notice:logs', 'View notice logs']
@@ -54,7 +56,7 @@ class NoticeSeeder extends Seeder
                 'submission_at' => '2016-12-01',
                 'notice_type_id' => '1',
                 'organization_id' => '1',
-                'status' => 'active'
+                'status' => 'draft'
             ],
             [
                 'name' => 'Notice Quotation',
@@ -68,7 +70,7 @@ class NoticeSeeder extends Seeder
                 'submission_at' => '2016-12-01',
                 'notice_type_id' => '2',
                 'organization_id' => '1',
-                'status' => 'active'
+                'status' => 'draft'
             ],
         ];
 

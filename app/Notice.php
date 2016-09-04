@@ -19,6 +19,7 @@ class Notice extends Model
         'name',
         'number',
         'description',
+        'rules',
         'price',
         'published_at',
         'expired_at',
@@ -97,7 +98,7 @@ class Notice extends Model
 
     public function canUnpublish()
     {
-        return $this->status != 'not published' && $this->status != 'cancelled';
+        return $this->status == 'published';
     }
 
     public function canCancel()
@@ -119,6 +120,11 @@ class Notice extends Model
         return $this->belongsTo(Organization::class, 'organization_id');
     }
 
+    public function activities()
+    {
+        return $this->hasMany(NoticeActivity::class);
+    }
+
     /*
      * Helpers
      */
@@ -126,5 +132,10 @@ class Notice extends Model
     public function isExpired()
     {
         return Carbon::today()->toDateString() >= $this->expired_at;
+    }
+
+    public static function published()
+    {
+        return static::where('status', 'published');
     }
 }

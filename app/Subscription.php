@@ -68,6 +68,16 @@ class Subscription extends Authenticatable
         }
     }
 
+    /*
+     * Query scopes
+     */
+    
+    public function scopeActive($query)
+    {
+        // Fixme: find better solutions.
+        return $query->where($this->getTable() . '.status', 'active');
+    }
+
     /* 
      * State controls 
      */
