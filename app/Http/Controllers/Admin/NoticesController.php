@@ -37,8 +37,7 @@ class NoticesController extends Controller
             'submission_address',
             'notice_type_id',
             'notice_category_id',
-            'organization_id',
-            'status'
+            'organization_id'
         );
 
         $notice  = NoticesRepository::create(new Notice, $inputs);
@@ -55,7 +54,10 @@ class NoticesController extends Controller
 
     public function edit(Notice $notice)
     {
-        return view('admin.notices.edit', compact('notice'));
+        $requirementTechnicals = $notice->requirementTechnicals;
+        $requirementCommercials = $notice->requirementCommercials;
+        $noticeEvents = $notice->events;
+        return view('admin.notices.edit', compact('notice', 'noticeEvents', 'requirementCommercials', 'requirementTechnicals'));
     }
 
     public function update(NoticeRequest $request, Notice $notice)

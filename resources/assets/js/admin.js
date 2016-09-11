@@ -1,3 +1,10 @@
+$(window).load(function() {
+    $('.sk-fading-circle').hide();
+    $('.content').fadeIn('slow',function() {
+      $(this).css('visibility', 'visible');
+    })
+});
+
 $(function() {
 
 	Vue.config.debug = true;
@@ -57,5 +64,13 @@ $(function() {
       }
 		}
   });
+});
 
+// Single picker
+$('.daterange-single').daterangepicker({ 
+    singleDatePicker: true,
+    locale: {
+      cancelLabel: 'Clear',
+      format: 'YYYY-MM-DD'
+    }
 });

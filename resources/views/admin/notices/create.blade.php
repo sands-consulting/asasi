@@ -17,17 +17,26 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-    <div class="panel-body">
-        {!! Former::open_vertical(route('admin.notices.index'))->method('POST') !!}
-            @include('admin.notices.form')
-            <div class="form-group">
-                <div class="col-lg-10 col-sm-8 col-lg-offset-2 col-sm-offset-4">
-                    {!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
-                    {!! link_to_route('admin.notices.index', trans('actions.cancel'), [], ['class' => 'btn btn-default']) !!}
-                </div>
-            </div>
-        {!! Former::close() !!}
-    </div>
+<div class="panel panel-white">
+    {!! Former::open_vertical(route('admin.notices.index'))
+        ->id('notice-form')
+        ->method('POST')
+        ->addClass('stepy-validation') !!}
+
+        @include('admin.notices.form')
+
+        @include('admin.notices.form-requirement-commercials')
+
+        @include('admin.notices.form-requirement-technicals')
+
+        @include('admin.notices.form-notice-events')
+
+        @include('admin.notices.form-others')
+
+        {!! Former::submit(trans('actions.save'))
+            ->addClass('bg-blue stepy-finish')
+            ->data_confirm(trans('app.confirmation')) !!}
+
+    {!! Former::close() !!}
 </div>
 @endsection

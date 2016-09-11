@@ -205,6 +205,9 @@ return [
         App\Providers\Modules\VendorsServiceProvider::class,
         App\Providers\Modules\VendorTypesProvider::class,
         App\Providers\Modules\CartsServiceProvider::class,
+        App\Providers\Modules\CommercialRequirementsServiceProvider::class,
+        App\Providers\Modules\RequirementTechnicalsServiceProvider::class,
+        App\Providers\Modules\NoticeEventsServiceProvider::class,
     ],
 
     /*

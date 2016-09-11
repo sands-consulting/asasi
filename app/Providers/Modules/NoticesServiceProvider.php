@@ -46,5 +46,13 @@ class NoticesServiceProvider extends ServiceProvider
                 $router->resource('notices', 'NoticesController');
             });
         });
+
+        // api routing
+        app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
+            $router->post('notices/save', [
+                'as' => 'notices.save',
+                'uses' => 'NoticesController@save'
+            ]);
+        });
     }
 }

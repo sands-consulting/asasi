@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use App\Libraries\Traits\DateAccessorTrait;
 
-class NoticeEvent extends Model
+class RequirementCommercial extends Model
 {
     use RevisionableTrait,
         DateAccessorTrait,
@@ -16,13 +16,10 @@ class NoticeEvent extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'name',
-        'event_at',
-        'location',
-        'required',
+        'title',
+        'mandatory',
+        'require_file',
         'notice_id',
-        'notice_event_type_id',
-        'status',
     ];
 
     protected $attributes = [
@@ -30,20 +27,16 @@ class NoticeEvent extends Model
     ];
 
     protected $searchable = [
-        'name',
-        'event_at',
-        'location',
-        'status',
+        'title',
+        'mandatory',
+        'require_file'
     ];
 
     protected $sortable = [
-        'name',
-        'event_at',
-        'location',
-        'status',
+        'title',
+        'mandatory',
+        'require_file'
     ];
-
-    protected $dates = [];
 
     /*
      * Search scopes
@@ -81,39 +74,25 @@ class NoticeEvent extends Model
      */
     public function canActivate()
     {
-        return $this->status != 'active' && $this->status != 'cancelled';
+        return $this->status != 'active';
     }
 
-    public function canInactivate()
+    public function canDeactivate()
     {
-        return $this->status != 'inactive' && $this->status != 'cancelled';
-    }
-
-    public function canCancel()
-    {
-        return $this->status != 'cancelled';
+        return $this->status == 'active';
     }
     
     /*
      * Relationship
      */
 
-    public function activities()
+    public function notice()
     {
-        return $this->morphMany(NoticeActivity::class, 'activitable');
+        return $this->belongsTo(Notice::class);
     }
 
-    public function type()
-    {
-        return $this->belongsTo(NoticeEventType::class, 'notice_event_type_id');
-    }
-
-    /**
+    /*
      * Helpers
      */
-    
-    public static function options()
-    {
-        return static::lists('name', 'id');
-    }
+
 }

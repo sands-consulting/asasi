@@ -125,6 +125,21 @@ class Notice extends Model
         return $this->hasMany(NoticeActivity::class);
     }
 
+    public function requirementCommercials()
+    {
+        return $this->hasMany(RequirementCommercial::class);
+    }
+
+    public function requirementTechnicals()
+    {
+        return $this->hasMany(RequirementTechnical::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(NoticeEvent::class);
+    }
+
     /*
      * Helpers
      */

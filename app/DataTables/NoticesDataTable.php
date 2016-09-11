@@ -24,7 +24,7 @@ class NoticesDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::where('status', 'active');
+        $query = Notice::whereNotNull('name');
 
         if($this->datatables->request->input('q', null))
         {

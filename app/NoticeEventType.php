@@ -79,4 +79,21 @@ class NoticeEventType extends Model
     {
         return $this->status != 'inactive';
     }
+
+    /*
+     * Relationship
+     */
+    public function noticeEvents()
+    {
+        return $this->hasMany(NoticeEventType::class);
+    }
+
+    /*
+     * Helpers
+     */
+    
+    public static function options()
+    {
+        return static::lists('name', 'id');
+    }
 }

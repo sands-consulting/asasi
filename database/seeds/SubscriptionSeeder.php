@@ -37,6 +37,9 @@ class SubscriptionSeeder extends Seeder
             ]);
         }
 
+        // Assign admin role to all permission.
+        App\Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
+
         SubscriptionsRepository::create(new Subscription, [
             'started_at' => '2016-08-01',
             'expired_at' => '2017-08-01',

@@ -53,11 +53,11 @@ class NoticesPolicy extends BasePolicy
 
     public function publish(Notice $notice)
     {
-        return $this->user->hasPermission('notice:publish') && $notice->canActivate();
+        return $this->user->hasPermission('notice:publish') && $notice->canPublish();
     }
 
     public function unpublish(Notice $notice)
     {
-        return $this->user->hasPermission('notice:unpublish') && $notice->canDeactivate();
+        return $this->user->hasPermission('notice:unpublish') && $notice->canUnpublish();
     }
 }

@@ -15,10 +15,17 @@ class CreateRequirementCommercialsTable extends Migration
         Schema::create('requirement_commercials', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->boolean('mandatory');
-            $table->boolean('require_file');
+            $table->boolean('mandatory')->default(0);
+            $table->boolean('require_file')->default(0);
+            $table->unsignedInteger('notice_id');
+            $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
+
+            $table->foreign('notice_id')
+                ->references('id')
+                ->on('notices')
+                ->onDelete('cascade');
         });
     }
 
@@ -29,6 +36,8 @@ class CreateRequirementCommercialsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('requirement_commercials');
+        Schema::enableForeignKeyConstraints();
     }
 }

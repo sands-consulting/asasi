@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use App\Libraries\Traits\DateAccessorTrait;
 
-class NoticeEvent extends Model
+class NoticeActivity extends Model
 {
     use RevisionableTrait,
         DateAccessorTrait,
@@ -17,12 +17,11 @@ class NoticeEvent extends Model
 
     protected $fillable = [
         'name',
-        'event_at',
-        'location',
-        'required',
+        'activitable_type',
+        'activitable_id',
         'notice_id',
-        'notice_event_type_id',
-        'status',
+        'vendor_id',
+        'status'
     ];
 
     protected $attributes = [
@@ -31,15 +30,19 @@ class NoticeEvent extends Model
 
     protected $searchable = [
         'name',
-        'event_at',
-        'location',
+        'activitable_type',
+        'activitable_id',
+        'notice_id',
+        'vendor_id',
         'status',
     ];
 
     protected $sortable = [
         'name',
-        'event_at',
-        'location',
+        'activitable_type',
+        'activitable_id',
+        'notice_id',
+        'vendor_id',
         'status',
     ];
 
@@ -76,44 +79,17 @@ class NoticeEvent extends Model
         }
     }
 
-    /* 
-     * State controls 
-     */
-    public function canActivate()
-    {
-        return $this->status != 'active' && $this->status != 'cancelled';
-    }
-
-    public function canInactivate()
-    {
-        return $this->status != 'inactive' && $this->status != 'cancelled';
-    }
-
-    public function canCancel()
-    {
-        return $this->status != 'cancelled';
-    }
-    
-    /*
+    /**
      * Relationship
      */
-
-    public function activities()
-    {
-        return $this->morphMany(NoticeActivity::class, 'activitable');
-    }
-
-    public function type()
-    {
-        return $this->belongsTo(NoticeEventType::class, 'notice_event_type_id');
-    }
-
-    /**
-     * Helpers
-     */
     
-    public static function options()
+    public function activitable()
     {
-        return static::lists('name', 'id');
+        return $this->morphTo();
+    }
+
+    public function notice()
+    {
+        return $this->belongsTo(Notice::class);
     }
 }
