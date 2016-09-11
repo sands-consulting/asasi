@@ -45,7 +45,6 @@
     "datatables.net-buttons-dt": "^1.2.2",
     "stepy": "*",
     "moment": "^2.14.1",
-    "x-editable": "^1.5.1",
-    "smalot-bootstrap-datetimepicker": "^2.3.11"
+    "x-editable": "^1.5.1"
   }
 }
