@@ -34,7 +34,9 @@
 
         @include('admin.notices.form-notice-events')
 
-        @include('admin.notices.form-others')
+        @include('admin.notices.form-mof')
+        
+        @include('admin.notices.form-cidb')
         
         {!! Former::submit(trans('actions.save'))
             ->addClass('bg-blue stepy-finish')

@@ -28,6 +28,7 @@ $(function() {
 
     // Initialize wizard
     $(".stepy-validation").stepy({
+        titleClick: true,
         validate: true,
         block: true,
         back: function(index) {
@@ -286,5 +287,21 @@ $(function() {
     $('.myeditable-switchery').on('shown', function (e, editable) {
         var elem = document.querySelector('.switcher-single');
         var init = new Switchery(elem);
+    });
+
+    // Field Codes
+    $(document).on('click', '.btn-add-rule', function() {
+        var template = $(this).data('template');
+        var cachedTemplate = cachedTemplate || $('#'+template).html();
+        var clone = $(cachedTemplate).clone();
+        var rules = $(this).parents('.row').siblings('.rules:last');
+        var btn_add = $(this).parent().find('.btn-add-rule');
+        var btn_remove = clone.find('.btn-remove-rule');
+
+        rules.after(clone);
+
+    })
+    $(document).on('click', '.btn-remove-rule', function() {
+        $(this).parents('.rules').remove();
     });
 });
