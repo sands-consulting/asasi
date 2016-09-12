@@ -20,7 +20,7 @@
             <div class="col-sm-8 col-sm-offset-1"">
                 <button type="button" class="btn btn-default btn-add-rule" data-template="mof-condition-and">And</button>
                 <button type="button" class="btn btn-default btn-add-rule" data-template="mof-condition-or">Or</button>
-                <button type="button" class="btn btn-success btn-add-rule" data-confirm="{{ trans('app.confirmation') }}">End</button>
+                <button type="button" class="btn btn-success btn-save-rule" data-confirm="{{ trans('app.confirmation') }}">End</button>
             </div>
         </div>
     </div>
@@ -67,5 +67,11 @@
                 </div>
             </div>
         </div>
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+        });
     </script>
 @stop
