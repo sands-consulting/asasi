@@ -45,6 +45,13 @@ class NoticesServiceProvider extends ServiceProvider
                 ]);
                 $router->resource('notices', 'NoticesController');
             });
+
+            $router->get('notices/my-notices', [
+                'as' => 'notices.my-notices',
+                'uses' => 'NoticesController@myNotices'
+            ]);
+
+            $router->resource('notices', 'NoticesController', ['only' => ['index']]);
         });
 
         // api routing

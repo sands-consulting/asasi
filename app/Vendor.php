@@ -132,6 +132,11 @@ class Vendor extends Authenticatable
     {
         return $this->belongsTo(Place::class, 'address_country_id');
     }
+
+    public function notices()
+    {
+        return $this->belongsToMany(Notice::class);
+    }
     
     public static function boot()
     {

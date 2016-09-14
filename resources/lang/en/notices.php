@@ -26,6 +26,7 @@ return [
         'create' => 'Create New Notice',
         'edit' => 'Edit Notice',
         'all' => 'All Notices',
+        'my_notices' => 'My Notices',
     ],
 
     'notices' => [

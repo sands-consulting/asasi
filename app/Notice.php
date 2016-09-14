@@ -140,6 +140,11 @@ class Notice extends Model
         return $this->hasMany(NoticeEvent::class);
     }
 
+    public function vendors()
+    {
+        return $this->hasMany(Vendor::class);
+    }
+
     /*
      * Helpers
      */
