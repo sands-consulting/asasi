@@ -35,9 +35,7 @@
 
         @include('admin.notices.form-cidb')
 
-        {!! Former::submit(trans('actions.save'))
-            ->addClass('bg-blue stepy-finish')
-            ->data_confirm(trans('app.confirmation')) !!}
+        <a href="{{ route('admin.notices.index') }}" class="btn bg-blue stepy-finish">{{ trans('actions.finish') }}</a>
 
     {!! Former::close() !!}
 </div>
