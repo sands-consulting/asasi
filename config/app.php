@@ -208,6 +208,7 @@ return [
         App\Providers\Modules\CommercialRequirementsServiceProvider::class,
         App\Providers\Modules\RequirementTechnicalsServiceProvider::class,
         App\Providers\Modules\NoticeEventsServiceProvider::class,
+        App\Providers\Modules\RulesServiceProvider::class,
     ],
 
     /*

@@ -62,14 +62,14 @@ $(function() {
                     var rulesInput = form.find('input[name^="rule"]')
                     $.post('/api/rules/store', rulesInput)
                         .done(function(data) {
-                            if (data.id && !$('#ruleId').val()) {
-                                $('<input>').attr({
-                                    type: 'hidden',
-                                    id: 'ruleId',
-                                    name: 'id',
-                                    value: data.id
-                                }).appendTo(form);
-                            }
+                            // if (data.id && !$('#ruleId').val()) {
+                            //     $('<input>').attr({
+                            //         type: 'hidden',
+                            //         id: 'ruleId',
+                            //         name: 'id',
+                            //         value: data.id
+                            //     }).appendTo(form);
+                            // }
                             return true;
                         });
                     break;
