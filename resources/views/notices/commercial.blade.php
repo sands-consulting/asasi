@@ -22,13 +22,13 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            {!! Former::open() !!}
+            {!! Former::open_for_files(route('notices.store-commercial', $notice->id)) !!}
             <div class="panel">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-lg">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th width="5%">#</th>
                                 <th>Title</th>
                                 <th width="30%"></th>
                             </tr>
@@ -42,11 +42,11 @@
                                     <td>{{ $requirement->title }}</td>
                                     <td>
                                         @if($requirement->require_file)
-                                            {!! Former::file('requirement_id['. $requirement->id .']')
+                                            {!! Former::file('requirements['. $requirement->id .']')
                                                 ->label(false)
                                                 ->addClass('file-styled') !!}
                                         @else
-                                            <input type="checkbox" class="styled" checked="checked">
+                                            <input type="checkbox" name="requirements[{{ $requirement->id }}]" class="styled" value="1" required>
                                         @endif
                                     </td>
                                 </tr>
@@ -56,7 +56,7 @@
                                     <td>{{ $i }}</td>
                                     <td>Price</td>
                                     <td>
-                                        {!! Former::text('price['. $requirement->id .']')
+                                        {!! Former::text('price')
                                             ->label(false)
                                             ->prepend('RM')
                                             ->required() !!}
@@ -66,12 +66,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-footer panel-footer-condensed">
+                <div class="panel-footer">
                     <div class="heading-elements">
-                        <a href="#" class="heading-text text-default pull-right">Save
-                        <i class="icon-arrow-right14 position-right"></i></a href="#">
+                        <button type="submit" class="btn bg-blue pull-right">Save</button>
                     </div>
-                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
                 </div>
             </div>
             {!! Former::close() !!}

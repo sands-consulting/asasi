@@ -58,9 +58,17 @@ class NoticesServiceProvider extends ServiceProvider
                 'as' => 'notices.commercial',
                 'uses' => 'NoticesController@commercial'
             ]);
+            $router->post('notices/{notices}/store-commercial/', [
+                'as' => 'notices.store-commercial',
+                'uses' => 'NoticesController@storeCommercial'
+            ]);
             $router->post('notices/{notices}/technical/', [
                 'as' => 'notices.technical',
                 'uses' => 'NoticesController@technical'
+            ]);
+            $router->post('notices/{notices}/store-technical/', [
+                'as' => 'notices.store-technical',
+                'uses' => 'NoticesController@storeTechnical'
             ]);
             
             $router->resource('notices', 'NoticesController', ['only' => ['index']]);
