@@ -28,4 +28,21 @@ class NoticesController extends Controller
 
         return view('notices.my-notices', compact('myNotices'));
     }
+
+    public function submission(Notice $notice)
+    {
+        return view('notices.submission', compact('notice'));
+    }
+
+    public function commercial(Notice $notice)
+    {
+        $requirements = $notice->requirementCommercials;
+        return view('notices.commercial', compact('requirements'));
+    }
+
+    public function technical(Notice $notice)
+    {
+        $requirements = $notice->requirementTechnicals;
+        return view('notices.technical', compact('requirements'));
+    }
 }

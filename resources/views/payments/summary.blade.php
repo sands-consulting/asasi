@@ -41,7 +41,9 @@
                                         <td>{{ $notice->number }}</td>
                                         <td>{{ $notice->description }}</td>
                                         <td>{{ $notice->organization->name }}</td>
-                                        <td></td>
+                                        <td>
+                                            {{-- <a href="{{ route('noy.create') }}" class="btn btn-link">{{ trans('actions.proceed') }}</a> --}}
+                                        </td>
                                     </tr>
                                     <?php $i++; ?>
                                     @endforeach
@@ -50,7 +52,7 @@
                         </table>
                         <div class="panel-footer">
                             <div class="heading-elements">
-                                <a href="{{ route('payments.endpoint') }}" class="heading-text text-default pull-right" data-method="POST">{{ trans('notices.buttons.my_notices') }} <i class="icon-arrow-right14 position-right"></i></a> 
+                                <a href="{{ route('notices.my-notices') }}" class="heading-text text-default pull-right" data-method="POST">{{ trans('notices.buttons.my_notices') }} <i class="icon-arrow-right14 position-right"></i></a> 
                             </div>
                             <a class="heading-elements-toggle"><i class="icon-more"></i></a>
                         </div>

@@ -14,10 +14,13 @@ return [
 	'login' => 'Login',
 	'logout' => 'Logout',
 	'pay' => 'Pay',
+	'proceed' => 'Proceed',
 	'publish' => 'Publish',
 	'save' => 'Save',
 	'search' => 'Search',
 	'suspend' => 'Suspend',
 	'unpublish' => 'Unpublish',
 	'view' => 'View',
+	'show' => 'Show',
+	'submit' => 'Submit',
 ];

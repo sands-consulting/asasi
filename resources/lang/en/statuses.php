@@ -13,4 +13,6 @@ return [
     'suspended' => 'Suspended',
     'approved' => 'Approved',
     'rejected' => 'Rejected',
+    'completed' => 'Completed',
+    'incomplete' => 'Incomplete',
 ];

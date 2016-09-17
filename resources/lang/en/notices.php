@@ -56,6 +56,18 @@ return [
         ],
         'revisions' => [
 
-        ]
+        ],
+        'my_notices' => [
+            'title' => 'My Notices'
+        ],
+        'submission' => [
+            'title' => 'Submission'
+        ],
+        'commercial' => [
+            'title' => 'Commercial Requirements'
+        ],
+        'technical' => [
+            'title' => 'Technical Requirements'
+        ],
     ],
 ];
