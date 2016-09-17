@@ -129,8 +129,10 @@ class AsasiMigrations extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('path');
+            $table->string('url');
             $table->string('type');
             $table->integer('size');
+            $table->string('mime_type');
             $table->string('uploadable_type');
             $table->unsignedInteger('uploadable_id');
             $table->unsignedInteger('user_id');

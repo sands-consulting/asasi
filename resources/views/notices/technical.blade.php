@@ -43,7 +43,7 @@
                                             ->label(false)
                                             ->addClass('file-input') }}
                                     @else
-                                        checkbox
+                                        <input type="checkbox" class="styled">
                                     @endif
                                 </td>
                             </tr>

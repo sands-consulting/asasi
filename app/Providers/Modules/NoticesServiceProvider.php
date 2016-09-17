@@ -62,6 +62,7 @@ class NoticesServiceProvider extends ServiceProvider
                 'as' => 'notices.technical',
                 'uses' => 'NoticesController@technical'
             ]);
+            
             $router->resource('notices', 'NoticesController', ['only' => ['index']]);
         });
 

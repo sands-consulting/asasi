@@ -33,6 +33,7 @@ elixir(function(mix) {
         '../vendor/pnotify/dist/pnotify.js',
         '../vendor/legitripple/js/ripple.js',
         '../vendor/select2/dist/js/select2.js',
+        'vendor/uniform.min.js',
         'vendor/buttons.server-side.js',
         'vendor/limitless-four.js',
         'vendor/pnotify.js',

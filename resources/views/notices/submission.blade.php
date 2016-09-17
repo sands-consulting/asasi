@@ -96,32 +96,40 @@
                     </div>
                 </div>
             </fieldset>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <table class="table table-striped media-library">
-                    @if ($notice->requirementCommercials)
-                    <tr>
-                        <td>
-                            <i class="icon-coins"></i>
-                        </td>
-                        <td>Commercials</td>
-                        <td width="10%"><a href="{{ route('notices.commercial', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a></td>
-                    </tr>
-                    @endif
-                    @if ($notice->requirementTechnicals)
-                    <tr>
-                        <td>
-                            <i class="icon-wrench2"></i>
-                        </td>
-                        <td>Technicals</td>
-                        <td><a href="{{ route('notices.technical', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a></td>
-                    </tr>
-                    @endif
-                </table>
-            </div>
+            <fieldset>
+                <legend class="text-semibold">
+                    <i class="icon-file-text2 position-left"></i>
+                    Notice Requirements
+                </legend>
+                
+                @if ($notice->requirementCommercials)
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="icon-coins"></i> Commercials
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="label label-danger">Incomplete</span>
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <a href="{{ route('notices.commercial', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>  
+                    </div>                    
+                </div>
+                <br>
+                @endif
+                @if ($notice->requirementTechnicals)
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="icon-coins"></i> Technicals
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="label label-danger">Incomplete</span>
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <a href="{{ route('notices.technical', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>
+                    </div>                    
+                </div>
+                @endif
+            </fieldset>
         </div>
     </div>
 @stop

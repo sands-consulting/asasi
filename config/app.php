@@ -181,6 +181,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Sands\Uploadable\UploadableServiceProvider::class,
 
         /*
          * Asasi Core ServiceProviders

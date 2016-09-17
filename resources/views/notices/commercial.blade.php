@@ -22,55 +22,59 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
+            {!! Former::open() !!}
             <div class="panel">
-                <table class="table table-striped table-bordered table-lg">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (!$requirements->isEmpty())
-                            <?php $i = 1; ?>
-                            @foreach($requirements as $requirement)
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-lg">
+                        <thead>
                             <tr>
-                                <td>{{ $i }}</td>
-                                <td>{{ $requirement->title }}</td>
-                                <td>
-                                    @if($requirement->require_file)
-                                        {!! Former::file('requirement['. $requirement->id .']')
+                                <th>#</th>
+                                <th>Title</th>
+                                <th width="30%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!$requirements->isEmpty())
+                                <?php $i = 1; ?>
+                                @foreach($requirements as $requirement)
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $requirement->title }}</td>
+                                    <td>
+                                        @if($requirement->require_file)
+                                            {!! Former::file('requirement_id['. $requirement->id .']')
+                                                ->label(false)
+                                                ->addClass('file-styled') !!}
+                                        @else
+                                            <input type="checkbox" class="styled" checked="checked">
+                                        @endif
+                                    </td>
+                                </tr>
+                                <?php $i++; ?>
+                                @endforeach
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>Price</td>
+                                    <td>
+                                        {!! Former::text('price['. $requirement->id .']')
                                             ->label(false)
-                                            ->addClass('file-input') !!}
-                                    @else
-                                        <input type="checkbox" class="styled" checked="checked">
-                                    @endif
-                                </td>
-                            </tr>
-                            <?php $i++; ?>
-                            @endforeach
-                            <tr>
-                                <td>{{ $i }}</td>
-                                <td>Price</td>
-                                <td>
-                                    {!! Former::text('price['. $requirement->id .']')
-                                        ->label(false)
-                                        ->prepend('RM')
-                                        ->required() !!}
-                                </td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
+                                            ->prepend('RM')
+                                            ->required() !!}
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
                 <div class="panel-footer panel-footer-condensed">
                     <div class="heading-elements">
-                        <button class="heading-text text-default pull-right">Save
-                        <i class="icon-arrow-right14 position-right"></button></a> 
+                        <a href="#" class="heading-text text-default pull-right">Save
+                        <i class="icon-arrow-right14 position-right"></i></a href="#">
                     </div>
                     <a class="heading-elements-toggle"><i class="icon-more"></i></a>
                 </div>
             </div>
+            {!! Former::close() !!}
         </div>
     </div>
 @stop
