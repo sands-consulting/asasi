@@ -9,8 +9,8 @@ class SubmissionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('uploadable')->registerFilter('custom-save', CustomSave::class);
-        app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\NoticesPolicy');
+        // app('uploadable')->registerFilter('custom-save', CustomSave::class);
+        app('policy')->register('App\Http\Controllers\Admin\SubmissionsController', 'App\Policies\SubmissionsPolicy');
     }
 
     /**
@@ -22,22 +22,30 @@ class SubmissionServiceProvider extends ServiceProvider
     {
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('notices', 'App\Notice');
+            $router->model('submissions', 'App\Submission');
 
             // admin
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->resource('notices', 'NoticesController');
+                $router->get('submissions/{notices}/lists', [
+                    'as' => 'admin.submissions.lists',
+                    'uses' => 'SubmissionsController@lists'
+                ]);
+                $router->get('submissions/{submissions}/evaluate', [
+                    'as' => 'admin.submissions.evaluate',
+                    'uses' => 'SubmissionsController@evaluate'
+                ]);
+                $router->resource('submissions', 'SubmissionsController');
             });
 
             // public
-            $router->resource('notices', 'NoticesController', ['only' => ['index']]);
+            $router->resource('submissions', 'SubmissionsController', ['only' => ['index']]);
         });
 
         // api routing
         app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
-            $router->post('notices/save', [
-                'as' => 'notices.save',
-                'uses' => 'NoticesController@save'
+            $router->post('submissions/save', [
+                'as' => 'submissions.save',
+                'uses' => 'SubmissionsController@save'
             ]);
         });
     }

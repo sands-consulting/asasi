@@ -4,10 +4,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
+use App\Libraries\Traits\DateAccessorTrait;
 
 class Submission extends Model
 {
     use RevisionableTrait,
+        DateAccessorTrait,
         SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
@@ -95,6 +97,11 @@ class Submission extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function details()
+    {
+        return $this->hasMany(SubmissionDetail::class);
+    }
+    
     /**
      * Helpers
      */

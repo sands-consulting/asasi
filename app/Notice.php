@@ -145,6 +145,11 @@ class Notice extends Model
         return $this->hasMany(Vendor::class);
     }
 
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
     /*
      * Helpers
      */

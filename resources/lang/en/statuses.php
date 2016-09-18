@@ -7,6 +7,7 @@ return [
 	'expired' => 'Expired',
     'inactive' => 'Inactive',
     'not-published' => 'Not Published',
+    'pending' => 'Pending',
     'pending-approval' => 'Pending Approval',
     'published' => 'Published',
     'not-publish' => 'Not Published',

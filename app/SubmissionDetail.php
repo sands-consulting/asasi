@@ -76,6 +76,14 @@ class SubmissionDetail extends Model
         return $this->belongsTo(Submission::class);
     }
 
+    public function requirement()
+    {
+        if ($this->submission->type == 'commercial')
+            return $this->belongsTo(RequirementCommercial::class, 'requirement_id');
+        else
+            return $this->belongsTo(RequirementTechnical::class, 'requirement_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
