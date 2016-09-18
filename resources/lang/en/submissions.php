@@ -4,22 +4,13 @@ return [
     'title' => 'Submission',
 
     'attributes' => [
-        'name' => 'Name',
-        'number' => 'Number',
-        'description' => 'Description',
-        'rules' => 'Rules',
-        'price' => 'Price',
-        'published_at' => 'Published At',
-        'expired_at' => 'Expired At',
-        'purchased_at' => 'Purchased At',
-        'submission_at' => 'Submission At',
-        'submission_address' => 'Submission Address',
-        'notice_type_id' => 'Type',
-        'notice_category_id' => 'Category',
-        'organization_id' => 'Organization',
+        'type' => 'Type',
+        'notice_id' => 'Notice',
+        'vendor_id' => 'Vendor',
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
+        'deleted_at' => 'Deleted At',
     ],
 
     'buttons' => [
@@ -66,8 +57,8 @@ return [
         'revisions' => [
 
         ],
-        'my_notices' => [
-            'title' => 'My Submissions'
+        'evaluate' => [
+            'title' => 'Evaluate : :submission'
         ],
         'submission' => [
             'title' => 'Submission'
