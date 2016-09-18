@@ -22,36 +22,53 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
+            {!! Former::open_for_files(route('notices.store-technical', $notice->id)) !!}
             <div class="panel">
-                <table class="table table-striped table-bordered table-lg">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (!$requirements->isEmpty())
-                            @foreach($requirements as $requirement)
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-lg">
+                        <thead>
                             <tr>
-                                <td>#</td>
-                                <td>{{ $requirement->title }}</td>
-                                <td>
-                                    @if($requirement->require_file)
-                                        {{ Former::file($requirement->id)
-                                            ->label(false)
-                                            ->addClass('file-input') }}
-                                    @else
-                                        <input type="checkbox" class="styled">
-                                    @endif
-                                </td>
+                                <th width="5%">#</th>
+                                <th>Title</th>
+                                <th width="30%"></th>
                             </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @if (!$requirements->isEmpty())
+                                <?php $i = 1; ?>
+                                @foreach($requirements as $requirement)
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $requirement->title }}</td>
+                                    <td>
+                                        @if($requirement->require_file)
+                                            {!! Former::file('file['. $requirement->id .']')
+                                                ->label(false)
+                                                ->addClass('file-styled') !!}
+
+                                        @else
+                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" required>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <?php $i++; ?>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="heading-elements">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="{{ route('notices.submission', $notice->id) }}" class="btn btn-default ml-15">Back</a>
+                                <button type="submit" class="btn bg-blue pull-right">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {!! Former::close() !!}
         </div>
     </div>
 @stop

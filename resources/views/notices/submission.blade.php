@@ -119,7 +119,7 @@
                 @if ($notice->requirementTechnicals)
                 <div class="row">
                     <div class="col-sm-6">
-                        <i class="icon-coins"></i> Technicals
+                        <i class="icon-wrench2"></i> Technicals
                     </div>
                     <div class="col-sm-2">
                         <span class="label label-danger">Incomplete</span>

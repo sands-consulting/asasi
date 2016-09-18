@@ -17,7 +17,6 @@ class CreateSubmissionsTable extends Migration
             $table->string('type');
             $table->unsignedInteger('notice_id');
             $table->unsignedInteger('vendor_id');
-            $table->unsignedInteger('user_id');
             $table->string('status')->index();
             $table->nullableTimestamps();
             $table->softDeletes();
@@ -31,6 +30,23 @@ class CreateSubmissionsTable extends Migration
             $table->foreign('vendor_id')
                 ->references('id')
                 ->on('vendors')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('submission_details', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('type')->nullable();
+            $table->string('value')->nullable();
+            $table->unsignedInteger('submission_id');
+            $table->unsignedInteger('requirement_id');
+            $table->unsignedInteger('user_id');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('submission_id')
+                ->references('id')
+                ->on('submissions')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

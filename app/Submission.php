@@ -3,28 +3,19 @@
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Sands\Uploadable\UploadableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 
 class Submission extends Model
 {
     use RevisionableTrait,
-        SoftDeletes,
-        UploadableTrait;
+        SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
-
-    protected $uploadableConfig = [
-        'requirements' => [
-            'save',                  // saves the image prefixed wth "original-"
-        ]
-    ];
 
     protected $fillable = [
         'type',
         'notice_id',
-        'vendor_id',
-        'user_id',
+        'vendor_id'
     ];
 
     protected $attributes = [
@@ -108,18 +99,4 @@ class Submission extends Model
      * Helpers
      */
 
-
-    /*
-     * Boot
-     */
-    
-    public static function boot()
-    {
-        self::saved(function (Submission $submission) {
-            $submission->attachFiles();
-        });
-        self::deleted(function (Submission $submission) {
-            $submission->detachFiles();
-        });
-    }
 }

@@ -42,11 +42,12 @@
                                     <td>{{ $requirement->title }}</td>
                                     <td>
                                         @if($requirement->require_file)
-                                            {!! Former::file('requirements['. $requirement->id .']')
+                                            {!! Former::file('file['. $requirement->id .']')
                                                 ->label(false)
                                                 ->addClass('file-styled') !!}
+
                                         @else
-                                            <input type="checkbox" name="requirements[{{ $requirement->id }}]" class="styled" value="1" required>
+                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" required>
                                         @endif
                                     </td>
                                 </tr>
@@ -68,7 +69,12 @@
                 </div>
                 <div class="panel-footer">
                     <div class="heading-elements">
-                        <button type="submit" class="btn bg-blue pull-right">Save</button>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="{{ route('notices.submission', $notice->id) }}" class="btn btn-default ml-15">Back</a>
+                                <button type="submit" class="btn bg-blue pull-right">Save</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
