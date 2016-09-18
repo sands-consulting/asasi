@@ -142,8 +142,8 @@ class AsasiSeeder extends Seeder
         Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
 
         OrganizationsRepository::create(new Organization, [
-            'name' => 'Sands Consulting',
-            'short_name' => 'SANDS'
+            'name' => 'Setiausaha Kerajaan Selangor',
+            'short_name' => 'SUK SELANGOR'
         ]);
 
         $places = [

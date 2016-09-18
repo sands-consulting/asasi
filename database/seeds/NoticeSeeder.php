@@ -46,7 +46,7 @@ class NoticeSeeder extends Seeder
         $noticeData = [
             [
                 'name' => 'Notice Tender',
-                'number' => '0000001',
+                'number' => 'NT00001',
                 'description' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'rules' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'price' =>  '250.00',
@@ -60,7 +60,7 @@ class NoticeSeeder extends Seeder
             ],
             [
                 'name' => 'Notice Quotation',
-                'number' => '0000001',
+                'number' => 'NQ00001',
                 'description' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'rules' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'price' =>  '150.00',
