@@ -23,6 +23,7 @@ class RequirementTechnicalsController extends Controller
         // Fixme: temp solution
         $inputs['mandatory'] = $inputs['mandatory'][0];
         $inputs['require_file'] = $inputs['require_file'][0];
+        $inputs['type'] = $inputs['require_file'][0] == 1 ? 'file' : 'check';
         $requirementTechnical = RequirementTechnicalsRepository::create(new RequirementTechnical, $inputs);
 
         return response()->json($requirementTechnical);

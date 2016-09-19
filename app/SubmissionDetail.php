@@ -21,7 +21,6 @@ class SubmissionDetail extends Model
     ];
 
     protected $fillable = [
-        'type',
         'value',
         'requirement_id',
         'submission_id',

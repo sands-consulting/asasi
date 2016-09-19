@@ -23,7 +23,7 @@ class CommercialRequirementsController extends Controller
         // Fixme: temp solution
         $inputs['mandatory'] = $inputs['mandatory'][0];
         $inputs['require_file'] = $inputs['require_file'][0];
-
+        $inputs['type'] = $inputs['require_file'][0] == 1 ? 'file' : 'check';
         $commercialRequirement = CommercialRequirementsRepository::create(new RequirementCommercial, $inputs);
 
         return response()->json($commercialRequirement);

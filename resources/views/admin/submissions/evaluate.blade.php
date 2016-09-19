@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('submissions.attributes.type') }}</strong>:</label>
-                        <div class="form-control-static">{{ trans('submissions.types.' . $submission->type) }}</div>
+                        <label class="control-label"><strong>{{ trans('notices.attributes.number') }}</strong>:</label>
+                        <div class="form-control-static">{{ $submission->notice->number }}</div>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -66,9 +66,9 @@
                 </td>
                 <td>
                     <span class="text-blue"> 
-                        @if ($detail->type == 'check')
+                        @if ($detail->requirement->type == 'check')
                             {{ $detail->value == 1 ? 'Yes' : 'No' }}
-                        @elseif ($detail->type == 'file')
+                        @elseif ($detail->requirement->type == 'file')
                             <a href="{{ $detail->files()->first()->url }}" target="_blank" class="btn btn-success btn-xs">View File</a>
                         @endif
                     </span>

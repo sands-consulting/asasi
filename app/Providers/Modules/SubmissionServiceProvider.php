@@ -9,7 +9,7 @@ class SubmissionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // app('uploadable')->registerFilter('custom-save', CustomSave::class);
+        app('uploadable')->registerFilter('custom-save', CustomSave::class);
         app('policy')->register('App\Http\Controllers\Admin\SubmissionsController', 'App\Policies\SubmissionsPolicy');
     }
 

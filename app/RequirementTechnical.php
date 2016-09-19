@@ -20,6 +20,7 @@ class RequirementTechnical extends Model
         'mandatory',
         'require_file',
         'notice_id',
+        'type'
     ];
 
     protected $attributes = [
