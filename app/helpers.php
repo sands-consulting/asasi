@@ -42,3 +42,19 @@ function is_complete_form($attributes)
 
     return true;
 }
+
+function get_days($quantity, $type)
+{
+    $days = 0;
+    switch ($type) {
+        case 'months':
+            $days = $quantity * 30;
+            break;
+        
+        case 'years':
+            $days = quantity * 365;
+            break;
+    }
+
+    return $days;
+}

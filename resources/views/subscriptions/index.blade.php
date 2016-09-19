@@ -27,9 +27,10 @@
                 <div class="panel-body text-center">
                     <div class="icon-object border-blue-400 text-blue"><i class="icon-stack3"></i></div>
                     <h5 class="text-semibold">{{ $package->name }} <br>
-                        <small>{{ $package->validity_quantity }} {{ $package->validity_type }}</small></h5>
+                        <small>{{ $package->validity_quantity }} {{ $package->validity_type }}</small> <br>
+                        <small>RM {{ $package->fee_amount }}</small></h5>
                     <p class="mb-15">{{ $package->description }}</p>
-                    <a href="#" class="btn bg-blue-400 legitRipple">Subscribe</a>
+                    <a href="{{ route('subscriptions.payment', $package->id) }}" class="btn bg-blue-400 legitRipple" data-method="POST">Subscribe</a>
                 </div>
             </div>
         </div>

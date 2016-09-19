@@ -23,7 +23,7 @@ class Subscription extends Authenticatable
     ];
 
     protected $attributes = [
-        'status' => 'pending-payment'
+        'status' => 'active'
     ];
 
     protected $searchable = [

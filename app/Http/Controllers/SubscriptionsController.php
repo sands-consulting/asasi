@@ -7,6 +7,7 @@ use App\Subscription;
 use App\DataTables\SubscriptionHitoriesDataTable;
 use App\Http\Requests\SubscriptionRequest;
 use App\Repositories\SubscriptionsRepository;
+use App\Repositories\VendorsRepository;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -46,6 +47,35 @@ class SubscriptionsController extends Controller
         return redirect()
             ->route('subscriptions.edit', $subscription->id)
             ->with('notice', trans('subscriptions.notices.public.saved', ['name' => $subscription->name]));
+    }
+
+    public function payment(Request $request, Package $package)
+    {
+        return view('subscriptions.payment', compact('package'));
+    }
+
+    // temp to mock payment gateway
+    public function endpoint(Request $request, Package $package)
+    {
+        $request->session()->put('package_id', $package->id);
+        return redirect()
+            ->route('subscriptions.redirect-uri')
+            ->with('notice', trans('subscriptions.notices.public.paid'));
+    }
+
+    public function redirectUri(Request $request)
+    {
+        $package_id = $request->session()->get('package_id');
+        $package    = Package::find($package_id);
+        $vendor     = Auth::user()->vendor;
+
+        VendorsRepository::subscribe($vendor, $package);
+
+        $request->session()->forget('package_id');
+
+        return redirect()
+            ->route('subscriptions.current')
+            ->with('notice', trans('subscriptions.notices.public.subscribed', ['name' => $package->name]));
     }
 
     public function current()

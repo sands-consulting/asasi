@@ -35,6 +35,21 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 'uses' => 'SubscriptionsController@history'
             ]);
 
+            $router->post('subscriptions/{packages}/payment', [
+                'as'  => 'subscriptions.payment',
+                'uses' => 'SubscriptionsController@payment'
+            ]);
+
+            $router->post('subscriptions/{packages}/endpoint', [
+                'as'  => 'subscriptions.endpoint',
+                'uses' => 'SubscriptionsController@endpoint'
+            ]);
+
+            $router->get('subscriptions/redirect', [
+                'as'  => 'subscriptions.redirect-uri',
+                'uses' => 'SubscriptionsController@redirectUri'
+            ]);
+
             $router->resource('subscriptions', 'SubscriptionsController');
         });
     }

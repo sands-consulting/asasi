@@ -137,7 +137,20 @@ class Vendor extends Authenticatable
     {
         return $this->belongsToMany(Notice::class);
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
     
+    /*
+     * Scopes
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', '=', 'active');
+    }
+
     public static function boot()
     {
         parent::boot();

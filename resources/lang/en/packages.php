@@ -47,6 +47,10 @@ return [
         ],
         'revisions' => [
 
-        ]
+        ],
+        'payment' => [
+            'title' => 'Package Payment',
+            'summary' => 'Payment Summary',
+        ],
     ],
 ];
