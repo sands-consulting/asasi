@@ -53,6 +53,11 @@ class SubmissionNoticesDataTable extends DataTable
     {
         return [
             [
+                'data' => 'number',
+                'name' => 'number',
+                'title' => trans('notices.attributes.number')
+            ],
+            [
                 'data' => 'organization_id',
                 'name' => 'organization_id',
                 'title' => trans('notices.attributes.organization_id')
