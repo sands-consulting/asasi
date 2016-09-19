@@ -36,7 +36,6 @@ class CreateSubmissionsTable extends Migration
 
         Schema::create('submission_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type')->nullable();
             $table->string('value')->nullable();
             $table->unsignedInteger('submission_id');
             $table->unsignedInteger('requirement_id');
@@ -65,6 +64,9 @@ class CreateSubmissionsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('submissions');
+        Schema::dropIfExists('submission_details');
+        Schema::enableForeignKeyConstraints();
     }
 }

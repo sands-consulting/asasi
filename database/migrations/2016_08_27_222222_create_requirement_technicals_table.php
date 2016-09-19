@@ -17,6 +17,7 @@ class CreateRequirementTechnicalsTable extends Migration
             $table->string('title');
             $table->boolean('mandatory')->default(0);
             $table->boolean('require_file')->default(0);
+            $table->string('type')->default('check');
             $table->unsignedInteger('notice_id');
             $table->string('status');
             $table->nullableTimestamps();
