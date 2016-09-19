@@ -8,4 +8,12 @@ $(function() {
     // $('.file-styled').uniform({
     //     fileButtonClass: 'action btn bg-warning-400'
     // });
+    
+    $('.daterange-single').daterangepicker({ 
+        singleDatePicker: true,
+        locale: {
+          cancelLabel: 'Clear',
+          format: 'YYYY-MM-DD'
+        }
+    }); 
 });

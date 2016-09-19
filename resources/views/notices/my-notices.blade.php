@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table media-library">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -42,7 +42,7 @@
                                 <td>{{ $myNotice->description }}</td>
                                 <td>{{ $myNotice->organization->name }}</td>
                                 <td>
-                                    <a href="{{ route('notices.submission', $myNotice->id) }}" class="btn btn-link">{{ trans('actions.proceed') }}</a>
+                                    <a href="{{ route('notices.submission', $myNotice->id) }}" class="btn btn-default btn-xs">{{ trans('actions.proceed') }}</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>
