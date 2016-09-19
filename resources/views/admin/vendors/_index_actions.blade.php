@@ -11,14 +11,6 @@
             @if(Auth::user()->hasPermission('vendor:update'))
             <li><a href="{{ route('admin.vendors.edit', $vendor->id) }}">{{ trans('actions.edit') }}</a></li>
             @endif
-
-            @if($vendor->canActivate() && Auth::user()->hasPermission('vendor:activate'))
-            <li><a href="{{ route('admin.vendors.activate', [$vendor->id, 'redirect_to' => route('admin.vendors.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
-            @endif
-
-            @if($vendor->canDeactivate() && Auth::user()->hasPermission('vendor:deactivate'))
-            <li><a href="{{ route('admin.vendors.deactivate', [$vendor->id, 'redirect_to' => route('admin.vendors.index')]) }}" data-method="PUT">{{ trans('actions.deactivate') }}</a></li>
-            @endif
 		</ul>
 	</li>
 </ul>
