@@ -22,7 +22,8 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            {!! Former::open_for_files(route('notices.store-technical', $notice->id)) !!}
+            {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
+            {!! Former::hidden('type', 'technical') !!}
             <div class="panel">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-lg">

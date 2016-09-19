@@ -23,6 +23,8 @@
     <div class="row">
         <div class="col-sm-12">
             {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
+            {!! Former::populate($submission) !!}
+            {!! Former::hidden('submission_id', $submission->id) !!}
             {!! Former::hidden('type', 'commercial') !!}
             <div class="panel">
                 <div class="table-responsive">
@@ -41,14 +43,24 @@
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{ $requirement->title }}</td>
-                                    <td>
+                                    <td class="text-center">
+                                        {!! Former::hidden('submission_detail_id['. $requirement->id .']')
+                                            ->value($requirement->details->id) !!}
                                         @if($requirement->require_file)
+                                        
                                             {!! Former::file('file['. $requirement->id .']')
                                                 ->label(false)
                                                 ->addClass('file-styled') !!}
-
+                                            
+                                            @if($requirement->details->files()->first())
+                                                <a href="{{ $requirement->details->files()->first()->url }}" target="_blank" class="btn btn-success btn-xs">View File</a>
+                                            @endif
                                         @else
-                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" required>
+                                            @if($requirement->details->value == 1) <?php $checked = 'checked'; ?>
+                                            @else <?php $checked = false; ?>
+                                            @endif
+                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" {{ $checked }}>
+                                            
                                         @endif
                                     </td>
                                 </tr>

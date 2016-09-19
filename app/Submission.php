@@ -16,6 +16,7 @@ class Submission extends Model
 
     protected $fillable = [
         'type',
+        'price',
         'notice_id',
         'vendor_id'
     ];

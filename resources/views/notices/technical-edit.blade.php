@@ -2,7 +2,7 @@
 
 @section('header')
     <div class="page-title">
-        <h4><i class="icon-file-text position-left"></i> <span class="text-semibold">{{ trans('notices.views.commercial.title') }}</span></h4>
+        <h4><i class="icon-file-text position-left"></i> <span class="text-semibold">{{ trans('notices.views.technical.title') }}</span></h4>
 
         {{-- <ul class="breadcrumb breadcrumb-caret position-right">
             <li><a href="{{ route('home.index') }}">Home</a></li>
@@ -23,7 +23,8 @@
     <div class="row">
         <div class="col-sm-12">
             {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
-            {!! Former::hidden('type', 'commercial') !!}
+            {!! Former::hidden('submission_id', $submission->id) !!}
+            {!! Former::hidden('type', 'technical') !!}
             <div class="panel">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-lg">
@@ -41,29 +42,30 @@
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{ $requirement->title }}</td>
-                                    <td>
+                                    <td class="text-center">
+                                        {!! Former::hidden('submission_detail_id['. $requirement->id .']')
+                                            ->value($requirement->details->id) !!}
+
                                         @if($requirement->require_file)
+                                        
                                             {!! Former::file('file['. $requirement->id .']')
                                                 ->label(false)
                                                 ->addClass('file-styled') !!}
-
+                                            
+                                            @if($requirement->details->files()->first())
+                                                <a href="{{ $requirement->details->files()->first()->url }}" target="_blank" class="btn btn-success btn-xs">View File</a>
+                                            @endif
                                         @else
-                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" required>
+                                            @if($requirement->details->value == 1) <?php $checked = 'checked'; ?>
+                                            @else <?php $checked = false; ?>
+                                            @endif
+                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" {{ $checked }}>
+                                            
                                         @endif
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
                                 @endforeach
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>Price</td>
-                                    <td>
-                                        {!! Former::text('price')
-                                            ->label(false)
-                                            ->prepend('RM')
-                                            ->required() !!}
-                                    </td>
-                                </tr>
                             @endif
                         </tbody>
                     </table>

@@ -111,7 +111,11 @@
                         <span class="label label-danger">Incomplete</span>
                     </div>
                     <div class="col-sm-4 text-right">
+                        @if (!$submissions['commercial'])
                         <a href="{{ route('notices.commercial', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>  
+                        @else
+                        <a href="{{ route('notices.commercial-edit', [$notice->id, $submissions['commercial']->id] ) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>  
+                        @endif
                     </div>                    
                 </div>
                 <br>
@@ -125,7 +129,11 @@
                         <span class="label label-danger">Incomplete</span>
                     </div>
                     <div class="col-sm-4 text-right">
+                        @if (!$submissions['technical'])
                         <a href="{{ route('notices.technical', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>
+                        @else
+                        <a href="{{ route('notices.technical-edit', [$notice->id, $submissions['technical']->id]) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>
+                        @endif
                     </div>                    
                 </div>
                 @endif

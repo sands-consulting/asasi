@@ -35,7 +35,15 @@ class NoticesController extends Controller
 
     public function submission(Notice $notice)
     {
-        return view('notices.submission', compact('notice'));
+        // check if submission exists
+        $submissions['commercial'] = Submission::where('vendor_id', Auth::user()->vendor->id)
+            ->where('type', 'commercial')
+            ->first();
+        $submissions['technical'] = Submission::where('vendor_id', Auth::user()->vendor->id)
+            ->where('type', 'technical')
+            ->first();
+
+        return view('notices.submission', compact('notice', 'submissions'));
     }
 
     public function commercial(Notice $notice)
@@ -44,33 +52,19 @@ class NoticesController extends Controller
         return view('notices.commercial', compact('notice', 'requirements'));
     }
 
-    public function storeCommercial(Notice $notice, Request $request)
+    public function commercialEdit(Notice $notice, Submission $submission)
     {
-        $input              = $request->only('value', 'price', 'file');
-        $input['type']      = 'commercial';
-        $input['vendor_id'] = Auth::user()->vendor->id;
-        $input['notice_id'] = $notice->id;
+        $details = $submission->details;
+        // return $details = $submission->details()->where('requirement_id', 2)->first(['value']);
+        // Fixme: fix code to reduce query.
+        $requirements = $notice->requirementCommercials->map(function ($requirement, $key) use ($details) {
+            $requirement->details = $details->where('requirement_id', $requirement->id)->first();
+            return $requirement;
+        });
 
-        $submission = SubmissionsRepository::create(new Submission, $input);
-
-        // Fixme: Temp solutions
-        $details = $notice->requirementCommercials->reduce(function($carry, $requirement) use ($input, $submission) {
-
-            $file = isset($input['file'][$requirement->id]) ? $input['file'][$requirement->id] : null;
-            $carry['value'] = isset($input['value'][$requirement->id]) ? $input['value'][$requirement->id] : null;
-            $carry['requirement_id'] = $requirement->id;
-            $carry['submission_id'] = $submission->id;
-            $carry['user_id'] = Auth::user()->id;
-
-            $SubmissionDetail = SubmissionDetailsRepository::create(new SubmissionDetail, $carry);
-            $SubmissionDetail->attachFiles($file);
-
-        }, null);
-
-        return redirect()
-            ->route('notices.submission', $notice->id)
-            ->with('notice', trans('notices.notices.submission_saved'));
+        return view('notices.commercial-edit', compact('notice', 'submission', 'requirements'));
     }
+
 
     public function technical(Notice $notice)
     {
@@ -78,26 +72,57 @@ class NoticesController extends Controller
         return view('notices.technical', compact('notice', 'requirements'));
     }
 
-    public function storeTechnical(Request $request, Notice $notice)
+    public function technicalEdit(Notice $notice, Submission $submission)
     {
-        $input              = $request->only('value', 'file');
-        $input['type']      = 'technical';
+        $details = $submission->details;
+        // Fixme: fix code to reduce query.
+        $requirements = $notice->requirementTechnicals->map(function ($requirement, $key) use ($details) {
+            $requirement->details = $details->where('requirement_id', $requirement->id)->first();
+            return $requirement;
+        });
+
+        return view('notices.technical-edit', compact('notice', 'submission', 'requirements'));
+    }
+
+    public function saveSubmission(Notice $notice, Request $request)
+    {
+        $input = $request->only(
+            'type',
+            'price', 
+            'submission_id',
+            'submission_detail_id',
+            'value', 
+            'file'
+        );
+
         $input['vendor_id'] = Auth::user()->vendor->id;
         $input['notice_id'] = $notice->id;
 
-        $submission = SubmissionsRepository::create(new Submission, $input);
+        if (!isset($input['submission_id'])) {
+            $submission = SubmissionsRepository::create(new Submission, $input);
+        } else {
+            $submission = Submission::find($input['submission_id']);
+            $submission = SubmissionsRepository::update($submission, $input);
+        }
 
         // Fixme: Temp solutions
-        $details = $notice->requirementTechnicals->reduce(function($carry, $requirement) use ($input, $submission) {
+        $details = $notice->requirementCommercials->reduce(function($carry, $requirement) use ($input, $submission) {
 
             $file = isset($input['file'][$requirement->id]) ? $input['file'][$requirement->id] : null;
             $carry['value'] = isset($input['value'][$requirement->id]) ? $input['value'][$requirement->id] : null;
-            $carry['requirement_id'] = $requirement->id;
-            $carry['submission_id'] = $submission->id;
             $carry['user_id'] = Auth::user()->id;
 
-            $SubmissionDetail = SubmissionDetailsRepository::create(new SubmissionDetail, $carry);
-            $SubmissionDetail->attachFiles($file);
+            if (!isset($input['submission_detail_id'][$requirement->id])) {
+                $carry['requirement_id'] = $requirement->id;
+                $carry['submission_id'] = $submission->id;
+                
+                $submissionDetail = SubmissionDetailsRepository::create(new SubmissionDetail, $carry);
+                $submissionDetail->attachFiles($file);
+            } else {
+                $submissionDetail = SubmissionDetail::find($input['submission_detail_id'][$requirement->id]);
+                SubmissionDetailsRepository::update($submissionDetail, $carry);
+                $submissionDetail->attachFiles($file);
+            }
 
         }, null);
 
