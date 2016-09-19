@@ -27,7 +27,7 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'status' => 'inactive',
+        'status' => 'active',
     ];
 
     protected $searchable = [

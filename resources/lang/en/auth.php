@@ -33,6 +33,7 @@ return [
     'notices' => [
         'confirm' => 'Please confirm your email address.',
         'confirmed' => 'You are now confirmed. Please login.',
-        'not_verified' => 'Your account is not verified. Please check your email and click the confirmation link.'
+        'not_verified' => 'Your account is not verified. Please check your email and click the confirmation link.',
+        'suspended' => 'Your account has been suspended. Please check contact administrator.'
     ],
 ];

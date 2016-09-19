@@ -68,6 +68,6 @@ class UsersPolicy extends BasePolicy
 
     public function suspend(User $user)
     {
-        return $this->user->hasPermission('user:suspend') && $uer->canSuspend();
+        return $this->user->hasPermission('user:suspend') && $user->canSuspend();
     }
 }

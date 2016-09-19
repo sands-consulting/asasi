@@ -1,10 +1,12 @@
-@extends('layouts.public')
+@extends('layouts.window')
+
+@section('page-title', trans('auth.register'))
 
 @section('content')
 <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
         <div class="panel panel-default">
-            <div class="panel-heading">Register</div>
+            <div class="panel-heading">Register New Account</div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                     {{ csrf_field() }}

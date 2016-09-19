@@ -77,6 +77,12 @@ class AuthController extends Controller
                 ->with('alert', trans('auth.notices.not_verified'));
         }
 
+        if (Auth::guard($this->getGuard())->validate(['email' => $request->email, 'password' => $request->password, 'status' => 'suspended'])) {
+            return redirect('/login')
+                ->withInput($request->only('email', 'remember'))
+                ->with('alert', trans('auth.notices.suspended'));
+        }
+
         $throttles = $this->isUsingThrottlesLoginsTrait();
 
         if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
