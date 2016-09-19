@@ -22,6 +22,84 @@
 
 @section('content')
 	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h6 class="panel-title">Notice</h6>
+					<div class="heading-elements panel-nav">
+						<ul class="nav nav-tabs nav-tabs-bottom">
+							@foreach($notice_types as $notice_type)
+								@if($notice_type->type->id == $type)
+								<li class="active">
+								@else
+								<li>
+								@endif
+									<a href="{{ route('home.index', ['type' => $notice_type->type->id]) }}" class="legitRipple" data-method="GET">
+										<i class="icon-clipboard3 position-left"></i> {{ $notice_type->type->name }}
+										<span class="legitRipple-ripple"></span>
+									</a>
+								</li>
+							@endforeach
+						</ul>
+	            	</div>
+					<a class="heading-elements-toggle"><i class="icon-more"></i></a>
+				</div>
+				
+				<div class="panel-tab-content tab-content">
+					<div class="tab-pane has-padding active" id="panel-tab-1">
+						<div class="panel-body">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, tempora rerum. Maxime voluptate rem temporibus itaque exercitationem totam impedit ex nisi dicta, deleniti voluptatum, quibusdam aliquam architecto! Recusandae, molestias, laboriosam.
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Organization</th>
+										<th>Description</th>
+										<th>Price</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									@if(!$notices->isEmpty())
+										@foreach($notices as $notice)
+										<tr>
+											<td>{{ link_to_route('admin.notices.show', $notice->organization->short_name, $notice->id) }}</td>
+											<td>
+												<p>{{ $notice->name }}</p>
+												<p><small>{{ str_limit($notice->description, 100) }}</small></p>
+											</td>
+											<td>{{ $notice->price }}</td>
+											<td>
+											@if(Auth::user()->canBuy())
+												<a href="{{ route('carts.add', $notice->id) }}" class="btn btn-sm" data-method="POST">Add To Cart</a></td>
+											@else
+												<i>Let vendor use cart and force to subscribe before paying</i>
+											@endif
+										</tr>
+										@endforeach
+									@else
+										<tr>
+											<td colspan="4">Sorry, there is no notice with this type published yet.</td>
+										</tr>
+									@endif
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="panel-footer panel-footer-condensed">
+						<div class="heading-elements">
+							<a href="#" class="heading-text text-default pull-right">Show more
+							<i class="icon-arrow-right14 position-right"></i></a> 
+						</div>
+						<a class="heading-elements-toggle"><i class="icon-more"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-sm-8">
 			<div class="panel panel-flat">
 				<div class="panel-heading">
@@ -98,85 +176,6 @@
 							{!! link_to_route('vendors.create', trans('vendors.buttons.create-application')) !!}
 						@endif
 					{!! Former::close() !!}
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h6 class="panel-title">Notice</h6>
-					<div class="heading-elements panel-nav">
-						<ul class="nav nav-tabs nav-tabs-bottom">
-							@foreach($notice_types as $notice_type)
-								@if($notice_type->type->id == $type)
-								<li class="active">
-								@else
-								<li>
-								@endif
-									<a href="{{ route('home.index', ['type' => $notice_type->type->id]) }}" class="legitRipple" data-method="GET">
-										<i class="icon-clipboard3 position-left"></i> {{ $notice_type->type->name }}
-										<span class="legitRipple-ripple"></span>
-									</a>
-								</li>
-							@endforeach
-						</ul>
-	            	</div>
-					<a class="heading-elements-toggle"><i class="icon-more"></i></a>
-				</div>
-				
-				<div class="panel-tab-content tab-content">
-					<div class="tab-pane has-padding active" id="panel-tab-1">
-						<div class="panel-body">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, tempora rerum. Maxime voluptate rem temporibus itaque exercitationem totam impedit ex nisi dicta, deleniti voluptatum, quibusdam aliquam architecto! Recusandae, molestias, laboriosam.
-						</div>
-						<div class="table-responsive">
-							<table class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>Organization</th>
-										<th>Description</th>
-										<th>Price</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									@if(!$notices->isEmpty())
-										@foreach($notices as $notice)
-										<tr>
-											<td>{{ link_to_route('admin.notices.show', $notice->organization->short_name, $notice->id) }}</td>
-											<td>
-												<p>{{ $notice->name }}</p>
-												<p><small>{{ str_limit($notice->description, 100) }}</small></p>
-											</td>
-											<td>{{ $notice->price }}</td>
-											<td>
-											@if(Auth::user()->canBuy())
-												<a href="{{ route('carts.add', $notice->id) }}" class="btn btn-sm" data-method="POST">Add To Cart</a></td>
-											@else
-												<i>Let vendor use cart and force to subscribe before paying</i>
-											@endif
-										</tr>
-										@endforeach
-									@else
-										<tr>
-											<td colspan="4">Sorry, there is no notice with this type published yet.</td>
-										</tr>
-									@endif
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-					<div class="panel-footer panel-footer-condensed">
-						<div class="heading-elements">
-							<a href="#" class="heading-text text-default pull-right">Show more
-							<i class="icon-arrow-right14 position-right"></i></a> 
-						</div>
-						<a class="heading-elements-toggle"><i class="icon-more"></i></a>
-					</div>
 				</div>
 			</div>
 		</div>
