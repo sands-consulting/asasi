@@ -54,6 +54,7 @@ class NoticeSeeder extends Seeder
                 'expired_at' => '2017-08-01',
                 'purchased_at' => '2016-10-01',
                 'submission_at' => '2016-12-01',
+                'submission_address' => 'Address 1',
                 'notice_type_id' => '1',
                 'organization_id' => '1',
                 'status' => 'draft'
@@ -68,6 +69,7 @@ class NoticeSeeder extends Seeder
                 'expired_at' => '2017-08-01',
                 'purchased_at' => '2016-10-01',
                 'submission_at' => '2016-12-01',
+                'submission_address' => 'Address 2',
                 'notice_type_id' => '2',
                 'organization_id' => '1',
                 'status' => 'draft'
