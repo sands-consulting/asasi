@@ -156,6 +156,14 @@
                                 <a href="{{ route('admin.packages.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.manage.packages') }}</span></a>
                             </li>
                             @endif
+                            
+                            @if(Auth::user()->hasPermission('vendor:index'))
+                            <li class="{{ is_path_active('admin/submissions*') }}">
+                                <a href="{{ route('admin.submissions.index') }}" class="legitRipple">
+                                    <i class="icon-mailbox"></i> <span>{{ trans('menu.admin.manage.submissions') }}</span>
+                                </a>
+                            </li>
+                            @endif
 
                             @if(Auth::user()->hasPermission('vendor:index'))
                             <li class="{{ is_path_active('admin/vendors*') }}">

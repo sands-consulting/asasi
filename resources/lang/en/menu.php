@@ -48,6 +48,7 @@ return [
             'vendors'       => 'Vendors',
             'news'          => 'News',
             'packages'      => 'Packages',
+            'submissions'   => 'Submissions',
         ]
     ]
 ];
