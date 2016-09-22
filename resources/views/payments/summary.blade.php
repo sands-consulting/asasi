@@ -29,7 +29,7 @@
                                     <th>Number</th>
                                     <th>Description</th>
                                     <th>Organization</th>
-                                    <th>Action</th>
+                                    <th>Price</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,9 +41,7 @@
                                         <td>{{ $notice->number }}</td>
                                         <td>{{ $notice->description }}</td>
                                         <td>{{ $notice->organization->name }}</td>
-                                        <td>
-                                            {{-- <a href="{{ route('noy.create') }}" class="btn btn-link">{{ trans('actions.proceed') }}</a> --}}
-                                        </td>
+                                        <td>{{ $notice->price }}</td>
                                     </tr>
                                     <?php $i++; ?>
                                     @endforeach

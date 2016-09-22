@@ -38,7 +38,7 @@
                                 ></a>
                             </td>
                             <td class="action-column">
-                                <button type="button" class="btn btn-xs btn-danger btn-remove" data-url="/api/requirement-technicals/delete/"><i class="icon-cross2"></i></button>
+                                <a href="#" class="btn btn-xs btn-danger btn-remove" data-url="/api/requirement-technicals/delete/" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross2"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -77,7 +77,7 @@
             </td>
             <td class="action-column">
                 <button type="button" class="btn btn-xs btn-success btn-save" data-table="#tblTechReq" data-url="{{ route('api.requirement-technicals.store') }}"><i class="icon-checkmark3"></i></button>
-                <button type="button" class="btn btn-xs btn-danger btn-remove" data-url="/api/requirement-technicals/delete/"><i class="icon-cross2"></i></button>
+                <a href="#" class="btn btn-xs btn-danger btn-remove" data-url="/api/requirement-technicals/delete/" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross2" data-confirm="{{ trans('app.confirmation') }}"></i></a>
             </td>
         </tr>
     </script>

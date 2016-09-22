@@ -69,8 +69,10 @@ $(function() {
 // Single picker
 $('.daterange-single').daterangepicker({ 
     singleDatePicker: true,
+    timePicker: true,
+    timePicker24Hour: true,
     locale: {
       cancelLabel: 'Clear',
-      format: 'YYYY-MM-DD'
+      format: 'YYYY-MM-DD HH:mm:ss'
     }
 });
