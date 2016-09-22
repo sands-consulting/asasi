@@ -142,12 +142,17 @@ class Notice extends Model
 
     public function vendors()
     {
-        return $this->hasMany(Vendor::class);
+        return $this->belongsToMany(Vendor::class);
     }
 
     public function submissions()
     {
         return $this->hasMany(Submission::class);
+    }
+
+    public function evaluators()
+    {
+        return $this->hasMany(NoticeEvaluator::class);
     }
 
     /*

@@ -142,14 +142,39 @@ class Vendor extends Authenticatable
     {
         return $this->hasMany(Subscription::class);
     }
-    
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
     /*
      * Scopes
      */
+    
     public function scopeActive($query)
     {
         return $query->where('status', '=', 'active');
     }
+
+    /*
+     * Helpers 
+     */
+
+    // public function getProgress($type)
+    // {
+    //     $progress = 0;
+    //     $total = $this->submissions()->where('type', $type)->count();
+    //     $completed = $this->submissions()->where('type', $type)
+    //             ->wherePivot('status', 'completed')
+    //             ->count();
+
+    //     if ($total > 0) 
+    //         $progress = $completed/$total * 100;
+
+    //     return number_format($progress, 2, '.', '');
+
+    // }
 
     public static function boot()
     {

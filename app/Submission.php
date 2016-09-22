@@ -102,9 +102,44 @@ class Submission extends Model
     {
         return $this->hasMany(SubmissionDetail::class);
     }
+
+    public function evaluators()
+    {
+        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluators', 'submission_id', 'user_id');
+    }
     
     /**
      * Helpers
      */
+
+    public function getProgress($value='')
+    {
+        $progress = 0;
+
+        $evaluators = $this->evaluators()->count();
+        $completed = $this->evaluators()->wherePivot('status', 'completed')->count();
+
+        $progress = $completed/$evaluators * 100;
+
+        return $progress;
+    }
+
+    // // additional helper relation for the count
+    // public function totalEvaluatorsCount()
+    // {
+    //     return $this->belongsToMany('Order')
+    //         ->selectRaw('count(orders.id) as aggregate')
+    //         ->groupBy('pivot_product_id');
+    // }
+
+    // // accessor for easier fetching the count
+    // public function getOrdersCountAttribute()
+    // {
+    //     if ( ! array_key_exists('ordersCount', $this->relations)) $this->load('ordersCount');
+
+    //     $related = $this->getRelation('ordersCount')->first();
+
+    //     return ($related) ? $related->aggregate : 0;
+    // }
 
 }
