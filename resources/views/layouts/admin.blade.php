@@ -157,6 +157,14 @@
                             </li>
                             @endif
                             
+                            @if(Auth::user()->hasPermission('evaluation:index'))
+                            <li class="{{ is_path_active('admin/evaluations*') }}">
+                                <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">
+                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations') }}</span>
+                                </a>
+                            </li>
+                            @endif
+
                             @if(Auth::user()->hasPermission('vendor:index'))
                             <li class="{{ is_path_active('admin/submissions*') }}">
                                 <a href="{{ route('admin.submissions.index') }}" class="legitRipple">

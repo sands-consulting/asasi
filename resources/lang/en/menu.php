@@ -49,6 +49,7 @@ return [
             'news'          => 'News',
             'packages'      => 'Packages',
             'submissions'   => 'Submissions',
+            'evaluations'   => 'Evaluations',
         ]
     ]
 ];
