@@ -18,11 +18,12 @@ class Submission extends Model
         'type',
         'price',
         'notice_id',
-        'vendor_id'
+        'vendor_id',
+        'status'
     ];
 
     protected $attributes = [
-        'status' => 'pending'
+        'status' => 'draft'
     ];
 
     protected $searchable = [
@@ -79,6 +80,11 @@ class Submission extends Model
         return $this->status != 'inactive';
     }
     
+    public function canSubmit()
+    {
+        return $this->status === 'completed';
+    }
+
     /*
      * Relationship
      */
@@ -124,22 +130,8 @@ class Submission extends Model
         return $progress;
     }
 
-    // // additional helper relation for the count
-    // public function totalEvaluatorsCount()
-    // {
-    //     return $this->belongsToMany('Order')
-    //         ->selectRaw('count(orders.id) as aggregate')
-    //         ->groupBy('pivot_product_id');
-    // }
-
-    // // accessor for easier fetching the count
-    // public function getOrdersCountAttribute()
-    // {
-    //     if ( ! array_key_exists('ordersCount', $this->relations)) $this->load('ordersCount');
-
-    //     $related = $this->getRelation('ordersCount')->first();
-
-    //     return ($related) ? $related->aggregate : 0;
-    // }
-
+    public function FunctionName($value='')
+    {
+        # code...
+    }
 }

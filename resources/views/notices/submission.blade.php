@@ -108,13 +108,18 @@
                         <i class="icon-coins"></i> Commercials
                     </div>
                     <div class="col-sm-2">
-                        <span class="label label-danger">Incomplete</span>
+                        @if ($submissions['commercial']->status == 'draft')
+                        <span class="label label-danger">
+                        @else
+                        <span class="label label-success">
+                        @endif
+                        {{ $submissions['commercial']->status }}</span>
                     </div>
                     <div class="col-sm-4 text-right">
                         @if (!$submissions['commercial'])
-                        <a href="{{ route('notices.commercial', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>  
+                        <a href="{{ route('notices.commercial', $notice->id) }}" class="btn btn-xs btn-default" data-method="POST">Show</a>  
                         @else
-                        <a href="{{ route('notices.commercial-edit', [$notice->id, $submissions['commercial']->id] ) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>  
+                        <a href="{{ route('notices.commercial-edit', [$notice->id, $submissions['commercial']->id] ) }}" class="btn btn-xs btn-default" data-method="POST">Show</a>  
                         @endif
                     </div>                    
                 </div>
@@ -126,18 +131,31 @@
                         <i class="icon-wrench2"></i> Technicals
                     </div>
                     <div class="col-sm-2">
-                        <span class="label label-danger">Incomplete</span>
+                        @if ($submissions['technical']->status == 'draft')
+                        <span class="label label-danger">
+                        @else
+                        <span class="label label-success">
+                        @endif
+                        {{ $submissions['technical']->status }}</span>
                     </div>
                     <div class="col-sm-4 text-right">
                         @if (!$submissions['technical'])
-                        <a href="{{ route('notices.technical', $notice->id) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>
+                        <a href="{{ route('notices.technical', $notice->id) }}" class="btn btn-xs btn-default" data-method="POST">Show</a>
                         @else
-                        <a href="{{ route('notices.technical-edit', [$notice->id, $submissions['technical']->id]) }}" class="btn btn-xs bg-blue" data-method="POST">Show</a>
+                        <a href="{{ route('notices.technical-edit', [$notice->id, $submissions['technical']->id]) }}" class="btn btn-xs btn-default" data-method="POST">Show</a>
                         @endif
                     </div>                    
                 </div>
                 @endif
             </fieldset>
+            <hr>
+            <div class="text-right">
+                @if($submissions['commercial']->canSubmit() && $submissions['technical']->canSubmit())
+                    <button type="submit" class="btn btn-primary legitRipple">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                @else
+                    <button type="button" class="btn btn-primary legitRipple" data-placement="left" data-popup="tooltip" title="{{ trans('app.incomplete_tooltip') }}">Submit <i class="icon-arrow-right14 position-right" ></i></button>
+                @endif
+            </div>
         </div>
     </div>
 @stop

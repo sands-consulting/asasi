@@ -33,7 +33,7 @@ class CreateEvaluationsTable extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::create('submission_evaluators', function (Blueprint $table) {
+        Schema::create('submission_evaluator', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('submission_id');
             $table->unsignedInteger('user_id');

@@ -105,8 +105,13 @@ class NoticesController extends Controller
             $submission = SubmissionsRepository::update($submission, $input);
         }
 
+        if ($input['type'] == 'commercial')
+            $requirements = $notice->requirementCommercials;
+        elseif ($input['type'] == 'technical')
+            $requirements = $notice->requirementTechnicals;
+
         // Fixme: Temp solutions
-        $details = $notice->requirementCommercials->reduce(function($carry, $requirement) use ($input, $submission) {
+        $details = $requirements->reduce(function($carry, $requirement) use ($input, $submission) {
 
             $file = isset($input['file'][$requirement->id]) ? $input['file'][$requirement->id] : null;
             $carry['value'] = isset($input['value'][$requirement->id]) ? $input['value'][$requirement->id] : null;
@@ -125,6 +130,10 @@ class NoticesController extends Controller
             }
 
         }, null);
+
+        if (SubmissionDetailsRepository::statusCheck($submission, $requirements)) {
+            $submission = SubmissionsRepository::update($submission, ['status' => 'completed']);
+        }
 
         return redirect()
             ->route('notices.submission', $notice->id)
