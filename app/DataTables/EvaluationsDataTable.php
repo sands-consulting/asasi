@@ -50,6 +50,11 @@ class EvaluationsDataTable extends DataTable
                 'data'  => 'name',
                 'name'  => 'name',
                 'title' => trans('notices.attributes.name'),
+            ],
+            [
+                'data'  => 'type',
+                'name'  => 'type',
+                'title' => trans('notice-evaluators.attributes.type'),
             ]
         ];
 

@@ -227,10 +227,12 @@
                             <li class="navigation-header">                               
                                 <span>{{ trans('menu.admin.settings.title') }}</span> <i class="icon-cogs" title="{{ trans('menu.admin.settings.title') }}" data-original-title="{{ trans('menu.admin.settings.title') }}"></i>
                             </li>
-
+                            
+                            @if(Auth::user()->hasPermission('payment-gateways:index'))
                             <li class="{{ is_path_active('admin/payment-gateways*') }}">
                                 <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.settings.payment-gateways') }}</span></a>
                             </li>
+                            @endif
 
                             @if(Auth::user()->hasPermission('allocation-type:index'))
                             <li class="{{ is_path_active('admin/allocation-types*') }}">
