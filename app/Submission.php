@@ -111,7 +111,7 @@ class Submission extends Model
 
     public function evaluators()
     {
-        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluators', 'submission_id', 'user_id');
+        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluator', 'submission_id', 'user_id');
     }
     
     /**
@@ -125,7 +125,9 @@ class Submission extends Model
         $evaluators = $this->evaluators()->count();
         $completed = $this->evaluators()->wherePivot('status', 'completed')->count();
 
-        $progress = $completed/$evaluators * 100;
+        if ($evaluators > 0 && $completed > 0) {
+            $progress = $completed/$evaluators * 100;
+        }
 
         return $progress;
     }
