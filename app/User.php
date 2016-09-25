@@ -204,6 +204,11 @@ class User extends Authenticatable
      * Helpers
      */
     
+    public static function options()
+    {
+        return static::lists('name','id')->toArray();
+    }
+
     public function confirmEmail()
     {
         $this->verified = true;

@@ -10,13 +10,14 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class NoticeEvaluator extends Model
 {
     use RevisionableTrait,
-        Sluggable,
         SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        // Payment fields
+        'notice_id',
+        'user_id',
+        'type'
     ];
 
     protected $hidden = [
@@ -71,6 +72,10 @@ class NoticeEvaluator extends Model
         }
     }
 
+    public function scopeType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
     /*
      * Relationsip
      */
@@ -87,7 +92,7 @@ class NoticeEvaluator extends Model
 
     public function submissions()
     {
-        return $this->belongsToMany(Submission::class, 'submission_evaluators', 'user_id', 'submission_id');
+        return $this->belongsToMany(Submission::class, 'submission_evaluator', 'user_id', 'submission_id');
     }
 
     /* 

@@ -45,24 +45,21 @@
                     <a href="#left-tab1" data-toggle="tab"><i class="icon-menu7 position-left"></i> Notice Details</a>
                 </li>
                 <li>
-                    <a href="#left-tab2" data-toggle="tab"><i class="icon-menu7 position-left"></i> Vendors</a>
+                    <a href="#left-tab2" data-toggle="tab"><i class="icon-office position-left"></i> Vendors</a>
                 </li>
                 <li>
-                    <a href="#left-tab3" data-toggle="tab"><i class="icon-menu7 position-left"></i> Price List</a>
+                    <a href="#left-tab3" data-toggle="tab"><i class="icon-coins position-left"></i> Price List</a>
                 </li>
-                <li>
-                    <a href="#left-tab4" data-toggle="tab"><i class="icon-menu7 position-left"></i> Evaluators</a>
-                </li>
-                <li>
-                    <a href="#left-tab5" data-toggle="tab"><i class="icon-menu7 position-left"></i> Evaluations</a>
-                </li>
-                {{-- <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog5 position-left"></i> Dropdown <span class="caret"></span></a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user position-left"></i> Evaluators <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#left-tab3" data-toggle="tab">Dropdown tab</a></li>
-                        <li><a href="#left-tab4" data-toggle="tab">Another tab</a></li>
+                        <li><a href="#left-tab4" data-toggle="tab">Progress</a></li>
+                        <li><a href="#left-tab5" data-toggle="tab">Assigned</a></li>
                     </ul>
-                </li> --}}
+                </li>
+                <li>
+                    <a href="#left-tab6" data-toggle="tab"><i class="icon-pencil position-left"></i> Evaluations</a>
+                </li>
             </ul>
 
             <div class="tab-content">
@@ -83,6 +80,10 @@
                 </div>
 
                 <div class="tab-pane has-padding" id="left-tab5">
+                    @include('admin.notices.show-evaluators-assign')
+                </div>
+
+                <div class="tab-pane has-padding" id="left-tab6">
                     @include('admin.notices.show-evaluations')
                 </div>
             </div>
