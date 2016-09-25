@@ -123,6 +123,13 @@ class User extends Authenticatable
         }
     }
 
+    public function scopeEvaluators($query)
+    {
+        $query->whereHas('roles', function($roles) {
+            return $roles->whereName('evaluator');
+        });
+    }
+
     /* 
      * State controls 
      */
