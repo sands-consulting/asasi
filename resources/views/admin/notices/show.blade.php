@@ -37,80 +37,57 @@
     </div>
     
     <div class="panel-body">
-        <fieldset>
-            <legend class="text-semibold">
-                <i class="icon-file-text2 position-left"></i>
-                Notice Details
-            </legend>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.name') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->name }}</div>
-                    </div>
+        
+
+        <div class="tabbable nav-tabs-vertical nav-tabs-left">
+            <ul class="nav nav-tabs nav-tabs-highlight">
+                <li class="active">
+                    <a href="#left-tab1" data-toggle="tab"><i class="icon-menu7 position-left"></i> Notice Details</a>
+                </li>
+                <li>
+                    <a href="#left-tab2" data-toggle="tab"><i class="icon-office position-left"></i> Vendors</a>
+                </li>
+                <li>
+                    <a href="#left-tab3" data-toggle="tab"><i class="icon-coins position-left"></i> Price List</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user position-left"></i> Evaluators <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#left-tab4" data-toggle="tab">Progress</a></li>
+                        <li><a href="#left-tab5" data-toggle="tab">Assigned</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#left-tab6" data-toggle="tab"><i class="icon-pencil position-left"></i> Evaluations</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active has-padding" id="left-tab1">
+                    @include('admin.notices.show-notice')
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.number') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->number }}</div>
-                    </div>
+
+                <div class="tab-pane has-padding" id="left-tab2">
+                    @include('admin.notices.show-vendors')
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.notice_type_id') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
-                    </div>
+
+                <div class="tab-pane has-padding" id="left-tab3">
+                    @include('admin.notices.show-prices')
                 </div>
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.description') }}</strong>:</label>
-                        <div class="form-control-static">{{ !empty($notice->description) ? nl2br($notice->description) : 'N/A' }}</div>
-                    </div>
+
+                <div class="tab-pane has-padding" id="left-tab4">
+                    @include('admin.notices.show-evaluators')
                 </div>
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.rules') }}</strong>:</label>
-                        <div class="form-control-static">{!! !empty($notice->rules) ? nl2br($notice->rules) : 'N/A' !!}</div>
-                    </div>
+
+                <div class="tab-pane has-padding" id="left-tab5">
+                    @include('admin.notices.show-evaluators-assign')
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.published_at') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->published_at ? $notice->published_at->getFromSetting() : 'N/A' }}</div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.expired_at') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->expired_at ? $notice->expired_at->getFromSetting() : 'N/A' }}</div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.purchased_at') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->purchased_at ? $notice->purchased_at->getFromSetting() : 'N/A' }}</div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.price') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->price ? $notice->price : 'N/A' }}</div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.submission_at') }}</strong>:</label>
-                        <div class="form-control-static">{{ $notice->submission_at ? $notice->submission_at->getFromSetting() : 'N/A' }}</div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label"><strong>{{ trans('notices.attributes.submission_address') }}</strong>:</label>
-                        <div class="form-control-static">{!! $notice->submission_address ? nl2br($notice->submission_address) : 'N/A' !!}</div>
-                    </div>
+
+                <div class="tab-pane has-padding" id="left-tab6">
+                    @include('admin.notices.show-evaluations')
                 </div>
             </div>
-        </fieldset>
+        </div>
     </div>
 </div>
 @endsection

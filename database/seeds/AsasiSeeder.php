@@ -49,6 +49,12 @@ class AsasiSeeder extends Seeder
                 'display_name'  => 'Vendor',
                 'description'   => 'Vendor. Fixed role for vendor.',
             ],
+            [
+                'id'            => 3,
+                'name'          => 'evaluator',
+                'display_name'  => 'Evaluator',
+                'description'   => 'Evaluator.',
+            ],
         ];
 
         foreach ($roles as $roleData) {

@@ -88,6 +88,11 @@ class SubmissionDetail extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function evaluation()
+    {
+        return $this->hasOne(SubmissionEvaluation::class);
+    }
+
     public function uploads()
     {
         return $this->morphMany(CustomUpload::class, 'uploadable');
@@ -96,6 +101,7 @@ class SubmissionDetail extends Model
     /**
      * Helpers
      */
+
 
     /*
      * Override functions

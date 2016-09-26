@@ -123,6 +123,13 @@ class User extends Authenticatable
         }
     }
 
+    public function scopeEvaluators($query)
+    {
+        $query->whereHas('roles', function($roles) {
+            return $roles->whereName('evaluator');
+        });
+    }
+
     /* 
      * State controls 
      */
@@ -204,6 +211,11 @@ class User extends Authenticatable
      * Helpers
      */
     
+    public static function options()
+    {
+        return static::lists('name','id')->toArray();
+    }
+
     public function confirmEmail()
     {
         $this->verified = true;

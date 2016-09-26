@@ -25,6 +25,18 @@
             {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
             {!! Former::hidden('type', 'commercial') !!}
             <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-7"> 
+                            {!! Former::text('price')
+                                ->label('Offered Price')
+                                ->prepend('RM')
+                                ->required() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-lg">
                         <thead>
@@ -54,16 +66,7 @@
                                 </tr>
                                 <?php $i++; ?>
                                 @endforeach
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>Price</td>
-                                    <td>
-                                        {!! Former::text('price')
-                                            ->label(false)
-                                            ->prepend('RM')
-                                            ->required() !!}
-                                    </td>
-                                </tr>
+                                
                             @endif
                         </tbody>
                     </table>

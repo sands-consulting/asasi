@@ -69,8 +69,21 @@ $(function() {
 // Single picker
 $('.daterange-single').daterangepicker({ 
     singleDatePicker: true,
+    timePicker: true,
+    timePicker24Hour: true,
     locale: {
       cancelLabel: 'Clear',
-      format: 'YYYY-MM-DD'
+      format: 'YYYY-MM-DD HH:mm:ss'
     }
 });
+
+// Javascript to enable link to tab
+var url = document.location.toString();
+if (url.match('#')) {
+    $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+} 
+
+// Change hash for page-reload
+$('.nav-tabs a').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash;
+})

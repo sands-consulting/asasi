@@ -29,9 +29,7 @@ class HomeController extends Controller
         if (!!Auth::user()->hasPermission('access:admin')) {
             return redirect()
                 ->route('admin');
-        }
-
-        if (!$vendor = Auth::user()->vendor) {
+        } elseif (!$vendor = Auth::user()->vendor) {
             return redirect()
                 ->route('vendors.create')
                 ->with('notice', trans('vendors.notices.public.no-vendor'));

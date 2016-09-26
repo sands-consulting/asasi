@@ -1,40 +1,45 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
-use App\Libraries\Traits\DateAccessorTrait;
 
-class Submission extends Model
+class NoticeEvaluator extends Model
 {
     use RevisionableTrait,
-        DateAccessorTrait,
         SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'type',
-        'price',
         'notice_id',
-        'vendor_id',
-        'status'
+        'user_id',
+        'type'
+    ];
+
+    protected $hidden = [
+        // hidden column
     ];
 
     protected $attributes = [
-        'status' => 'draft'
+        // default attributes value
     ];
 
-    protected $searchable = [
-        'status'
+    protected $searchacble = [
+        // fields
     ];
 
     protected $sortable = [
-        'status'
+        // fields
     ];
 
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
 
     /*
      * Search scopes
@@ -67,36 +72,17 @@ class Submission extends Model
         }
     }
 
-    /* 
-     * State controls 
-     */
-    public function canActivate()
+    public function scopeType($query, $type)
     {
-        return $this->status != 'active';
+        return $query->where('type', $type);
     }
-
-    public function canDeactivate()
-    {
-        return $this->status != 'inactive';
-    }
-    
-    public function canSubmit()
-    {
-        return $this->status === 'completed';
-    }
-
     /*
-     * Relationship
+     * Relationsip
      */
-
+    
     public function notice()
     {
         return $this->belongsTo(Notice::class);
-    }
-
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class);
     }
 
     public function user()
@@ -104,36 +90,47 @@ class Submission extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function details()
+    public function submissions()
     {
-        return $this->hasMany(SubmissionDetail::class);
+        return $this->belongsToMany(Submission::class, 'submission_evaluator', 'user_id', 'submission_id');
     }
 
-    public function evaluators()
-    {
-        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluator', 'submission_id', 'user_id');
-    }
-    
-    /**
-     * Helpers
+    /* 
+     * State controls 
      */
 
-    public function getProgress($value='')
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+    /*
+     * Helpers 
+     */
+
+    public function getProgress($type)
     {
         $progress = 0;
+        $total = $this->submissions()->where('type', $type)->count();
+        $completed = $this->submissions()->where('type', $type)
+                ->wherePivot('status', 'completed')
+                ->count();
 
-        $evaluators = $this->evaluators()->count();
-        $completed = $this->evaluators()->wherePivot('status', 'completed')->count();
-
-        if ($evaluators > 0 && $completed > 0) {
-            $progress = $completed/$evaluators * 100;
-        }
+        if ($total > 0) 
+            $progress = $completed/$total * 100;
 
         return $progress;
+        // return number_format($progress, 2, '.', '');
+
     }
 
-    public function FunctionName($value='')
+    public static function boot()
     {
-        # code...
+        parent::boot();
     }
+
 }

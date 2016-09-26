@@ -23,4 +23,5 @@ return [
 	'view' => 'View',
 	'show' => 'Show',
 	'submit' => 'Submit',
+	'evaluate' => 'Evaluate',
 ];
