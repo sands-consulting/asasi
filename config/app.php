@@ -161,7 +161,6 @@ return [
         /*
          * Asasi Service Providers
          */
-
         Sands\Asasi\Booted\BootedServiceProvider::class,
         Sands\Asasi\Foundation\FoundationServiceProvider::class,
         Sands\Asasi\Scaffold\ScaffoldServiceProvider::class,
@@ -175,6 +174,7 @@ return [
         /*
          * Packages Service Providers
          */
+        Barryvdh\Snappy\ServiceProvider::class,
         Former\FormerServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -251,6 +251,7 @@ return [
         'Log'        => Illuminate\Support\Facades\Log::class,
         'Mail'       => Illuminate\Support\Facades\Mail::class,
         'Password'   => Illuminate\Support\Facades\Password::class,
+        'PDF'        => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'Queue'      => Illuminate\Support\Facades\Queue::class,
         'Redirect'   => Illuminate\Support\Facades\Redirect::class,
         'Redis'      => Illuminate\Support\Facades\Redis::class,
