@@ -61,4 +61,14 @@ class PaymentsController extends Controller
 
         return view('payments.summary', compact('notices'));
     }
+
+    public function receipt()
+    {
+        return view('payments.receipt');
+    }
+
+    public function invoice()
+    {
+        return view('payments.invoice');
+    }
 }
