@@ -71,6 +71,16 @@ class PaymentsServiceProvider extends ServiceProvider
                 'uses'  => 'PaymentsController@receipt'
             ]);
 
+            $router->get('payments/invoice/print', [
+                'as'    => 'payments.invoice',
+                'uses'  => 'PaymentsController@printInvoice'
+            ]);
+
+            $router->get('payments/receipt/print', [
+                'as'    => 'payments.receipt',
+                'uses'  => 'PaymentsController@printReceipt'
+            ]);
+
             $router->resource('payments', 'PaymentsController');
         });
     }

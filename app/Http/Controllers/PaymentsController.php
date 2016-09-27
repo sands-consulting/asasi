@@ -7,6 +7,7 @@ use App\Package;
 use App\Payment;
 use App\Http\Requests\PaymentRequest;
 use App\Repositories\PaymentsRepository;
+use PDF;
 use Auth;
 use Cart;
 use Illuminate\Http\Request;
@@ -67,8 +68,20 @@ class PaymentsController extends Controller
         return view('payments.receipt');
     }
 
+    public function printReceipt()
+    {
+        // return PDF::loadView('payments.printReceipt')->download('receipt.pdf');
+        return view('payments.printReceipt');
+    }
+
     public function invoice()
     {
         return view('payments.invoice');
+    }
+
+    public function printInvoice()
+    {
+        return PDF::loadView('payments.printInvoice')->inline('receipt.pdf');
+        // return view('payments.printInvoice');
     }
 }

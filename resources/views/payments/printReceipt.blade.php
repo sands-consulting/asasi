@@ -10,14 +10,14 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h5 class="panel-title">{{ trans('payments.invoice') }}</h5>
+                                    <h5 class="panel-title">{{ trans('payments.receipt') }}</h5>
                                 </div>
                             </div>
                         </div>
 
                         <div class="panel-body no-padding-bottom">
                             <div class="row">
-                                <div class="col-xs-6 content-group">
+                                <div class="col-sm-6 content-group">
                                     <ul class="list-condensed list-unstyled">
                                         <li>2269 Elba Lane</li>
                                         <li>Paris, France</li>
@@ -25,9 +25,9 @@
                                     </ul>
                                 </div>
 
-                                <div class="col-xs-6 content-group">
-                                    <div class="invoice-details text-right">
-                                        <h5 class="text-uppercase text-semibold">Invoice #49029</h5>
+                                <div class="col-sm-6 content-group">
+                                    <div class="receipt-details">
+                                        <h5 class="text-uppercase text-semibold">receipt #49029</h5>
                                         <ul class="list-condensed list-unstyled">
                                             <li>Date: <span class="text-semibold">January 12, 2015</span></li>
                                             <li>Due date: <span class="text-semibold">May 12, 2015</span></li>
@@ -37,8 +37,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-6 col-lg-9 content-group">
-                                    <span class="text-muted">Invoice To:</span>
+                                <div class="col-md-6 col-lg-9 content-group">
+                                    <span class="text-muted">receipt To:</span>
                                     <ul class="list-condensed list-unstyled">
                                         <li><h5>Rebecca Manes</h5></li>
                                         <li><span class="text-semibold">Normand axis LTD</span></li>
@@ -50,9 +50,9 @@
                                     </ul>
                                 </div>
 
-                                <div class="col-xs-6 col-lg-3 content-group">
+                                <div class="col-md-6 col-lg-3 content-group">
                                     <span class="text-muted">Payment Details:</span>
-                                    <ul class="list-condensed list-unstyled invoice-payment-details">
+                                    <ul class="list-condensed list-unstyled receipt-payment-details">
                                         <li><h5>Total Due: <span class="text-right text-semibold">$8,750</span></h5></li>
                                         <li>Bank name: <span class="text-semibold">Profit Bank Europe</span></li>
                                         <li>Country: <span>United Kingdom</span></li>
@@ -108,7 +108,7 @@
                         </div>
 
                         <div class="panel-body">
-                            <div class="row invoice-payment">
+                            <div class="row receipt-payment">
                                 <div class="col-sm-7">
                                     <div class="content-group">
                                     <h6>Authorized person</h6>
@@ -144,15 +144,14 @@
                                         </div>
 
                                         <div class="text-right">
-                                            <a href="/payments/printInvoice" target="_blank" class="btn btn-primary btn-labeled"><b><i class="icon-printer"></i></b> Print invoice</a>
-                                            {{-- <button type="button" class="btn btn-primary btn-labeled"><b><i class="icon-printer"></i></b> Print invoice</button> --}}
+                                            <button type="button" class="btn btn-primary btn-labeled"><b><i class="icon-printer"></i></b> Print receipt</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <h6>Other information</h6>
-                            <p class="text-muted">Thank you for using Limitless. This invoice can be paid via PayPal, Bank transfer, Skrill or Payoneer. Payment is due within 30 days from the date of delivery. Late payment is possible, but with with a fee of 10% per month. Company registered in England and Wales #6893003, registered office: 3 Goodman Street, London E1 8BF, United Kingdom. Phone number: 888-555-2311</p>
+                            <p class="text-muted">Thank you for using Limitless. This receipt can be paid via PayPal, Bank transfer, Skrill or Payoneer. Payment is due within 30 days from the date of delivery. Late payment is possible, but with with a fee of 10% per month. Company registered in England and Wales #6893003, registered office: 3 Goodman Street, London E1 8BF, United Kingdom. Phone number: 888-555-2311</p>
                         </div>
 
                         <div class="panel-footer">
