@@ -17,46 +17,51 @@
   </tr>
 </table>
 <table class="container">
-    <tr>
-        <td>
-            <table class="table table-bg">
-                <tr>
-                    <td class="col-3">
-                        <span class="text-muted">Invoice Id</span> <br>
-                        49029
-                    </td>
-                    <td  class="col-5" rowspan="3">
-                        <span class="text-muted">Billed To</span>
-                        <ul class="list-condensed list-unstyled">
-                          <li><h5>Rebecca Manes</h5></li>
-                          <li><span class="text-semibold">Normand axis LTD</span></li>
-                          <li>3 Goodman Street</li>
-                          <li>London E1 8BF</li>
-                          <li>United Kingdom</li>
-                          <li>888-555-2311</li>
-                          <li><a href="#">rebecca@normandaxis.ltd</a></li>
-                        </ul>
-                    </td>
-                    <td  class="col-3 text-right" rowspan="3">
-                        <span class="text-muted">Total Due</span> <br>
-                        <h5>RM 30.00</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="text-muted">Invoice Date</span> <br>
-                        January 12, 2015
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="text-muted">Due Date</span> <br>
-                        May 12, 2015
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td class="col-6">
+            <ul class="list-condensed list-unstyled">
+              <li>2269 Elba Lane</li>
+              <li>Paris, France</li>
+              <li>888-555-2311</li>
+            </ul>
+          </td>
+          <td class="col-6 right invoice-details">
+            <h5 class="text-uppercase text-semibold">Invoice #49029</h5>
+            <ul class="list-condensed list-unstyled">
+                <li>Date: <span class="text-semibold">January 12, 2015</span></li>
+                <li>Due date: <span class="text-semibold">May 12, 2015</span></li>
+                <li><h5>Total Due: <span class="text-right text-semibold">RM 30.00</span></h5></li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table class="container">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td class="col-12">
+            <span class="text-muted">Invoice To:</span>
+            <ul class="list-condensed list-unstyled">
+              <li><h5>Rebecca Manes</h5></li>
+              <li><span class="text-semibold">Normand axis LTD</span></li>
+              <li>3 Goodman Street</li>
+              <li>London E1 8BF</li>
+              <li>United Kingdom</li>
+              <li>888-555-2311</li>
+              <li><a href="#">rebecca@normandaxis.ltd</a></li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 </table>
 <table class="container">
   <tr>
