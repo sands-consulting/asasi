@@ -18,13 +18,12 @@ class NoticeEventsController extends Controller
             'notice_event_type_id',
             'location',
             'event_at',
-            'require',
+            'required',
             'notice_id'
         );
 
         // Fixme: temp solution
-        $inputs['require'] = $inputs['require'][0];
-
+        $inputs['required'] = $inputs['required'][0];
         $noticeEvent = NoticeEventsRepository::create(new NoticeEvent, $inputs);
 
         return response()->json($noticeEvent);
