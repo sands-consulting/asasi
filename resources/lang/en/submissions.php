@@ -4,6 +4,7 @@ return [
     'title' => 'Submission',
 
     'attributes' => [
+        'id' => 'Submission Id',
         'type' => 'Type',
         'notice_id' => 'Notice',
         'vendor_id' => 'Vendor',

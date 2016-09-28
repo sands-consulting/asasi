@@ -49,9 +49,9 @@ class EvaluationVendorsDataTable extends DataTable
     {
         $columns = [
             [
-                'data'  => 'name',
-                'name'  => 'vendors.name',
-                'title' => trans('vendors.attributes.name'),
+                'data'  => 'id',
+                'name'  => 'id',
+                'title' => trans('submissions.attributes.id'),
             ],
             [
                 'data'  => 'type',

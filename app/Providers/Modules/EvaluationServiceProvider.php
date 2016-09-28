@@ -35,6 +35,21 @@ class EvaluationServiceProvider extends ServiceProvider
 
                 $router->resource('evaluations', 'EvaluationsController');
             });
+
+            $router->group(['namespace' => 'Api', 'prefix' => 'api'], function ($router) {
+                $router->post('evaluations/store', [
+                    'as' => 'api.evaluations.store',
+                    'uses' => 'EvaluationsController@store'
+                ]);
+                $router->post('evaluations/update', [
+                    'as' => 'api.evaluations.update',
+                    'uses' => 'EvaluationsController@update'
+                ]);
+                $router->post('evaluations/delete/{evaluations}', [
+                    'as' => 'api.evaluations.delete',
+                    'uses' => 'EvaluationsController@delete'
+                ]);
+            });
         });
     }
 }

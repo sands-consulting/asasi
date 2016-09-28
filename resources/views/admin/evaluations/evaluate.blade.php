@@ -52,14 +52,15 @@
             <tr>
                 <th width="5%">#</th>
                 <th>Title</th>
-                <th width="20%">Value</th>
+                <th>Value</th>
+                <th>Remark</th>
                 <th width="15%">Rating</th>
             </tr>
         </thead>
         <tbody>
             <?php $i = 1; ?>
             @foreach($submissionDetails as $detail)
-            <tr>
+            <tr id="row-{{ $detail->id }}">
                 <td>{{ $i }}</td>
                 <td>
                     {{ $detail->requirement->title }}
@@ -74,16 +75,37 @@
                     </span>
                 </td>
                 <td>
-                    {!! Former::select() 
-                        ->options([
-                            '' => 'Select',
-                            '1' => '1',
-                            '2' => '2',
-                            '3' => '3',
-                            '4' => '4',
-                            '5' => '5',
-
-                        ]) !!}
+                    <a href="#" 
+                        class="myeditable"
+                        data-type="textarea"
+                        data-onblur="submit"
+                        @if ($detail->evaluation) 
+                            data-pk="{{ $detail->evaluation->id }}" 
+                            data-name="remark"
+                        @else    
+                            data-name="submission_evaluation[{{ $detail->id }}][remark]"
+                        @endif 
+                        data-url="{{ route('api.evaluations.update') }}"
+                    >{{ $detail->evaluation ? $detail->evaluation->remark : '' }}</a>
+                </td>
+                <td>
+                    <a href="#" 
+                        class="myeditable" 
+                        data-type="select"
+                        data-mode="inline"
+                        data-showButtons="false"
+                        data-onblur="submit"
+                        data-source="[{value: '', text: 'Select'}, {value: 1, text: '1'}, {value: 2, text: '2'}, {value: 3, text: '3'}, {value: 4, text: '4'}, {value: 5, text: '5'}]"
+                        @if ($detail->evaluation) 
+                            data-pk="{{ $detail->evaluation->id }}"
+                            data-value="{{ $detail->evaluation->rating }}"
+                            data-name="rating"
+                        @else
+                            data-name="submission_evaluation[{{ $detail->id }}][rating]"
+                        @endif
+                        data-url="{{ route('api.evaluations.update') }}"
+                        data-inputclass="no-minimum-width"
+                    >{{ $detail->evaluation ? $detail->evaluation->rating : '' }}</a>
                 </td>
             </tr>
                 <?php $i++; ?>
@@ -95,7 +117,7 @@
 <div class="panel panel-flat">
     <div class="panel-body">
         <a href="{{ route('admin.evaluations.vendors', $submission->notice->id) }}" class="btn btn-default">Back</a>
-        <button class="btn btn-primary pull-right">Save</button>
+        <button id="evaluations-btn-save" class="btn btn-primary pull-right" data-url="{{ route('api.evaluations.store') }}">Save</button>
     </div>
 </div>
 @endsection

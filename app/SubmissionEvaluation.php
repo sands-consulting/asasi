@@ -15,7 +15,9 @@ class SubmissionEvaluation extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        // SubmissionEvaluation fields
+        'rating',
+        'remark',
+        'submission_detail_id',
     ];
 
     protected $hidden = [
@@ -33,7 +35,7 @@ class SubmissionEvaluation extends Model
     protected $sortable = [
         // fields
     ];
-
+    
     public function logs()
     {
         return $this->morphMany(UserLog::class, 'actionable');
