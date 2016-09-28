@@ -21,6 +21,6 @@ Route::get('/', [
 	'as' 	=> 'home.index'
 ]);
 Route::get('admin', [
-	'uses'	=> 'Admin\UsersController@index',
+	'uses'	=> 'Admin\DashboardController@index',
 	'as'	=> 'admin'
 ]);
