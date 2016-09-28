@@ -23,10 +23,6 @@ class VendorsServiceProvider extends ServiceProvider
             $router->model('vendors', 'App\Vendor');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->put('vendors/{vendors}/activate', [
-                    'as'    => 'admin.vendors.activate',
-                    'uses'  => 'VendorsController@activate'
-                ]);
                 $router->put('vendors/{vendors}/approve', [
                     'as'    => 'admin.vendors.approve',
                     'uses'  => 'VendorsController@approve'
@@ -35,9 +31,21 @@ class VendorsServiceProvider extends ServiceProvider
                     'as'    => 'admin.vendors.reject',
                     'uses'  => 'VendorsController@reject'
                 ]);
-                $router->put('vendors/{vendors}/deactivate', [
-                    'as'    => 'admin.vendors.deactivate',
-                    'uses'  => 'VendorsController@deactivate'
+                $router->put('vendors/{vendors}/activate', [
+                    'as'    => 'admin.vendors.activate',
+                    'uses'  => 'VendorsController@activate'
+                ]);
+                $router->put('vendors/{vendors}/suspend', [
+                    'as'    => 'admin.vendors.suspend',
+                    'uses'  => 'VendorsController@suspend'
+                ]);
+                $router->put('vendors/{vendors}/blacklist', [
+                    'as'    => 'admin.vendors.blacklist',
+                    'uses'  => 'VendorsController@blacklist'
+                ]);
+                $router->put('vendors/{vendors}/unblacklist', [
+                    'as'    => 'admin.vendors.unblacklist',
+                    'uses'  => 'VendorsController@unblacklist'
                 ]);
                 $router->get('vendors/{vendors}/revisions', [
                     'as'    => 'admin.vendors.revisions',
@@ -62,6 +70,11 @@ class VendorsServiceProvider extends ServiceProvider
                 'uses'  => 'VendorsController@pending'
             ]);
             
+            $router->get('vendors/profile', [
+                'as'    => 'vendors.profile',
+                'uses'  => 'VendorsController@profile'
+            ]);
+
             $router->resource('vendors', 'VendorsController');
         });
     }

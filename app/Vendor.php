@@ -94,24 +94,34 @@ class Vendor extends Authenticatable
     /* 
      * State controls 
      */
-    public function canActivate()
-    {
-        return $this->status != 'active';
-    }
-
-    public function canDeactivate()
-    {
-        return $this->status != 'inactive';
-    }
-    
     public function canApprove()
     {
-        return $this->status != 'approved' && $this->status != 'rejected';
+        return $this->status == 'pending-approval' && $this->status != 'rejected';
     }
 
     public function canReject()
     {
-        return $this->status != 'rejected' && $this->status != 'approved';
+        return $this->status == 'pending-approval' && $this->status != 'rejected';
+    }
+
+    public function canSuspend()
+    {
+        return $this->status != 'suspended' && $this->status != 'pending-approval';
+    }
+
+    public function canActivate()
+    {
+        return $this->status == 'suspended';
+    }
+
+    public function canBlacklist()
+    {
+        return $this->status != 'blacklisted' && $this->status != 'pending-approval';
+    }
+
+    public function canUnblacklist()
+    {
+        return $this->status == 'blacklisted';
     }
 
     /*
@@ -121,6 +131,11 @@ class Vendor extends Authenticatable
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     public function city()

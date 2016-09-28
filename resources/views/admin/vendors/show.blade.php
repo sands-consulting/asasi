@@ -20,6 +20,26 @@
             <i class=" icon-cross2"></i> <span>{{ trans('vendors.buttons.reject') }}</span>
         </a>
         @endif
+        @if($vendor->canSuspend())
+        <a href="{{ route('admin.vendors.suspend', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#suspend-modal">
+            <i class=" icon-user-lock"></i> <span>{{ trans('vendors.buttons.suspend') }}</span>
+        </a>
+        @endif
+        @if($vendor->canActivate())
+        <a href="{{ route('admin.vendors.activate', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text text-success legitRipple" data-method="PUT">
+            <i class=" icon-user-check"></i> <span>{{ trans('vendors.buttons.activate') }}</span>
+        </a>
+        @endif
+        @if($vendor->canBlacklist())
+        <a href="{{ route('admin.vendors.blacklist', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple" data-toggle="modal" data-target="#blacklist-modal">
+            <i class=" icon-user-block"></i> <span>{{ trans('vendors.buttons.blacklist') }}</span>
+        </a>
+        @endif
+        @if($vendor->canUnblacklist())
+        <a href="{{ route('admin.vendors.unblacklist', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple" data-method="PUT">
+            <i class=" icon-user-block"></i> <span>{{ trans('vendors.buttons.unblacklist') }}</span>
+        </a>
+        @endif
         <a href="{{ route('admin.vendors.edit', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple" data-method="GET">
             <i class=" icon-pencil5"></i> <span>{{ trans('vendors.buttons.edit') }}</span>
         </a>
@@ -34,6 +54,18 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
         <h5 class="panel-title">{{ trans('vendors.views.show.admin.title') }}: {{ $vendor->name }}</h5>
+        <div class="heading-elements">
+            @if ($vendor->status == 'approved')
+                <span class="label label-success heading-text">
+            @elseif ($vendor->status == 'suspended')
+                <span class="label label-danger heading-text">
+            @elseif ($vendor->status == 'blacklisted')
+                <span class="label bg-grey-800 heading-text">
+            @else
+                <span class="label label-default heading-text">
+            @endif
+            {{ $vendor->status }}</span>
+        </div>
     </div>
     
     <div class="panel-body">
@@ -188,34 +220,8 @@
     </div>
 </div>
 
-<div id="reject-modal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h5 class="modal-title">Reject Form</h5>
-            </div>
 
-            {!! Former::open_vertical(route('admin.vendors.reject', $vendor->id))->method('PUT') !!}
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                {!! Former::textarea('remarks')
-                                    ->label('vendors.attributes.remarks')
-                                    ->rows(5)
-                                    ->required() !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link legitRipple" data-dismiss="modal">Close<span class="legitRipple-ripple"></span><span class="legitRipple-ripple"></span></button>
-                    <button type="submit" class="btn btn-primary legitRipple">Submit form</button>
-                </div>
-            {!! Former::close() !!}
-        </div>
-    </div>
-</div>
+    @include('admin.vendors.modals.reject')
+    @include('admin.vendors.modals.suspend')
+    @include('admin.vendors.modals.blacklist')
 @endsection

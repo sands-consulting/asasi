@@ -7,6 +7,7 @@ use App\Events\VendorApproved;
 use App\Events\VendorRejected;
 use App\Http\Requests\VendorRequest;
 use App\Repositories\VendorsRepository;
+use App\Repositories\UsersRepository;
 use App\Repositories\UserLogsRepository;
 use App\Setting;
 use App\User;
@@ -78,22 +79,6 @@ class VendorsController extends Controller
         return $table->render('admin.vendors.revisions', compact('place'));
     }
 
-    public function activate(Request $request, Vendor $vendor)
-    {
-        VendorsRepository::activate($vendor);
-        return redirect()
-            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
-            ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
-    }
-
-    public function deactivate(Request $request, Vendor $vendor)
-    {
-        VendorsRepository::deactivate($vendor);
-        return redirect()
-            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
-            ->with('notice', trans('vendors.notices.deactivated', ['name' => $vendor->name]));
-    }
-
     public function approve(Request $request, Vendor $vendor)
     {
         $inputs = $request->only(['redirect_to']);
@@ -101,6 +86,7 @@ class VendorsController extends Controller
 
         $role_id = Setting::where('key', 'vendor_role_id')->first()->value;
         User::find($vendor->user->id)->roles()->attach($role_id);
+        User::find($vendor->user->id)->vendors()->attach($role_id);
 
         UserLogsRepository::log(Auth::user(), 'Approve Vendor', $vendor, $request->getClientIp());
 
@@ -123,5 +109,63 @@ class VendorsController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
             ->with('notice', trans('vendors.notices.rejected', ['name' => $vendor->name]));
+    }
+
+    public function suspend(Request $request, Vendor $vendor)
+    {
+        $inputs = $request->only(['redirect_to', 'remarks']);
+        
+        VendorsRepository::update($vendor, $inputs, ['status' => 'suspended']);
+
+        foreach($vendor->users as $user) {
+            UsersRepository::suspend($user);
+        }
+
+        UserLogsRepository::log(Auth::user(), 'Suspend Vendor', $vendor, $request->getClientIp(), $inputs['remarks']);
+        
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.suspended', ['name' => $vendor->name]));
+    }
+
+    public function activate(Request $request, Vendor $vendor)
+    {
+        $inputs = $request->only(['redirect_to']);
+        
+        VendorsRepository::update($vendor, $inputs, ['status' => 'approved']);
+
+        foreach($vendor->users as $user) {
+            UsersRepository::activate($user);
+        }
+
+        UserLogsRepository::log(Auth::user(), 'Activate Vendor', $vendor, $request->getClientIp());
+        
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
+    }
+
+    public function blacklist(Request $request, Vendor $vendor)
+    {
+        $inputs = $request->only(['redirect_to', 'remarks']);
+        
+        VendorsRepository::update($vendor, $inputs, ['status' => 'blacklisted']);
+        UserLogsRepository::log(Auth::user(), 'Blacklist Vendor', $vendor, $request->getClientIp());
+        
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.blacklisted', ['name' => $vendor->name]));
+    }
+
+    public function unblacklist(Request $request, Vendor $vendor)
+    {
+        $inputs = $request->only(['redirect_to']);
+        
+        VendorsRepository::update($vendor, $inputs, ['status' => 'approved']);
+        UserLogsRepository::log(Auth::user(), 'Unblacklist Vendor', $vendor, $request->getClientIp());
+        
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
+            ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
     }
 }

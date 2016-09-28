@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasOne(Vendor::class);
     }
 
+    public function vendors()
+    {
+        return $this->belongsToMany(Vendor::class);
+    }
+
     public function organizations()
     {
         return $this->belongsToMany(Organization::class);

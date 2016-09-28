@@ -71,8 +71,18 @@ class VendorsPolicy extends BasePolicy
         return $this->user->hasPermission('vendor:activate') && $vendor->canActivate();
     }
 
-    public function deactivate(Vendor $vendor)
+    public function suspend(Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:deactivate') && $vendor->canDeactivate();
+        return $this->user->hasPermission('vendor:suspend') && $vendor->canSuspend();
+    }
+
+    public function blacklist(Vendor $vendor)
+    {
+        return $this->user->hasPermission('vendor:blacklist') && $vendor->canBlacklist();
+    }
+
+    public function unblacklist(Vendor $vendor)
+    {
+        return $this->user->hasPermission('vendor:deblacklist') && $vendor->canUnblacklist();
     }
 }

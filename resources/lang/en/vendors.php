@@ -51,6 +51,10 @@ return [
         'complete-application' => 'Send Application',
         'cancel-application' => 'Cancel Application',
         'reject' => 'Reject',
+        'suspend' => 'Suspend',
+        'activate' => 'Activate',
+        'blacklist' => 'Blacklist',
+        'unblacklist' => 'Unblacklist',
     ],
 
     'notices' => [
@@ -70,6 +74,9 @@ return [
         'updated'  => 'Vendor :name updated',
         'deleted'  => 'Vendor :name deleted',
         'rejected' => 'Vendor :name has been rejected',
+        'suspended' => 'Vendor :name has been suspended',
+        'activated' => 'Vendor :name has been activated',
+        'blacklisted' => 'Vendor :name has been blacklisted',
     ],
 
 	'views' => [
