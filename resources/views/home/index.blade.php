@@ -22,6 +22,100 @@
 
 @section('content')
 	<div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-flat">
+				<div class="panel-heading">
+					<h6 class="panel-title">{{ trans('home.views.index.panels.news.title') }}</h6>
+				</div>
+
+				<div class="panel-body" style="min-height: 210px">
+					<div class="content-group-xs" id="bullets"></div>
+
+					<ul class="media-list">
+						<li class="media">
+							<div class="media-body">
+								Stats for July, 6: 1938 orders, $4220 revenue
+								<div class="media-annotation">2 hours ago</div>
+							</div>
+
+							<div class="media-right">
+								<a href="#"><i class="icon-arrow-right13"></i></a>
+							</div>
+						</li>
+						<li class="media">
+							<div class="media-body">
+								Stats for July, 6: 1938 orders, $4220 revenue
+								<div class="media-annotation">2 hours ago</div>
+							</div>
+
+							<div class="media-right">
+								<a href="#"><i class="icon-arrow-right13"></i></a>
+							</div>
+						</li>
+						<li class="media">
+							<div class="media-body">
+								Stats for July, 6: 1938 orders, $4220 revenue
+								<div class="media-annotation">2 hours ago</div>
+							</div>
+
+							<div class="media-right">
+								<a href="#"><i class="icon-arrow-right13"></i></a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="panel panel-flat border-bottom-success">
+						<div class="panel-heading">
+							<h6 class="panel-title">Bottom custom border</h6>
+						</div>
+						
+						<div class="panel-body">
+							Panel with bottom <code>success</code> border
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="panel panel-flat border-bottom-danger">
+						<div class="panel-heading">
+							<h6 class="panel-title">Bottom custom border</h6>
+						</div>
+						
+						<div class="panel-body">
+							Panel with bottom <code>success</code> border
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="panel panel-flat border-bottom-warning">
+						<div class="panel-heading">
+							<h6 class="panel-title">Bottom custom border</h6>
+						</div>
+						
+						<div class="panel-body">
+							Panel with bottom <code>success</code> border
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="panel panel-flat border-bottom-info">
+						<div class="panel-heading">
+							<h6 class="panel-title">Bottom custom border</h6>
+						</div>
+						
+						<div class="panel-body">
+							Panel with bottom <code>success</code> border
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -56,6 +150,8 @@
 									<tr>
 										<th>Organization</th>
 										<th>Description</th>
+										<th>Qualification</th>
+										<th>Expiry Date</th>
 										<th>Price</th>
 										<th></th>
 									</tr>
@@ -64,18 +160,21 @@
 									@if(!$notices->isEmpty())
 										@foreach($notices as $notice)
 										<tr>
-											<td>{{ link_to_route('admin.notices.show', $notice->organization->short_name, $notice->id) }}</td>
+											<td>{{ $notice->organization->short_name }}</td>
 											<td>
-												<p>{{ $notice->name }}</p>
+												<p>{{ link_to_route('admin.notices.show', $notice->name, $notice->id) }}</p>
 												<p><small>{{ str_limit($notice->description, 100) }}</small></p>
 											</td>
+											<td></td>
+											<td>{{ $notice->expired_at->getFromSetting() }}</td>
 											<td>{{ $notice->price }}</td>
 											<td>
-											@if(Auth::user()->canBuy())
-												<a href="{{ route('carts.add', $notice->id) }}" class="btn btn-sm" data-method="POST">Add To Cart</a></td>
-											@else
-												<i>Let vendor use cart and force to subscribe before paying</i>
-											@endif
+												@if(Auth::user()->canBuy())
+													<a href="{{ route('carts.add', $notice->id) }}" class="btn btn-sm" data-method="POST"><i class="icon-cart"></i> <br> Add To Cart</a>
+												@else
+													<i>Let vendor use cart and force to subscribe before paying</i>
+												@endif
+											</td>
 										</tr>
 										@endforeach
 									@else
@@ -95,87 +194,6 @@
 						</div>
 						<a class="heading-elements-toggle"><i class="icon-more"></i></a>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<div class="panel panel-flat">
-				<div class="panel-heading">
-					<h6 class="panel-title">{{ trans('home.views.index.panels.news.title') }}</h6>
-				</div>
-
-				<div class="panel-body">
-					<div class="content-group-xs" id="bullets"></div>
-
-					<ul class="media-list">
-						<li class="media">
-							<div class="media-body">
-								Stats for July, 6: 1938 orders, $4220 revenue
-								<div class="media-annotation">2 hours ago</div>
-							</div>
-
-							<div class="media-right">
-								<a href="#"><i class="icon-arrow-right13"></i></a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-sm-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h6 class="panel-title">{{ trans('home.views.index.panels.vendors.title') }}</h6>
-				</div>
-
-				<div class="panel-body">
-					@if (!empty($vendor))
-						{!! Former::setOption('TwitterBootstrap3.labelWidths', array('large' => 5, 'small' => 5)) !!}
-						{!! Former::open_horizontal()->method('POST') !!}
-							{!! Former::populate($vendor) !!}
-							
-							{!! Former::text('name')
-								->label('vendors.attributes.name')
-								->readonly() !!}
-
-							{!! Former::text('created_at')
-								->label('vendors.attributes.created_at')
-								->forceValue($vendor->created_at->format('d-m-Y'))
-								->readonly() !!}
-
-							{!! Former::text('status')
-								->label('vendors.attributes.status')
-								->forceValue(trans("statuses.$vendor->status"))
-								->readonly() !!}
-							@if ($vendor->status != 'approved')
-								<div class="form-group">
-									<div class="col-sm-12">
-									@if ($vendor->status == 'draft')
-										{!! link_to_route('vendors.edit', trans('vendors.buttons.edit-application'), $vendor->id, ['class' => 'btn btn-default btn-block']) !!}
-										{!! Former::submit(trans('vendors.buttons.complete-application'))
-											->addClass('btn-block bg-blue')
-											->data_confirm(trans('app.confirmation'))
-											->formaction(route('vendors.complete-application', $vendor->id)) !!}
-									@endif
-									@if($vendor->status == 'pending-approval')
-										{!! Former::submit(trans('vendors.buttons.cancel-application'))
-											->addClass('btn-block btn-danger')
-											->data_confirm(trans('app.confirmation'))
-											->formaction(route('vendors.cancel-application', $vendor->id)) !!}
-									@endif
-									@if($vendor->status == 'rejected')
-										{!! link_to_route('vendors.create', trans('vendors.buttons.create-application'), [], ['class' => 'btn btn-default bg-blue btn-block']) !!}
-									@endif
-									</div>
-								</div>
-							@endif
-						@else
-							{!! link_to_route('vendors.create', trans('vendors.buttons.create-application')) !!}
-						@endif
-					{!! Former::close() !!}
 				</div>
 			</div>
 		</div>

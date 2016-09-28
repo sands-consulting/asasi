@@ -9,7 +9,7 @@
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
 </head>
-<body class="layout-boxed navbar-top">
+<body class="navbar-top">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
 	<div class="navbar-boxed">
 		<div class="navbar-header">
@@ -146,6 +146,31 @@
 						<i class="icon-home2 position-left"></i> {{ trans('menu.home') }}
 					</a>
 				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-nav-material navbar-right">
+				<li>
+					<a href="{{ route('vendors.profile') }}" class="legitRipple">
+						<i class="icon-office position-left"></i>
+						{{ Auth::user()->vendor->name }}
+						{{-- <span class="label label-inline position-right bg-success-400">1.4</span> --}}
+					</a>
+				</li>
+
+				{{-- <li class="dropdown">
+					<a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
+						<i class="icon-cog3"></i>
+						<span class="visible-xs-inline-block position-right">Share</span>
+						<span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+						<li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+						<li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+					</ul>
+				</li> --}}
 			</ul>
 		</div>
 	</div>

@@ -9,7 +9,7 @@
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
-<body class="navbar-top">
+<body class="navbar-top sidebar-xs">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
     <div class="navbar-boxed">
         <div class="navbar-header">
@@ -84,7 +84,7 @@
 
 <div class="page-container">
     <div class="page-content">
-        <div class="sidebar sidebar-main sidebar-default sidebar-fixed">
+        <div class="sidebar sidebar-main sidebar-default">
             <div class="sidebar-content">
                 <div class="sidebar-user-material">
                     <div class="category-content">

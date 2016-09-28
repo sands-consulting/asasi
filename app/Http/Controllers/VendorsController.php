@@ -80,4 +80,10 @@ class VendorsController extends Controller
     {
         return view('vendors.pending', compact('vendor'));
     }
+
+    public function profile()
+    {
+        $vendor = Auth::user()->vendor;
+        return view('vendors.profile', compact('vendor'));
+    }
 }
