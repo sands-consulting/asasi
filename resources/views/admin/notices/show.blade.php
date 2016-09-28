@@ -60,6 +60,9 @@
                 <li>
                     <a href="#left-tab6" data-toggle="tab"><i class="icon-pencil position-left"></i> Evaluations</a>
                 </li>
+                <li>
+                    <a href="#left-tab7" data-toggle="tab"><i class="icon-medal-star position-left"></i> Award</a>
+                </li>
             </ul>
 
             <div class="tab-content">
@@ -85,6 +88,10 @@
 
                 <div class="tab-pane has-padding" id="left-tab6">
                     @include('admin.notices.show-evaluations')
+                </div>
+
+                <div class="tab-pane has-padding" id="left-tab7">
+                    @include('admin.notices.show-award')
                 </div>
             </div>
         </div>

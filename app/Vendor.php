@@ -86,6 +86,11 @@ class Vendor extends Authenticatable
         }
     }
 
+    public function scopeAwarded($query)
+    {
+        return $query->whereStatus('awarded');
+    }
+
     /* 
      * State controls 
      */

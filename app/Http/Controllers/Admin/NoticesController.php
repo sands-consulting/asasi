@@ -55,8 +55,9 @@ class NoticesController extends Controller
         $submissions['technical'] = $notice->submissions()->where('type', 'technical')->get();
         $evaluators['commercial'] = $notice->evaluators()->where('type','commercial')->get();
         $evaluators['technical'] = $notice->evaluators()->where('type','technical')->get();
+        $vendorAwarded = $notice->vendors()->awarded()->first();
 
-        return view('admin.notices.show', compact('notice', 'vendors', 'submissions', 'evaluators'));
+        return view('admin.notices.show', compact('notice', 'vendors', 'submissions', 'evaluators', 'vendorAwarded'));
     }
 
     public function edit(Notice $notice)
