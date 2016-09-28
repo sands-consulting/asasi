@@ -39,7 +39,7 @@ class NoticesDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '80', 'class' => 'text-center'])
+                    ->addAction(['width' => '5%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -49,22 +49,26 @@ class NoticesDataTable extends DataTable
             [
                 'data' => 'name',
                 'name' => 'name',
-                'title' => trans('notices.attributes.name')
+                'title' => trans('notices.attributes.name'),
+                'width' => '40%'
             ],
             [
                 'data' => 'number',
                 'name' => 'number',
-                'title' => trans('notices.attributes.number')
+                'title' => trans('notices.attributes.number'),
+                'width' => '15%'
             ],
             [
                 'data' => 'published_at',
                 'name' => 'published_at',
-                'title' => trans('notices.attributes.published_at')
+                'title' => trans('notices.attributes.published_at'),
+                'width' => '15%'
             ],
             [
                 'data' => 'status',
                 'name' => 'status',
-                'title' => trans('notices.attributes.status')
+                'title' => trans('notices.attributes.status'),
+                'width' => '15%'
             ],
         ];
     }
@@ -78,6 +82,7 @@ class NoticesDataTable extends DataTable
     {
         $data = parent::getBuilderParameters();
         $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        $data['autoWidth'] = false;
         return $data;
     }
 }

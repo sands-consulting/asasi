@@ -1,17 +1,17 @@
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-12">
         <div class="form-group">
             <label class="control-label"><strong>{{ trans('notices.attributes.name') }}</strong>:</label>
             <div class="form-control-static">{{ $notice->name }}</div>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <div class="form-group">
             <label class="control-label"><strong>{{ trans('notices.attributes.number') }}</strong>:</label>
             <div class="form-control-static">{{ $notice->number }}</div>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <div class="form-group">
             <label class="control-label"><strong>{{ trans('notices.attributes.notice_type_id') }}</strong>:</label>
             <div class="form-control-static">{{ $notice->type ? $notice->type->name : 'N/A' }}</div>

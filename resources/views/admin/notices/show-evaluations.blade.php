@@ -5,7 +5,7 @@
             <th>Vendor</th>
             <th>Type</th>
             <th>Progress</th>
-            <th>Action</th>
+            <th>Score</th>
         </thead>
         <tbody>
             @if (!$submissions['commercial']->isEmpty())
@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ link_to_route('admin.users.show', trans('actions.show'), $submission->id) }}</td>
+                        <td></td>
                     </tr>
                     <?php $i++ ?>
                 @endforeach
@@ -41,7 +41,7 @@
             <th>Vendor</th>
             <th>Type</th>
             <th>Progress</th>
-            <th>Action</th>
+            <th>Score</th>
         </thead>
         <tbody>
             @if (!$submissions['technical']->isEmpty())
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ link_to_route('admin.users.show', trans('actions.show'), $submission->id) }}</td>
+                        <td></td>
                     </tr>
                     <?php $i++ ?>
                 @endforeach

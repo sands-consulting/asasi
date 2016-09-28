@@ -46,7 +46,7 @@ return [
             'status' => 'Status',
         ],
         'show' => [
-            'title' => 'View',
+            'title' => 'View Notice',
         ],
         'create' => [
             'title' => 'New',

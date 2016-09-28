@@ -33,7 +33,7 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h5 class="panel-title">{{ trans('notices.views.show.title') }}: {{ $notice->name }}</h5>
+        <h5 class="panel-title">{{ trans('notices.views.show.title') }}</h5>
     </div>
     
     <div class="panel-body">
