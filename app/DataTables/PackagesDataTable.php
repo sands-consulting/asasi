@@ -24,7 +24,7 @@ class PackagesDataTable extends DataTable
 
     public function query()
     {
-        $query = Package::where('status', 'active');
+        $query = Package::whereNotNull('name');
 
         if($this->datatables->request->input('q', null))
         {

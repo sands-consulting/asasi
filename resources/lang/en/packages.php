@@ -11,6 +11,7 @@ return [
         'fee_amount' => 'Fee Amount',
         'fee_tax_code' => 'Fee Tax Code',
         'fee_tax_rate' => 'Fee Tax Rate',
+        'label_color' => 'Label Color',
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
@@ -44,6 +45,7 @@ return [
         ],
         'edit' => [
             'title' => 'Edit',
+            'legend' => 'Package Details'
         ],
         'revisions' => [
 

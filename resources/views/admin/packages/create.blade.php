@@ -19,7 +19,7 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-body">
-        {!! Former::open(route('admin.packages.index'))->method('POST') !!}
+        {!! Former::open_vertical(route('admin.packages.index'))->method('POST') !!}
             @include('admin.packages.form')
             <div class="form-group">
                 <div class="col-lg-10 col-sm-8 col-lg-offset-2 col-sm-offset-4">

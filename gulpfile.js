@@ -69,6 +69,7 @@ elixir(function(mix) {
         'vendor/x-editable/input-ext/single-switchery.js',
         'vendor/x-editable/input-ext/daterangepicker.js',
         'vendor/notice_wizard.js',
+        'vendor/form_select2.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
     .version([

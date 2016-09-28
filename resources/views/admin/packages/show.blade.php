@@ -40,7 +40,7 @@
         <fieldset>
             <legend class="text-semibold">
                 <i class="icon-file-text2 position-left"></i>
-                Vendor Details
+                Package Details
             </legend>
             <div class="row">
                 <div class="col-sm-6">

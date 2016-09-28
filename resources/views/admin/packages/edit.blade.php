@@ -18,14 +18,17 @@
 
 @section('content')
 <div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">{{ $package->name }}</h5>
+    </div>
     <div class="panel-body">
-        {!! Former::open(route('admin.packages.show', $package->id))->method('PUT') !!}
+        {!! Former::open_vertical(route('admin.packages.show', $package->id))->method('PUT') !!}
             {!! Former::populate($package) !!}
             @include('admin.packages.form')
             <div class="form-group">
-                <div class="col-lg-10 col-sm-8 col-lg-offset-2 col-sm-offset-4">
-                    {!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
+                <div class="col-sm-12 text-right">
                     {!! link_to_route('admin.packages.index', trans('actions.cancel'), [], ['class' => 'btn btn-default']) !!}
+                    {!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
                 </div>
             </div>
         {!! Former::close() !!}

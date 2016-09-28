@@ -23,6 +23,7 @@ class CreatePackagesTable extends Migration
             $table->decimal('fee_amount');
             $table->string('fee_tax_code');
             $table->decimal('fee_tax_rate');
+            $table->string('label_color')->nullable();
             $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
