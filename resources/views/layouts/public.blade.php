@@ -148,14 +148,15 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-nav-material navbar-right">
+				@if (Auth::user()->vendor)
 				<li>
 					<a href="{{ route('vendors.profile') }}" class="legitRipple">
 						<i class="icon-office position-left"></i>
-						{{ Auth::user()->vendor->name }}
+						{{  Auth::user()->vendor->name  }}
 						{{-- <span class="label label-inline position-right bg-success-400">1.4</span> --}}
 					</a>
 				</li>
-
+				@endif
 				{{-- <li class="dropdown">
 					<a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
 						<i class="icon-cog3"></i>
