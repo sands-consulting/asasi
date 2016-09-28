@@ -161,7 +161,6 @@ return [
         /*
          * Asasi Service Providers
          */
-
         Sands\Asasi\Booted\BootedServiceProvider::class,
         Sands\Asasi\Foundation\FoundationServiceProvider::class,
         Sands\Asasi\Scaffold\ScaffoldServiceProvider::class,
@@ -175,6 +174,7 @@ return [
         /*
          * Packages Service Providers
          */
+        Barryvdh\Snappy\ServiceProvider::class,
         Former\FormerServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -196,6 +196,7 @@ return [
          * Modules
          */
         App\Providers\Modules\AllocationsServiceProvider::class,
+        App\Providers\Modules\DashboardServiceProvider::class,
         App\Providers\Modules\PackagesServiceProvider::class,
         App\Providers\Modules\NewsServiceProvider::class,
         App\Providers\Modules\NoticesServiceProvider::class,
@@ -234,15 +235,19 @@ return [
         'Blade'      => Illuminate\Support\Facades\Blade::class,
         'Bus'        => Illuminate\Support\Facades\Bus::class,
         'Cache'      => Illuminate\Support\Facades\Cache::class,
+        'Cart'       => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Config'     => Illuminate\Support\Facades\Config::class,
         'Cookie'     => Illuminate\Support\Facades\Cookie::class,
         'Crypt'      => Illuminate\Support\Facades\Crypt::class,
         'DB'         => Illuminate\Support\Facades\DB::class,
         'Eloquent'   => Illuminate\Database\Eloquent\Model::class,
+        'Entrust'    => Zizaco\Entrust\EntrustFacade::class,
         'Event'      => Illuminate\Support\Facades\Event::class,
         'File'       => Illuminate\Support\Facades\File::class,
         'Form'       => Collective\Html\FormFacade::class,
+        'Former'     => Former\Facades\Former::class,
         'Gate'       => Illuminate\Support\Facades\Gate::class,
+        'Gravatar'   => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'Hash'       => Illuminate\Support\Facades\Hash::class,
         'Input'      => Illuminate\Support\Facades\Input::class,
         'Html'       => Collective\Html\HtmlFacade::class,
@@ -251,6 +256,7 @@ return [
         'Log'        => Illuminate\Support\Facades\Log::class,
         'Mail'       => Illuminate\Support\Facades\Mail::class,
         'Password'   => Illuminate\Support\Facades\Password::class,
+        'PDF'        => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'Queue'      => Illuminate\Support\Facades\Queue::class,
         'Redirect'   => Illuminate\Support\Facades\Redirect::class,
         'Redis'      => Illuminate\Support\Facades\Redis::class,
@@ -263,12 +269,6 @@ return [
         'URL'        => Illuminate\Support\Facades\URL::class,
         'Validator'  => Illuminate\Support\Facades\Validator::class,
         'View'       => Illuminate\Support\Facades\View::class,
-        'Entrust'    => Zizaco\Entrust\EntrustFacade::class,
-        'Html'       => Collective\Html\HtmlFacade::class,
-        'Form'       => Collective\Html\FormFacade::class,
-        'Former'     => Former\Facades\Former::class,
-        'Gravatar'   => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
-        'Cart'       => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];
