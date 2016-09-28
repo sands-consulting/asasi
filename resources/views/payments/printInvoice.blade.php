@@ -22,7 +22,7 @@
             <table class="table table-bg">
                 <tr>
                     <td class="col-3">
-                        <span class="text-muted">Invoice Id</span> <br>
+                        <span class="text-muted">Invoice Id</span><br>
                         49029
                     </td>
                     <td  class="col-5" rowspan="3">
@@ -38,19 +38,19 @@
                         </ul>
                     </td>
                     <td  class="col-3 text-right" rowspan="3">
-                        <span class="text-muted">Total Due</span> <br>
+                        <span class="text-muted">Total Due</span><br>
                         <h5>RM 30.00</h5>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span class="text-muted">Invoice Date</span> <br>
+                        <span class="text-muted">Invoice Date</span><br>
                         January 12, 2015
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span class="text-muted">Due Date</span> <br>
+                        <span class="text-muted">Due Date</span><br>
                         May 12, 2015
                     </td>
                 </tr>
@@ -65,9 +65,8 @@
           <thead>
               <tr>
                   <th>Description</th>
-                  <th width="80px">GST Amount</th>
-                  <th width="80px">Amount</th>
-                  <th width="80px">Tax Code</th>
+                  <th width="100px" class="text-right">GST Amount</th>
+                  <th width="100px" class="text-right">Amount</th>
               </tr>
           </thead>
           <tbody>
@@ -76,51 +75,44 @@
                       <h6 class="no-margin">PPG. SEL. 10/2016 (N)</h6>
                       <span class="text-muted">Kerja-Kerja Menaiktaraf Bengkel IAT Syarikat Ain Food Products, Pejabat Pertanian Daerah Gombak/Petaling Selangor Darul Ehsan.</span>
                   </td>
-                  <td>RM 0.00</td>
-                  <td>RM 10.00</td>
-                  <td><span class="text-semibold">N-T</span></td>
+                  <td class="text-right">RM 0.00<br>N-T</td>
+                  <td class="text-right">RM 10.00</td>
               </tr>
               <tr>
                   <td>
                       <h6 class="no-margin">PDP/PLB/55/2016</h6>
                       <span class="text-muted">KERJA-KERJA MEMBAIKPULIH KEROSAKAN BANGUNAN DAN LAIN-LAIN KERJA BERKAITAN DI BALAI JKKK KAMPUNG BUKIT CHERAKAH DI DALAM DAERAH PETALING</span>
                   </td>
-                  <td>RM 0.00</td>
-                  <td>RM 10.00</td>
-                  <td><span class="text-semibold">N-T</span></td>
+                  <td class="text-right">RM 0.00<br>N-T</td>
+                  <td class="text-right">RM 10.00</td>
               </tr>
               <tr>
                   <td>
                       <h6 class="no-margin">PDKS/KP 200-2/1/5-1(S)</h6>
                       <span class="text-muted">MEMBAIK PULIH DAN PEMBAIKAN TANDAS-TANDAS DISELURUH PEJABAT DAERAH/TANAH KUALA SELANGOR</span>
                   </td>
-                  <td>RM 0.00</td>
-                  <td>RM 10.00</td>
-                  <td><span class="text-semibold">N-T</span></td>
+                  <td class="text-right">RM 0.00<br>N-T</td>
+                  <td class="text-right">RM 10.00</td>
               </tr>
               <tr>
                   <td></td>
                   <td>Subtotal</td>
-                  <td><span class="text-semibold">RM 30.00</span></td>
-                  <td></td>
+                  <td class="text-right"><span class="text-semibold">RM 30.00</span></td>
               </tr>
               <tr class="no-border">
                   <td></td>
                   <td>GST (6%)</td>
-                  <td><span class="text-semibold">RM 0.00</span></td>
-                  <td></td>
+                  <td class="text-right"><span class="text-semibold">RM 0.00</span></td>
               </tr>
               <tr class="no-border">
                   <td></td>
                   <td>Total (incld. GST)</td>
-                  <td><span class="text-semibold">RM 30.00</span></td>
-                  <td></td>
+                  <td class="text-right"><span class="text-semibold">RM 30.00</span></td>
               </tr>
               <tr class="no-border">
                   <td></td>
                   <td>Balance Due</td>
-                  <td><span class="text-semibold">RM 30.00</span></td>
-                  <td></td>
+                  <td class="text-right"><span class="text-semibold">RM 30.00</span></td>
               </tr>
           </tbody>
       </table>
@@ -135,22 +127,22 @@
               <tr>
                   <th>Code</th>
                   <th width="80px">Rate</th>
-                  <th width="80px">Tax</th>
-                  <th width="80px">Sale Amount</th>
+                  <th class="text-right" width="80px">Tax</th>
+                  <th class="text-right" width="80px">Sale Amount</th>
               </tr>
           </thead>
           <tbody>
               <tr>
                   <td>N-T</td>
                   <td>0%</td>
-                  <td>RM 0.00</td>
-                  <td><span class="text-semibold">RM 0.00</span></td>
+                  <td class="text-right">RM 0.00</td>
+                  <td class="text-right"><span class="text-semibold">RM 0.00</span></td>
               </tr>
               <tr>
                   <td>SR</td>
                   <td>6%</td>
-                  <td>RM 0.00</td>
-                  <td><span class="text-semibold">RM 0.00</span></td>
+                  <td class="text-right">RM 0.00</td>
+                  <td class="text-right"><span class="text-semibold">RM 0.00</span></td>
               </tr>
           </tbody>
       </table>
