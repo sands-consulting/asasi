@@ -150,7 +150,7 @@ class VendorsController extends Controller
         $inputs = $request->only(['redirect_to', 'remarks']);
         
         VendorsRepository::update($vendor, $inputs, ['status' => 'blacklisted']);
-        UserLogsRepository::log(Auth::user(), 'Blacklist Vendor', $vendor, $request->getClientIp());
+        UserLogsRepository::log(Auth::user(), 'Blacklist Vendor', $vendor, $request->getClientIp(), $inputs['remarks']);
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
