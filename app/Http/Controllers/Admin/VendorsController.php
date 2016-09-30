@@ -86,7 +86,7 @@ class VendorsController extends Controller
 
         $role_id = Setting::where('key', 'vendor_role_id')->first()->value;
         User::find($vendor->user->id)->roles()->attach($role_id);
-        User::find($vendor->user->id)->vendors()->attach($role_id);
+        User::find($vendor->user->id)->vendors()->attach($vendor->id);
 
         UserLogsRepository::log(Auth::user(), 'Approve Vendor', $vendor, $request->getClientIp());
 
