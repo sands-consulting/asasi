@@ -18,6 +18,7 @@ return [
         'all' => 'All Subscriptions',
         'approve' => 'Approve',
         'create' => 'Create New Subscription',
+        'edit' => 'Edit',
     ],
 
     'notices' => [
@@ -27,6 +28,10 @@ return [
         'created' => 'Subscription :name created',
         'updated' => 'Subscription :name updated',
         'deleted' => 'Subscription :name deleted',
+        'activated' => 'Subscription has been activated',
+        'deactivated' => 'Subscription has been deactivated',
+        'cancelled' => 'Subscription has been cancelled',
+        'existed' => 'Other active subscription for :name exists.',
     ],
 
 	'views' => [
@@ -41,7 +46,7 @@ return [
             ]
 		],
         'show' => [
-            'title' => 'View',
+            'title' => 'View Subscription',
             'admin' => [
                 'title' => 'View Subscription'
             ],

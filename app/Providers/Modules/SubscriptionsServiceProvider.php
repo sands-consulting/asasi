@@ -9,6 +9,7 @@ class SubscriptionsServiceProvider extends ServiceProvider
     public function boot()
     {
         app('policy')->register('App\Http\Controllers\SubscriptionsController', 'App\Policies\SubscriptionsPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\SubscriptionsController', 'App\Policies\SubscriptionsPolicy');
     }
     /**
      * Register the application services.
@@ -22,6 +23,18 @@ class SubscriptionsServiceProvider extends ServiceProvider
             $router->model('subscriptions', 'App\Subscription');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+                $router->put('subscriptions/{subscriptions}/activate', [
+                    'as'  => 'admin.subscriptions.activate',
+                    'uses' => 'SubscriptionsController@activate'
+                ]);
+                $router->put('subscriptions/{subscriptions}/deactivate', [
+                    'as'  => 'admin.subscriptions.deactivate',
+                    'uses' => 'SubscriptionsController@deactivate'
+                ]);
+                $router->put('subscriptions/{subscriptions}/cancel', [
+                    'as'  => 'admin.subscriptions.cancel',
+                    'uses' => 'SubscriptionsController@cancel'
+                ]);
                 $router->resource('subscriptions', 'SubscriptionsController');
             });
             

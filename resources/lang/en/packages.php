@@ -39,6 +39,7 @@ return [
         ],
         'show' => [
             'title' => 'View',
+            'legend' => 'Package Details'
         ],
         'create' => [
             'title' => 'New',

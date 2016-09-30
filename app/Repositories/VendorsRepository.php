@@ -36,11 +36,17 @@ class VendorsRepository extends BaseRepository
 
     public static function subscribe(Vendor $vendor, Package $package)
     {
-        $days       = get_days($package->validity_quantity, $package->validity_type);
         $activeSubs = $vendor->subscriptions()->active()->first();
 
-        $started_at = count($activeSubs) > 0 ? $activeSubs->expired_at->copy()->addDay() : Carbon::today();
-        $expired_at = $started_at->copy()->addDays($days);
+        $started_at = Carbon::today();
+        switch($package->validity_type) {
+            case 'months':
+                $expired_at = $activeSubs ? $activeSubs->expired_at->copy()->addMonths($package->validity_quantity): $started_at->copy()->addMonths($package->validity_quantity);
+                break;
+            case 'years':
+                $expired_at = $activeSubs ? $activeSubs->expired_at->copy()->addYears($package->validity_quantity): $started_at->copy()->addYears($package->validity_quantity);
+                break;
+        }
         
         $subscription = new Subscription;
         $subscription->started_at =  $started_at;
@@ -49,9 +55,11 @@ class VendorsRepository extends BaseRepository
         
         // dd($started_at);
         if ($vendor->subscriptions()->save($subscription)) {
-            $newSubs = SubscriptionsRepository::update($activeSubs, ['status' => 'inactive']);
-            return $newSubs;
+            if ($activeSubs) {
+                SubscriptionsRepository::update($activeSubs, ['status' => 'inactive']);
+            }
         }
 
+        return $subscription;
     }
 }

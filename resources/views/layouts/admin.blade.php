@@ -157,6 +157,12 @@
                             </li>
                             @endif
                             
+                            @if(Auth::user()->hasPermission('subscription:index'))
+                            <li class="{{ is_path_active('admin/subscriptions*') }}">
+                                <a href="{{ route('admin.subscriptions.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.manage.subscriptions') }}</span></a>
+                            </li>
+                            @endif
+
                             @if(Auth::user()->hasPermission('evaluation:index'))
                             <li class="{{ is_path_active('admin/evaluations*') }}">
                                 <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">

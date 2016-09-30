@@ -74,8 +74,7 @@ class Subscription extends Authenticatable
     
     public function scopeActive($query)
     {
-        // Fixme: find better solutions.
-        return $query->where($this->getTable() . '.status', 'active');
+        return $query->where("{$this->getTable()}.status", 'active');
     }
 
     /* 
@@ -83,12 +82,17 @@ class Subscription extends Authenticatable
      */
     public function canActivate()
     {
-        return $this->status != 'active';
+        return $this->status == 'inactive' || $this->status == 'cancelled' ;
     }
 
     public function canDeactivate()
     {
-        return $this->status != 'inactive';
+        return $this->status == 'active';
+    }
+
+    public function canCancel()
+    {
+        return $this->status != 'cancelled';
     }
     
     /*

@@ -181,6 +181,10 @@ class Vendor extends Authenticatable
      * Helpers 
      */
 
+    public static function options()
+    {
+        return ['' => 'Select One'] + Vendor::lists('name', 'id')->toArray();
+    }
     // public function getProgress($type)
     // {
     //     $progress = 0;

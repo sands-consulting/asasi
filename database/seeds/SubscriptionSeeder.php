@@ -25,6 +25,7 @@ class SubscriptionSeeder extends Seeder
             ['subscription:duplicate', 'Duplicate existing subscription'],
             ['subscription:activate', 'Activate existing subscription'],
             ['subscription:deactivate', 'Deactivate existing subscription'],
+            ['subscription:cancel', 'Cancel existing subscription'],
             ['subscription:delete', 'Delete existing subscription'],
             ['subscription:revisions', 'View subscription revisions'],
             ['subscription:logs', 'View subscription logs']

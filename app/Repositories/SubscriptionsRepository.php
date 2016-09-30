@@ -22,52 +22,25 @@ class SubscriptionsRepository extends BaseRepository
         $subscription->save();
     }
 
-    public static function expire(Subscription $subscription)
+    public static function deactivate(Subscription $subscription)
     {
-        if($subscription->status == 'cancelled')
+        if($subscription->status == 'inactive')
         {
             throw new RepositoryException('Deactivating ' . Subscription::class, $subscription);
         }
 
-        $subscription->status = 'expired';
+        $subscription->status = 'inactive';
         $subscription->save();
     }
 
-    public static function updateStatusExpired()
+    public static function cancel(Subscription $subscription)
     {
-        $subscriptions = Subscription::whereStatus('active')->get();
-        if (!$subscriptions->isEmpty()) {
-            foreach ($subscriptions as $subscription) {
-                $vendor = $subscription->vendor;
-                $status = 'expired';
-                if ($subscription->isExpired()) {
-                    static::update($subscription, ['status' => $status]);
-                    Event::fire(new SubscriptionStatusChanged($vendor->user, $status));
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @param  array/numeric $days
-     * @return [type]
-     */
-    public static function getSubscriptionsExpiredIn($filter)
-    {
-        if (!is_array($filter)) {
-            $filter = (array) $filter;
+        if($subscription->status == 'cancelled')
+        {
+            throw new RepositoryException('Cancelling ' . Subscription::class, $subscription);
         }
 
-        foreach ($filter as $days) {
-            $expired_dates[] = Carbon::today()->addDays($days);
-        }
-
-        $subscriptions = Subscription::whereStatus('active')
-            ->whereIn('expired_at', $expired_dates)
-            ->get();
-
-        return $subscriptions;
+        $subscription->status = 'cancelled';
+        $subscription->save();
     }
 }

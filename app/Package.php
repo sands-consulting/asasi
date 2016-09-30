@@ -119,6 +119,10 @@ class Package extends Model
      * Helpers 
      */
 
+    public static function options()
+    {
+        return ['' => 'Select One'] + Package::lists('name', 'id')->toArray();
+    }
 
     public static function boot()
     {
