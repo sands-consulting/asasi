@@ -66,17 +66,6 @@ $(function() {
   });
 });
 
-// Single picker
-$('.daterange-single').daterangepicker({ 
-    singleDatePicker: true,
-    timePicker: true,
-    timePicker24Hour: true,
-    locale: {
-      cancelLabel: 'Clear',
-      format: 'YYYY-MM-DD HH:mm:ss'
-    }
-});
-
 // Javascript to enable link to tab
 var url = document.location.toString();
 if (url.match('#')) {
