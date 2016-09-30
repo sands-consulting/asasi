@@ -80,7 +80,11 @@
                 <a href="#" class="myeditable" data-type="text" data-name="name" data-url="{{ route('api.notice-events.update') }}"></a>
             </td>
             <td>
-                <a href="#" class="myeditable" data-type="select" data-name="event_type_id" data-source="{{ App\NoticeEventType::options()->toJson() }}" 
+                <a href="#" class="myeditable" 
+                    data-type="select"
+                    data-name="notice_event_type_id"
+                    data-source="{{ App\NoticeEventType::options() }}" 
+                    data-value=""
                     data-url="{{ route('api.notice-events.update') }}"></a>
             </td>
             <td>
