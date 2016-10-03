@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         \Sands\Asasi\Foundation\Console\InstallerCommand::class,
         \App\Console\Commands\SubscriptionUpdateStatusCommand::class,
         \App\Console\Commands\SubscriptionExpireReminderCommand::class,
+        \App\Console\Commands\DeleteNonVerifiedAccountCommand::class,
     ];
 
     /**
@@ -32,6 +33,9 @@ class Kernel extends ConsoleKernel
             ->dailyAt('00:00');
         // Send reminder for subscription that will be expired
         $schedule->command('subscription:expire-reminder')
+            ->dailyAt('00:00');
+        // Send reminder for subscription that will be expired
+        $schedule->command('users:delete-non-verified')
             ->dailyAt('00:00');
     }
 }

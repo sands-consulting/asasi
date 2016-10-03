@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\User;
+use Carbon\Carbon;
 use Sands\Asasi\Foundation\Repository\Exceptions\RepositoryException;
 
 class UsersRepository extends BaseRepository
@@ -50,5 +51,14 @@ class UsersRepository extends BaseRepository
         $user->update([
             'password' => brcypt($password)
         ]);
+    }
+
+    public static function deleteNonVerified($days)
+    {
+        $today = Carbon::today();
+
+        return User::where('verified', 0)
+            ->where('created_at', '<=', $today->subDays($days))
+            ->forceDelete();
     }
 }
