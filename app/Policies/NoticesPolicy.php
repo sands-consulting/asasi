@@ -61,6 +61,11 @@ class NoticesPolicy extends BasePolicy
         return $this->user->hasPermission('notice:unpublish') && $notice->canUnpublish();
     }
 
+    public function cancel(Notice $notice)
+    {
+        return $this->user->hasPermission('notice:cancel') && $notice->canCancel();
+    }
+
     public function saveEvaluator(Notice $notice)
     {
         return $this->create();

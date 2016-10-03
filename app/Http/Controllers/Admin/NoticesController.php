@@ -132,6 +132,16 @@ class NoticesController extends Controller
             ->with('notice', trans('notices.notices.unpublished', ['name' => $notice->name]));
     }
 
+    public function cancel(Request $request, Notice $notice)
+    {
+        $input = $request->only(['remarks']);
+        NoticesRepository::cancel($notice);
+        UserLogsRepository::log(Auth::user(), 'Cancel', $notice, $request->getClientIp(), $input['remarks']);
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
+            ->with('notice', trans('notices.notices.cancelled', ['name' => $notice->name]));
+    }
+
     public function assignEvaluator(Notice $notice)
     {
         return view('admin.notices.show-evaluators-assign', compact('notice'));

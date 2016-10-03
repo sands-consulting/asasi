@@ -26,6 +26,7 @@ class NoticeSeeder extends Seeder
             ['notice:duplicate', 'Duplicate existing notice'],
             ['notice:activate', 'Activate existing notice'],
             ['notice:deactivate', 'Deactivate existing notice'],
+            ['notice:cancel', 'Cancel existing notice'],
             ['notice:publish', 'Publish existing notice'],
             ['notice:unpublish', 'Unpublish existing notice'],
             ['notice:delete', 'Delete existing notice'],

@@ -17,6 +17,7 @@ return [
         'notice_type_id' => 'Type',
         'notice_category_id' => 'Category',
         'organization_id' => 'Organization',
+        'remarks' => 'Remarks',
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
@@ -27,6 +28,7 @@ return [
         'edit' => 'Edit Notice',
         'all' => 'All Notices',
         'my_notices' => 'My Notices',
+        'cancel' => 'Cancel',
     ],
 
     'notices' => [
@@ -37,6 +39,7 @@ return [
         'deactivated' => 'Notice :name deactivated.',
         'published' => 'Notice :name published.',
         'unpublished' => 'Notice :name unpublished.',
+        'cancelled' => 'Notice :name cancelled.',
     ],
     
     'views' => [

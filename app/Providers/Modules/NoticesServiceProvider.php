@@ -31,6 +31,10 @@ class NoticesServiceProvider extends ServiceProvider
                     'as'    => 'admin.notices.unpublish',
                     'uses'  => 'NoticesController@unpublish'
                 ]);
+                $router->put('notices/{notices}/cancel', [
+                    'as'    => 'admin.notices.cancel',
+                    'uses'  => 'NoticesController@cancel'
+                ]);
                 $router->get('notices/{notices}/logs', [
                     'as'    => 'admin.notices.logs',
                     'uses'  => 'NoticesController@logs'

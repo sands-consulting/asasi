@@ -29,4 +29,14 @@ class NoticesRepository extends BaseRepository
         $notice->save();
     }
 
+    public static function cancel(Notice $notice)
+    {
+        if($notice->status == 'cancelled')
+        {
+            throw new RepositoryException('Cancelling ' . Notice::class, $notice);
+        }
+
+        $notice->status = 'cancelled';
+        $notice->save();
+    }
 }

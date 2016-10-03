@@ -20,10 +20,16 @@
             <i class="icon-minus-circle2"></i> <span>{{ trans('actions.unpublish') }}</span>
         </a>
         @endif
+        
+        @if($notice->canCancel())
+        <a href="{{ route('admin.notices.cancel', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#cancel-modal">
+            <i class=" icon-cancel-circle2"></i> <span>{{ trans('actions.cancel') }}</span>
+        </a>
+        @endif
 
         @if(Auth::user()->hasPermission('notice:update'))
         <a href="{{ route('admin.notices.edit', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
-            <i class="icon-pencil5"></i> <span>{{ trans('notices.buttons.edit') }}</span>
+            <i class="icon-pencil5"></i> <span>{{ trans('actions.edit') }}</span>
         </a>
         @endif
     </div>
@@ -34,6 +40,18 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
         <h5 class="panel-title">{{ trans('notices.views.show.title') }}</h5>
+        <div class="heading-elements">
+            @if ($notice->status == 'published')
+                <span class="label label-success heading-text">
+            @elseif ($notice->status == 'not-published')
+                <span class="label label-danger heading-text">
+            @elseif ($notice->status == 'cancelled')
+                <span class="label bg-grey-800 heading-text">
+            @else
+                <span class="label label-default heading-text">
+            @endif
+            {{ $notice->status }}</span>
+        </div>
     </div>
     
     <div class="panel-body">
@@ -97,4 +115,6 @@
         </div>
     </div>
 </div>
+
+@include('admin.notices.modals.cancel')
 @endsection

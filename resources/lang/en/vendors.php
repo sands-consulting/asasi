@@ -60,7 +60,7 @@ return [
     'notices' => [
         'public' => [
             'approved' => 'Your application already been approved. You cannot cancel your application.',
-            'canceled' => 'Your application has been canceled.',
+            'canceled' => 'Your application has been cancelled.',
             'cancel-failed' => 'Your application has been changed. Please check current status of your application.',
             'completed' => 'Your application has been submitted.',
             'complete-application' => 'Your application has been submitted for approval.',
