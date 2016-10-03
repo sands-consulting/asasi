@@ -42,26 +42,26 @@
         <div class="tabbable nav-tabs-vertical nav-tabs-left">
             <ul class="nav nav-tabs nav-tabs-highlight">
                 <li class="active">
-                    <a href="#left-tab1" data-toggle="tab"><i class="icon-menu7 position-left"></i> Notice Details</a>
+                    <a data-target="#left-tab1" data-toggle="tab"><i class="icon-menu7 position-left"></i> Notice Details</a>
                 </li>
                 <li>
-                    <a href="#left-tab2" data-toggle="tab"><i class="icon-office position-left"></i> Vendors</a>
+                    <a data-target="#left-tab2" data-toggle="tab"><i class="icon-office position-left"></i> Vendors</a>
                 </li>
                 <li>
-                    <a href="#left-tab3" data-toggle="tab"><i class="icon-coins position-left"></i> Price List</a>
+                    <a data-target="#left-tab3" data-toggle="tab"><i class="icon-coins position-left"></i> Price List</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user position-left"></i> Evaluators <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#left-tab4" data-toggle="tab">Progress</a></li>
-                        <li><a href="#left-tab5" data-toggle="tab">Assigned</a></li>
+                        <li><a data-target="#left-tab4" data-toggle="tab">Progress</a></li>
+                        <li><a data-target="#left-tab5" data-toggle="tab">Assigned</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#left-tab6" data-toggle="tab"><i class="icon-pencil position-left"></i> Evaluations</a>
+                    <a data-target="#left-tab6" data-toggle="tab"><i class="icon-pencil position-left"></i> Evaluations</a>
                 </li>
                 <li>
-                    <a href="#left-tab7" data-toggle="tab"><i class="icon-medal-star position-left"></i> Award</a>
+                    <a data-target="#left-tab7" data-toggle="tab"><i class="icon-medal-star position-left"></i> Award</a>
                 </li>
             </ul>
 

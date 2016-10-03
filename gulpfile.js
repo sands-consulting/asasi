@@ -35,6 +35,7 @@ elixir(function(mix) {
         '../vendor/legitripple/js/ripple.js',
         '../vendor/moment/moment.js',
         '../vendor/select2/dist/js/select2.js',
+        'vendor/pnotify.min.js',
         'vendor/pickers/daterangepicker.js',
         'vendor/uniform.min.js',
         'vendor/buttons.server-side.js',
