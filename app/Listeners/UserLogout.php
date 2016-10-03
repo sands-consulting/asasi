@@ -14,6 +14,8 @@ class UserLogout
 
     public function handle($event)
     {
-        UserLogsRepository::log($event->user, 'logout', $event->user, $this->request->getClientIp());
+        if ($event->user) {
+            UserLogsRepository::log($event->user, 'logout', $event->user, $this->request->getClientIp());
+        }
     }
 }
