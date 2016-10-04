@@ -157,12 +157,13 @@
           <td class="col-8">
             <h6>Account Details</h6>
             <ul class="list-condensed list-unstyled text-muted">
-                <li><span class="text-semibold">Eugene Kopyov</span></li>
-                <li>2269 Elba Lane</li>
-                <li>Paris, France</li>
-                <li>888-555-2311</li>
+                <li><span class="text-semibold">Normand axis LTD</span></li>
+                <li>Bank: CIMB Islamic Bank Berhad</li>
+                <li>Branch: UPM Serdang</li>
+                <li>A/C Number: 66234342</li>
                 <li>IBAN: KFH37784028476740</li>
-                <li>SWIFT code: BPT4E</li>
+                <li>SWIFT Code: BPT4E</li>
+                <li>GST Number: 00514513212</li>
             </ul>
           </td>
         </tr>
