@@ -17,7 +17,13 @@ class UsersDataTable extends DataTable
                 return view('admin.users._index_roles', compact('user'));
             })
             ->editColumn('name', function($user) {
-                return link_to_route('admin.users.show', $user->name, $user->id);
+                $string = link_to_route('admin.users.show', $user->name, $user->id);
+
+                if($user->vendors) {
+                    $string .= '<br><small>' . $user->vendors[0]->name . '</small>';
+                }
+
+                return $string;
             })
             ->editColumn('status', function($user) {
                 return view('admin.users._index_status', compact('user'));
@@ -27,7 +33,7 @@ class UsersDataTable extends DataTable
 
     public function query()
     {
-        $query = User::with('roles');
+        $query = User::with('roles', 'vendors');
 
         if($this->datatables->request->input('q', null))
         {

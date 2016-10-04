@@ -18,7 +18,6 @@ class User extends Authenticatable
         'password',
         'status',
         'token',
-        'verified',
     ];
 
     protected $hidden = [
@@ -27,7 +26,7 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'status' => 'active',
+        'status' => 'inactive',
     ];
 
     protected $searchable = [
@@ -101,6 +100,9 @@ class User extends Authenticatable
                 foreach ($this->searchable as $column) {
                     $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
                 }
+            });
+            $query->orWhereHas('vendors', function($query) use($keywords) {
+                $query->('name', 'LIKE', "%$keywords%");
             });
             unset($queries['keywords']);
         }
@@ -241,5 +243,9 @@ class User extends Authenticatable
     public static function boot()
     {
         parent::boot();
+
+        parent::creating(function($user) {
+            $user->confirmation_token = str_random(64);
+        });
     }
 }
