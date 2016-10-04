@@ -19,7 +19,7 @@ class UsersDataTable extends DataTable
             ->editColumn('name', function($user) {
                 $string = link_to_route('admin.users.show', $user->name, $user->id);
 
-                if($user->vendors) {
+                if(count($user->vendors) > 0) {
                     $string .= '<br><small>' . $user->vendors[0]->name . '</small>';
                 }
 
