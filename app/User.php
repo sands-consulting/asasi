@@ -102,7 +102,7 @@ class User extends Authenticatable
                 }
             });
             $query->orWhereHas('vendors', function($query) use($keywords) {
-                $query->('name', 'LIKE', "%$keywords%");
+                $query->where('name', 'LIKE', "%$keywords%");
             });
             unset($queries['keywords']);
         }
