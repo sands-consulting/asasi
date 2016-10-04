@@ -39,7 +39,7 @@
                     </td>
                     <td  class="col-3 text-right" rowspan="3">
                         <span class="text-muted">Total Due</span><br>
-                        <h5>RM 30.00</h5>
+                        <h4>RM 2,621,040.50</h4>
                     </td>
                 </tr>
                 <tr>
