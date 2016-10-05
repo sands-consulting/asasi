@@ -49,10 +49,10 @@
         <a href="{{ route('admin.vendors.destroy', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-method="DELETE" data-confirm="{{ trans('app.confirmation') }}">
             <i class=" icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
         </a>
+        @endif
         <a href="{{ route('admin.vendors.index') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
         </a>
-        @endif
     </div>
 </div>
 @endsection

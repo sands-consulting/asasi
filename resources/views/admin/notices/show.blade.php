@@ -26,12 +26,22 @@
             <i class=" icon-cancel-circle2"></i> <span>{{ trans('actions.cancel') }}</span>
         </a>
         @endif
-
+        
         @if(Auth::user()->hasPermission('notice:update'))
         <a href="{{ route('admin.notices.edit', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class="icon-pencil5"></i> <span>{{ trans('actions.edit') }}</span>
         </a>
         @endif
+
+        @if(Auth::user()->hasPermission('notice:delete'))
+        <a href="#" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#delete-modal">
+            <i class=" icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
+        </a>
+        @endif
+
+        <a href="{{ route('admin.notices.index') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+            <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
+        </a>
     </div>
 </div>
 @endsection
@@ -43,10 +53,8 @@
         <div class="heading-elements">
             @if ($notice->status == 'published')
                 <span class="label label-success heading-text">
-            @elseif ($notice->status == 'not-published')
-                <span class="label label-danger heading-text">
             @elseif ($notice->status == 'cancelled')
-                <span class="label bg-grey-800 heading-text">
+                <span class="label label-danger heading-text">
             @else
                 <span class="label label-default heading-text">
             @endif
@@ -60,7 +68,7 @@
         <div class="tabbable nav-tabs-vertical nav-tabs-left">
             <ul class="nav nav-tabs nav-tabs-highlight">
                 <li class="active">
-                    <a data-target="#left-tab1" data-toggle="tab"><i class="icon-menu7 position-left"></i> Notice Details</a>
+                    <a data-target="#left-tab1" data-toggle="tab"><i class="icon-clipboard3 position-left"></i> Notice Details</a>
                 </li>
                 <li>
                     <a data-target="#left-tab2" data-toggle="tab"><i class="icon-office position-left"></i> Vendors</a>
@@ -116,5 +124,7 @@
     </div>
 </div>
 
+{{-- Modals --}}
 @include('admin.notices.modals.cancel')
+@include('admin.notices.modals.delete')
 @endsection

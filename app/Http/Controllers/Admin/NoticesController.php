@@ -93,10 +93,10 @@ class NoticesController extends Controller
             ->with('notice', trans('notices.notices.updated', ['name' => $notice->name]));
     }
 
-    public function destroy(Notice $notice)
+    public function destroy(Request $request, Notice $notice)
     {
         NoticesRepository::delete($notice);
-        UserLogsRepository::log(Auth::user(), 'Delete', $notice, $request->getClientIp());
+        UserLogsRepository::log(Auth::user(), 'Delete', $notice, $request->getClientIp(), $request->remarks);
         return redirect()
             ->route('admin.notices.index')
             ->with('notice', trans('notices.notices.deleted', ['name' => $notice->name]));
