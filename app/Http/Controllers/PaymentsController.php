@@ -70,8 +70,8 @@ class PaymentsController extends Controller
 
     public function printReceipt()
     {
-        // return PDF::loadView('payments.printReceipt')->download('receipt.pdf');
-        return view('payments.printReceipt');
+        return PDF::loadView('payments.printReceipt')->inline('receipt.pdf');
+        // return view('payments.printReceipt');
     }
 
     public function invoice()
@@ -81,7 +81,7 @@ class PaymentsController extends Controller
 
     public function printInvoice()
     {
-        return PDF::loadView('payments.printInvoice')->inline('receipt.pdf');
+        return PDF::loadView('payments.printInvoice')->inline('invoice.pdf');
         // return view('payments.printInvoice');
     }
 }
