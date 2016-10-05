@@ -21,17 +21,17 @@
         </a>
         @endif
         
-        {{--@if($subscription->canCancel() && Auth::user()->hasPermission('subscription:cancel'))
-         <a href="{{ route('admin.subscriptions.cancel', $subscription->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-warning legitRipple">
+        @if($subscription->canCancel() && Auth::user()->hasPermission('subscription:cancel'))
+         <a href="#" class="btn btn-link btn-float text-size-small has-text text-warning legitRipple" data-toggle="modal" data-target="#cancel-modal">
             <i class="icon-cancel-circle2"></i> <span>{{ trans('actions.cancel') }}</span>
         </a>
-        @endif --}}
+        @endif 
 
-        @if(Auth::user()->hasPermission('subscription:delete'))
+        {{-- @if(Auth::user()->hasPermission('subscription:delete'))
         <a href="{{ route('admin.subscriptions.destroy', $subscription->id) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-warning legitRipple" data-confirm="{{ trans('app.confirmation') }}">
             <i class="icon-cancel-circle2"></i> <span>{{ trans('actions.delete') }}</span>
         </a>
-        @endif
+        @endif --}}
 
         @if(Auth::user()->hasPermission('subscription:update'))
         <a href="{{ route('admin.subscriptions.edit', $subscription->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
@@ -121,4 +121,6 @@
         </fieldset>
     </div>
 </div>
+
+@include('admin.subscriptions.modals.cancel')
 @endsection

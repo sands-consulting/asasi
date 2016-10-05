@@ -13,8 +13,8 @@ class SubscriptionsDataTable extends DataTable
             ->addColumn('action', function($subscription) {
                 return view('admin.subscriptions._index_actions', compact('subscription'));
             })
-            ->editColumn('name', function($subscription) {
-                return link_to_route('admin.subscriptions.show', $subscription->name, $subscription->id);
+            ->editColumn('vendor_name', function($subscription) {
+                return link_to_route('admin.subscriptions.show', $subscription->vendor_name, $subscription->id);
             })
             ->editColumn('package_name', function($subscription) {
                 return view('admin.subscriptions._index_package', compact('subscription'));

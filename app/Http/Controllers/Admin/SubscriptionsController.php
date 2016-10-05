@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use App\Subscription;
 use App\DataTables\SubscriptionsDataTable;
 use App\Http\Requests\SubscriptionRequest;
 use App\Repositories\SubscriptionsRepository;
+use App\Repositories\UserLogsRepository;
 use Illuminate\Http\Request;
 
 class SubscriptionsController extends Controller
@@ -22,7 +24,7 @@ class SubscriptionsController extends Controller
 
     public function store(SubscriptionRequest $request)
     {
-        $inputs  = $request->all();
+        $inputs  = $request->only(['started_at', 'expired_at', 'vendor_id', 'package_id']);
         $exists = Subscription::where('vendor_id', $inputs['vendor_id'])->active()->first();
 
         if (!$exists) {
@@ -31,7 +33,7 @@ class SubscriptionsController extends Controller
             return redirect()
                 ->route('admin.subscriptions.create')
                 ->withInput($inputs)
-                ->with('alert', trans('subscriptions.notices.existed', ['name' => $exists->name]));
+                ->with('alert', trans('subscriptions.notices.existed', ['name' => $exists->vendor->name]));
         }
 
         return redirect()
@@ -94,6 +96,7 @@ class SubscriptionsController extends Controller
     public function deactivate(Request $request, Subscription $subscription)
     {
         SubscriptionsRepository::deactivate($subscription);
+        UserLogsRepository::log(Auth::user(), 'Deactivate', $subscription, $request->getClientIp(), $request->remarks);
         return redirect()
             ->to($request->input('redirect_to', route('admin.subscriptions.show', $subscription->id)))
             ->with('notice', trans('subscriptions.notices.deactivated', ['name' => $subscription->name]));
@@ -102,6 +105,7 @@ class SubscriptionsController extends Controller
     public function cancel(Request $request, Subscription $subscription)
     {
         SubscriptionsRepository::cancel($subscription);
+        UserLogsRepository::log(Auth::user(), 'Cancel', $subscription, $request->getClientIp(), $request->remarks);
         return redirect()
             ->to($request->input('redirect_to', route('admin.subscriptions.show', $subscription->id)))
             ->with('notice', trans('subscriptions.notices.cancelled', ['name' => $subscription->name]));

@@ -8,6 +8,7 @@ return [
         'expired_at' => 'Expired At',
         'package_id' => 'Package',
         'vendor_id' => 'Vendor',
+        'remarks' => 'Remarks',
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
@@ -31,7 +32,7 @@ return [
         'activated' => 'Subscription has been activated',
         'deactivated' => 'Subscription has been deactivated',
         'cancelled' => 'Subscription has been cancelled',
-        'existed' => 'Other active subscription for :name exists.',
+        'existed' => 'Other active subscription for :name already exists.',
     ],
 
 	'views' => [

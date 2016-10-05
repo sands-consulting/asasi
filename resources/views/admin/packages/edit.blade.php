@@ -25,8 +25,8 @@
         {!! Former::open_vertical(route('admin.packages.show', $package->id))->method('PUT') !!}
             {!! Former::populate($package) !!}
             @include('admin.packages.form')
-            <div class="form-group">
-                <div class="col-sm-12 text-right">
+            <div class="row">
+                <div class="col-sm-12">
                     {!! link_to_route('admin.packages.index', trans('actions.cancel'), [], ['class' => 'btn btn-default']) !!}
                     {!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
                 </div>
