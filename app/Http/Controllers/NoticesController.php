@@ -30,7 +30,7 @@ class NoticesController extends Controller
         $vendor = Auth::user()->vendor;
         $myNotices = $vendor->notices;
 
-        return view('notices.my-notices', compact('myNotices'));
+        return view('notices.my-notices', compact('vendor', 'myNotices'));
     }
 
     public function submission(Notice $notice)

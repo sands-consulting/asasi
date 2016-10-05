@@ -168,6 +168,16 @@ class Vendor extends Authenticatable
         return $this->hasMany(Submission::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function transactionDetails()
+    {
+        return $this->hasManyThrough(TransactionDetail::class, Transaction::class);
+    }
+
     /*
      * Scopes
      */

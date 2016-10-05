@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Notice;
 use App\Package;
 use App\Payment;
+use App\Transaction;
 use App\Http\Requests\PaymentRequest;
 use App\Repositories\PaymentsRepository;
 use PDF;
@@ -63,25 +64,25 @@ class PaymentsController extends Controller
         return view('payments.summary', compact('notices'));
     }
 
-    public function receipt()
+    public function receipt(Transaction $transaction)
     {
-        return view('payments.receipt');
+        return view('payments.receipt', compact('transaction'));
     }
 
-    public function printReceipt()
+    public function printReceipt(Transaction $transaction)
     {
-        return PDF::loadView('payments.printReceipt')->inline('receipt.pdf');
+        return PDF::loadView('payments.printReceipt', $transaction)->inline('receipt.pdf');
         // return view('payments.printReceipt');
     }
 
-    public function invoice()
+    public function invoice(Transaction $transaction)
     {
-        return view('payments.invoice');
+        return view('payments.invoice', compact('transaction'));
     }
 
-    public function printInvoice()
+    public function printInvoice(Transaction $transaction)
     {
-        return PDF::loadView('payments.printInvoice')->inline('invoice.pdf');
+        return PDF::loadView('payments.printInvoice', compact('transaction'))->inline('invoice.pdf');
         // return view('payments.printInvoice');
     }
 }

@@ -42,7 +42,33 @@
                                 <td>{{ $myNotice->description }}</td>
                                 <td>{{ $myNotice->organization->name }}</td>
                                 <td>
-                                    <a href="{{ route('notices.submission', $myNotice->id) }}" class="btn btn-default btn-xs">{{ trans('actions.proceed') }}</a>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle legitRipple" data-toggle="dropdown">Action <span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li>
+                                                <a href="{{ route('notices.submission', $myNotice->id) }}">
+                                                    <i class="icon-compose"></i> {{ trans('notices.buttons.submission') }}
+                                                </a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="{{ route('payments.invoice', $vendor->transactionDetails(function ($query) {
+                                                        return $query->where('detailable_type', 'App\Notice')
+                                                            ->where('detailable_id', $myNotice->id);
+                                                    })->first()->transaction_id) }}" target="_blank">
+                                                    <i class="icon-calculator"></i> {{ trans('notices.buttons.invoice') }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('payments.receipt', $vendor->transactionDetails(function ($query) {
+                                                        return $query->where('detailable_type', 'App\Notice')
+                                                            ->where('detailable_id', $myNotice->id);
+                                                    })->first()->transaction_id) }}" target="_blank">
+                                                    <i class="icon-newspaper"></i> {{ trans('notices.buttons.receipt') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                             <?php $i++; ?>

@@ -29,6 +29,9 @@ return [
         'all' => 'All Notices',
         'my_notices' => 'My Notices',
         'cancel' => 'Cancel',
+        'submission' => 'Submission',
+        'invoice' => 'Invoice',
+        'receipt' => 'Receipt',
     ],
 
     'notices' => [

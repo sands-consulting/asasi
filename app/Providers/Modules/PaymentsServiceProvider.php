@@ -21,6 +21,7 @@ class PaymentsServiceProvider extends ServiceProvider
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
             $router->model('payments', 'App\Payment');
+            $router->model('transactions', 'App\Transaction');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
                 $router->put('payments/{payments}/activate', [
@@ -61,22 +62,22 @@ class PaymentsServiceProvider extends ServiceProvider
                 'uses'  => 'PaymentsController@summary'
             ]);
 
-            $router->get('payments/invoice', [
+            $router->get('payments/{transactions}/invoice', [
                 'as'    => 'payments.invoice',
                 'uses'  => 'PaymentsController@invoice'
             ]);
 
-            $router->get('payments/receipt', [
+            $router->get('payments/{transactions}/receipt', [
                 'as'    => 'payments.receipt',
                 'uses'  => 'PaymentsController@receipt'
             ]);
 
-            $router->get('payments/invoice/print', [
+            $router->get('payments/{transactions}/invoice/print', [
                 'as'    => 'payments.invoice',
                 'uses'  => 'PaymentsController@printInvoice'
             ]);
 
-            $router->get('payments/receipt/print', [
+            $router->get('payments/{transactions}/receipt/print', [
                 'as'    => 'payments.receipt',
                 'uses'  => 'PaymentsController@printReceipt'
             ]);
