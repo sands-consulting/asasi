@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Venturecraft\Revisionable\RevisionableTrait;
+use App\Libraries\Traits\DateAccessorTrait;
 
 class Subscription extends Authenticatable
 {
     use RevisionableTrait,
-        SoftDeletes;
+        SoftDeletes,
+        DateAccessorTrait;
 
     protected $revisionCreationsEnabled = true;
 

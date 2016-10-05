@@ -55,13 +55,13 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label"><strong>{{ trans('subscriptions.attributes.started_at') }}</strong>:</label>
-                                <div class="form-control-static">{{ $subscription->started_at->format('m/d/Y') }}</div>
+                                <div class="form-control-static">{{ $subscription->started_at->getFromSetting() }}</div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label"><strong>{{ trans('subscriptions.attributes.expired_at') }}</strong>:</label>
-                                <div class="form-control-static">{{ $subscription->expired_at->format('m/d/Y') }}  - {{ $subscription->expired_at->diffForHumans() }}</div>
+                                <div class="form-control-static">{{ $subscription->expired_at->getFromSetting() }}</div>
                             </div>
                         </div>
                     </div>
