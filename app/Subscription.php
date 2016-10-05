@@ -23,7 +23,7 @@ class Subscription extends Authenticatable
     ];
 
     protected $attributes = [
-        'status' => 'active'
+        'status' => 'pending'
     ];
 
     protected $searchable = [

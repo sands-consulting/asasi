@@ -33,7 +33,7 @@ class SubscriptionsController extends Controller
     {
         $inputs = $request->all();
         $subscription = SubscriptionsRepository::create(new Subscription, $inputs, ['user_id' => Auth::user()->id]);
-
+        
         return redirect()
             ->route('home.index')
             ->with('notice', trans('subscriptions.notices.public.saved', ['name' => $subscription->name]));
