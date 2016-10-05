@@ -6,7 +6,7 @@
                 <h5 class="modal-title">Suspend Reason</h5>
             </div>
 
-            {!! Former::open_vertical(route('admin.vendors.blacklist', $vendor->id))->method('PUT') !!}
+            {!! Former::open_vertical(route('admin.vendors.suspend', $vendor->id))->method('PUT') !!}
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
