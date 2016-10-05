@@ -159,7 +159,7 @@
                             
                             @if(Auth::user()->hasPermission('subscription:index'))
                             <li class="{{ is_path_active('admin/subscriptions*') }}">
-                                <a href="{{ route('admin.subscriptions.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.manage.subscriptions') }}</span></a>
+                                <a href="{{ route('admin.subscriptions.index') }}"><i class="icon-envelope"></i> <span>{{ trans('menu.admin.manage.subscriptions') }}</span></a>
                             </li>
                             @endif
 
@@ -174,7 +174,7 @@
                             @if(Auth::user()->hasPermission('vendor:index'))
                             <li class="{{ is_path_active('admin/vendors*') }}">
                                 <a href="{{ route('admin.vendors.index') }}" class="legitRipple">
-                                    <i class="icon-people"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span>
+                                    <i class="icon-office"></i> <span>{{ trans('menu.admin.manage.vendors') }}</span>
                                 </a>
                             </li>
                             @endif
