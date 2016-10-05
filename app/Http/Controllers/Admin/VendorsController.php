@@ -62,6 +62,13 @@ class VendorsController extends Controller
     public function destroy(Vendor $vendor)
     {
         VendorsRepository::delete($vendor);
+
+        if ($vendor->users) {
+            foreach($vendor->users as $user) {
+                UsersRepository::delete($user);
+            }
+        }
+
         return redirect()
             ->route('admin.vendors.index')
             ->with('notice', trans('vendors.notices.deleted', ['name' => $vendor->name]));
@@ -82,7 +89,7 @@ class VendorsController extends Controller
     public function approve(Request $request, Vendor $vendor)
     {
         $inputs = $request->only(['redirect_to']);
-        VendorsRepository::update($vendor, $inputs, ['status' => 'approved']);
+        VendorsRepository::update($vendor, $inputs, ['status' => 'inactive']);
 
         $role_id = Setting::where('key', 'vendor_role_id')->first()->value;
         User::find($vendor->user->id)->roles()->attach($role_id);
@@ -117,8 +124,10 @@ class VendorsController extends Controller
         
         VendorsRepository::update($vendor, $inputs, ['status' => 'suspended']);
 
-        foreach($vendor->users as $user) {
-            UsersRepository::suspend($user);
+        if ($vendor->users) {
+            foreach($vendor->users as $user) {
+                UsersRepository::suspend($user);
+            }
         }
 
         UserLogsRepository::log(Auth::user(), 'Suspend Vendor', $vendor, $request->getClientIp(), $inputs['remarks']);
@@ -132,7 +141,7 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         
-        VendorsRepository::update($vendor, $inputs, ['status' => 'approved']);
+        VendorsRepository::update($vendor, $inputs, ['status' => 'active']);
 
         foreach($vendor->users as $user) {
             UsersRepository::activate($user);
@@ -161,7 +170,7 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         
-        VendorsRepository::update($vendor, $inputs, ['status' => 'approved']);
+        VendorsRepository::update($vendor, $inputs, ['status' => 'active']);
         UserLogsRepository::log(Auth::user(), 'Unblacklist Vendor', $vendor, $request->getClientIp());
         
         return redirect()

@@ -20,6 +20,11 @@
             <i class=" icon-cross2"></i> <span>{{ trans('vendors.buttons.reject') }}</span>
         </a>
         @endif
+        @if(Auth::user()->hasPermission('vendor:update'))
+        <a href="{{ route('admin.vendors.edit', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple" data-method="GET">
+            <i class=" icon-pencil5"></i> <span>{{ trans('vendors.buttons.edit') }}</span>
+        </a>
+        @endif
         @if($vendor->canSuspend())
         <a href="{{ route('admin.vendors.suspend', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#suspend-modal">
             <i class=" icon-user-lock"></i> <span>{{ trans('vendors.buttons.suspend') }}</span>
@@ -30,22 +35,24 @@
             <i class=" icon-user-check"></i> <span>{{ trans('vendors.buttons.activate') }}</span>
         </a>
         @endif
-        @if($vendor->canBlacklist())
+        @if(Auth::user()->hasPermission('vendor:blacklist') && $vendor->canBlacklist())
         <a href="{{ route('admin.vendors.blacklist', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple" data-toggle="modal" data-target="#blacklist-modal">
             <i class=" icon-user-block"></i> <span>{{ trans('vendors.buttons.blacklist') }}</span>
         </a>
         @endif
-        @if($vendor->canUnblacklist())
+        @if(Auth::user()->hasPermission('vendor:unblacklist') && $vendor->canUnblacklist())
         <a href="{{ route('admin.vendors.unblacklist', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple" data-method="PUT">
             <i class=" icon-user-block"></i> <span>{{ trans('vendors.buttons.unblacklist') }}</span>
         </a>
         @endif
-        <a href="{{ route('admin.vendors.edit', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple" data-method="GET">
-            <i class=" icon-pencil5"></i> <span>{{ trans('vendors.buttons.edit') }}</span>
+        @if(Auth::user()->hasPermission('vendor:update'))
+        <a href="{{ route('admin.vendors.destroy', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-method="DELETE" data-confirm="{{ trans('app.confirmation') }}">
+            <i class=" icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
         </a>
         <a href="{{ route('admin.vendors.index') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
         </a>
+        @endif
     </div>
 </div>
 @endsection
@@ -55,7 +62,7 @@
     <div class="panel-heading">
         <h5 class="panel-title">{{ trans('vendors.views.show.admin.title') }}: {{ $vendor->name }}</h5>
         <div class="heading-elements">
-            @if ($vendor->status == 'approved')
+            @if ($vendor->status == 'active')
                 <span class="label label-success heading-text">
             @elseif ($vendor->status == 'suspended')
                 <span class="label label-danger heading-text">

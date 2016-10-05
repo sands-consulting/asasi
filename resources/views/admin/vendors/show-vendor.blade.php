@@ -55,18 +55,22 @@
                                     <div class="form-control-static">{{ $vendor->registration_number }}</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="control-label"><strong>{{ trans('vendors.attributes.tax_1_number') }}</strong>:</label>
                                     <div class="form-control-static">{{ $vendor->tax_1_number }}</div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="control-label"><strong>{{ trans('vendors.attributes.tax_2_number') }}</strong>:</label>
                                     <div class="form-control-static">{{ $vendor->tax_2_number }}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label"><strong>{{ trans('vendors.attributes.contact_website') }}</strong>:</label>
+                                    <div class="form-control-static">{{ $vendor->contact_website }}</div>
                                 </div>
                             </div>
                         </div>
@@ -91,27 +95,25 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label class="control-label"><strong>{{ trans('vendors.attributes.address_postcode') }}</strong>:</label>
                                     <div class="form-control-static">{{ $vendor->address_postcode }}</div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label class="control-label"><strong>{{ trans('vendors.attributes.address_city_id') }}</strong>:</label>
                                     <div class="form-control-static">{{{ $vendor->city->name or 'No City' }}}</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label class="control-label"><strong>{{ trans('vendors.attributes.address_state_id') }}</strong>:</label>
                                     <div class="form-control-static">{{{ $vendor->state->name or 'No State' }}}</div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label class="control-label"><strong>{{ trans('vendors.attributes.address_country_id') }}</strong>:</label>
                                     <div class="form-control-static">{{{ $vendor->country->name or 'No Country' }}}</div>
@@ -150,12 +152,6 @@
                                 <div class="form-group">
                                     <label class="control-label"><strong>{{ trans('vendors.attributes.contact_fax') }}</strong>:</label>
                                     <div class="form-control-static">{{ $vendor->contact_fax }}</div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label"><strong>{{ trans('vendors.attributes.contact_website') }}</strong>:</label>
-                                    <div class="form-control-static">{{ $vendor->contact_website }}</div>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +221,7 @@
                         </table>
                     </fieldset>
                 </div>
-                                    
+
                 <div class="tab-pane" id="vendor-shareholders">
                     <fieldset>
                         <legend class="text-semibold">

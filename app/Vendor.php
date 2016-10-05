@@ -96,17 +96,17 @@ class Vendor extends Authenticatable
      */
     public function canApprove()
     {
-        return $this->status == 'pending-approval' && $this->status != 'rejected';
+        return $this->status == 'pending' && $this->status != 'rejected';
     }
 
     public function canReject()
     {
-        return $this->status == 'pending-approval' && $this->status != 'rejected';
+        return $this->status == 'pending' && $this->status != 'rejected';
     }
 
     public function canSuspend()
     {
-        return $this->status != 'suspended' && $this->status != 'pending-approval';
+        return $this->status != 'suspended' && $this->status != 'pending';
     }
 
     public function canActivate()
@@ -116,7 +116,7 @@ class Vendor extends Authenticatable
 
     public function canBlacklist()
     {
-        return $this->status != 'blacklisted' && $this->status != 'pending-approval';
+        return $this->status != 'blacklisted' && $this->status != 'pending';
     }
 
     public function canUnblacklist()

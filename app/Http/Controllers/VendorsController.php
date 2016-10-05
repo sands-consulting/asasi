@@ -48,7 +48,7 @@ class VendorsController extends Controller
     public function completeApplication(Request $request, Vendor $vendor)
     {
         if (is_complete_form($vendor)) {
-            $vendor = VendorsRepository::update($vendor, [], ['status' => 'pending-approval']);
+            $vendor = VendorsRepository::update($vendor, [], ['status' => 'pending']);
             return redirect()
                 ->route('home.index')
                 ->with('notice', trans('vendors.notices.public.complete-application', ['name' => $vendor->name]));
@@ -61,7 +61,7 @@ class VendorsController extends Controller
 
     public function cancelApplication(Vendor $vendor)
     {
-        if ($vendor->status == 'pending-approval') {
+        if ($vendor->status == 'pending') {
             VendorsRepository::update($vendor, ['status' => 'draft']);
 
             return redirect()
