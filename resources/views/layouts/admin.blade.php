@@ -165,9 +165,17 @@
 
                             @if(Auth::user()->hasPermission('evaluation:index'))
                             <li class="{{ is_path_active('admin/evaluations*') }}">
-                                <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">
-                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations') }}</span>
+                                <a href="{{ route('admin.evaluations.index') }}" class="has-ul legitRipple">
+                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations.index') }}</span>
                                 </a>
+                                <ul class="hidden-ul">
+                                    <li class="{{ is_path_active('admin/evaluations') }}">
+                                        <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">{{ trans('menu.admin.manage.evaluations.index') }}</a>
+                                    </li>
+                                    <li class="{{ is_path_active('admin/evaluations/settings') }}">
+                                        <a href="{{ route('admin.evaluations.settings') }}" class="legitRipple">{{ trans('menu.admin.manage.evaluations.settings') }}</a>
+                                    </li>
+                                </ul>
                             </li>
                             @endif
 

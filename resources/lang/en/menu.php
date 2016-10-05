@@ -50,7 +50,10 @@ return [
             'packages'      => 'Packages',
             'subscriptions' => 'Subscriptions',
             'submissions'   => 'Submissions',
-            'evaluations'   => 'Evaluations',
+            'evaluations'   => [
+                'index' => 'Evaluations',
+                'settings' => 'Settings',
+            ],
         ]
     ]
 ];

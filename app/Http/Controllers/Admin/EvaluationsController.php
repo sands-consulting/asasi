@@ -32,4 +32,9 @@ class EvaluationsController extends Controller
         $submissionDetails = $submission->details;
         return view('admin.evaluations.evaluate', compact('submission', 'submissionDetails'));
     }
+
+    public function settings()
+    {
+        return view('admin.evaluations.settings');
+    }
 }

@@ -33,6 +33,11 @@ class EvaluationServiceProvider extends ServiceProvider
                     'uses' => 'EvaluationsController@evaluate'  
                 ]);
 
+                $router->get('evaluations/settings', [
+                    'as' => 'admin.evaluations.settings',
+                    'uses' => 'EvaluationsController@settings'  
+                ]);
+
                 $router->resource('evaluations', 'EvaluationsController');
             });
 
