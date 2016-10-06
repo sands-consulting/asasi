@@ -58,7 +58,7 @@
 		<table class="table">
 			<tr>
 				<th class="col-xs-3">{{ trans('allocations.attributes.value') }}</th>
-				<td>{{ $allocation->value }}</td>
+				<td>{{ number_format($allocation->value, 2) }}</td>
 			</tr>
 			<tr>
 				<th class="col-xs-3">{{ trans('allocations.attributes.type') }}</th>

@@ -25,6 +25,12 @@ class AllocationDataTable extends DataTable
             ->editColumn('created_at', function($allocation) {
                 return $allocation->created_at->format('d/m/Y H:i:s');
             })
+            ->editColumn('organization', function($allocation) {
+                return $allocation->organization->name;
+            })
+            ->editColumn('type', function($allocation) {
+                return $allocation->type->name;
+            })
             ->make(true);
     }
 
