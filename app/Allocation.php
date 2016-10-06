@@ -35,6 +35,11 @@ class Allocation extends Model
         return $this->belongsTo(Organization::class);
     }
 
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
+
     public function canActivate()
     {
         return $this->status != 'active';
