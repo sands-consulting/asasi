@@ -25,6 +25,8 @@
 
         @include('admin.notices.form')
 
+        @include('admin.notices.form-allocations')
+
         @include('admin.notices.form-requirement-commercials')
 
         @include('admin.notices.form-requirement-technicals')

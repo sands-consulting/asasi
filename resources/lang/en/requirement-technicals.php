@@ -40,7 +40,7 @@ return [
         'create' => [
             'title' => 'New',
             'table' => [
-                'empty' => 'No record found. Please create new row by clicking on <i class="icon-add"></i> button on top right corner of this table.'
+                'empty' => 'No record found. Please create new row by clicking on <i class="icon-add"></i> button on bottom left corner of this table.'
             ],
         ],
         'edit' => [
