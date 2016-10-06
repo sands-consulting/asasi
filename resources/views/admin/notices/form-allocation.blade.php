@@ -1,5 +1,5 @@
-<fieldset title="3">
-    <legend class="text-semibold">Notice Event</legend>
+<fieldset title="2">
+    <legend class="text-semibold">Allocation</legend>
 
     <div class="row">
         <div class="col-md-12">
@@ -7,10 +7,7 @@
                 <thead>
                     <tr>
                        <th>Name</th>
-                       <th width="10%">Type</th>
-                       <th>Location</th>
-                       <th width="10%">Date/Time</th>
-                       <th width="10%">Required</th>
+                       <th width="15%">Value</th>
                        <th width="15%">Action</th>
                     </tr>
                 </thead>
@@ -74,37 +71,4 @@
 
 @section('scripts')
     @parent
-    <script id="noticeEventsRow" type="text/x-template">
-        <tr>
-            <td>
-                <a href="#" class="myeditable" data-type="text" data-name="name" data-url="{{ route('api.notice-events.update') }}"></a>
-            </td>
-            <td>
-                <a href="#" class="myeditable" 
-                    data-type="select"
-                    data-name="notice_event_type_id"
-                    data-source="{{ App\NoticeEventType::options() }}" 
-                    data-value=""
-                    data-url="{{ route('api.notice-events.update') }}"></a>
-            </td>
-            <td>
-                <a href="#" class="myeditable" data-type="textarea" data-name="location"  
-                    data-url="{{ route('api.notice-events.update') }}"></a>
-            </td>
-            <td>
-                <a href="#" class="myeditable" data-type="daterange" data-name="event_at" data-title="Select date & time"
-                    data-daterangepicker="{ singleDatePicker: true, timePicker: true, timePicker24Hour: true, }"
-                    data-url="{{ route('api.notice-events.update') }}"
-                    data-onblur="ignore"></a>
-            </td>
-            <td>
-                <a href="#" class="myeditable myeditable-switchery" data-type="switchery" data-classInput="switcher-single" data-name="required" data-title="Is Required ?" data-source="{'1': 'Yes'}"
-                    data-value="0" data-emptytext="No" data-url="{{ route('api.notice-events.update') }}"></a>
-            </td>
-            <td class="action-column">
-                <button type="button" class="btn btn-xs btn-success btn-save" data-table="#tblNoticeEvents" data-url="{{ route('api.notice-events.store') }}"><i class="icon-checkmark3"></i></button>
-                <button type="button" class="btn btn-xs btn-danger btn-remove" data-url="/api/notice-events/delete/"><i class="icon-cross2"></i></button>
-            </td>
-        </tr>
-    </script>
 @stop

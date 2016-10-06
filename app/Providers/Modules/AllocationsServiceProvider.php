@@ -26,13 +26,9 @@ class AllocationsServiceProvider extends ServiceProvider
                     'as'    => 'admin.allocations.revisions',
                     'uses'  => 'AllocationsController@revisions'
                 ]);
-                $router->get('allocations/{allocations}/activate', [
-                    'as'    => 'admin.allocations.activate',
-                    'uses'  => 'AllocationsController@deactivate'
-                ]);
-                $router->get('allocations/{allocations}/deactivate', [
-                    'as'    => 'admin.allocations.deactivate',
-                    'uses'  => 'AllocationsController@deactivate'
+                $router->get('allocations/{allocations}/logs', [
+                    'as'    => 'admin.allocations.logs',
+                    'uses'  => 'AllocationsController@logs'
                 ]);
                 $router->resource('allocations', 'AllocationsController');
 

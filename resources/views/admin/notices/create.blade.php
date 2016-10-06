@@ -18,22 +18,9 @@
 
 @section('content')
 <div class="panel panel-white">
-    {!! Former::open_vertical(route('admin.notices.index'))
-        ->id('notice-form')
-        ->method('POST')
-        ->addClass('stepy-validation') !!}
+    {!! Former::open_vertical(route('admin.notices.index'))->id('notice-form')->method('POST')->addClass('stepy-validation') !!}
 
         @include('admin.notices.form')
-
-        @include('admin.notices.form-requirement-commercials')
-
-        @include('admin.notices.form-requirement-technicals')
-
-        @include('admin.notices.form-notice-events')
-
-        @include('admin.notices.form-mof')
-
-        @include('admin.notices.form-cidb')
 
         <a href="{{ route('admin.notices.index') }}" class="btn bg-blue stepy-finish">{{ trans('actions.finish') }}</a>
 
