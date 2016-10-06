@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Allocation',
+    'title' => 'Allocations',
 
     'attributes' => [
         'name' => 'Name',
