@@ -41,6 +41,8 @@ class NoticesController extends Controller
             'organization_id'
         );
 
+        $allocations = $request->only('allocations');
+
         $notice  = NoticesRepository::create(new Notice, $inputs);
         UserLogsRepository::log(Auth::user(), 'Create', $notice, $request->getClientIp());
         return redirect()

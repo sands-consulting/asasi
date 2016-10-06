@@ -27,7 +27,8 @@ class AllocationSeeder extends Seeder
                 'activate' => 'Activate allocation',
                 'deactivate' => 'Deactivate allocation',
                 'revisions' => 'View allocation revisions',
-                'logs' => 'View allocation logs'
+                'logs' => 'View allocation logs',
+                'organization' => 'Allow to manage allocation with organization'
             ],
             'allocation-type' => [
                 'index' => 'List all allocation types',

@@ -37,6 +37,9 @@ class NoticeRequest extends FormRequest
             'notice_type_id' => 'required',
             'organization_id' => 'required',
             'status' => '',
+
+            'allocations.*.id' => 'required|exists:allocations,id',
+            'allocations.*.value' => 'required',
         ];
     }
 
@@ -56,6 +59,9 @@ class NoticeRequest extends FormRequest
             'notice_type_id' => 'required',
             'organization_id' => 'required',
             'status' => '',
+
+            'allocations.*.id' => 'required|exists:allocations,id',
+            'allocations.*.value' => 'required',
         ];
     }
 }
