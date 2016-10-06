@@ -12,7 +12,7 @@ class AllocationsServiceProvider extends ServiceProvider
         app('policy')
             ->register('App\Http\Controllers\Admin\AllocationsController', 'App\Policies\AllocationsPolicy');
         app('policy')
-            ->register('App\Http\Controllers\Admin\AllocationTypeController', 'App\Policies\AllocationTypePolicy');
+            ->register('App\Http\Controllers\Admin\AllocationTypesController', 'App\Policies\AllocationTypesPolicy');
     }
 
     public function register()
@@ -38,17 +38,13 @@ class AllocationsServiceProvider extends ServiceProvider
 
                 $router->get('allocation-types/{allocation_types}/revisions', [
                     'as'    => 'admin.allocation-types.revisions',
-                    'uses'  => 'AllocationTypeController@revisions'
+                    'uses'  => 'AllocationTypesController@revisions'
                 ]);
-                $router->get('allocation-types/{allocation_types}/activate', [
-                    'as'    => 'admin.allocation-types.activate',
-                    'uses'  => 'AllocationTypeController@activate'
+                $router->get('allocation-types/{allocation_types}/logs', [
+                    'as'    => 'admin.allocation-types.logs',
+                    'uses'  => 'AllocationTypesController@logs'
                 ]);
-                $router->get('allocation-types/{allocation_types}/deactivate', [
-                    'as'    => 'admin.allocation-types.deactivate',
-                    'uses'  => 'AllocationTypeController@deactivate'
-                ]);
-                $router->resource('allocation-types', 'AllocationTypeController');
+                $router->resource('allocation-types', 'AllocationTypesController');
             });
         });
     }
