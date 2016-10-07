@@ -3,11 +3,17 @@
 @import "limitless-four/_main/core";
 @import "limitless-four/_main/colors";
 @import "vendor/icomoon";
+@import "prompt";
+
+body {
+    background-color: #ECEFF1;
+}
 
 .navbar {
   .navbar-brand {
     &.prompt {
-      background: url(/assets/images/logo-white.svg) no-repeat 15px 10px;;
+      background: @prompt-logo no-repeat 15px 10px;
+      background-repeat: no-repeat;
       background-size: auto 30px;
       width: 175px;
       text-indent: -9999px;
@@ -334,3 +340,36 @@ fieldset:first-child legend:first-child {
     border: 1px solid #fff;
   }
 }
+
+.login-container {
+    background: url(/assets/images/login-header.png);
+    background-repeat: no-repeat;
+    @media screen and (max-width: 768px) {
+        background-size: cover;
+    }
+    @media screen and (min-width: 769px) {
+        background-size: contain;
+    }
+    .page-container .login-form {
+        width: auto;
+    }
+    .login-header {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 400;
+        .login-header-tagline {
+            margin-bottom: 80px;
+        }
+    }
+    .login-form {
+        padding: 40px;
+        .form-group:first-child {
+            margin-top: 50px;
+        }
+    }
+}
+
+.prompt-logo {
+    margin-bottom: 10px;
+}
+

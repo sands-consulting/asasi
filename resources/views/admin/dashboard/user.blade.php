@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 
-@section('page-title', trans('dashboard.title'))
-
 @section('header')
     <div class="page-title">
         <h4><i class="icon-home2 position-left"></i> <span class="text-semibold">{{ trans('home.views.index.title') }}</span></h4>
@@ -15,15 +13,55 @@
     @if(Auth::user() && Auth::user()->hasPermission('access:vendor'))
     <div class="heading-elements">
         <div class="heading-btn-group">
-            <a href="{{ route('subscriptions.current') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-stack text-indigo-400"></i> <span>My Package</span></a>
-            <a href="{{ route('notices.my-notices') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-clipboard3 text-indigo-400"></i> <span>My Notices</span></a>
+            <a href="{{ route('dashboard.user') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-user text-primary-700"></i> <span>USER</span></a>
+            <a href="{{ route('dashboard.vendor') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-office text-primary-700"></i> <span>VENDOR</span></a>
+            <a href="{{ route('dashboard.tender') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-file-empty2 text-primary-700"></i> <span>TENDER</span></a>
+            <a href="{{ route('dashboard.transaction') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-credit-card text-primary-700"></i> <span>TRANSACTION</span></a>
+            <a href="{{ route('dashboard.portfolio') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-folder2 text-primary-700"></i> <span>PORTFOLIO</span></a>
         </div>
     </div>
     @endif
 @stop
 
 @section('content')
-
+    <!-- start: user status -->
+    <div class="row">
+        <div class="col-md-12 dashboard-panel-user-status">
+            <div class="panel panel-flat">
+                <div class="panel-body text-center">
+                    <div class="col-md-3 dashboard-panel-user-detail">
+                        <div class="dashboard-panel-user-icon text-green-700">
+                            <i class="icon-user"></i>
+                        </div>
+                        <div class="text-muted">ACTIVE USER</div>
+                        <div class="dashboard-panel-user-number text-green-700">1000</div>
+                    </div>
+                    <div class="col-md-3 dashboard-panel-user-detail">
+                        <div class="dashboard-panel-user-icon text-orange-700">
+                            <i class="icon-user"></i>
+                        </div>
+                        <div class="text-muted">INACTIVE USER</div>
+                        <div class="dashboard-panel-user-number text-orange-700">1000</div>
+                    </div>
+                    <div class="col-md-3 dashboard-panel-user-detail">
+                        <div class="dashboard-panel-user-icon text-primary-700">
+                            <i class="icon-user"></i>
+                        </div>
+                        <div class="text-muted">ALL USER</div>
+                        <div class="dashboard-panel-user-number text-primary-700">1000</div>
+                    </div>
+                    <div class="col-md-3 dashboard-panel-user-detail">
+                        <div class="dashboard-panel-user-icon text-danger-800">
+                            <i class="icon-user"></i>
+                        </div>
+                        <div class="text-muted">SUSPENDED USER</div>
+                        <div class="dashboard-panel-user-number text-danger-800">1000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end: user status -->
     <!-- start: login activity & last login -->
     <div class="row">
         <div class="col-md-9">
@@ -235,4 +273,4 @@
             </div>
         </div>
     </div>
-@endsection
+@stop

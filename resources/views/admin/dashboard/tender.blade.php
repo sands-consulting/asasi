@@ -15,8 +15,11 @@
     @if(Auth::user() && Auth::user()->hasPermission('access:vendor'))
     <div class="heading-elements">
         <div class="heading-btn-group">
-            <a href="{{ route('subscriptions.current') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-stack text-indigo-400"></i> <span>My Package</span></a>
-            <a href="{{ route('notices.my-notices') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-clipboard3 text-indigo-400"></i> <span>My Notices</span></a>
+            <a href="{{ route('dashboard.user') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-user text-primary-700"></i> <span>USER</span></a>
+            <a href="{{ route('dashboard.vendor') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-office text-primary-700"></i> <span>VENDOR</span></a>
+            <a href="{{ route('dashboard.tender') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-file-empty2 text-primary-700"></i> <span>TENDER</span></a>
+            <a href="{{ route('dashboard.transaction') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-credit-card text-primary-700"></i> <span>TRANSACTION</span></a>
+            <a href="{{ route('dashboard.portfolio') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-folder2 text-primary-700"></i> <span>PORTFOLIO</span></a>
         </div>
     </div>
     @endif
