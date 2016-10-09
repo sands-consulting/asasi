@@ -110,6 +110,11 @@ class Notice extends Model
      * Relationship
      */
 
+    public function allocations()
+    {
+        return $this->hasMany(NoticeAllocation::class);
+    }
+
     public function type()
     {
         return $this->belongsTo(NoticeType::class, 'notice_type_id');

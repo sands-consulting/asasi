@@ -8,7 +8,7 @@ class NoticeAllocationServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\NoticeAllocationsController', 'App\Policies\NoticeAllocationsPolicy');
+        app('policy')->register('App\Http\Controllers\Api\NoticeAllocationsController', 'App\Policies\NoticeAllocationsPolicy');
     }
 
     /**
@@ -22,7 +22,7 @@ class NoticeAllocationServiceProvider extends ServiceProvider
         app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
             $router->model('notice_allocations', 'App\NoticeAllocation');
 
-            $router->post('notice-allocations/store', [
+            $router->post('notice-allocations/{notices}/store', [
                 'as' => 'api.notice-allocations.store',
                 'uses' => 'NoticeAllocationsController@store'
             ]);

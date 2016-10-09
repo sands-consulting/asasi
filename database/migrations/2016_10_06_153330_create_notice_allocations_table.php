@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAllocationNoticeTable extends Migration
+class CreateNoticeAllocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateAllocationNoticeTable extends Migration
      */
     public function up()
     {
-        Schema::create('allocation_notice', function (Blueprint $table) {
+        Schema::create('notice_allocations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('allocation_id');
             $table->unsignedInteger('notice_id');
+            $table->decimal('amount');
             $table->nullableTimestamps();
             $table->softDeletes();
 
@@ -39,7 +40,7 @@ class CreateAllocationNoticeTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::drop('allocation_notice');
+        Schema::drop('notice_allocations');
         Schema::enableForeignKeyConstraints();
     }
 }

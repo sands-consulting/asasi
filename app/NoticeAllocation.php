@@ -22,9 +22,7 @@ class NoticeAllocation extends Model
         'status',
     ];
 
-    protected $attributes = [
-        'status' => 'active'
-    ];
+    protected $attributes = [];
 
     protected $searchable = [];
 
@@ -88,6 +86,16 @@ class NoticeAllocation extends Model
     public function activities()
     {
         return $this->morphMany(NoticeActivity::class, 'activitable');
+    }
+
+    public function notice()
+    {
+        return $this->belongsTo(Notice::class);
+    }
+
+    public function allocation()
+    {
+        return $this->belongsTo(Allocation::class);
     }
 
     /**
