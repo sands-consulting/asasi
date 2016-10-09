@@ -5,25 +5,26 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Repositories\AuthLogsRepository;
 use App\Http\Controllers\Controller;
+use App\Notice;
 use App\NoticeEvent;
 use App\Repositories\NoticeEventsRepository;
 
 class NoticeEventsController extends Controller
 {
     
-    public function store(Request $request, NoticeEvent $noticeEvent)
+    public function store(Request $request, Notice $notice)
     {
         $inputs = $request->only(
             'name',
             'notice_event_type_id',
             'location',
             'event_at',
-            'required',
-            'notice_id'
+            'required'
         );
 
         // Fixme: temp solution
         $inputs['required'] = $inputs['required'][0];
+        $inputs['notice_id'] = $notice->id;
         $noticeEvent = NoticeEventsRepository::create(new NoticeEvent, $inputs);
 
         return response()->json($noticeEvent);

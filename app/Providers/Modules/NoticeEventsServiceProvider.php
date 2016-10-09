@@ -22,7 +22,7 @@ class NoticeEventsServiceProvider extends ServiceProvider
         app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
             $router->model('notice_events', 'App\NoticeEvent');
 
-            $router->post('notice-events/store', [
+            $router->post('notice-events/{notices}/store', [
                 'as' => 'api.notice-events.store',
                 'uses' => 'NoticeEventsController@store'
             ]);
