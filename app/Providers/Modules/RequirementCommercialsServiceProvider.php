@@ -4,11 +4,11 @@ namespace App\Providers\Modules;
 
 use Illuminate\Support\ServiceProvider;
 
-class CommercialRequirementsServiceProvider extends ServiceProvider
+class RequirementCommercialsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\CommercialRequirementsController', 'App\Policies\CommercialRequirementsPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\RequirementCommercialsController', 'App\Policies\RequirementCommercialsPolicy');
     }
 
     /**
@@ -22,17 +22,17 @@ class CommercialRequirementsServiceProvider extends ServiceProvider
         app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
             $router->model('requirement_commercials', 'App\RequirementCommercial');
 
-            $router->post('requirement-commercials/store', [
+            $router->post('requirement-commercials/{notices}/store', [
                 'as' => 'api.requirement-commercials.store',
-                'uses' => 'CommercialRequirementsController@store'
+                'uses' => 'RequirementCommercialsController@store'
             ]);
             $router->post('requirement-commercials/update', [
                 'as' => 'api.requirement-commercials.update',
-                'uses' => 'CommercialRequirementsController@update'
+                'uses' => 'RequirementCommercialsController@update'
             ]);
             $router->post('requirement-commercials/delete/{requirement_commercials}', [
                 'as' => 'api.requirement-commercials.delete',
-                'uses' => 'CommercialRequirementsController@delete'
+                'uses' => 'RequirementCommercialsController@delete'
             ]);
         });
     }

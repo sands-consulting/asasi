@@ -22,7 +22,7 @@ class RequirementTechnicalsServiceProvider extends ServiceProvider
         app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
             $router->model('requirement_technicals', 'App\RequirementTechnical');
 
-            $router->post('requirement-technicals/store', [
+            $router->post('requirement-technicals/{notices}/store', [
                 'as' => 'api.requirement-technicals.store',
                 'uses' => 'RequirementTechnicalsController@store'
             ]);

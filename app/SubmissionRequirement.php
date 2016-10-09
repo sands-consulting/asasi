@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use App\Libraries\Traits\DateAccessorTrait;
 
-class RequirementCommercial extends Model
+class SubmissionRequirement extends Model
 {
     use RevisionableTrait,
         DateAccessorTrait,
@@ -16,11 +16,12 @@ class RequirementCommercial extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
+        'type',
         'title',
         'mandatory',
         'require_file',
-        'notice_id',
-        'type'
+        'field_type',
+        'notice_id'
     ];
 
     protected $attributes = [
@@ -91,9 +92,4 @@ class RequirementCommercial extends Model
     {
         return $this->belongsTo(Notice::class);
     }
-
-    /*
-     * Helpers
-     */
-
 }

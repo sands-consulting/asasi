@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequirementTechnicalsTable extends Migration
+class CreateSubmissionRequirementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,13 @@ class CreateRequirementTechnicalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requirement_technicals', function (Blueprint $table) {
+        Schema::create('submission_requirements', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type');
             $table->string('title');
             $table->boolean('mandatory')->default(0);
             $table->boolean('require_file')->default(0);
-            $table->string('type')->default('check');
+            $table->string('field_type')->default('check');
             $table->unsignedInteger('notice_id');
             $table->string('status');
             $table->nullableTimestamps();
@@ -38,7 +39,7 @@ class CreateRequirementTechnicalsTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::drop('requirement_technicals');
+        Schema::drop('submission_requirements');
         Schema::enableForeignKeyConstraints();
     }
 }

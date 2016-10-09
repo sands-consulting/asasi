@@ -209,7 +209,7 @@ return [
         App\Providers\Modules\VendorsServiceProvider::class,
         App\Providers\Modules\VendorTypesProvider::class,
         App\Providers\Modules\CartsServiceProvider::class,
-        App\Providers\Modules\CommercialRequirementsServiceProvider::class,
+        App\Providers\Modules\RequirementCommercialsServiceProvider::class,
         App\Providers\Modules\PaymentsServiceProvider::class,
         App\Providers\Modules\RequirementTechnicalsServiceProvider::class,
         App\Providers\Modules\RulesServiceProvider::class,

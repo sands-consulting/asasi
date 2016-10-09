@@ -22,17 +22,31 @@
                         @foreach($requirementCommercials as $requirementCommercial)
                         <tr data-id="{{ $requirementCommercial->id }}">
                             <td>
-                                <a href="#" class="myeditable" id="update-requirement" data-type="textarea" data-name="title" 
-                                    data-pk="{{ $requirementCommercial->id }}" data-url="{{ route('api.requirement-commercials.update') }}">{{ $requirementCommercial->title }}</a>
+                                <a href="#" class="myeditable"
+                                    id="update-requirement"
+                                    data-type="textarea"
+                                    data-name="title" 
+                                    data-pk="{{ $requirementCommercial->id }}"
+                                    data-url="{{ route('api.requirement-commercials.update') }}">{{ $requirementCommercial->title }}</a>
                             </td>
                             <td>
-                                <a href="#" class="myeditable myeditable-switchery" data-type="switchery" data-inputclass="switcher-single" data-name="mandatory" data-title="Is Mandatory ?" 
-                                    data-source="{'1': 'Yes'}" data-value="{{ $requirementCommercial->mandatory }}" data-emptytext="No" data-pk="{{ $requirementCommercial->id }}"
+                                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                                    data-inputclass="switcher-single"
+                                    data-name="mandatory"
+                                    data-title="Is Mandatory ?" 
+                                    data-source="{'1': 'Yes'}"
+                                    data-value="{{ $requirementCommercial->mandatory }}"
+                                    data-emptytext="No"
+                                    data-pk="{{ $requirementCommercial->id }}"
                                     data-url="{{ route('api.requirement-commercials.update') }}"></a>
                             </td>
                             <td>
-                                <a href="#" class="myeditable myeditable-switchery" data-type="switchery" data-inputclass="switcher-single" data-name="require_file" data-title="Require File ?"
-                                    data-source="{'1': 'Yes'}" data-value="{{ $requirementCommercial->require_file }}" data-emptytext="No" data-pk="{{ $requirementCommercial->id }}"
+                                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                                    data-inputclass="switcher-single" data-name="require_file" data-title="Require File ?"
+                                    data-source="{'1': 'Yes'}"
+                                    data-value="{{ $requirementCommercial->require_file }}"
+                                    data-emptytext="No"
+                                    data-pk="{{ $requirementCommercial->id }}"
                                     data-url="{{ route('api.requirement-commercials.update') }}"
                                 ></a>
                             </td>
@@ -67,17 +81,29 @@
                 <a href="#" class="myeditable" id="new-requirement" data-type="textarea" data-name="title" data-url="{{ route('api.requirement-commercials.update') }}"></a>
             </td>
             <td>
-                <a href="#" class="myeditable myeditable-switchery" data-type="switchery" data-inputclass="switcher-single" data-name="mandatory" data-title="Is Mandatory ?" 
-                    data-source="{'1': 'Yes'}" data-value="0" data-emptytext="No" data-url="{{ route('api.requirement-commercials.update') }}"></a>
+                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                    data-inputclass="switcher-single"
+                    data-name="mandatory"
+                    data-title="Is Mandatory ?" 
+                    data-source="{'1': 'Yes'}"
+                    data-value="0"
+                    data-emptytext="No"
+                    data-url="{{ route('api.requirement-commercials.update') }}"></a>
             </td>
             <td>
-                <a href="#" class="myeditable myeditable-switchery" data-type="switchery" data-inputclass="switcher-single" data-name="require_file" data-title="Require File ?" 
-                    data-source="{'1': 'Yes'}" data-value="0" data-emptytext="No" data-url="{{ route('api.requirement-commercials.update') }}"
+                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                    data-inputclass="switcher-single" data-name="require_file" data-title="Require File ?" 
+                    data-source="{'1': 'Yes'}"
+                    data-value="0"
+                    data-emptytext="No"
+                    data-url="{{ route('api.requirement-commercials.update') }}"
                 ></a>
             </td>
             <td class="action-column">
-                <button type="button" class="btn btn-xs btn-success btn-save" data-table="#tblCommReq" data-url="{{ route('api.requirement-commercials.store') }}"><i class="icon-checkmark3"></i></button>
-                <a href="#" type="button" class="btn btn-xs btn-danger btn-remove" data-url="/api/requirement-commercials/delete/" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross2"></i></a>
+                <button type="button" class="btn btn-xs btn-success btn-save" data-table="#tblCommReq" data-url="{{ route('api.requirement-commercials.store', $notice->id) }}">
+                    <i class="icon-checkmark3"></i></button>
+                <a href="#" type="button" class="btn btn-xs btn-danger btn-remove" data-url="/api/requirement-commercials/delete/" data-confirm="{{ trans('app.confirmation') }}">
+                    <i class="icon-cross2"></i></a>
             </td>
         </tr>
     </script>

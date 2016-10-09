@@ -9,7 +9,7 @@ use App\Notice;
 use App\SubmissionRequirement;
 use App\Repositories\SubmissionRequirementsRepository;
 
-class RequirementTechnicalsController extends Controller
+class RequirementCommercialsController extends Controller
 {
     
     public function store(Request $request, Notice $notice)
@@ -24,7 +24,7 @@ class RequirementTechnicalsController extends Controller
         $inputs['mandatory'] = $inputs['mandatory'][0];
         $inputs['require_file'] = $inputs['require_file'][0];
         $inputs['field_type'] = $inputs['require_file'] == 1 ? 'file' : 'check';
-        $inputs['type'] = 'technicals';
+        $inputs['type'] = 'commercials';
         $inputs['notice_id'] = $notice->id;
         $submissionRequirement = SubmissionRequirementsRepository::create(new SubmissionRequirement, $inputs);
 
