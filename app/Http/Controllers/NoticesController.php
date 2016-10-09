@@ -36,11 +36,11 @@ class NoticesController extends Controller
     public function submission(Notice $notice)
     {
         // check if submission exists
-        $submissions['commercial'] = Submission::where('vendor_id', Auth::user()->vendor->id)
-            ->where('type', 'commercial')
+        $submissions['commercials'] = Submission::where('vendor_id', Auth::user()->vendor->id)
+            ->where('type', 'commercials')
             ->first();
-        $submissions['technical'] = Submission::where('vendor_id', Auth::user()->vendor->id)
-            ->where('type', 'technical')
+        $submissions['technicals'] = Submission::where('vendor_id', Auth::user()->vendor->id)
+            ->where('type', 'technicals')
             ->first();
 
         return view('notices.submission', compact('notice', 'submissions'));
@@ -105,9 +105,9 @@ class NoticesController extends Controller
             $submission = SubmissionsRepository::update($submission, $input);
         }
 
-        if ($input['type'] == 'commercial')
+        if ($input['type'] == 'commercials')
             $requirements = $notice->requirementCommercials;
-        elseif ($input['type'] == 'technical')
+        elseif ($input['type'] == 'technicals')
             $requirements = $notice->requirementTechnicals;
 
         // Fixme: Temp solutions

@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-sm-12">
             {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
-            {!! Former::hidden('type', 'commercial') !!}
+            {!! Former::hidden('type', 'commercials') !!}
             <div class="panel">
                 <div class="panel-body">
                     <div class="row">
