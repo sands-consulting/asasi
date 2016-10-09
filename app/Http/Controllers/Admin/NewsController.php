@@ -29,12 +29,9 @@ class NewsController extends Controller
     {
         $inputs = $request->only('title', 'content', 'category_id');
 
-        if($request->user()->hasPermission('news:organization'))
-        {
+        if($request->user()->hasPermission('news:organization')) {
             $inputs['organization_id'] = $request->user()->organizations()->first()->id;
-        }
-        else
-        {
+        } else {
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
@@ -70,7 +67,7 @@ class NewsController extends Controller
             ->with('notice', trans('news.notices.updated', ['title' => $news->title]));
     }
 
-    public function destroy(News $news)
+    public function destroy(Request $request, News $news)
     {
         NewsRepository::delete($news);
         UserLogsRepository::log($request->user(), 'delete', $news, $request->getClientIp());

@@ -22,12 +22,9 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-	<div class="panel-body">
+
 		{!! Former::vertical_open(route('admin.news.index'))->method('POST') !!}
 			{!! Former::populate($news) !!}
 			@include('admin.news.form')
 		{!! Former::close() !!}
-	</div>
-</div>
 @endsection

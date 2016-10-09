@@ -33,7 +33,7 @@ class NewsSeeder extends Seeder
             ['news:delete',                 'Delete exisiting news'],
             ['news:publish',                'Publish existing news'],
             ['news:unpublish',              'Unpublish existing news'],
-            ['news:revisions',               'View news revisions'],
+            ['news:revisions',              'View news revisions'],
             ['news:logs',                   'View news logs'],
             ['news:organization',           'Allow to manage news within user organization'],
 

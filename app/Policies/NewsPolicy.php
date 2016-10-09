@@ -58,7 +58,7 @@ class NewsPolicy extends BasePolicy
 
     public function publish(News $news)
     {
-        return $this->checkOrganization($news, 'news:duplicate') && $news->canPublish();
+        return $this->checkOrganization($news, 'news:publish') && $news->canPublish();
     }
 
     public function unpublish(News $news)

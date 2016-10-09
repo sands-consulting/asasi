@@ -19,6 +19,7 @@ class News extends Model
         'title',
         'content',
         'category_id',
+        'organization_id',
         'status'
     ];
 
