@@ -245,7 +245,7 @@ class User extends Authenticatable
         parent::boot();
 
         parent::creating(function($user) {
-            $user->confirmation_token = str_random(64);
+            $user->token = str_random(64);
         });
     }
 }

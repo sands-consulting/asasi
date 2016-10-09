@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use App\User;
 use App\Vendor;
@@ -67,11 +67,8 @@ class VendorSeeder extends Seeder
             ['SSM', 'Company Limited by Guarantee'],
             ['SSM', 'Limited Company'],
             ['SSM', 'Public Limited Company'],
-
             ['SKM', 'Cooperative'],
-
             ['ROS', 'Association / Club / Society'],
-
             ['BAR',     'Law Firm'],
             ['BEM',     'Professional Engineer'],
             ['BQSM',    'Professional Quantity Surveryor'],
@@ -129,7 +126,7 @@ class VendorSeeder extends Seeder
             'capital_paid_up' => '250000',
             'type_id' => 4,
             'user_id' => 2,
-            'status' => 'pending-approval',
+            'status' => 'pending',
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'deleted_at' => null
