@@ -71,6 +71,9 @@
                     <a data-target="#left-tab1" data-toggle="tab"><i class="icon-clipboard3 position-left"></i> Notice Details</a>
                 </li>
                 <li>
+                    <a data-target="#tab-events" data-toggle="tab"><i class="icon-calendar3 position-left"></i> Events</a>
+                </li>
+                <li>
                     <a data-target="#left-tab2" data-toggle="tab"><i class="icon-office position-left"></i> Vendors</a>
                 </li>
                 <li>
@@ -94,6 +97,10 @@
             <div class="tab-content">
                 <div class="tab-pane active has-padding" id="left-tab1">
                     @include('admin.notices.show-notice')
+                </div>
+                
+                <div class="tab-pane active has-padding" id="tab-events">
+                    @include('admin.notices.show-events')
                 </div>
 
                 <div class="tab-pane has-padding" id="left-tab2">

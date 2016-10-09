@@ -43,7 +43,7 @@ class NoticeEvent extends Model
         'status',
     ];
 
-    protected $dates = [];
+    protected $dates = ['event_at'];
 
     /*
      * Search scopes
