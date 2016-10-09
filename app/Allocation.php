@@ -49,4 +49,13 @@ class Allocation extends Model
     {
         return $this->status != 'inactive';
     }
+
+    /*
+     * Helpers
+     */
+    
+    public static function options()
+    {
+        return static::lists('name', 'id');
+    }
 }
