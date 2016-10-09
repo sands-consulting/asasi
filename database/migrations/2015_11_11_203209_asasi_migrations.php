@@ -72,6 +72,7 @@ class AsasiMigrations extends Migration
             $table->string('name')->unique();
             $table->string('display_name');
             $table->string('description')->nullable();
+            $table->boolean('fixed')->default(0);
             $table->nullableTimestamps();
             $table->softDeletes();
         });

@@ -26,7 +26,7 @@ class RolesDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '80', 'class' => 'text-center'])
+                    ->addAction(['width' => '80', 'class' => 'text-left'])
                     ->parameters($this->getBuilderParameters());
     }
 
