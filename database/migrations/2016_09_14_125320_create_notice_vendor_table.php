@@ -27,6 +27,8 @@ class CreateNoticeVendorTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('notice_vendor');
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -38,6 +38,8 @@ class CreateAllocationNoticeTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::drop('allocation_notice');
+        Schema::enableForeignKeyConstraints();
     }
 }

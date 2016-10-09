@@ -85,7 +85,7 @@ class CreateEvaluationsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('notice_evaluators');
-        Schema::dropIfExists('submission_evaluators');
+        Schema::dropIfExists('submission_evaluator');
         Schema::dropIfExists('submission_evaluations');
         Schema::enableForeignKeyConstraints();
     }

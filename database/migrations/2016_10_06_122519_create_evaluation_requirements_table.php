@@ -45,7 +45,9 @@ class CreateEvaluationRequirementsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('evaluation_requirements');
-        Schema::dropIfExists('evaluation_types');
+        Schema::dropIfExists('evaluation_types');\
+        Schema::enableForeignKeyConstraints();
     }
 }
