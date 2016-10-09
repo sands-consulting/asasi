@@ -51,6 +51,10 @@ class VendorsServiceProvider extends ServiceProvider
                     'as'    => 'admin.vendors.revisions',
                     'uses'  => 'VendorsController@revisions'
                 ]);
+                $router->get('vendors/{vendors}/logs', [
+                    'as'    => 'admin.vendors.logs',
+                    'uses'  => 'VendorsController@logs'
+                ]);
                 
                 $router->resource('vendors', 'VendorsController');
             });

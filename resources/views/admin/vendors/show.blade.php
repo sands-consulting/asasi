@@ -57,6 +57,26 @@
 </div>
 @endsection
 
+@section('secondary-header')
+<ul class="breadcrumb-elements">
+    @if(Auth::user()->hasPermission('vendor:logs'))
+    <li>
+        <a href="{{ route('admin.vendors.logs', $vendor->id) }}" class="legitRipple">
+            <i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
+        </a>
+    </li>
+    @endif
+
+    @if(Auth::user()->hasPermission('vendor:revisions'))
+    <li>
+        <a href="{{ route('admin.vendors.revisions', $vendor->id) }}" class="legitRipple">
+            <i class="icon-database-edit2"></i> {{ trans('revisions.title') }}
+        </a>
+    </li>
+    @endif
+</ul>
+@endsection
+
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-heading">

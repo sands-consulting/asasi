@@ -128,6 +128,11 @@ class Vendor extends Authenticatable
      * Relationship
      */
 
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
