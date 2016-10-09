@@ -1,4 +1,4 @@
-<fieldset title="4">
+<fieldset title="7">
     <legend class="text-semibold">Technical Requirement</legend>
 
     <div class="row">

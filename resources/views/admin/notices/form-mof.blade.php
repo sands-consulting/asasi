@@ -1,4 +1,4 @@
-<fieldset id="mof" title="6">
+<fieldset id="mof" title="4">
     <legend class="text-semibold">MOF</legend>
     
     <div id="field-codes" style="margin:30px">

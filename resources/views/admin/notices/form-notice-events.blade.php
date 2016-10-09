@@ -1,4 +1,4 @@
-<fieldset title="5">
+<fieldset title="3">
     <legend class="text-semibold">Notice Event</legend>
 
     <div class="row">
