@@ -50,6 +50,7 @@
                                                     <i class="icon-compose"></i> {{ trans('notices.buttons.submission') }}
                                                 </a>
                                             </li>
+                                            @if (!$vendor->transactionDetails->isEmpty())
                                             <li class="divider"></li>
                                             <li>
                                                 <a href="{{ route('payments.invoice', $vendor->transactionDetails(function ($query) {
@@ -67,6 +68,7 @@
                                                     <i class="icon-newspaper"></i> {{ trans('notices.buttons.receipt') }}
                                                 </a>
                                             </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
