@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\DataTables\EvaluationsDataTable;
-use App\DataTables\EvaluationVendorsDataTable;
+use App\DataTables\EvaluationSubmissionsDataTable;
 use App\Submission;
 use App\Notice;
 use Illuminate\Http\Request;
@@ -16,9 +16,10 @@ class EvaluationsController extends Controller
         return $table->render('admin.evaluations.index');
     }
 
-    public function vendors(EvaluationVendorsDataTable $table, $type)
+    public function submissions(Request $request, EvaluationSubmissionsDataTable $table, Notice $notice)
     {
-        return $table->forType($type)->render('admin.evaluations.vendors');
+        $inputs = $request->only('type');
+        return $table->forType($inputs['type'])->render('admin.evaluations.submissions', compact('notice'));
     }
 
     public function evaluate(Submission $submission)

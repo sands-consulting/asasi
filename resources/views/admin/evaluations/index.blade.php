@@ -13,6 +13,9 @@
 
 @section('content')
 <div class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title">Notices</h6>
+    </div>
     {!! $dataTable->table() !!}
 </div>
 @endsection

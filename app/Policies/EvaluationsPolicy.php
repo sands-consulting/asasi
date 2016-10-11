@@ -11,7 +11,7 @@ class EvaluationsPolicy extends BasePolicy
         return $this->user->hasPermission('evaluation:index');
     }
 
-    public function vendors()
+    public function submissions()
     {
         return $this->user->hasPermission('evaluation:evaluate');
     }

@@ -6,7 +6,7 @@ use App\Submission;
 use App\NoticeEvaluator;
 use Auth;
 
-class EvaluationVendorsDataTable extends DataTable
+class EvaluationSubmissionsDataTable extends DataTable
 {
     public function ajax()
     {
@@ -52,6 +52,7 @@ class EvaluationVendorsDataTable extends DataTable
                 'data'  => 'id',
                 'name'  => 'id',
                 'title' => trans('submissions.attributes.id'),
+                'sWidth' => '200px',
             ],
             [
                 'data'  => 'type',
@@ -72,5 +73,12 @@ class EvaluationVendorsDataTable extends DataTable
     {
         $this->type = $type;
         return $this;
+    }
+
+    protected function getBuilderParameters()
+    {
+        $data = parent::getBuilderParameters();
+        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        return $data;
     }
 }
