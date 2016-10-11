@@ -53,7 +53,7 @@ class EvaluationRequirementServiceProvider extends ServiceProvider
                     'as' => 'api.evaluation-requirements.update',
                     'uses' => 'EvaluationRequirementsController@update'
                 ]);
-                $router->post('evaluation-requirements/delete/{evaluations}', [
+                $router->post('evaluation-requirements/delete/{evaluation_requirements}', [
                     'as' => 'api.evaluation-requirements.delete',
                     'uses' => 'EvaluationRequirementsController@delete'
                 ]);
