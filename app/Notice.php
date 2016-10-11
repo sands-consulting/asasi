@@ -165,6 +165,11 @@ class Notice extends Model
         return $this->morphMany(TransactionDetail::class, 'detailable');
     }
 
+    public function evaluationRequirements()
+    {
+        return $this->hasMany(EvaluationRequirement::class);
+    }
+
     /*
      * Helpers
      */

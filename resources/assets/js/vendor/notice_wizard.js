@@ -164,8 +164,9 @@ $(function() {
     // Change defaults
     $.fn.editable.defaults.highlight = false;
     $.fn.editable.defaults.mode = 'popup';
+    $.fn.editable.defaults.onblur = 'submit';
     $.fn.editableform.template = '<form class="editableform">' +
-        '<div class="control-group" style="width: 100%">' +
+        '<div class="control-group">' +
         '<div class="editable-input"></div> <div class="editable-buttons"></div>' +
         '<div class="editable-error-block"></div>' +
         '</div> ' +
@@ -185,9 +186,7 @@ $(function() {
      */
     
     // Initialize
-    $('.myeditable').editable({
-        onblur: 'ignore',
-    });
+    $('.myeditable').editable();
 
     //make username required
     $('#new-requirement').editable('option', 'validate', function(v) {
@@ -267,14 +266,12 @@ $(function() {
             var init = new Switchery(elem);
         });
 
-        $myeditable.editable({
-            onblur: 'ignore',
-        });
-
+        $myeditable.editable();
         // $myeditable.find('.btn-remove').show();
     })
 
-    $(document).on('click', '.btn-remove', function () {
+    $(document).on('click', '.btn-remove', function (ev) {
+        ev.preventDefault();
         var url = $(this).data('url');
         var $tr = $(this).closest('tr');
         var $emptyTr = $tr.siblings('.table-empty');

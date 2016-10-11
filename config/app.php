@@ -215,6 +215,7 @@ return [
         App\Providers\Modules\RulesServiceProvider::class,
         App\Providers\Modules\SubmissionServiceProvider::class,
         App\Providers\Modules\EvaluationServiceProvider::class,
+        App\Providers\Modules\EvaluationRequirementServiceProvider::class,
     ],
 
     /*

@@ -172,8 +172,8 @@
                                     <li class="{{ is_path_active('admin/evaluations') }}">
                                         <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">{{ trans('menu.admin.manage.evaluations.index') }}</a>
                                     </li>
-                                    <li class="{{ is_path_active('admin/evaluations/settings') }}">
-                                        <a href="{{ route('admin.evaluations.settings') }}" class="legitRipple">{{ trans('menu.admin.manage.evaluations.settings') }}</a>
+                                    <li class="{{ is_path_active('admin/evaluation-requirements') }}">
+                                        <a href="{{ route('admin.evaluation-requirements.index') }}" class="legitRipple">{{ trans('menu.admin.manage.evaluations.settings') }}</a>
                                     </li>
                                 </ul>
                             </li>

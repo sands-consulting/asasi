@@ -19,7 +19,8 @@ class EvaluationSeeder extends Seeder
 
         $permissions = [
             ['evaluation:index', 'List of evaluator\'s notices.'],
-            ['evaluation:evaluate', 'Evaluate submisssion.']
+            ['evaluation:evaluate', 'Evaluate submisssion.'],
+            ['evaluation:settings', 'Evaluation Settings.']
         ];
 
         foreach ($permissions as $permissionData) {

@@ -7,7 +7,6 @@ use App\DataTables\EvaluationsDataTable;
 use App\DataTables\EvaluationVendorsDataTable;
 use App\Submission;
 use App\Notice;
-use Auth;
 use Illuminate\Http\Request;
 
 class EvaluationsController extends Controller
@@ -26,10 +25,5 @@ class EvaluationsController extends Controller
     {
         $submissionDetails = $submission->details;
         return view('admin.evaluations.evaluate', compact('submission', 'submissionDetails'));
-    }
-
-    public function settings()
-    {
-        return view('admin.evaluations.settings');
     }
 }

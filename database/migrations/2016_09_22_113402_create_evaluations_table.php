@@ -54,18 +54,51 @@ class CreateEvaluationsTable extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::create('submission_evaluations', function (Blueprint $table) {
+        Schema::create('evaluation_scores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('rating')->nullable();
+            $table->integer('score')->nullable();
             $table->text('remark')->nullable();
-            $table->unsignedInteger('submission_detail_id');
+            $table->unsignedInteger('evaluation_requirement_id');
             $table->unsignedInteger('user_id');
             $table->nullableTimestamps();
             $table->softDeletes();
 
-            $table->foreign('submission_detail_id')
+            $table->foreign('evaluation_requirement_id')
                 ->references('id')
-                ->on('submission_details')
+                ->on('evaluation_requirements')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('evaluation_types', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('slug');
+            $table->string('name');
+            $table->string('status');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+        });
+        
+        Schema::create('evaluation_requirements', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('sequence')->nullable;
+            $table->string('title');
+            $table->unsignedInteger('full_score')->default(0);
+            $table->unsignedInteger('evaluation_type_id');
+            $table->unsignedInteger('notice_id');
+            $table->string('status');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('evaluation_type_id')
+                ->references('id')
+                ->on('evaluation_types')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -87,7 +120,9 @@ class CreateEvaluationsTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('notice_evaluators');
         Schema::dropIfExists('submission_evaluator');
-        Schema::dropIfExists('submission_evaluations');
+        Schema::dropIfExists('evaluation_scores');
+        Schema::dropIfExists('evaluation_types');
+        Schema::dropIfExists('evaluation_requirements');
         Schema::enableForeignKeyConstraints();
     }
 }
