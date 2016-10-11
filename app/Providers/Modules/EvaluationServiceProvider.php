@@ -28,7 +28,7 @@ class EvaluationServiceProvider extends ServiceProvider
                     'uses' => 'EvaluationsController@submissions'  
                 ]);
 
-                $router->get('evaluations/{submissions}/evaluate', [
+                $router->get('evaluations/{notices}/evaluate/{submissions}', [
                     'as' => 'admin.evaluations.evaluate',
                     'uses' => 'EvaluationsController@evaluate'  
                 ]);

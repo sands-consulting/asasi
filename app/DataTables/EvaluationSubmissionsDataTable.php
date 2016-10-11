@@ -13,20 +13,22 @@ class EvaluationSubmissionsDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($submission) {
-                return view('admin.evaluations._vendors_actions', compact('submission'));
+                return view('admin.evaluations._submissions_actions', compact('submission'));
             })
             ->editColumn('name', function($submission) {
-                return link_to_route('admin.evaluations.evaluate', $submission->name, $submission->id);
+                return link_to_route('admin.evaluations.evaluate', $submission->name, [$submission->notice_id, $submission->id]);
             })
             ->make(true);
     }
 
     public function query()
     {
-        // dump($this->type);
-        $query = Submission::leftJoin('vendors', 'vendors.id', '=', 'submissions.vendor_id')
-            ->select('submissions.id as id', 'vendors.name as name', 'submissions.type as type')
-            ->where('type', $this->type);
+        $types = NoticeEvaluator::where('user_id', $this->user_id)
+            ->where('notice_id', $this->notice_id)
+            ->lists('type');
+
+        $query = Submission::where('notice_id', $this->notice_id)
+            ->whereIn('type', $types);
 
 
         if($this->datatables->request->input('q', null))
@@ -67,6 +69,18 @@ class EvaluationSubmissionsDataTable extends DataTable
     protected function filename()
     {
         return 'evaluations_dt_' . time();
+    }
+
+    public function byUserId($userId)
+    {
+        $this->user_id = $userId;
+        return $this;
+    }
+
+    public function byNoticeId($noticeId)
+    {
+        $this->notice_id = $noticeId;
+        return $this;
     }
 
     public function forType($type)

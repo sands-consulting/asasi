@@ -12,11 +12,15 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-    <div class="panel-heading">
-        <h6 class="panel-title">Notices</h6>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h6 class="panel-title">Notices</h6>
+            </div>
+            {!! $dataTable->table() !!}
+        </div>
     </div>
-    {!! $dataTable->table() !!}
 </div>
 @endsection
 
