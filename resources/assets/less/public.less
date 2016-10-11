@@ -373,3 +373,71 @@ fieldset:first-child legend:first-child {
     margin-bottom: 10px;
 }
 
+.landing-gray {
+    background-color: #ECEFF1;
+}
+.page-landing {
+    background-color:white;
+    padding: 0px;
+    .content-wrapper {
+        @media (min-width: 768px) {
+            .row {
+                width: 750px;
+            }
+        }
+        @media (min-width: 992px) {
+            .row {
+                width: 970px;
+            }
+        }
+        @media (min-width: 1200px) {
+            .row {
+                width: 1170px;
+            }
+        }
+        .row {
+            padding-top:10px;
+            margin: 0px;
+            &.landing-gray {
+                background-color: #ECEFF1;
+            }
+            &.landing-white {
+                background-color: white;
+            }
+        }
+    }
+    hr {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .form-group {
+        margin-bottom: 10px;
+    }
+}
+
+.badge {
+    font-weight: 100;
+    font-size: 12px;
+}
+
+fieldset > legend > i {
+    margin-right: 5px;
+}
+
+.landing--dt-header {
+    background-color: @landing--dt-header;
+}
+
+.landing--dt-body {
+    .row {
+        border: 1px solid @landing--dt-header;
+        border-top: none;
+        .datatable-header {
+            padding: none;
+        }
+        .dataTables_filter {
+            float: right;
+        }
+    }
+}
+
