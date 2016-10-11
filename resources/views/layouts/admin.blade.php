@@ -166,7 +166,7 @@
                             @if(Auth::user()->hasPermission('evaluation:index'))
                             <li class="{{ is_path_active('admin/evaluations*') }}">
                                 <a href="{{ route('admin.evaluations.index') }}" class="has-ul legitRipple">
-                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations.index') }}</span>
+                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations.title') }}</span>
                                 </a>
                                 <ul class="hidden-ul">
                                     <li class="{{ is_path_active('admin/evaluations') }}">
@@ -220,18 +220,13 @@
                                 <a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
                             </li>
                             @endif
-
-                            @if(Auth::user()->hasPermission('qualification-code:index'))
-                            <li class="{{ is_path_active('admin/qualification-codes*') }}">
-                                <a href="{{ route('admin.qualification-codes.index') }}"><i class="icon-drawer3"></i> <span>{{ trans('menu.admin.administration.qualification-codes') }}</span></a>
-                            </li>
-                            @endif
                             
                             @if(Auth::user()->hasPermission('notice-type:index'))
                             <li class="{{ is_path_active('admin/notice_types*') }}">
                                 <a href="{{ route('admin.notice-types.index') }}"><i class="icon-clipboard"></i> <span>{{ trans('menu.admin.administration.notice-types') }}</span></a>
                             </li>
                             @endif
+
                             @if(Auth::user()->hasPermission('notice-category:index'))
                             <li class="{{ is_path_active('admin/notice_categories*') }}">
                                 <a href="{{ route('admin.notice-categories.index') }}"><i class="icon-clipboard"></i> <span>{{ trans('menu.admin.administration.notice-categories') }}</span></a>
@@ -260,11 +255,6 @@
                             </li>
                             @endif
 
-                            @if(Auth::user()->hasPermission('vendor-type:index'))
-                            <li class="{{ is_path_active('admin/vendor-types*') }}">
-                                <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.settings.vendor-types') }}</span></a>
-                            </li>
-                            @endif
                         </ul>
                     </div>
                 </div>
