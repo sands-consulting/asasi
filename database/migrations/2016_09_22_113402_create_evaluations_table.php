@@ -54,28 +54,6 @@ class CreateEvaluationsTable extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::create('evaluation_scores', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('score')->nullable();
-            $table->text('remark')->nullable();
-            $table->unsignedInteger('evaluation_requirement_id');
-            $table->unsignedInteger('user_id');
-            $table->nullableTimestamps();
-            $table->softDeletes();
-
-            $table->foreign('evaluation_requirement_id')
-                ->references('id')
-                ->on('evaluation_requirements')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-        });
-
         Schema::create('evaluation_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug');
@@ -99,6 +77,28 @@ class CreateEvaluationsTable extends Migration
             $table->foreign('evaluation_type_id')
                 ->references('id')
                 ->on('evaluation_types')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('evaluation_scores', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('score')->nullable();
+            $table->text('remark')->nullable();
+            $table->unsignedInteger('evaluation_requirement_id');
+            $table->unsignedInteger('user_id');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('evaluation_requirement_id')
+                ->references('id')
+                ->on('evaluation_requirements')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
