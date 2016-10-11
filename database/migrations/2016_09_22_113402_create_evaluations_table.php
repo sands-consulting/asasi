@@ -62,7 +62,7 @@ class CreateEvaluationsTable extends Migration
             $table->nullableTimestamps();
             $table->softDeletes();
         });
-        
+
         Schema::create('evaluation_requirements', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sequence')->nullable;
@@ -80,9 +80,9 @@ class CreateEvaluationsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreign('user_id')
+            $table->foreign('notice_id')
                 ->references('id')
-                ->on('users')
+                ->on('notices')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
