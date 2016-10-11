@@ -74,7 +74,6 @@
             <div class="row no-padding">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                        <h5><i class="icon-newspaper mr-5"></i> Tender</h5>
                         {!! $dataTable->table() !!}
                     </div>
                 </div>
