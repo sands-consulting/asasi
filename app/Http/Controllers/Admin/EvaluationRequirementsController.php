@@ -17,26 +17,11 @@ class EvaluationRequirementsController extends Controller
         return $table->render('admin.evaluation-requirements.index');
     }
 
-    public function create(Notice $notice)
-    {
-        return view('admin.evaluation-requirements.create', compact('notice'));
-    }
-
-    public function store(Notice $notice)
-    {
-        //
-    }
-
     public function edit(Notice $notice)
     {
         $requirementCommercials = $notice->evaluationRequirements()->commercials()->get();
         $requirementTechnicals = $notice->evaluationRequirements()->technicals()->get();
 
         return view('admin.evaluation-requirements.edit', compact('notice', 'requirementCommercials', 'requirementTechnicals'));
-    }
-
-    public function update(Notice $notice)
-    {
-        //
     }
 }

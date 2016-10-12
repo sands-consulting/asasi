@@ -94,43 +94,34 @@
     <div class="col-sm-6">
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <h6 class="panel-title">{{ ucfirst($submission->type) }} Evaluations</h6>
+                <h6 class="panel-title">Submissions</h6>
             </div>
-            {!! Former::open() !!}
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th width="80px">#</th>
-                        <th>Title</th>
-                        <th width="250px">Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 1; ?>
-                    @foreach ($evaluationRequirements as $evaluationRequirement)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $evaluationRequirement->title }}</td>
-                            <td>
-                                {!! Former::number()
-                                    ->label(false)
-                                    ->append('/ ' . $evaluationRequirement->full_score)
-                                    ->addClass('text-center')
-                                    ->min(0)
-                                    ->max($evaluationRequirement->full_score)
-                                    ->required() !!}</td>
-                        </tr>
-                        <?php $i++; ?>
-                    @endforeach
-                </tbody>
-            </table>
-            <div class="panel-footer">
-                <div class="text-right">
-                    <button type="submit" class="btn btn-default bg-blue-400"><i class="icon-floppy-disk"></i> {{ trans('actions.save') }}</button>
-                </div>
-            </div>
-            {!! Former::close() !!}
+            {!! $dataTable->table() !!}
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+{!! $dataTable->scripts() !!}
+
+<script type="text/javascript">
+    // $("#dataTableBuilder-notices").DataTable({
+    //     "serverSide":true,
+    //     "processing":true,
+    //     "ajax":"{{ route('admin.evaluations.index') }}",
+    //     "columns":[
+    //         { "name":"notices.name","data":"name","title":"Name","orderable":true,"searchable":true },
+    //         // { "defaultContent":"","data":"action","name":"action","title":"Action","render":null,"orderable":false,"searchable":false,"width":"80","class":"text-center" }
+    //     ],
+    //     "dom":"<\"datatable-header\"f><\"datatable-scroll\"t><\"datatable-footer\"ip>",
+    //     "language":{
+    //         "search":"<span>Filter:<\/span> _INPUT_",
+    //         "lengthMenu":"<span>Show:<\/span> _MENU_",
+    //         "paginate":{
+    //             "first":"First","last":"Last","next":"&rarr;","previous":"&larr;"
+    //         }
+    //     }
+    // });
+</script>
 @endsection

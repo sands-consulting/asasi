@@ -12,11 +12,11 @@ class EvaluationsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($notice) {
-                return view('admin.evaluations._index_actions', compact('notice'));
+            ->addColumn('action', function($noticeEvaluator) {
+                return view('admin.evaluations._index_actions', compact('noticeEvaluator'));
             })
-            ->editColumn('name', function($notice) {
-                return link_to_route('admin.evaluations.vendors', $notice->name, [$notice->type]);
+            ->editColumn('type', function($noticeEvaluator) {
+                return ucfirst(strtolower($noticeEvaluator->type));
             })
             ->make(true);
     }
@@ -24,8 +24,8 @@ class EvaluationsDataTable extends DataTable
     public function query()
     {
         $evaluatorId = Auth::user()->id;
-        $query = NoticeEvaluator::leftJoin('notices', 'notices.id', '=', 'notice_evaluators.notice_id')->where('user_id', $evaluatorId);
-
+        $query = NoticeEvaluator::leftJoin('notices', 'notices.id', '=', 'notice_evaluators.notice_id')
+            ->where('user_id', $evaluatorId);
 
         if($this->datatables->request->input('q', null))
         {
@@ -47,14 +47,15 @@ class EvaluationsDataTable extends DataTable
     {
         $columns = [
             [
+                'data'  => 'number',
+                'name'  => 'number',
+                'title' => trans('notices.attributes.number'),
+                'sWidth' => '30%',
+            ],
+            [
                 'data'  => 'name',
                 'name'  => 'name',
                 'title' => trans('notices.attributes.name'),
-            ],
-            [
-                'data'  => 'type',
-                'name'  => 'type',
-                'title' => trans('notice-evaluators.attributes.type'),
             ]
         ];
 
@@ -64,5 +65,12 @@ class EvaluationsDataTable extends DataTable
     protected function filename()
     {
         return 'evaluations_dt_' . time();
+    }
+
+    protected function getBuilderParameters()
+    {
+        $data = parent::getBuilderParameters();
+        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        return $data;
     }
 }

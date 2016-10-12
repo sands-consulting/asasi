@@ -6,27 +6,29 @@ use App\Submission;
 use App\NoticeEvaluator;
 use Auth;
 
-class EvaluationVendorsDataTable extends DataTable
+class EvaluationSubmissionsDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($submission) {
-                return view('admin.evaluations._vendors_actions', compact('submission'));
+                return view('admin.evaluations._submissions_actions', compact('submission'));
             })
             ->editColumn('name', function($submission) {
-                return link_to_route('admin.evaluations.evaluate', $submission->name, $submission->id);
+                return link_to_route('admin.evaluations.evaluate', $submission->name, [$submission->notice_id, $submission->id]);
             })
             ->make(true);
     }
 
     public function query()
     {
-        // dump($this->type);
-        $query = Submission::leftJoin('vendors', 'vendors.id', '=', 'submissions.vendor_id')
-            ->select('submissions.id as id', 'vendors.name as name', 'submissions.type as type')
-            ->where('type', $this->type);
+        $types = NoticeEvaluator::where('user_id', $this->user_id)
+            ->where('notice_id', $this->notice_id)
+            ->lists('type');
+
+        $query = Submission::where('notice_id', $this->notice_id)
+            ->whereIn('type', $types);
 
 
         if($this->datatables->request->input('q', null))
@@ -52,6 +54,7 @@ class EvaluationVendorsDataTable extends DataTable
                 'data'  => 'id',
                 'name'  => 'id',
                 'title' => trans('submissions.attributes.id'),
+                'sWidth' => '200px',
             ],
             [
                 'data'  => 'type',
@@ -68,9 +71,28 @@ class EvaluationVendorsDataTable extends DataTable
         return 'evaluations_dt_' . time();
     }
 
+    public function byUserId($userId)
+    {
+        $this->user_id = $userId;
+        return $this;
+    }
+
+    public function byNoticeId($noticeId)
+    {
+        $this->notice_id = $noticeId;
+        return $this;
+    }
+
     public function forType($type)
     {
         $this->type = $type;
         return $this;
+    }
+
+    protected function getBuilderParameters()
+    {
+        $data = parent::getBuilderParameters();
+        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        return $data;
     }
 }

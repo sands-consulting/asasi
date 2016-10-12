@@ -8,7 +8,7 @@
                        <th width="5%">Seq</th>
                        <th>Title</th>
                        <th width="15%">Score</th>
-                       <th width="30%">Action</th>
+                       <th width="150px">Action</th>
                     </tr>
                 </thead>
                 <tbody> 
@@ -71,7 +71,7 @@
                        <th width="5%">Seq</th>
                        <th>Title</th>
                        <th width="15%">Score</th>
-                       <th width="30%">Action</th>
+                       <th width="150px">Action</th>
                     </tr>
                 </thead>
                 <tbody> 

@@ -12,7 +12,7 @@
                     ->addClass('select')
                     ->required() !!}
 
-                {!! Former::hidden('notice_evaluators[type]')->value('commercial') !!}
+                {!! Former::hidden('notice_evaluators[type]')->value('commercials') !!}
             </div>
         </div>
         <div class="row">
@@ -34,7 +34,7 @@
                     ->options(App\User::evaluators()->lists('name','id'))
                     ->data_placeholder('Click here to select evaluator from user list.')
                     ->addClass('select')
-                    ->value($notice->evaluators()->type('technical')->lists('user_id'))
+                    ->value($notice->evaluators()->type('technicals')->lists('user_id'))
                     ->required() !!}
 
                 {!! Former::hidden('notice_evaluators[type]')->value('technical') !!}

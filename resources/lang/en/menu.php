@@ -51,6 +51,7 @@ return [
             'subscriptions' => 'Subscriptions',
             'submissions'   => 'Submissions',
             'evaluations'   => [
+                'title' => 'Evaluation Management',
                 'index' => 'Evaluations',
                 'settings' => 'Settings',
             ],

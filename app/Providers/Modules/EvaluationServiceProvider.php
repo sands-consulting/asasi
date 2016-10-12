@@ -23,12 +23,12 @@ class EvaluationServiceProvider extends ServiceProvider
             $router->model('evaluations', 'App\Evaluation');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->get('evaluations/{type}/vendors', [
-                    'as' => 'admin.evaluations.vendors',
-                    'uses' => 'EvaluationsController@vendors'  
+                $router->get('evaluations/{notices}/submissions', [
+                    'as' => 'admin.evaluations.submissions',
+                    'uses' => 'EvaluationsController@submissions'  
                 ]);
 
-                $router->get('evaluations/{submissions}/evaluate', [
+                $router->get('evaluations/{notices}/evaluate/{submissions}', [
                     'as' => 'admin.evaluations.evaluate',
                     'uses' => 'EvaluationsController@evaluate'  
                 ]);
@@ -37,7 +37,10 @@ class EvaluationServiceProvider extends ServiceProvider
                     'as' => 'admin.evaluations.settings',
                     'uses' => 'EvaluationsController@settings'  
                 ]);
-
+                $router->get('evaluations/{notices}/requirements', [
+                    'as' => 'admin.evaluations.requirements',
+                    'uses' => 'EvaluationsController@requirements'  
+                ]);
                 $router->resource('evaluations', 'EvaluationsController');
             });
 
