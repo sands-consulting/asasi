@@ -22,36 +22,39 @@
                     </fieldset>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
-                        <div class="form-control-feedback">
-                            <i class="icon-envelop5 text-muted"></i>
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('login') }}">
+                        {!! csrf_field() !!}
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
+                            <div class="form-control-feedback">
+                                <i class="icon-envelop5 text-muted"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="password" class="form-control" name="password" placeholder="{{ trans('auth.password') }}">
-                        <div class="form-control-feedback">
-                            <i class="icon-lock2 text-muted"></i>
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="password" class="form-control" name="password" placeholder="{{ trans('auth.password') }}">
+                            <div class="form-control-feedback">
+                                <i class="icon-lock2 text-muted"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn bg-blue-700 btn-block legitRipple">{{trans('auth.login_button')}}</button>
-                    </div>
-                    <div class="text-center">
-                        <a href="{{ url('/password/email') }}">{{trans('auth.forgot_password')}}</a>
-                    </div>
-                    <hr/>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-block legitRipple">{{trans('auth.login_button')}}</button>
-                    </div>
-                    <div class="text-center text-muted">
-                        Get your latest info on the latest Tender and Quotation in Selangor!
-                    </div>
-                    <hr/>
-                    <div class="text-center text-muted">
-                        <i class="icon-presentation"></i> How To Register
-                    </div>
-                    <hr/>
+                        <div class="form-group">
+                            <button type="submit" class="btn bg-blue-700 btn-block legitRipple">{{trans('auth.login_button')}}</button>
+                        </div>
+                        <div class="text-center">
+                            <a href="{{ url('/password/email') }}">{{trans('auth.forgot_password')}}</a>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-block legitRipple">{{trans('auth.login_button')}}</button>
+                        </div>
+                        <div class="text-center text-muted">
+                            Get your latest info on the latest Tender and Quotation in Selangor!
+                        </div>
+                        <hr/>
+                        <div class="text-center text-muted">
+                            <i class="icon-presentation"></i> How To Register
+                        </div>
+                        <hr/>
+                    </form>
                 </div>
             </div>
         </div>
