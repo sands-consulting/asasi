@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 
 class EvaluationRequirementsController extends Controller
 {
-    public function index(EvaluationNoticesDataTable $table)
+    public function index(EvaluationNoticesDataTable $table, Notice $notice)
     {
-        return $table->render('admin.evaluation-requirements.index');
+        return $table->render('admin.evaluation-requirements.index', compact('notice'));
     }
 
     public function edit(Notice $notice)

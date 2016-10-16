@@ -101,4 +101,9 @@ class EvaluationRequirement extends Model
     {
         return $this->belongsTo(EvaluationType::class);
     }
+
+    public function scores()
+    {
+        return $this->hasMany(EvaluationScore::class);
+    }
 }

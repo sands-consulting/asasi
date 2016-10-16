@@ -9,7 +9,7 @@
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
-<body class="navbar-top sidebar-xs">
+<body class="navbar-top">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
     <div class="navbar-boxed">
         <div class="navbar-header">
@@ -165,17 +165,9 @@
 
                             @if(Auth::user()->hasPermission('evaluation:index'))
                             <li class="{{ is_path_active('admin/evaluations*') }}">
-                                <a href="{{ route('admin.evaluations.index') }}" class="has-ul legitRipple">
-                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations.title') }}</span>
+                                <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">
+                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations.index') }}</span>
                                 </a>
-                                <ul class="hidden-ul">
-                                    <li class="{{ is_path_active('admin/evaluations') }}">
-                                        <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">{{ trans('menu.admin.manage.evaluations.index') }}</a>
-                                    </li>
-                                    <li class="{{ is_path_active('admin/evaluation-requirements') }}">
-                                        <a href="{{ route('admin.evaluation-requirements.index') }}" class="legitRipple">{{ trans('menu.admin.manage.evaluations.settings') }}</a>
-                                    </li>
-                                </ul>
                             </li>
                             @endif
 

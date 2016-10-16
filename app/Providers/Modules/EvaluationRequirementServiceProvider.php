@@ -23,7 +23,10 @@ class EvaluationRequirementServiceProvider extends ServiceProvider
             $router->model('evaluation-requirements', 'App\EvaluationRequirement');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                
+                $router->get('evaluation-requirements/{notices}/index', [
+                    'as' => 'admin.evaluation-requirements.index',
+                    'uses' => 'EvaluationRequirementsController@index'
+                ]);
                 $router->get('evaluation-requirements/{notices}/create', [
                     'as' => 'admin.evaluation-requirements.create',
                     'uses' => 'EvaluationRequirementsController@create'
@@ -40,7 +43,7 @@ class EvaluationRequirementServiceProvider extends ServiceProvider
                     'as' => 'admin.evaluation-requirements.update',
                     'uses' => 'EvaluationRequirementsController@update'
                 ]);
-                $router->resource('evaluation-requirements', 'EvaluationRequirementsController', ['only' => ['index', 'show']]);
+                $router->resource('evaluation-requirements', 'EvaluationRequirementsController', ['only' => ['show']]);
 
             });
 
