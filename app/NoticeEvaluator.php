@@ -25,7 +25,7 @@ class NoticeEvaluator extends Model
     ];
 
     protected $attributes = [
-        // default attributes value
+        'status' => 'pending'
     ];
 
     protected $searchacble = [
