@@ -39,4 +39,29 @@ class NoticesController extends Controller
 
         return response()->json($notice);
     }
+
+    public function update(Request $request, Notice $notice)
+    {
+        $input = $request->only(
+            'id',
+            'name',
+            'number',
+            'description',
+            'rules',
+            'price',
+            'published_at',
+            'expired_at',
+            'purchased_at',
+            'submission_at',
+            'submission_address',
+            'notice_type_id',
+            'notice_category_id',
+            'organization_id'
+        );
+
+        $notice = NoticesRepository::update($notice, $input);
+
+        return response()->json($notice);
+
+    }
 }

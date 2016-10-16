@@ -18,7 +18,7 @@
 
 @section('content')
 <div class="panel panel-white">
-    {!! Former::open_vertical(route('admin.notices.show', $notice->id))->id('notice-form')->method('PUT')->addClass('stepy-validation') !!}
+    {!! Former::open_vertical(route('admin.notices.show', $notice->id))->id('notice-form')->method('PUT')->addClass('stepy-validation-edit') !!}
 
         {{ Former::populate($notice) }}
 

@@ -62,14 +62,42 @@ $(function() {
                     var rulesInput = form.find('input[name^="rule"]')
                     $.post('/api/rules/store', rulesInput)
                         .done(function(data) {
-                            // if (data.id && !$('#ruleId').val()) {
-                            //     $('<input>').attr({
-                            //         type: 'hidden',
-                            //         id: 'ruleId',
-                            //         name: 'id',
-                            //         value: data.id
-                            //     }).appendTo(form);
-                            // }
+                            return true;
+                        });
+                    break;
+            }
+        }
+    });
+
+    $(".stepy-validation-edit").stepy({
+        titleClick: true,
+        validate: true,
+        block: true,
+        back: function(index) {
+            $.post('/api/notice')
+        },
+        next: function(index) {
+            var form = $('#notice-form');
+            var noticeInput = form.find(':input');
+            
+            if (!$(".stepy-validation-edit").validate(validate)) {
+                return false
+            }
+
+            switch(index) {
+                case 2:
+                    var url = $(location).attr('href');
+                    url = url.replace('/admin/', '/api/').replace('/edit', '/update');
+                    console.log(url);
+                    $.post(url, noticeInput)
+                        .done(function(data) {
+                            return true;
+                        });
+                    break;
+                case 6:
+                    var rulesInput = form.find('input[name^="rule"]')
+                    $.post('/api/rules/store', rulesInput)
+                        .done(function(data) {
                             return true;
                         });
                     break;

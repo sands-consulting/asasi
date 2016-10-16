@@ -55,6 +55,10 @@ class NoticesServiceProvider extends ServiceProvider
                     'as'    => 'admin.notices.save-evaluator',
                     'uses'  => 'NoticesController@saveEvaluator'
                 ]);
+                $router->get('notices/{notices}/settings', [
+                    'as'    => 'admin.notices.settings',
+                    'uses'  => 'NoticesController@settings'
+                ]);
                 $router->resource('notices', 'NoticesController');
             });
 
@@ -93,8 +97,13 @@ class NoticesServiceProvider extends ServiceProvider
         // api routing
         app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
             $router->post('notices/save', [
-                'as' => 'notices.save',
+                'as' => 'api.notices.save',
                 'uses' => 'NoticesController@save'
+            ]);
+
+            $router->put('notices/{notices}/update', [
+                'as' => 'api.notices.update',
+                'uses' => 'NoticesController@update'
             ]);
         });
     }
