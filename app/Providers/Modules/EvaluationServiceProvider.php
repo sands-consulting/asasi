@@ -28,20 +28,37 @@ class EvaluationServiceProvider extends ServiceProvider
                     'uses' => 'EvaluationsController@submissions'  
                 ]);
 
-                $router->get('evaluations/{notices}/evaluate/{submissions}', [
-                    'as' => 'admin.evaluations.evaluate',
-                    'uses' => 'EvaluationsController@evaluate'  
+                $router->get('evaluations/{notices}/create', [
+                    'as' => 'admin.evaluations.create',
+                    'uses' => 'EvaluationsController@create'  
+                ]);
+
+                $router->get('evaluations/{notices}/edit', [
+                    'as' => 'admin.evaluations.edit',
+                    'uses' => 'EvaluationsController@edit'  
+                ]);
+
+                $router->put('evaluations/{notices}/update', [
+                    'as' => 'admin.evaluations.update',
+                    'uses' => 'EvaluationsController@update'  
+                ]);
+
+                $router->post('evaluations/{notices}/store', [
+                    'as' => 'admin.evaluations.store',
+                    'uses' => 'EvaluationsController@store'  
                 ]);
 
                 $router->get('evaluations/settings', [
                     'as' => 'admin.evaluations.settings',
                     'uses' => 'EvaluationsController@settings'  
                 ]);
+
                 $router->get('evaluations/{notices}/requirements', [
                     'as' => 'admin.evaluations.requirements',
                     'uses' => 'EvaluationsController@requirements'  
                 ]);
-                $router->resource('evaluations', 'EvaluationsController');
+
+                $router->resource('evaluations', 'EvaluationsController', ['only' => ['index']]);
             });
 
             $router->group(['namespace' => 'Api', 'prefix' => 'api'], function ($router) {

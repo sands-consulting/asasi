@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">Notices</h6>

@@ -21,8 +21,8 @@ return [
     ],
 
     'notices' => [
-        'created' => 'Evaluation :name created.',
-        'updated' => 'Evaluation :name updated.',
+        'created' => 'Evaluation score created.',
+        'updated' => 'Evaluation score updated.',
         'deleted' => 'Evaluation :name deleted.',
         'activated' => 'Evaluation :name activated.',
         'deactivated' => 'Evaluation :name deactivated.',

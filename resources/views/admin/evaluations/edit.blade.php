@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">Notices</h6>
@@ -44,60 +44,24 @@
                             <div class="form-control-static">{{ !empty($notice->description) ? nl2br($notice->description) : 'N/A' }}</div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    {{-- <div class="col-sm-12">
                         <div class="form-group">
                             <label class="control-label"><strong>{{ trans('notices.attributes.rules') }}</strong>:</label>
                             <div class="form-control-static">{!! !empty($notice->rules) ? nl2br($notice->rules) : 'N/A' !!}</div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.published_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->published_at ? $notice->published_at->getFromSetting() : 'N/A' }}</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.expired_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->expired_at ? $notice->expired_at->getFromSetting() : 'N/A' }}</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.purchased_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->purchased_at ? $notice->purchased_at->getFromSetting() : 'N/A' }}</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.price') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->price ? $notice->price : 'N/A' }}</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.submission_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->submission_at ? $notice->submission_at->getFromSetting() : 'N/A' }}</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.submission_address') }}</strong>:</label>
-                            <div class="form-control-static">{!! $notice->submission_address ? nl2br($notice->submission_address) : 'N/A' !!}</div>
-                        </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <h6 class="panel-title">{{ ucfirst($submission->type) }} Evaluations</h6>
+                <h6 class="panel-title">Evaluations</h6>
             </div>
-            {!! Former::open() !!}
-            <table class="table table-bordered table-striped">
+            {!! Former::open(route('admin.evaluations.update', $notice->id))->method('PUT') !!}
+            <table class="table table-bordered table-striped table-condensed">
                 <thead>
                     <tr>
                         <th width="80px">#</th>
@@ -107,17 +71,18 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    @foreach ($evaluationRequirements as $evaluationRequirement)
+                    @foreach ($requirements as $requirement)
                         <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ $evaluationRequirement->title }}</td>
+                            <td>{{ $requirement->title }}</td>
                             <td>
-                                {!! Former::number()
+                                {!! Former::number('scores['. $requirement->id .']')
                                     ->label(false)
-                                    ->append('/ ' . $evaluationRequirement->full_score)
+                                    ->append('/ ' . $requirement->full_score)
                                     ->addClass('text-center')
                                     ->min(0)
-                                    ->max($evaluationRequirement->full_score)
+                                    ->max($requirement->full_score)
+                                    ->value($requirement->score)
                                     ->required() !!}</td>
                         </tr>
                         <?php $i++; ?>
@@ -126,7 +91,7 @@
             </table>
             <div class="panel-footer">
                 <div class="text-right">
-                    <button type="submit" class="btn btn-default bg-blue-400"><i class="icon-floppy-disk"></i> {{ trans('actions.save') }}</button>
+                    <button type="submit" class="btn btn-primary bg-blue-400">{{ trans('actions.save') }} <i class="icon-floppy-disk position-right"></i></button>
                 </div>
             </div>
             {!! Former::close() !!}

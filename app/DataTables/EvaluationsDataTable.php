@@ -25,6 +25,8 @@ class EvaluationsDataTable extends DataTable
     {
         $evaluatorId = Auth::user()->id;
         $query = NoticeEvaluator::leftJoin('notices', 'notices.id', '=', 'notice_evaluators.notice_id')
+            ->leftJoin('organizations', 'organizations.id', '=', 'notices.organization_id')
+            ->select('notices.id', 'organizations.name as organization_name', 'notices.name', 'notices.number')
             ->where('user_id', $evaluatorId);
 
         if($this->datatables->request->input('q', null))
@@ -47,14 +49,20 @@ class EvaluationsDataTable extends DataTable
     {
         $columns = [
             [
+                'data'  => 'organization_name',
+                'name'  => 'organizations.name',
+                'title' => trans('notices.attributes.organization_id'),
+                'sWidth' => '25%',
+            ],
+            [
                 'data'  => 'number',
                 'name'  => 'number',
                 'title' => trans('notices.attributes.number'),
-                'sWidth' => '30%',
+                'sWidth' => '20%',
             ],
             [
                 'data'  => 'name',
-                'name'  => 'name',
+                'name'  => 'notices.name',
                 'title' => trans('notices.attributes.name'),
             ]
         ];
@@ -70,7 +78,7 @@ class EvaluationsDataTable extends DataTable
     protected function getBuilderParameters()
     {
         $data = parent::getBuilderParameters();
-        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        $data['dom'] = '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>';
         return $data;
     }
 }

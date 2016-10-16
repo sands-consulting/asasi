@@ -16,8 +16,23 @@ class EvaluationsPolicy extends BasePolicy
         return $this->user->hasPermission('evaluation:evaluate');
     }
 
-    public function evaluate()
+    public function create()
     {
-        return $this->user->hasPermission('evaluation:evaluate');
+        return $this->submissions();
+    }
+
+    public function store()
+    {
+        return $this->submissions();
+    }
+
+    public function edit()
+    {
+        return $this->submissions();
+    }
+
+    public function update()
+    {
+        return $this->submissions();
     }
 }

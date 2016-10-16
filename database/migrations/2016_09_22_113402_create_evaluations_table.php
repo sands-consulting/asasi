@@ -17,6 +17,7 @@ class CreateEvaluationsTable extends Migration
             $table->string('type');
             $table->unsignedInteger('notice_id');
             $table->unsignedInteger('user_id');
+            $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
 

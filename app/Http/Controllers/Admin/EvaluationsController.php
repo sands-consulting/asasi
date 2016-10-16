@@ -6,8 +6,10 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\EvaluationsDataTable;
 use App\DataTables\EvaluationSubmissionsDataTable;
 use App\EvaluationRequirement;
+use App\EvaluationScore;
 use App\Submission;
 use App\Notice;
+use App\Repositories\EvaluationScoresRepository;
 use Illuminate\Http\Request;
 
 class EvaluationsController extends Controller
@@ -26,10 +28,60 @@ class EvaluationsController extends Controller
             ->render('admin.evaluations.submissions', compact('notice'));
     }
 
-    public function evaluate(Notice $notice, Submission $submission)
+    public function create(Notice $notice)
     {
-        $submissionDetails = $submission->details;
         $evaluationRequirements = EvaluationRequirement::where('evaluation_type_id', 1)->get();
-        return view('admin.evaluations.evaluate', compact('notice','submission', 'submissionDetails', 'evaluationRequirements'));
+        return view('admin.evaluations.create', compact('notice', 'evaluationRequirements'));
+    }
+
+    public function store(Request $request, Notice $notice)
+    {
+        $inputs = $request->only('scores');
+
+        foreach ($inputs['scores'] as $evaluation_requirement_id => $score) {
+            EvaluationScoresRepository::create(new EvaluationScore, [
+                'score' => $score,
+                'remark' => null,
+                'evaluation_requirement_id' => $evaluation_requirement_id,
+                'user_id' => $request->user()->id
+            ]);
+        }
+
+        return redirect()
+            ->route('admin.evaluations.edit', $notice->id)
+            ->with('notice', trans('evaluations.notices.created'));
+    }
+
+    public function edit(Notice $notice)
+    {
+        $requirements = EvaluationRequirement::where('evaluation_type_id', 1)
+            ->where('notice_id', $notice->id)
+            ->get();
+
+        // Fixme: Find better solution to populate score
+        $requirements = $requirements->each(function($requirement) {
+            $requirement->score = $requirement->scores()
+                ->where('user_id', \Auth::user()->id)
+                ->first()->score;
+        });
+
+        return view('admin.evaluations.edit', compact('notice', 'requirements'));
+    }
+
+    public function update(Request $request, Notice $notice)
+    {
+        $inputs = $request->only('scores');
+        foreach ($inputs['scores'] as $evaluation_requirement_id => $score) {
+            $evaluationScore = EvaluationScore::whereEvaluationRequirementId($evaluation_requirement_id)->first();
+            EvaluationScoresRepository::update($evaluationScore, [
+                'score' => $score,
+                'remark' => null,
+                'user_id' => $request->user()->id
+            ]);
+        }
+
+        return redirect()
+            ->route('admin.evaluations.edit', $notice->id)
+            ->with('notice', trans('evaluations.notices.updated'));
     }
 }

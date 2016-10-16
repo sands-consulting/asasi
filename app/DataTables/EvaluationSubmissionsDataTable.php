@@ -16,7 +16,7 @@ class EvaluationSubmissionsDataTable extends DataTable
                 return view('admin.evaluations._submissions_actions', compact('submission'));
             })
             ->editColumn('name', function($submission) {
-                return link_to_route('admin.evaluations.evaluate', $submission->name, [$submission->notice_id, $submission->id]);
+                return link_to_route('admin.evaluations.create', $submission->name, [$submission->notice_id, $submission->id]);
             })
             ->make(true);
     }
