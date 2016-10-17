@@ -80,7 +80,7 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h5 class="panel-title">{{ trans('vendors.views.show.admin.title') }}: {{ $vendor->name }}</h5>
+        {{-- <h5 class="panel-title">{{ trans('vendors.views.show.admin.title') }}: {{ $vendor->name }}</h5> --}}
         <div class="heading-elements">
             @if ($vendor->status == 'active')
                 <span class="label label-success heading-text">
@@ -92,22 +92,18 @@
                 <span class="label label-default heading-text">
             @endif
             {{ $vendor->status }}</span>
+            <span class="label label-success heading-text">3.7</span>
+            <span class="label label-warning heading-text">1.4</span>
+            <span class="label label-danger heading-text">0.3</span>
         </div>
     </div>
     
     <div class="panel-body">
         <div class="tabbable">
-            <ul class="nav nav-pills nav-pills-toolbar nav-justified">
-                <li class="active"><a href="#vendor" data-toggle="tab" class="legitRipple" aria-expanded="true">Vendor Details</a></li>
-                <li class=""><a href="#vendor-subscriptions" data-toggle="tab" class="legitRipple" aria-expanded="false">Subscriptions</a></li>
-                <li class=""><a href="#vendor-transactions" data-toggle="tab" class="legitRipple" aria-expanded="false">Transactions</a></li>
-                {{-- <li class="dropdown">
-                    <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#" data-toggle="tab">Dropdown pill</a></li>
-                        <li><a href="#" data-toggle="tab">Another pill</a></li>
-                    </ul>
-                </li> --}}
+            <ul class="nav nav-tabs bg-primary-300">
+                <li class="text-center active"><a href="#vendor" data-toggle="tab" class="legitRipple" aria-expanded="true">{{-- <i class="icon-home"></i><br> --}}Details</a></li>
+                <li class="text-center "><a href="#vendor-subscriptions" data-toggle="tab" class="legitRipple" aria-expanded="false">{{-- <i class="icon-home"></i><br> --}}Subscriptions</a></li>
+                <li class="text-center "><a href="#vendor-transactions" data-toggle="tab" class="legitRipple" aria-expanded="false">{{-- <i class="icon-home"></i><br> --}}Transactions</a></li>
             </ul>
 
             <div class="tab-content">

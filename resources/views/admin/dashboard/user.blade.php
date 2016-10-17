@@ -33,28 +33,30 @@
         <div class="col-md-12 dashboard-panel-user-status">
             <div class="panel panel-flat">
                 <div class="panel-body text-center">
-                    <div class="col-md-3 dashboard-panel-user-detail">
-                        <div class="dashboard-panel-user-icon text-green-700">
+                    <div class="col-sm-3 col-xs-12 dashboard-panel-user-detail">
+                        <div class="col-sm-12 col-xs-6"><div class="dashboard-panel-user-icon text-green-700">
                             <i class="icon-user"></i>
                         </div>
-                        <div class="text-muted">ACTIVE USER</div>
+</div>
+                        <div class="col-sm-12 col-xs-6"><div class="text-muted">ACTIVE USER</div>
                         <div class="dashboard-panel-user-number text-green-700">1000</div>
-                    </div>
-                    <div class="col-md-3 dashboard-panel-user-detail">
+</div>
+                                                                    </div>
+                    <div class="col-sm-3 col-xs-6 dashboard-panel-user-detail">
                         <div class="dashboard-panel-user-icon text-orange-700">
                             <i class="icon-user"></i>
                         </div>
                         <div class="text-muted">INACTIVE USER</div>
                         <div class="dashboard-panel-user-number text-orange-700">1000</div>
                     </div>
-                    <div class="col-md-3 dashboard-panel-user-detail">
+                    <div class="col-sm-3 col-xs-6 dashboard-panel-user-detail">
                         <div class="dashboard-panel-user-icon text-primary-700">
                             <i class="icon-user"></i>
                         </div>
                         <div class="text-muted">ALL USER</div>
                         <div class="dashboard-panel-user-number text-primary-700">1000</div>
                     </div>
-                    <div class="col-md-3 dashboard-panel-user-detail">
+                    <div class="col-sm-3 col-xs-6 dashboard-panel-user-detail">
                         <div class="dashboard-panel-user-icon text-danger-800">
                             <i class="icon-user"></i>
                         </div>

@@ -2,6 +2,7 @@
 @landing--dt-header: #D5D8D9;
 
 @primary-color: #0288D1;
+@warning-color: #FFB74D;
 
 /**
  * Global Style for prompt
@@ -45,5 +46,34 @@
     }
     .dataTableBuilder_wrapper {
         border-top: none;
+    }
+}
+}
+
+/*
+ * additional color to overwrite color
+ */
+
+.label-warning {
+    background-color: @warning-color;
+    border-color: @warning-color;
+    color: #fff;
+}
+
+.Prompt--nav-stacked {
+    li.active > a {
+        color: @primary-color;
+    }
+    li {
+        > a {
+            color: gray;
+        }
+        > a:hover {
+            color: @primary-color;
+        }
+    }
+    legend, fieldset:first-child legend:first-child {
+        background-color: #64B5F6;
+        padding: 10px;
     }
 }

@@ -4,6 +4,7 @@
 @import "limitless-one/_main/colors";
 @import "vendor/icomoon";
 @import "vendor/loading";
+@import "prompt";
 
 .navbar {
   .navbar-brand {
@@ -29,6 +30,41 @@
     
 }
 
-body {
-  background-color: #eceff1;
+.dashboard-panel-user-status {
+    @media (min-width: 769px) {
+        height: 160px;
+    }
+    @media (max-width: 768px) {
+        height: 250px;
+    }
+    .panel-body {
+        @media (min-width: 769px) {
+            height: 100px;
+        }
+        @media (max-width: 768px) {
+            height: 200px;
+        }
+        margin-top: 40px;
+        .dashboard-panel-user-detail {
+            top: -60px;
+        }
+    }
+    .dashboard-panel-user-icon {
+        padding: 10px;
+        border-radius: 30px;
+        width: 60px;
+        height: 60px;
+        margin: 0px auto 14px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
+        i {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    }
+    .dashboard-panel-user-number {
+        font-size: 18px;
+        margin-top: 4px;
+    }
 }
+

@@ -88,7 +88,7 @@ return [
         'show' => [
             'title' => 'View',
             'admin' => [
-                'title' => 'View Vendor',
+                'title' => 'View',
                 'legend' => 'Vendor Details'
             ],
         ],
