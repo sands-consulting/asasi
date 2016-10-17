@@ -2,19 +2,19 @@
 
 namespace App\Listeners;
 
-use App\Events\VendorRegistered;
-use App\Mailers\AppMailer;
+use App\Events\UserRegistered;
+use App\Mailers\UserConfirmationMailer;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailConfirmationLink
+class EmailUserConfirmationLink
 {
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct(AppMailer $mailer)
+    public function __construct(UserConfirmationMailer $mailer)
     {
         $this->mailer = $mailer;
     }
@@ -22,11 +22,11 @@ class EmailConfirmationLink
     /**
      * Handle the event.
      *
-     * @param  VendorRegistered  $event
+     * @param  UserRegistered  $event
      * @return void
      */
-    public function handle(VendorRegistered $event)
+    public function handle(UserRegistered $event)
     {
-        $this->mailer->sendEmailConfirmationTo($event->user);
+        $this->mailer->send($event->user);
     }
 }

@@ -13,29 +13,31 @@ return [
     |
     */
 
+    'attributes' => [
+        'name'                  => 'Name',
+        'email'                 => 'Email Address',
+        'password'              => 'Password',
+        'password_confirmation' => 'Password Confirmation',
+        'remember_me'           => 'Remember Me'
+    ],
+
+    'buttons' => [
+        'send_password_link'    => 'Send Password Link'
+    ],
+
+    'notices' => [
+        'inactive'  => 'Your account is inactive. Please confirm your email address.',
+        'confirmed' => 'Your account is now confirmed. You may login.',
+        'suspended' => 'Your account is suspended. Please contact system administrator'
+    ],
+
     'required' => 'Please enter your login and password.',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'unauthorized' => 'You are not authorized to run the action',
+
     'register' => 'Register new account',
-    'register_button' => 'Register',
-    'name' => 'Name',
     'login' => 'Login to your account',
-    'login_button' => 'Login',
-    'logout' => 'Logout',
     'forgot_password' => 'Forgot Password?',
-    'remember_me' => 'Remember Me',
-    'password' => 'Password',
-    'confirm_password' => 'Confirm Password',
-    'email' => 'E-mail',
-    'send_password_link' => 'Send Password Link',
     'reset_password' => 'Reset Password',
-    'click_here_reset_password' => 'Click here to reset your password',
-    'problem_input' => '<strong>Whoops!</strong> There were some problems with your input.',
-    'notices' => [
-        'confirm' => 'Please confirm your email address.',
-        'confirmed' => 'You are now confirmed. Please login.',
-        'not_verified' => 'Your account is not verified. Please check your email and click the confirmation link.',
-        'suspended' => 'Your account has been suspended. Please check contact administrator.'
-    ],
 ];

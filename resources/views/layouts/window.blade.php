@@ -34,8 +34,8 @@
 	{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }} | All Rights Reserved.
 </div>
 
-@yield('scripts')
 <script src="{{ elixir('assets/js/public.js') }}"></script>
+@yield('scripts')
 {!! flash_messages() !!}
 </body>
 </html>

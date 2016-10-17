@@ -25,4 +25,5 @@ return [
 	'submit' => 'Submit',
 	'evaluate' => 'Evaluate',
 	'assign' => 'Assign',
+	'register' => 'Register'
 ];

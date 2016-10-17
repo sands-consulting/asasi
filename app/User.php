@@ -17,7 +17,7 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
-        'token',
+        'confirmation_token',
     ];
 
     protected $hidden = [
@@ -223,13 +223,6 @@ class User extends Authenticatable
         return static::lists('name','id')->toArray();
     }
 
-    public function confirmEmail()
-    {
-        $this->verified = true;
-        $this->token = null;
-        $this->save();
-    }
-
     public function canBuy()
     {
         // Rules to allow buying notice
@@ -245,7 +238,7 @@ class User extends Authenticatable
         parent::boot();
 
         parent::creating(function($user) {
-            $user->token = str_random(64);
+            $user->confirmation_token = str_random(64);
         });
     }
 }

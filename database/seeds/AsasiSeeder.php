@@ -66,7 +66,6 @@ class AsasiSeeder extends Seeder
                 'name'      => 'Super Admin',
                 'email'     => 'admin@example.com',
                 'password'  => 'admin123',
-                'verified'  => 1,
                 'status'    => 'active',
             ],
         ];

@@ -12,10 +12,8 @@
 */
 
 Route::auth();
-Route::get('register/confirm/{token}', [
-    'uses' => 'Auth\AuthController@confirmEmail',
-    'as'   => 'auth.confirm'
-]);
+Route::get('confirmation/{token}', 'Auth\AuthController@confirmation');
+
 Route::get('/', [
 	'uses' 	=> 'HomeController@index',
 	'as' 	=> 'home.index'

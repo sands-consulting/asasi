@@ -19,14 +19,14 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\UserLogout',
         ],
-        'App\Events\VendorRegistered' => [
-            'App\Listeners\EmailConfirmationLink',
-        ],
         'App\Events\SubscriptionStatusChanged' => [
             'App\Listeners\EmailSubscriptionStatusChanged',
         ],
         'App\Events\SubscriptionExpireReminder' => [
             'App\Listeners\EmailSubscriptionExpireReminder',
+        ],
+        'App\Events\UserRegistered' => [
+            'App\Listeners\EmailUserConfirmationLink',
         ],
         'App\Events\VendorApproved' => [
             'App\Listeners\VendorApprovedListener',

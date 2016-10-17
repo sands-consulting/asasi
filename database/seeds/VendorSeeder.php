@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 use App\User;
 use App\Vendor;
@@ -90,7 +90,6 @@ class VendorSeeder extends Seeder
                 'name'      => 'Amin Adha',
                 'email'     => 'amin@my-sands.com',
                 'password'  => 'amin123',
-                'verified'  => 1,
                 'status'    => 'active',
             ],
         ];
