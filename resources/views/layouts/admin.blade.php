@@ -139,6 +139,14 @@
                             </li>
                             @endif
 
+                            @if(Auth::user()->hasPermission('evaluation:index'))
+                            <li class="{{ is_path_active('admin/evaluations*') }}">
+                                <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">
+                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations.index') }}</span>
+                                </a>
+                            </li>
+                            @endif
+
                             @if(Auth::user()->hasPermission('news:index'))
                             <li class="{{ is_path_active('admin/news*') }}">
                                 <a href="{{ route('admin.news.index') }}"><i class="icon-newspaper"></i> <span>{{ trans('menu.admin.manage.news') }}</span></a>
@@ -154,14 +162,6 @@
                             @if(Auth::user()->hasPermission('subscription:index'))
                             <li class="{{ is_path_active('admin/subscriptions*') }}">
                                 <a href="{{ route('admin.subscriptions.index') }}"><i class="icon-envelope"></i> <span>{{ trans('menu.admin.manage.subscriptions') }}</span></a>
-                            </li>
-                            @endif
-
-                            @if(Auth::user()->hasPermission('evaluation:index'))
-                            <li class="{{ is_path_active('admin/evaluations*') }}">
-                                <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">
-                                    <i class="icon-pencil"></i> <span>{{ trans('menu.admin.manage.evaluations.index') }}</span>
-                                </a>
                             </li>
                             @endif
 
@@ -286,19 +286,12 @@
                 </div>
                 @endif
             </div>
-            <div class="sk-fading-circle">
-              <div class="sk-circle1 sk-circle"></div>
-              <div class="sk-circle2 sk-circle"></div>
-              <div class="sk-circle3 sk-circle"></div>
-              <div class="sk-circle4 sk-circle"></div>
-              <div class="sk-circle5 sk-circle"></div>
-              <div class="sk-circle6 sk-circle"></div>
-              <div class="sk-circle7 sk-circle"></div>
-              <div class="sk-circle8 sk-circle"></div>
-              <div class="sk-circle9 sk-circle"></div>
-              <div class="sk-circle10 sk-circle"></div>
-              <div class="sk-circle11 sk-circle"></div>
-              <div class="sk-circle12 sk-circle"></div>
+            <div class="loading">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
             </div>
             <div class="content" style="visibility:hidden ">
                 @yield('content')

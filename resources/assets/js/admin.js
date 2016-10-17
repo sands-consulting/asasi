@@ -1,11 +1,8 @@
-$(window).load(function() {
-    $('.sk-fading-circle').hide();
-    $('.content').fadeIn('slow',function() {
-      $(this).css('visibility', 'visible');
-    })
-});
-
 $(function() {
+  $('.loading').hide();
+  $('.content').fadeIn('slow', function() {
+    $(this).css('visibility', 'visible');
+  });
 
 	Vue.config.debug = true;
 
