@@ -18,7 +18,7 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     protected $redirectTo           = '/';
-    protected $redirectAfterLogout  = '/login';
+    protected $redirectAfterLogout  = '/';
 
     public function __construct()
     {
@@ -44,23 +44,6 @@ class AuthController extends Controller
         ]);
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        if(in_array($user->status, ['inactive', 'suspended'])) {
-            Auth::guard($this->getGuard())->logout();
-            return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
-                ->with('alert', trans('auth.notices.' . $user->status));
-        }
-
-        return redirect()->intended($this->redirectPath());
-    }
-
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function register(Request $request)
     {
         $validator = $this->validator($request->all());
@@ -76,6 +59,32 @@ class AuthController extends Controller
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
                 ->with('notice', trans('auth.notices.inactive'));
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->back()
+            ->with('alert', $this->getFailedLoginMessage())
+            ->withInput($request->only($this->loginUsername(), 'remember'));
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if(in_array($user->status, ['inactive', 'suspended'])) {
+            Auth::guard($this->getGuard())->logout();
+            return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
+                ->with('alert', trans('auth.notices.' . $user->status));
+        }
+
+        return redirect()->intended($this->redirectPath());
+    }
+
+    public function logout()
+    {
+        Auth::guard($this->getGuard())->logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
+                ->with('notice', trans('auth.notices.logged_out'));
     }
 
     public function confirmation($token)

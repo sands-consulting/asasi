@@ -15,6 +15,7 @@ elixir(function(mix) {
   // styles
   mix
     .less('public.less', 'public/assets/css/public.css')
+    .less('window.less', 'public/assets/css/window.css')
     .less('admin.less', 'public/assets/css/admin.css')
     .less('print.less', 'public/assets/css/print.css');
 
@@ -77,6 +78,7 @@ elixir(function(mix) {
     ], 'public/assets/js/admin.js')
     .version([
         'assets/css/public.css',
+        'assets/css/window.css',
         'assets/css/admin.css',
         'assets/css/print.css',
         'assets/js/public.js',

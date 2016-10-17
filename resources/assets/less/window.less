@@ -1,0 +1,59 @@
+@import "limitless-four/_main/bootstrap";
+@import "limitless-four/_main/components";
+@import "limitless-four/_main/core";
+@import "limitless-four/_main/colors";
+@import "vendor/icomoon";
+@import "prompt";
+
+body {
+    background-color: #ECEFF1;
+    background: url(@background-1) no-repeat;
+
+    @media screen and (max-width: 768px) {
+        background-size: cover;
+    }
+    
+    @media screen and (min-width: 769px) {
+        background-size: contain;
+    }
+}
+
+.window-header {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    background: url(@logo-prompt-white) no-repeat top center;
+    margin: 20px 0 60px;
+    padding-top: 50px;
+    display: block;
+
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+form {
+    &.panel {
+        .panel-heading {
+            font-size: 17px;
+            font-weight: 500;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 40px;
+        }
+
+        .panel-body {
+            padding: 40px;
+
+            .form-group {
+                margin: 0 0 20px;
+
+                &:first-of-type {
+                    margin-top: -50px;
+                }
+            }
+        }
+    }
+}

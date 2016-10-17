@@ -36,9 +36,6 @@ class SubmissionServiceProvider extends ServiceProvider
                 ]);
                 $router->resource('submissions', 'SubmissionsController');
             });
-
-            // public
-            $router->resource('submissions', 'SubmissionsController', ['only' => ['index']]);
         });
 
         // api routing

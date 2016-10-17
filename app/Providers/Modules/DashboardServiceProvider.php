@@ -26,8 +26,6 @@ class DashboardServiceProvider extends ServiceProvider
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            // $router->model('users', 'App\User');
-
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) { 
                 $router->get('dashboard/user', [
                     'as'    => 'admin.dashboard.user',
@@ -49,25 +47,28 @@ class DashboardServiceProvider extends ServiceProvider
                     'as'    => 'admin.dashboard.tender',
                     'uses'  => 'DashboardController@tender'
                 ]);
-                $router->resource('dashboard', 'DashboardController');
+                $router->get('/', [
+                    'as'    => 'admin',
+                    'uses'  => 'DashboardController@index'
+                ]);
             });
 
-            $router->get('dashboard/eligible', [
-                'as'    => 'dashboard.eligible',
-                'uses'  => 'DashboardController@eligible'
+            $router->get('dashboard/eligibles', [
+                'as'    => 'dashboard.eligibles',
+                'uses'  => 'DashboardController@eligibles'
             ]);
-
-            $router->get('dashboard/purchased', [
-                'as'    => 'dashboard.purchased',
-                'uses'  => 'DashboardController@purchased'
+            $router->get('dashboard/invitations', [
+                'as'    => 'dashboard.invitations',
+                'uses'  => 'DashboardController@invitations'
             ]);
-
-            $router->get('dashboard/limited', [
-                'as'    => 'dashboard.limited',
-                'uses'  => 'DashboardController@limited'
+            $router->get('dashboard/bookmarks', [
+                'as'    => 'dashboard.invitations',
+                'uses'  => 'DashboardController@invitations'
             ]);
-
-            $router->resource('dashboard', 'DashboardController');
+            $router->get('dashboard/purchases', [
+                'as'    => 'dashboard.purchases',
+                'uses'  => 'DashboardController@purchases'
+            ]);
         });
     }
 }

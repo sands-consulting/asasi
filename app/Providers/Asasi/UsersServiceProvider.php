@@ -70,6 +70,7 @@ class UsersServiceProvider extends ServiceProvider
                 'as'    => 'profile.resume',
                 'uses'  => 'ProfileController@resume'
             ]);
+            $router->get('confirmation/{token}', 'Auth\AuthController@confirmation');
         });
     }
 }

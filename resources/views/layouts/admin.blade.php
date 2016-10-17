@@ -13,7 +13,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
     <div class="navbar-boxed">
         <div class="navbar-header">
-            <a class="navbar-brand prompt" href="{{ url('/') }}">
+            <a class="navbar-brand prompt" href="{{ route('admin') }}">
                 {{ config('app.name') }}
             </a>
 
@@ -33,19 +33,19 @@
 
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::guest())
-                <li><a href="{{ url('login') }}">{{ trans('menu.login') }}</a></li>
-                <li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
+                <li><a href="{{ url('login') }}">{{ trans('menu.user.login') }}</a></li>
+                <li><a href="{{ url('register') }}">{{ trans('menu.user.register') }}</a></li>
                 @else
                 <li>
-                    <a href="{{ route('home.index') }}">
-                        <i class="icon-atom2"></i> {{ trans('menu.public_site') }}
+                    <a href="{{ route('home') }}">
+                        <i class="icon-atom2"></i> {{ trans('menu.access.portal') }}
                     </a>
                 </li>
 
                 @if(Auth::user()->hasPermission('access:report'))
                 <li>
                     <a href="{{ route('admin') }}">
-                        <i class="icon-file-text"></i> {{ trans('menu.report') }}
+                        <i class="icon-file-text"></i> {{ trans('menu.access.report') }}
                     </a>
                 </li>
                 @endif

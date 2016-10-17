@@ -4,27 +4,28 @@ return [
     'site_admin'    => 'Site Admin',
     'language'      => 'Language',
 
-    'public_site'   => 'Public Site',
-    'admin_area'    => 'Admin Area',
-    'report'        => 'Reporting Module',
-
-    'login'         => 'Login',
-    'register'      => 'Register',
-    'release_user'  => 'Release User',
-    'my_profile'    => 'My Profile',
-    'sign_out'      => 'Sign Out',
-
-    'home'			=> 'Home',
-    'dashboard'     => 'Dashboard',
-    'subscriptions'	=> 'Subscriptions',
-
-    'main'          => 'Main',
-    'tender'        => [
-        'chart' => 'Tender Chart',
-        'success' => 'Tender Successfull',
+    'access' => [
+        'portal'    => 'Portal',
+        'admin'     => 'Admin Area',
+        'report'    => 'Reports'
     ],
-    
-    'agency' => 'Agency',
+
+    'app' => [
+        'home'          => 'Home',
+        'submissions'   => 'Submissions',
+        'awards'        => 'Awards',
+        'cart'          => 'Cart',
+        'help'          => 'Help',
+        'contact'       => 'Contact'
+    ],
+
+    'user' => [
+        'login'         => 'Login',
+        'register'      => 'Register',
+        'release_user'  => 'Release User',
+        'my_profile'    => 'My Profile',
+        'sign_out'      => 'Sign Out'
+    ],
 
     'admin' => [
         'administration' => [

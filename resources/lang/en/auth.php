@@ -22,9 +22,10 @@ return [
     ],
 
     'notices' => [
-        'inactive'  => 'Your account is inactive. Please confirm your email address.',
-        'confirmed' => 'Your account is now confirmed. You may login.',
-        'suspended' => 'Your account is suspended. Please contact system administrator'
+        'inactive'      => 'Your account is inactive. Please confirm your email address.',
+        'confirmed'     => 'Your account is now confirmed. You may login.',
+        'suspended'     => 'Your account is suspended. Please contact system administrator.',
+        'logged_out'    => 'You have been logged out.'
     ],
 
     'required' => 'Please enter your login and password.',

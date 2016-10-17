@@ -12,13 +12,3 @@
 */
 
 Route::auth();
-Route::get('confirmation/{token}', 'Auth\AuthController@confirmation');
-
-Route::get('/', [
-	'uses' 	=> 'HomeController@index',
-	'as' 	=> 'home.index'
-]);
-Route::get('admin', [
-	'uses'	=> 'Admin\DashboardController@index',
-	'as'	=> 'admin'
-]);

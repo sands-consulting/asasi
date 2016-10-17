@@ -3,28 +3,17 @@
 return [
 	'views' => [
 		'index' => [
-            'title' => 'Home',
-			'panels' => [
-				'news' => [
-                    'title' => 'Recent News'
-				],
-                'vendors' => [
-                    'title' => 'Vendors Application Status',
-                    'registration_status' => 'Registration Status',
-                    'paritcipation' => 'Top Participation',
-                    'status' => 'Vendor Status'
-                ],
-                'notices' => [
-                    'title' => 'Notices'
-                ],
-                'login' => [
-                    'activity' => 'Login Activity',
-                    'last' => 'Last Login'
-                ],
-                'users' => [
-                    'title' => 'User List'
-                ]
-			]
+            'user'  => [
+                'register_button' => 'Company Registration',
+                'register_text' => 'Get your latest information on Tenders and Quotations',
+                'register_help' => 'How To Register'
+            ],
+            'news' => [
+            	'title' => 'Recent News'
+            ],
+            'notices' => [
+            	'title' => 'All Notices'
+            ]
 		]
 	]
 ];

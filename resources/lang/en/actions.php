@@ -3,6 +3,8 @@
 return [
 	'activate' => 'Activate',
 	'add' => 'Add',
+	'assign' => 'Assign',
+	'evaluate' => 'Evaluate',
 	'back' => 'Back',
 	'cancel' => 'Cancel',
 	'clear' => 'Clear',
@@ -16,14 +18,12 @@ return [
 	'pay' => 'Pay',
 	'proceed' => 'Proceed',
 	'publish' => 'Publish',
+	'register' => 'Register',
 	'save' => 'Save',
 	'search' => 'Search',
-	'suspend' => 'Suspend',
-	'unpublish' => 'Unpublish',
-	'view' => 'View',
 	'show' => 'Show',
 	'submit' => 'Submit',
-	'evaluate' => 'Evaluate',
-	'assign' => 'Assign',
-	'register' => 'Register'
+	'suspend' => 'Suspend',
+	'unpublish' => 'Unpublish',
+	'view' => 'View'
 ];
