@@ -88,6 +88,16 @@ class Notice extends Model
         }
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    public function scopeLimited($query)
+    {
+        return $query->where('status', 'limited');
+    }
+
     /* 
      * State controls 
      */
@@ -182,5 +192,10 @@ class Notice extends Model
     public static function published()
     {
         return static::where('status', 'published');
+    }
+
+    public static function limited()
+    {
+        return static::where('status', 'limited');
     }
 }
