@@ -190,9 +190,57 @@
 
 <div class="page-container">
     <div class="page-content">
-    	@yield('sidebar')
+    	{{-- @yield('sidebar') --}}
     	<div class="content-wrapper">
-			@yield('content')
+            <div class="row">
+                <div class="col-md-12 dashboard-panel-user-status">
+                    <div class="panel panel-flat">
+                        <div class="panel-body text-center">
+                            <div class="col-md-3 dashboard-panel-user-detail">
+                                <a href="{{ route('dashboard.index') }}">
+                                    <div class="dashboard-panel-user-icon text-green-700">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <div class="text-muted">All</div>
+                                    <div class="dashboard-panel-user-number text-green-700">0</div>
+                                    <i class="icon-arrow-down32"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-3 dashboard-panel-user-detail">
+                                <a href="{{ route('dashboard.eligible') }}">
+                                    <div class="dashboard-panel-user-icon text-orange-700">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <div class="text-muted">Eligibles</div>
+                                    <div class="dashboard-panel-user-number text-orange-700">2</div>
+                                    <i class="icon-arrow-down32"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-3 dashboard-panel-user-detail">
+                                <a href="{{ route('dashboard.eligible') }}">
+                                    <div class="dashboard-panel-user-icon text-primary-700">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <div class="text-muted">Purchased</div>
+                                    <div class="dashboard-panel-user-number text-primary-700">10</div>
+                                    <i class="icon-arrow-down32"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-3 dashboard-panel-user-detail">
+                                <a href="{{ route('dashboard.eligible') }}">
+                                    <div class="dashboard-panel-user-icon text-danger-800">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <div class="text-muted">Limited</div>
+                                    <div class="dashboard-panel-user-number text-danger-800">0</div>
+                                    <i class="icon-arrow-down32"></i>
+                                </a>
+                            </div>
+                        </div>
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
 </div>
