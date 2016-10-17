@@ -22,14 +22,15 @@ return [
         'administration' => [
             'title'                 => 'Administration',
 
-            'users'                 => 'Users',
-            'roles'                 => 'Roles',
-            'permissions'           => 'Permissions',
-            'organizations'         => 'Organizations',
-            'places'                => 'Places',
-            'qualification-codes'   => 'Qualification Codes',
-            'notice-types'          => 'Notice Types',
-            'notice-categories'     => 'Notice Categories',
+            'users'                     => 'Users',
+            'roles'                     => 'Roles',
+            'permissions'               => 'Permissions',
+            'organizations'             => 'Organizations',
+            'places'                    => 'Places',
+            'qualification-codes'       => 'Qualification Codes',
+            'qualification-code-types'  => 'Qualification Code Types',
+            'notice-types'              => 'Notice Types',
+            'notice-categories'         => 'Notice Categories',
         ],
         'settings' => [
             'title'                 => 'Settings',

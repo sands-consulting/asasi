@@ -220,6 +220,22 @@
                                 <a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
                             </li>
                             @endif
+
+                            @if(Auth::user()->hasPermissions(['qualification-code:index', 'qualification-code-type:index']))
+                            <li class="{{is_path_active(['admin/qualification-codes*', 'admin/qualification-code-types*']) }}">
+                                <a href="{{ route('admin.qualification-codes.index') }}" class="has-ul legitRipple">
+                                    <i class="icon-drawer3"></i> <span>{{ trans('menu.admin.administration.qualification-codes') }}</span>
+                                </a>
+                                <ul class="hidden-ul">
+                                    <li class="{{ is_path_active('admin/qualification-codes*') }}">
+                                        <a href="{{ route('admin.qualification-codes.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-codes') }}</a>
+                                    </li>
+                                    <li class="{{ is_path_active('admin/qualification-code-types*') }}">
+                                        <a href="{{ route('admin.qualification-code-types.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-code-types') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @endif
                             
                             @if(Auth::user()->hasPermission('notice-type:index'))
                             <li class="{{ is_path_active('admin/notice_types*') }}">
