@@ -4,6 +4,21 @@ $(function() {
     $(this).css('visibility', 'visible');
   });
 
+  sidebarState = localStorage['sidebarState'];
+
+  if(sidebarState == 'xs')
+  {
+    $('body').addClass('sidebar-xs');
+  }
+
+  $('.sidebar-main-toggle').click(function(){
+    if($('body').hasClass('sidebar-xs')) {
+      localStorage['sidebarState'] = 'xs';
+    } else {
+      delete localStorage['sidebarState'];
+    }
+  });
+
 	Vue.config.debug = true;
 
 	vm_datatable_search = new Vue({
