@@ -18,6 +18,14 @@ return [
     'dashboard'     => 'Dashboard',
     'subscriptions'	=> 'Subscriptions',
 
+    'main'          => 'Main',
+    'tender'        => [
+        'chart' => 'Tender Chart',
+        'success' => 'Tender Successfull',
+    ],
+    
+    'agency' => 'Agency',
+
     'admin' => [
         'administration' => [
             'title'                 => 'Administration',
