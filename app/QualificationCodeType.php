@@ -2,11 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class QualificationCodeType extends Model
 {
-    use SoftDeletes;
+    use RevisionableTrait, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -17,15 +19,13 @@ class QualificationCodeType extends Model
         'status' => 'active',
     ];
 
-    public function users()
+    public function codes()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(QualificationCode::class, 'type_id');
     }
 
-    public function getFullNameAttribute()
+    public function logs()
     {
-        return $this->getAncestorsAndSelf()->map(function ($qualificationCodeType) {
-            return $qualificationCodeType->name;
-        })->implode(' > ');
+        return $this->morphMany(UserLog::class, 'actionable');
     }
 }

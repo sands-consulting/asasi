@@ -26,13 +26,9 @@ class QualificationCodesServiceProvider extends ServiceProvider
                     'as'    => 'admin.qualification-codes.revisions',
                     'uses'  => 'QualificationCodesController@revisions'
                 ]);
-                $router->get('qualification-codes/{qualification_codes}/publish', [
-                    'as'    => 'admin.qualification-codes.publish',
-                    'uses'  => 'QualificationCodesController@publish'
-                ]);
-                $router->get('qualification-codes/{qualification_codes}/unpublish', [
-                    'as'    => 'admin.qualification-codes.unpublish',
-                    'uses'  => 'QualificationCodesController@unpublish'
+                $router->get('qualification-codes/{qualification_codes}/logs', [
+                    'as'    => 'admin.qualification-codes.logs',
+                    'uses'  => 'QualificationCodesController@logs'
                 ]);
                 $router->resource('qualification-codes', 'QualificationCodesController');
 
@@ -40,13 +36,9 @@ class QualificationCodesServiceProvider extends ServiceProvider
                     'as'    => 'admin.qualification-code-types.revisions',
                     'uses'  => 'QualificationCodeTypesController@revisions'
                 ]);
-                $router->get('qualification-code-types/{qualification_code_types}/publish', [
-                    'as'    => 'admin.qualification-code-types.publish',
-                    'uses'  => 'QualificationCodeTypesController@publish'
-                ]);
-                $router->get('qualification-code-types/{qualification_code_types}/unpublish', [
-                    'as'    => 'admin.qualification-code-types.unpublish',
-                    'uses'  => 'QualificationCodeTypesController@unpublish'
+                $router->get('qualification-code-types/{qualification_code_types}/logs', [
+                    'as'    => 'admin.qualification-code-types.logs',
+                    'uses'  => 'QualificationCodeTypesController@logs'
                 ]);
                 $router->resource('qualification-code-types', 'QualificationCodeTypesController');
             });
