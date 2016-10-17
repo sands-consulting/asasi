@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="text-center">
-                    <a href="{{ url('/password/email') }}">{{trans('auth.forgot_password')}}</a> &bullet; <a href="{{ url('/login') }}">{{trans('auth.login')}}</a>
+                    <a href="{{ url('/password/reset') }}">{{trans('auth.forgot_password')}}</a> &bullet; <a href="{{ url('/login') }}">{{trans('auth.login')}}</a>
                 </div>
             </div>
         </form>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up Confirmation</title>
+    <title>Confirm Your Email Address</title>
 </head>
 <body>
     <h1>Thanks for signing up!</h1>

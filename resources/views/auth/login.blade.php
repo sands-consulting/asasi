@@ -34,7 +34,7 @@
 				</div>
 
 				<div class="text-center">
-					<a href="{{ url('/password/email') }}">{{trans('auth.forgot_password')}}</a> &bullet; <a href="{{ url('/register') }}">{{trans('auth.register')}}</a>
+					<a href="{{ url('/password/reset') }}">{{trans('auth.forgot_password')}}</a> &bullet; <a href="{{ url('/register') }}">{{trans('auth.register')}}</a>
 				</div>
 			</div>
 		</form>

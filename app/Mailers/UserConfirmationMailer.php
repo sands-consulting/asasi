@@ -9,6 +9,7 @@ class UserConfirmationMailer
 {
     public $from_address;
     public $from_name;
+    public $subject;
     public $view;
 
     protected $mailer;
@@ -17,6 +18,7 @@ class UserConfirmationMailer
     {
         $this->from_address = config('mail.from.address');
         $this->from_name    = config('mail.from.name');
+        $this->subject      = trans('auth.confirmation');
         $this->view         = 'auth.emails.confirmation';
         $this->mailer       = $mailer;
     }
@@ -26,6 +28,7 @@ class UserConfirmationMailer
         return $this->mailer->send($this->view, ['user' => $user], function($message) use($user) {
             $message->from($this->from_address, $this->from_name);
             $message->to($user->email, $user->name);
+            $message->subject($this->subject);
         });
     }
 }

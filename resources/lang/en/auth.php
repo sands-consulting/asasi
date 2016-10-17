@@ -21,10 +21,6 @@ return [
         'remember_me'           => 'Remember Me'
     ],
 
-    'buttons' => [
-        'send_password_link'    => 'Send Password Link'
-    ],
-
     'notices' => [
         'inactive'  => 'Your account is inactive. Please confirm your email address.',
         'confirmed' => 'Your account is now confirmed. You may login.',
@@ -40,4 +36,5 @@ return [
     'login' => 'Login to your account',
     'forgot_password' => 'Forgot Password?',
     'reset_password' => 'Reset Password',
+    'confirmation' => 'Confirm Your Email Address'
 ];

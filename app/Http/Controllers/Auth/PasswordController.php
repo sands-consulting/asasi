@@ -7,26 +7,39 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
-
     use ResetsPasswords;
 
-    /**
-     * Create a new password controller instance.
-     *
-     * @return void
-     */
+    protected $redirectTo = '/login';
+
     public function __construct()
     {
         $this->middleware($this->guestMiddleware());
+        $this->subject = trans('passwords.password_reset_link');
+    }
+
+    protected function resetPassword($user, $password)
+    {
+        $user->forceFill([
+            'password' => bcrypt($password)
+        ])->save();
+    }
+
+    protected function getSendResetLinkEmailSuccessResponse($response)
+    {
+        return redirect()->back()->with('notice', trans($response));
+    }
+
+    protected function getResetSuccessResponse($response)
+    {
+        return redirect($this->redirectPath())->with('notice', trans($response));
+    }
+
+    protected function getResetValidationRules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+        ];
     }
 }
