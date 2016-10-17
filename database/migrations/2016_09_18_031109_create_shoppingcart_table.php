@@ -11,7 +11,7 @@ class CreateShoppingcartTable extends Migration
      */
     public function up()
     {
-        Schema::create('shoppingcart', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->string('identifier');
             $table->string('instance');
             $table->longText('content');
@@ -26,7 +26,7 @@ class CreateShoppingcartTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::drop('shoppingcart');
+        Schema::drop('carts');
         Schema::enableForeignKeyConstraints();
     }
 }
