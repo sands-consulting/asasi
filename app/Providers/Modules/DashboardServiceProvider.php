@@ -30,27 +30,43 @@ class DashboardServiceProvider extends ServiceProvider
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) { 
                 $router->get('dashboard/user', [
-                    'as'    => 'dashboard.user',
+                    'as'    => 'admin.dashboard.user',
                     'uses'  => 'DashboardController@user'
                 ]);
                 $router->get('dashboard/vendor', [
-                    'as'    => 'dashboard.vendor',
+                    'as'    => 'admin.dashboard.vendor',
                     'uses'  => 'DashboardController@vendor'
                 ]);
                 $router->get('dashboard/transaction', [
-                    'as'    => 'dashboard.transaction',
+                    'as'    => 'admin.dashboard.transaction',
                     'uses'  => 'DashboardController@transaction'
                 ]);
                 $router->get('dashboard/portfolio', [
-                    'as'    => 'dashboard.portfolio',
+                    'as'    => 'admin.dashboard.portfolio',
                     'uses'  => 'DashboardController@portfolio'
                 ]);
                 $router->get('dashboard/tender', [
-                    'as'    => 'dashboard.tender',
+                    'as'    => 'admin.dashboard.tender',
                     'uses'  => 'DashboardController@tender'
                 ]);
                 $router->resource('dashboard', 'DashboardController');
             });
+
+            $router->get('dashboard/eligible', [
+                'as'    => 'dashboard.eligible',
+                'uses'  => 'DashboardController@eligible'
+            ]);
+
+            $router->get('dashboard/purchased', [
+                'as'    => 'dashboard.purchased',
+                'uses'  => 'DashboardController@purchased'
+            ]);
+
+            $router->get('dashboard/limited', [
+                'as'    => 'dashboard.limited',
+                'uses'  => 'DashboardController@limited'
+            ]);
+
             $router->resource('dashboard', 'DashboardController');
         });
     }

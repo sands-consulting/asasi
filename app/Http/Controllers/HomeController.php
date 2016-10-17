@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Notice;
-use App\DataTables\UsersDemoDataTable;
+use App\DataTables\DashboardDataTable;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -15,9 +15,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDemoDataTable $table)
+    public function index(Request $request, DashboardDataTable $table)
     {
-        
-        return $table->render('home.index');
+        $input = $request->only('type');
+        return $table->forType($input['type'])->render('home.index');
     }
 }

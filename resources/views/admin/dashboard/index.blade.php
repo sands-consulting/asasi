@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="panel panel-flat">
                 <div class="panel-heading">
                     <h6 class="panel-title">{{ trans('home.views.index.panels.login.last') }}</h6>

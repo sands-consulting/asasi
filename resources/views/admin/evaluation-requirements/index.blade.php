@@ -22,6 +22,20 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
         <h5 class="panel-title">{{ trans('evaluations.views.settings.title') }}</h5>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-cog3"></i><span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#">Notices</a></li>
+                        <li><a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}">{{ trans('evaluation-requirements.title') }}</a></li>
+                        <li><a href="{{ route('admin.evaluators.index', $notice->id) }}">Evaluators</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">All Settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
     
     {{-- <div class="panel-body">

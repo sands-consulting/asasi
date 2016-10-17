@@ -15,4 +15,5 @@ return [
     'completed' => 'Completed',
     'incomplete' => 'Incomplete',
     'cancelled' => 'Cancelled',
+    'paid' => 'Paid',
 ];

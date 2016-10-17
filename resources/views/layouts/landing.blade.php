@@ -9,7 +9,7 @@
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
 </head>
-<body class="navbar-top">
+<body class="navbar-top layout-boxed">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
     <div class="navbar-boxed">
         <div class="navbar-header">
@@ -22,6 +22,11 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-mobile">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url('login') }}">{{ trans('menu.main') }}</a></li>
+                <li><a href="{{ url('dashboard') }}">{{ trans('menu.tender.chart') }}</a></li>
+                <li><a href="{{ url('dashboard') }}">{{ trans('menu.tender.success') }}</a></li>
+                <li><a href="{{ url('dashboard') }}">{{ trans('menu.agency') }}</a></li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false">
                         <i class="icon-cart4"></i>
@@ -70,26 +75,9 @@
                         </div>
                     </div>  
                 </li>
-                @if(Auth::guest())
-                <li><a href="{{ url('login') }}">{{ trans('menu.login') }}</a></li>
-                <li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
-                @else
 
-                @if(Auth::user()->hasPermission('access:admin'))
-                <li>
-                    <a href="{{ route('admin') }}">
-                        <i class="icon-cog52"></i> {{ trans('menu.admin_area') }}
-                    </a>
-                </li>
-                @endif
-
-                @if(Auth::user()->hasPermission('access:report'))
-                <li>
-                    <a href="{{ route('admin') }}">
-                        <i class="icon-file-text"></i> {{ trans('menu.report') }}
-                    </a>
-                </li>
-                @endif
+                @if(Auth::user())
+                
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         {!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
@@ -110,6 +98,27 @@
                             </a>
                         </li>
                         @endif
+                        
+                        <li class="divider"></li>
+
+                        @if(Auth::user()->hasPermission('access:admin'))
+                        <li>
+                            <a href="{{ route('admin') }}">
+                                <i class="icon-cog52"></i> {{ trans('menu.admin_area') }}
+                            </a>
+                        </li>
+                        @endif
+
+                        @if(Auth::user()->hasPermission('access:report'))
+                        <li>
+                            <a href="{{ route('admin') }}">
+                                <i class="icon-file-text"></i> {{ trans('menu.report') }}
+                            </a>
+                        </li>
+                        @endif
+
+                        <li class="divider"></li>
+                        
                         <li>
                             <a href="{{ url('logout') }}">
                                 <i class="icon-switch2"></i> {{ trans('menu.sign_out') }}

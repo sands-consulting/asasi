@@ -75,5 +75,8 @@ return [
         'technical' => [
             'title' => 'Technical Requirements'
         ],
+        'settings' => [
+            'title' => 'Settings'
+        ]
     ],
 ];

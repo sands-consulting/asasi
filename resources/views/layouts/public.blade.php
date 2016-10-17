@@ -9,7 +9,7 @@
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
 </head>
-<body class="navbar-top">
+<body class="navbar-top layout-boxed">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
 	<div class="navbar-boxed">
 		<div class="navbar-header">
@@ -24,6 +24,10 @@
 
 		<div class="navbar-collapse collapse" id="navbar-mobile">
 			<ul class="nav navbar-nav navbar-right">
+				<li><a href="{{ url('login') }}">{{ trans('menu.main') }}</a></li>
+                <li><a href="{{ url('dashboard') }}">{{ trans('menu.tender.chart') }}</a></li>
+                <li><a href="{{ url('dashboard') }}">{{ trans('menu.tender.success') }}</a></li>
+                <li><a href="{{ url('dashboard') }}">{{ trans('menu.agency') }}</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false">
 						<i class="icon-cart4"></i>
@@ -72,26 +76,8 @@
 						</div>
 					</div>	
 				</li>
-				@if(Auth::guest())
-				<li><a href="{{ url('login') }}">{{ trans('menu.login') }}</a></li>
-				<li><a href="{{ url('register') }}">{{ trans('menu.register') }}</a></li>
-				@else
-
-				@if(Auth::user()->hasPermission('access:admin'))
-				<li>
-					<a href="{{ route('admin') }}">
-						<i class="icon-cog52"></i> {{ trans('menu.admin_area') }}
-					</a>
-				</li>
-				@endif
-
-				@if(Auth::user()->hasPermission('access:report'))
-				<li>
-					<a href="{{ route('admin') }}">
-						<i class="icon-file-text"></i> {{ trans('menu.report') }}
-					</a>
-				</li>
-				@endif
+				@if(Auth::user())
+				
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
@@ -112,6 +98,23 @@
 							</a>
 						</li>
 						@endif
+						<li class="divider"></li>
+						@if(Auth::user()->hasPermission('access:admin'))
+						<li>
+							<a href="{{ route('admin') }}">
+								<i class="icon-cog52"></i> {{ trans('menu.admin_area') }}
+							</a>
+						</li>
+						@endif
+
+						@if(Auth::user()->hasPermission('access:report'))
+						<li>
+							<a href="{{ route('admin') }}">
+								<i class="icon-file-text"></i> {{ trans('menu.report') }}
+							</a>
+						</li>
+						@endif
+						<li class="divider"></li>
 						<li>
 							<a href="{{ url('logout') }}">
 								<i class="icon-switch2"></i> {{ trans('menu.sign_out') }}
@@ -125,8 +128,8 @@
 	</div>
 </div>
 
-<div class="navbar navbar-default" id="navbar-second">
-	<div class="navbar-boxed">
+{{-- <div class="navbar navbar-default" id="navbar-second"> --}}
+	{{-- <div class="navbar-boxed">
 		<ul class="nav navbar-nav no-border visible-xs-block">
 			<li>
 				<a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle">
@@ -136,27 +139,29 @@
                 	<span class="icon-bar"></span>
 				</a>
 			</li>
-		</ul>
+		</ul> --}}
 
-		<div class="navbar-collapse collapse" id="navbar-second-toggle">
+		{{-- <div class="navbar-collapse collapse" id="navbar-second-toggle">
 
 			<ul class="nav navbar-nav navbar-nav-material">
 				<li class="{{ is_path_active('/') }}">
 					<a href="{{ url('/') }}" class="legitRipple">
-						<i class="icon-home2 position-left"></i> {{ trans('menu.home') }}
+						<i class="icon-home2 position-left"></i> Eligibles
+					</a>
+				</li>
+				<li class="{{ is_path_active('/') }}">
+					<a href="{{ url('/') }}" class="legitRipple">
+						<i class="icon-home2 position-left"></i> Purchased
+					</a>
+				</li>
+				<li class="{{ is_path_active('/dashboard/limited') }}">
+					<a href="{{ url('/') }}" class="legitRipple">
+						<i class="icon-home2 position-left"></i> Limited
 					</a>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav navbar-nav-material navbar-right">
-				@if (Auth::user()->vendor)
-				<li>
-					<a href="{{ route('vendors.profile') }}" class="legitRipple">
-						<i class="icon-office position-left"></i>
-						{{  Auth::user()->vendor->name  }}
-						{{-- <span class="label label-inline position-right bg-success-400">1.4</span> --}}
-					</a>
-				</li>
-				@endif
+			<ul class="nav navbar-nav navbar-nav-material navbar-right"> --}}
+				
 				{{-- <li class="dropdown">
 					<a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown">
 						<i class="icon-cog3"></i>
@@ -172,10 +177,10 @@
 						<li><a href="#"><i class="icon-gear"></i> All settings</a></li>
 					</ul>
 				</li> --}}
-			</ul>
-		</div>
-	</div>
-</div>
+			{{-- </ul> --}}
+		{{-- </div> --}}
+	{{-- </div> --}}
+{{-- </div> --}}
 
 <div class="page-header">
 	<div class="page-header-content">
@@ -185,6 +190,7 @@
 
 <div class="page-container">
     <div class="page-content">
+    	@yield('sidebar')
     	<div class="content-wrapper">
 			@yield('content')
 		</div>

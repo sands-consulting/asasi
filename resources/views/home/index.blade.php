@@ -21,41 +21,61 @@
                         </div>
                     </fieldset>
                 </div>
-                <div class="col-md-3">
-                    <form class="form-horizontal Landing__login-form" role="form" method="POST" action="{{ url('login') }}">
-                        {!! csrf_field() !!}
-                        <div class="form-group has-feedback has-feedback-left">
-                            <input type="email" class="form-control bg-white Landing__form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
-                            <div class="form-control-feedback Landing__input-icon">
-                                <i class="icon-envelop5 text-muted"></i>
+                @if(Auth::guest())
+                    <div class="col-md-3">
+                        <form class="form-horizontal Landing__login-form" role="form" method="POST" action="{{ url('login') }}">
+                            {!! csrf_field() !!}
+                            <div class="form-group has-feedback has-feedback-left">
+                                <input type="email" class="form-control bg-white Landing__form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
+                                <div class="form-control-feedback Landing__input-icon">
+                                    <i class="icon-envelop5 text-muted"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group has-feedback has-feedback-left">
-                            <input type="password" class="form-control bg-white Landing__form-control" name="password" placeholder="{{ trans('auth.password') }}">
-                            <div class="form-control-feedback Landing__input-icon">
-                                <i class="icon-lock2 text-muted"></i>
+                            <div class="form-group has-feedback has-feedback-left">
+                                <input type="password" class="form-control bg-white Landing__form-control" name="password" placeholder="{{ trans('auth.password') }}">
+                                <div class="form-control-feedback Landing__input-icon">
+                                    <i class="icon-lock2 text-muted"></i>
+                                </div>
                             </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn bg-blue-700 btn-block legitRipple">{{trans('auth.login_button')}}</button>
+                            </div>
+                            <div class="text-center">
+                                <a href="{{ url('/password/email') }}">{{trans('auth.forgot_password')}}</a>
+                            </div>
+                            <hr/>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-block legitRipple">{{trans('auth.action_button')}}</button>
+                            </div>
+                            <div class="text-center text-muted">
+                                Get your latest info on the latest Tender and Quotation in Selangor!
+                            </div>
+                            <hr/>
+                            <div class="text-center text-muted">
+                                <i class="icon-presentation"></i> How To Register
+                            </div>
+                            <hr/>
+                        </form>
+                    </div>
+                @else
+                    <div class="col-sm-3">
+                        <div class="panel panel-flat">
+                            <div class="panel body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error repellat, placeat quae itaque aliquid atque adipisci reprehenderit earum, delectus dolores veritatis similique perspiciatis asperiores quos, nobis doloremque illo. Voluptas, cumque!
+                                </div>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn bg-blue-700 btn-block legitRipple">{{trans('auth.login_button')}}</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-flat">
+                            <div class="panel body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur debitis error laudantium sunt provident, animi ut ducimus nam, consequuntur distinctio cumque iste doloribus veniam, placeat. Eius perspiciatis alias harum eaque.</div>
                         </div>
-                        <div class="text-center">
-                            <a href="{{ url('/password/email') }}">{{trans('auth.forgot_password')}}</a>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-flat">
+                            <div class="panel body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, nam, doloribus odio reiciendis inventore eligendi tempora ab esse necessitatibus dicta totam adipisci. Quibusdam minus sunt nam, similique aspernatur facilis tempora?</div>
                         </div>
-                        <hr/>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-block legitRipple">{{trans('auth.action_button')}}</button>
-                        </div>
-                        <div class="text-center text-muted">
-                            Get your latest info on the latest Tender and Quotation in Selangor!
-                        </div>
-                        <hr/>
-                        <div class="text-center text-muted">
-                            <i class="icon-presentation"></i> How To Register
-                        </div>
-                        <hr/>
-                    </form>
-                </div>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="container">
@@ -64,8 +84,8 @@
                     <div class="col-md-9"><h5>Notice</h5></div>
                     <div class="col-md-3">
                         <ul class="list-unstyle list-inline pull-right mt-15">
-                            <li><i class="icon-newspaper mr-5"></i>Tender</li>
-                            <li><i class="icon-newspaper mr-5"></i>Quotation</li>
+                            <li class="active"><i class="icon-newspaper mr-5"></i><a href="{{ route('home.index', ['type' => 1]) }}">Tender</a></li>
+                            <li><i class="icon-newspaper mr-5"></i><a href="{{ route('home.index', ['type' => 2]) }}">Quotation</a></li>
                         </ul>
                     </div>
                 </div>

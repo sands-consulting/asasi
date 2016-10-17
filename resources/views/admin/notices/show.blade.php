@@ -49,8 +49,9 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h5 class="panel-title">{{ $notice->number}} - {{ $notice->name }}</h5>
-        <div class="heading-elements">
+        <h4 class="panel-title" style="max-width: 800px"><small style="margin-left: 0px">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</small>
+        <br>{{ $notice->name }}</h4>
+        <div class="heading-elements" style="vertical-align: top; padding-top: 0px">
             @if ($notice->status == 'published')
                 <span class="label label-success heading-text">
             @elseif ($notice->status == 'cancelled')
@@ -91,14 +92,11 @@
                         <a data-target="#left-tab3" data-toggle="tab"><i class="icon-coins position-left"></i> Price List</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user position-left"></i> Evaluators <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user position-left"></i> Evaluations <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a data-target="#left-tab4" data-toggle="tab">Progress</a></li>
-                            <li><a data-target="#left-tab5" data-toggle="tab">Assigned</a></li>
+                            <li><a data-target="#left-tab4" data-toggle="tab">By Evaluator</a></li>
+                            <li><a data-target="#left-tab5" data-toggle="tab">By Vendor</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a data-target="#left-tab6" data-toggle="tab"><i class="icon-pencil position-left"></i> Evaluations</a>
                     </li>
                     <li>
                         <a data-target="#left-tab7" data-toggle="tab"><i class="icon-medal-star position-left"></i> Award</a>
