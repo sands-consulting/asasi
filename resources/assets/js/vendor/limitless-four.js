@@ -28,6 +28,10 @@ $(function() {
 
     // Calculate min height
     function containerHeight() {
+        if($('.page-container').length == 0) {
+            return;
+        }
+
         var availableHeight = $(window).height() - $('.page-container').offset().top - $('.navbar-fixed-bottom').outerHeight();
 
         $('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
