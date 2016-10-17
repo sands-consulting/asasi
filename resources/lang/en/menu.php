@@ -37,8 +37,10 @@ return [
             'places'                    => 'Places',
             'qualification-codes'       => 'Qualification Codes',
             'qualification-code-types'  => 'Qualification Code Types',
+            'notices'                   => 'Notices',
             'notice-types'              => 'Notice Types',
             'notice-categories'         => 'Notice Categories',
+            'packages'                  => 'Packages',
         ],
         'settings' => [
             'title'                 => 'Settings',
@@ -56,7 +58,6 @@ return [
             'allocations'   => 'Allocations',
             'vendors'       => 'Vendors',
             'news'          => 'News',
-            'packages'      => 'Packages',
             'subscriptions' => 'Subscriptions',
             'submissions'   => 'Submissions',
             'evaluations'   => [

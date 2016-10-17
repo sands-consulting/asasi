@@ -150,12 +150,6 @@
                                 <a href="{{ route('admin.notices.index') }}"><i class="icon-clipboard3"></i> <span>{{ trans('menu.admin.manage.notices') }}</span></a>
                             </li>
                             @endif
-
-                            @if(Auth::user()->hasPermission('package:index'))
-                            <li class="{{ is_path_active('admin/packages*') }}">
-                                <a href="{{ route('admin.packages.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.manage.packages') }}</span></a>
-                            </li>
-                            @endif
                             
                             @if(Auth::user()->hasPermission('subscription:index'))
                             <li class="{{ is_path_active('admin/subscriptions*') }}">
@@ -207,9 +201,9 @@
                             </li>
                             @endif
 
-                            @if(Auth::user()->hasPermission('place:index'))
-                            <li class="{{ is_path_active('admin/places*') }}">
-                                <a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
+                            @if(Auth::user()->hasPermission('package:index'))
+                            <li class="{{ is_path_active('admin/packages*') }}">
+                                <a href="{{ route('admin.packages.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.administration.packages') }}</span></a>
                             </li>
                             @endif
 
@@ -229,15 +223,25 @@
                             </li>
                             @endif
                             
-                            @if(Auth::user()->hasPermission('notice-type:index'))
-                            <li class="{{ is_path_active('admin/notice_types*') }}">
-                                <a href="{{ route('admin.notice-types.index') }}"><i class="icon-clipboard"></i> <span>{{ trans('menu.admin.administration.notice-types') }}</span></a>
+                            @if(Auth::user()->hasPermissions(['notice-type:index', 'notice-category:index']))
+                            <li class="{{is_path_active(['admin/qualification-codes*', 'admin/qualification-code-types*']) }}">
+                                <a href="{{ route('admin.notice-types.index') }}" class="has-ul legitRipple">
+                                    <i class="icon-clipboard"></i> <span>{{ trans('menu.admin.administration.notices') }}</span>
+                                </a>
+                                <ul class="hidden-ul">
+                                    <li class="{{ is_path_active('admin/notice-types*') }}">
+                                        <a href="{{ route('admin.notice-types.index') }}" class="legitRipple">{{ trans('menu.admin.administration.notice-types') }}</a>
+                                    </li>
+                                    <li class="{{ is_path_active('admin/notice-categories*') }}">
+                                        <a href="{{ route('admin.notice-categories.index') }}" class="legitRipple">{{ trans('menu.admin.administration.notice-categories') }}</a>
+                                    </li>
+                                </ul>
                             </li>
                             @endif
 
-                            @if(Auth::user()->hasPermission('notice-category:index'))
-                            <li class="{{ is_path_active('admin/notice_categories*') }}">
-                                <a href="{{ route('admin.notice-categories.index') }}"><i class="icon-clipboard"></i> <span>{{ trans('menu.admin.administration.notice-categories') }}</span></a>
+                            @if(Auth::user()->hasPermission('place:index'))
+                            <li class="{{ is_path_active('admin/places*') }}">
+                                <a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
                             </li>
                             @endif
 
