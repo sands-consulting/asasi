@@ -6,200 +6,200 @@
 @import "prompt";
 
 body {
-    background: #eceff1;
-    padding-bottom: 60px;
+  background: #eceff1;
+  padding-bottom: 60px;
 
-    &.home-controller {
-        &.guest {
-            background: #fff;
-        }
+  &.home-controller {
+    &.guest {
+      background: #fff;
     }
+  }
 }
 
 .navbar {
-    .navbar-header {
-        min-width: auto;
+  .navbar-header {
+    min-width: auto;
 
-        .navbar-brand {
-            &.prompt {
-                background: url(@logo-prompt-white) no-repeat left center;
-                background-repeat: no-repeat;
-                background-size: auto 30px;
-                width: 146px;
-                text-indent: -9999px;
-            }
-        }
+    .navbar-brand {
+      &.prompt {
+        background: url(@logo-prompt-white) no-repeat left center;
+        background-repeat: no-repeat;
+        background-size: auto 30px;
+        width: 146px;
+        text-indent: -9999px;
+      }
     }
+  }
 
-    .navbar-nav {
-        > li {
-            > a {
-                font-weight: 500;
-                text-transform: uppercase
-            }
-        }
+  .navbar-nav {
+    > li {
+      > a {
+        font-weight: 500;
+        text-transform: uppercase
+      }
     }
+  }
 }
 
 .footer {
-    background: #eceff1;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 10px 0;
+  background: #eceff1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px 0;
 }
 
 .section-landing {
-    background: #eceff1;
-    margin: 0 0 -70px;
-    padding: 20px 0 50px;
+  background: #eceff1;
+  margin: 0 0 -70px;
+  padding: 20px 0 50px;
 
-    .container {
-        padding: 0 20px;
+  .container {
+    padding: 0 20px;
+  }
+
+  .form-login {
+    .form-group {
+      margin: 0 0 10px;
+
+      .form-control {
+        background-color: #fff;
+      }
+
+      > .form-control-feedback {
+        left: 10px;
+      }
+    }
+  }
+
+  .text-muted {
+    color: #6a6a6a;
+  }
+
+  .btn-register {
+    margin-bottom: 10px;
+  }
+
+  hr {
+    margin: 10px 0;
+    border-color: #ccc;
+  }
+
+  .carousel-indicators {
+    li {
+      width: 6px;
+      height: 6px;
+      border-color: #666;
+
+      &.active {
+        width: 8px;
+        height: 8px;
+        background-color: #666;
+      }
+    }
+  }
+
+  #carousel-banners {
+    .carousel-indicators {
+      bottom: -10px;
+    }
+  }
+
+  #carousel-news {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+    .carousel-title {
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e5e5e5;
     }
 
-    .form-login {
-        .form-group {
-            margin: 0 0 10px;
+    .carousel-control {
+      top: 22px;
+      bottom: auto;
+      width: auto;
+      background: none;
 
-            .form-control {
-                background-color: #fff;
-            }
+      .glyphicon {
+        font-size: 16px;
+      }
 
-            > .form-control-feedback {
-                left: 10px;
-            }
-        }
-    }
+      &.left {
+        right: 22px;
+        left: auto;
+      }
 
-    .text-muted {
-        color: #6a6a6a;
-    }
-
-    .btn-register {
-        margin-bottom: 10px;
-    }
-
-    hr {
-        margin: 10px 0;
-        border-color: #ccc;
+      &.right {
+        right: 0;
+      }
     }
 
     .carousel-indicators {
-        li {
-            width: 6px;
-            height: 6px;
-            border-color: #666;
-
-            &.active {
-                width: 8px;
-                height: 8px;
-                background-color: #666;
-            }
-        }
+      bottom: -14px;
     }
 
-    #carousel-banners {
-        .carousel-indicators {
-            bottom: -10px;
-        }
+    .item {
+      padding-right: 120px;
+
+      h1 {
+        font-size: 17px;
+        font-weight: 500;
+        margin: 0;
+        padding: 0;
+      }
     }
-
-    #carousel-news {
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-
-        .carousel-title {
-            font-weight: 500;
-            text-transform: uppercase;
-            padding: 10px 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .carousel-control {
-            top: 22px;
-            bottom: auto;
-            width: auto;
-            background: none;
-
-            .glyphicon {
-                font-size: 16px;
-            }
-
-            &.left {
-                right: 22px;
-                left: auto;
-            }
-
-            &.right {
-                right: 0;
-            }
-        }
-
-        .carousel-indicators {
-            bottom: -14px;
-        }
-
-        .item {
-            padding-right: 120px;
-
-            h1 {
-                font-size: 17px;
-                font-weight: 500;
-                margin: 0;
-                padding: 0;
-            }
-        }
-    }
+  }
 }
 
 .panel-notice {
-    box-shadow: 0 1px 3px rgba(206, 206, 206, 0.5);
+  box-shadow: 0 1px 3px rgba(206, 206, 206, 0.5);
+  border-radius: 0;
+
+  .panel-heading {
+    border: none;
     border-radius: 0;
+    padding: 17px 20px;
 
-    .panel-heading {
-        border: none;
-        border-radius: 0;
-        padding: 17px 20px;
-
-        .panel-title {
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 1;
-            color: #fff;
-        }
-
-        .list-inline {
-            a {
-                color: #fff;
-            }
-
-            .active {
-                a {
-                    text-transform: uppercase;
-                }
-            }
-        }
-
-        &.bg-slate-300 {
-            .panel-title {
-                color: #333;
-            }
-
-            .list-inline {
-                a {
-                    color: #333;
-                }
-            }
-        }
+    .panel-title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+      color: #fff;
     }
 
-    .panel-body {
-        padding: 20px;
-        border: 1px solid #f4f4f4;
-        border-top: none;
+    .list-inline {
+      a {
+        color: #fff;
+      }
+
+      .active {
+        a {
+          text-transform: uppercase;
+        }
+      }
     }
+
+    &.bg-slate-300 {
+      .panel-title {
+        color: #333;
+      }
+
+      .list-inline {
+        a {
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .panel-body {
+    padding: 20px;
+    border: 1px solid #f4f4f4;
+    border-top: none;
+  }
 }
