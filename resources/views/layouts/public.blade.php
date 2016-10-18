@@ -9,7 +9,7 @@
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
 </head>
-<body class="navbar-top layout-boxed">
+<body class="{{ body_classes('navbar-top layout-boxed public') }}">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
 	<div class="navbar-boxed">
 		<div class="navbar-header">
@@ -46,8 +46,10 @@
 @yield('ahead')
 @endif
 
-<div class="container">
-    @yield('content')
+<div class="page-container">
+	<div class="page-content">
+    	@yield('content')
+    </div>
 </div>
 
 <div class="footer text-center text-muted">
