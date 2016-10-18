@@ -74,6 +74,7 @@ elixir(function(mix) {
         'vendor/notice_wizard.js',
         'vendor/form_select2.js',
         'vendor/picker_date.js',
+        'pages/admin.dashboard.user.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
     .version([

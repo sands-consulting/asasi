@@ -13,6 +13,12 @@ return [
             ],
             'notices' => [
             	'title' => 'All Notices'
+            ],
+            'panels' => [
+                'login' => [
+                    'activity' => 'Login Activity',
+                    'last' => 'Last Login'
+                ]
             ]
 		],
         'submissions' => [

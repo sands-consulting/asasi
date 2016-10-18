@@ -74,5 +74,13 @@ class DashboardServiceProvider extends ServiceProvider
                 'uses'  => 'DashboardController@projects'
             ]);
         });
+
+        // api routing
+        app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
+            $router->get('dashboard/chart-login-activity', [
+                'as' => 'api.dashboard.chart-login-activity',
+                'uses' => 'DashboardController@chartLoginActivity'
+            ]);
+        });
     }
 }

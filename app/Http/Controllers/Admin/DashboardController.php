@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\UserLog;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.user');
+        $lastLogins = UserLog::lastLogin()->get();
+
+        return view('admin.dashboard.user', compact('lastLogins'));
     }
 
     public function user()
     {
-        return view('admin.dashboard.user');
+        $lastLogins = UserLog::lastLogin()->get();
+
+        return view('admin.dashboard.user', compact('lastLogins'));
     }
 
     public function vendor()

@@ -34,14 +34,15 @@
             <div class="panel panel-flat">
                 <div class="panel-body text-center">
                     <div class="col-sm-3 col-xs-12 dashboard-panel-user-detail">
-                        <div class="col-sm-12 col-xs-6"><div class="dashboard-panel-user-icon text-green-700">
-                            <i class="icon-user"></i>
+                        <div class="col-sm-12 col-xs-6">
+                            <div class="dashboard-panel-user-icon text-green-700">
+                                <i class="icon-user"></i>
+                            </div>
                         </div>
-</div>
                         <div class="col-sm-12 col-xs-6"><div class="text-muted">ACTIVE USER</div>
-                        <div class="dashboard-panel-user-number text-green-700">1000</div>
-</div>
-                                                                    </div>
+                            <div class="dashboard-panel-user-number text-green-700">1000</div>
+                        </div>
+                    </div>
                     <div class="col-sm-3 col-xs-6 dashboard-panel-user-detail">
                         <div class="dashboard-panel-user-icon text-orange-700">
                             <i class="icon-user"></i>
@@ -73,116 +74,41 @@
         <div class="col-md-9">
             <div class="panel panel-flat">
                 <div class="panel-heading">
-                    <h6 class="panel-title">{{ trans('home.views.index.panels.login.activity') }}</h6>
+                    <h6 class="panel-title text-uppercase">{{ strtoupper(trans('home.views.index.panels.login.activity')) }}</h6>
                 </div>
 
-                <div class="panel-body" style="min-height: 210px">
-                    <div class="chart-container"></div>
+                <div class="panel-body">
+                    <div class="chart-container">
+                        <div class="chart" id="c3-area-chart"></div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="panel panel-flat">
                 <div class="panel-heading">
-                    <h6 class="panel-title">{{ trans('home.views.index.panels.login.last') }}</h6>
+                    <h6 class="panel-title text-uppercase">{{ trans('home.views.index.panels.login.last') }}</h6>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a href="#"><i class="icon-arrow-right13"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="panel-body" style="min-height: 210px">
+                <div class="panel-body">
                     <ul class="media-list">
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-pink text-pink btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-statistics"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <ul class="icons-list">
-                                    <li>
-                                        <a href="#"><i class="icon-arrow-right13"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-checkmark3"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <ul class="icons-list">
-                                    <li>
-                                        <a href="#"><i class="icon-arrow-right13"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-primary text-primary btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-alignment-unalign"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <ul class="icons-list">
-                                    <li>
-                                        <a href="#"><i class="icon-arrow-right13"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-warning-400 text-warning-400 btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-spinner11"></i></a>
-                            </div>
-
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <ul class="icons-list">
-                                    <li>
-                                        <a href="#"><i class="icon-arrow-right13"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-teal-400 text-teal btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-redo2"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <ul class="icons-list">
-                                    <li>
-                                        <a href="#"><i class="icon-arrow-right13"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        @foreach ($lastLogins as $lastLogin)
+                            <li class="media">
+                                <div class="media-left media-middle">
+                                    <img src="{{ Gravatar::src($lastLogin->user->email, 40) }}" class="img-circle" alt="{{ $lastLogin->user->name }}">
+                                </div>
+                                
+                                <div class="media-body">
+                                    {{ $lastLogin->user->name }}
+                                    <div class="media-annotation">{{ $lastLogin->created_at->formatDateTimeFromSetting() }}</div>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
