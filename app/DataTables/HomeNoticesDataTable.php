@@ -22,10 +22,10 @@ class HomeNoticesDataTable extends DataTable
                 return $name;
             })
             ->editColumn('purchased_at', function($notice) {
-                return $notice->purchased_at->getFromSetting();
+                return $notice->purchased_at->formatDateFromSetting();
             })
             ->editColumn('expired_at', function($notice) {
-                return $notice->expired_at->getFromSetting();
+                return $notice->expired_at->formatDateFromSetting();
             })
             ->editColumn('status', function($notice) {
                 // return view('admin.notices._index_status', compact('notice'));

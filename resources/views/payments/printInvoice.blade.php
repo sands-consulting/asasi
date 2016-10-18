@@ -46,13 +46,13 @@
                 <tr>
                     <td>
                         <span class="text-muted">Invoice Date</span><br>
-                        {{ $transaction->created_at->getFromSetting() }}
+                        {{ $transaction->created_at->formatDateFromSetting() }}
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <span class="text-muted">Due Date</span><br>
-                        {{ $transaction->created_at->copy()->addDays(14)->getFromSetting() }}
+                        {{ $transaction->created_at->copy()->addDays(14)->formatDateFromSetting() }}
                     </td>
                 </tr>
             </table>

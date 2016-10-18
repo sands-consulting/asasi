@@ -23,9 +23,25 @@ class MyCarbon extends Carbon
         return $this->format($longFormat);
     }
 
-    public function getFromSetting()
+    public function formatDateFromSetting($format = 'd/m/Y')
     {
-        $settingFormat = Setting::where('key', 'date_format')->first()->value;
-        return $this->format($settingFormat);
+        $setting = Setting::where('key', 'date_format')->first();
+        
+        if ($setting) {
+            $format = $setting->value;
+        }
+
+        return $this->format($format);
+    }
+
+    public function formatDateTimeFromSetting($format = 'd/m/Y H:i a')
+    {
+        $setting = Setting::where('key', 'datetime_format')->first();
+        
+        if ($setting) {
+            $format = $setting->value;
+        }
+
+        return $this->format($format);
     }
 }

@@ -53,19 +53,19 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label"><strong>{{ trans('notices.attributes.published_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->published_at ? $notice->published_at->getFromSetting() : 'N/A' }}</div>
+                            <div class="form-control-static">{{ $notice->published_at ? $notice->published_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label"><strong>{{ trans('notices.attributes.expired_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->expired_at ? $notice->expired_at->getFromSetting() : 'N/A' }}</div>
+                            <div class="form-control-static">{{ $notice->expired_at ? $notice->expired_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="control-label"><strong>{{ trans('notices.attributes.purchased_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->purchased_at ? $notice->purchased_at->getFromSetting() : 'N/A' }}</div>
+                            <div class="form-control-static">{{ $notice->purchased_at ? $notice->purchased_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -77,7 +77,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="control-label"><strong>{{ trans('notices.attributes.submission_at') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->submission_at ? $notice->submission_at->getFromSetting() : 'N/A' }}</div>
+                            <div class="form-control-static">{{ $notice->submission_at ? $notice->submission_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
                     </div>
                     <div class="col-sm-6">
