@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Http\Requests;
 use App\Notice;
-use App\DataTables\DashboardAllDataTable;
+use App\DataTables\HomeNoticesDataTable;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(Request $request, DashboardAllDataTable $table)
+    public function index(Request $request, HomeNoticesDataTable $table)
     {
         $input = $request->only('type');
         return $table->forType($input['type'])->render('home.index');
