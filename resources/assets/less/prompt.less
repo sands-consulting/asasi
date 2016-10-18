@@ -1,10 +1,51 @@
-@logo-prompt-white:     '/assets/images/logo-white.svg';
+@logo-prompt-white:     	'/assets/images/logo-white.svg';
 
-@background-1:			'/assets/images/bg-1.png';
+@background-1:						'/assets/images/bg-1.png';
 
 .form-control {
 	&:focus {
 		border-bottom-color: @color-blue-700;
 		box-shadow: 0 1px 0 @color-blue-700;
+	}
+}
+
+.prompt-box {
+	background: #fff;
+	height: 128px;
+	margin-bottom: 15px;
+	padding: 15px 10px 10px;
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 1px 3px rgba(206, 206, 206, 0.5);
+
+	&.border {
+		border-bottom-width: 3px;
+		border-bottom-style: solid;
+	}
+
+	.title {
+		font-size: 14px;
+		text-align: right;
+	}
+
+	.number {
+		font-size: 36px;
+		font-weight: 500;
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+	}
+}
+
+a {
+	&.prompt-box {
+		color: #333;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: none;
+		}
 	}
 }

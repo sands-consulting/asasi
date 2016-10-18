@@ -4,7 +4,7 @@ namespace App\DataTables;
 
 use App\Notice;
 
-class NoticePurchasedDataTable extends DataTable
+class DashboardEligiblesDataTable extends DataTable
 {
     public function ajax()
     {
@@ -13,8 +13,8 @@ class NoticePurchasedDataTable extends DataTable
             ->addColumn('action', function($notice) {
                 return view('admin.notices._index_actions', compact('notice'));
             })
-            ->editColumn('notice_name', function($notice) {
-                return link_to_route('admin.notices.show', $notice->notice_name, $notice->notice_id);
+            ->editColumn('name', function($notice) {
+                return link_to_route('admin.notices.show', $notice->name, $notice->id);
             })
             ->editColumn('status', function($notice) {
                 return view('admin.notices._index_status', compact('notice'));
@@ -24,14 +24,7 @@ class NoticePurchasedDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::with(['vendors'])
-            ->select([
-                'notices.id as notice_id',
-                'notices.name as notice_name',
-                'notices.number as notice_number',
-                'notices.expired_at',
-                'notices.status'
-            ])->published();
+        $query = Notice::published();
 
         if($this->datatables->request->input('q', null))
         {
@@ -54,14 +47,14 @@ class NoticePurchasedDataTable extends DataTable
     {
         return [
             [
-                'data' => 'notice_name',
-                'name' => 'notice_name',
+                'data' => 'name',
+                'name' => 'name',
                 'title' => trans('notices.attributes.name'),
                 'width' => '40%'
             ],
             [
-                'data' => 'notice_number',
-                'name' => 'notice_number',
+                'data' => 'number',
+                'name' => 'number',
                 'title' => trans('notices.attributes.number'),
                 'width' => '15%'
             ],

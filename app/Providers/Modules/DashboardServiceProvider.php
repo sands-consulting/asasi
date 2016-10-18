@@ -62,12 +62,16 @@ class DashboardServiceProvider extends ServiceProvider
                 'uses'  => 'DashboardController@invitations'
             ]);
             $router->get('dashboard/bookmarks', [
-                'as'    => 'dashboard.invitations',
-                'uses'  => 'DashboardController@invitations'
+                'as'    => 'dashboard.bookmarks',
+                'uses'  => 'DashboardController@bookmarks'
             ]);
             $router->get('dashboard/purchases', [
                 'as'    => 'dashboard.purchases',
                 'uses'  => 'DashboardController@purchases'
+            ]);
+            $router->get('dashboard/projects', [
+                'as'    => 'dashboard.projects',
+                'uses'  => 'DashboardController@projects'
             ]);
         });
     }

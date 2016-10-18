@@ -4,7 +4,7 @@ namespace App\DataTables;
 
 use App\Notice;
 
-class NoticeLimitedDataTable extends DataTable
+class DashboardPurchasesDataTable extends DataTable
 {
     public function ajax()
     {
@@ -13,8 +13,8 @@ class NoticeLimitedDataTable extends DataTable
             ->addColumn('action', function($notice) {
                 return view('admin.notices._index_actions', compact('notice'));
             })
-            ->editColumn('name', function($notice) {
-                return link_to_route('admin.notices.show', $notice->name, $notice->id);
+            ->editColumn('notice_name', function($notice) {
+                return link_to_route('admin.notices.show', $notice->notice_name, $notice->notice_id);
             })
             ->editColumn('status', function($notice) {
                 return view('admin.notices._index_status', compact('notice'));
@@ -24,7 +24,14 @@ class NoticeLimitedDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::limited();
+        $query = Notice::with(['vendors'])
+            ->select([
+                'notices.id as notice_id',
+                'notices.name as notice_name',
+                'notices.number as notice_number',
+                'notices.expired_at',
+                'notices.status'
+            ])->published();
 
         if($this->datatables->request->input('q', null))
         {
@@ -47,10 +54,16 @@ class NoticeLimitedDataTable extends DataTable
     {
         return [
             [
-                'data' => 'name',
-                'name' => 'name',
+                'data' => 'notice_name',
+                'name' => 'notice_name',
                 'title' => trans('notices.attributes.name'),
                 'width' => '40%'
+            ],
+            [
+                'data' => 'notice_number',
+                'name' => 'notice_number',
+                'title' => trans('notices.attributes.number'),
+                'width' => '15%'
             ],
             [
                 'data' => 'expired_at',

@@ -4,7 +4,7 @@ namespace App\DataTables;
 
 use App\Notice;
 
-class NoticeEligibleDataTable extends DataTable
+class DashboardBookmarksDataTable extends DataTable
 {
     public function ajax()
     {

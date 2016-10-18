@@ -53,7 +53,7 @@ body {
 
 .section-landing {
     background: #eceff1;
-    margin: 0 0 -71px;
+    margin: 0 0 -70px;
     padding: 20px 0 50px;
 
     .container {
@@ -161,9 +161,7 @@ body {
     border-radius: 0;
 
     .panel-heading {
-        background: #d5d8d9;
-        border: 1px solid #d5d8d9;
-        border-bottom: none;
+        border: none;
         border-radius: 0;
         padding: 17px 20px;
 
@@ -171,17 +169,28 @@ body {
             font-size: 16px;
             font-weight: 500;
             line-height: 1;
-            color: #333333;
+            color: #fff;
         }
 
         .list-inline {
             a {
-                color: #a5a5a5;
+                color: #fff;
             }
 
             .active {
                 a {
                     text-transform: uppercase;
+                }
+            }
+        }
+
+        &.bg-slate-300 {
+            .panel-title {
+                color: #333;
+            }
+
+            .list-inline {
+                a {
                     color: #333;
                 }
             }

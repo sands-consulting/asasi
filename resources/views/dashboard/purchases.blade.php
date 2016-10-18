@@ -12,8 +12,8 @@
 @endif
 
 <div class="panel panel-notice">
-    <div class="panel-heading {{ Auth::check() ? 'bg-green-600' : 'bg-slate-300' }}">
-        <h1 class="panel-title">{{ trans('home.views.index.notices.title') }}</h1>
+    <div class="panel-heading bg-indigo-700">
+        <h1 class="panel-title">{{ trans('dashboard.purchases.title') }}</h1>
 
         <div class="heading-elements">
             <ul class="list-inline heading-text">
