@@ -14,6 +14,16 @@ return [
             'notices' => [
             	'title' => 'All Notices'
             ]
-		]
+		],
+        'submissions' => [
+            'notices' => [
+                'title' => 'Submissions'
+            ]
+        ],
+        'awards' => [
+            'notices' => [
+                'title' => 'Awards'
+            ]
+        ]
 	]
 ];

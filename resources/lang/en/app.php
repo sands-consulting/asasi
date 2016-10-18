@@ -2,10 +2,11 @@
 
 return [
 	'admin' => 'Admin',
-	'report' => 'Report',
-	'confirmation' => 'Are you sure?',
-    'incomplete_tooltip' => 'Please complete form above before proceed.',
+    'all' => 'All',
+    'confirmation' => 'Are you sure?',
     'footer' => '&copy;:year :name',
+    'incomplete_tooltip' => 'Please complete form above before proceed.',
+    'report' => 'Report',
 
     'cart' => [
     	'title'	=> 'Cart',

@@ -12,16 +12,17 @@ class HomeController extends Controller
 {
     public function index(Request $request, HomeNoticesDataTable $table)
     {
-        $input = $request->only('type');
-        return $table->forType($input['type'])->render('home.index');
+        return $table->render('home.index');
     }
 
-    public function submissions(Request $request)
+    public function submissions(Request $request, HomeNoticesDataTable $table)
     {
+        return $table->render('home.submissions');
     }
 
-    public function awards(Request $request)
+    public function awards(Request $request, HomeNoticesDataTable $table)
     {
+        return $table->render('home.awards');
     }
 
     public function contact(Request $request)

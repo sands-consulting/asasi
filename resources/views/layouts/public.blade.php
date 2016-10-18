@@ -25,7 +25,7 @@
 		<div class="navbar-collapse collapse" id="navbar-mobile">
 			<ul class="nav navbar-nav">
 				<li class="{{ is_path_active('/') }}"><a href="{{ route('home') }}">{{ trans('menu.app.home') }}</a></li>
-                <li class="{{ is_path_active('awards') }}"><a href="{{ route('submissions') }}">{{ trans('menu.app.submissions') }}</a></li>
+                <li class="{{ is_path_active('submissions') }}"><a href="{{ route('submissions') }}">{{ trans('menu.app.submissions') }}</a></li>
                 <li class="{{ is_path_active('awards') }}"><a href="{{ route('awards') }}">{{ trans('menu.app.awards') }}</a></li>
             </ul>
 
