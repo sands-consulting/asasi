@@ -8,6 +8,16 @@
     box-shadow: 0 1px 0 @color-blue-700;
   }
 }
+.dataTables_filter {
+  margin: 0 0 20px;
+
+  input {
+    &:focus {
+      border-bottom-color: @color-blue-700;
+      box-shadow: 0 1px 0 @color-blue-700;
+    }
+  }
+}
 
 .prompt-box {
   background: #fff;
@@ -46,6 +56,155 @@ a {
 
     &:hover {
       text-decoration: none;
+    }
+  }
+}
+
+.carousel {
+  .carousel-indicators {
+    li {
+      width: 6px;
+      height: 6px;
+      border-color: #666;
+
+      &.active {
+        width: 8px;
+        height: 8px;
+        background-color: #666;
+      }
+    }
+  }
+
+  &.news {
+    .carousel-title {
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .carousel-control {
+      top: 22px;
+      bottom: auto;
+      width: auto;
+      background: none;
+
+      .glyphicon {
+        font-size: 16px;
+      }
+
+      &.left {
+        right: 22px;
+        left: auto;
+      }
+
+      &.right {
+        right: 0;
+      }
+    }
+
+    .item {
+      padding-right: 120px;
+
+      h1 {
+        font-size: 17px;
+        font-weight: 500;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+.panel-notice {
+  box-shadow: 0 1px 3px rgba(206, 206, 206, 0.5);
+  border-radius: 0;
+
+  .panel-heading {
+    border: none;
+    border-radius: 0;
+    padding: 17px 20px;
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+      color: #fff;
+    }
+
+    .list-inline {
+      a {
+        color: #fff;
+      }
+
+      .active {
+        background: #fff;
+        border-radius: 3px;
+        padding: 3px 5px;
+        margin: -3px 20px 0 0;
+
+        a {
+          color: #333;
+          font-weight: bold;
+        }
+      }
+    }
+
+    &.bg-slate-300 {
+      .panel-title {
+        color: #333;
+      }
+    }
+  }
+
+  .panel-body {
+    padding: 20px;
+    border: 1px solid #f4f4f4;
+    border-top: none;
+  }
+}
+
+.panel-vendor {
+  position: relative;
+
+  h1 {
+    font-size: 14px;
+    line-height: 1;
+    margin: 0 0 2px;
+    padding: 0;
+  }
+
+  .expiry {
+    font-size: 12px;
+    margin: 0 0 2px;
+    padding: 0;
+  }
+
+  .btn-renew {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    display: block;
+  }
+
+  .label {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+  }
+
+  .btn {
+    position: absolute;
+    bottom: 10px;
+
+    &.btn-company-details {
+      left: 10px;
+    }
+
+    &.btn-change-requests {
+      right: 10px;
     }
   }
 }

@@ -12,6 +12,13 @@ return [
     	'projects' => 'Projects'
     ],
 
+    'vendor' => [
+        'expiry' => 'Subscription Expiry Date',
+        'renew' => 'Renew',
+        'company_details' => 'Company Details',
+        'change_requests' => 'Change Requests'
+    ],
+
     'eligibles' => [
     	'title' => 'Eligibles'
     ],
