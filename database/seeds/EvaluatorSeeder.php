@@ -29,6 +29,18 @@ class EvaluatorSeeder extends Seeder
         }
 
         // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
+        App\Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
+
+        $roles = [
+            [
+                'name'          => 'evaluator',
+                'display_name'  => 'Evaluator',
+                'description'   => 'Evaluator.',
+            ]
+        ];
+
+        foreach ($roles as $roleData) {
+            RolesRepository::create(new Role(), $roleData);
+        }
     }
 }

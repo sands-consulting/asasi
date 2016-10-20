@@ -31,7 +31,7 @@ class EvaluationSeeder extends Seeder
         }
 
         // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
+        App\Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
         App\Role::find(3)->permissions()->attach(Permission::whereGroup('evaluation')->lists('id')->toArray());
     }
 }

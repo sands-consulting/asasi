@@ -1,14 +1,15 @@
 <?php
 
+use App\Permission;
+use App\Role;
 use App\User;
 use App\Vendor;
 use App\VendorType;
-use App\Permission;
-use App\Role;
+use App\Repositories\PermissionsRepository;
+use App\Repositories\RolesRepository;
 use App\Repositories\UsersRepository;
 use App\Repositories\VendorsRepository;
 use App\Repositories\VendorTypesRepository;
-use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
 class VendorSeeder extends Seeder
@@ -20,6 +21,7 @@ class VendorSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('user_vendor')->truncate();
         DB::table('vendor_types')->truncate();
         DB::table('vendors')->truncate();
 
@@ -59,16 +61,34 @@ class VendorSeeder extends Seeder
             $perm->roles()->attach(Role::first());
         }
 
+        $roles = [
+            [
+                'name'          => 'vendor',
+                'display_name'  => 'Vendor',
+                'description'   => 'Vendor.',
+            ],
+            [
+                'name'          => 'vendor-admin',
+                'display_name'  => 'Vendor Admin',
+                'description'   => 'Vendor Admin.',
+            ]
+        ];
+
+        foreach ($roles as $roleData) {
+            $role = RolesRepository::create(new Role(), $roleData);
+            $role->permissions()->attach(Permission::where('name', 'access:vendor')->first()->id);
+        }
+
         $vendor_types = [
-            ['SSM', 'Sole Proprietorship'],
-            ['SSM', 'Partnership'],
-            ['SSM', 'Limited Liability Partnership'],
-            ['SSM', 'Private Limited Company'],
-            ['SSM', 'Company Limited by Guarantee'],
-            ['SSM', 'Limited Company'],
-            ['SSM', 'Public Limited Company'],
-            ['SKM', 'Cooperative'],
-            ['ROS', 'Association / Club / Society'],
+            ['SSM',     'Sole Proprietorship'],
+            ['SSM',     'Partnership'],
+            ['SSM',     'Limited Liability Partnership'],
+            ['SSM',     'Private Limited Company'],
+            ['SSM',     'Company Limited by Guarantee'],
+            ['SSM',     'Limited Company'],
+            ['SSM',     'Public Limited Company'],
+            ['SKM',     'Cooperative'],
+            ['ROS',     'Association / Club / Society'],
             ['BAR',     'Law Firm'],
             ['BEM',     'Professional Engineer'],
             ['BQSM',    'Professional Quantity Surveryor'],
@@ -84,28 +104,11 @@ class VendorSeeder extends Seeder
             ]);
         }
 
-        $users = [
-            [
-                'id'        => 2,
-                'name'      => 'Amin Adha',
-                'email'     => 'amin@my-sands.com',
-                'password'  => 'amin123',
-                'status'    => 'active',
-            ],
-        ];
-
-        foreach ($users as $userData) {
-            $userData['password'] = app()->make('hash')->make($userData['password']);
-            UsersRepository::create(new User(), $userData);
-        }
-
-        Role::find(2)->permissions()->attach(3);
-
-        VendorsRepository::create(new Vendor, [
-            'name' => 'Sands Consulting Sdn Bhd',
-            'registration_number' => 'M123123',
-            'tax_1_number' => '1231234',
-            'tax_2_number' => '1231235',
+        $vendor = VendorsRepository::create(new Vendor, [
+            'name' => 'Thera Future Inc.',
+            'registration_number' => '123456-TF',
+            'tax_1_number' => '123456',
+            'tax_2_number' => '789012',
             'address_1' => '11-2-2A, Jalan Pusat Bandar 2A',
             'address_2' => 'Seksyen 9',
             'address_postcode' => '43650',
@@ -120,15 +123,23 @@ class VendorSeeder extends Seeder
             'contact_person_designation' => 'Mr',
             'contact_person_telephone' => '+60123456788',
             'contact_person_email' => 'amin@my-sands.com',
-            'capital_currency' => '1000000',
+            'capital_currency' => 'MYR',
             'capital_authorized' => '500000',
             'capital_paid_up' => '250000',
             'type_id' => 4,
-            'user_id' => 2,
-            'status' => 'pending',
+            'status' => 'active',
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'deleted_at' => null
         ]);
+
+        
+        $user = UsersRepository::create(new User(), [
+            'name'      => 'Amin Adha',
+            'email'     => 'amin@my-sands.com',
+            'password'  => app()->make('hash')->make('amin1234'),
+            'status'    => 'active',
+        ]);
+        $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->lists('id')->toArray());
+        $vendor->users()->attach($user);
     }
 }

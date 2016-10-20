@@ -38,23 +38,10 @@ class AsasiSeeder extends Seeder
 
         $roles = [
             [
-                'id'            => 1,
                 'name'          => 'admin',
                 'display_name'  => 'Admin',
                 'description'   => 'System Administrator. Should be able to do everything.',
-            ],
-            [
-                'id'            => 2,
-                'name'          => 'vendor',
-                'display_name'  => 'Vendor',
-                'description'   => 'Vendor. Fixed role for vendor.',
-            ],
-            [
-                'id'            => 3,
-                'name'          => 'evaluator',
-                'display_name'  => 'Evaluator',
-                'description'   => 'Evaluator.',
-            ],
+            ]
         ];
 
         foreach ($roles as $roleData) {
@@ -144,11 +131,11 @@ class AsasiSeeder extends Seeder
             ]);
         }
 
-        Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
+        Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
 
         OrganizationsRepository::create(new Organization, [
-            'name' => 'Setiausaha Kerajaan Selangor',
-            'short_name' => 'SUK SELANGOR'
+            'name' => 'ACME Inc.',
+            'short_name' => 'ACME'
         ]);
 
         $places = [

@@ -39,7 +39,7 @@ class NoticeEventSeeder extends Seeder
         }
 
          // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(App\Permission::all()->lists('id')->toArray());
+        App\Role::first()->permissions()->sync(App\Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
         
         $noticeEventTypeData = [
             [
