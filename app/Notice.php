@@ -182,6 +182,10 @@ class Notice extends Model
         return $this->hasMany(EvaluationRequirement::class);
     }
 
+    public function bookmarks()
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
+    }
     /*
      * Helpers
      */

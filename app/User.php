@@ -40,9 +40,18 @@ class User extends Authenticatable
         'status'
     ];
 
+    /*
+     * Relationship
+     */
+    
     public function logs()
     {
         return $this->morphMany(UserLog::class, 'actionable');
+    }
+
+    public function bookmarks()
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
     public function blacklists()
@@ -228,7 +237,7 @@ class User extends Authenticatable
         // Rules to allow buying notice
         return $this->subscriptions()->active()->count() > 0;
     }
-
+    
     /**
      * Boot
      */

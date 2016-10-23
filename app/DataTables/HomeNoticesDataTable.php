@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Notice;
+use Auth;
 
 class HomeNoticesDataTable extends DataTable
 {
@@ -11,13 +12,14 @@ class HomeNoticesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                // return view('admin.notices._index_actions', compact('notice'));
+                return view('home._index_notice_actions', compact('notice'));
             })
-            ->addColumn('code', function() {
-                return '-';
+            ->addColumn('code', function($notice) {
+                return '-'; 
             })
             ->editColumn('name', function($notice) {
-                $name  = "<span class='text-header'>$notice->number</span> <br />";
+                $name = "<span class='text-header'>$notice->number</span> <br />";
+                $name .= "<span class='text-header text-italic'>" . $notice->organization->short_name . "</span> <br />";
                 $name .= link_to_route('admin.notices.show', $notice->name, $notice->id);
                 return $name;
             })
@@ -54,7 +56,7 @@ class HomeNoticesDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
+                    ->addAction(['width' => '20%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -65,7 +67,7 @@ class HomeNoticesDataTable extends DataTable
                 'data' => 'name',
                 'name' => 'name',
                 'title' => trans('notices.attributes.name'),
-                'width' => '40%'
+                'width' => '30%'
             ],
             [
                 'data' => 'code',
@@ -89,7 +91,7 @@ class HomeNoticesDataTable extends DataTable
                 'data' => 'price',
                 'name' => 'price',
                 'title' => trans('notices.attributes.price'),
-                'width' => '15%'
+                'width' => '10%'
             ],
         ];
     }
@@ -104,6 +106,7 @@ class HomeNoticesDataTable extends DataTable
         $data = parent::getBuilderParameters();
         $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
+
         return $data;
     }
 
