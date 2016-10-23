@@ -122,7 +122,9 @@ class Notice extends Model
 
     public function allocations()
     {
-        return $this->hasMany(NoticeAllocation::class);
+        return $this->belongsToMany(Allocation::class)
+            ->withPivot('amount')
+            ->withTimestamps();
     }
 
     public function type()

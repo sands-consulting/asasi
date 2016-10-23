@@ -73,9 +73,23 @@ $(function() {
             $(this).find('option:first').attr('selected', 'selected');
           });
         }
-      }
+      },
+      perform_filter: function(e) {
+          e.preventDefault();
+          var filter = $(e.currentTarget).data('filter');
+          this.table.ajax.url(this.url + '?filter=' + filter).load();
+          this.table.draw();
+      },
 		}
   });
+
+  // Equal Height
+  var heights = $(".row-eq-height .panel-body").map(function() {
+    return $(this).height();
+  }).get()
+  var maxHeight = Math.max.apply(null, heights);
+  $(".row-eq-height .panel-body").height(maxHeight);
+
 });
 
 // Javascript to enable link to tab

@@ -47,36 +47,86 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-	<div class="panel-heading">
-		<h5 class="panel-title">{{ $allocation->name }}</h5>
-		<div class="heading-elements">
-			@include('admin.allocations._index_status')
+<div id="allocation-show">
+	<div class="row row-eq-height form-datatable-search">
+		<div class="col-sm-8">
+			<div class="panel panel-flat">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-9">
+							<div class="row mb-20">
+								<div class="col-sm-12">
+									<span class="text-muted">{{ $allocation->organization->name }}</span><br>
+									<div class="text-left">{{ $allocation->name }}</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<span class="text-muted">Year</span><br>
+									<div class="text-left">2016</div>
+								</div>
+								<div class="col-sm-6">
+									<span class="text-muted">{{ trans('allocations.attributes.created_at') }}</span><br>
+									<div class="text-left">{{ $allocation->created_at }}</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3 text-right">
+							<label class="badge badge-warning"><span class="text-size-large">{{ $allocation->type->name }} </span></label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="panel panel-flat bg-slate-300">
+				<div class="panel-body">
+					<span class="text-size-large">{{ trans('allocations.views.show.panels.total') }}</span><br>
+					<div class="text-center text-size-xlarge">RM {{ $allocation->value }}</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<a href="#" v-on:click="perform_filter($event)" data-filter="usage">
+				<div class="panel panel-flat border-bottom-orange-600">
+					<div class="panel-body valign-middle">
+						<span class="text-muted text-size-large">Usage</span><br>
+						<div class="text-center text-size-xlarge text-orange-600">RM 42,000</div>
+					</div>
+				</div>	
+			</a>
+		</div>
+		<div class="col-sm-4">
+			<a href="#" v-on:click="perform_filter($event)" data-filter="allocated">
+				<div class="panel panel-flat border-bottom-teal-400 form-datatable-search">
+					<div class="panel-body valign-middle">
+						<span class="text-muted text-size-large">Allocated</span><br>
+						<div class="text-center text-size-xlarge text-teal-400">RM 8,000</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-sm-4">
+			<div class="panel panel-flat border-bottom-blue-300">
+				<div class="panel-body valign-middle">
+					<span class="text-muted text-size-large">Balance</span><br>
+					<div class="text-center text-size-xlarge text-blue-300">RM 0</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="table-responsive">
-		<table class="table">
-			<tr>
-				<th class="col-xs-3">{{ trans('allocations.attributes.value') }}</th>
-				<td>{{ number_format($allocation->value, 2) }}</td>
-			</tr>
-			<tr>
-				<th class="col-xs-3">{{ trans('allocations.attributes.type') }}</th>
-				<td>{{ $allocation->type->name }}</td>
-			</tr>
-			<tr>
-				<th class="col-xs-3">{{ trans('allocations.attributes.organization') }}</th>
-				<td>{{ $allocation->organization->name }}</td>
-			</tr>
-			<tr>
-				<th class="col-xs-3">{{ trans('allocations.attributes.created_at') }}</th>
-				<td>{{ $allocation->created_at->format('d/m/Y H:i:s') }}</td>
-			</tr>
-			<tr>
-				<th class="col-xs-3">{{ trans('allocations.attributes.updated_at') }}</th>
-				<td>{{ $allocation->updated_at->format('d/m/Y H:i:s') }}</td>
-			</tr>
-		</table>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-flat">
+				{!! $dataTable->table() !!}
+			</div>
+		</div>
 	</div>
 </div>
+@endsection
+
+
+@section('scripts')
+{!! $dataTable->scripts() !!}
 @endsection

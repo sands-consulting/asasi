@@ -32,6 +32,9 @@ return [
             'status' => 'By Status'
         ],
         'show' => [
+            'panels' => [
+                'total' => 'Total',
+            ]
         ],
         'create' => [
             'title' => 'New Allocation',

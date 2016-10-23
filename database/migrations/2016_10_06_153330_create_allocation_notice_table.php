@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNoticeAllocationsTable extends Migration
+class CreateAllocationNoticeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateNoticeAllocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notice_allocations', function (Blueprint $table) {
+        Schema::create('allocation_notice', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('allocation_id');
             $table->unsignedInteger('notice_id');
@@ -22,7 +22,7 @@ class CreateNoticeAllocationsTable extends Migration
 
             $table->foreign('allocation_id')
                 ->references('id')
-                ->on('notices')
+                ->on('allocations')
                 ->onDelete('cascade');
 
             $table->foreign('notice_id')
@@ -40,7 +40,7 @@ class CreateNoticeAllocationsTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::drop('notice_allocations');
+        Schema::drop('allocation_notice');
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -51,6 +51,25 @@ class Allocation extends Model
     }
 
     /*
+     * Relationship
+     */
+    
+    public function notices()
+    {
+        return $this->belongsToMany(Notice::class)
+            ->withPivot('amount')
+            ->withTimestamps();;
+    }
+    /*
+     * Mutators
+     */
+    
+    public function getValueAttribute($value)
+    {
+        return number_format($value, '0', '.', ',');
+    }
+
+    /*
      * Helpers
      */
     

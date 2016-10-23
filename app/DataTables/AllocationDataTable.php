@@ -16,9 +16,6 @@ class AllocationDataTable extends DataTable
             ->editColumn('name', function($allocation) {
                 return link_to_route('admin.allocations.show', $allocation->name, $allocation->id);
             })
-             ->editColumn('value', function($allocation) {
-                return number_format($allocation->value, 2);
-            })
             ->editColumn('status', function($allocation) {
                 return trans('statuses.' . $allocation->status);
             })
@@ -39,7 +36,7 @@ class AllocationDataTable extends DataTable
         $query = Allocation::with('organization', 'type');
         $query = $query->leftJoin('allocation_types', 'allocations.type_id', '=', 'allocation_types.id');
         $query = $query->leftJoin('organizations', 'allocations.organization_id', '=', 'organizations.id');
-        $query = $query->select('allocations.*', 'allocation_types.name', 'organizations.name');
+        $query = $query->select('allocations.*', 'allocation_types.name as allocation_type_name', 'organizations.name as organization_name');
 
         if($this->datatables->request->input('q', null))
         {
@@ -63,7 +60,7 @@ class AllocationDataTable extends DataTable
         $columns = [
             [
                 'data'  => 'name',
-                'name'  => 'allocations.name',
+                'name'  => 'name',
                 'title' => trans('allocations.attributes.name'),
             ],
             [
@@ -72,8 +69,8 @@ class AllocationDataTable extends DataTable
                 'title' => trans('allocations.attributes.value')
             ],
             [
-                'data'  => 'type',
-                'name'  => 'allocation_types.name',
+                'data'  => 'allocation_type_name',
+                'name'  => 'allocation_type_name',
                 'title' => trans('allocations.attributes.type')
             ]
         ];
@@ -81,8 +78,8 @@ class AllocationDataTable extends DataTable
         if(!$this->user->hasPermission('allocation:organziation'))
         {
             $columns[] = [
-                'data'  => 'organization',
-                'name'  => 'organizations.name',
+                'data'  => 'organization_name',
+                'name'  => 'organization_name',
                 'title' => trans('allocations.attributes.organization')
             ];
         }
@@ -92,6 +89,12 @@ class AllocationDataTable extends DataTable
             'name'  => 'allocations.status',
             'title' => trans('allocations.attributes.status'),
         ];
+        // $columns[] = [
+        //     'data' => 'created_at',
+        //     'name' => 'allocations.created_at',
+        //     'title' => trans('allocations.attributes.created_at')
+        // ];
+        
         $columns[] = [
             'data' => 'created_at',
             'name' => 'allocations.created_at',

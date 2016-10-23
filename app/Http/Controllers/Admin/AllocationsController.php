@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Allocation;
 use App\Organization;
 use App\DataTables\AllocationDataTable;
+use App\DataTables\AllocationNoticeDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserLogsDataTable;
 use App\Http\Requests\AllocationRequest;
@@ -20,9 +21,9 @@ class AllocationsController extends Controller
         return $table->render('admin.allocations.index');
     }
 
-    public function show(Allocation $allocation)
+    public function show(Allocation $allocation, AllocationNoticeDataTable $table)
     {
-        return view('admin.allocations.show', compact('allocation'));
+        return $table->forId($allocation->id)->render('admin.allocations.show', compact('allocation'));
     }
 
     public function create(Request $request)
@@ -34,12 +35,9 @@ class AllocationsController extends Controller
     {
         $inputs = $request->only('name', 'value', 'status', 'type_id');
 
-        if($request->user()->hasPermission('allocation:organization'))
-        {
+        if($request->user()->hasPermission('allocation:organization')) {
             $inputs['organization_id'] = $request->user()->organizations()->first()->id;
-        }
-        else
-        {
+        } else {
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 

@@ -12,14 +12,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (!$notice->allocations->isEmpty())
+                    @if ($notice->allocations)
                         <tr class="table-empty" style="display:none">
                             <td colspan="4">
                                 {!! trans('notice-allocations.views.create.table.empty') !!}
                             </td>
                         </tr>
-                        @foreach($notice->allocations as $noticeAllocation)
-                        <tr data-id="{{ $noticeAllocation->id }}">
+                        @foreach($notice->allocations as $allocation)
+                        <tr data-id="{{ $allocation->id }}">
                             <td>
                                 <a href="#" class="myeditable" 
                                     data-type="select"
@@ -28,17 +28,17 @@
                                     data-onblur="submit"
                                     data-name="allocation_id" 
                                     data-source="{{ App\Allocation::options() }}" 
-                                    data-pk="{{ $noticeAllocation->id }}"
-                                    data-value="{{ $noticeAllocation->allocation_id }}"
-                                    data-url="{{ route('api.notice-allocations.update') }}">{{ $noticeAllocation->allocation->name }}</a>
+                                    data-pk="{{ $allocation->id }}"
+                                    data-value="{{ $allocation->id }}"
+                                    data-url="{{ route('api.notice-allocations.update', $notice->id) }}">{{ $allocation->name }}</a>
                             </td>
                             <td>
                                 <a href="#" class="myeditable" 
                                     data-type="text" 
                                     data-mode="inline"
                                     data-name="amount" 
-                                    data-pk="{{ $noticeAllocation->id }}" 
-                                    data-url="{{ route('api.notice-allocations.update') }}">{{ $noticeAllocation->amount }}</a>
+                                    data-pk="{{ $allocation->id }}" 
+                                    data-url="{{ route('api.notice-allocations.update', $notice->id) }}">{{ $allocation->pivot->amount }}</a>
                             </td>
                             <td class="action-column">
                                 <button type="button" class="btn btn-xs btn-danger btn-remove" data-url="/api/notice-allocations/delete/"><i class="icon-cross2"></i></button>
@@ -74,7 +74,7 @@
                     data-showbuttons="false"
                     data-name="allocation_id"
                     data-source="{{ App\Allocation::options() }}"
-                    data-url="{{ route('api.notice-allocations.update') }}"></a>
+                    data-url="{{ route('api.notice-allocations.update', $notice->id) }}"></a>
             </td>
             <td>
                 <a href="#" class="myeditable" 
@@ -82,7 +82,7 @@
                     data-onblur="submit"
                     data-type="text"
                     data-name="amount" 
-                    data-url="{{ route('api.notice-allocations.update') }}"></a>
+                    data-url="{{ route('api.notice-allocations.update', $notice->id) }}"></a>
             </td>
             <td class="action-column">
                 <button type="button" class="btn btn-xs btn-success btn-save" data-table="#tblNoticeAllocations" data-url="{{ route('api.notice-allocations.store', $notice->id) }}"><i class="icon-checkmark3"></i></button>

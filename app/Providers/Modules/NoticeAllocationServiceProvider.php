@@ -26,7 +26,7 @@ class NoticeAllocationServiceProvider extends ServiceProvider
                 'as' => 'api.notice-allocations.store',
                 'uses' => 'NoticeAllocationsController@store'
             ]);
-            $router->post('notice-allocations/update', [
+            $router->post('notice-allocations/{notices}/update', [
                 'as' => 'api.notice-allocations.update',
                 'uses' => 'NoticeAllocationsController@update'
             ]);

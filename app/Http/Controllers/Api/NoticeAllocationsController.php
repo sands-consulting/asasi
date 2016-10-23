@@ -20,23 +20,21 @@ class NoticeAllocationsController extends Controller
         );
 
         // Fixme: temp solution
-        $input['notice_id'] = $notice->id;
-        $noticeAllocation = NoticeAllocationsRepository::create(new NoticeAllocation, $input);
-
-        return response()->json($noticeAllocation);
+        $allocation = $notice->allocations()->attach($input['allocation_id'], ['amount' => $input['amount']]);
+        return response()->json($allocation);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Notice $notice)
     {
         $id = $request->get('pk');
         $name = $request->get('name');
         $value = $request->get('value');
 
-        $noticeAllocation = NoticeAllocation::find($id);
-        $noticeAllocation->$name = is_array($value) ? $value[0]:$value;
-        $noticeAllocation->save();
+        $allocation[$name] = is_array($value) ? $value[0]:$value;
+        $notice->allocations()->updateExistingPivot($id, $allocation);
 
-        return response()->json($noticeAllocation);
+
+        return response()->json($allocation);
     }
 
     public function delete(NoticeAllocation $noticeAllocation)

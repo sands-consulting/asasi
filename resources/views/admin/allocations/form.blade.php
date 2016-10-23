@@ -11,7 +11,7 @@
 	->required() !!}
 @if(!Auth::user()->hasPermission('allocation:organization'))
 {!! Former::select('organization_id')
-	->label('allocations.attributes.status')
+	->label('allocations.attributes.organization')
 	->options(\App\Organization::getNestedList('name', 'id', '-'), null)
 	->addClass('select2')
 	->required() !!}
