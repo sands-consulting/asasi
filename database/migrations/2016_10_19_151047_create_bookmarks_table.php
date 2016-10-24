@@ -18,6 +18,7 @@ class CreateBookmarksTable extends Migration
             $table->string('bookmarkable_id');
             $table->unsignedInteger('user_id');
             $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 
