@@ -20,80 +20,73 @@
     @endif
 @stop
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
-            {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
-            {!! Former::populate($submission) !!}
-            {!! Former::hidden('submission_id', $submission->id) !!}
-            {!! Former::hidden('type', 'commercial') !!}
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-7"> 
-                            {!! Former::text('price')
-                                ->label('Offered Price')
-                                ->prepend('RM')
-                                ->required() !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-lg">
-                        <thead>
-                            <tr>
-                                <th width="5%">#</th>
-                                <th>Title</th>
-                                <th width="30%"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (!$requirements->isEmpty())
-                                <?php $i = 1; ?>
-                                @foreach($requirements as $requirement)
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $requirement->title }}</td>
-                                    <td class="text-center">
-                                        {!! Former::hidden('submission_detail_id['. $requirement->id .']')
-                                            ->value($requirement->details->id) !!}
-                                        @if($requirement->require_file)
-                                        
-                                            {!! Former::file('file['. $requirement->id .']')
-                                                ->label(false)
-                                                ->addClass('file-styled') !!}
-                                            
-                                            @if($requirement->details->files()->first())
-                                                <a href="{{ $requirement->details->files()->first()->url }}" target="_blank" class="btn btn-success btn-xs">View File</a>
-                                            @endif
-                                        @else
-                                            @if($requirement->details->value == 1) <?php $checked = 'checked'; ?>
-                                            @else <?php $checked = false; ?>
-                                            @endif
-                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" {{ $checked }}>
-                                            
-                                        @endif
-                                    </td>
-                                </tr>
-                                <?php $i++; ?>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <div class="heading-elements">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <a href="{{ route('notices.submission', $notice->id) }}" class="btn btn-default ml-15">Back</a>
-                                <button type="submit" class="btn bg-blue pull-right">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {!! Former::close() !!}
+    {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
+    {!! Former::populate($submission) !!}
+    {!! Former::hidden('submission_id', $submission->id) !!}
+    {!! Former::hidden('type', 'commercial') !!}
+
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Notice Submission (Commercials)</h5>
         </div>
+        <div class="panel-body">
+            <div class="row is-table-row">
+                <div class="col-sm-1 greyed">
+                    <div class="box text-center">
+                        <input type="checkbox" name="dummy" class="styled" value="" checked>
+                    </div>
+                </div>
+                <div class="col-sm-11">
+                    <div class="box"> 
+                        {!! Former::text('price')
+                                ->label(false)
+                                ->prepend('Offered Price: RM')
+                                ->required() !!}
+                    </div>  
+                </div>
+            </div>
+
+            @foreach($requirements as $requirement)
+                <div class="row is-table-row">
+                    <div class="col-sm-1 greyed">
+                        <div class="box text-center">
+                            {!! Former::hidden('submission_detail_id['. $requirement->id .']')
+                                ->value($requirement->details->id) !!}
+                            @if(!$requirement->require_file)
+                                @if($requirement->details->value == 1) <?php $checked = 'checked'; ?>
+                                @else <?php $checked = false; ?>
+                                @endif
+                                <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" {{ $checked }}>
+                            @else
+                                <input type="checkbox" name="dummy" class="styled" value="" checked>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="box"> 
+                            @if ($requirement->require_file)
+                                {!! Former::file('file['. $requirement->id .']')
+                                    ->label(false)
+                                    ->addClass('file-styled') !!}
+                                
+                                @if($requirement->details->files()->first())
+                                    <a href="{{ $requirement->details->files()->first()->url }}" target="_blank" class="btn btn-success btn-xs">View File</a>
+                                @endif
+                            @endif
+                            {{ $requirement->title }}
+                        </div>  
+                    </div>
+                </div>
+            @endforeach
+
+            <div class="row is-table-row">
+                <div class="col-sm-12">
+                    <a href="{{ route('notices.submission', $notice->id) }}" class="btn btn-default"><span class="p-20">Back</span></a>
+                    <button type="submit" class="btn bg-blue pull-right"><span class="p-20">Save</span></button>
+                </div>
+            </div>
+        </div>
+        
     </div>
+    {!! Former::close() !!}
 @stop

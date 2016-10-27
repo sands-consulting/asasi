@@ -6,6 +6,7 @@ use Auth;
 use App\Http\Requests;
 use App\Notice;
 use App\DataTables\HomeNoticesDataTable;
+use App\DataTables\HomeSubmissionsDataTable;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,9 +16,10 @@ class HomeController extends Controller
         return $table->render('home.index');
     }
 
-    public function submissions(Request $request, HomeNoticesDataTable $table)
+    public function submissions(Request $request, HomeSubmissionsDataTable $table)
     {
-        return $table->render('home.submissions');
+        $vendor = $request->user()->vendor()->first();
+        return $table->forVendor($vendor)->render('home.submissions');
     }
 
     public function awards(Request $request, HomeNoticesDataTable $table)
