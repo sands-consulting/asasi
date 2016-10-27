@@ -1,8 +1,8 @@
 <?php
 
 use App\Permission;
-use App\Evaluation;
-use App\Repositories\SubscriptionsRepository;
+use App\Role;
+use App\Repositories\RolesRepository;
 use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
