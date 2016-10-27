@@ -68,6 +68,7 @@ class User extends Authenticatable
     public function vendor()
     {
         return $this->belongsToMany(Vendor::class)
+            ->withPivot(['status'])
             ->wherePivot('status', 'active');
     }
 

@@ -33,9 +33,9 @@ class PaymentsController extends Controller
             ->with('notice', trans('payments.notices.paid'));
     }
 
-    public function redirect()
+    public function redirect(Request $request)
     {
-        $vendor = Auth::user()->vendor;
+        $vendor = $request->user()->vendor()->first();
         $notices = [];
 
         if (Cart::count() > 0) {

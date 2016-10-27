@@ -25,21 +25,22 @@ class NoticesController extends Controller
         return $table->render('admin.notices.index');
     }
 
-    public function myNotices()
+    public function myNotices(Request $request)
     {
-        $vendor = Auth::user()->vendor;
+        $vendor = $request->user()->vendor()->first();
         $myNotices = $vendor->notices;
 
         return view('notices.my-notices', compact('vendor', 'myNotices'));
     }
 
-    public function submission(Notice $notice)
+    public function submission(Request $request, Notice $notice)
     {
+        $vendor = $request->user()->vendor()->first();
         // check if submission exists
-        $submissions['commercials'] = Submission::where('vendor_id', Auth::user()->vendor->id)
+        $submissions['commercials'] = Submission::where('vendor_id', $vendor->id)
             ->where('type', 'commercials')
             ->first();
-        $submissions['technicals'] = Submission::where('vendor_id', Auth::user()->vendor->id)
+        $submissions['technicals'] = Submission::where('vendor_id', $vendor->id)
             ->where('type', 'technicals')
             ->first();
 
