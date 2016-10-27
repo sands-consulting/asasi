@@ -1,7 +1,11 @@
 <?php
 
+use App\Allocation;
+use App\AllocationType;
 use App\Permission;
 use App\Role;
+use App\Repositories\AllocationsRepository;
+use App\Repositories\AllocationTypesRepository;
 use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
@@ -51,6 +55,54 @@ class AllocationSeeder extends Seeder
                 ]);
                 $perm->roles()->attach(Role::first());
             }
+        }
+
+        $allocationTypeData = [
+            [
+                'name' => 'Developments',
+                'status' =>  'active'
+            ],
+            [
+                'name' => 'Operations',
+                'status' =>  'active'
+            ],
+            [
+                'name' => 'Corporate Communications',
+                'status' =>  'active'
+            ],
+        ];
+
+        foreach ($allocationTypeData as $allocationType) {
+            AllocationTypesRepository::create(new AllocationType(), $allocationType);
+        }
+
+        $allocationData = [
+            [
+                'name' => 'Information Communication Technology',
+                'value' => '500000',
+                'type_id' =>  1,
+                'organization_id' => 1,
+                'status' =>  'active'
+            ],
+            [
+                'name' => 'Human Resources',
+                'value' => '700000',
+                'type_id' =>  2,
+                'organization_id' => 1,
+                'status' =>  'active'
+            ],
+            [
+                'name' => 'Sales & Marketing',
+                'value' => '1000000',
+                'type_id' =>  3,
+                'organization_id' => 1,
+                'status' =>  'active'
+            ],
+        ];
+
+        foreach ($allocationData as $allocation) {
+            $allocation = AllocationsRepository::create(new Allocation(), $allocation);
+            $allocation->notices()->attach(1, ['amount' => '100000']);
         }
     }
 }
