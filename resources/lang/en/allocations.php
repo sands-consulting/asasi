@@ -34,6 +34,10 @@ return [
         'show' => [
             'panels' => [
                 'total' => 'Total',
+                'usage' => 'Usage',
+                'allocated' => 'Allocated',
+                'balance' => 'Balance',
+                'notices' => 'Notices',
             ]
         ],
         'create' => [

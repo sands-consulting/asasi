@@ -28,7 +28,8 @@ $(function() {
 			q: {},
 			table: null,
 			url: null,
-      searching: false
+      searching: false,
+      panel_color: 'bg-slate-300'
 		},
 		computed: {
 			can_search: function() {
@@ -75,10 +76,11 @@ $(function() {
         }
       },
       perform_filter: function(e) {
-          e.preventDefault();
           var filter = $(e.currentTarget).data('filter');
+          var color = $(e.currentTarget).data('color');
           this.table.ajax.url(this.url + '?filter=' + filter).load();
           this.table.draw();
+          this.panel_color = 'bg-' + color;
       },
 		}
   });

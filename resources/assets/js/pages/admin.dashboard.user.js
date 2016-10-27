@@ -10,14 +10,14 @@ $(function () {
       r: 4
     },
     color: {
-      pattern: ['#E53935', '#3949AB']
+      pattern: ['#f39c12']
     },
     data: {
       x: 'label',
       url: '/api/dashboard/chart-login-activity',
       mimeType: 'json',
       types: {
-        data: 'area-spline'
+        logins: 'area-spline'
       }
     },
     axis: {
