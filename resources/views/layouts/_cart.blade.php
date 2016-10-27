@@ -21,7 +21,7 @@
 						<span class="media-annotation pull-right">MYR {{ $cart->price }}</span>
 					</a>
 
-					<span class="text-muted">{{ str_limit($cart->options->description, 60) }}</span>
+					{{-- <span class="text-muted">{{ str_limit($cart->options->description, 30) }}</span> --}}
 				</div>
 			</li>
 			@empty

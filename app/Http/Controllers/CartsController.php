@@ -16,12 +16,12 @@ class CartsController extends Controller
 
     public function add($item)
     {
-        $cartItem = Cart::add($item->id, $item->name, 1, $item->price, ['description' => $item->description]);
+        $cartItem = Cart::add($item->id, $item->name, 1, $item->price, ['number' => $item->number,'description' => $item->description]);
         $cartItem->associate('Notice');
 
         return redirect()
             ->back()
-            ->with('notice', trans('carts.notices.added', ['name' => $item->name]));
+            ->with('notice', trans('carts.notices.added', ['name' => $item->number]));
     }
 
     public function remove($rowId)
@@ -30,7 +30,7 @@ class CartsController extends Controller
         Cart::remove($rowId);
         return redirect()
             ->route('carts.index')
-            ->with('notice', trans('carts.notices.removed', ['name' => $item->name]));
+            ->with('notice', trans('carts.notices.removed', ['name' => $item->options->number]));
     }
 
     public function save($cart)

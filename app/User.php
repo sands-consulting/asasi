@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Cache;
+use Cart;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -66,7 +67,8 @@ class User extends Authenticatable
 
     public function vendor()
     {
-        return $this->hasOne(Vendor::class);
+        return $this->belongsToMany(Vendor::class)
+            ->wherePivot('status', 'active');
     }
 
     public function vendors()
@@ -81,7 +83,7 @@ class User extends Authenticatable
 
     public function subscriptions()
     {
-        return $this->hasManyThrough(Subscription::class, Vendor::class);
+        return $this->vendor->first()->subscriptions;
     }
     /*
      * Custom Attributes
@@ -159,6 +161,14 @@ class User extends Authenticatable
         return $this->status != 'suspended';
     }
 
+    public function canAddNoticeToCart(Notice $notice)
+    {
+        $inCart = Cart::content()->search(function($cartItem) use ($notice){
+            return $cartItem->id === $notice->id;
+        });
+
+        return $this->hasSubscription() && !$this->hasBoughtNotice($notice->id) && !$inCart;
+    }
     /*
      * ACL functions
      */
@@ -186,6 +196,21 @@ class User extends Authenticatable
     public function hasAllPermissions($permissions=[])
     {
         return count(array_intersect($this->cachedPermissions(), $permissions)) == count($permissions);
+    }
+
+    public function hasSubscription()
+    {
+        $vendor = $this->vendor()->with('subscriptions')->first();
+        return $vendor->subscriptions->count() > 0;
+    }
+
+    public function hasBoughtNotice($notice)
+    {
+        $vendor = $this->vendor()->with(['notices' => function($query) use ($notice) {
+            return $query->where('notices.id', $notice);
+        }])->first();
+
+        return $vendor->notices->count() > 0;
     }
 
     /*
@@ -230,12 +255,6 @@ class User extends Authenticatable
     public static function options()
     {
         return static::lists('name','id')->toArray();
-    }
-
-    public function canBuy()
-    {
-        // Rules to allow buying notice
-        return $this->subscriptions()->active()->count() > 0;
     }
     
     /**
