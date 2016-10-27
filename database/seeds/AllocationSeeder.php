@@ -53,7 +53,8 @@ class AllocationSeeder extends Seeder
                     'name'          => $group . ':' . $action,
                     'description'   => $description
                 ]);
-                $perm->roles()->attach(Role::first());
+                if ($action != 'oraganization')
+                    $perm->roles()->attach(Role::first());
             }
         }
 

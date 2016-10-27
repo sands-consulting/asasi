@@ -140,6 +140,6 @@ class VendorSeeder extends Seeder
             'status'    => 'active',
         ]);
         $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->lists('id')->toArray());
-        $vendor->users()->attach($user);
+        $vendor->users()->attach($user, ['status' => 'active']);
     }
 }

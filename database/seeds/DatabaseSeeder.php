@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NoticeTypeSeeder::class);
         $this->call(NoticeEventSeeder::class);
         $this->call(NoticeEventTypeSeeder::class);
+        $this->call(SubmissionSeeder::class);
         $this->call(PackageSeeder::class);
         $this->call(VendorSeeder::class);
         $this->call(SettingSeeder::class);

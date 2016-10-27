@@ -46,8 +46,8 @@ class NoticeSeeder extends Seeder
 
         $noticeData = [
             [
-                'name' => 'Notice Tender',
-                'number' => 'NT00001',
+                'name' => 'SEBUT HARGA MEMBEKAL DAN MENGHANTAR BAHAN BINAAN, PERALATAN MENTERNAK, BAKA TERNAKAN, MAKANAN TERNAKAN DAN PELBAGAI BAGI PESERTA GENERASI MUDA (AGROGEMS) TAHUN 2016 DI BAWAH JABATAN PERKHIDMATAN VETERINAR NEGERI SELANGOR',
+                'number' => 'JPV-SEL(S)400/61/73',
                 'description' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'rules' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'price' =>  '250.00',
@@ -58,11 +58,11 @@ class NoticeSeeder extends Seeder
                 'submission_address' => 'Address 1',
                 'notice_type_id' => '1',
                 'organization_id' => '1',
-                'status' => 'draft'
+                'status' => 'published'
             ],
             [
-                'name' => 'Notice Quotation',
-                'number' => 'NQ00001',
+                'name' => 'KERJA-KERJA PENSTABILAN TEBING DI PEJABAT JURUTERA DAERAH KUALA LANGAT SELANGOR DARUL EHSAN',
+                'number' => 'JKR/K.LGT/BIL001/2016',
                 'description' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'rules' =>  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eveniet aspernatur cum voluptas ipsam nostrum explicabo! Sunt dignissimos architecto numquam modi. Deserunt, impedit, recusandae. Quod itaque necessitatibus fugit quas veritatis.',
                 'price' =>  '150.00',
