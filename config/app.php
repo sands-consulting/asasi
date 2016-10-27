@@ -214,6 +214,7 @@ return [
         App\Providers\Modules\NoticeCategoriesServiceProvider::class,
         App\Providers\Modules\NoticeEventsServiceProvider::class,
         App\Providers\Modules\NoticeAllocationServiceProvider::class,
+        App\Providers\Modules\NotificationsServiceProvider::class,
         App\Providers\Modules\QualificationCodesServiceProvider::class,
         App\Providers\Modules\SubscriptionsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,

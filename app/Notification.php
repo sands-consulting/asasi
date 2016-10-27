@@ -15,9 +15,11 @@ class Notification extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'description',
+        'content',
         'link',
-        'news_id',
+        'item_type',
+        'item_id',
+        'user_id',
         'status'
     ];
 
@@ -26,9 +28,24 @@ class Notification extends Model
     ];
 
     protected $dates = [
+        'created_at',
+        'updated_at',
         'read_at'
     ];
 
+    /*
+     * Scope
+     */
+    
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    /*
+     * Relationship
+     */
+    
     public function user()
     {
         return $this->belongsTo(User::class);
