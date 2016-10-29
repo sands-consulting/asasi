@@ -61,12 +61,12 @@
                             <div class="col-sm-2 greyed">
                                 <div class="box text-center">
                                     {!! Former::number('scores['. $evaluationRequirement->id .']')
-                                    ->label(false)
-                                    ->append('/ ' . $evaluationRequirement->full_score)
-                                    ->addClass('text-center')
-                                    ->min(0)
-                                    ->max($evaluationRequirement->full_score)
-                                    ->required() !!}
+                                        ->label(false)
+                                        ->append('/ ' . $evaluationRequirement->full_score)
+                                        ->addClass('text-center')
+                                        ->min(0)
+                                        ->max($evaluationRequirement->full_score)
+                                        ->required() !!}
                                 </div>
                             </div>
                         </div>

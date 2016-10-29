@@ -23,10 +23,10 @@ class VendorsController extends Controller
     public function store(VendorRequest $request)
     {
         $inputs = $request->all();
-        $vendor = VendorsRepository::create(new Vendor, $inputs, ['user_id' => Auth::user()->id]);
+        $vendor = VendorsRepository::create(new Vendor, $inputs, ['user_id' => $request->user()->id]);
 
         return redirect()
-            ->route('home.index')
+            ->route('home')
             ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
     }
 

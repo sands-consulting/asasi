@@ -5,7 +5,7 @@
         <h4><i class="icon-envelop5 position-left"></i> <span class="text-semibold">{{ trans('subscriptions.views.current.title') }}</span></h4>
 
         <ul class="breadcrumb breadcrumb-caret position-right">
-            <li><a href="{{ route('home.index') }}">Home</a></li>
+            <li><a href="{{ route('home') }}">Home</a></li>
             <li class="active">Subscriptions</li>
         </ul>
     </div>
