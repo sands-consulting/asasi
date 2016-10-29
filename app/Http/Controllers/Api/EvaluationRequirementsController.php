@@ -19,10 +19,12 @@ class EvaluationRequirementsController extends Controller
             'sequence',
             'title',
             'full_score',
+            'mandatory',
             'type'
         );
 
         $inputs['notice_id'] = $notice->id;
+        $inputs['mandatory'] = $inputs['mandatory'][0] ?: 0;
         $inputs['evaluation_type_id'] = EvaluationType::whereName($inputs['type'])->first()->id;
 
         $requirement = EvaluationRequirementsRepository::create(new EvaluationRequirement, $inputs);

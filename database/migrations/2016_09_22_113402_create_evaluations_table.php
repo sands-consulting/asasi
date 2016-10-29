@@ -67,6 +67,7 @@ class CreateEvaluationsTable extends Migration
         Schema::create('evaluation_requirements', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sequence')->nullable;
+            $table->boolean('mandatory')->default(0);
             $table->string('title');
             $table->unsignedInteger('full_score')->default(0);
             $table->unsignedInteger('evaluation_type_id');

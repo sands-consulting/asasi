@@ -19,6 +19,7 @@ class EvaluationRequirement extends Model
         'sequence',
         'title',
         'full_score',
+        'mandatory',
         'evaluation_type_id',
         'notice_id',
         'status'

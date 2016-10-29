@@ -21,8 +21,17 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h5 class="panel-title">{{ $notice->number }} - {{ $notice->name }}</h5>
-        <div class="heading-elements">
+        <h4 class="panel-title" style="max-width: 900px"><small style="margin-left: 0px">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</small>
+        <br>{{ $notice->name }}</h4>
+        <div class="heading-elements" style="vertical-align: top; padding-top: 0px">
+            @if ($notice->status == 'published')
+                <span class="label label-success heading-text">
+            @elseif ($notice->status == 'cancelled')
+                <span class="label label-danger heading-text">
+            @else
+                <span class="label label-default heading-text">
+            @endif
+            {{ $notice->status }}</span>
             <ul class="icons-list">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-cog3"></i><span class="caret"></span></a>

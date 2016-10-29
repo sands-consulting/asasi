@@ -8,6 +8,7 @@
                        <th width="5%">Seq</th>
                        <th>Title</th>
                        <th width="15%">Score</th>
+                       <th width="15%">Mandatory</th>
                        <th width="150px">Action</th>
                     </tr>
                 </thead>
@@ -41,6 +42,17 @@
                                     data-url="{{ route('api.evaluation-requirements.update') }}"
                                 >{{ $requirementCommercial->full_score }}</a>
                             </td>
+                            <td>
+                                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                                    data-inputclass="switcher-single"
+                                    data-name="mandatory"
+                                    data-title="Is Mandatory ?" 
+                                    data-source="{'1': 'Yes'}"
+                                    data-value="{{ $requirementCommercial->mandatory }}"
+                                    data-emptytext="No"
+                                    data-pk="{{ $requirementCommercial->id }}"
+                                    data-url="{{ route('api.requirement-commercials.update') }}"></a>
+                            </td>
                             <td class="action-column">
                                 <a href="#" class="btn btn-xs btn-danger btn-remove" data-url="/api/evaluation-requirements/delete/" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross2"></i></a>
                             </td>
@@ -48,13 +60,13 @@
                         @endforeach
                     @else
                         <tr class="table-empty">
-                            <td colspan="4">
+                            <td colspan="5">
                                 {!! trans('requirement-commercials.views.create.table.empty') !!}
                             </td>
                         </tr>
                     @endif
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             <button type="button" class="btn btn-xs btn-info btn-add" data-template="#commercialsRow" data-noticeId="{{ $notice->id }}"><i class="icon-add"></i> Add new row</button>
                         </td>
                     </tr>
@@ -71,6 +83,7 @@
                        <th width="5%">Seq</th>
                        <th>Title</th>
                        <th width="15%">Score</th>
+                       <th width="15%">Mandatory</th>
                        <th width="150px">Action</th>
                     </tr>
                 </thead>
@@ -104,6 +117,17 @@
                                     data-pk="{{ $requirementTechnical->id }}"
                                     data-url="{{ route('api.evaluation-requirements.update') }}">{{ $requirementTechnical->full_score }}</a>
                             </td>
+                            <td>
+                                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                                    data-inputclass="switcher-single"
+                                    data-name="mandatory"
+                                    data-title="Is Mandatory ?" 
+                                    data-source="{'1': 'Yes'}"
+                                    data-value="{{ $requirementTechnical->mandatory }}"
+                                    data-emptytext="No"
+                                    data-pk="{{ $requirementTechnical->id }}"
+                                    data-url="{{ route('api.evaluation-requirements.update') }}"></a>
+                            </td>
                             <td class="action-column">
                                 <a href="#" class="btn btn-xs btn-danger btn-remove" data-url="/api/evaluation-requirements/delete/" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross2"></i></a>
                             </td>
@@ -111,13 +135,13 @@
                         @endforeach
                     @else
                         <tr class="table-empty">
-                            <td colspan="4">
+                            <td colspan="5">
                                 {!! trans('requirement-commercials.views.create.table.empty') !!}
                             </td>
                         </tr>
                     @endif
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             <button type="button" class="btn btn-xs btn-info btn-add" data-template="#technicalsRow" data-noticeId="{{ $notice->id }}"><i class="icon-add"></i> Add new row</button>
                         </td>
                     </tr>
@@ -152,6 +176,15 @@
                     data-url="{{ route('api.evaluation-requirements.update') }}"
                 ></a>
             </td>
+            <td>
+                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                    data-inputclass="switcher-single"
+                    data-name="mandatory"
+                    data-title="Is Mandatory ?" 
+                    data-source="{'1': 'Yes'}"
+                    data-emptytext="No"
+                    data-url="{{ route('api.evaluation-requirements.update') }}"></a>
+            </td>
             <td class="action-column">
                 <button type="button" class="btn btn-xs btn-success btn-save" data-table="#tblCommReq" data-url="{{ route('api.evaluation-requirements.store', 
                     [$notice->id, 'type' => 'Commercials']) }}"><i class="icon-checkmark3"></i></button>
@@ -182,6 +215,15 @@
                     data-name="full_score"
                     data-url="{{ route('api.evaluation-requirements.update') }}"
                 ></a>
+            </td>
+            <td>
+                <a href="#" class="myeditable myeditable-switchery" data-type="switchery"
+                    data-inputclass="switcher-single"
+                    data-name="mandatory"
+                    data-title="Is Mandatory ?" 
+                    data-source="{'1': 'Yes'}"
+                    data-emptytext="No"
+                    data-url="{{ route('api.evaluation-requirements.update') }}"></a>
             </td>
             <td class="action-column">
                 <button type="button" class="btn btn-xs btn-success btn-save" data-table="#tblTechReq" data-url="{{ route('api.evaluation-requirements.store',
