@@ -17,10 +17,10 @@
 <div class="row">
 	<div class="form-group col-xs-12">
 		<label class="control-label">{{ trans('roles.attributes.permissions') }}</label>
-		<div class="row">
+		<div class="row row-eq-height">
 		@foreach(\App\Permission::all()->groupBy('group') as $group => $perms)
 			<div class="col-xs-12 col-sm-6">
-				<div class="panel">
+				<div class="panel eq-element">
 					<div class="panel-heading bg-blue-700">{{ str_titleize($group) }}</div>
 					<div class="panel-body">
 						<div class="row">

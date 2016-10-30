@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Project;
+use Gravatar;
 
 class ProjectDataTable extends DataTable
 {
@@ -18,8 +19,15 @@ class ProjectDataTable extends DataTable
                 $link .= "<br>" . link_to_route('admin.projects.show', $project->name, $project->id) ." ";
                 return $link;
             })
-            ->editColumn('projects.status', function($project) {
-                return trans('statuses.' . $project->status);
+            ->editColumn('project_progress', function($project) {
+                return view('admin.projects._index_progress', compact('project'));
+            })
+            ->editColumn('project_status', function($project) {
+                return view('admin.projects._index_status', compact('project'));
+            })
+            ->editColumn('project_manager', function($project) {
+                return '<img src="' . Gravatar::src($project->managers()->first()->email, 30) . '" class="img-circle" alt="' . $project->managers()->first()->name . '">';
+
             })
             ->editColumn('projects.created_at', function($project) {
                 return $project->created_at->format('d/m/Y H:i:s');
@@ -32,9 +40,17 @@ class ProjectDataTable extends DataTable
 
     public function query()
     {
-        $query = Project::with('organization');
+        $query = Project::with(['organization', 'vendor', 'users']);
         $query = $query->leftJoin('organizations', 'projects.organization_id', '=', 'organizations.id');
-        $query = $query->select('projects.*', 'organizations.name as organization_name');
+        $query = $query->leftJoin('vendors', 'projects.vendor_id', '=', 'vendors.id');
+        $query = $query->select(
+            'projects.*', 
+            'projects.status as project_status',
+            'projects.progress as project_progress',
+            'organizations.name as organization_name',
+            'projects.id as project_manager',
+            'vendors.name as vendor_name'
+        );
 
         if($this->datatables->request->input('q', null))
         {
@@ -60,29 +76,39 @@ class ProjectDataTable extends DataTable
                 'data'  => 'projects.name',
                 'name'  => 'projects.name',
                 'title' => trans('projects.attributes.name'),
+                'sWidth' => '25%',
             ]
         ];
 
         if(!$this->user->hasPermission('project:organization'))
         {
             $columns[] = [
-                'data'  => 'organization_name',
-                'name'  => 'organizations.name',
-                'title' => trans('projects.attributes.organization')
+                'data'  => 'vendor_name',
+                'name'  => 'vendors.name',
+                'title' => trans('projects.attributes.vendor')
             ];
         }
 
         $columns[] = [
-            'data'  => 'projects.status',
-            'name'  => 'projects.status',
+            'data'  => 'project_progress',
+            'name'  => 'project_progress',
+            'title' => trans('projects.attributes.progress'),
+            'sWidth' => '15%'
+        ];
+
+        $columns[] = [
+            'data'  => 'project_manager',
+            'name'  => 'project_manager',
+            'title' => trans('projects.attributes.managers'),
+            'sClass' => 'text-center'
+        ];
+
+        $columns[] = [
+            'data'  => 'project_status',
+            'name'  => 'project_status',
             'title' => trans('projects.attributes.status'),
         ];
-        // $columns[] = [
-        //     'data' => 'created_at',
-        //     'name' => 'projects.created_at',
-        //     'title' => trans('projects.attributes.created_at')
-        // ];
-        
+
         $columns[] = [
             'data' => 'projects.created_at',
             'name' => 'projects.created_at',

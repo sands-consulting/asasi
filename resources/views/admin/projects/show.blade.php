@@ -61,7 +61,17 @@
                         <a href="{{ route('admin.projects.show', $project->id) }}">{{ $project->name }}</a>
                     </div>
                     <div class="col-sm-2 text-center">
-                        <span class="label label-warning label-rounded text-thin">{{ $project->status }}</span>
+                        @if($project->status == 'completed')
+                        <span class="label label-rounded label-success">
+                        @elseif($project->status == 'ongoing')
+                        <span class="label label-rounded label-warning">
+                        @else
+                        <span class="label label-rounded label-default">
+                        @endif
+
+                        {{ trans('statuses.' . $project->status) }}
+
+                        </span>
                     </div>
                 </div>
                 <div class="row mb-20">

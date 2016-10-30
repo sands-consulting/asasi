@@ -24,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->string('contact_phone');
             $table->string('contact_fax');
             $table->decimal('cost');
+            $table->decimal('progress');
             $table->unsignedInteger('notice_id');
             $table->unsignedInteger('organization_id');
             $table->unsignedInteger('vendor_id');

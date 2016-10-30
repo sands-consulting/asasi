@@ -10,8 +10,9 @@ return [
         'type' => 'Type',
         'organization' => 'Organization',
         'vendor' => 'Vendor',
-        'manager' => 'Manager',
+        'managers' => 'Managers',
         'status' => 'Status',
+        'progress' => 'Progress',
         'created_at' => 'Created At',
         'updated_at' => 'Updated At'
     ],

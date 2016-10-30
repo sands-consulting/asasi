@@ -74,6 +74,7 @@ class ProjectSeeder extends Seeder
                 'contact_phone' => '+60123456789',
                 'contact_fax' => '+60345678912',
                 'cost' => '100000.00',
+                'progress' => '20',
                 'notice_id' =>  1,
                 'organization_id' => 1,
                 'vendor_id' => 1,

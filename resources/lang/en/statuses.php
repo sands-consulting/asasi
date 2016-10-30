@@ -16,4 +16,5 @@ return [
     'incomplete' => 'Incomplete',
     'cancelled' => 'Cancelled',
     'paid' => 'Paid',
+    'ongoing' => 'Ongoing',
 ];
