@@ -85,6 +85,32 @@ class CreateProjectsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
         });
+
+        Schema::create('project_milestones', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('slug');
+            $table->string('name');
+            $table->text('description');
+            $table->datetime('baseline_start');
+            $table->datetime('baseline_end');
+            $table->integer('baseline_duration');
+            $table->datetime('actual_start')->nullable();
+            $table->datetime('actual_end')->nullable();
+            $table->integer('actual_duration')->nullable();
+            $table->decimal('variance')->nullable();
+            $table->boolean('payment_milestone');
+            $table->decimal('cost')->nullable();
+            $table->string('status');
+            $table->unsignedInteger('project_id');
+            $table->unsignedInteger('user_id');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('project_id')
+                ->references('id')
+                ->on('projects')
+                ->onDelete('cascade');
+        });
     }
 
     /**
@@ -94,8 +120,9 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('allocation_project');
         Schema::dropIfExists('project_user');
+        Schema::dropIfExists('allocation_project');
+        Schema::dropIfExists('project_milestones');
         Schema::dropIfExists('projects');
     }
 }

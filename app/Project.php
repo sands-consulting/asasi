@@ -48,28 +48,6 @@ class Project extends Model
      * Relationship
      */
 
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class);
-    }
-
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class)
-            ->withPivot(['position', 'status'])
-            ->withTimestamps();
-    }
-
-    public function logs()
-    {
-        return $this->morphMany(UserLog::class, 'actionable');
-    }
-
     public function canActivate()
     {
         return $this->status != 'active';
@@ -92,6 +70,33 @@ class Project extends Model
     public function notices()
     {
         return $this->belongsTo(Notice::class);
+    }
+
+        public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+            ->withPivot(['position', 'status'])
+            ->withTimestamps();
+    }
+
+    public function milestones()
+    {
+        return $this->hasMany(ProjectMilestone::class);
+    }
+
+    public function logs()
+    {
+        return $this->morphMany(UserLog::class, 'actionable');
     }
 
     /*

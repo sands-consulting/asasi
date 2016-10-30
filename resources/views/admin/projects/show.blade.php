@@ -159,8 +159,9 @@
                 
                 <div class="timeline timeline-left">
                     <div class="timeline-container">
-
-                        <!-- Sales stats -->
+                        
+                        <!-- Milstone -->
+                        @foreach ($project->milestones()->latest(5) as $milestone)
                         <div class="timeline-row">
                             <div class="timeline-icon">
                                 <a href="#">{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}</a>
@@ -168,9 +169,9 @@
 
                             <div class="panel panel-flat timeline-content">
                                 <div class="panel-heading">
-                                    <h6 class="panel-title">Milestone 1<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                                    <h6 class="panel-title">{{ $milestone->name }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
                                     <div class="heading-elements">
-                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated 3 hours ago</span>
+                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated {{ $milestone->updated_at->diffForHumans() }}</span>
 
                                         <ul class="icons-list">
                                             <li><a data-action="reload"></a></li>
@@ -179,86 +180,14 @@
                                 </div>
 
                                 <div class="panel-body">
-                                    Lorem laboriosam provident facere nisi omnis! Aliquid molestias, mollitia alias.
+                                    {{ str_limit($milestone->description, 45) }}
                                 </div>
                             </div>
                         </div>
-                        <!-- /sales stats -->
+                        @endforeach
+                        <!-- /Milestone -->
 
-                        <!-- Sales stats -->
-                        <div class="timeline-row">
-                            <div class="timeline-icon">
-                                <a href="#">{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}</a>
-                            </div>
-
-                            <div class="panel panel-flat timeline-content">
-                                <div class="panel-heading">
-                                    <h6 class="panel-title">Milestone 2<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-                                    <div class="heading-elements">
-                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated 3 hours ago</span>
-
-                                        <ul class="icons-list">
-                                            <li><a data-action="reload"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="panel-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /sales stats -->
-
-                        <!-- Sales stats -->
-                        <div class="timeline-row">
-                            <div class="timeline-icon">
-                                <a href="#">{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}</a>
-                            </div>
-
-                            <div class="panel panel-flat timeline-content">
-                                <div class="panel-heading">
-                                    <h6 class="panel-title">Milestone 2<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-                                    <div class="heading-elements">
-                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated 3 hours ago</span>
-
-                                        <ul class="icons-list">
-                                            <li><a data-action="reload"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="panel-body">
-                                    Lorem ipsum dolor sit amet, sint eum sequi. Fugiat asperiores autem alias..
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /sales stats -->
-
-                        <!-- Sales stats -->
-                        <div class="timeline-row">
-                            <div class="timeline-icon">
-                                <a href="#">{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}</a>
-                            </div>
-
-                            <div class="panel panel-flat timeline-content">
-                                <div class="panel-heading">
-                                    <h6 class="panel-title">Milestone 2<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-                                    <div class="heading-elements">
-                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated 3 hours ago</span>
-
-                                        <ul class="icons-list">
-                                            <li><a data-action="reload"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="panel-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /sales stats -->
+                        
                     </div>
                 </div>
             </div>
