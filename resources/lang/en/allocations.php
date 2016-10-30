@@ -34,7 +34,7 @@ return [
         'show' => [
             'panels' => [
                 'total' => 'Total',
-                'usage' => 'Usage',
+                'reserved' => 'Reserved',
                 'allocated' => 'Allocated',
                 'balance' => 'Balance',
                 'notices' => 'Notices',

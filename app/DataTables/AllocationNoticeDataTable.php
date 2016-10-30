@@ -30,7 +30,7 @@ class AllocationNoticeDataTable extends DataTable
                 })->where('notices.status', '!=', 'awarded');
 
                 break;
-            case 'usage':
+            case 'reserved':
                 $query->whereHas('allocations', function($subquery) {
                     $subquery->where('allocations.id', $this->id);
                 })->where('notices.status', 'awarded');

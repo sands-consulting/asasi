@@ -48,78 +48,80 @@
 
 @section('content')
 <div id="allocation-show">
-	<div class="row row-eq-height form-datatable-search">
-		<div class="col-sm-8">
+	<div class="row">
+		<div class="col-sm-12">
 			<div class="panel panel-flat">
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-sm-9">
-							<div class="row mb-20">
-								<div class="col-sm-12">
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-md-4 col-sm-12">
 									<span class="text-muted">{{ $allocation->organization->name }}</span><br>
 									<div class="text-left">{{ $allocation->name }}</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
+								<div class="col-md-3 col-sm-12">
 									<span class="text-muted">Year</span><br>
 									<div class="text-left">2016</div>
 								</div>
-								<div class="col-sm-6">
+								<div class="col-md-3 col-sm-12">
 									<span class="text-muted">{{ trans('allocations.attributes.created_at') }}</span><br>
 									<div class="text-left">{{ $allocation->created_at }}</div>
 								</div>
+								<div class="col-md-2 col-sm-12 text-right">
+									{{-- <label class="badge badge-warning text-thin"><span class="text-size-large">{{ $allocation->type->name }} </span></label> --}}
+									<span class="label label-warning label-rounded text-thin">{{ $allocation->type->name }}</span>
+								</div>
 							</div>
 						</div>
-						<div class="col-sm-3 text-right">
-							<label class="badge badge-warning"><span class="text-size-large">{{ $allocation->type->name }} </span></label>
-						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="panel panel-flat bg-slate-300">
-				<div class="panel-body">
-					<span class="text-size-large">{{ trans('allocations.views.show.panels.total') }}</span><br>
-					<div class="text-center text-size-xlarge">RM {{ $allocation->value }}</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<a href="#" v-on:click="perform_filter($event)" data-filter="usage">
-				<div class="panel panel-flat border-bottom-orange-600">
-					<div class="panel-body valign-middle">
-						<span class="text-muted text-size-large">Usage</span><br>
-						<div class="text-center text-size-xlarge text-orange-600">RM 42,000</div>
-					</div>
-				</div>	
-			</a>
-		</div>
-		<div class="col-sm-4">
-			<a href="#" v-on:click="perform_filter($event)" data-filter="allocated">
-				<div class="panel panel-flat border-bottom-teal-400 form-datatable-search">
-					<div class="panel-body valign-middle">
-						<span class="text-muted text-size-large">Allocated</span><br>
-						<div class="text-center text-size-xlarge text-teal-400">RM 8,000</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div class="col-sm-4">
-			<div class="panel panel-flat border-bottom-blue-300">
-				<div class="panel-body valign-middle">
-					<span class="text-muted text-size-large">Balance</span><br>
-					<div class="text-center text-size-xlarge text-blue-300">RM 0</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="panel panel-flat">
-				{!! $dataTable->table() !!}
+	<div class="datatable-filter">
+		<div class="row row-eq-height">
+			<div class="col-sm-4">
+				<a href="#" @click.prevent="perform_filter($event)" data-filter="total" data-color="slate-300">
+					<div class="panel panel-flat eq-element bg-slate-300">
+						<div class="panel-body">
+							<span class="text-size-large">{{ trans('allocations.views.show.panels.total') }}</span><br>
+							<div class="text-center text-size-xlarge pt-10">RM {{ $allocation->value }}</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a href="#" @click.prevent="perform_filter($event)" data-filter="allocated" data-color="teal-400">
+					<div class="panel panel-flat eq-element border-bottom-teal-400 form-datatable-search">
+						<div class="panel-body valign-middle">
+							<span class="text-muted text-size-large">{{ trans('allocations.views.show.panels.allocated') }}</span><br>
+							<div class="text-center text-size-xlarge text-teal-400 pt-10">RM 8,000</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a href="#" @click.prevent="perform_filter($event)" data-filter="reserved" data-color="orange-600">
+					<div class="panel panel-flat eq-element border-bottom-orange-600">
+						<div class="panel-body valign-middle">
+							<span class="text-muted text-size-large">{{ trans('allocations.views.show.panels.reserved') }}</span><br>
+							<div class="text-center text-size-xlarge text-orange-600 pt-10">RM 42,000</div>
+						</div>
+					</div>	
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel">
+					<div class="panel-heading" v-bind:class="panel_color">
+						<h6 class="panel-title">{{ trans('allocations.views.show.panels.notices') }}</h6>
+					</div>
+					{{-- <div class="panel-body">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque animi esse temporibus aperiam, tempora veniam commodi voluptate eligendi exercitationem cum. Provident, inventore, doloribus. Dolor quia incidunt, dignissimos eos blanditiis vitae!
+					</div> --}}
+					{!! $dataTable->table() !!}
+				</div>
 			</div>
 		</div>
 	</div>

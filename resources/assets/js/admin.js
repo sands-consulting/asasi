@@ -85,12 +85,28 @@ $(function() {
 		}
   });
 
-  // Equal Height
-  var heights = $(".row-eq-height .panel-body").map(function() {
-    return $(this).height();
-  }).get()
-  var maxHeight = Math.max.apply(null, heights);
-  $(".row-eq-height .panel-body").height(maxHeight);
+  vm_datatable_filter = new Vue({
+    el: '.datatable-filter',
+    data: {
+      data_table: 'dataTableBuilder',
+      table: null,
+      url: null,
+      panel_color: 'bg-slate-300'
+    },
+    ready: function() {
+      this.table = $(this.$el).data('data-table') || window.LaravelDataTables[this.data_table];
+      this.url = this.table.ajax.url() || '';
+    },
+    methods: {
+      perform_filter: function(e) {
+          var filter = $(e.currentTarget).data('filter');
+          var color = $(e.currentTarget).data('color');
+          this.table.ajax.url(this.url + '?filter=' + filter).load();
+          this.table.draw();
+          this.panel_color = 'bg-' + color;
+      },
+    }
+  });
 
   // socket
   // var socket = io('http://prompt.dev:3000');
@@ -116,6 +132,13 @@ $(function() {
       }
   });
 });
+
+// Equal Height
+var heights = $(".row-eq-height .eq-element").map(function() {
+  return $(this).height();
+}).get()
+var maxHeight = Math.max.apply(null, heights);
+$(".row-eq-height .eq-element").height(maxHeight);
 
 // Javascript to enable link to tab
 // var url = document.location.toString();
