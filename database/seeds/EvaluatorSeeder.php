@@ -2,7 +2,9 @@
 
 use App\Permission;
 use App\Role;
+use App\User;
 use App\Repositories\RolesRepository;
+use App\Repositories\UsersRepository;
 use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
@@ -22,25 +24,13 @@ class EvaluatorSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            $perm = PermissionsRepository::create(new Permission(), [
                 'name'        => $permissionData[0],
                 'description' => $permissionData[1],
             ]);
-        }
 
-        // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
-
-        $roles = [
-            [
-                'name'          => 'evaluator',
-                'display_name'  => 'Evaluator',
-                'description'   => 'Evaluator.',
-            ]
-        ];
-
-        foreach ($roles as $roleData) {
-            RolesRepository::create(new Role(), $roleData);
+            // assign all permission to admin role
+            $perm->roles()->attach(Role::first());
         }
     }
 }

@@ -3,8 +3,12 @@
 use App\Permission;
 use App\EvaluationType;
 use App\EvaluationRequirement;
+use App\Role;
+use App\User;
 use App\Repositories\EvaluationTypesRepository;
 use App\Repositories\EvaluationRequirementsRepository;
+use App\Repositories\RolesRepository;
+use App\Repositories\UsersRepository;
 use App\Repositories\PermissionsRepository;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +25,22 @@ class EvaluationSeeder extends Seeder
         DB::table('evaluation_requirements')->truncate();
         DB::table('evaluation_types')->truncate();
 
+        $role = RolesRepository::create(new Role(), [
+            'name'          => 'evaluator',
+            'display_name'  => 'Evaluator',
+            'description'   => 'Evaluator.',
+        ]);
+
+        $user = UsersRepository::create(new User(), [
+            'name'      => 'Evaluator',
+            'email'     => 'evaluator@example.com',
+            'password'  => app()->make('hash')->make('evaluator123'),
+            'status'    => 'active',
+        ]);
+
+        // assign user to role
+        $user->roles()->attach($role);
+
         $permissions = [
             ['evaluation:index', 'List of evaluator\'s notices.'],
             ['evaluation:evaluate', 'Evaluate submisssion.'],
@@ -28,15 +48,18 @@ class EvaluationSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            $perm = PermissionsRepository::create(new Permission(), [
                 'name'        => $permissionData[0],
                 'description' => $permissionData[1],
             ]);
+
+            // assign all permission to admin role
+            $perm->roles()->attach(Role::first());
         }
 
-        // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
-        App\Role::find(3)->permissions()->attach(Permission::whereGroup('evaluation')->lists('id')->toArray());
+        // assign role to permission
+        $role->permissions()->attach(Permission::whereGroup('evaluation')->lists('id')->toArray());
+        $role->permissions()->attach(Permission::whereName('access:admin')->lists('id')->toArray());
 
         // Evaluation Type Data
         $evaluationTypeData = [
