@@ -94,6 +94,7 @@ class CreateEvaluationsTable extends Migration
             $table->integer('score')->nullable();
             $table->text('remark')->nullable();
             $table->unsignedInteger('evaluation_requirement_id');
+            $table->unsignedInteger('submission_id');
             $table->unsignedInteger('user_id');
             $table->nullableTimestamps();
             $table->softDeletes();
@@ -101,13 +102,16 @@ class CreateEvaluationsTable extends Migration
             $table->foreign('evaluation_requirement_id')
                 ->references('id')
                 ->on('evaluation_requirements')
-                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('submission_id')
+                ->references('id')
+                ->on('submissions')
                 ->onDelete('cascade');
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
     }

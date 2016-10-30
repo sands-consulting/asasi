@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\DataTables\EvaluationsDataTable;
-use App\DataTables\EvaluationSubmissionsDataTable;
+use App\DataTables\EvaluationSubmissionDataTable;
 use App\EvaluationRequirement;
 use App\EvaluationScore;
 use App\Submission;
@@ -19,7 +19,7 @@ class EvaluationsController extends Controller
         return $table->render('admin.evaluations.index');
     }
 
-    public function submissions(Request $request, EvaluationSubmissionsDataTable $table, Notice $notice)
+    public function submission(Request $request, EvaluationSubmissionDataTable $table, Notice $notice)
     {
         $inputs = $request->only('type');
         return $table->byNoticeId($notice->id)
@@ -28,13 +28,13 @@ class EvaluationsController extends Controller
             ->render('admin.evaluations.submissions', compact('notice'));
     }
 
-    public function create(Notice $notice)
+    public function create(Notice $notice, Submission $submission)
     {
         $evaluationRequirements = EvaluationRequirement::where('evaluation_type_id', 1)->get();
-        return view('admin.evaluations.create', compact('notice', 'evaluationRequirements'));
+        return view('admin.evaluations.create', compact('notice', 'evaluationRequirements', 'submission'));
     }
 
-    public function store(Request $request, Notice $notice)
+    public function store(Request $request, Notice $notice, Submission $submission)
     {
         $inputs = $request->only('scores');
 
@@ -43,16 +43,24 @@ class EvaluationsController extends Controller
                 'score' => $score,
                 'remark' => null,
                 'evaluation_requirement_id' => $evaluation_requirement_id,
+                'submission_id' => $submission->id,
                 'user_id' => $request->user()->id
             ]);
         }
 
+        $requirements = EvaluationRequirement::where('evaluation_type_id', 1)
+            ->where('notice_id', $notice->id);
+
+        if ($submission->scores->count() == $requirements->count()) {
+            $submission->evaluators()->updateExistingPivot($request->user()->id,['status'=>'completed']);
+        }
+
         return redirect()
-            ->route('admin.evaluations.edit', $notice->id)
+            ->route('admin.evaluations.edit', [$notice->id, $submission->id])
             ->with('notice', trans('evaluations.notices.created'));
     }
 
-    public function edit(Notice $notice)
+    public function edit(Notice $notice, Submission $submission)
     {
         $requirements = EvaluationRequirement::where('evaluation_type_id', 1)
             ->where('notice_id', $notice->id)
@@ -65,10 +73,10 @@ class EvaluationsController extends Controller
                 ->first()->score;
         });
 
-        return view('admin.evaluations.edit', compact('notice', 'requirements'));
+        return view('admin.evaluations.edit', compact('notice', 'requirements', 'submission'));
     }
 
-    public function update(Request $request, Notice $notice)
+    public function update(Request $request, Notice $notice, Submission $submission)
     {
         $inputs = $request->only('scores');
         foreach ($inputs['scores'] as $evaluation_requirement_id => $score) {
@@ -80,8 +88,15 @@ class EvaluationsController extends Controller
             ]);
         }
 
+        $requirements = EvaluationRequirement::where('evaluation_type_id', 1)
+            ->where('notice_id', $notice->id);
+
+        if ($submission->scores->count() == $requirements->count()) {
+            $submission->evaluators()->updateExistingPivot($request->user()->id,['status'=>'completed']);
+        }
+
         return redirect()
-            ->route('admin.evaluations.edit', $notice->id)
+            ->route('admin.evaluations.edit', [$notice->id, $submission->id])
             ->with('notice', trans('evaluations.notices.updated'));
     }
 }

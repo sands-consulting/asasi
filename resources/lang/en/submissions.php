@@ -6,6 +6,7 @@ return [
     'attributes' => [
         'id' => 'Submission Id',
         'type' => 'Type',
+        'avg_score' => 'Average Score',
         'notice_id' => 'Notice',
         'vendor_id' => 'Vendor',
         'status' => 'Status',

@@ -23,27 +23,27 @@ class EvaluationServiceProvider extends ServiceProvider
             $router->model('evaluations', 'App\Evaluation');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->get('evaluations/{notices}/submissions', [
-                    'as' => 'admin.evaluations.submissions',
-                    'uses' => 'EvaluationsController@submissions'  
+                $router->get('evaluations/{notices}/submission', [
+                    'as' => 'admin.evaluations.submission',
+                    'uses' => 'EvaluationsController@submission'  
                 ]);
 
-                $router->get('evaluations/{notices}/create', [
+                $router->get('evaluations/{notices}/{submissions}/create', [
                     'as' => 'admin.evaluations.create',
                     'uses' => 'EvaluationsController@create'  
                 ]);
 
-                $router->get('evaluations/{notices}/edit', [
+                $router->get('evaluations/{notices}/{submissions}/edit', [
                     'as' => 'admin.evaluations.edit',
                     'uses' => 'EvaluationsController@edit'  
                 ]);
 
-                $router->put('evaluations/{notices}/update', [
+                $router->put('evaluations/{notices}/{submissions}/update', [
                     'as' => 'admin.evaluations.update',
                     'uses' => 'EvaluationsController@update'  
                 ]);
 
-                $router->post('evaluations/{notices}/store', [
+                $router->post('evaluations/{notices}/{submissions}/store/', [
                     'as' => 'admin.evaluations.store',
                     'uses' => 'EvaluationsController@store'  
                 ]);

@@ -7,7 +7,9 @@
     <h4>{{ trans('evaluations.title') }}</h4>
 </div>
 <div class="heading-elements">
-    
+    <a href="{{ route('admin.evaluations.submission', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+        <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
+    </a>
 </div>
 @endsection
 
@@ -45,7 +47,7 @@
                 <h6 class="panel-title">Evaluations Criteria</h6>
             </div>
             <div class="panel-body">
-                {!! Former::open(route('admin.evaluations.store', $notice->id)) !!}
+                {!! Former::open(route('admin.evaluations.store', [$notice->id, $submission->id])) !!}
 
                     <?php $i = 1; ?>
                     @foreach ($evaluationRequirements as $evaluationRequirement)
@@ -74,8 +76,8 @@
                     @endforeach
 
                     <div class="row is-table-row">
-                        <div class="col-sm-12 text center">
-                            <button type="submit" class="btn btn-primary bg-blue-400">{{ trans('actions.save') }} <i class="icon-floppy-disk position-right"></i></button>
+                        <div class="col-sm-2 col-sm-offset-5 text-center">
+                            <button type="submit" class="btn btn-primary bg-blue-400 btn-block"><span class="">{{ trans('actions.save') }}</span></button>
                         </div>
                     </div>
 

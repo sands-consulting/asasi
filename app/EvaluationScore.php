@@ -17,6 +17,7 @@ class EvaluationScore extends Model
 
     protected $fillable = [
         'score',
+        'submission_id',
         'user_id',
         'remark',
         'evaluation_requirement_id'
@@ -67,4 +68,8 @@ class EvaluationScore extends Model
     {
         return $this->belongTo(EvaluationRequirement::class);
     }
+
+    /*
+     * Helpers
+     */
 }

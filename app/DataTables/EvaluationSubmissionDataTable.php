@@ -6,17 +6,23 @@ use App\Submission;
 use App\NoticeEvaluator;
 use Auth;
 
-class EvaluationSubmissionsDataTable extends DataTable
+class EvaluationSubmissionDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($submission) {
-                return view('admin.evaluations._submissions_actions', compact('submission'));
+                return view('admin.evaluations._submission_actions', compact('submission'));
             })
             ->editColumn('name', function($submission) {
                 return link_to_route('admin.evaluations.create', $submission->name, [$submission->notice_id, $submission->id]);
+            })
+            ->editColumn('avg_score', function($submission) {
+                return $submission->score_avg;
+            })
+            ->editColumn('evaluation_status', function($submission) {
+                return $submission->evaluators()->first()->pivot->status;
             })
             ->make(true);
     }
@@ -27,7 +33,10 @@ class EvaluationSubmissionsDataTable extends DataTable
             ->where('notice_id', $this->notice_id)
             ->lists('type');
 
-        $query = Submission::where('notice_id', $this->notice_id)
+        $query = Submission::with(['evaluators' => function ($subquery) {
+                $subquery->wherePivot('user_id', $this->user_id);
+            }])
+            ->where('notice_id', $this->notice_id)
             ->whereIn('type', $types);
 
 
@@ -60,6 +69,16 @@ class EvaluationSubmissionsDataTable extends DataTable
                 'data'  => 'type',
                 'name'  => 'submission.type',
                 'title' => trans('submissions.attributes.type'),
+            ],
+            [
+                'data'  => 'evaluation_status',
+                'name'  => 'evaluation_status',
+                'title' => trans('submissions.attributes.status'),
+            ],
+            [
+                'data'  => 'avg_score',
+                'name'  => 'avg_score',
+                'title' => trans('submissions.attributes.avg_score'),
             ],
         ];
 

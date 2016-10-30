@@ -99,19 +99,43 @@ class Submission extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function details()
     {
         return $this->hasMany(SubmissionDetail::class);
     }
 
+    public function scores()
+    {
+        return $this->hasMany(EvaluationScore::class);
+    }
+
     public function evaluators()
     {
-        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluator', 'submission_id', 'user_id');
+        return $this->belongsToMany(User::class, 'submission_evaluator', 'submission_id', 'user_id')
+            ->withPivot(['status'])
+            ->withTimestamps();
+    }
+
+    public function scoreAverage()
+    {
+      return $this->hasOne(EvaluationScore::class)
+        ->selectRaw('submission_id, avg(score) as score_avg')
+        ->groupBy('submission_id');
+    }
+
+    /*
+     * accessors
+     */
+    public function getScoreAvgAttribute()
+    {
+        // if relation is not loaded already, let's do it first
+        if ( ! array_key_exists('scoreAverage', $this->relations)) 
+        $this->load('scoreAverage');
+
+        $related = $this->getRelation('scoreAverage');
+
+        // then return the count directly
+        return ($related) ? (int) $related->score_avg : 0;
     }
     
     /**
@@ -130,10 +154,5 @@ class Submission extends Model
         }
 
         return $progress;
-    }
-
-    public function FunctionName($value='')
-    {
-        # code...
     }
 }
