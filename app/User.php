@@ -164,9 +164,12 @@ class User extends Authenticatable
 
     public function canAddNoticeToCart(Notice $notice)
     {
-        $inCart = Cart::content()->search(function($cartItem) use ($notice){
-            return $cartItem->id === $notice->id;
-        });
+        $inCart = false;
+        if ($content = Cart::content()) {
+            $inCart = Cart::content()->search(function($cartItem) use ($notice){
+                return $cartItem->id === $notice->id;
+            });
+        }
 
         return $this->hasSubscription() && !$this->hasBoughtNotice($notice->id) && !$inCart;
     }
@@ -202,7 +205,11 @@ class User extends Authenticatable
     public function hasSubscription()
     {
         $vendor = $this->vendor()->with('subscriptions')->first();
-        return $vendor->subscriptions->count() > 0;
+        if ($vendor) {
+            return $vendor->subscriptions->count() > 0;
+        }
+
+        return false;
     }
 
     public function hasBoughtNotice($notice)
