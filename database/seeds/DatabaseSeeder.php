@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentGatewaySeeder::class);
         $this->call(EvaluationSeeder::class);
         $this->call(EvaluatorSeeder::class);
+        $this->call(ProjectSeeder::class);
 
         Model::reguard();
         try {

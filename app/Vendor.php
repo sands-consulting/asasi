@@ -183,6 +183,10 @@ class Vendor extends Authenticatable
         return $this->hasManyThrough(TransactionDetail::class, Transaction::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(VendorType::class, 'type_id');
+    }
     /*
      * Scopes
      */
