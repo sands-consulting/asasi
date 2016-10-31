@@ -8,13 +8,13 @@
 
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="/assets/images/landing-picture-1.png" alt="landing-page-image" class="img-responsive" alt="PROMPT">
+				<img src="/assets/images/banner-01.jpg" alt="landing-page-image" class="img-responsive" alt="PROMPT">
 			</div>
 			<div class="item">
-				<img src="/assets/images/landing-picture-1.png" alt="landing-page-image" class="img-responsive" alt="PROMPT">
+				<img src="/assets/images/banner-02.jpg" alt="landing-page-image" class="img-responsive" alt="PROMPT">
 			</div>
 			<div class="item">
-				<img src="/assets/images/landing-picture-1.png" alt="landing-page-image" class="img-responsive" alt="PROMPT">
+				<img src="/assets/images/banner-03.jpg" alt="landing-page-image" class="img-responsive" alt="PROMPT">
 			</div>
 		</div>
 
@@ -40,15 +40,15 @@
 
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<h1>Ralat Penutupan Peti Sebutharga Bagi Kerja Gred G2 Pengkhususan CE21 &amp; CE01, MARRIS, Fasa 2 2016 (26 KERJA)</h1>
+				<span>Ralat Penutupan Peti Sebutharga Bagi Kerja Gred G2 Pengkhususan CE21 &amp; CE01, MARRIS, Fasa 2 2016 (26 KERJA)</span>
 				<p class="text-muted">9 May 2016</p>
 			</div>
 			<div class="item">
-				<h1>Ralat Penutupan Peti Sebutharga Bagi Kerja Gred G2 Pengkhususan CE21 &amp; CE01, MARRIS, Fasa 2 2016 (26 KERJA)</h1>
+				<span>Ralat Penutupan Peti Sebutharga Bagi Kerja Gred G2 Pengkhususan CE21 &amp; CE01, MARRIS, Fasa 2 2016 (26 KERJA)</span>
 				<p class="text-muted">10 May 2016</p>
 			</div>
 			<div class="item">
-				<h1>Ralat Penutupan Peti Sebutharga Bagi Kerja Gred G2 Pengkhususan CE21 &amp; CE01, MARRIS, Fasa 2 2016 (26 KERJA)</h1>
+				<span>Ralat Penutupan Peti Sebutharga Bagi Kerja Gred G2 Pengkhususan CE21 &amp; CE01, MARRIS, Fasa 2 2016 (26 KERJA)</span>
 				<p class="text-muted">11 May 2016</p>
 			</div>
 		</div>
