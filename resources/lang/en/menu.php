@@ -4,8 +4,8 @@ return [
     'site_admin'    => 'Site Admin',
     'language'      => 'Language',
     'my_profile'    => 'My Profile',
-    'sign_out'    => 'Sign Out',
-    'dashboard' => 'Dashboard',
+    'sign_out'      => 'Sign Out',
+    'dashboard'     => 'Dashboard',
 
     'access' => [
         'portal'    => 'Portal',

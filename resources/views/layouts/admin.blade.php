@@ -9,7 +9,7 @@
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
-<body class="navbar-top">
+<body class="navbar-top v-cloak">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
     <div class="navbar-boxed">
         <div class="navbar-header">
@@ -61,7 +61,7 @@
                             <template v-else>
                                 <li class="media">
                                     <div class="media-body">
-                                        <div class="text-center">You have No new notification received.</div>
+                                        <div class="text-center">You have no notification.</div>
                                     </div>
                                 </li>
                             </template>
@@ -127,7 +127,7 @@
 
 <div class="page-container">
     <div class="page-content">
-        <div class="sidebar sidebar-main sidebar-default">
+        <div class="sidebar sidebar-main sidebar-default sidebar-fixed">
             <div class="sidebar-content">
                 <div class="sidebar-user-material">
                     <div class="category-content">
@@ -202,6 +202,12 @@
                             </li>
                             @endif
                             
+                            @if(Auth::user()->hasPermission('project:index'))
+                            <li class="{{ is_path_active('admin/projects*') }}">
+                                <a href="{{ route('admin.projects.index') }}"><i class="icon-folder-check"></i> <span>{{ trans('menu.admin.manage.projects') }}</span></a>
+                            </li>
+                            @endif
+
                             @if(Auth::user()->hasPermission('subscription:index'))
                             <li class="{{ is_path_active('admin/subscriptions*') }}">
                                 <a href="{{ route('admin.subscriptions.index') }}"><i class="icon-envelope"></i> <span>{{ trans('menu.admin.manage.subscriptions') }}</span></a>
