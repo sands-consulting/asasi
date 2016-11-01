@@ -17,7 +17,7 @@ class EvaluatorSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('notice_evaluators')->truncate();
+        DB::table('notice_evaluator')->truncate();
 
         $permissions = [
             ['evaluator:index', 'List of evaluator\'s.']

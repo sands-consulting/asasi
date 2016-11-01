@@ -12,12 +12,15 @@ class NoticeEvaluator extends Model
     use RevisionableTrait,
         SoftDeletes;
 
+    protected $table = 'notice_evaluator';
+
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'notice_id',
         'user_id',
-        'type'
+        'type_id',
+        'status',
     ];
 
     protected $hidden = [
@@ -74,8 +77,9 @@ class NoticeEvaluator extends Model
 
     public function scopeType($query, $type)
     {
-        return $query->where('type', $type);
+        return $query->where('type_id', $type);
     }
+    
     /*
      * Relationsip
      */
@@ -88,6 +92,11 @@ class NoticeEvaluator extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(EvaluationType::class, 'type_id');
     }
 
     public function submissions()

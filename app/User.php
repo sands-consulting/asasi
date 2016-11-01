@@ -87,6 +87,13 @@ class User extends Authenticatable
         return $this->vendor->first()->subscriptions;
     }
 
+    public function notices()
+    {
+        return $this->belongsToMany(Notice::class, 'notice_evaluator', 'user_id', 'notice_id')
+            ->withPivot(['type_id', 'status'])
+            ->withTimestamps();
+    }
+
     public function submissions()
     {
         return $this->belongsToMany(User::class, 'submission_evaluator', 'user_id', 'submission_id')

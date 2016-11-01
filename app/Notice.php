@@ -169,7 +169,9 @@ class Notice extends Model
 
     public function evaluators()
     {
-        return $this->hasMany(NoticeEvaluator::class);
+        return $this->belongsToMany(User::class, 'notice_evaluator')
+            ->withPivot(['type_id', 'status'])
+            ->withTimestamps();
     }
 
     public function transactionDetails()
