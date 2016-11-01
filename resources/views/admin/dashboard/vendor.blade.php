@@ -1,29 +1,4 @@
-@extends('layouts.admin')
-
-@section('page-title', trans('dashboard.title'))
-
-@section('header')
-    <div class="page-title">
-        <h4><i class="icon-home2 position-left"></i> <span class="text-semibold">{{ trans('home.views.index.title') }}</span></h4>
-
-        {{-- <ul class="breadcrumb breadcrumb-caret position-right">
-            <li><a href="{{ route('home.index') }}">Home</a></li>
-            <li class="active">{{ trans('subscriptions.views.history.title') }}</li>
-        </ul> --}}
-    </div>
-    
-    @if(Auth::user() && Auth::user()->hasPermission('access:vendor'))
-    <div class="heading-elements">
-        <div class="heading-btn-group">
-            <a href="{{ route('admin.dashboard.user') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-user text-primary-700"></i> <span>USER</span></a>
-            <a href="{{ route('admin.dashboard.vendor') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-office text-primary-700"></i> <span>VENDOR</span></a>
-            <a href="{{ route('admin.dashboard.tender') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-file-empty2 text-primary-700"></i> <span>TENDER</span></a>
-            <a href="{{ route('admin.dashboard.transaction') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-credit-card text-primary-700"></i> <span>TRANSACTION</span></a>
-            <a href="{{ route('admin.dashboard.portfolio') }}" class="btn btn-link btn-float has-text text-size-small legitRipple"><i class="icon-folder2 text-primary-700"></i> <span>PORTFOLIO</span></a>
-        </div>
-    </div>
-    @endif
-@stop
+@extends('admin.dashboard.index')
 
 @section('content')
 
