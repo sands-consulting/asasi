@@ -40,11 +40,11 @@ class EvaluatorServiceProvider extends ServiceProvider
                     'as' => 'admin.evaluators.edit',
                     'uses' => 'EvaluatorsController@edit'
                 ]);
-                $router->get('evaluators/{notices}/assign/{users}', [
+                $router->get('evaluators/{notice_evaluator}/assign/{notices}', [
                     'as' => 'admin.evaluators.assign',
                     'uses' => 'EvaluatorsController@assign'
                 ]);
-                $router->post('evaluators/{notices}/assigned', [
+                $router->post('evaluators/{notice_evaluator}/assigned/{notices}', [
                     'as' => 'admin.evaluators.assigned',
                     'uses' => 'EvaluatorsController@assigned'
                 ]);

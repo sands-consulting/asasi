@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\EvaluatorsDataTable;
 use App\Notice;
+use App\NoticeEvaluator;
+use App\User;
 use Illuminate\Http\Request;
 
 class EvaluatorsController extends Controller
@@ -13,16 +15,25 @@ class EvaluatorsController extends Controller
         return $table->with('notice', $notice)->render('admin.evaluators.index', compact('notice'));
     }
 
-    public function assign(Notice $notice)
+    public function assign(NoticeEvaluator $evaluator, Notice $notice)
     {
-        return view('admin.evaluators.assign', compact('notice'));
+        return view('admin.evaluators.assign', compact('evaluator', 'notice'));
     }
 
-    public function assigned(Request $request, Notice $notice)
+    public function assigned(Request $request, NoticeEvaluator $evaluator, Notice $notice)
     {
-        $inputs = $request->only('submission_id');
-        $noticeEvaluator = $notice->evaluators()->where('user_id', $request->user()->id)->first();
-        $noticeEvaluator->submissions()->sync($inputs['submission_id']);
+        $input = $request->only('submission_id');
+        $submissionIds = $input['submission_id'];
+
+        $submissionData = [];
+        if (count($submissionIds) > 0) {
+            foreach ($submissionIds as $submissionId)
+            $submissionData[$submissionId] = [
+                'status' => 'incomplete'
+            ];
+        }
+
+        $evaluator->submissions()->sync($submissionData);
 
         return redirect()
             ->back()

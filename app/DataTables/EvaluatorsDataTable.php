@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Evaluations;
 use App\NoticeEvaluator;
 use Auth;
 
@@ -15,10 +14,7 @@ class EvaluatorsDataTable extends DataTable
             ->addColumn('action', function($evaluator) {
                 return view('admin.evaluators._index_actions', compact('evaluator'));
             })
-            ->editColumn('type', function($evaluator) {
-                return ucfirst(strtolower($evaluator->type));
-            })
-            ->editColumn('status', function($evaluator) {
+            ->editColumn('evaluator_status', function($evaluator) {
                 return view('admin.evaluators._index_status', compact('evaluator'));
             })
             ->make(true);
@@ -26,20 +22,24 @@ class EvaluatorsDataTable extends DataTable
 
     public function query()
     {
-        $query = NoticeEvaluator::where('notice_id', $this->notice->id)
-            ->leftJoin('users', 'users.id', '=', 'notice_evaluators.user_id')
+        $query = NoticeEvaluator::with(['user', 'notice', 'type'])
+            ->leftJoin('users', 'users.id', '=','notice_evaluator.user_id')
+            ->leftJoin('evaluation_types', 'evaluation_types.id', '=','notice_evaluator.type_id')
+            ->where('notice_evaluator.notice_id', $this->notice->id)
             ->select([
-                'users.name as name',
-                'notice_evaluators.type as type',
-                'notice_evaluators.status as status',
-                'notice_evaluators.user_id as user_id',
-                'notice_evaluators.notice_id as notice_id'
+                'notice_evaluator.id as evaluator_id',
+                'notice_evaluator.notice_id as notice_id',
+                'notice_evaluator.user_id as user_id',
+                'notice_evaluator.status as evaluator_status',
+                'users.name as evaluator_name',
+                'evaluation_types.name as type_name',
             ]);
 
         if($this->datatables->request->input('q', null))
         {
             $query->search($this->datatables->request->input('q', []));
         }
+
         return $this->applyScopes($query);
     }
 
@@ -56,20 +56,20 @@ class EvaluatorsDataTable extends DataTable
     {
         $columns = [
             [
-                'data'  => 'name',
-                'name'  => 'name',
+                'data'  => 'evaluator_name',
+                'name'  => 'evaluator_name',
                 'title' => trans('users.attributes.name'),
                 'sWidth' => '30%',
             ],
             [
-                'data'  => 'type',
-                'name'  => 'type',
+                'data'  => 'type_name',
+                'name'  => 'type_name',
                 'title' => trans('notice-evaluators.attributes.type'),
                 'sWidth' => '25%',
             ],
             [
-                'data'  => 'status',
-                'name'  => 'status',
+                'data'  => 'evaluator_status',
+                'name'  => 'evaluator_status',
                 'title' => trans('notice-evaluators.attributes.status'),
                 'sWidth' => '25%',
             ],

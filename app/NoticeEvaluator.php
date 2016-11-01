@@ -101,7 +101,9 @@ class NoticeEvaluator extends Model
 
     public function submissions()
     {
-        return $this->belongsToMany(Submission::class, 'submission_evaluator', 'user_id', 'submission_id');
+        return $this->belongsToMany(Submission::class, 'submission_evaluator', 'evaluator_id', 'submission_id')
+            ->withPivot(['status'])
+            ->withTimestamps();
     }
 
     /* 
