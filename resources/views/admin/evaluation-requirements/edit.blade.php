@@ -21,29 +21,31 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h4 class="panel-title" style="max-width: 900px"><small style="margin-left: 0px">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</small>
-        <br>{{ $notice->name }}</h4>
-        <div class="heading-elements" style="vertical-align: top; padding-top: 0px">
-            @if ($notice->status == 'published')
-                <span class="label label-success heading-text">
-            @elseif ($notice->status == 'cancelled')
-                <span class="label label-danger heading-text">
-            @else
-                <span class="label label-default heading-text">
-            @endif
-            {{ $notice->status }}</span>
-            <ul class="icons-list">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-cog3"></i><span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#">Notices</a></li>
-                        <li><a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}">{{ trans('evaluation-requirements.title') }}</a></li>
-                        <li><a href="{{ route('admin.evaluators.index', $notice->id) }}">Evaluators</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">All Settings</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="row">
+            <div class="col-sm-10 panel-title"><span class="text-muted">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</span>
+            <br>{{ $notice->name }}</div>
+            <div class="col-sm-2 heading-elements">
+                @if ($notice->status == 'published')
+                    <span class="label label-success heading-text">
+                @elseif ($notice->status == 'cancelled')
+                    <span class="label label-danger heading-text">
+                @else
+                    <span class="label label-default heading-text">
+                @endif
+                {{ $notice->status }}</span>
+                <ul class="icons-list">
+                    <li class="dropdown">
+                        <a href="{{ route('admin.notices.show', $notice->id) }}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-cog3"></i><span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#">Notices</a></li>
+                            <li><a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}">{{ trans('evaluation-requirements.title') }}</a></li>
+                            <li><a href="{{ route('admin.evaluators.index', $notice->id) }}">Evaluators</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">All Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
