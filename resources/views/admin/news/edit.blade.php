@@ -15,19 +15,19 @@
 <div class="heading-elements">
 	<div class="heading-btn-group">
 		@if($news->canPublish() && Auth::user()->hasPermission('news:publish'))
-		<a href="{{ route('admin.news.publish', $news->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-blue legitRipple">
+		<a href="{{ route('admin.news.publish', $news->slug) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-blue legitRipple">
 			<i class="icon-check"></i> <span>{{ trans('actions.publish') }}</span>
 		</a>
 		@endif
 
 		@if($news->canUnpublish() && Auth::user()->hasPermission('news:unpublish'))
-		<a href="{{ route('admin.news.unpublish', $news->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
+		<a href="{{ route('admin.news.unpublish', $news->slug) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
 			<i class="icon-blocked"></i> <span>{{ trans('actions.unpublish') }}</span>
 		</a>
 		@endif
 
-		@if(Auth::user()->id != $news->id && Auth::user()->hasPermission('news:delete'))
-		<a href="{{ route('admin.news.destroy', $news->id) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
+		@if(Auth::user()->hasPermission('news:delete'))
+		<a href="{{ route('admin.news.destroy', $news->slug) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
 			<i class="icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
 		</a>
 		@endif

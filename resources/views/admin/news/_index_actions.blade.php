@@ -4,14 +4,14 @@
 			<i class="icon-menu9"></i>
 		</a>
 		<ul class="dropdown-menu dropdown-menu-right">
-			<li><a href="{{ route('admin.news.edit', $news->id) }}">{{ trans('actions.edit') }}</a></li>
+			<li><a href="{{ route('admin.news.edit', $news->slug) }}">{{ trans('actions.edit') }}</a></li>
 
 			@if($news->canPublish() && Auth::user()->hasPermission('news:publish'))
-			<li><a href="{{ route('admin.news.publish', [$news->id, 'redirect_to' => route('admin.news.index')]) }}" data-method="PUT">{{ trans('actions.publish') }}</a></li>
+			<li><a href="{{ route('admin.news.publish', [$news->slug, 'redirect_to' => route('admin.news.index')]) }}" data-method="PUT">{{ trans('actions.publish') }}</a></li>
 			@endif
 
 			@if($news->canUnpublish() && Auth::user()->hasPermission('news:unpublish'))
-			<li><a href="{{ route('admin.news.unpublish', [$news->id, 'redirect_to' => route('admin.news.index')]) }}" data-method="PUT">{{ trans('actions.unpublish') }}</a></li>
+			<li><a href="{{ route('admin.news.unpublish', [$news->slug, 'redirect_to' => route('admin.news.index')]) }}" data-method="PUT">{{ trans('actions.unpublish') }}</a></li>
 			@endif
 		</ul>
 	</li>

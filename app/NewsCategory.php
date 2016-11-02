@@ -43,6 +43,16 @@ class NewsCategory extends Model
         ];
     }
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+    
     public static function getOptions($label='name')
     {
         return static::lists($label, 'id')->toArray();

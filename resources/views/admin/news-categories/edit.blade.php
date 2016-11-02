@@ -15,7 +15,7 @@
 <div class="heading-elements">
 	<div class="heading-btn-group">
 		@if(Auth::user()->hasPermission('news-category:delete'))
-		<a href="{{ route('admin.news-categories.destroy', $category->id) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
+		<a href="{{ route('admin.news-categories.destroy', $category->slug) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
 			<i class="icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
 		</a>
 		@endif
@@ -31,7 +31,7 @@
 <ul class="breadcrumb-elements">
     @if(Auth::user()->hasPermission('news-category:logs'))
 	<li>
-		<a href="{{ route('admin.news-categories.logs', $category->id) }}" class="legitRipple">
+		<a href="{{ route('admin.news-categories.logs', $category->slug) }}" class="legitRipple">
 			<i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
 		</a>
 	</li>
@@ -50,7 +50,7 @@
 @section('content')
 <div class="panel panel-flat">
 	<div class="panel-body">
-		{!! Former::open(route('admin.news-categories.update', $category->id))->method('PUT') !!}
+		{!! Former::open(route('admin.news-categories.update', $category->slug))->method('PUT') !!}
 			{!! Former::populate($category) !!}
 			@include('admin.news-categories.form')
 		{!! Former::close() !!}

@@ -14,7 +14,7 @@ class NewsDataTable extends DataTable
                 return view('admin.news._index_actions', compact('news'));
             })
             ->editColumn('title', function($news) {
-                return link_to_route('admin.news.edit', $news->title, $news->id);
+                return link_to_route('admin.news.edit', $news->title, $news->slug);
             })
             ->editColumn('category', function($news) {
                 return $news->category->name;
