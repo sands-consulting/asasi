@@ -102,19 +102,19 @@
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li>
                             <a href="{{ route('profile') }}">
-                                <i class="icon-user"></i> {{ trans('menu.my_profile') }}
+                                <i class="icon-user"></i> {{ trans('menu.user.my_profile') }}
                             </a>
                         </li>
                         @if(session('original_user_id'))
                         <li>
                             <a href="{{ route('profile.resume') }}" data-method="POST">
-                                <i class="icon-user-cancel"></i> {{ trans('menu.release_user') }}
+                                <i class="icon-user-cancel"></i> {{ trans('menu.user.release_user') }}
                             </a>
                         </li>
                         @endif
                         <li>
                             <a href="{{ url('logout') }}">
-                                <i class="icon-switch2"></i> {{ trans('menu.sign_out') }}
+                                <i class="icon-switch2"></i> {{ trans('menu.user.sign_out') }}
                             </a>
                         </li>
                     </ul>

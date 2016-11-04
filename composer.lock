@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb11fafcb7aaba1474fbe923145b2771",
-    "content-hash": "c5d1598a5b8550f1eb3409f3bcfb2885",
+    "hash": "ee3143c72b33da97151918abe415d283",
+    "content-hash": "516aeb7de7e7abd1fcfef807bf4bb297",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -946,16 +946,16 @@
         },
         {
             "name": "gloudemans/shoppingcart",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
-                "reference": "143d51b22b365068b2308bb3732eadffb4df266c"
+                "reference": "3ec0cefe870aa4b95f30b0c47252492a8da2a67d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/143d51b22b365068b2308bb3732eadffb4df266c",
-                "reference": "143d51b22b365068b2308bb3732eadffb4df266c",
+                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/3ec0cefe870aa4b95f30b0c47252492a8da2a67d",
+                "reference": "3ec0cefe870aa4b95f30b0c47252492a8da2a67d",
                 "shasum": ""
             },
             "require": {
@@ -992,7 +992,7 @@
                 "laravel",
                 "shoppingcart"
             ],
-            "time": "2016-10-13 10:10:37"
+            "time": "2016-11-02 14:22:23"
         },
         {
             "name": "guzzlehttp/psr7",

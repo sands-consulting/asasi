@@ -12,16 +12,19 @@ return [
         'updated_at' => 'Last Updated At',
     ],
 
-    'buttons' => [],
+    'buttons' => [
+        'accept' => 'Accept',
+        'decline' => 'Decline',
+    ],
 
     'notices' => [
-        'created' => 'Evaluation score created.',
-        'updated' => 'Evaluation score updated.',
-        'deleted' => 'Evaluation :name deleted.',
-        'activated' => 'Evaluation :name activated.',
-        'deactivated' => 'Evaluation :name deactivated.',
-        'published' => 'Evaluation :name published.',
-        'unpublished' => 'Evaluation :name unpublished.',
+        'created' => 'Evaluator score created.',
+        'updated' => 'Evaluator score updated.',
+        'deleted' => 'Evaluator :name deleted.',
+        'activated' => 'Evaluator :name activated.',
+        'deactivated' => 'Evaluator :name deactivated.',
+        'accepted' => 'Evaluator request for notice :number accepted.',
+        'declined' => 'Evaluator request for notice :number declined.',
     ],
     
     'views' => [
@@ -34,10 +37,11 @@ return [
             'title' => 'View',
         ],
         'create' => [
-            'title' => 'New',
+            'title' => 'Add Evaluator(s)',
         ],
         'edit' => [
             'title' => 'Edit',
+            'info' => 'A notification will be sent to the selected evaluator for approval.',
         ],
         'revisions' => [
 
@@ -47,6 +51,13 @@ return [
         ],
         'assign' => [
             'title' => 'Assign Evaluator'
+        ],
+        'request' => [
+            'title' => 'Evaluator\'s Request',
+            'panels' => [
+                'notice' => 'Notice Details',
+                'action' => 'Evaluator\'s Acceptance',
+            ]
         ],
     ],
 ];
