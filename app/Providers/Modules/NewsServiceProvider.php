@@ -18,12 +18,11 @@ class NewsServiceProvider extends ServiceProvider
     {
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
             $router->model('news', 'App\News');
+            $router->model('news_categories', 'App\NewsCategory');
             $router->resource('news', 'NewsController', ['only' => ['index', 'show']]);
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->bind('news', function ($id) {
-                    return News::find($id);
-                });
+                // news
                 $router->get('news/{news}/revisions', [
                     'as'    => 'admin.news.revisions',
                     'uses'  => 'NewsController@revisions'
@@ -41,10 +40,8 @@ class NewsServiceProvider extends ServiceProvider
                     'uses'  => 'NewsController@unpublish'
                 ]);
                 $router->resource('news', 'NewsController', ['except' => 'show']);
-                
-                $router->bind('news_categories', function($id) {
-                    return NewsCategory::find($id);
-                });
+
+                // news-categories
                 $router->get('news-categories/{news_categories}/revisions', [
                     'as'    => 'admin.news-categories.revisions',
                     'uses'  => 'NewsCategoriesController@revisions'

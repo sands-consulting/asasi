@@ -38,7 +38,7 @@ class NewsController extends Controller
         $news   = NewsRepository::create(new News, $inputs);
         UserLogsRepository::log($request->user(), 'create', $news, $request->getClientIp());
         return redirect()
-            ->route('admin.news.edit', $news->id)
+            ->route('admin.news.edit', $news->slug)
             ->with('notice', trans('news.notices.created', ['title' => $news->title]));
     }
 
@@ -92,7 +92,7 @@ class NewsController extends Controller
     {
         NewsRepository::publish($news);
         UserLogsRepository::log($request->user(), 'publish', $news, $request->getClientIp());
-        return redirect($request->input('redirect_to', route('admin.news.edit', $news->id)))
+        return redirect($request->input('redirect_to', route('admin.news.edit', $news->slug)))
                 ->with('notice', trans('news.notices.published', ['title' => $news->title]));
     }
 
@@ -100,7 +100,7 @@ class NewsController extends Controller
     {
         NewsRepository::unpublish($news);
         UserLogsRepository::log($request->user(), 'unpublish', $news, $request->getClientIp());
-        return redirect($request->input('redirect_to', route('admin.news.edit', $news->id)))
+        return redirect($request->input('redirect_to', route('admin.news.edit', $news->slug)))
                 ->with('notice', trans('news.notices.unpublished', ['title' => $news->title]));
     }
 }

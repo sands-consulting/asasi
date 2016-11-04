@@ -29,7 +29,7 @@ class NewsCategoriesController extends Controller
         $category   = NewsCategoriesRepository::create(new NewsCategory, $inputs);
         UserLogsRepository::log($request->user(), 'create', $category, $request->getClientIp());
         return redirect()
-            ->route('admin.news-categories.edit', $category->id)
+            ->route('admin.news-categories.edit', $category->slug)
             ->with('notice', trans('news-categories.notices.created', ['name' => $category->name]));
     }
 
@@ -44,11 +44,11 @@ class NewsCategoriesController extends Controller
         NewsCategoriesRepository::update($category, $inputs);
         UserLogsRepository::log($request->user(), 'update', $category, $request->getClientIp());
         return redirect()
-            ->route('admin.news-categories.edit', $category->id)
+            ->route('admin.news-categories.edit', $category->slug)
             ->with('notice', trans('news-categories.notices.updated', ['name' => $category->name]));
     }
 
-    public function destroy(NewsCategory $category)
+    public function destroy(Request $request, NewsCategory $category)
     {
         NewsCategoriesRepository::delete($category);
         UserLogsRepository::log($request->user(), 'delete', $category, $request->getClientIp());
