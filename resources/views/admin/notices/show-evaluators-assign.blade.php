@@ -8,11 +8,10 @@
                     ->label(false)
                     ->options(App\User::evaluators()->lists('name','id'))
                     ->data_placeholder('Click here to select evaluator from user list.')
-                    ->value($notice->evaluators()->type('commercial')->lists('user_id'))
-                    ->addClass('select')
-                    ->required() !!}
+                    ->value($notice->evaluators()->wherePivot('type_id', 1)->lists('user_id'))
+                    ->addClass('select') !!}
 
-                {!! Former::hidden('notice_evaluators[type]')->value('commercials') !!}
+                {!! Former::hidden('notice_evaluators[type_id]')->value(1) !!}
             </div>
         </div>
         <div class="row">
@@ -34,10 +33,10 @@
                     ->options(App\User::evaluators()->lists('name','id'))
                     ->data_placeholder('Click here to select evaluator from user list.')
                     ->addClass('select')
-                    ->value($notice->evaluators()->type('technicals')->lists('user_id'))
+                    ->value($notice->evaluators()->wherePivot('type_id', 2)->lists('user_id'))
                     ->required() !!}
 
-                {!! Former::hidden('notice_evaluators[type]')->value('technical') !!}
+                {!! Former::hidden('notice_evaluators[type_id]')->value(2) !!}
             </div>
         </div>
         <div class="row">

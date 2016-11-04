@@ -111,7 +111,7 @@ class Submission extends Model
 
     public function evaluators()
     {
-        return $this->belongsToMany(User::class, 'submission_evaluator', 'submission_id', 'user_id')
+        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluator', 'submission_id', 'evaluator_id')
             ->withPivot(['status'])
             ->withTimestamps();
     }
@@ -121,6 +121,11 @@ class Submission extends Model
       return $this->hasOne(EvaluationScore::class)
         ->selectRaw('submission_id, avg(score) as score_avg')
         ->groupBy('submission_id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(EvaluationType::class, 'type_id');
     }
 
     /*
@@ -142,17 +147,15 @@ class Submission extends Model
      * Helpers
      */
 
-    public function getProgress($value='')
+    public function getProgress()
     {
         $progress = 0;
 
         $evaluators = $this->evaluators()->count();
         $completed = $this->evaluators()->wherePivot('status', 'completed')->count();
-
         if ($evaluators > 0 && $completed > 0) {
             $progress = $completed/$evaluators * 100;
         }
-
         return $progress;
     }
 }

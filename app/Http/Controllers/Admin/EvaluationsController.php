@@ -3,34 +3,40 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\DataTables\EvaluationsDataTable;
+use App\DataTables\EvaluationDataTable;
 use App\DataTables\EvaluationSubmissionDataTable;
 use App\EvaluationRequirement;
 use App\EvaluationScore;
 use App\Submission;
 use App\Notice;
+use App\NoticeEvaluator;
 use App\Repositories\EvaluationScoresRepository;
 use Illuminate\Http\Request;
 
 class EvaluationsController extends Controller
 {
-    public function index(EvaluationsDataTable $table)
+    public function index(EvaluationDataTable $table)
     {
         return $table->render('admin.evaluations.index');
     }
 
     public function submission(Request $request, EvaluationSubmissionDataTable $table, Notice $notice)
     {
-        $inputs = $request->only('type');
+        $evaluator = NoticeEvaluator::where('notice_id', $notice->id)
+            ->where('user_id', $request->user()->id)
+            ->first();
+
         return $table->byNoticeId($notice->id)
             ->byUserId($request->user()->id)
-            ->forType($inputs['type'])
+            ->forType($evaluator->type->id)
             ->render('admin.evaluations.submissions', compact('notice'));
     }
 
-    public function create(Notice $notice, Submission $submission)
+    public function create(Request $request, Notice $notice, Submission $submission)
     {
-        $evaluationRequirements = EvaluationRequirement::where('evaluation_type_id', 1)->get();
+        $evaluationRequirements = EvaluationRequirement::where('evaluation_type_id', $submission->type_id)
+            ->where('notice_id', $notice->id)->get();
+
         return view('admin.evaluations.create', compact('notice', 'evaluationRequirements', 'submission'));
     }
 
@@ -60,18 +66,13 @@ class EvaluationsController extends Controller
             ->with('notice', trans('evaluations.notices.created'));
     }
 
-    public function edit(Notice $notice, Submission $submission)
+    public function edit(Request $request, Notice $notice, Submission $submission)
     {
-        $requirements = EvaluationRequirement::where('evaluation_type_id', 1)
-            ->where('notice_id', $notice->id)
+        $requirements = EvaluationRequirement::where('evaluation_requirements.notice_id', $notice->id)
+            ->leftJoin('evaluation_scores', 'evaluation_scores.evaluation_requirement_id', '=', 'evaluation_requirements.id')
+            ->leftJoin('submissions', 'submissions.id', '=', 'evaluation_scores.submission_id')
+            ->where('submissions.id', $submission->id)
             ->get();
-
-        // Fixme: Find better solution to populate score
-        $requirements = $requirements->each(function($requirement) {
-            $requirement->score = $requirement->scores()
-                ->where('user_id', \Auth::user()->id)
-                ->first()->score;
-        });
 
         return view('admin.evaluations.edit', compact('notice', 'requirements', 'submission'));
     }

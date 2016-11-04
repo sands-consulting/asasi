@@ -20,7 +20,13 @@ class EvaluatorSeeder extends Seeder
         DB::table('notice_evaluator')->truncate();
 
         $permissions = [
-            ['evaluator:index', 'List of evaluator\'s.']
+            ['evaluator:index', 'List of evaluator\'s.'],
+            ['evaluator:create', 'Assign evaluator to notice.'],
+            ['evaluator:edit', 'Assign evaluator to notice.'],
+            ['evaluator:delete', 'Delete evaluator from notice.'],
+            ['evaluator:assign', 'Assign evaluator to submission.'],
+            ['evaluator:revisions', 'View evaluator revisions'],
+            ['evaluator:logs', 'View evaluator logs']
         ];
 
         foreach ($permissions as $permissionData) {

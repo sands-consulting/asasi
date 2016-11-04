@@ -51,11 +51,6 @@
             <fieldset>
                 <legend class="text-semibold"> <i class="icon-clipboard3"></i> Submission List</legend>
                 <div class="row">
-                    {{-- <div class="alert alert-info alert-styled-left alert-arrow-left alert-bordered">
-                        <button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
-                        <span class="text-semibold">Heads up!</span> This alert needs your attention, but it's not <a href="#" class="alert-link">super important</a>.
-                    </div> --}}
-
                     @foreach ($notice->submissions as $submission)
                         <div class="col-sm-3">
                             {!! Former::checkboxes('submission_id[]')

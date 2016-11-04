@@ -16,8 +16,8 @@
                         <td>{{ $submission->type }}</td>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar" style="width: {{ $submission->getProgress($submission->type) }}%">
-                                    <span>{{ $submission->getProgress($submission->type) }}%</span>
+                                <div class="progress-bar" style="width: {{ $submission->getProgress() }}%">
+                                    <span>{{ $submission->getProgress() }}%</span>
                                 </div>
                             </div>
                         </td>

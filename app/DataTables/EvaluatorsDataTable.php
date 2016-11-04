@@ -27,7 +27,7 @@ class EvaluatorsDataTable extends DataTable
             ->leftJoin('evaluation_types', 'evaluation_types.id', '=','notice_evaluator.type_id')
             ->where('notice_evaluator.notice_id', $this->notice->id)
             ->select([
-                'notice_evaluator.id as evaluator_id',
+                'notice_evaluator.id',
                 'notice_evaluator.notice_id as notice_id',
                 'notice_evaluator.user_id as user_id',
                 'notice_evaluator.status as evaluator_status',

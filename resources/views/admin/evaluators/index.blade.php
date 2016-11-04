@@ -9,6 +9,9 @@
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
+        <a href="{{ route('admin.evaluators.edit', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+            <i class=" icon-pencil"></i> <span>{{ trans('actions.edit') }}</span>
+        </a>
         <a href="{{ route('admin.notices.show', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
         </a>

@@ -15,29 +15,33 @@ class EvaluationSubmissionDataTable extends DataTable
             ->addColumn('action', function($submission) {
                 return view('admin.evaluations._submission_actions', compact('submission'));
             })
-            ->editColumn('name', function($submission) {
-                return link_to_route('admin.evaluations.create', $submission->name, [$submission->notice_id, $submission->id]);
-            })
-            ->editColumn('avg_score', function($submission) {
-                return $submission->score_avg;
-            })
-            ->editColumn('evaluation_status', function($submission) {
-                return $submission->evaluators()->first()->pivot->status;
+            ->editColumn('type_name', function($submission) {
+                return str_titleize($submission->type_name);
             })
             ->make(true);
     }
 
     public function query()
     {
-        $types = NoticeEvaluator::where('user_id', $this->user_id)
-            ->where('notice_id', $this->notice_id)
-            ->lists('type');
-
-        $query = Submission::with(['evaluators' => function ($subquery) {
-                $subquery->wherePivot('user_id', $this->user_id);
-            }])
-            ->where('notice_id', $this->notice_id)
-            ->whereIn('type', $types);
+        $query = Submission::with('scores')
+            ->leftJoin('evaluation_types', 'evaluation_types.id', '=', 'submissions.type_id')
+            ->leftJoin('notice_evaluator', function($join) {
+                $join->on('notice_evaluator.notice_id', '=', 'submissions.notice_id');
+                $join->on('notice_evaluator.type_id', '=', 'submissions.type_id');
+            })
+            ->leftJoin('submission_evaluator', function($join) {
+                $join->on('submission_evaluator.submission_id', '=', 'submissions.id');
+                $join->on('submission_evaluator.evaluator_id', '=', 'notice_evaluator.id');
+            })
+            ->where('submissions.notice_id', $this->notice_id)
+            ->where('submissions.type_id', $this->type_id)
+            ->select([
+                'submissions.id as submission_id',
+                'submissions.notice_id as notice_id',
+                'notice_evaluator.id as evaluator_id',
+                'evaluation_types.name as type_name',
+                'submission_evaluator.status as evaluation_status',
+            ]);
 
 
         if($this->datatables->request->input('q', null))
@@ -60,26 +64,22 @@ class EvaluationSubmissionDataTable extends DataTable
     {
         $columns = [
             [
-                'data'  => 'id',
-                'name'  => 'id',
+                'data'  => 'submission_id',
+                'name'  => 'submissions.id',
                 'title' => trans('submissions.attributes.id'),
                 'sWidth' => '200px',
             ],
             [
-                'data'  => 'type',
-                'name'  => 'submission.type',
+                'data'  => 'type_name',
+                'name'  => 'evaluation_types.name',
                 'title' => trans('submissions.attributes.type'),
             ],
             [
                 'data'  => 'evaluation_status',
-                'name'  => 'evaluation_status',
+                'name'  => 'submission_evaluator.status',
                 'title' => trans('submissions.attributes.status'),
-            ],
-            [
-                'data'  => 'avg_score',
-                'name'  => 'avg_score',
-                'title' => trans('submissions.attributes.avg_score'),
-            ],
+                'searchable' => false,
+            ]
         ];
 
         return $columns;
@@ -102,16 +102,16 @@ class EvaluationSubmissionDataTable extends DataTable
         return $this;
     }
 
-    public function forType($type)
+    public function forType($typeId)
     {
-        $this->type = $type;
+        $this->type_id = $typeId;
         return $this;
     }
 
     protected function getBuilderParameters()
     {
         $data = parent::getBuilderParameters();
-        $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
+        $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
         return $data;
     }
 }

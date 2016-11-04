@@ -49,29 +49,34 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h4 class="panel-title" style="max-width: 800px"><small style="margin-left: 0px">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</small>
-        <br>{{ $notice->name }}</h4>
-        <div class="heading-elements" style="vertical-align: top; padding-top: 0px">
-            @if ($notice->status == 'published')
-                <span class="label label-success heading-text">
-            @elseif ($notice->status == 'cancelled')
-                <span class="label label-danger heading-text">
-            @else
-                <span class="label label-default heading-text">
-            @endif
-            {{ $notice->status }}</span>
-            <ul class="icons-list">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-cog3"></i><span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#">Notices</a></li>
-                        <li><a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}">{{ trans('evaluation-requirements.title') }}</a></li>
-                        <li><a href="{{ route('admin.evaluators.index', $notice->id) }}">Evaluators</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">All Settings</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="row">
+            <div class="col-sm-10">
+                <small class="text-muted">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</small>
+                <br>
+                {{ $notice->name }}
+            </div>
+            <div class="heading-elements">
+                @if ($notice->status == 'published')
+                    <span class="label label-success heading-text">
+                @elseif ($notice->status == 'cancelled')
+                    <span class="label label-danger heading-text">
+                @else
+                    <span class="label label-default heading-text">
+                @endif
+                {{ $notice->status }}</span>
+                <ul class="icons-list">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-cog3"></i><span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#">Notices</a></li>
+                            <li><a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}">{{ trans('evaluation-requirements.title') }}</a></li>
+                            <li><a href="{{ route('admin.evaluators.index', $notice->id) }}">Evaluators</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">All Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -91,15 +96,11 @@
                     <li>
                         <a data-target="#left-tab3" data-toggle="tab"><i class="icon-coins position-left"></i> Price List</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user position-left"></i> Evaluations <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a data-target="#left-tab4" data-toggle="tab">By Evaluator</a></li>
-                            <li><a data-target="#left-tab5" data-toggle="tab">By Vendor</a></li>
-                        </ul>
+                    <li>
+                        <a data-target="#left-tab4" data-toggle="tab"><i class="icon-coins position-left"></i> Evaluations</a>
                     </li>
                     <li>
-                        <a data-target="#left-tab7" data-toggle="tab"><i class="icon-medal-star position-left"></i> Award</a>
+                        <a data-target="#left-tab6" data-toggle="tab"><i class="icon-medal-star position-left"></i> Award</a>
                     </li>
                 </ul>
 
@@ -125,14 +126,10 @@
                     </div>
 
                     <div class="tab-pane has-padding" id="left-tab5">
-                        @include('admin.notices.show-evaluators-assign')
-                    </div>
-
-                    <div class="tab-pane has-padding" id="left-tab6">
                         @include('admin.notices.show-evaluations')
                     </div>
 
-                    <div class="tab-pane has-padding" id="left-tab7">
+                    <div class="tab-pane has-padding" id="left-tab6">
                         @include('admin.notices.show-award')
                     </div>
                 </div>

@@ -34,6 +34,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\VendorRejected' => [
             'App\Listeners\VendorRejectedListener',
         ],
+        'App\Events\EvaluatorAssigned' => [
+            'App\Listeners\EmailEvaluatorApprovalLink',
+        ],
+        'App\Events\EvaluatorSubmissionAssigned' => [
+            'App\Listeners\EvaluatorSubmissionAssignedListener',
+        ],
     ];
 
     /**

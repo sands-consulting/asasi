@@ -53,10 +53,10 @@ class NoticesController extends Controller
     public function show(Notice $notice)
     {
         $vendors = $notice->vendors;
-        $submissions['commercial'] = $notice->submissions()->where('type', 'commercial')->get();
-        $submissions['technical'] = $notice->submissions()->where('type', 'technical')->get();
-        $evaluators['commercial'] = $notice->evaluators()->where('type','commercial')->get();
-        $evaluators['technical'] = $notice->evaluators()->where('type','technical')->get();
+        $submissions['commercial'] = $notice->submissions()->where('type_id', 1)->get();
+        $submissions['technical'] = $notice->submissions()->where('type_id', 2)->get();
+        $evaluators['commercial'] = $notice->evaluators()->wherePivot('type_id','commercials')->get();
+        $evaluators['technical'] = $notice->evaluators()->wherePivot('type_id','technicals')->get();
         $vendorAwarded = $notice->vendors()->awarded()->first();
 
         return view('admin.notices.show', compact('notice', 'vendors', 'submissions', 'evaluators', 'vendorAwarded'));
@@ -142,37 +142,5 @@ class NoticesController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.cancelled', ['name' => $notice->name]));
-    }
-
-    public function assignEvaluator(Notice $notice)
-    {
-        return view('admin.notices.show-evaluators-assign', compact('notice'));
-    }
-
-    public function saveEvaluator(Request $request, Notice $notice)
-    {
-        $input = $request->only('notice_evaluators');
-        $type = $input['notice_evaluators']['type'];
-
-        $evaluatorIds = array();
-        foreach ($input['notice_evaluators']['user_id'] as $evaluatorId)
-        {
-            $evaluator = NoticeEvaluator::firstOrNew([
-                'notice_id' => $notice->id, 
-                'user_id' => $evaluatorId, 
-                'type' => $type
-            ]);
-
-            $notice->evaluators()->save($evaluator);
-            $evaluatorIds[] = $evaluatorId;
-        }
-
-        NoticeEvaluator::where('notice_id', $notice->id)
-            ->where('type', $type)
-            ->whereNotIn('user_id', $evaluatorIds)->delete();
-
-        return redirect()
-            ->route('admin.notices.show', [$notice->id, '#left-tab5'])
-            ->with('notice', 'Evaluator added.');
     }
 }

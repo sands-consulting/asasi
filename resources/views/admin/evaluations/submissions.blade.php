@@ -13,49 +13,25 @@
 
 @section('content')
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="panel panel-flat">
-            <div class="panel-heading">
-                <h6 class="panel-title">Notices</h6>
-            </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.name') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->name }}</div>
-                        </div>
+                    <div class="col-sm-12 mb-15">
+                        <span class="label label-rounded label-default">{{ $notice->status }}</span>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.number') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->number }}</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.notice_type_id') }}</strong>:</label>
-                            <div class="form-control-static">{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
-                        </div>
+                    <div class="col-sm-12 mb-5">
+                        <div class="text-muted">{{ $notice->number }} ({{ $notice->organization->name }})</div>
                     </div>
                     <div class="col-sm-12">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.description') }}</strong>:</label>
-                            <div class="form-control-static">{{ !empty($notice->description) ? nl2br($notice->description) : 'N/A' }}</div>
-                        </div>
+                        <div class="">{{ $notice->name }}</div>
                     </div>
-                    {{-- <div class="col-sm-12">
-                        <div class="form-group">
-                            <label class="control-label"><strong>{{ trans('notices.attributes.rules') }}</strong>:</label>
-                            <div class="form-control-static">{!! !empty($notice->rules) ? nl2br($notice->rules) : 'N/A' !!}</div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-9">
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">Submissions</h6>

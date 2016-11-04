@@ -6,17 +6,17 @@ use App\Evaluations;
 use App\NoticeEvaluator;
 use Auth;
 
-class EvaluationsDataTable extends DataTable
+class EvaluationDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($noticeEvaluator) {
-                return view('admin.evaluations._index_actions', compact('noticeEvaluator'));
+            ->addColumn('action', function($evaluator) {
+                return view('admin.evaluations._index_actions', compact('evaluator'));
             })
-            ->editColumn('type', function($noticeEvaluator) {
-                return ucfirst(strtolower($noticeEvaluator->type));
+            ->editColumn('type', function($evaluator) {
+                return str_titleize($evaluator->type);
             })
             ->make(true);
     }
@@ -24,10 +24,18 @@ class EvaluationsDataTable extends DataTable
     public function query()
     {
         $evaluatorId = Auth::user()->id;
-        $query = NoticeEvaluator::leftJoin('notices', 'notices.id', '=', 'notice_evaluators.notice_id')
+        $query = NoticeEvaluator::leftJoin('notices', 'notices.id', '=', 'notice_evaluator.notice_id')
             ->leftJoin('organizations', 'organizations.id', '=', 'notices.organization_id')
-            ->select('notices.id', 'organizations.name as organization_name', 'notices.name', 'notices.number')
-            ->where('user_id', $evaluatorId);
+            ->leftJoin('evaluation_types', 'evaluation_types.id', '=', 'notice_evaluator.type_id')
+            ->select([
+                'notices.id as notice_id',
+                'organizations.name as organization_name',
+                'notices.name as notice_name',
+                'notices.number as notice_number',
+                'evaluation_types.name as evaluation_type'
+            ])
+            ->where('notice_evaluator.user_id', $evaluatorId)
+            ->where('notice_evaluator.status', 'active');
 
         if($this->datatables->request->input('q', null))
         {
@@ -55,14 +63,14 @@ class EvaluationsDataTable extends DataTable
                 'sWidth' => '25%',
             ],
             [
-                'data'  => 'number',
-                'name'  => 'number',
+                'data'  => 'notice_number',
+                'name'  => 'notice_number',
                 'title' => trans('notices.attributes.number'),
                 'sWidth' => '20%',
             ],
             [
-                'data'  => 'name',
-                'name'  => 'notices.name',
+                'data'  => 'notice_name',
+                'name'  => 'notice_name',
                 'title' => trans('notices.attributes.name'),
             ]
         ];

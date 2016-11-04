@@ -20,7 +20,7 @@ class EvaluatorServiceProvider extends ServiceProvider
     {
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('evaluators', 'App\Evaluator');
+            $router->model('evaluators', 'App\NoticeEvaluator');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
                 
@@ -32,7 +32,7 @@ class EvaluatorServiceProvider extends ServiceProvider
                     'as' => 'admin.evaluators.create',
                     'uses' => 'EvaluatorsController@create'
                 ]);
-                $router->post('evaluators/store', [
+                $router->post('evaluators/{notices}/store', [
                     'as' => 'admin.evaluators.store',
                     'uses' => 'EvaluatorsController@store'
                 ]);
@@ -40,17 +40,33 @@ class EvaluatorServiceProvider extends ServiceProvider
                     'as' => 'admin.evaluators.edit',
                     'uses' => 'EvaluatorsController@edit'
                 ]);
-                $router->get('evaluators/{notice_evaluator}/assign/{notices}', [
+                $router->get('evaluators/{evaluators}/assign/{notices}', [
                     'as' => 'admin.evaluators.assign',
                     'uses' => 'EvaluatorsController@assign'
                 ]);
-                $router->post('evaluators/{notice_evaluator}/assigned/{notices}', [
+                $router->post('evaluators/{evaluators}/assigned/{notices}', [
                     'as' => 'admin.evaluators.assigned',
                     'uses' => 'EvaluatorsController@assigned'
                 ]);
                 $router->get('evaluators/update', [
                     'as' => 'admin.evaluators.update',
                     'uses' => 'EvaluatorsController@update'
+                ]);
+                $router->post('evaluators/{notices}/save', [
+                    'as'    => 'admin.evaluators.save',
+                    'uses'  => 'EvaluatorsController@save'
+                ]);
+                $router->get('evaluators/{evaluators}/request', [
+                    'as' => 'admin.evaluators.request',
+                    'uses' => 'EvaluatorsController@request'
+                ]);
+                $router->put('evaluators/{evaluators}/accept', [
+                    'as' => 'admin.evaluators.accept',
+                    'uses' => 'EvaluatorsController@accept'
+                ]);
+                $router->put('evaluators/{evaluators}/decline', [
+                    'as' => 'admin.evaluators.decline',
+                    'uses' => 'EvaluatorsController@decline'
                 ]);
             });
 

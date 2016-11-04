@@ -47,14 +47,6 @@ class NoticesServiceProvider extends ServiceProvider
                     'as'    => 'admin.notices.duplicate',
                     'uses'  => 'NoticesController@duplicate'
                 ]);
-                $router->get('notices/{notices}/assign-evaluator', [
-                    'as'    => 'admin.notices.assign-evaluator',
-                    'uses'  => 'NoticesController@assignEvaluator'
-                ]);
-                $router->post('notices/{notices}/save-evaluator', [
-                    'as'    => 'admin.notices.save-evaluator',
-                    'uses'  => 'NoticesController@saveEvaluator'
-                ]);
                 $router->get('notices/{notices}/settings', [
                     'as'    => 'admin.notices.settings',
                     'uses'  => 'NoticesController@settings'
