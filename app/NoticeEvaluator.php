@@ -126,8 +126,8 @@ class NoticeEvaluator extends Model
     public function getProgress($type)
     {
         $progress = 0;
-        $total = $this->submissions()->where('type', $type)->count();
-        $completed = $this->submissions()->where('type', $type)
+        $total = $this->submissions()->where('type_id', $type)->count();
+        $completed = $this->submissions()->where('type_id', $type)
                 ->wherePivot('status', 'completed')
                 ->count();
 

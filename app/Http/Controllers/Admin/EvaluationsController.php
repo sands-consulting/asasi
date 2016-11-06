@@ -34,10 +34,10 @@ class EvaluationsController extends Controller
 
     public function create(Request $request, Notice $notice, Submission $submission)
     {
-        $evaluationRequirements = EvaluationRequirement::where('evaluation_type_id', $submission->type_id)
+        $requirements = EvaluationRequirement::where('evaluation_type_id', $submission->type_id)
             ->where('notice_id', $notice->id)->get();
 
-        return view('admin.evaluations.create', compact('notice', 'evaluationRequirements', 'submission'));
+        return view('admin.evaluations.create', compact('notice', 'requirements', 'submission'));
     }
 
     public function store(Request $request, Notice $notice, Submission $submission)

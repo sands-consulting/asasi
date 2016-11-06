@@ -55,8 +55,8 @@ class NoticesController extends Controller
         $vendors = $notice->vendors;
         $submissions['commercial'] = $notice->submissions()->where('type_id', 1)->get();
         $submissions['technical'] = $notice->submissions()->where('type_id', 2)->get();
-        $evaluators['commercial'] = $notice->evaluators()->wherePivot('type_id','commercials')->get();
-        $evaluators['technical'] = $notice->evaluators()->wherePivot('type_id','technicals')->get();
+        $evaluators['commercial'] = NoticeEvaluator::where('notice_id', $notice->id)->where('type_id', 1)->get();
+        $evaluators['technical'] = NoticeEvaluator::where('notice_id', $notice->id)->where('type_id', 2)->get();
         $vendorAwarded = $notice->vendors()->awarded()->first();
 
         return view('admin.notices.show', compact('notice', 'vendors', 'submissions', 'evaluators', 'vendorAwarded'));
