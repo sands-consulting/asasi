@@ -10,14 +10,15 @@
         <tbody>
             @if (!$evaluators['commercial']->isEmpty())
                 <?php $i = 1; ?>
+
                 @foreach ($evaluators['commercial'] as $evaluator)
                     <tr>
                         <td>{{ $evaluator->user->name }}</td>
-                        <td>{{ $evaluator->type }}</td>
+                        <td>{{ $evaluator->type->name }}</td>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped active" style="width: {{ $evaluator->getProgress($evaluator->type) }}%">
-                                    <span>{{ $evaluator->getProgress($evaluator->type) }}%</span>
+                                <div class="progress-bar progress-bar-striped active" style="width: {{ $evaluator->getProgress($evaluator->type_id) }}%">
+                                    <span>{{ $evaluator->getProgress($evaluator->type_id) }}%</span>
                                 </div>
                             </div>
                         </td>
@@ -49,11 +50,11 @@
                 @foreach ($evaluators['technical'] as $evaluator)
                     <tr>
                         <td>{{ $evaluator->user->name }}</td>
-                        <td>{{ $evaluator->type }}</td>
+                        <td>{{ $evaluator->type->name }}</td>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped active" style="width: {{ $evaluator->getProgress($evaluator->type) }}%">
-                                    <span>{{ $evaluator->getProgress($evaluator->type) }}%</span>
+                                <div class="progress-bar progress-bar-striped active" style="width: {{ $evaluator->getProgress($evaluator->type_id) }}%">
+                                    <span>{{ $evaluator->getProgress($evaluator->type_id) }}%</span>
                                 </div>
                             </div>
                         </td>

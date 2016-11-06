@@ -122,11 +122,7 @@
                     </div>
 
                     <div class="tab-pane has-padding" id="left-tab4">
-                        @include('admin.notices.show-evaluators')
-                    </div>
-
-                    <div class="tab-pane has-padding" id="left-tab5">
-                        @include('admin.notices.show-evaluations')
+                        @include('admin.notices.show-evaluations-by-evaluator')
                     </div>
 
                     <div class="tab-pane has-padding" id="left-tab6">
