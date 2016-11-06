@@ -46,43 +46,40 @@
             <div class="panel-heading">
                 <h6 class="panel-title">Evaluations Criteria</h6>
             </div>
-            <div class="panel-body">
-                {!! Former::open(route('admin.evaluations.store', [$notice->id, $submission->id])) !!}
-
-                    <?php $i = 1; ?>
-                    @foreach ($evaluationRequirements as $evaluationRequirement)
-                        <div class="row is-table-row">
-                            <div class="col-sm-1">
-                                <div class="box">{{ $i }}</div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="box"> 
-                                    {{ $evaluationRequirement->title }}
-                                </div>  
-                            </div>
-                            <div class="col-sm-2 greyed">
-                                <div class="box text-center">
-                                    {!! Former::number('scores['. $evaluationRequirement->id .']')
+            {!! Former::open(route('admin.evaluations.store', [$notice->id, $submission->id])) !!}
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th width="80px">#</th>
+                            <th>Title</th>
+                            <th width="250px">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        @foreach ($requirements as $requirement)
+                            <tr>
+                                <td>{{ $i }}</td>
+                                <td>{{ $requirement->title }}</td>
+                                <td>
+                                    {!! Former::number('scores['. $requirement->id .']')
                                         ->label(false)
-                                        ->append('/ ' . $evaluationRequirement->full_score)
+                                        ->append('/ ' . $requirement->full_score)
                                         ->addClass('text-center')
                                         ->min(0)
-                                        ->max($evaluationRequirement->full_score)
-                                        ->required() !!}
-                                </div>
-                            </div>
-                        </div>
-                        <?php $i++; ?>
-                    @endforeach
-
-                    <div class="row is-table-row">
-                        <div class="col-sm-2 col-sm-offset-5 text-center">
-                            <button type="submit" class="btn btn-primary bg-blue-400 btn-block"><span class="">{{ trans('actions.save') }}</span></button>
-                        </div>
+                                        ->max($requirement->full_score)
+                                        ->required() !!}</td>
+                            </tr>
+                            <?php $i++; ?>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="panel-footer">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary bg-blue-400 pl-20 pr-20">{{ trans('actions.save') }}</button>
                     </div>
-
-                {!! Former::close() !!}
-            </div>
+                </div>
+            {!! Former::close() !!}
         </div>
     </div>
 </div>

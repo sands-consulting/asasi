@@ -17,6 +17,35 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row is-table-row">
+                    <div class="col-sm-8">
+                        <div class="text-muted">{{ $notice->number }}</div>
+                        <a href="{{ route('admin.notices.show', $notice->id) }}">{{ $notice->name }}</a>
+                    </div>
+                    <div class="col-sm-2 text-center text-muted">
+                        <div class="box ml-10">
+                            <div class="text-size-mini">Notice Type</div>
+                            <div>{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center text-muted">
+                        <div class="box">
+                            <div class="text-size-mini">Evaluation Type</div>
+                            <div>{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row is-table-row">
+                    <div class="col-sm-12">
+                        <div class="text-muted">{{ !empty($notice->description) ? nl2br($notice->description) : 'N/A' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title">Evaluations</h6>
             </div>
