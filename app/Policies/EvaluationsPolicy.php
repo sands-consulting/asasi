@@ -35,9 +35,4 @@ class EvaluationsPolicy extends BasePolicy
     {
         return $this->edit();
     }
-
-    public function summary()
-    {
-        return $this->user->hasPermission('evaluation:index');
-    }
 }

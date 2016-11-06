@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Notice;
 use App\NoticeEvaluator;
+use App\Vendor;
 use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeRequest;
@@ -142,5 +143,33 @@ class NoticesController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.cancelled', ['name' => $notice->name]));
+    }
+
+    public function summary(Notice $notice)
+    {
+        // Fixme: try to create dynamic query for evaluation type other than commercial and technical.
+        $vendors = Vendor::leftJoin('submissions as commercials', 'commercials.vendor_id', '=', 'vendors.id')
+            ->leftJoin('submissions as technicals', 'technicals.vendor_id', '=', 'vendors.id')
+            ->where('commercials.notice_id', $notice->id)
+            ->where('technicals.notice_id', $notice->id)
+            ->where('commercials.type_id', 1)
+            ->where('technicals.type_id', 2)
+            ->select([
+                'vendors.id',
+                'vendors.name',
+                'technicals.total_score as technical_score',
+                'commercials.total_score as commercial_score',
+                'commercials.price as offered_price',
+                \DB::raw("'None' as offered_duration")
+            ])
+            ->groupBy('vendors.id')
+            ->get();
+
+        return view('admin.notices.evaluation-summary', compact('notice', 'vendors'));
+    }
+
+    public function award(Notice $notice, Vendor $vendor)
+    {
+        return view('admin.notices.award', compact('notice', 'vendor'));
     }
 }

@@ -51,6 +51,14 @@ class NoticesServiceProvider extends ServiceProvider
                     'as'    => 'admin.notices.settings',
                     'uses'  => 'NoticesController@settings'
                 ]);
+                $router->get('notices/{notices}/summary', [
+                    'as' => 'admin.notices.summary',
+                    'uses' => 'NoticesController@summary'  
+                ]);
+                $router->get('notices/{notices}/award/{vendors}', [
+                    'as' => 'admin.notices.award',
+                    'uses' => 'NoticesController@award'  
+                ]);
                 $router->resource('notices', 'NoticesController');
             });
 
