@@ -56,7 +56,7 @@ class EvaluationSeeder extends Seeder
             ['evaluation:index', 'View list of notices assigned.'],
             ['evaluation:submission', 'View list of submisssion.'],
             ['evaluation:create', 'Create new evaluation.'],
-            ['evaluation:ùpdate', 'Update existing evaluation.'],
+            ['evaluation:edit', 'Update existing evaluation.'],
             ['evaluation:delete', 'Delete existing evaluation.'],
         ];
 

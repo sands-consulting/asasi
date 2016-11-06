@@ -25,7 +25,7 @@ class EvaluatorsPolicy extends BasePolicy
 
     public function update()
     {
-        return $this->user->hasPermission('evaluator:update');
+        return $this->edit();
     }
 
     public function assign()

@@ -23,7 +23,7 @@ class EvaluationsPolicy extends BasePolicy
 
     public function store()
     {
-        return $this->user->hasPermission('evaluation:store');
+        return $this->create();
     }
 
     public function edit()
@@ -33,6 +33,6 @@ class EvaluationsPolicy extends BasePolicy
 
     public function update()
     {
-        return $this->user->hasPermission('evaluation:update');
+        return $this->edit();
     }
 }
