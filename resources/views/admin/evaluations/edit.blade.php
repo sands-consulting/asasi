@@ -65,7 +65,7 @@
                             <td>{{ $i }}</td>
                             <td>{{ $requirement->title }}</td>
                             <td>
-                                {!! Former::number('scores['. $requirement->id .']')
+                                {!! Former::number('scores['. $requirement->requirement_id .']')
                                     ->label(false)
                                     ->append('/ ' . $requirement->full_score)
                                     ->addClass('text-center')

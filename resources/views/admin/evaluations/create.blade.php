@@ -23,13 +23,17 @@
                         <div class="text-muted">{{ $notice->number }}</div>
                         <a href="{{ route('admin.notices.show', $notice->id) }}">{{ $notice->name }}</a>
                     </div>
-                    <div class="col-sm-2 box text-center text-muted">
-                        <div class="text-size-mini">Notice Type</div>
-                        <div>{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
+                    <div class="col-sm-2 text-center text-muted">
+                        <div class="box ml-10">
+                            <div class="text-size-mini">Notice Type</div>
+                            <div>{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
+                        </div>
                     </div>
-                    <div class="col-sm-2 box text-center text-muted">
-                        <div class="text-size-mini">Evaluation Type</div>
-                        <div>{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
+                    <div class="col-sm-2 text-center text-muted">
+                        <div class="box">
+                            <div class="text-size-mini">Evaluation Type</div>
+                            <div>{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
+                        </div>
                     </div>
                 </div>
                 <div class="row is-table-row">

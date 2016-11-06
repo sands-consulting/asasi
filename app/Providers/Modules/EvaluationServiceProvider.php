@@ -58,6 +58,11 @@ class EvaluationServiceProvider extends ServiceProvider
                     'uses' => 'EvaluationsController@requirements'  
                 ]);
 
+                $router->get('evaluations/{notices}/summary', [
+                    'as' => 'admin.evaluations.summary',
+                    'uses' => 'EvaluationsController@summary'  
+                ]);
+
                 $router->resource('evaluations', 'EvaluationsController', ['only' => ['index']]);
             });
 

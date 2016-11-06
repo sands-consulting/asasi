@@ -28,11 +28,16 @@ class EvaluationsPolicy extends BasePolicy
 
     public function edit()
     {
-        return $this->user->hasPermission('evaluation:edit');
+        return $this->user->hasPermission('evaluation:update');
     }
 
     public function update()
     {
         return $this->edit();
+    }
+
+    public function summary()
+    {
+        return $this->user->hasPermission('evaluation:index');
     }
 }

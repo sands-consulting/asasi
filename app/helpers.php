@@ -57,3 +57,7 @@ function is_complete_form($attributes)
 
     return true;
 }
+
+function trim_trailing_zeroes($nbr) {
+    return strpos($nbr,'.')!==false ? rtrim(rtrim($nbr,'0'),'.') : $nbr;
+}
