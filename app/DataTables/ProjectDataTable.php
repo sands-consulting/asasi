@@ -26,8 +26,11 @@ class ProjectDataTable extends DataTable
                 return view('admin.projects._index_status', compact('project'));
             })
             ->editColumn('project_manager', function($project) {
-                return '<img src="' . Gravatar::src($project->managers()->first()->email, 30) . '" class="img-circle" alt="' . $project->managers()->first()->name . '">';
-
+                $managers = null;
+                foreach ($project->managers() as $manager) {
+                    $managers .= '<img src="' . Gravatar::src($manager->email, 40) . '" class="img-circle" alt="' . $manager->name . '" title="' . $manager->name . '">';
+                }
+                return $managers;
             })
             ->editColumn('projects.created_at', function($project) {
                 return $project->created_at->format('d/m/Y H:i:s');

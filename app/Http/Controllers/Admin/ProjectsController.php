@@ -55,7 +55,22 @@ class ProjectsController extends Controller
 
     public function update(ProjectRequest $request, Project $project)
     {
-        $inputs = $request->only('name', 'value', 'status', 'type_id');
+        $inputs = $request->only(
+            'organization_id',
+            'name',
+            'number',
+            'description',
+            'contact_name', 
+            'contact_position', 
+            'contact_phone', 
+            'contact_fax', 
+            'contact_email', 
+            'managers', 
+            'vendor_id', 
+            'cost', 
+            'progress', 
+            'status'
+        );
 
         if($request->user()->hasPermission('project:organization'))
         {
@@ -67,10 +82,22 @@ class ProjectsController extends Controller
         }
 
         ProjectsRepository::update($project, $inputs);
+
+        $managers = [];
+        if (count($inputs['managers']) > 0) {
+            foreach ($inputs['managers'] as $manager) {
+                $managers[$manager] = [
+                    'position' => 'manager',
+                    'status' => 'active'
+                ];
+            }
+        }
+        $project->users()->sync($managers);
+
         UserLogsRepository::log($request->user(), 'update', $project, $request->getClientIp());
         return redirect()
             ->route('admin.projects.show', $project->id)
-            ->with('notice', trans('projects.notices.updated', ['name' => $project->name]));
+            ->with('notice', trans('projects.notices.updated', ['number' => $project->number]));
     }
 
     public function destroy(Project $project)

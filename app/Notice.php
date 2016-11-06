@@ -192,6 +192,11 @@ class Notice extends Model
      * Helpers
      */
 
+    public static function options()
+    {
+        return static::lists('name','id');
+    }
+
     public function isExpired()
     {
         return Carbon::today()->toDateString() >= $this->expired_at;

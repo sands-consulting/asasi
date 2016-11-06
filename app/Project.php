@@ -103,10 +103,10 @@ class Project extends Model
      * Mutators
      */
     
-    public function getCostAttribute($value)
-    {
-        return number_format($value, '0', '.', ',');
-    }
+    // public function getCostAttribute($value)
+    // {
+    //     return number_format($value, '0', '.', ',');
+    // }
 
     /*
      * Helpers

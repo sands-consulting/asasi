@@ -147,7 +147,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="text-muted">Proposed Project Cost</label>
-                            <div class="form-control-static">{{ $project->cost }}</div>
+                            <div class="form-control-static">{{ 'RM' }} {{ $project->cost }}</div>
                         </div>
                     </div>
                     <div class="col-sm-6">

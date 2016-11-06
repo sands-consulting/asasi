@@ -6,11 +6,18 @@ return [
     'attributes' => [
         'name' => 'Name',
         'number' => 'number',
-        'descriptions' => 'Desicription',
-        'type' => 'Type',
+        'description' => 'Description',
+        'cost' => 'Cost',
         'organization' => 'Organization',
         'vendor' => 'Vendor',
+        'contact_name' => 'Contact Name',
+        'contact_position' => 'Contact Position',
+        'contact_phone' => 'Contact Phone',
+        'contact_fax' => 'Contact Fax',
+        'contact_email' => 'Contact Email',
         'managers' => 'Managers',
+        'organization' => 'Organization',
+        'notice' => 'Notice',
         'status' => 'Status',
         'progress' => 'Progress',
         'created_at' => 'Created At',
@@ -24,9 +31,9 @@ return [
     ],
 
     'notices' => [
-        'created' => 'Project :name created',
-        'updated' => 'Project :name updated',
-        'deleted' => 'Project :name deleted'
+        'created' => 'Project :number created',
+        'updated' => 'Project :number updated',
+        'deleted' => 'Project :number deleted'
     ],
 
     'views' => [
