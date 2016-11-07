@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NoticeAwarded;
 use App\Notice;
 use App\NoticeEvaluator;
 use App\Project;
@@ -212,6 +213,8 @@ class NoticesController extends Controller
         $project->allocations()->sync($allocations);
         
         NoticesRepository::update($notice, ['status', 'awarded']);
+        
+        event(new NoticeAwarded($notice, $vendor));
 
         return redirect()
             ->route('admin.projects.edit', $project->id)

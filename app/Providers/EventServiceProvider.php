@@ -40,6 +40,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\EvaluatorSubmissionAssigned' => [
             'App\Listeners\EvaluatorSubmissionAssignedListener',
         ],
+        'App\Events\NoticeAwarded' => [
+            'App\Listeners\NoticeAwardedListener',
+        ],
     ];
 
     /**
