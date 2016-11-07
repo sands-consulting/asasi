@@ -241,7 +241,7 @@ class Vendor extends Model
         });
 
         static::saving(function($model){
-            foreach ($model->toArray() as $key => $value) {
+            foreach($model->getFillable() as $key => $value) {
                 $model->{$key} = empty($value) ? null : $value;
             }
         });
