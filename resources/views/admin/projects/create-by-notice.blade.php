@@ -24,26 +24,6 @@
 @section('content')
 <div class="panel panel-flat">
 	<div class="panel-body">
-		{{-- {!! Former::open_vertical(route('admin.projects.create-by-notice'))->method('POST') !!}
-			<div class="row">
-				<div class="col-sm-12">
-					{!! Former::select('notice_id')
-						->options(App\Notice::awarded()->lists('name', 'id'))
-						->label('projects.attributes.notice')
-						->placeholder('Select from notice')
-						->addClass('select2') !!}
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<div class="text-right"> 
-					{!! Former::submit(trans('actions.create'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
-				</div>
-			</div>
-		{!! Former::close() !!} 
-
-		<div class="text-center text-size-large text-semibold">OR</div>
-		--}}
-		
 		{!! Former::open_vertical(route('admin.projects.store'))->method('POST') !!}
 			@include('admin.projects.form')
 		{!! Former::close() !!}

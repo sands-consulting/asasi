@@ -13,18 +13,21 @@
 	<div class="col-sm-8">
 		{!! Former::text('name')
 			->label('projects.attributes.name')
+			->value($notice->name)
 			->required() !!}
 	</div>
 
 	<div class="col-sm-4"> 
 		{!! Former::text('number')
 			->label('projects.attributes.number')
+			->value($notice->number)
 			->required() !!}
 	</div>
 
 	<div class="col-sm-12">
 		{!! Former::textarea('description')
 			->label('projects.attributes.description')
+			->value($notice->description)
 			->required() !!}
 	</div>
 </div>
@@ -36,7 +39,6 @@
 			->addClass('select2')
 			->required() !!}
 	</div>
-	@if ($project)
 	<div class="col-sm-6"> 
 		{!! Former::select('managers[]')
 			->multiple(true)
@@ -44,9 +46,8 @@
 			->options(App\User::options())
 			->addClass('select2')
 			->placeholder('Select Manager')
-			->value($project->managers()) !!}
+			->required() !!}
 	</div>
-	@endif
 </div>
 <div class="row">
 	<div class="col-sm-6"> 
@@ -55,7 +56,7 @@
 			->required() !!}
 	</div>
 	<div class="col-sm-6"> 
-		{!! Former::text('contact_phone')
+		{!! Former::text('contact_position')
 			->label('projects.attributes.contact_phone')
 			->required() !!}
 	</div>
@@ -75,11 +76,6 @@
 	<div class="col-sm-6"> 
 		{!! Former::text('cost')
 			->label('projects.attributes.cost')
-			->required() !!}
-	</div>
-	<div class="col-sm-6"> 
-		{!! Former::text('progress')
-			->label('projects.attributes.progress')
 			->required() !!}
 	</div>
 </div>

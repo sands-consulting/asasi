@@ -80,4 +80,9 @@ class NoticesPolicy extends BasePolicy
     {
         return $this->user->hasPermission('notice:show');
     }
+
+    public function storeAward()
+    {
+        return $this->award();
+    }
 }

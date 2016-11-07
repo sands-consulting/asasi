@@ -93,6 +93,11 @@ class Notice extends Model
         return $query->where('status', 'published');
     }
 
+    public function scopeAwarded($query)
+    {
+        return $query->where('status', 'awarded');
+    }
+
     public function scopeLimited($query)
     {
         return $query->where('status', 'limited');

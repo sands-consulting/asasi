@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Notice;
 use App\NoticeEvaluator;
+use App\Project;
 use App\Vendor;
 use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeRequest;
 use App\Repositories\NoticesRepository;
+use App\Repositories\ProjectsRepository;
 use App\Repositories\UserLogsRepository;
 use Auth;
 use Illuminate\Http\Request;
@@ -171,5 +173,48 @@ class NoticesController extends Controller
     public function award(Notice $notice, Vendor $vendor)
     {
         return view('admin.notices.award', compact('notice', 'vendor'));
+    }
+
+    public function storeAward(Request $request, Notice $notice)
+    {
+        $input = $request->only(['vendor_id', 'allocations', 'duration']);
+        $vendor = Vendor::find($input['vendor_id']);
+
+        $allocations = [];
+        $cost = null;
+        if (count($input['allocations']) > 0 ) {
+            foreach($input['allocations'] as $allocation_id => $amount) {
+                $allocations[$allocation_id] = [
+                    'amount' => $amount,
+                    'status' => 'active'
+                ];
+
+                $cost += $amount;
+            }
+        }
+
+        $project = ProjectsRepository::create(new Project(), [
+            'name'            => $notice->name,
+            'slug'            => null,
+            'number'          => $notice->number,
+            'description'     => $notice->description,
+            'duration'        => $input['duration'],
+            'cost'            => $cost,
+            'contact_name'    => $vendor->contact_person_name,
+            'contact_phone'   => $vendor->contact_person_telephone,
+            'contact_email'   => $vendor->contact_person_email,
+            'contact_fax'     => $vendor->contact_fax,
+            'organization_id' => $notice->organization_id,
+            'vendor_id'       => $vendor->id,
+            'notice_id'       => $notice->id,
+        ]);
+
+        $project->allocations()->sync($allocations);
+        
+        NoticesRepository::update($notice, ['status', 'awarded']);
+
+        return redirect()
+            ->route('admin.projects.edit', $project->id)
+            ->with('notices', trans('projects.notices.create', ['number' => $project->number]));
     }
 }

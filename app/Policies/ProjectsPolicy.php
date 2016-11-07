@@ -21,6 +21,11 @@ class ProjectsPolicy extends BasePolicy
         return $this->user->hasPermission('project:create');
     }
 
+    public function createByNotice()
+    {
+        return $this->create();
+    }
+
     public function store()
     {
         return $this->create();

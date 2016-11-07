@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Notice;
 use App\Project;
 use App\Organization;
 use App\DataTables\ProjectDataTable;
@@ -29,6 +30,13 @@ class ProjectsController extends Controller
     public function create(Request $request)
     {
         return view('admin.projects.create', ['project' => new Project]);
+    }
+
+    public function createByNotice(Request $request)
+    {
+        $input = $request->only('notice_id');
+        $project = Notice::find($input['notice_id']);
+        return view('admin.projects.create', ['project' => $project]);
     }
 
     public function store(ProjectRequest $request)

@@ -28,6 +28,16 @@ class ProjectsServiceProvider extends ServiceProvider
                     'uses'  => 'ProjectsController@logs'
                 ]);
 
+                $router->post('projects/create-by-notice', [
+                    'as'    => 'admin.projects.create-by-notice',
+                    'uses'  => 'ProjectsController@createByNotice'
+                ]);
+
+                $router->post('projects/store-by-notice', [
+                    'as'    => 'admin.projects.store-by-notice',
+                    'uses'  => 'ProjectsController@storeByNotice'
+                ]);
+
                 $router->resource('projects', 'ProjectsController');
             });
         });

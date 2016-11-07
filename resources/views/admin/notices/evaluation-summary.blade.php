@@ -113,10 +113,10 @@
                         <td class="text-right">{{ 'RM' }} {{ trim_trailing_zeroes($vendor->offered_price) }}</td>
                         <td>{{ $vendor->offered_duration }}</td>
                         <td>
-                            <a href="{{ route('admin.notices.award', [$notice->id, $vendor->id]) }}" class="btn btn-primary btn-xs">Award</a>
+                            <a href="{{ route('admin.notices.award', [$notice->id, $vendor->id]) }}" class="btn btn-primary btn-xs" data-method="POST">Award</a>
                         </td>
                         <td>
-                            <a href="{{ route('admin.notices.award', [$notice->id, $vendor->id]) }}" class="btn btn-default btn-xs"><i class="icon-list"></i></a>
+                            <a href="{{ route('admin.notices.award', [$notice->id, $vendor->id]) }}" class="btn btn-default btn-xs"><i class="icon-list3"></i></a>
                         </td>
                     </tr>
                     @endforeach

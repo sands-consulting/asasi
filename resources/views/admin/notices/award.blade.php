@@ -91,7 +91,7 @@
                 <h6 class="panel-title">Award</h6>
             </div>
             <div class="panel-body">
-                {!! Former::open_vertical() !!}
+                {!! Former::open_vertical(route('admin.notices.store-award', $notice->id)) !!}
                     <fieldset>
                         <legend><i class="icon-office"></i> Vendors</legend>
                         <div class="row">

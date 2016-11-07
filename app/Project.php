@@ -17,17 +17,18 @@ class Project extends Model
 
     protected $fillable = [
         'name',
-        'desctiption',
+        'number',
+        'description',
         'contact_name',
         'contact_position',
         'contact_email',
         'contact_phone',
         'contact_fax',
         'cost',
+        'progress',
         'notice_id',
         'organization_id',
         'vendor_id',
-        'value',
         'status'
     ];
 
@@ -120,5 +121,10 @@ class Project extends Model
     public function managers()
     {
         return $this->users()->wherePivot('position', 'manager')->get();
+    }
+
+    public static function boot()
+    {
+        parent::boot();
     }
 }
