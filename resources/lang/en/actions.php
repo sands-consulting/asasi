@@ -15,6 +15,7 @@ return [
 	'finish' => 'Finish',
 	'login' => 'Login',
 	'logout' => 'Logout',
+	'next' => 'Next',
 	'pay' => 'Pay',
 	'proceed' => 'Proceed',
 	'publish' => 'Publish',

@@ -74,6 +74,16 @@ class VendorType extends Model
         }
     }
 
+    public function scopeActive($query)
+    {
+        return $query->whereStatus('active');
+    }
+
+    public function getLabelAttribute()
+    {
+        return implode(' - ', [$this->incorporation_authority, $this->incorporation_type]);
+    }
+
     public static function boot()
     {
         parent::boot();

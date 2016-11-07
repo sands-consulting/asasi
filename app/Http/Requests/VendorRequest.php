@@ -40,7 +40,7 @@ class VendorRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'registration_number' => 'required',
+            'registration_number' => '',
             'tax_1_number' => '',
             'tax_2_number' => '',
             'address_1' => '',

@@ -3,10 +3,9 @@
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class Vendor extends Authenticatable
+class Vendor extends Model
 {
     use RevisionableTrait,
         SoftDeletes;
@@ -41,7 +40,7 @@ class Vendor extends Authenticatable
     ];
 
     protected $attributes = [
-        'status' => 'draft'
+        'status' => 'pending'
     ];
 
     protected $searchable = [

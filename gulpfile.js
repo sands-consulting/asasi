@@ -43,6 +43,7 @@ elixir(function(mix) {
         'vendor/limitless-four.js',
         'vendor/pnotify.js',
         'vendor/nicescroll.js',
+        'vendor.js',
         'public.js',
     ], 'public/assets/js/public.js')
     .scripts([

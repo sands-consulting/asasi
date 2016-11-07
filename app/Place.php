@@ -92,6 +92,16 @@ class Place extends Model
         }
     }
 
+    public function scopeActive($query)
+    {
+        return $query->whereStatus('active');
+    }
+
+    public function scopeType($query, $type)
+    {
+        return $query->whereType($type);
+    }
+
     /* 
      * State controls 
      */

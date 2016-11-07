@@ -16,6 +16,7 @@ return [
         'expiry' => 'Subscription Expiry Date',
         'no_subscription' => 'You have no active subscription',
         'renew' => 'Renew',
+        'continue_registration' => 'Continue Registration',
         'company_details' => 'Company Details',
         'change_requests' => 'Change Requests',
         'submissions' => 'Submissions'

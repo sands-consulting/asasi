@@ -2,10 +2,10 @@
 
 namespace App\Libraries;
  
-use Carbon\Carbon;
+use Carbon\Carbon as NesbotCarbon;
 use App\Setting;
  
-class MyCarbon extends Carbon
+class Carbon extends NesbotCarbon
 {
     // Example method getShort() which formats the object's
     // value with the defined short format string.

@@ -2,9 +2,10 @@
 
 return [
     'title' => 'Vendors',
+
     'attributes' => [
         'name' => 'Vendor Name',
-        'registration_number' => 'Registration Number',
+        'registration_number' => 'Registration No.',
         'tax_1_number' => 'Tax Number (1)',
         'tax_2_number' => 'Tax Number (2)',
         'address' => 'Address',
@@ -23,8 +24,8 @@ return [
         'contact_person_telephone' => 'Contact Person Telephone',
         'contact_person_email' => 'Contact Person Email',
         'capital_currency' => 'Capital Currency',
-        'capital_authorized' => 'Capital Authorized',
-        'capital_paid_up' => 'Capital Paid Up',
+        'capital_authorized' => 'Authorized Capital',
+        'capital_paid_up' => 'Paid Up Capital',
         'mof_number' => 'MOF Registration Number',
         'mof_expiry_date' => 'MOF Expiry Date',
         'mof_qualification_code' => 'MOF Qualification Code',
@@ -39,6 +40,12 @@ return [
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
         'deleted_at' => 'Deleted At',
+
+        'shareholders' => [
+            'name' => 'Name',
+            'identity_number' => 'Identity Number',
+            'nationality' => 'Nationality',
+        ]
     ],
 
     'buttons' => [
@@ -56,6 +63,7 @@ return [
         'activate' => 'Activate',
         'blacklist' => 'Blacklist',
         'unblacklist' => 'Unblacklist',
+        'add-shareholder' => 'Add Shareholder',
     ],
 
     'notices' => [
@@ -97,13 +105,17 @@ return [
             'title' => 'Create New Vendor',
         ],
         'edit' => [
-            'title' => 'Edit',
-        ],
-        'apply' => [
-            'title' => 'Vendor Application Form',
-        ],
-        'pending' => [ 
-            'title' => 'Application Pending Approval',
+            'title' => 'Edit Vendor',
+
+            'application' => [
+                'title' => 'Company Application Form',
+                'description' => 'All fields are compulsary. The form can be save and update later for completion'
+            ],
+
+            'details' => [
+                'title' => 'Edit Company Details',
+                'description' => 'All fields are compulsary. The form can be save and update later for completion'
+            ]
         ],
         '_show' => [
             'nav' => [
@@ -117,6 +129,18 @@ return [
                 'transactions' => 'Transactions',
                 'projects' => 'Projects',
             ]
+        ],
+        '_form' => [
+            'nav' => [
+                'details' => 'Company Details',
+                'contact' => 'Contact Person',
+                'qualification_codes' => 'Qualification Codes',
+                'shareholders' => 'Shareholders',
+                'employees' => 'Employees',
+                'accounts' => 'Accounts',
+                'files' => 'Files'
+            ],
+            'submit_application' => 'Submit Application'
         ]
 	]
 ];

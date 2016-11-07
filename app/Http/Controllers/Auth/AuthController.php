@@ -42,7 +42,12 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return DB::transaction(function() use($data) {
-            $vendor = Vendor::create(['name' => $data['vendor_name'], 'registration_number' => $data['vendor_registration_number']]);
+            $vendor = Vendor::create([
+                'name' => $data['vendor_name'],
+                'registration_number' => $data['vendor_registration_number']
+                'contact_person_name' => $data['name'],
+                'contact_person_email' => $data['email']
+            ]);
 
             $user = User::create([
                 'name' => $data['name'],

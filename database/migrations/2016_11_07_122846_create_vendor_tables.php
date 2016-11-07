@@ -16,11 +16,51 @@ class CreateVendorTables extends Migration
             $table->string('normalized_registration_number')->index()->after('registration_number');
         });
 
+        Schema::create('vendor_shareholders', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('identity_number')->index();
+            $table->unsignedInteger('nationality_id')->index();
+            $table->unsignedInteger('vendor_id');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('nationality_id')
+                ->references('id')
+                ->on('places')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('vendor_id')
+                ->references('id')
+                ->on('vendors')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
         Schema::create('vendor_employees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('designation');
             $table->string('role');
+            $table->unsignedInteger('vendor_id');
+            $table->nullableTimestamps();
+            $table->softDeletes();
+
+            $table->foreign('vendor_id')
+                ->references('id')
+                ->on('vendors')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('vendor_accounts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('account_name');
+            $table->string('account_number');
+            $table->string('account_bank_name');
+            $table->string('account_bank_iban');
+            $table->text('account_bank_address');
             $table->unsignedInteger('vendor_id');
             $table->nullableTimestamps();
             $table->softDeletes();
@@ -103,6 +143,8 @@ class CreateVendorTables extends Migration
     {
         Schema::drop('vendor_files');
         Schema::drop('vendor_qualification_codes');
+        Schema::drop('vendor_accounts');
+        Schema::drop('vendor_shareholders');
         Schema::drop('vendor_employees');
 
         Schema::table('vendors', function (Blueprint $table) {

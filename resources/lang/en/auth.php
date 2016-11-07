@@ -14,8 +14,8 @@ return [
     */
 
     'attributes' => [
-        'vendor_name'                   => 'Vendor Name',
-        'vendor_registration_number'    => 'Vendor Registration No.',
+        'vendor_name'                   => 'Company Name',
+        'vendor_registration_number'    => 'Company Registration No.',
         'name'                          => 'Name',
         'email'                         => 'Email Address',
         'password'                      => 'Password',
