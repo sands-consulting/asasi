@@ -91,6 +91,11 @@ class Vendor extends Authenticatable
         return $query->whereStatus('awarded');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', '=', 'active');
+    }
+
     /* 
      * State controls 
      */
@@ -191,18 +196,27 @@ class Vendor extends Authenticatable
      * Scopes
      */
     
-    public function scopeActive($query)
+    public function getActiveSubscriptionAttribute()
     {
-        return $query->where('status', '=', 'active');
+        return $this->subscriptions()->active()->first();
     }
 
-    /*
-     * Helpers 
-     */
+    public function getAddressAttribute()
+    {
+        $address = [
+            $this->address_1,
+            $this->address_2,
+            $this->address_postcode . ($this->city ? ' ' . $this->city->name : null),
+            $this->state ? $this->state->name : null,
+            $this->country ? $this->country->name : null
+        ];
+
+        return implode("\n", array_filter($address));
+    }
 
     public static function options()
     {
-        return ['' => 'Select One'] + Vendor::lists('name', 'id')->toArray();
+        return Vendor::lists('name', 'id')->toArray();
     }
     // public function getProgress($type)
     // {

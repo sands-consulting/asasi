@@ -114,6 +114,11 @@ class User extends Authenticatable
         return $this->blacklists()->active()->count() > 0;
     }
 
+    public function getVendorAttribute()
+    {
+        return $this->hasRole('Vendor') ? $this->vendors()->first() : null;
+    }
+
     /*
      * Search scopes
      */

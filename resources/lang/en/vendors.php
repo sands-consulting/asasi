@@ -7,6 +7,7 @@ return [
         'registration_number' => 'Registration Number',
         'tax_1_number' => 'Tax Number (1)',
         'tax_2_number' => 'Tax Number (2)',
+        'address' => 'Address',
         'address_1' => 'Line 1',
         'address_2' => 'Line 2',
         'address_postcode' => 'Postcode',
@@ -103,6 +104,19 @@ return [
         ],
         'pending' => [ 
             'title' => 'Application Pending Approval',
+        ],
+        '_show' => [
+            'nav' => [
+                'details' => 'Details',
+                'qualification_codes' => 'Qualification Codes',
+                'users' => 'Users',
+                'subscriptions' => 'Subscriptions',
+                'invitations' => 'Invitations',
+                'eligibles' => 'Eligibles',
+                'purchases' => 'Purchases',
+                'transactions' => 'Transactions',
+                'projects' => 'Projects',
+            ]
         ]
 	]
 ];

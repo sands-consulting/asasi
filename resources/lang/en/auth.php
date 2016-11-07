@@ -31,7 +31,7 @@ return [
     'required' => 'Please enter your login and password.',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'unauthorized' => 'You are not authorized to run the action',
+    'unauthorized' => 'You are not authorized to access previous page.',
 
     'register' => 'Register new account',
     'login' => 'Login to your account',

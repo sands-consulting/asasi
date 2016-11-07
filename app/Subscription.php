@@ -1,12 +1,12 @@
 <?php namespace App;
 
-use Cviebrock\EloquentSluggable\Sluggable;
+use App\Libraries\Traits\DateAccessorTrait;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Venturecraft\Revisionable\RevisionableTrait;
-use App\Libraries\Traits\DateAccessorTrait;
 
 class Subscription extends Authenticatable
 {
@@ -116,12 +116,15 @@ class Subscription extends Authenticatable
         parent::boot();
     }
 
-    /*
-     * Helpers
-     */
-
-    public function isExpired()
+    public function getExpiringAttribute()
     {
-        return Carbon::today()->toDateString() >= $this->expired_at;
+        $compare = $this->expired_at->subMonths(3);
+        return $compare->freshTimestamp()->gte($compare);
     }
+
+    public function getExpiredAttribute()
+    {
+        return $compare->freshTimestamp()->gt($this->expired_at);
+    }
+
 }

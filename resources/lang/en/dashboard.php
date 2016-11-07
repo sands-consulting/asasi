@@ -14,9 +14,11 @@ return [
 
     'vendor' => [
         'expiry' => 'Subscription Expiry Date',
+        'no_subscription' => 'You have no active subscription',
         'renew' => 'Renew',
         'company_details' => 'Company Details',
-        'change_requests' => 'Change Requests'
+        'change_requests' => 'Change Requests',
+        'submissions' => 'Submissions'
     ],
 
     'eligibles' => [

@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class VendorsController extends Controller
 {
-    public function index()
-    {
-        return view('vendors.create');
-    }
-
     public function create()
     {
         return view('vendors.create');
@@ -45,6 +40,11 @@ class VendorsController extends Controller
             ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
     }
 
+    public function show(Vendor $vendor)
+    {
+        return view('vendors.show', compact('vendor'));
+    }
+
     public function completeApplication(Request $request, Vendor $vendor)
     {
         if (is_complete_form($vendor)) {
@@ -72,8 +72,6 @@ class VendorsController extends Controller
                 ->route('home.index')
                 ->with('alert', trans('vendors.notices.public.cancel-fail'));
         }
-
-        
     }
 
     public function pending(Vendor $vendor)

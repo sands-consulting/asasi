@@ -23,12 +23,20 @@
   background: #fff;
   height: 128px;
   margin-bottom: 15px;
-  padding: 15px 10px 10px;
+  padding: 15px 10px;
   box-sizing: border-box;
   display: block;
   width: 100%;
   position: relative;
-  box-shadow: 0 1px 3px rgba(206, 206, 206, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  &.full {
+    height: 100%;
+  }
+
+  .panel-vendor {
+    height: 128px;
+  }
 
   &.border {
     border-bottom-width: 3px;
@@ -189,22 +197,53 @@ a {
     display: block;
   }
 
+  &.prompt-box {
+    .label {
+      top: 15px;
+    }
+
+    .btn-group {
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+
   .label {
     position: absolute;
-    top: 15px;
+    top: 0;
     right: 10px;
   }
 
-  .btn {
+  .btn-group {
+    font-size: 11px;
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
+    right: 0;
+    display: block;
 
-    &.btn-company-details {
-      left: 10px;
+    a {
+      color: @color-blue-700;
+      margin-left: 5px;
+      display: inline-block;
+      text-align: center;
     }
+  }
+}
 
-    &.btn-change-requests {
-      right: 10px;
+.panel-list {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 5px;
+
+      .header {
+        font-size: 11px;
+        color: #999;
+        display: block;
+      }
     }
   }
 }

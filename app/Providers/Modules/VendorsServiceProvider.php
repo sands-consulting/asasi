@@ -59,27 +59,9 @@ class VendorsServiceProvider extends ServiceProvider
                 $router->resource('vendors', 'VendorsController');
             });
             
-            $router->post('vendors/{vendors}/complete-application', [
-                'as'    => 'vendors.complete-application',
-                'uses'  => 'VendorsController@completeApplication'
+            $router->resource('vendors', 'VendorsController', [
+                'except' => ['index', 'destroy']
             ]);
-
-            $router->post('vendors/{vendors}/cancel-submit', [
-                'as'    => 'vendors.cancel-application',
-                'uses'  => 'VendorsController@cancelApplication'
-            ]);
-
-            $router->get('vendors/{vendors}/pending', [
-                'as'    => 'vendors.pending',
-                'uses'  => 'VendorsController@pending'
-            ]);
-            
-            $router->get('vendors/profile', [
-                'as'    => 'vendors.profile',
-                'uses'  => 'VendorsController@profile'
-            ]);
-
-            $router->resource('vendors', 'VendorsController');
         });
     }
 }
