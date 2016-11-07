@@ -58,6 +58,14 @@ function is_complete_form($attributes)
     return true;
 }
 
-function trim_trailing_zeroes($nbr) {
+function trim_trailing_zeroes($nbr)
+{
     return strpos($nbr,'.')!==false ? rtrim(rtrim($nbr,'0'),'.') : $nbr;
+}
+
+function normalize_registration_number($string)
+{
+    $string = ltrim($string, '0');
+    $string = str_replace('-', '', $string);
+    return $string;
 }

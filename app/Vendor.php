@@ -237,6 +237,10 @@ class Vendor extends Authenticatable
     {
         parent::boot();
 
+        static::creating(function($model) {
+            $model->normalized_registration_number = normalize_registration_number($model->registration_number);
+        });
+
         static::saving(function($model){
             foreach ($model->toArray() as $key => $value) {
                 $model->{$key} = empty($value) ? null : $value;

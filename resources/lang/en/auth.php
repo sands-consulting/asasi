@@ -14,11 +14,13 @@ return [
     */
 
     'attributes' => [
-        'name'                  => 'Name',
-        'email'                 => 'Email Address',
-        'password'              => 'Password',
-        'password_confirmation' => 'Password Confirmation',
-        'remember_me'           => 'Remember Me'
+        'vendor_name'                   => 'Vendor Name',
+        'vendor_registration_number'    => 'Vendor Registration No.',
+        'name'                          => 'Name',
+        'email'                         => 'Email Address',
+        'password'                      => 'Password',
+        'password_confirmation'         => 'Password Confirmation',
+        'remember_me'                   => 'Remember Me'
     ],
 
     'notices' => [

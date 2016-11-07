@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use App\Mailers\AppMailer;
+use App\Role;
 use App\User;
+use App\Vendor;
+use DB;
 use Event;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -28,6 +31,8 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'vendor_registration_number' => 'required|unique:vendors,normalized_registration_number',
+            'vendor_name' => 'required|unique:vendors,name',
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:8|confirmed',
@@ -36,17 +41,26 @@ class AuthController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'confirmation_token' => str_random(30)
-        ]);
+        return DB::transaction(function() use($data) {
+            $vendor = Vendor::create(['name' => $data['vendor_name'], 'registration_number' => $data['vendor_registration_number']]);
+
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'confirmation_token' => str_random(30)
+            ]);
+            $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->lists('id')->toArray());
+            $user->vendors()->attach($vendor->id);
+            return $user;
+        });
     }
 
     public function register(Request $request)
     {
-        $validator = $this->validator($request->all());
+        $data                               = $request->all();
+        $data['vendor_registration_number'] = normalize_registration_number($data['vendor_registration_number']);
+        $validator                          = $this->validator($data);
 
         if ($validator->fails()) {
             $this->throwValidationException(

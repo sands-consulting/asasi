@@ -107,6 +107,7 @@ class VendorSeeder extends Seeder
         $vendor = VendorsRepository::create(new Vendor, [
             'name' => 'Thera Future Inc.',
             'registration_number' => '123456-TF',
+            'normalized_registration_number' => '123456TF',
             'tax_1_number' => '123456',
             'tax_2_number' => '789012',
             'address_1' => '11-2-2A, Jalan Pusat Bandar 2A',

@@ -11,6 +11,22 @@
     <div class="panel-body">
         {!! csrf_field() !!}
 
+        <div class="form-group{{ $errors->has('vendor_registration_number') ? ' has-error' : '' }} has-feedback has-feedback-left">
+            <input type="text" class="form-control" name="vendor_registration_number" value="{{ old('vendor_registration_number') }}" placeholder="{{ trans('auth.attributes.vendor_registration_number') }}">
+            <div class="form-control-feedback">
+                <i class="icon-bookmark text-muted"></i>
+            </div>
+            @if($errors->has('vendor_registration_number'))<span class="help-block">{{ $errors->first('vendor_registration_number') }}</span>@endif
+        </div>
+
+        <div class="form-group{{ $errors->has('vendor_name') ? ' has-error' : '' }} has-feedback has-feedback-left">
+            <input type="text" class="form-control" name="vendor_name" value="{{ old('vendor_name') }}" placeholder="{{ trans('auth.attributes.vendor_name') }}">
+            <div class="form-control-feedback">
+                <i class="icon-office text-muted"></i>
+            </div>
+            @if($errors->has('vendor_name'))<span class="help-block">{{ $errors->first('vendor_name') }}</span>@endif
+        </div>
+
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} has-feedback has-feedback-left">
             <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="{{ trans('auth.attributes.name') }}">
             <div class="form-control-feedback">
@@ -27,18 +43,24 @@
             @if($errors->has('email'))<span class="help-block">{{ $errors->first('email') }}</span>@endif
         </div>
 
-        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} has-feedback has-feedback-left">
-            <input type="password" class="form-control" name="password" placeholder="{{ trans('auth.attributes.password') }}">
-            <div class="form-control-feedback">
-                <i class="icon-lock2 text-muted"></i>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} has-feedback has-feedback-left">
+                    <input type="password" class="form-control" name="password" placeholder="{{ trans('auth.attributes.password') }}">
+                    <div class="form-control-feedback">
+                        <i class="icon-lock2 text-muted"></i>
+                    </div>
+                    @if($errors->has('password'))<span class="help-block">{{ $errors->first('password') }}</span>@endif
+                </div>
             </div>
-            @if($errors->has('password'))<span class="help-block">{{ $errors->first('password') }}</span>@endif
-        </div>
 
-        <div class="form-group has-feedback has-feedback-left">
-            <input type="password" class="form-control" name="password_confirmation" placeholder="{{ trans('auth.attributes.password_confirmation') }}">
-            <div class="form-control-feedback">
-                <i class="icon-lock2 text-muted"></i>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group has-feedback has-feedback-left">
+                    <input type="password" class="form-control" name="password_confirmation" placeholder="{{ trans('auth.attributes.password_confirmation') }}">
+                    <div class="form-control-feedback">
+                        <i class="icon-lock2 text-muted"></i>
+                    </div>
+                </div>
             </div>
         </div>
 
