@@ -2,25 +2,10 @@ vm_vendor = new Vue({
   el: '.form-vendor',
   data: {
     submit: false,
+    last_tab: false,
     shareholders: [],
     employees: [],
     accounts: []
-  },
-  computed: {
-    current_tab: function() {
-      return nav.find('[role=presentation].active');
-    },
-    last_tab: function() {
-      nav       = $(this.$el).find('.nav');
-      num_tabs  = nav.find('[role=presentation]').length;
-
-      return this.current_tab.index() == (num_tabs - length);
-    },
-    not_deleted: function(arrays) {
-      return arrays.filter(function(item) {
-        return item._delete == false;
-      });
-    }
   },
   ready: function(ev) {
     this.submit = eval($(this.$el).data('submit')) || false;
@@ -34,6 +19,10 @@ vm_vendor = new Vue({
       next = active.next();
       next.addClass('active');
       $(next.find('a').attr('href')).show('tab');
+
+      this.$nextTick(function () {
+        this.last_tab = this.updateLastTab();
+      });
     },
     show: function(event) {
       active = $(this.$el).find('.nav').find('[role=presentation].active');
@@ -44,7 +33,18 @@ vm_vendor = new Vue({
       selected.parents('[role=presentation]').addClass('active');
       $(selected.attr('href')).show('tab');
 
+      this.$nextTick(function () {
+        this.last_tab = this.updateLastTab();
+      });
+
       return false;
+    },
+    updateLastTab: function() {
+      nav       = $(this.$el).find('.nav');
+      num_tabs  = nav.find('[role=presentation]').length;
+      current   = nav.find('.active');
+
+      return current.index() == (num_tabs - 1);
     },
     setDelete: function(object) {
       object._delete = true;

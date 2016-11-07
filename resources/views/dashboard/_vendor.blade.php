@@ -1,11 +1,13 @@
 <div class="prompt-box panel-vendor">
 	<h1>{{ Auth::user()->vendor->name }}</h1>
 	@if(Auth::user()->vendor->status == 'active')
-	<span class="label label-success">
+	<span class="label label-warning">
 	@elseif(Auth::user()->vendor->status == 'pending')
-	<span class="label label-danger">
-	@else
+	<span class="label label-warning">
+	@elseif(Auth::user()->vendor->status == 'draft')
 	<span class="label label-default">
+	@else
+	<span class="label label-danger">
 	@endif
 	{{ trans('statuses.' . Auth::user()->vendor->status) }}
 	</span>
@@ -18,7 +20,7 @@
 	</p>
 	@if(Auth::user()->vendor->expiring)<a href="#" class="text-danger-700 btn-renew">{{ trans('dashboard.vendor.renew') }}</a>@endif
 	<div class="btn-group">
-		@if(Auth::user()->vendor->status == 'pending')
+		@if(Auth::user()->vendor->status == 'draft')
 		<a href="{{ route('vendors.edit', Auth::user()->vendor->id) }}"><i class="icon icon-pen6"></i><br>{{ trans('dashboard.vendor.continue_registration') }}</a>
 		@else
 		<a href="{{ route('vendors.show', Auth::user()->vendor->id) }}"><i class="icon icon-file-text2"></i><br>{{ trans('dashboard.vendor.company_details') }}</a>

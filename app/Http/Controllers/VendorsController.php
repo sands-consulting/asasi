@@ -35,8 +35,13 @@ class VendorsController extends Controller
         $inputs = $request->all();
         $vendor = VendorsRepository::update($vendor, $inputs);
 
+        if(isset($inputs['submit']))
+        {
+            $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending']);
+        }
+
         return redirect()
-            ->route('vendors.edit', $vendor->id)
+            ->route('home')
             ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
     }
 

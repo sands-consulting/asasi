@@ -40,7 +40,7 @@ class Vendor extends Model
     ];
 
     protected $attributes = [
-        'status' => 'pending'
+        'status' => 'draft'
     ];
 
     protected $searchable = [

@@ -186,7 +186,7 @@
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="col-xs-1">#</th>
 								<th>{{ trans('vendors.attributes.shareholders.name') }}</th>
 								<th>{{ trans('vendors.attributes.shareholders.identity_number') }}</th>
 								<th>{{ trans('vendors.attributes.shareholders.nationality') }}</th>
@@ -194,12 +194,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(shareholder, index) in not_deleted(shareholders)">
-								<td>@{{ index+ 1}}</td>
-								<td><input type="name" class="form-control" v-model="shareholder.name"></td>
-								<td><input type="identity_number" class="form-control" v-model="shareholder.identity_number"></td>
+							<template v-for="shareholder in shareholders">
+							<tr>
+								<td>@{{ index + 1}}</td>
+								<td><input type="shareholders[][name]" class="form-control" v-model="shareholder.name"></td>
+								<td><input type="shareholders[][identity_number]" class="form-control" v-model="shareholder.identity_number"></td>
 								<td>
-									<select v-model="shareholder.nationality_id">
+									<select name="shareholders[][nationality_id]" class="form-control select2" v-model="shareholder.nationality_id">
 										@foreach(App\Place::type('country')->active()->lists('name', 'id') as $key => $value)
 										<option value="{{ $key }}">{{ $value }}</option>
 										@endforeach
@@ -207,8 +208,10 @@
 								</td>
 								<td>
 									<a href="#" class="btn btn-xs btn-danger" v-on:click="setDelete(shareholder)">{{ trans('actions.delete') }}</a>
+									<input type="hidden" name="shareholders[][_delete]" v-model="shareholder._delete">
 								</td>
 							</tr>
+							</template>
 							<tr>
 								<td colspan="5" align="center"><a href="#" v-on:click="addShareholder"><i class="icon-plus-circle2"></i> {{ trans('vendors.buttons.add-shareholder') }}</a></td>
 							</tr>
