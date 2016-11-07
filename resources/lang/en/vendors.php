@@ -128,6 +128,27 @@ return [
                 'purchases' => 'Purchases',
                 'transactions' => 'Transactions',
                 'projects' => 'Projects',
+            ],
+        ],
+        '_show_details' => [
+            'shareholders' => [
+                'title' => 'Shareholders',
+            ],
+
+            'employees' => [
+                'title' => 'Employees'
+            ],
+
+            'accounts' => [
+                'title' => 'Accounts'
+            ],
+
+            'contact_person' => [
+                'title' => 'Contact Person'
+            ],
+
+            'capital' => [
+                'title' => 'Capital'
             ]
         ],
         '_form' => [

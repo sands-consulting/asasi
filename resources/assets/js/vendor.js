@@ -1,14 +1,10 @@
 vm_vendor = new Vue({
   el: '.form-vendor',
   data: {
-    submit: false,
     last_tab: false,
     shareholders: [],
     employees: [],
     accounts: []
-  },
-  ready: function(ev) {
-    this.submit = eval($(this.$el).data('submit')) || false;
   },
   methods: {
     next: function() {

@@ -19,13 +19,6 @@
 			{{ trans('dashboard.vendor.no_subscription') }}
 			@endif
 			</p>
-	
-			@if($vendor->expiring)<a href="#" class="text-danger-700 btn-renew">{{ trans('dashboard.vendor.renew') }}</a>@endif
-	
-			<div class="btn-group">
-				<a href="#"><i class="icon icon-pen6"></i><br>{{ trans('dashboard.vendor.change_requests') }}</a>
-				<a href="#"><i class="icon icon-folder-download"></i><br>{{ trans('dashboard.vendor.submissions') }}</a>
-			</div>
 		</div>
 
 		<div class="col-xs-12 col-md-4 panel-list">
@@ -56,7 +49,7 @@
 	</div>
 </div>
 
-<div class="navbar navbar-default">
+<div class="navbar navbar-default mb-15">
 	<ul class="nav navbar-nav">
 		<li class="active"><a href="#">{{ trans('vendors.views._show.nav.details') }}</a></li>
 		<li><a href="#">{{ trans('vendors.views._show.nav.qualification_codes') }}</a></li>

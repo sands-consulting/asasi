@@ -76,6 +76,7 @@ elixir(function(mix) {
         'vendor/form_select2.js',
         'vendor/picker_date.js',
         'pages/admin.dashboard.user.js',
+        'vendor.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
     .version([

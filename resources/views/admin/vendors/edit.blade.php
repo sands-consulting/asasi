@@ -18,18 +18,16 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-	<div class="panel-body">
-		{!! Former::open(action('Admin\VendorsController@update', $vendor->id))->method('PUT') !!}
-			{!! Former::populate($vendor) !!}
-			@include('admin.vendors.form')
-			<div class="form-group">
-			    <div class="col-lg-10 col-sm-8 col-lg-offset-2 col-sm-offset-4">
-			        {!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
-			        {!! link_to_route('admin.vendors.show', trans('actions.cancel'), $vendor->id, ['class' => 'btn btn-default']) !!}
-			    </div>
+{!! Former::open_vertical(route('admin.vendors.update', $vendor->id))->method('PUT')->addClass('panel form-vendor')->novalidate() !!}
+	{{ Former::populate($vendor) }}
+    @include('admin.vendors._form')
+	<div class="panel-footer">
+		<div class="row">
+			<div class="col-xs-12 col-md-9 col-md-offset-3">
+				<a href="#" class="btn btn-default pull-right" v-if="!last_tab" v-on:click="next">{{ trans('actions.next') }}</a>
+				<input type="submit" name="save" class="btn bg-blue-700 pull-right" value="{{ trans('actions.save') }}">
 			</div>
-		{!! Former::close() !!}
+		</div>
 	</div>
-</div>
+{!! Former::close() !!}
 @endsection

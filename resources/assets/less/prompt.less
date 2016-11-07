@@ -1,6 +1,6 @@
 @logo-prompt-white: '/assets/images/logo-white.svg';
-
 @background-1:      '/assets/images/bg-1.png';
+
 
 .form-vertical {
   .control-label {
@@ -36,6 +36,7 @@
   width: 100%;
   position: relative;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 0;
 
   &.full {
     height: 100%;
@@ -52,7 +53,6 @@
 
   .title {
     font-size: 14px;
-    text-align: right;
   }
 
   .number {
@@ -256,11 +256,11 @@ a {
 }
 
 .form-vendor {
-  .panel-body {
-    > .row {
-      margin-top: -30px;
-    }
+  .panel-heading {
+    padding-bottom: 0;
+  }
 
+  .panel-body {
     .nav {
       li {
         margin-top: 0;
