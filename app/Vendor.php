@@ -243,7 +243,7 @@ class Vendor extends Model
 
         static::saving(function($model){
             foreach($model->getFillable() as $attribute) {
-                $model->{$attribute} = !empty($model->{$attribute}) ?: null;
+                $model->{$attribute} = !empty($model->{$attribute}) ? $model->{$attribute} : null;
             }
         });
     }

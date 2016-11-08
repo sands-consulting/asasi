@@ -27,7 +27,7 @@ class NoticesController extends Controller
 
     public function myNotices(Request $request)
     {
-        $vendor = $request->user()->vendor()->first();
+        $vendor = $request->user()->vendor->first();
         $myNotices = $vendor->notices;
 
         return view('notices.my-notices', compact('vendor', 'myNotices'));
@@ -35,13 +35,15 @@ class NoticesController extends Controller
 
     public function submission(Request $request, Notice $notice)
     {
-        $vendor = $request->user()->vendor()->first();
+        $vendor = $request->user()->vendor;
         // check if submission exists
         $submissions['commercials'] = Submission::where('vendor_id', $vendor->id)
-            ->where('type', 'commercials')
+            ->where('type_id', 1)
+            ->where('notice_id', $notice->id)
             ->first();
         $submissions['technicals'] = Submission::where('vendor_id', $vendor->id)
-            ->where('type', 'technicals')
+            ->where('type_id', 2)
+            ->where('notice_id', $notice->id)
             ->first();
 
         return view('notices.submission', compact('notice', 'submissions'));
@@ -88,7 +90,7 @@ class NoticesController extends Controller
     public function saveSubmission(Notice $notice, Request $request)
     {
         $input = $request->only(
-            'type',
+            'type_id',
             'price', 
             'submission_id',
             'submission_detail_id',
@@ -106,9 +108,9 @@ class NoticesController extends Controller
             $submission = SubmissionsRepository::update($submission, $input);
         }
 
-        if ($input['type'] == 'commercials')
+        if ($input['type_id'] == 1)
             $requirements = $notice->requirementCommercials;
-        elseif ($input['type'] == 'technicals')
+        elseif ($input['type_id'] == 2)
             $requirements = $notice->requirementTechnicals;
 
         // Fixme: Temp solutions

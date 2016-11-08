@@ -149,12 +149,12 @@ class Notice extends Model
 
     public function requirementCommercials()
     {
-        return $this->hasMany(SubmissionRequirement::class)->where('type', 'commercials');
+        return $this->hasMany(SubmissionRequirement::class)->where('type_id', '1');
     }
 
     public function requirementTechnicals()
     {
-        return $this->hasMany(SubmissionRequirement::class)->where('type', 'technicals');
+        return $this->hasMany(SubmissionRequirement::class)->where('type_id', '2');
     }
 
     public function events()

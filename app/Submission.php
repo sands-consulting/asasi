@@ -15,7 +15,7 @@ class Submission extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'type',
+        'type_id',
         'price',
         'notice_id',
         'vendor_id',

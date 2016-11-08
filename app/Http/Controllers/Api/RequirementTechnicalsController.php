@@ -24,7 +24,7 @@ class RequirementTechnicalsController extends Controller
         $inputs['mandatory'] = $inputs['mandatory'][0];
         $inputs['require_file'] = $inputs['require_file'][0];
         $inputs['field_type'] = $inputs['require_file'] == 1 ? 'file' : 'check';
-        $inputs['type'] = 'technicals';
+        $inputs['type_id'] = 2;
         $inputs['notice_id'] = $notice->id;
         $submissionRequirement = SubmissionRequirementsRepository::create(new SubmissionRequirement, $inputs);
 

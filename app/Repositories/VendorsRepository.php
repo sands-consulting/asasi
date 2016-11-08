@@ -36,9 +36,10 @@ class VendorsRepository extends BaseRepository
 
     public static function subscribe(Vendor $vendor, Package $package)
     {
-        $activeSubs = $vendor->subscriptions()->active()->first();
+        $activeSubs = $vendor->active_subscription;
 
         $started_at = Carbon::today();
+
         if ($activeSubs) {
             $started_at = $activeSubs->expired_at->copy()->addDay();
         }

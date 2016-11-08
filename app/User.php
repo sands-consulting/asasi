@@ -223,21 +223,17 @@ class User extends Authenticatable
 
     public function hasSubscription()
     {
-        $vendor = $this->vendor()->with('subscriptions')->first();
+        $vendor = $this->vendor;
         if ($vendor) {
-            return $vendor->subscriptions->count() > 0;
+            return $vendor->active_subscription;
         }
 
         return false;
     }
 
-    public function hasBoughtNotice($notice)
+    public function hasBoughtNotice($notice_id)
     {
-        $vendor = $this->vendor()->with(['notices' => function($query) use ($notice) {
-            return $query->where('notices.id', $notice);
-        }])->first();
-
-        return $vendor->notices->count() > 0;
+        return $this->vendor->notices()->find($notice_id);
     }
 
     /*

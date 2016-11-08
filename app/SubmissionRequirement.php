@@ -16,7 +16,7 @@ class SubmissionRequirement extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'type',
+        'type_id',
         'title',
         'mandatory',
         'require_file',
