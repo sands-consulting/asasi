@@ -15,6 +15,7 @@ class Vendor extends Model
     protected $fillable = [
         'name',
         'registration_number',
+        'normalized_registration_number',
         'tax_1_number',
         'tax_2_number',
         'contact_telephone',
@@ -241,8 +242,8 @@ class Vendor extends Model
         });
 
         static::saving(function($model){
-            foreach($model->getFillable() as $key => $value) {
-                $model->{$key} = empty($value) ? null : $value;
+            foreach($model->getFillable() as $attribute) {
+                $model->{$attribute} = !empty($model->{$attribute}) ?: null;
             }
         });
     }
