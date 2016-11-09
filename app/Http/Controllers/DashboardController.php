@@ -32,8 +32,7 @@ class DashboardController extends Controller
 
     public function bookmarks(Request $request, DashboardBookmarksDataTable $table)
     {
-        $vendor = $request->user()->vendor;
-        return $table->render('dashboard.bookmarks');
+        return $table->forUser($request->user()->id)->render('dashboard.bookmarks');
     }
 
     public function purchases(Request $request, DashboardPurchasesDataTable $table)

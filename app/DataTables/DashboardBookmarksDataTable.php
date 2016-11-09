@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Notice;
+use App\Bookmark;
 
 class DashboardBookmarksDataTable extends DataTable
 {
@@ -10,21 +10,27 @@ class DashboardBookmarksDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($notice) {
-                return view('admin.notices._index_actions', compact('notice'));
+            ->addColumn('action', function($bookmark) {
+                return view('dashboard._bookmarks_notice_actions', compact('bookmark'));
             })
             ->editColumn('name', function($notice) {
                 return link_to_route('admin.notices.show', $notice->name, $notice->id);
-            })
-            ->editColumn('status', function($notice) {
-                return view('admin.notices._index_status', compact('notice'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Notice::published();
+        $query = Bookmark::leftJoin('notices', 'notices.id', '=', 'bookmarks.bookmarkable_id')
+            ->where('bookmarks.user_id', $this->user_id)
+            ->where('bookmarks.bookmarkable_type', 'App\Notice')
+            ->select(
+                'notices.id as notice_id',
+                'notices.name as notice_name',
+                'notices.number as notice_number',
+                'notices.expired_at as notice_expired_at',
+                'notices.status as notice_status'
+            );
 
         if($this->datatables->request->input('q', null))
         {
@@ -39,7 +45,7 @@ class DashboardBookmarksDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
+                    ->addAction(['width' => '15%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -47,27 +53,21 @@ class DashboardBookmarksDataTable extends DataTable
     {
         return [
             [
-                'data' => 'name',
-                'name' => 'name',
+                'data' => 'notice_name',
+                'name' => 'notice_name',
                 'title' => trans('notices.attributes.name'),
                 'width' => '40%'
             ],
             [
-                'data' => 'number',
-                'name' => 'number',
+                'data' => 'notice_number',
+                'name' => 'notice_number',
                 'title' => trans('notices.attributes.number'),
                 'width' => '15%'
             ],
             [
-                'data' => 'expired_at',
-                'name' => 'expired_at',
+                'data' => 'notice_expired_at',
+                'name' => 'notice_expired_at',
                 'title' => trans('notices.attributes.expired_at'),
-                'width' => '15%'
-            ],
-            [
-                'data' => 'status',
-                'name' => 'status',
-                'title' => trans('notices.attributes.status'),
                 'width' => '15%'
             ],
         ];
@@ -84,5 +84,11 @@ class DashboardBookmarksDataTable extends DataTable
         $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
         return $data;
+    }
+
+    public function forUser($userId)
+    {
+        $this->user_id = $userId;
+        return $this;
     }
 }

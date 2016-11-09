@@ -181,16 +181,15 @@ class User extends Authenticatable
         return $this->status != 'suspended';
     }
 
-    public function canAddNoticeToCart(Notice $notice)
+    public function canAddNoticeToCart($noticeId)
     {
         $inCart = false;
         if ($content = Cart::content()) {
-            $inCart = Cart::content()->search(function($cartItem) use ($notice){
-                return $cartItem->id === $notice->id;
+            $inCart = Cart::content()->search(function($cartItem) use ($noticeId){
+                return $cartItem->id == $noticeId;
             });
         }
-
-        return $this->hasSubscription() && !$this->hasBoughtNotice($notice->id) && !$inCart;
+        return $this->hasSubscription() && !$this->hasBoughtNotice($noticeId) && !$inCart;
     }
     /*
      * ACL functions

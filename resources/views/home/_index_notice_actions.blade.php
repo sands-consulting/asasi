@@ -1,5 +1,5 @@
 @if(Auth::check())    
-    @if(Auth::check() && Auth::user()->canAddNoticeToCart($notice))
+    @if(Auth::check() && Auth::user()->canAddNoticeToCart($notice->id))
         <a href="{{ route('carts.add', $notice->id) }}" class="btn btn-xs" data-method="POST"><i class="icon-cart"></i></a>
     @endif
 
