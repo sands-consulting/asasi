@@ -20,6 +20,14 @@ return [
         'edit' => 'Edit Submission',
         'all' => 'All Submissions',
         'my_notices' => 'My Submissions',
+        'public' => [
+            'commercial' => [
+                'view' => 'Check Commercial Submission',
+            ],
+            'technical' => [
+                'view' => 'Check Technical Submission',
+            ]
+        ]
     ],
 
     'notices' => [

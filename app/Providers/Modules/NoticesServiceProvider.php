@@ -95,7 +95,10 @@ class NoticesServiceProvider extends ServiceProvider
                 'as' => 'notices.save-submission',
                 'uses' => 'NoticesController@saveSubmission'
             ]);
-            
+            $router->get('notices/{notices}/submit-submission', [
+                'as' => 'notices.submit-submission',
+                'uses' => 'NoticesController@submitSubmission'
+            ]);
             $router->resource('notices', 'NoticesController', ['only' => ['index']]);
         });
 
