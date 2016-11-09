@@ -24,7 +24,9 @@ class DashboardInvitationsDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::limited();
+        $query = Notice::leftJoin('notice_invitation', 'notice_invitation.id', '=', 'notices.id')
+            ->where('notice_invitation.vendor_id', $this->vendor_id)
+            ->limited();
 
         if($this->datatables->request->input('q', null))
         {
@@ -57,13 +59,7 @@ class DashboardInvitationsDataTable extends DataTable
                 'name' => 'expired_at',
                 'title' => trans('notices.attributes.expired_at'),
                 'width' => '15%'
-            ],
-            [
-                'data' => 'status',
-                'name' => 'status',
-                'title' => trans('notices.attributes.status'),
-                'width' => '15%'
-            ],
+            ]
         ];
     }
 
@@ -78,5 +74,11 @@ class DashboardInvitationsDataTable extends DataTable
         $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
         return $data;
+    }
+
+    public function forVendor($vendorId)
+    {
+        $this->vendor_id = $vendorId;
+        return $this;
     }
 }

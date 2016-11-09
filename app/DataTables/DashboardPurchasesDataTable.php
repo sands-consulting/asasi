@@ -24,14 +24,16 @@ class DashboardPurchasesDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::with(['vendors'])
+        $query = Notice::leftJoin('notice_vendor', 'notice_vendor.notice_id', '=', 'notices.id')
+            ->leftJoin('vendors', 'vendors.id', '=', 'notice_vendor.notice_id')
+            ->where('vendors.id', $this->vendor_id)
             ->select([
                 'notices.id as notice_id',
                 'notices.name as notice_name',
                 'notices.number as notice_number',
                 'notices.expired_at',
                 'notices.status'
-            ])->published();
+            ]);
 
         if($this->datatables->request->input('q', null))
         {
@@ -91,5 +93,11 @@ class DashboardPurchasesDataTable extends DataTable
         $data['dom'] = '<"datatable-header"l><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
         return $data;
+    }
+
+    public function forVendor($vendorId)
+    {
+        $this->vendor_id = $vendorId;
+        return $this;
     }
 }

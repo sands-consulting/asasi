@@ -4,8 +4,12 @@
     @endif
 
     @if(!in_array(Auth::user()->id, $notice->bookmarks->lists('user_id')->toArray()))
-        <a href="{{ route('bookmarks.add', $notice->id) }}" class="btn btn-xs" data-method="POST"><i class="icon-bookmark3"></i></a>
+        <a href="{{ route('bookmarks.add', $notice->id) }}" class="btn btn-xs" data-method="POST">
+            <i class="icon-bookmark3"></i>
+        </a>
     @else
-        <i class="icon-bookmark2 text-danger"></i>
+        <a href="{{ route('bookmarks.remove', $notice->id) }}" class="btn btn-xs" data-method="POST">
+            <i class="icon-bookmark2 text-danger"></i>
+        </a>
     @endif
 @endif

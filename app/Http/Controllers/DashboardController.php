@@ -26,21 +26,25 @@ class DashboardController extends Controller
 
     public function invitations(Request $request, DashboardInvitationsDataTable $table)
     {
-        return $table->render('dashboard.invitations');
+        $vendor = $request->user()->vendor;
+        return $table->forVendor($vendor->id)->render('dashboard.invitations');
     }
 
     public function bookmarks(Request $request, DashboardBookmarksDataTable $table)
     {
+        $vendor = $request->user()->vendor;
         return $table->render('dashboard.bookmarks');
     }
 
     public function purchases(Request $request, DashboardPurchasesDataTable $table)
     {
-        return $table->render('dashboard.purchases');
+        $vendor = $request->user()->vendor;
+        return $table->forVendor($vendor->id)->render('dashboard.purchases');
     }
 
     public function projects(Request $request, DashboardProjectsDataTable $table)
     {
-        return $table->render('dashboard.projects');
+        $vendor = $request->user()->vendor;
+        return $table->forVendor($vendor->id)->render('dashboard.projects');
     }
 }

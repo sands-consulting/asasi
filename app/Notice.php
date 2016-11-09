@@ -193,6 +193,12 @@ class Notice extends Model
     {
         return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
+
+    public function invitations()
+    {
+        return $this->belongsToMany(Vendor::class, 'notice_invitation');
+    }
+    
     /*
      * Helpers
      */

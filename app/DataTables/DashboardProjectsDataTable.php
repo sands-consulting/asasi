@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Notice;
+use App\Project;
 
 class DashboardProjectsDataTable extends DataTable
 {
@@ -36,10 +36,7 @@ class DashboardProjectsDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::published();
-        if (isset($this->type)) {
-            $query->where('notice_type_id', $this->type);
-        }
+        $query = Project::where('vendor_id', $this->vendor_id);
 
         if($this->datatables->request->input('q', null))
         {
@@ -110,7 +107,12 @@ class DashboardProjectsDataTable extends DataTable
     public function forType($type)
     {
         $this->type = $type;
+        return $this;
+    }
 
+    public function forVendor($vendorId)
+    {
+        $this->vendor_id = $vendorId;
         return $this;
     }
 }

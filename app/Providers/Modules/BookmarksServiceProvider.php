@@ -26,7 +26,7 @@ class BookmarksServiceProvider extends ServiceProvider
                 'as' => 'bookmarks.add'
             ]);
 
-            $router->post('bookmarks/{bookmarks}/remove', [
+            $router->post('bookmarks/{notices}/remove', [
                 'uses' => 'BookmarksController@remove',
                 'as' => 'bookmarks.remove'
             ]);

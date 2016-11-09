@@ -3,37 +3,37 @@
 		<div class="col-xs-12 col-md-3">
 			<ul class="nav nav-pills nav-stacked" role="tablist">
 				<li role="presentation" class="active">
-					<a href="#vendor-details" aria-controls="vendor-details" role="tab" v-on:click="show">
+					<a href="#vendor-details" aria-controls="vendor-details" role="tab" @click.prevent="show">
 						<i class=" icon-file-text"></i> {{ trans('vendors.views._form.nav.details') }}
 					</a>
 				</li>
 				<li role="presentation">
-					<a href="#vendor-contact" aria-controls="vendor-contact" role="tab" v-on:click="show">
+					<a href="#vendor-contact" aria-controls="vendor-contact" role="tab" @click.prevent="show">
 						<i class="icon-user-tie"></i> {{ trans('vendors.views._form.nav.contact') }}
 					</a>
 				</li>
 				<li role="presentation">
-					<a href="#vendor-qualification-codes" aria-controls="vendor-qualification-codes" role="tab" v-on:click="show">
+					<a href="#vendor-qualification-codes" aria-controls="vendor-qualification-codes" role="tab" @click.prevent="show">
 						<i class="icon-folder-check"></i> {{ trans('vendors.views._form.nav.qualification_codes') }}
 					</a>
 				</li>
 				<li role="presentation">
-					<a href="#vendor-shareholders" aria-controls="vendor-shareholders" role="tab" v-on:click="show">
+					<a href="#vendor-shareholders" aria-controls="vendor-shareholders" role="tab" @click.prevent="show">
 						<i class="icon-portfolio"></i> {{ trans('vendors.views._form.nav.shareholders') }}
 					</a>
 				</li>
 				<li role="presentation">
-					<a href="#vendor-employees" aria-controls="vendor-employees" role="tab" v-on:click="show">
+					<a href="#vendor-employees" aria-controls="vendor-employees" role="tab" @click.prevent="show">
 						<i class="icon-users4"></i> {{ trans('vendors.views._form.nav.employees') }}
 					</a>
 				</li>
 				<li role="presentation">
-					<a href="#vendor-accounts" aria-controls="vendor-accounts" role="tab" v-on:click="show">
+					<a href="#vendor-accounts" aria-controls="vendor-accounts" role="tab" @click.prevent="show">
 						<i class="icon-database4"></i> {{ trans('vendors.views._form.nav.accounts') }}
 					</a>
 				</li>
 				<li role="presentation">
-					<a href="#vendor-files" aria-controls="vendor-files" role="tab" v-on:click="show">
+					<a href="#vendor-files" aria-controls="vendor-files" role="tab" @click.prevent="show">
 						<i class="icon-stack"></i> {{ trans('vendors.views._form.nav.files') }}
 					</a>
 				</li>
@@ -207,13 +207,13 @@
 									</select>
 								</td>
 								<td>
-									<a href="#" class="btn btn-xs btn-danger" v-on:click="setDelete(shareholder)">{{ trans('actions.delete') }}</a>
+									<a href="#" class="btn btn-xs btn-danger" @click.prevent="setDelete(shareholder)">{{ trans('actions.delete') }}</a>
 									<input type="hidden" name="shareholders[][_delete]" v-model="shareholder._delete">
 								</td>
 							</tr>
 							</template>
 							<tr>
-								<td colspan="5" align="center"><a href="#" v-on:click="addShareholder"><i class="icon-plus-circle2"></i> {{ trans('vendors.buttons.add-shareholder') }}</a></td>
+								<td colspan="5" align="center"><a href="#" @click.prevent="addShareholder"><i class="icon-plus-circle2"></i> {{ trans('vendors.buttons.add-shareholder') }}</a></td>
 							</tr>
 						</tbody>
 					</table>

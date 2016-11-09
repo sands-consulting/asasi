@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Bookmark;
 use App\Http\Requests;
+use App\Notice;
 use App\Repositories\BookmarksRepository;
-use Bookmark;
+use Illuminate\Http\Request;
 
 class BookmarksController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contents = Bookmark::content();
+        $contents = $request->user()->bookmarks;
         return view()->make('bookmarks.index', compact('contents'));
     }
 
@@ -24,13 +25,12 @@ class BookmarksController extends Controller
             ->with('notice', trans('bookmarks.notices.added', ['name' => $item->name]));
     }
 
-    public function remove($id)
+    public function remove(Request $request, Notice $notice)
     {
-        $item = Bookmark::get($id);
-        Bookmark::destroy($id);
+        BookmarksRepository::remove($request->user(), $notice);
         return redirect()
-            ->route('bookmarks.index')
-            ->with('notice', trans('bookmark.notices.removed', ['name' => $item->name]));
+            ->back()
+            ->with('notice', trans('bookmark.notices.removed', ['name' => $notice->number]));
     }
 
     public function destroy()
