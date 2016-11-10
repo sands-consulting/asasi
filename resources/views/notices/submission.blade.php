@@ -22,8 +22,8 @@
 @section('content')
     <div class="panel panel-flat">        
         <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-9">
+            <div class="row row-eq-height">
+                <div class="col-sm-9 eq-element" style="border-right: 0.5px solid #dcdcdc">
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Notice Details</h5>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 eq-element">
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Notice Requirements</h5>
@@ -160,25 +160,20 @@
                             </div>                    
                         </div>
                     @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-9"></div>
-                <div class="col-md-3">
                     @if($submissions['commercials'] && $submissions['technicals'])
-                        @if($submissions['commercials']->canSubmit() && $submissions['technicals']->canSubmit())
-                            <button type="submit" class="btn btn-primary btn-block legitRipple">
-                                <span class="text-thin">Submit</span>
-                            </button>
-                        @else
-                            <a href="{{ route('notices.submit-submission', $notice->id) }}" 
-                                class="btn btn-primary btn-block legitRipple" 
+                        <a 
+                            @if($submissions['commercials']->canSubmit() && $submissions['technicals']->canSubmit())
+                                href="{{ route('notices.submit-submission', $notice->id) }}"
+                                data-method="POST"
+                            @else
+                                href="#"
                                 data-placement="left" 
                                 data-popup="tooltip" 
-                                title="{{ trans('app.incomplete_tooltip') }}">
-                                <span class="text-thin">Submit</span>
-                            </a>
-                        @endif
+                                title="{{ trans('app.incomplete_tooltip') }}"
+                            @endif
+                            class="btn btn-primary btn-block legitRipple submission-btn" 
+                            <span class="text-thin">Submit</span>
+                        </a>
                     @else
                         <p class="text-danger">Please view requirement above and submit before proceed.</p>
                     @endif
