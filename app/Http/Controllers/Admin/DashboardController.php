@@ -9,14 +9,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $lastLogins = UserLog::lastLogin()->get();
+        $lastLogins = UserLog::lastLogin(5)->get();
 
         return view('admin.dashboard.user', compact('lastLogins'));
     }
 
     public function user()
     {
-        $lastLogins = UserLog::lastLogin()->get();
+        $lastLogins = UserLog::lastLogin(5)->get();
 
         return view('admin.dashboard.user', compact('lastLogins'));
     }

@@ -28,13 +28,18 @@ class UserLog extends Model
         return $this->morphTo();
     }
 
-    public function scopeLastLogin($query)
+    public function scopeLastLogin($query, $limit = null)
     {
-        return $query->with('user')
+        $logins = $query->with('user')
             ->select(\DB::raw('MAX(created_at) as created_at, action, user_id'))
             ->where('action', 'login')
             ->groupBy('user_id')
             ->orderBy('created_at');
+
+            if (!is_null($limit)) 
+                $logins->limit($limit);
+            
+        return $logins;
     }
 
     public static function boot()
