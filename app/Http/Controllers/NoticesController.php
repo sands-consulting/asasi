@@ -167,7 +167,7 @@ class NoticesController extends Controller
 
         return redirect()
             ->route('notices.submission-slip', $submission)
-            ->with('notices', trans('notices.notices.submission_submitted', ['number' => $notice->number]));
+            ->with('notices', trans('notices.notices.submission_submitted', ['number' => $submission->notice->number]));
     }
 
     public function submissionSlip(Request $request, Submission $submission)
