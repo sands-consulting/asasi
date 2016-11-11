@@ -24,7 +24,7 @@
         <div class="col-sm-12">
             {!! Former::open_for_files(route('notices.save-submission', $notice->id)) !!}
             {!! Former::hidden('submission_id', $submission->id) !!}
-            {!! Former::hidden('type', 'technical') !!}
+            {!! Former::hidden('type_id', 2) !!}
             <div class="panel panel-flat">
                 <div class="panel-heading">
                     <h5 class="panel-title">Notice Submission (Technicals)</h5>
@@ -32,30 +32,28 @@
                 <div class="panel-body">
                     @foreach($requirements as $requirement)
                         <div class="row is-table-row">
-                            <div class="col-sm-1 greyed">
+                            <div class="col-sm-2 greyed">
                                 <div class="box text-center">
                                     {!! Former::hidden('submission_detail_id['. $requirement->id .']')
-                                        ->value($requirement->details->id) !!}
+                                        ->value(!is_null($requirement->details) ? $requirement->details->id : null) !!}
                                     @if(!$requirement->require_file)
                                         @if($requirement->details->value == 1) <?php $checked = 'checked'; ?>
                                         @else <?php $checked = false; ?>
                                         @endif
                                         <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" {{ $checked }}>
                                     @else
-                                        <input type="checkbox" name="dummy" class="styled" value="" checked>
+                                        @if(!is_null($requirement->details->files()) ? $requirement->details->files()->first() : false)
+                                            <a href="{{ $requirement->details->files()->first()->url }}" target="_blank" class="btn btn-blue-700 btn-xs"><i class="icon-file-check2"></i></a>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-sm-11">
+                            <div class="col-sm-10">
                                 <div class="box"> 
                                     @if ($requirement->require_file)
                                         {!! Former::file('file['. $requirement->id .']')
                                             ->label(false)
                                             ->addClass('file-styled') !!}
-                                        
-                                        @if($requirement->details->files()->first())
-                                            <a href="{{ $requirement->details->files()->first()->url }}" target="_blank" class="btn btn-success btn-xs">View File</a>
-                                        @endif
                                     @endif
                                     {{ $requirement->title }}
                                 </div>  

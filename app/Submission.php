@@ -15,11 +15,11 @@ class Submission extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'type_id',
         'price',
         'notice_id',
         'vendor_id',
-        'status'
+        'status',
+        'submitted_at',
     ];
 
     protected $attributes = [
@@ -99,9 +99,13 @@ class Submission extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-    public function details()
+    public function details($type = null)
     {
-        return $this->hasMany(SubmissionDetail::class);
+        $details = $this->hasMany(SubmissionDetail::class);
+        if (!is_null($type))
+            $details->where('type_id', $type);
+
+        return $details;
     }
 
     public function scores()
@@ -123,11 +127,6 @@ class Submission extends Model
         ->groupBy('submission_id');
     }
 
-    public function type()
-    {
-        return $this->belongsTo(EvaluationType::class, 'type_id');
-    }
-
     /*
      * accessors
      */
@@ -146,6 +145,11 @@ class Submission extends Model
     /**
      * Helpers
      */
+
+    public function submitted()
+    {
+        return $this->status === 'submitted';
+    }
 
     public function getProgress()
     {

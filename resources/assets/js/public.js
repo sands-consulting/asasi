@@ -19,8 +19,12 @@ $(function() {
 });
 
 // Equal Height
-// var heights = $(".row-eq-height .media-box").map(function() {
-// return $(this).height();
-// }).get()
-// var maxHeight = Math.max.apply(null, heights);
-// $(".row-eq-height .media-box").height(maxHeight);
+$(window).resize(function(){
+  if ($(window).width() >= 800){  
+    var heights = $(".row-eq-height .eq-element").map(function() {
+      return $(this).height();
+    }).get()
+    var maxHeight = Math.max.apply(null, heights);
+    $(".row-eq-height .eq-element").height(maxHeight);
+  } 
+});

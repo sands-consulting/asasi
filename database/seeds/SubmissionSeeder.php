@@ -210,17 +210,9 @@ class SubmissionSeeder extends Seeder
             [
                 'price' => '500000',
                 'notice_id' =>  1,
-                'type_id' => 1,
                 'vendor_id' => 1,
                 'status' =>  'completed'
-            ],
-            [
-                'price' => null,
-                'notice_id' =>  1,
-                'type_id' => 2,
-                'vendor_id' => 1,
-                'status' =>  'completed'
-            ],
+            ]
         ];
 
         foreach ($submissionData as $submission) {
@@ -230,61 +222,71 @@ class SubmissionSeeder extends Seeder
         $submissionDetailsData = [
             [
                 'value' => 1,
+                'type_id' =>  1,
                 'submission_id' =>  1,
                 'requirement_id' =>  1,
                 'user_id' =>  2,
             ],
             [
                 'value' => null,
+                'type_id' =>  1,
                 'submission_id' =>  1,
                 'requirement_id' =>  2,
                 'user_id' =>  2,
             ],
             [
                 'value' => 1,
+                'type_id' =>  1,
                 'submission_id' =>  1,
                 'requirement_id' =>  3,
                 'user_id' =>  2,
             ],
             [
                 'value' => 1,
+                'type_id' =>  1,
                 'submission_id' =>  1,
                 'requirement_id' =>  4,
                 'user_id' =>  2,
             ],
             [
                 'value' => null,
+                'type_id' =>  1,
                 'submission_id' =>  1,
                 'requirement_id' =>  5,
                 'user_id' =>  2,
             ],
             [
                 'value' => 1,
-                'submission_id' =>  2,
+                'type_id' =>  2,
+                'submission_id' =>  1,
                 'requirement_id' =>  6,
                 'user_id' =>  2,
             ],
             [
                 'value' => null,
-                'submission_id' =>  2,
+                'type_id' =>  2,
+                'submission_id' =>  1,
                 'requirement_id' =>  7,
                 'user_id' =>  2,
             ],
             [
                 'value' => 1,
-                'submission_id' =>  2,
+                'type_id' =>  2,
+                'submission_id' =>  1,
                 'requirement_id' =>  8,
                 'user_id' =>  2,
             ],
             [
                 'value' => null,
-                'submission_id' =>  2,
+                'type_id' =>  2,
+                'submission_id' =>  1,
                 'requirement_id' =>  9,
                 'user_id' =>  2,
             ],
             [
                 'value' => null,
-                'submission_id' =>  2,
+                'type_id' =>  2,
+                'submission_id' =>  1,
                 'requirement_id' =>  10,
                 'user_id' =>  2,
             ],

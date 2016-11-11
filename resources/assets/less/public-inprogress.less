@@ -10,6 +10,13 @@
     display: table-cell;
     vertical-align: middle;
   }
+
+  .submission-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 97%;
+  }
 }
 
 .is-table-row .box {
@@ -24,6 +31,37 @@
     padding: 0;  
 }
 
+.submission-slip {
+  .slip-header {
+    min-height: 200px;
+    background: url(/assets/images/slip-bg@2x.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 75px;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .slip-title {
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+// Helpers
+.mb-50 {
+  margin-bottom: 50px;
+}
+
 .greyed {
   background-color: #eceff1 !important;
 }
+
+// @media print {
+//   .submission-slip {
+//     .slip-header {
+//       content: url(/assets/images/slip-bg@2x.png);
+//       z-index: -1;
+//     }
+//   }
+// }

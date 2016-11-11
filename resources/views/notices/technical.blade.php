@@ -48,7 +48,7 @@
                                                 ->addClass('file-styled') !!}
 
                                         @else
-                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1" required>
+                                            <input type="checkbox" name="value[{{ $requirement->id }}]" class="styled" value="1">
                                         @endif
                                     </td>
                                 </tr>

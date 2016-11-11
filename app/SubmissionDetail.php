@@ -22,6 +22,7 @@ class SubmissionDetail extends Model
 
     protected $fillable = [
         'value',
+        'type_id',
         'requirement_id',
         'submission_id',
         'user_id',
@@ -93,7 +94,9 @@ class SubmissionDetail extends Model
 
     public function uploads()
     {
-        return $this->morphMany(CustomUpload::class, 'uploadable');
+        // Fixme: handle soft delete file.
+        return $this->morphMany(CustomUpload::class, 'uploadable')
+            ->whereNull('deleted_at');
     }
 
     /**
@@ -117,6 +120,19 @@ class SubmissionDetail extends Model
             }
         }
         return $attached;
+    }
+
+    public function detachFiles($forType = null)
+    {
+        if ($forType) {
+            $models = $this->uploads()->where('type', $forType)->get();
+        } else {
+            $models = $this->uploads;
+        }
+
+        $models->each(function ($model) {
+            $model->delete();
+        });
     }
 
     /*

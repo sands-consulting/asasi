@@ -10,6 +10,7 @@ return [
         'notice_id' => 'Notice',
         'vendor_id' => 'Vendor',
         'status' => 'Status',
+        'submitted_at' => 'Submmission Date',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
         'deleted_at' => 'Deleted At',
@@ -22,10 +23,10 @@ return [
         'my_notices' => 'My Submissions',
         'public' => [
             'commercial' => [
-                'view' => 'Check Commercial Submission',
+                'view' => 'Edit Submission',
             ],
             'technical' => [
-                'view' => 'Check Technical Submission',
+                'view' => 'Edit Submission',
             ]
         ]
     ],

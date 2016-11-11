@@ -43,6 +43,8 @@ return [
         'published' => 'Notice :name published.',
         'unpublished' => 'Notice :name unpublished.',
         'cancelled' => 'Notice :name cancelled.',
+        'submission_saved' => 'Your submission for Notice :number successfully saved.',
+        'submission_submitted' => 'Your submission for Notice :number successfully submitted.',
     ],
     
     'views' => [

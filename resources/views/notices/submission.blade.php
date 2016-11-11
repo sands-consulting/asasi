@@ -95,87 +95,97 @@
                     </div>
                     {{-- Commercial --}}
                     @if ($notice->requirementCommercials)
-                        <div class="row">
-                            <div class="col-sm-12 mb-5">
-                                @if ($submissions['commercials']->status == 'incomplete')
-                                <span class="label label-warning">
+                        <div class="row mb-20">
+                            {{-- <div class="col-sm-12 mb-5">
+                                @if (App\Repositories\SubmissionsRepository::checkComplete($notice, $submission, 1))
+                                    <span class="label label-success">Completed</span>
                                 @else
-                                <span class="label label-success">
+                                    <span class="label label-danger">Incomplete</span>
                                 @endif
-                                {{ $submissions['commercials']->status }}</span>
-                            </div>
-                            <div class="col-sm-12 mb-5">Commercials</div>
-                            <div class="col-sm-12">
-                                @if (!$submissions['commercials'])
-                                <a href="{{ route('notices.commercial', $notice->id) }}" data-method="POST">
-                                    <small class="text-muted text-thin">
-                                        {{ trans('submissions.buttons.public.commercial.view') }}
-                                        <span class="pull-right"><i class="icon-arrow-right22"></i></span>
-                                    </small>
-                                </a>  
+                            </div> --}}
+                            <div class="col-sm-12 mb-5">
+                                Commercials
+                                @if (App\Repositories\SubmissionsRepository::checkComplete($notice, $submission, 1))
+                                    <span class="label label-success label-rounded pull-right"><span class="text-thin">Completed</span></span>
                                 @else
-                                <a href="{{ route('notices.commercial-edit', [$notice->id, $submissions['commercials']->id] ) }}" data-method="POST">
-                                    <small class="text-muted text-thin">
-                                        {{ trans('submissions.buttons.public.commercial.view') }}
-                                        <span class="pull-right"><i class="icon-arrow-right22"></i></span>
-                                    </small>
-                                </a>  
+                                    <span class="label label-danger label-rounded pull-right"><span class="text-thin">Incomplete</span></span>
+                                @endif
+                            </div>
+                            <div class="col-sm-12">
+                                <p class="text-muted"><small class="text-italic">Note: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, corporis minus vel! Quibusdam dolor, cupiditate harum autem commodi.</small></p>
+                                @if (!$submission->submitted())
+                                <div class="text-right">
+                                    @if ($submission->details(1)->get()->isEmpty())
+                                    <a href="{{ route('notices.commercial', $notice->id) }}" data-method="POST">
+                                        <small>
+                                            {{ trans('submissions.buttons.public.commercial.view') }}
+                                            <i class="icon-arrow-right22"></i>
+                                        </small>
+                                    </a>  
+                                    @else
+                                    <a href="{{ route('notices.commercial-edit', [$notice->id, $submission->id] ) }}" data-method="POST">
+                                        <small>
+                                            {{ trans('submissions.buttons.public.commercial.view') }}
+                                            <i class="icon-arrow-right22"></i>
+                                        </small>
+                                    </a>
+                                    @endif
+                                </div>
                                 @endif
                             </div>                    
                         </div>
-                        <br>
+                        <hr>    
                     @endif
                     {{-- Technical --}}
                     @if ($notice->requirementTechnicals)
                         <div class="row">
                             <div class="col-sm-12 mb-5">
-                                @if ($submissions['technicals'])
-                                    @if ($submissions['technicals']->status == 'draft')
-                                    <span class="label label-danger">
-                                    @else
-                                    <span class="label label-success">
-                                    @endif
-                                    {{ $submissions['technicals']->status }}</span>
+                                Technicals
+                                @if (App\Repositories\SubmissionsRepository::checkComplete($notice, $submission, 2))
+                                    <span class="label label-success label-rounded pull-right"><span class="text-thin">Completed</span></span>
                                 @else
-                                    <span class="label label-danger">Incomplete</span>
+                                    <span class="label label-danger label-rounded pull-right"><span class="text-thin">Incomplete</span></span>
                                 @endif
                             </div>
-                            <div class="col-sm-12 mb-5">Technicals</div>
                             <div class="col-sm-12">
-                                @if (!$submissions['technicals'])
-                                <a href="{{ route('notices.technical', $notice->id) }}" data-method="POST">
-                                    <small class="text-muted text-thin">
-                                        {{ trans('submissions.buttons.public.technical.view') }}
-                                        <span class="pull-right"><i class="icon-arrow-right22"></i></span>
-                                    </small>
-                                </a>
-                                @else
-                                <a href="{{ route('notices.technical-edit', [$notice->id, $submissions['technicals']->id]) }}"  data-method="POST">
-                                    <small class="text-muted text-thin">
-                                        {{ trans('submissions.buttons.public.technical.view') }}
-                                        <span class="pull-right"><i class="icon-arrow-right22"></i></span>
-                                    </small>
-                                </a>
+                                <p class="text-muted"><small class="text-italic">Note: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, corporis minus vel! Quibusdam dolor, cupiditate harum autem commodi.</small></p>
+                                @if (!$submission->submitted())
+                                <div class="text-right">
+                                    @if ($submission->details(2)->get()->isEmpty())
+                                    <a href="{{ route('notices.technical', $notice->id) }}" data-method="POST">
+                                        <small>
+                                            {{ trans('submissions.buttons.public.technical.view') }}
+                                            <i class="icon-arrow-right22"></i>
+                                        </small>
+                                    </a>
+                                    @else
+                                    <a href="{{ route('notices.technical-edit', [$notice->id, $submission->id]) }}"data-method="POST">
+                                        <small>
+                                            {{ trans('submissions.buttons.public.technical.view') }}
+                                            <i class="icon-arrow-right22"></i>
+                                        </small>
+                                    </a>
+                                    @endif
+                                </div>
                                 @endif
                             </div>                    
                         </div>
                     @endif
-                    @if($submissions['commercials'] && $submissions['technicals'])
+                    @if($submission->submitted())
                         <a 
-                            @if($submissions['commercials']->canSubmit() && $submissions['technicals']->canSubmit())
-                                href="{{ route('notices.submit-submission', $notice->id) }}"
-                                data-method="POST"
-                            @else
-                                href="#"
-                                data-placement="left" 
-                                data-popup="tooltip" 
-                                title="{{ trans('app.incomplete_tooltip') }}"
-                            @endif
+                            href="{{ route('notices.submission-slip', $submission->id) }}"
+                            class="btn btn-default btn-block legitRipple submission-btn" 
+                            <span class="text-thin">Print Slip</span>
+                        </a>
+                    @elseif(App\Repositories\SubmissionsRepository::checkComplete($notice, $submission))
+                        <a 
+                            href="{{ route('notices.submission-submit', $submission->id) }}"
+                            data-method="POST"
                             class="btn btn-primary btn-block legitRipple submission-btn" 
                             <span class="text-thin">Submit</span>
                         </a>
                     @else
-                        <p class="text-danger">Please view requirement above and submit before proceed.</p>
+                        <p class="submission-btn text-danger">Please complete requirement above and submit before proceed.</p>
                     @endif
                 </div>
             </div>
