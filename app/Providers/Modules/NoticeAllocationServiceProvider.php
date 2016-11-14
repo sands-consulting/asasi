@@ -8,7 +8,7 @@ class NoticeAllocationServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Api\NoticeAllocationsController', 'App\Policies\NoticeAllocationsPolicy');
+        // app('policy')->register('App\Http\Controllers\Api\NoticeAllocationsController', 'App\Policies\NoticeAllocationsPolicy');
     }
 
     /**
@@ -20,7 +20,7 @@ class NoticeAllocationServiceProvider extends ServiceProvider
     {
         // api routing
         app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
-            $router->model('notice_allocations', 'App\NoticeAllocation');
+            $router->model('allocation_notice', 'App\AllocationNotice');
 
             $router->post('notice-allocations/{notices}/store', [
                 'as' => 'api.notice-allocations.store',
@@ -30,7 +30,7 @@ class NoticeAllocationServiceProvider extends ServiceProvider
                 'as' => 'api.notice-allocations.update',
                 'uses' => 'NoticeAllocationsController@update'
             ]);
-            $router->post('notice-allocations/delete/{notice_allocations}', [
+            $router->post('notice-allocations/delete/{allocation_notice}', [
                 'as' => 'api.notice-allocations.delete',
                 'uses' => 'NoticeAllocationsController@delete'
             ]);

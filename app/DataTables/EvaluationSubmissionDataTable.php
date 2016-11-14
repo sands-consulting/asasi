@@ -24,6 +24,10 @@ class EvaluationSubmissionDataTable extends DataTable
     public function query()
     {
         $query = Submission::with('scores')
+            ->whereHas('evaluators', function($query) {
+                $query->where('user_id', $this->user_id)
+                    ->where('notice_id', $this->notice_id);
+            })
             ->leftJoin('notice_evaluator', function($join) {
                 $join->on('notice_evaluator.notice_id', '=', 'submissions.notice_id');
             })
@@ -41,7 +45,6 @@ class EvaluationSubmissionDataTable extends DataTable
                 'evaluation_types.name as type_name',
                 'submission_evaluator.status as evaluation_status'
             ]);
-
 
         if($this->datatables->request->input('q', null))
         {

@@ -57,12 +57,6 @@ class EvaluationDataTable extends DataTable
     {
         $columns = [
             [
-                'data'  => 'organization_name',
-                'name'  => 'organizations.name',
-                'title' => trans('notices.attributes.organization_id'),
-                'sWidth' => '25%',
-            ],
-            [
                 'data'  => 'notice_number',
                 'name'  => 'notice_number',
                 'title' => trans('notices.attributes.number'),

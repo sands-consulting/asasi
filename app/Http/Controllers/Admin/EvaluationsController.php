@@ -23,10 +23,6 @@ class EvaluationsController extends Controller
 
     public function submission(Request $request, EvaluationSubmissionDataTable $table, Notice $notice)
     {
-        $evaluator = NoticeEvaluator::where('notice_id', $notice->id)
-            ->where('user_id', $request->user()->id)
-            ->first();
-
         return $table->byNoticeId($notice->id)
             ->byUserId($request->user()->id)
             ->render('admin.evaluations.submissions', compact('notice'));
@@ -58,7 +54,12 @@ class EvaluationsController extends Controller
             ]);
         }
 
-        $requirements = EvaluationRequirement::where('evaluation_type_id', 1)
+        // Fixme: temp solution to get evaluator type
+        $evaluator = NoticeEvaluator::where('notice_id', $notice->id)
+            ->where('user_id', $request->user()->id)
+            ->first();
+
+        $requirements = EvaluationRequirement::where('evaluation_type_id', $evaluator->type_id)
             ->where('notice_id', $notice->id);
 
         if ($submission->scores->count() == $requirements->count()) {
@@ -89,7 +90,8 @@ class EvaluationsController extends Controller
     {
         $inputs = $request->only('scores');
         foreach ($inputs['scores'] as $evaluation_requirement_id => $score) {
-            $evaluationScore = EvaluationScore::whereEvaluationRequirementId($evaluation_requirement_id)->first();
+            $evaluationScore = EvaluationScore::whereEvaluationRequirementId($evaluation_requirement_id)
+                ->where('submission_id', $submission->id)->first();
             EvaluationScoresRepository::update($evaluationScore, [
                 'score' => $score,
                 'remark' => null,
@@ -97,15 +99,20 @@ class EvaluationsController extends Controller
             ]);
         }
 
-        $requirements = EvaluationRequirement::where('evaluation_type_id', 1)
+        // Fixme: temp solution to get evaluator type
+        $evaluator = NoticeEvaluator::where('notice_id', $notice->id)
+            ->where('user_id', $request->user()->id)
+            ->first();
+
+        $requirements = EvaluationRequirement::where('evaluation_type_id', $evaluator->type_id)
             ->where('notice_id', $notice->id);
 
         if ($submission->scores->count() == $requirements->count()) {
-            $submission->evaluators()->updateExistingPivot($request->user()->id,['status'=>'completed']);
+            $submission->evaluators()->updateExistingPivot($evaluator->id,['status'=>'completed']);
         }
 
         return redirect()
-            ->route('admin.evaluations.edit', [$notice->id, $submission->id])
+            ->route('admin.evaluations.submission', [$notice->id])
             ->with('notice', trans('evaluations.notices.updated'));
     }
 }
