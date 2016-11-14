@@ -1,6 +1,7 @@
 /database/design.mwb.bak
 /database/design.mwb
 /node_modules
+/public/uploads
 /resources/assets/vendor
 /resources/assets/js/*.map
 /resources/assets/js/*-build.js
