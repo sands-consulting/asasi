@@ -77,10 +77,8 @@ class EvaluationsController extends Controller
             ->leftJoin('submissions', 'submissions.id', '=', 'evaluation_scores.submission_id')
             ->where('submissions.id', $submission->id)
             ->select([
-                'evaluation_requirements.id as requirement_id',
                 'evaluation_requirements.*', 
-                'evaluation_scores.*', 
-                'submissions.*'
+                'evaluation_scores.score'
             ])
             ->get();
 

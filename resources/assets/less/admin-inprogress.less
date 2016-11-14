@@ -1,28 +1,8 @@
-@media only screen and (min-width : 768px) {
-  .is-table-row {
-    display: table;
-    margin: 10px auto;
-    width: 98%;
+.box div[class^="col-"] {
+    border: 0.5px solid #ebebeb;
+    padding: 1em;
+    margin: 0px;
   }
-
-  .is-table-row [class*="col-"] {
-    float: none;
-    display: table-cell;
-    vertical-align: middle;
-  }
-}
-
-.is-table-row .box {
-  // border-radius: 2px;
-  border: solid 0.5px #ebebeb;
-  padding: 2em;
-  margin: 0px;
-  
-}
-
-.is-table-row [class*="col-"] {
-    padding: 0;  
-}
 
 .greyed {
   background-color: #eceff1 !important;
@@ -34,4 +14,27 @@
 
 .text-size-xxlarge {
   font-size: 32px;
+}
+
+@media only screen and (min-width : 768px) {
+  .box div[class^="col-"] {
+    border: 0.5px solid #ebebeb;
+    border-left: none;
+    padding: 1em;
+    margin: 0px;
+    
+  }
+  .box div[class^="col-"]:first-child {
+      border-radius: 2px 0 2px 0px;
+      border: 0.5px solid #ebebeb;
+      padding: 1em;
+      margin: 0px;
+      
+  }
+  .box div[class^="col-"]:last-child {
+    border-radius: 0 2px 0 2px;
+    border-left: none;
+    margin: 0px;
+    
+  }
 }
