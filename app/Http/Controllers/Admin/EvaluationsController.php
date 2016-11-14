@@ -29,13 +29,16 @@ class EvaluationsController extends Controller
 
         return $table->byNoticeId($notice->id)
             ->byUserId($request->user()->id)
-            ->forType($evaluator->type->id)
             ->render('admin.evaluations.submissions', compact('notice'));
     }
 
     public function create(Request $request, Notice $notice, Submission $submission)
     {
-        $requirements = EvaluationRequirement::where('evaluation_type_id', $submission->type_id)
+        $evaluator = NoticeEvaluator::where('notice_id', $notice->id)
+            ->where('user_id', $request->user()->id)
+            ->first();
+
+        $requirements = EvaluationRequirement::where('evaluation_type_id', $evaluator->type_id)
             ->where('notice_id', $notice->id)->get();
 
         return view('admin.evaluations.create', compact('notice', 'requirements', 'submission'));

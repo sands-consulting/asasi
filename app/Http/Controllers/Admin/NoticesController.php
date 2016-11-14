@@ -57,8 +57,7 @@ class NoticesController extends Controller
     public function show(Notice $notice)
     {
         $vendors = $notice->vendors;
-        $submissions['commercial'] = $notice->submissions()->where('type_id', 1)->get();
-        $submissions['technical'] = $notice->submissions()->where('type_id', 2)->get();
+        $submissions = $notice->submissions;
         $evaluators['commercial'] = NoticeEvaluator::where('notice_id', $notice->id)->where('type_id', 1)->get();
         $evaluators['technical'] = NoticeEvaluator::where('notice_id', $notice->id)->where('type_id', 2)->get();
         $vendorAwarded = $notice->vendors()->awarded()->first();

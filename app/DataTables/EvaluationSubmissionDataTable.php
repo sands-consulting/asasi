@@ -16,7 +16,7 @@ class EvaluationSubmissionDataTable extends DataTable
                 return view('admin.evaluations._submission_actions', compact('submission'));
             })
             ->editColumn('type_name', function($submission) {
-                return str_titleize($submission->type_name);
+                return ucwords($submission->type_name);
             })
             ->make(true);
     }
@@ -24,23 +24,22 @@ class EvaluationSubmissionDataTable extends DataTable
     public function query()
     {
         $query = Submission::with('scores')
-            ->leftJoin('evaluation_types', 'evaluation_types.id', '=', 'submissions.type_id')
             ->leftJoin('notice_evaluator', function($join) {
                 $join->on('notice_evaluator.notice_id', '=', 'submissions.notice_id');
-                $join->on('notice_evaluator.type_id', '=', 'submissions.type_id');
             })
             ->leftJoin('submission_evaluator', function($join) {
                 $join->on('submission_evaluator.submission_id', '=', 'submissions.id');
                 $join->on('submission_evaluator.evaluator_id', '=', 'notice_evaluator.id');
             })
+            ->leftJoin('evaluation_types', 'evaluation_types.id', '=', 'notice_evaluator.type_id')
             ->where('submissions.notice_id', $this->notice_id)
-            ->where('submissions.type_id', $this->type_id)
+            ->where('notice_evaluator.user_id', $this->user_id)
             ->select([
                 'submissions.id as submission_id',
                 'submissions.notice_id as notice_id',
                 'notice_evaluator.id as evaluator_id',
                 'evaluation_types.name as type_name',
-                'submission_evaluator.status as evaluation_status',
+                'submission_evaluator.status as evaluation_status'
             ]);
 
 
@@ -99,12 +98,6 @@ class EvaluationSubmissionDataTable extends DataTable
     public function byNoticeId($noticeId)
     {
         $this->notice_id = $noticeId;
-        return $this;
-    }
-
-    public function forType($typeId)
-    {
-        $this->type_id = $typeId;
         return $this;
     }
 

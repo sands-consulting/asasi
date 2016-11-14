@@ -7,9 +7,9 @@
             <th width="20%">Price</th>
         </thead>
         <tbody>
-            @if (!$submissions['commercial']->isEmpty())
+            @if (!$submissions->isEmpty())
                 <?php $i = 1; ?>
-                @foreach ($submissions['commercial'] as $submission)
+                @foreach ($submissions as $submission)
                     <tr>
                         <td>{{ $i }}</td>
                         <td>{{ $submission->id }}</td>
