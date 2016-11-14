@@ -121,6 +121,11 @@ class Notice extends Model
         return $this->status != 'cancelled';
     }
     
+    public function canAward()
+    {
+        return $this->status != 'awarded' && $this->status != 'cancelled';
+    }
+
     /*
      * Relationship
      */
@@ -128,7 +133,8 @@ class Notice extends Model
     public function allocations()
     {
         return $this->belongsToMany(Allocation::class)
-            ->withPivot('amount')
+            ->withPivot(['id', 'amount'])
+            ->wherePivot('deleted_at', NULL)
             ->withTimestamps();
     }
 

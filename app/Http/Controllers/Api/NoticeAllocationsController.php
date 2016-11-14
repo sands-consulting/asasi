@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Repositories\AuthLogsRepository;
 use App\Http\Controllers\Controller;
 use App\Notice;
-use App\NoticeAllocation;
-use App\Repositories\NoticeAllocationsRepository;
+use App\AllocationNotice;
+use App\Repositories\AllocationNoticeRepository;
 
 class NoticeAllocationsController extends Controller
 {
@@ -19,8 +19,11 @@ class NoticeAllocationsController extends Controller
             'allocation_id'
         );
 
-        // Fixme: temp solution
-        $allocation = $notice->allocations()->attach($input['allocation_id'], ['amount' => $input['amount']]);
+        // Fixme: temp solution / prevent user from attaching same allocation to fix this
+        $notice->allocations()->attach($input['allocation_id'], ['amount' => $input['amount']]);
+        $allocation = $notice->allocations()
+            ->wherePivot('allocation_id', $input['allocation_id'])
+            ->first()->pivot;
         return response()->json($allocation);
     }
 
@@ -37,9 +40,9 @@ class NoticeAllocationsController extends Controller
         return response()->json($allocation);
     }
 
-    public function delete(NoticeAllocation $noticeAllocation)
+    public function delete(AllocationNotice $noticeAllocation)
     {
-        NoticeAllocationsRepository::delete($noticeAllocation);
+        AllocationNoticeRepository::delete($noticeAllocation);
         return response()->json($noticeAllocation);
     }
 }

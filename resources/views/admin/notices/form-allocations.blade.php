@@ -12,18 +12,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($notice->allocations)
+                    @if (!$notice->allocations->isEmpty())
                         <tr class="table-empty" style="display:none">
                             <td colspan="4">
-                                {!! trans('notice-allocations.views.create.table.empty') !!}
+                                {!! trans('notices.views.create.table.empty') !!}
                             </td>
                         </tr>
                         @foreach($notice->allocations as $allocation)
-                        <tr data-id="{{ $allocation->id }}">
+                        <tr data-id="{{ $allocation->pivot->id }}">
                             <td>
                                 <a href="#" class="myeditable" 
                                     data-type="select"
-                                    data-mode="inline"
                                     data-showbuttons="false"
                                     data-onblur="submit"
                                     data-name="allocation_id" 
@@ -34,8 +33,7 @@
                             </td>
                             <td>
                                 <a href="#" class="myeditable" 
-                                    data-type="text" 
-                                    data-mode="inline"
+                                    data-type="text"
                                     data-name="amount" 
                                     data-pk="{{ $allocation->id }}" 
                                     data-url="{{ route('api.notice-allocations.update', $notice->id) }}">{{ $allocation->pivot->amount }}</a>
@@ -48,7 +46,7 @@
                     @else
                         <tr class="table-empty">
                             <td colspan="6">
-                                {!! trans('notice-allocations.views.create.table.empty') !!}
+                                {!! trans('notices.views.create.table.empty') !!}
                             </td>
                         </tr>
                     @endif
@@ -70,7 +68,6 @@
             <td>
                 <a href="#" class="myeditable" 
                     data-type="select"
-                    data-mode="inline"
                     data-showbuttons="false"
                     data-name="allocation_id"
                     data-source="{{ App\Allocation::options() }}"
@@ -78,7 +75,6 @@
             </td>
             <td>
                 <a href="#" class="myeditable" 
-                    data-mode="inline"
                     data-onblur="submit"
                     data-type="text"
                     data-name="amount" 

@@ -119,10 +119,14 @@
                         <td class="text-right">{{ 'RM' }} {{ trim_trailing_zeroes($data->offered_price) }}</td>
                         <td>{{ $data->offered_duration }}</td>
                         <td>
+                            @if ($notice->canAward())
                             <a href="{{ route('admin.notices.award', [$notice->id, $data->id]) }}" class="btn btn-primary btn-xs" data-method="POST">Award</a>
+                            @endif
                         </td>
                         <td>
-                            <a href="{{ route('admin.notices.award', [$notice->id, $data->id]) }}" class="btn btn-default btn-xs"><i class="icon-list3"></i></a>
+                            @if ($notice->status == 'awarded')
+                                <a href="{{ route('admin.notices.award', [$notice->id, $data->id]) }}" class="btn btn-default btn-xs"><i class="icon-list3"></i></a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

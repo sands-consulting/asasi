@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use App\Libraries\Traits\DateAccessorTrait;
 
-class NoticeAllocation extends Model
+class AllocationNotice extends Model
 {
     use RevisionableTrait,
         DateAccessorTrait,
         SoftDeletes;
 
+    protected $table = 'allocation_notice';
+    
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
