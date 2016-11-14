@@ -165,7 +165,8 @@ class Vendor extends Model
 
     public function notices()
     {
-        return $this->belongsToMany(Notice::class);
+        return $this->belongsToMany(Notice::class)
+            ->withTimestamps();
     }
 
     public function subscriptions()

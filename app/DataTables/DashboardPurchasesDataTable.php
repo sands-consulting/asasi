@@ -24,9 +24,9 @@ class DashboardPurchasesDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::leftJoin('notice_vendor', 'notice_vendor.notice_id', '=', 'notices.id')
-            ->leftJoin('vendors', 'vendors.id', '=', 'notice_vendor.notice_id')
-            ->where('vendors.id', $this->vendor_id)
+        $query = Notice::whereHas('vendors', function($query) {
+                $query->where('vendors.id', $this->vendor_id);
+            })
             ->select([
                 'notices.id as notice_id',
                 'notices.name as notice_name',

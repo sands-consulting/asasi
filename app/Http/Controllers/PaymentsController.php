@@ -30,12 +30,12 @@ class PaymentsController extends Controller
     {
         return redirect()
             ->route('payments.redirect')
-            ->with('notice', trans('payments.notices.paid'));
+            ->with('notices', trans('payments.notices.paid'));
     }
 
     public function redirect(Request $request)
     {
-        $vendor = $request->user()->vendor()->first();
+        $vendor = $request->user()->vendor;
         $notices = [];
 
         if (Cart::count() > 0) {
@@ -44,6 +44,8 @@ class PaymentsController extends Controller
                 $notice = Notice::findOrFail($content->id);
                 $notices[] = $notice;
             }
+
+            Cart::destroy();
         }
 
         return redirect()
@@ -58,7 +60,7 @@ class PaymentsController extends Controller
         
         if (empty($notices)) {
             return redirect()
-                ->route('notices.my-notices');
+                ->route('dashboard.purchases');
         }
 
         return view('payments.summary', compact('notices'));

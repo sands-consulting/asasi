@@ -76,7 +76,7 @@ class Subscription extends Authenticatable
     
     public function scopeActive($query)
     {
-        return $query->where("{$this->getTable()}.status", 'active');
+        return $query->where('status', 'active');
     }
 
     /* 

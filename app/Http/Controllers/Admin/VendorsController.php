@@ -92,10 +92,6 @@ class VendorsController extends Controller
         $inputs = $request->only(['redirect_to']);
         VendorsRepository::update($vendor, $inputs, ['status' => 'inactive']);
 
-        $role_id = Setting::where('key', 'vendor_role_id')->first()->value;
-        User::find($vendor->user->id)->roles()->attach($role_id);
-        User::find($vendor->user->id)->vendors()->attach($vendor->id);
-
         UserLogsRepository::log($request->user(), 'Approve', $vendor, $request->getClientIp());
 
         Event::fire(new VendorApproved($request->user(), $vendor));

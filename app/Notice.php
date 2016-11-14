@@ -170,7 +170,8 @@ class Notice extends Model
 
     public function vendors()
     {
-        return $this->belongsToMany(Vendor::class);
+        return $this->belongsToMany(Vendor::class)
+            ->withTimestamps();
     }
 
     public function submissions()

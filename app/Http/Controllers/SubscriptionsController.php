@@ -85,7 +85,7 @@ class SubscriptionsController extends Controller
 
     public function current()
     {
-        $subscription = Auth::user()->vendor;
+        $subscription = Auth::user()->vendor->subscriptions()->active()->first();
         return view('subscriptions.current', compact('subscription'));
     }
 
