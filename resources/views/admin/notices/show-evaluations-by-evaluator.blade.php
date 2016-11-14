@@ -1,72 +1,67 @@
 <fieldset class="mb-20">
     <legend class="text-semibold"> <i class="icon-coins"></i> Commercial Evaluators</legend>
-    <table class="table">
-        <thead>
-            <th>Evaluator</th>
-            <th>Type</th>
-            <th>Progress</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            @if (!$evaluators['commercial']->isEmpty())
-                <?php $i = 1; ?>
-
-                @foreach ($evaluators['commercial'] as $evaluator)
-                    <tr>
-                        <td>{{ $evaluator->user->name }}</td>
-                        <td>{{ $evaluator->type->name }}</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped active" style="width: {{ $evaluator->getProgress($evaluator->type_id) }}%">
-                                    <span>{{ $evaluator->getProgress($evaluator->type_id) }}%</span>
-                                </div>
+    <div class="row">
+        @if (!$evaluators['commercial']->isEmpty())
+            @foreach ($evaluators['commercial'] as $evaluator)
+                <div class="col-md-4">
+                    <div class="panel panel-body">
+                        <div class="media mb-10">
+                            <div class="media-left">
+                                <a href="#" class="btn bg-primary-400 btn-rounded btn-icon legitRipple">
+                                    <span class="letter-icon">{{ get_initial($evaluator->user->name) }}</span>
+                                </a>
                             </div>
-                        </td>
-                        <td>{{ link_to_route('admin.users.show', trans('actions.show'), $evaluator->id) }}</td>
-                    </tr>
-                    <?php $i++ ?>
-                @endforeach
-            @else
-                <tr>
-                    <td colspan="3">No evaluators information found.</td>
-                </tr>
-            @endif
-        </tbody>
-    </table>
+
+                            <div class="media-body">
+                                <h6 class="media-heading">{{ $evaluator->user->name }}</h6>
+                                <span class="text-muted">{{ $evaluator->type->name }}</span>
+                            </div>
+
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-success active" style="width: {{ $evaluator->getProgress($evaluator->type_id) }}%">
+                                <span>{{ $evaluator->getProgress($evaluator->type_id) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <p>No evaluators information found.</p>
+        @endif
+    </div>
 </fieldset>
 
 <fieldset class="mb-20">
     <legend class="text-semibold"> <i class="icon-wrench2"></i> Technical Evaluators</legend>
-    <table class="table">
-        <thead>
-            <th>Evaluator</th>
-            <th>Type</th>
-            <th>Progress</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            @if (!$evaluators['technical']->isEmpty())
-                <?php $i = 1; ?>
-                @foreach ($evaluators['technical'] as $evaluator)
-                    <tr>
-                        <td>{{ $evaluator->user->name }}</td>
-                        <td>{{ $evaluator->type->name }}</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped active" style="width: {{ $evaluator->getProgress($evaluator->type_id) }}%">
-                                    <span>{{ $evaluator->getProgress($evaluator->type_id) }}%</span>
-                                </div>
+    <div class="row">
+        @if (!$evaluators['technical']->isEmpty())
+            @foreach ($evaluators['technical'] as $evaluator)
+                <div class="col-md-4">
+                    <div class="panel panel-body">
+                        <div class="media mb-10">
+                            <div class="media-left">
+                                <a href="#" class="btn bg-primary-400 btn-rounded btn-icon legitRipple">
+                                    <span class="letter-icon">{{ get_initial($evaluator->user->name) }}</span>
+                                </a>
                             </div>
-                        </td>
-                        <td>{{ link_to_route('admin.users.show', trans('actions.show'), $evaluator->id) }}</td>
-                    </tr>
-                    <?php $i++ ?>
-                @endforeach
-            @else
-                <tr>
-                    <td colspan="3">No evaluators information found.</td>
-                </tr>
-            @endif
-        </tbody>
-    </table>
+
+                            <div class="media-body">
+                                <h6 class="media-heading">{{ $evaluator->user->name }}</h6>
+                                <span class="text-muted">{{ $evaluator->type->name }}</span>
+                            </div>
+
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-success active" style="width: {{ $evaluator->getProgress($evaluator->type_id) }}%">
+                                <span>{{ $evaluator->getProgress($evaluator->type_id) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <p>No evaluators information found.</p>
+        @endif
+    </div>
 </fieldset>

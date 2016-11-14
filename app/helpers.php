@@ -69,3 +69,15 @@ function normalize_registration_number($string)
     $string = str_replace('-', '', $string);
     return $string;
 }
+
+function get_initial($str, $length = 2)
+{
+    $initial = '';
+    $str_part = explode(' ', $str);
+
+    for ($i=0; $i < $length; $i++) { 
+        $initial .= substr($str_part[$i], 0, 1);
+    }
+
+    return $initial;
+}
