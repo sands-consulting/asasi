@@ -22,6 +22,7 @@ class AuthController extends Controller
 
     protected $redirectTo           = '/';
     protected $redirectAfterLogout  = '/';
+    protected $redirectAdmin        = '/admin';
 
     public function __construct()
     {
@@ -94,8 +95,10 @@ class AuthController extends Controller
             return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
                 ->with('alert', trans('auth.notices.' . $user->status));
         }
-
-        return redirect()->intended($this->redirectPath());
+        if ($request->user()->hasPermission('access:admin'))
+            return redirect()->intended($this->redirectAdmin);
+        else
+            return redirect()->intended($this->redirectPath());
     }
 
     public function logout()
