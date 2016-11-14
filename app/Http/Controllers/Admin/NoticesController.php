@@ -149,25 +149,8 @@ class NoticesController extends Controller
 
     public function summary(Notice $notice)
     {
-        // Fixme: try to create dynamic query for evaluation type other than commercial and technical.
-        $vendors = Vendor::leftJoin('submissions as commercials', 'commercials.vendor_id', '=', 'vendors.id')
-            ->leftJoin('submissions as technicals', 'technicals.vendor_id', '=', 'vendors.id')
-            ->where('commercials.notice_id', $notice->id)
-            ->where('technicals.notice_id', $notice->id)
-            ->where('commercials.type_id', 1)
-            ->where('technicals.type_id', 2)
-            ->select([
-                'vendors.id',
-                'vendors.name',
-                'technicals.total_score as technical_score',
-                'commercials.total_score as commercial_score',
-                'commercials.price as offered_price',
-                \DB::raw("'None' as offered_duration")
-            ])
-            ->groupBy('vendors.id')
-            ->get();
-
-        return view('admin.notices.evaluation-summary', compact('notice', 'vendors'));
+        $summary = $notice->getSummary();
+        return view('admin.notices.evaluation-summary', compact('notice', 'summary'));
     }
 
     public function award(Notice $notice, Vendor $vendor)

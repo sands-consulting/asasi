@@ -95,8 +95,9 @@
                     <tr>
                         <th>#</th>
                         <th>Vendor Name</th>
-                        <th class="text-center">Technical Score</th>
-                        <th class="text-center">Commercial Score</th>
+                        @foreach ($summary['types'] as $type)
+                            <th class="text-center">{{ $type }} Score (%)</th>
+                        @endforeach
                         <th class="text-center">Offered Price</th>
                         <th>Offered Duration</th>
                         <th>Winner</th>
@@ -104,19 +105,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($vendors as $vendor)
+                    @foreach ($summary['data'] as $data)
                     <tr>
-                        <td>{{ $vendor->id }}</td>
-                        <td><a href="{{ route('admin.vendors.show', $vendor->id) }}">{{ $vendor->name }}</a></td>
-                        <td class="text-right">{{ trim_trailing_zeroes($vendor->technical_score) }} %</td>
-                        <td class="text-right">{{ trim_trailing_zeroes($vendor->commercial_score) }} %</td>
-                        <td class="text-right">{{ 'RM' }} {{ trim_trailing_zeroes($vendor->offered_price) }}</td>
-                        <td>{{ $vendor->offered_duration }}</td>
+                        <td>{{ $data->id }}</td>
+                        <td><a href="{{ route('admin.vendors.show', $data->id) }}">{{ $data->name }}</a></td>
+                        @foreach ($summary['types'] as $type)
+                            @if (!is_null($data->{$type}))
+                                <td class="text-right">{{ trim_trailing_zeroes($data->{$type}) }}</td>
+                            @else
+                                <td class="text-center">- <span class="text-italic">NIL</span> -</td>
+                            @endif
+                        @endforeach
+                        <td class="text-right">{{ 'RM' }} {{ trim_trailing_zeroes($data->offered_price) }}</td>
+                        <td>{{ $data->offered_duration }}</td>
                         <td>
-                            <a href="{{ route('admin.notices.award', [$notice->id, $vendor->id]) }}" class="btn btn-primary btn-xs" data-method="POST">Award</a>
+                            <a href="{{ route('admin.notices.award', [$notice->id, $data->id]) }}" class="btn btn-primary btn-xs" data-method="POST">Award</a>
                         </td>
                         <td>
-                            <a href="{{ route('admin.notices.award', [$notice->id, $vendor->id]) }}" class="btn btn-default btn-xs"><i class="icon-list3"></i></a>
+                            <a href="{{ route('admin.notices.award', [$notice->id, $data->id]) }}" class="btn btn-default btn-xs"><i class="icon-list3"></i></a>
                         </td>
                     </tr>
                     @endforeach
