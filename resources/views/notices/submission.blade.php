@@ -23,71 +23,71 @@
     <div class="panel panel-flat">        
         <div class="panel-body">
             <div class="row row-eq-height">
-                <div class="col-sm-9 eq-element" style="border-right: 0.5px solid #dcdcdc">
+                <div class="col-md-9 eq-element" style="border-right: 0.5px solid #dcdcdc">
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Notice Details</h5>
                         </div>
                     </div>
                     <div class="row mb-5">
-                        <div class="col-sm-8">
+                        <div class="col-md-8">
                             <div class="text-muted">{{ trans('notices.attributes.name') }}</div>
                             <div class="form-control-static">{{ $notice->name }}</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="text-muted">{{ trans('notices.attributes.number') }}</div>
                             <div class="form-control-static">{{ $notice->number }}</div>
                         </div>
                     </div>
                     <div class="row mb-5">
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="text-muted">{{ trans('notices.attributes.price') }}</div>
                             <div class="form-control-static">{{ $notice->price ? $notice->price : 'N/A' }}</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="text-muted">{{ trans('notices.attributes.notice_type_id') }}</div>
                             <div class="form-control-static">{{ $notice->type ? $notice->type->name : 'N/A' }}</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="text-muted">{{ trans('notices.attributes.expired_at') }}</div>
                             <div class="form-control-static">{{ $notice->expired_at ? $notice->expired_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
                     </div>
 
                     <div class="row mb-5">
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="text-muted">{{ trans('notices.attributes.published_at') }}</div>
                             <div class="form-control-static">{{ $notice->published_at ? $notice->published_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="text-muted">{{ trans('notices.attributes.purchased_at') }}</div>
                             <div class="form-control-static">{{ $notice->purchased_at ? $notice->purchased_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="text-muted">{{ trans('notices.attributes.submission_at') }}</div>
                             <div class="form-control-static">{{ $notice->submission_at ? $notice->submission_at->formatDateFromSetting() : 'N/A' }}</div>
                         </div>
                     </div>
 
                     <div class="row mb-5">
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <div class="text-muted">{{ trans('notices.attributes.submission_address') }}</div>
                             <div class="form-control-static">{!! $notice->submission_address ? nl2br($notice->submission_address) : 'N/A' !!}</div>
                         </div>    
                     </div>
 
                     <div class="row mb-5">
-                        <div class="col-sm-12">
+                        <div class="col-md-12">
                             <div class="text-muted">{{ trans('notices.attributes.description') }}</div>
                             <div class="form-control-static">{{ !empty($notice->description) ? nl2br($notice->description) : 'N/A' }}</div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-md-12">
                             <div class="text-muted">{{ trans('notices.attributes.rules') }}</div>
                             <div class="form-control-static">{!! !empty($notice->rules) ? nl2br($notice->rules) : 'N/A' !!}</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 eq-element">
+                <div class="col-md-3 eq-element">
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Notice Requirements</h5>
@@ -96,14 +96,14 @@
                     {{-- Commercial --}}
                     @if ($notice->requirementCommercials)
                         <div class="row mb-20">
-                            {{-- <div class="col-sm-12 mb-5">
+                            {{-- <div class="col-md-12 mb-5">
                                 @if (App\Repositories\SubmissionsRepository::checkComplete($notice, $submission, 1))
                                     <span class="label label-success">Completed</span>
                                 @else
                                     <span class="label label-danger">Incomplete</span>
                                 @endif
                             </div> --}}
-                            <div class="col-sm-12 mb-5">
+                            <div class="col-md-12 mb-5">
                                 Commercials
                                 @if (App\Repositories\SubmissionsRepository::checkComplete($notice, $submission, 1))
                                     <span class="label label-success label-rounded pull-right"><span class="text-thin">Completed</span></span>
@@ -111,7 +111,7 @@
                                     <span class="label label-danger label-rounded pull-right"><span class="text-thin">Incomplete</span></span>
                                 @endif
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-md-12">
                                 <p class="text-muted"><small class="text-italic">Note: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, corporis minus vel! Quibusdam dolor, cupiditate harum autem commodi.</small></p>
                                 @if (!$submission->submitted())
                                 <div class="text-right">
@@ -139,7 +139,7 @@
                     {{-- Technical --}}
                     @if ($notice->requirementTechnicals)
                         <div class="row">
-                            <div class="col-sm-12 mb-5">
+                            <div class="col-md-12 mb-5">
                                 Technicals
                                 @if (App\Repositories\SubmissionsRepository::checkComplete($notice, $submission, 2))
                                     <span class="label label-success label-rounded pull-right"><span class="text-thin">Completed</span></span>
@@ -147,7 +147,7 @@
                                     <span class="label label-danger label-rounded pull-right"><span class="text-thin">Incomplete</span></span>
                                 @endif
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-md-12">
                                 <p class="text-muted"><small class="text-italic">Note: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, corporis minus vel! Quibusdam dolor, cupiditate harum autem commodi.</small></p>
                                 @if (!$submission->submitted())
                                 <div class="text-right">
@@ -173,15 +173,18 @@
                     @endif
                     @if($submission->submitted())
                         <a 
-                            href="{{ route('notices.submission-slip', $submission->id) }}"
+                            href="#"
+                            onclick="window.open('{{ route('notices.submission-slip', $submission->id) }}', 'Submission Slip', 'location=30, status=1, resizable=1, titlebar=1, width=500, height=860'); return false;"
                             class="btn btn-default btn-block legitRipple submission-btn" 
                             <span class="text-thin">Print Slip</span>
                         </a>
                     @elseif(App\Repositories\SubmissionsRepository::checkComplete($notice, $submission))
                         <a 
                             href="{{ route('notices.submission-submit', $submission->id) }}"
+                            target="_blank"
                             data-method="POST"
-                            class="btn btn-primary btn-block legitRipple submission-btn" 
+                            class="btn btn-primary btn-block legitRipple submission-btn"
+                            data-confirm="{{ trans('app.confirm-submission') }}" 
                             <span class="text-thin">Submit</span>
                         </a>
                     @else

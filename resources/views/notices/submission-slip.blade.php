@@ -1,11 +1,11 @@
-@extends('layouts.public')
+@extends('layouts.window')
 
 @section('content')
     <div class="panel panel-flat">        
         <div class="panel-body">
-            <div class="row row-eq-height">
-                <div class="col-sm-6 col-md-offset-3">
-                    <div class="row" style="border: 0.5px solid #cdcdcd">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
                         <div class="col-md-12 no-padding">
                             <div class="submission-slip">
                                 <div class="slip-header">
@@ -19,11 +19,11 @@
                             </div>
                             <div class="text-center">{{ $submission->notice->name }}</div>
                         </div>
-                        <div class="col-sm-6 mb-50">
+                        <div class="col-md-6 mb-50">
                             <div class="text-muted text-center">{{ trans('notices.attributes.number') }}</div>
                             <div class="text-center">{{ $submission->notice->number }}</div>
                         </div>
-                        <div class="col-sm-6 mb-50" style="margin-bottom: 50px">
+                        <div class="col-md-6 mb-50" style="margin-bottom: 50px">
                             <div class="text-muted text-center">{{ trans('submissions.attributes.submitted_at') }}</div>
                             <div class="text-center">{{ $submission->submitted_at }}</div>
                         </div>
