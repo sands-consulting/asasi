@@ -3,27 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\UserLog;
+use App\Vendor;
+use App\DataTables\DashboardUsersDataTable;
+use App\DataTables\DashboardVendorsDataTable;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(DashboardUsersDataTable $table)
     {
         $lastLogins = UserLog::lastLogin(5)->get();
+        // return \App\User::with('latestLog')->first()->latestLog;
 
-        return view('admin.dashboard.user', compact('lastLogins'));
+        return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
 
-    public function user()
+    public function user(DashboardUsersDataTable $table)
     {
         $lastLogins = UserLog::lastLogin(5)->get();
-
-        return view('admin.dashboard.user', compact('lastLogins'));
+        return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
 
-    public function vendor()
+    public function vendor(DashboardVendorsDataTable $table)
     {
-        return view('admin.dashboard.vendor');
+        $topPurchasers = Vendor::purchaseCount();
+        return $table->render('admin.dashboard.vendor', compact('topPurchasers'));
     }
 
     public function tender()

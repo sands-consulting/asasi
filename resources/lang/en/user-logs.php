@@ -10,4 +10,10 @@ return [
         'created_at' => 'Date & Time',
         'system' => 'System'
     ],
+
+    'views' => [
+        'tables' => [
+            'empty' => 'No logs found.'
+        ]
+    ]
 ];

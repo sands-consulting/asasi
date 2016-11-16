@@ -22,6 +22,15 @@ return [
         'submissions' => 'Submissions'
     ],
 
+    'views' => [
+        'vendors' => [
+            'panels' => [
+                'registration_status' => 'Registration Status',
+                'top_purchaser' => 'Top Purchaser',
+            ],
+        ],
+    ],
+
     'eligibles' => [
     	'title' => 'Eligibles'
     ],

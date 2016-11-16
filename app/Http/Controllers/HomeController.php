@@ -7,13 +7,14 @@ use App\Http\Requests;
 use App\Notice;
 use App\DataTables\HomeNoticesDataTable;
 use App\DataTables\HomeSubmissionsDataTable;
+use App\Repositories\DashboardRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(Request $request, HomeNoticesDataTable $table)
     {
-        return $table->render('home.index');
+        return $table->render('home.index', compact('numbers'));
     }
 
     public function submissions(Request $request, HomeSubmissionsDataTable $table)

@@ -81,7 +81,7 @@
 	<div class="datatable-filter">
 		<div class="row row-eq-height">
 			<div class="col-sm-4">
-				<a href="#" @click.prevent="perform_filter($event)" data-filter="total" data-color="slate-300">
+				<a href="#" @click.prevent="handle_allocation($event)" data-filter="total" data-color="slate-300">
 					<div class="panel panel-flat eq-element bg-slate-300">
 						<div class="panel-body">
 							<span class="text-size-large">{{ trans('allocations.views.show.panels.total') }}</span><br>
@@ -91,7 +91,7 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="#" @click.prevent="perform_filter($event)" data-filter="allocated" data-color="teal-400">
+				<a href="#" @click.prevent="handle_allocation($event)" data-filter="allocated" data-color="teal-400">
 					<div class="panel panel-flat eq-element border-bottom-teal-400 form-datatable-search">
 						<div class="panel-body valign-middle">
 							<span class="text-muted text-size-large">{{ trans('allocations.views.show.panels.allocated') }}</span><br>
@@ -101,7 +101,7 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="#" @click.prevent="perform_filter($event)" data-filter="reserved" data-color="orange-600">
+				<a href="#" @click.prevent="handle_allocation($event)" data-filter="reserved" data-color="orange-600">
 					<div class="panel panel-flat eq-element border-bottom-orange-600">
 						<div class="panel-body valign-middle">
 							<span class="text-muted text-size-large">{{ trans('allocations.views.show.panels.reserved') }}</span><br>

@@ -96,6 +96,16 @@ class Vendor extends Model
         return $query->where('status', '=', 'active');
     }
 
+    public function scopeInactive($query)
+    {
+        return $query->where('status', '=', 'inactive');
+    }
+    
+    public function scopeBlacklisted($query)
+    {
+        return $query->where('status', '=', 'blacklisted');
+    }
+
     /* 
      * State controls 
      */
@@ -219,20 +229,18 @@ class Vendor extends Model
     {
         return Vendor::lists('name', 'id')->toArray();
     }
-    // public function getProgress($type)
-    // {
-    //     $progress = 0;
-    //     $total = $this->submissions()->where('type', $type)->count();
-    //     $completed = $this->submissions()->where('type', $type)
-    //             ->wherePivot('status', 'completed')
-    //             ->count();
 
-    //     if ($total > 0) 
-    //         $progress = $completed/$total * 100;
+    public static function purchaseCount($limit = null)
+    {
+        $vendors = Vendor::with('notices')
+            ->get()
+            ->sortBy(function($vendors) {
+                return $vendors->notices->count();
+            })
+            ->take($limit);
 
-    //     return number_format($progress, 2, '.', '');
-
-    // }
+        return $vendors;
+    }
 
     public static function boot()
     {

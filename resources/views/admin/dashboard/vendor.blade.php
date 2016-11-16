@@ -2,195 +2,114 @@
 
 @section('content')
 
-    <!-- start: login activity & last login -->
-    <div class="row">
-        <div class="col-md-9">
-            <div class="panel panel-flat">
-                <div class="panel-heading">
-                    <h6 class="panel-title">{{ trans('home.views.index.panels.vendors.registration_status') }}</h6>
-                </div>
+<!-- start: vendor register & top purchaser -->
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h6 class="panel-title text-uppercase">{{ strtoupper(trans('dashboard.views.vendors.panels.registration_status')) }}</h6>
+            </div>
 
-                <div class="panel-body" style="min-height: 210px">
-                    <div class="chart-container"></div>
+            <div class="panel-body">
+                <div class="chart-container">
+                    <div class="chart eq-element" id="c3-area-chart"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="panel panel-flat">
-                <div class="panel-heading">
-                    <h6 class="panel-title">{{ trans('home.views.index.panels.vendors.paritcipation') }}</h6>
-                </div>
-
-                <div class="panel-body" style="min-height: 210px">
-                    <ul class="media-list">
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-pink text-pink btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-statistics"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle dashboard-">
-                                <span class="badge badge-primary">73</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-checkmark3"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <span class="badge badge-primary">73</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-primary text-primary btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-alignment-unalign"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <span class="badge badge-primary">73</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-warning-400 text-warning-400 btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-spinner11"></i></a>
-                            </div>
-
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <span class="badge badge-primary">73</span>
-                            </div>
-                        </li>
-
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" class="btn border-teal-400 text-teal btn-flat btn-rounded btn-icon btn-xs legitRipple"><i class="icon-redo2"></i></a>
-                            </div>
-                            
-                            <div class="media-body">
-                                Christina Elliott
-                                <div class="media-annotation">10-02-2016 08:05PM</div>
-                            </div>
-
-                            <div class="media-right media-middle">
-                                <span class="badge badge-primary">73</span>
-                            </div>
-                        </li>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-flat" style="height: 390px">
+            <div class="panel-heading">
+                <h6 class="panel-title text-uppercase">{{ trans('dashboard.views.vendors.panels.top_purchaser') }}</h6>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a href="#"><i class="icon-arrow-right13"></i></a></li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- end: login activity & last login -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-flat">
-                <div class="panel-heading">
-                    <h6 class="panel-title">{{ trans('home.views.index.panels.vendors.status') }}</h6>
-                </div>
 
-                <div class="panel-body" style="min-height: 210px">
-                    <div class="content-group-xs" id="bullets"></div>
-
-                    <div class="tabbable">
-                        <ul class="nav nav-tabs nav-tabs-highlight">
-                            <li class="active"><a href="#left-icon-tab1" data-toggle="tab" class="legitRipple"><i class="icon-menu7 position-left"></i> Active</a></li>
-                            <li><a href="#left-icon-tab2" data-toggle="tab" class="legitRipple"><i class="icon-mention position-left"></i> Inactive</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false"><i class="icon-gear position-left"></i> Dropdown <span class="caret"></span></a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#left-icon-tab3" data-toggle="tab">Dropdown tab</a></li>
-                                    <li><a href="#left-icon-tab4" data-toggle="tab">Another tab</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="left-icon-tab1">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Eugene</td>
-                                                <td>Kopyov</td>
-                                                <td>@Kopyov</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Victoria</td>
-                                                <td>Baker</td>
-                                                <td>@Vicky</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>James</td>
-                                                <td>Alexander</td>
-                                                <td>@Alex</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Franklin</td>
-                                                <td>Morrison</td>
-                                                <td>@Frank</td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+            <div class="panel-body">
+                <ul class="media-list">
+                    @if ($topPurchasers)
+                        @foreach ($topPurchasers as $topPurchaser)
+                            <li class="media">
+                                <div class="media-left">
+                                    <a href="#" class="btn bg-primary-400 btn-rounded btn-icon legitRipple">
+                                        <span class="letter-icon">{{ get_initial($topPurchaser->name) }}</span>
+                                    </a>
                                 </div>
-                            </div>
 
-                            <div class="tab-pane" id="left-icon-tab2">
-                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid laeggin.
-                            </div>
-
-                            <div class="tab-pane" id="left-icon-tab3">
-                                DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg whatever.
-                            </div>
-
-                            <div class="tab-pane" id="left-icon-tab4">
-                                Aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthet.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <div class="media-body">
+                                    <div class="pt-10">
+                                        {{ $topPurchaser->name }}
+                                        <span class="label bg-grey-300 pull-right">{{ $topPurchaser->notices->count() }}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    @else
+                        <div class="text-center">No record found.</div>
+                    @endif
+                </ul>
             </div>
         </div>
     </div>
+</div>
+<!-- end: login activity & last login -->
+<div class="datatable-filter">
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <a href="#" @click.prevent="handle_dashboard($event)" 
+                class="prompt-box border border-bottom-primary" 
+                data-filter="all"
+                data-color="primary">
+                <div class="title"><i class="icon-users"></i> All</div>
+                <div class="number text-primary">{{ App\Vendor::count() }}</div>
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <a href="#" @click.prevent="handle_dashboard($event)" 
+                class="prompt-box border border-bottom-success" 
+                data-filter="active"
+                data-color="success">
+                <div class="title"><i class="icon-user"></i> Active</div>
+                <div class="number text-success">{{ App\Vendor::active()->count() }}</div>
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <a href="#" @click.prevent="handle_dashboard($event)" 
+                class="prompt-box border border-bottom-warning" 
+                data-filter="inactive"
+                data-color="warning">
+                <div class="title"><i class="icon-user"></i> Inactive</div>
+                <div class="number text-warning">{{ App\Vendor::inactive()->count() }}</div>
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <a href="#" @click.prevent="handle_dashboard($event)" 
+                class="prompt-box border border-bottom-danger" 
+                data-filter="blacklisted"
+                data-color="danger">
+                <div class="title"><i class="icon-user"></i> Blacklisted</div>
+                <div class="number text-danger">{{ App\Vendor::blacklisted()->count() }}</div>
+            </a>
+        </div>
+    </div>
+    <!-- end: user status -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-flat border" v-bind:class="border_color">
+                <div class="panel-heading">
+                    
+                </div>
+                {!! $dataTable->table(['class' =>'table table-bordered table-striped']) !!}
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+{!! $dataTable->scripts() !!}
 @endsection

@@ -45,6 +45,11 @@ class User extends Authenticatable
      * Relationship
      */
     
+    public function latestLog()
+    {
+      return $this->hasOne(UserLog::class, 'user_id')->latest();
+    }
+
     public function logs()
     {
         return $this->morphMany(UserLog::class, 'actionable');
@@ -168,6 +173,20 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('status', 'inactive');
+    }
+
+    public function scopeSuspended($query)
+    {
+        return $query->where('status', 'suspended');
+    }
     /* 
      * State controls 
      */

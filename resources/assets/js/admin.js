@@ -91,7 +91,9 @@ $(function() {
       data_table: 'dataTableBuilder',
       table: null,
       url: null,
-      panel_color: 'bg-slate-300'
+      panel_color: 'bg-slate-300',
+      border_color: 'border-top-primary',
+      active: null
     },
     ready: function() {
       this.table = $(this.$el).data('data-table') || window.LaravelDataTables[this.data_table];
@@ -99,12 +101,31 @@ $(function() {
     },
     methods: {
       perform_filter: function(e) {
-          var filter = $(e.currentTarget).data('filter');
-          var color = $(e.currentTarget).data('color');
+          var target = e.currentTarget;
+          var filter = $(target).data('filter');
+
           this.table.ajax.url(this.url + '?filter=' + filter).load();
           this.table.draw();
+          this.$nextTick( function() {
+            this.active = filter;
+          })
+      },
+      change_header_color: function(e) {
+          var color = $(e.currentTarget).data('color');
           this.panel_color = 'bg-' + color;
       },
+      change_border_color: function(e) {
+          var color = $(e.currentTarget).data('color');
+          this.border_color = 'border-top-' + color;
+      },
+      handle_allocation: function(e) {
+        this.perform_filter(e);
+        this.change_header_color(e);
+      },
+      handle_dashboard: function (e) {
+        this.perform_filter(e);
+        this.change_border_color(e);
+      }
     }
   });
 
