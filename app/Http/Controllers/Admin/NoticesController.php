@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\NoticeAwarded;
+use App\EvaluationRequirement;
+use App\EvaluationType;
 use App\Notice;
 use App\NoticeEvaluator;
 use App\Project;
 use App\Vendor;
+use App\Events\NoticeAwarded;
+use App\DataTables\EvaluationSummaryDataTable;
 use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeRequest;
@@ -147,10 +150,22 @@ class NoticesController extends Controller
             ->with('notice', trans('notices.notices.cancelled', ['name' => $notice->name]));
     }
 
-    public function summary(Notice $notice)
+    public function summary(Notice $notice, EvaluationSummaryDataTable $table)
     {
-        $summary = $notice->getSummary();
-        return view('admin.notices.evaluation-summary', compact('notice', 'summary'));
+        $types = EvaluationType::all();
+
+        return $table
+            ->forNotice($notice->id)
+            ->forType($types)
+            ->render('admin.notices.evaluation-summary', compact('notice'));
+    }
+
+    public function summaryByType(Notice $notice, EvaluationType $type, EvaluationSummaryDataTable $table)
+    {
+        return $table
+            ->forNotice($notice->id)
+            ->forType([$type])
+            ->render('admin.notices.evaluation-summary-type', compact('notice', 'type'));
     }
 
     public function award(Notice $notice, Vendor $vendor)

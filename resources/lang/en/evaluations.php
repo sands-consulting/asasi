@@ -6,6 +6,8 @@ return [
     'attributes' => [
         'id' => 'Id',
         'type' => 'Type',
+        'score' => 'Score',
+        'avg_score' => 'Average Score (%)',
         'evaluation_id' => 'Evaluation Id',
         'user_id' => 'Evaluator Id',
         'status' => 'Status',

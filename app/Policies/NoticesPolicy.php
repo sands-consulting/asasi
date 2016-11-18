@@ -76,6 +76,11 @@ class NoticesPolicy extends BasePolicy
         return $this->user->hasPermission('notice:show');
     }
 
+    public function summaryByType()
+    {
+        return $this->user->hasPermission('notice:show');
+    }
+
     public function award()
     {
         return $this->user->hasPermission('notice:show');

@@ -21,6 +21,7 @@ class NoticesServiceProvider extends ServiceProvider
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
             $router->model('notices', 'App\Notice');
+            $router->model('evaluation_types', 'App\EvaluationType');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
                 $router->put('notices/{notices}/publish', [
@@ -54,6 +55,10 @@ class NoticesServiceProvider extends ServiceProvider
                 $router->get('notices/{notices}/summary', [
                     'as' => 'admin.notices.summary',
                     'uses' => 'NoticesController@summary'
+                ]);
+                $router->get('notices/{notices}/summary/{evaluation_types}', [
+                    'as' => 'admin.notices.summary-by-type',
+                    'uses' => 'NoticesController@summaryByType'
                 ]);
                 $router->post('notices/{notices}/award/{vendors}', [
                     'as' => 'admin.notices.award',

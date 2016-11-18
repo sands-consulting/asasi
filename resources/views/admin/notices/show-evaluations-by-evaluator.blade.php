@@ -30,6 +30,13 @@
             <p>No evaluators information found.</p>
         @endif
     </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a href="{{ route('admin.notices.summary-by-type', [$notice->id, 1]) }}" class="btn btn-default">
+                <span class="text-thin">Show Summary</span>
+            </a>
+        </div>
+    </div>
 </fieldset>
 
 <fieldset class="mb-20">
@@ -63,5 +70,12 @@
         @else
             <p>No evaluators information found.</p>
         @endif
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a href="{{ route('admin.notices.summary-by-type', [$notice->id, 2]) }}" class="btn btn-default">
+                <span class="text-thin">Show Summary</span>
+            </a>
+        </div>
     </div>
 </fieldset>

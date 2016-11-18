@@ -4,6 +4,7 @@ return [
     'title' => 'Vendors',
 
     'attributes' => [
+        'id' => 'Id',
         'name' => 'Vendor Name',
         'registration_number' => 'Registration No.',
         'tax_1_number' => 'Tax Number (1)',

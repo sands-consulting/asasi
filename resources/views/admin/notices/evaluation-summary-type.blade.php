@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('page-title', trans('evaluations.title'))
+@section('page-title', trans('notices.title'))
 
 @section('header')
 <div class="page-title">
     <h4>
         {{ link_to_route('admin.notices.index', trans('notices.title')) }} /
-        <span class="text-semibold">{{ trans('notices.views.summary.title') }}</span>
+        <span class="text-semibold">{{ $type->name }} - {{ trans('notices.views.summary.title') }}</span>
     </h4>
 </div>
 <div class="heading-elements">
