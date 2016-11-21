@@ -23,7 +23,14 @@ class EvaluationSubmissionDataTable extends DataTable
 
     public function query()
     {
-        $query = Submission::with('scores')
+        $query = Submission::query()
+            ->select([
+                'submissions.id as submission_id',
+                'submissions.notice_id as notice_id',
+                'notice_evaluator.id as evaluator_id',
+                'evaluation_types.name as type_name',
+                'submission_evaluator.status as evaluation_status'
+            ])
             ->whereHas('evaluators', function($query) {
                 $query->where('user_id', $this->user_id)
                     ->where('notice_id', $this->notice_id);
@@ -37,14 +44,8 @@ class EvaluationSubmissionDataTable extends DataTable
             })
             ->leftJoin('evaluation_types', 'evaluation_types.id', '=', 'notice_evaluator.type_id')
             ->where('submissions.notice_id', $this->notice_id)
-            ->where('notice_evaluator.user_id', $this->user_id)
-            ->select([
-                'submissions.id as submission_id',
-                'submissions.notice_id as notice_id',
-                'notice_evaluator.id as evaluator_id',
-                'evaluation_types.name as type_name',
-                'submission_evaluator.status as evaluation_status'
-            ]);
+            ->where('notice_evaluator.user_id', $this->user_id);
+            
 
         if($this->datatables->request->input('q', null))
         {
@@ -74,7 +75,7 @@ class EvaluationSubmissionDataTable extends DataTable
             [
                 'data'  => 'type_name',
                 'name'  => 'evaluation_types.name',
-                'title' => trans('submissions.attributes.type'),
+                'title' => trans('evaluation-requirements.attributes.type_id'),
             ],
             [
                 'data'  => 'evaluation_status',

@@ -12,8 +12,7 @@
                 ->addClass('text-center')
                 ->min(0)
                 ->max($requirement->full_score)
-                ->value($requirement->score)
-                ->required() !!}
+                ->value($requirement->score) !!}
         </div>
     </div>
     <?php $i++ ?>

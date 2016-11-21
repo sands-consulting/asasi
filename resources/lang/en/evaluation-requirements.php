@@ -7,6 +7,7 @@ return [
         'id' => 'Id',
         'title' => 'Title',
         'full_score' => 'Full Score',
+        'type_id' => 'Evaluation Type',
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
