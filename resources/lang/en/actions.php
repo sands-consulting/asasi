@@ -26,5 +26,6 @@ return [
 	'submit' => 'Submit',
 	'suspend' => 'Suspend',
 	'unpublish' => 'Unpublish',
-	'view' => 'View'
+	'view' => 'View',
+	'print' => 'Print',
 ];

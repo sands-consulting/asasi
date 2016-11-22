@@ -52,6 +52,15 @@ class NoticesServiceProvider extends ServiceProvider
                     'as'    => 'admin.notices.settings',
                     'uses'  => 'NoticesController@settings'
                 ]);
+                $router->post('notices/{notices}/award/{vendors}', [
+                    'as' => 'admin.notices.award',
+                    'uses' => 'NoticesController@award'
+                ]);
+                $router->post('notices/{notices}/store-award', [
+                    'as' => 'admin.notices.store-award',
+                    'uses' => 'NoticesController@storeAward'  
+                ]);
+                // Summary
                 $router->get('notices/{notices}/summary', [
                     'as' => 'admin.notices.summary',
                     'uses' => 'NoticesController@summary'
@@ -60,13 +69,9 @@ class NoticesServiceProvider extends ServiceProvider
                     'as' => 'admin.notices.summary-by-type',
                     'uses' => 'NoticesController@summaryByType'
                 ]);
-                $router->post('notices/{notices}/award/{vendors}', [
-                    'as' => 'admin.notices.award',
-                    'uses' => 'NoticesController@award'
-                ]);
-                $router->post('notices/{notices}/store-award', [
-                    'as' => 'admin.notices.store-award',
-                    'uses' => 'NoticesController@storeAward'  
+                $router->get('notices/{notices}/summary/{submissions}/evaluators/{evaluation_types}', [
+                    'as' => 'admin.notices.summary-evaluators',
+                    'uses' => 'NoticesController@summaryEvaluators'
                 ]);
 
                 $router->resource('notices', 'NoticesController');

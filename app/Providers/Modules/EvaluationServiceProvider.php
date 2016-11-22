@@ -43,7 +43,7 @@ class EvaluationServiceProvider extends ServiceProvider
                     'uses' => 'EvaluationsController@update'  
                 ]);
 
-                $router->post('evaluations/{notices}/{submissions}/store/', [
+                $router->post('evaluations/{notices}/{submissions}/store', [
                     'as' => 'admin.evaluations.store',
                     'uses' => 'EvaluationsController@store'  
                 ]);
@@ -56,6 +56,11 @@ class EvaluationServiceProvider extends ServiceProvider
                 $router->get('evaluations/{notices}/requirements', [
                     'as' => 'admin.evaluations.requirements',
                     'uses' => 'EvaluationsController@requirements'  
+                ]);
+
+                $router->get('evaluations/{notices}/view/{users}/{submissions}', [
+                    'as' => 'admin.evaluations.view',
+                    'uses' => 'EvaluationsController@view'
                 ]);
 
                 $router->resource('evaluations', 'EvaluationsController', ['only' => ['index']]);

@@ -7,9 +7,11 @@ use App\EvaluationType;
 use App\Notice;
 use App\NoticeEvaluator;
 use App\Project;
+use App\Submission;
 use App\Vendor;
 use App\Events\NoticeAwarded;
 use App\DataTables\EvaluationSummaryDataTable;
+use App\DataTables\EvaluatorSummaryDataTable;
 use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeRequest;
@@ -166,6 +168,16 @@ class NoticesController extends Controller
             ->forNotice($notice->id)
             ->forType([$type])
             ->render('admin.notices.evaluation-summary-type', compact('notice', 'type'));
+    }
+
+    public function summaryEvaluators(Notice $notice, 
+        Submission $submission, EvaluationType $type, EvaluatorSummaryDataTable $table)
+    {
+        return $table
+            ->forNotice($notice)
+            ->forType($type)
+            ->forSubmission($submission)
+            ->render('admin.notices.evaluation-summary-evaluators', compact('notice'));
     }
 
     public function award(Notice $notice, Vendor $vendor)

@@ -9,18 +9,22 @@ class EvaluationSummaryDataTable extends DataTable
 {
     public function ajax()
     {
-        return $this->datatables
+        $dt = $this->datatables
             ->eloquent($this->query())
-            // ->addColumn('action', function($notice) {
-            //     return view('admin.notices._index_actions', compact('notice'));
-            // })
-            ->editColumn('name', function($vendor) {
-                return link_to_route('admin.vendors.show', $vendor->name, $vendor->id);
-            })
-            // ->editColumn('status', function($notice) {
-            //     return view('admin.notices._index_status', compact('notice'));
-            // })
-            ->make(true);
+            ->editColumn('vendor_name', function($vendor) {
+                return link_to_route('admin.vendors.show', $vendor->vendor_name, $vendor->vendor_id);
+            });
+
+        foreach($this->types as $type) {
+            $dt->editColumn($type->name . '_score', function($vendor) use ($type) {
+                return link_to_route('admin.notices.summary-evaluators', $vendor->{$type->name .'_score'}, [$vendor->notice_id, $vendor->submission_id, $type->id]);
+            });
+            $dt->editColumn($type->name . '_sum', function($vendor) use ($type) {
+                return link_to_route('admin.notices.summary-evaluators', $vendor->{$type->name .'_sum'}, [$vendor->notice_id, $vendor->submission_id, $type->id]);
+            });
+        }
+
+        return $dt->make(true);
     }
 
     public function query()
@@ -28,6 +32,8 @@ class EvaluationSummaryDataTable extends DataTable
         $select = [
             'vendors.id as vendor_id',
             'vendors.name as vendor_name',
+            'submissions.id as submission_id',
+            'submissions.notice_id as notice_id',
             'submissions.price as submission_price',
         ];
 
@@ -62,49 +68,6 @@ class EvaluationSummaryDataTable extends DataTable
             ->where('submissions.notice_id', $this->notice_id)
             ->select($select);
 
-        // $query = Notice::query()
-        //     ->leftJoin('notice_vendor', 'notice_vendor.notice_id', '=', 'notices.id')
-        //     ->leftJoin('vendors', 'vendors.id', '=', 'notice_vendor.vendor_id')
-        //     ->leftJoin('submissions', function($join) {
-        //         $join->on('submissions.notice_id', '=', 'notices.id');
-        //         $join->on('submissions.vendor_id', '=', 'vendors.id');
-        //     })
-        //     ->where('notices.id', '=', $this->notice_id)
-        //     ->groupBy('notices.id');
-
-        // $select = [
-        //     'vendors.id as vendor_id',
-        //     'vendors.name as vendor_name',
-        //     'submissions.price as submission_price',
-        // ];
-        
-        // foreach($this->types as $type) {  
-        //     $reqAlias   = $type->name . '_req';
-        //     $scoreAlias = $type->name . '_score';
-
-        //     $query->leftJoin('evaluation_requirements as ' . $reqAlias, $reqAlias . '.notice_id', '=', 'notices.id')
-        //         ->leftJoin('evaluation_scores as ' . $scoreAlias, function($join) use ($scoreAlias, $reqAlias) {
-        //             $join->on($scoreAlias . '.evaluation_requirement_id', '=', $reqAlias . '.id');
-        //             $join->on($scoreAlias . '.submission_id', '=', 'submissions.id');
-        //         })
-        //         ->where($reqAlias . '.evaluation_type_id', $type['id'])
-        //         ->groupBy($reqAlias . '.evaluation_type_id');
-
-        //     array_push(
-        //         $select, 
-        //         \DB::raw("FORMAT((SUM(" . $scoreAlias . ".score) / SUM(" . $reqAlias . ".full_score)) * 100, 2) as " 
-        //             . $type->name . '_score')
-        //     );
-
-        //     array_push(
-        //         $select, 
-        //         \DB::raw("SUM(" . $scoreAlias . ".score) as " . $type->name . '_sum')
-        //     );
-        // }
-        // $query->select($select);
-        // $query->leftJoin('evaluation_types', 'evaluation_types.id', '=', 'evaluation_requirements.evaluation_type_id');
-
-
         if($this->datatables->request->input('q', null))
         {
             $query->search($this->datatables->request->input('q', []));
@@ -118,7 +81,6 @@ class EvaluationSummaryDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -128,28 +90,27 @@ class EvaluationSummaryDataTable extends DataTable
             'data' => 'vendor_name',
             'name' => 'vendor_name',
             'title' => trans('vendors.attributes.name'),
-            'width' => '40%'
+            'width' => '30%'
         ];
 
         $columns[] = [
             'data' => 'submission_price',
             'name' => 'submission_price',
             'title' => trans('submissions.attributes.price'),
-            'width' => '40%'
+            'width' => '10%'
         ];
 
         foreach($this->types as $type) {
             $columns[] = [
                 'data' => $type->name . '_score',
                 'name' => $type->name . '_score',
-                'title' => ucfirst($type->name) . ' Average Score (%)',
-                'width' => '40%'
+                'title' => ucfirst($type->name) . ' (%)',
             ];
+
             $columns[] = [
                 'data' => $type->name . '_sum',
                 'name' => $type->name . '_sum',
-                'title' => ucfirst(($type->name)) . (' Total Score'),
-                'width' => '40%'
+                'title' => ucfirst(($type->name)) . (' Total'),
             ];
         }
 
