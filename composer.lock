@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee3143c72b33da97151918abe415d283",
-    "content-hash": "516aeb7de7e7abd1fcfef807bf4bb297",
+    "hash": "44dd23b6e908f3bde494786dc968a88f",
+    "content-hash": "b597cb9a519089c67eab26f08d8a82ca",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -380,6 +380,49 @@
                 "slug"
             ],
             "time": "2016-10-12 04:26:51"
+        },
+        {
+            "name": "dhtmlx/connector-php",
+            "version": "dev-custom",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aminadha/connector-php.git",
+                "reference": "086fcdf62593f443291313af3ae29be271aa7c97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aminadha/connector-php/zipball/086fcdf62593f443291313af3ae29be271aa7c97",
+                "reference": "086fcdf62593f443291313af3ae29be271aa7c97",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "yii2": "1.0.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Dhtmlx\\Connector\\": "codebase/"
+                }
+            },
+            "license": [
+                "GNU"
+            ],
+            "description": "PHP extension for the DHTMLX library",
+            "homepage": "http://dhtmlx.com/docs/products/dhtmlxConnector/index.shtml",
+            "keywords": [
+                "connector",
+                "connector-php",
+                "dhtmlx"
+            ],
+            "support": {
+                "source": "https://github.com/aminadha/connector-php/tree/dev-custom"
+            },
+            "time": "2016-11-25 08:32:24"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -5302,7 +5345,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dhtmlx/connector-php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

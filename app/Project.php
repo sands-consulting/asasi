@@ -46,7 +46,7 @@ class Project extends Model
     }
 
     /*
-     * Relationship
+     * State control
      */
 
     public function canActivate()
@@ -93,6 +93,11 @@ class Project extends Model
     public function milestones()
     {
         return $this->hasMany(ProjectMilestone::class);
+    }
+
+    public function ganttTasks()
+    {
+        return $this->hasMany(GanttTask::class);
     }
 
     public function logs()

@@ -224,6 +224,7 @@ return [
         App\Providers\Modules\RequirementCommercialsServiceProvider::class,
         App\Providers\Modules\PaymentsServiceProvider::class,
         App\Providers\Modules\ProjectsServiceProvider::class,
+        App\Providers\Modules\ProjectMilestonesServiceProvider::class,
         App\Providers\Modules\RequirementTechnicalsServiceProvider::class,
         App\Providers\Modules\RulesServiceProvider::class,
         App\Providers\Modules\SubmissionServiceProvider::class,

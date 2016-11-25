@@ -2,6 +2,7 @@
 
 return [
     'title' => 'Projects',
+    'title_singular' => 'Project',
 
     'attributes' => [
         'name' => 'Name',

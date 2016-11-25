@@ -24,7 +24,8 @@ class ProjectsController extends Controller
 
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $ganttTasks = $project->ganttTasks()->orderBy('id', 'desc')->take(5)->get();
+        return view('admin.projects.show', compact('project', 'ganttTasks'));
     }
 
     public function create(Request $request)

@@ -170,8 +170,12 @@
                 <div class="timeline timeline-left">
                     <div class="timeline-container">
                         
-                        <!-- Milstone -->
-                        @foreach ($project->milestones()->latest(5) as $milestone)
+                        <!-- Milestone -->
+                        
+                        <!-- /Milestone -->
+
+                        <!-- Gantt Task -->
+                        @foreach($ganttTasks as $task)
                         <div class="timeline-row">
                             <div class="timeline-icon">
                                 <a href="#">{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}</a>
@@ -179,26 +183,23 @@
 
                             <div class="panel panel-flat timeline-content">
                                 <div class="panel-heading">
-                                    <h6 class="panel-title">{{ $milestone->name }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                                    <h6 class="panel-title">{{ $task->text }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
                                     <div class="heading-elements">
-                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated {{ $milestone->updated_at->diffForHumans() }}</span>
-
-                                        <ul class="icons-list">
-                                            <li><a data-action="reload"></a></li>
-                                        </ul>
+                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated {{ $task->created_at->diffForHumans() }}</span>
                                     </div>
                                 </div>
 
                                 <div class="panel-body">
-                                    {{ str_limit($milestone->description, 45) }}
+                                    {{ str_limit($task->description, 45) }}
                                 </div>
                             </div>
                         </div>
                         @endforeach
-                        <!-- /Milestone -->
+                        <!-- /Gantt Task -->
 
                         
                     </div>
+                <a href="{{ route('admin.projects.milestones.index', $project->id) }}" class="btn btn-default btn-block">View Full Timeline</a>
                 </div>
             </div>
         </div>
