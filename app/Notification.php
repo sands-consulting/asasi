@@ -56,6 +56,10 @@ class Notification extends Model
         return $this->morphTo();
     }
 
+    /*
+     * Helpers
+     */
+    
     public function getUnreadAttribute()
     {
         return $this->status == 'unread';
@@ -72,5 +76,34 @@ class Notification extends Model
         {
             $this->update(['status' => 'read', 'read_at' => Carbon::now()]);
         }
+    }
+
+    /*
+     * Setters
+     */
+    
+    public function withContent($content)
+    {
+        $this->content = $content;
+     
+        return $this;
+    }
+    
+    public function withLink($link)
+    {
+        $this->link = $link;
+     
+        return $this;
+    }
+
+    public function regarding($object)
+    {
+        if(is_object($object))
+        {
+            $this->item_id   = $object->id;
+            $this->item_type = get_class($object);
+        }
+     
+        return $this;
     }
 }

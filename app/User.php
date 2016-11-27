@@ -303,6 +303,14 @@ class User extends Authenticatable
         return static::lists('name','id')->toArray();
     }
     
+    public function newNotification()
+    {
+        $notification = new Notification;
+        $notification->user()->associate($this);
+     
+        return $notification;
+    }
+
     /**
      * Boot
      */
