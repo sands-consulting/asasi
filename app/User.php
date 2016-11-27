@@ -65,9 +65,33 @@ class User extends Authenticatable
         return $this->hasMany(UserBlacklist::class);
     }
 
+    public function notices()
+    {
+        return $this->belongsToMany(Notice::class, 'notice_evaluator', 'user_id', 'notice_id')
+            ->withPivot(['type_id', 'status'])
+            ->withTimestamps();
+    }
+
+    public function organizations()
+    {
+        return $this->belongsToMany(Organization::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function submissions()
+    {
+        return $this->belongsToMany(User::class, 'submission_evaluator', 'user_id', 'submission_id')
+            ->withPivot(['status'])
+            ->withTimestamps();
+    }
+    
+    public function subscriptions()
+    {
+        return $this->vendor->first()->subscriptions;
     }
 
     public function vendor()
@@ -82,29 +106,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Vendor::class);
     }
 
-    public function organizations()
-    {
-        return $this->belongsToMany(Organization::class);
-    }
-
-    public function subscriptions()
-    {
-        return $this->vendor->first()->subscriptions;
-    }
-
-    public function notices()
-    {
-        return $this->belongsToMany(Notice::class, 'notice_evaluator', 'user_id', 'notice_id')
-            ->withPivot(['type_id', 'status'])
-            ->withTimestamps();
-    }
-
-    public function submissions()
-    {
-        return $this->belongsToMany(User::class, 'submission_evaluator', 'user_id', 'submission_id')
-            ->withPivot(['status'])
-            ->withTimestamps();
-    }
     /*
      * Custom Attributes
      */
@@ -166,16 +167,19 @@ class User extends Authenticatable
         }
     }
 
+    /*
+     * Scopes
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
     public function scopeEvaluators($query)
     {
         $query->whereHas('roles', function($roles) {
             return $roles->whereName('evaluator');
         });
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', 'active');
     }
 
     public function scopeInactive($query)
@@ -187,17 +191,13 @@ class User extends Authenticatable
     {
         return $query->where('status', 'suspended');
     }
+
     /* 
      * State controls 
      */
     public function canActivate()
     {
         return $this->status != 'active';
-    }
-
-    public function canSuspend()
-    {
-        return $this->status != 'suspended';
     }
 
     public function canAddNoticeToCart($noticeId)
@@ -210,6 +210,12 @@ class User extends Authenticatable
         }
         return $this->hasSubscription() && !$this->hasBoughtNotice($noticeId) && !$inCart;
     }
+
+    public function canSuspend()
+    {
+        return $this->status != 'suspended';
+    }
+
     /*
      * ACL functions
      */
@@ -237,21 +243,6 @@ class User extends Authenticatable
     public function hasAllPermissions($permissions=[])
     {
         return count(array_intersect($this->cachedPermissions(), $permissions)) == count($permissions);
-    }
-
-    public function hasSubscription()
-    {
-        $vendor = $this->vendor;
-        if ($vendor) {
-            return $vendor->active_subscription;
-        }
-
-        return false;
-    }
-
-    public function hasBoughtNotice($notice_id)
-    {
-        return $this->vendor->notices()->find($notice_id);
     }
 
     /*
@@ -292,6 +283,20 @@ class User extends Authenticatable
     /*
      * Helpers
      */
+    public function hasSubscription()
+    {
+        $vendor = $this->vendor;
+        if ($vendor) {
+            return $vendor->active_subscription;
+        }
+
+        return false;
+    }
+
+    public function hasBoughtNotice($notice_id)
+    {
+        return $this->vendor->notices()->find($notice_id);
+    }
     
     public static function options()
     {
