@@ -72,8 +72,7 @@ class Notification extends Model
 
     public function read()
     {
-        if($this->status == 'unread')
-        {
+        if ($this->status == 'unread') {
             $this->update(['status' => 'read', 'read_at' => Carbon::now()]);
         }
     }
@@ -98,8 +97,7 @@ class Notification extends Model
 
     public function regarding($object)
     {
-        if(is_object($object))
-        {
+        if (is_object($object)) {
             $this->item_id   = $object->id;
             $this->item_type = get_class($object);
         }

@@ -354,6 +354,7 @@
 </div>
 
 <script src="{{ elixir('assets/js/admin.js') }}"></script>
+<script src="http://prompt.dev:3000/socket.io/socket.io.js"></script>
 @yield('scripts')
 {!! flash_messages() !!}
 </body>

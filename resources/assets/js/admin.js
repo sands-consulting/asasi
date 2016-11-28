@@ -128,30 +128,6 @@ $(function() {
       }
     }
   });
-
-  // socket
-  // var socket = io('http://prompt.dev:3000');
-  vm_notifications = new Vue({
-      el: '#notifications',
-      data: {
-        notifications: [],
-        count: null
-      },
-      ready: function(ev) {
-        this.fetchData($(this.$el).data('source'));
-
-      },
-      methods: {
-        fetchData: function (apiURL) {
-          var self = this;
-          $.get( apiURL, function( data ) {
-            console.log(apiURL);
-            self.notifications = data;
-            self.count = data.length;
-          });
-        }
-      }
-  });
 });
 
 // Equal Height

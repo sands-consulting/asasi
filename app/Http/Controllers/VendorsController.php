@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\VendorApplied;
+use App\Notificators\VendorAppliedNotificator;
 use App\Vendor;
 use App\Http\Requests\VendorRequest;
 use App\Repositories\VendorsRepository;
@@ -38,6 +40,10 @@ class VendorsController extends Controller
         if(isset($inputs['submit']))
         {
             $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending']);
+            
+            $notificator = new VendorAppliedNotificator($vendor);
+            $notificator->notify();
+            event(new VendorApplied($vendor));
         }
 
         return redirect()

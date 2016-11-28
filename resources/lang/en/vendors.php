@@ -164,5 +164,18 @@ return [
             ],
             'submit_application' => 'Submit Application'
         ]
-	]
+	],
+
+    'emails' => [
+        'applied' => [
+            'subject' => 'Vendor Application For Approval',
+            ''
+        ]
+    ], 
+
+    'notifications' => [
+        'vendor_applied' => [
+            'content' => ':vendor_name needs your approval.'
+        ]
+    ],
 ];

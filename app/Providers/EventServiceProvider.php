@@ -28,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserRegistered' => [
             'App\Listeners\EmailUserConfirmationLink',
         ],
+        'App\Events\VendorApplied' => [
+            'App\Listeners\VendorAppliedListener',
+        ],
         'App\Events\VendorApproved' => [
             'App\Listeners\VendorApprovedListener',
         ],

@@ -69,6 +69,10 @@ class Permission extends Model
         }
     }
 
+    /*
+     * Relationship
+     */
+    
     public function logs()
     {
         return $this->morphMany(UserLog::class, 'actionable');
@@ -79,9 +83,29 @@ class Permission extends Model
         return $this->belongsToMany(Role::class);
     }
 
+    /*
+     * Helpers
+     */
+    
     public static function getGroupOptions()
     {
         return static::distinct('group')->orderBy('group')->lists('group');
+    }
+
+    /**
+     * Get user of a permission.
+     * @return Array Array of App\User object.
+     */
+    public function getUsers()
+    {   
+        $users = $this->roles->reduce(function ($carry, $role) {
+            foreach($role->users as $user) {
+                $carry[] = $user;
+            }
+            return $carry;
+        }, []);
+
+        return $users;
     }
 
     public static function boot()
