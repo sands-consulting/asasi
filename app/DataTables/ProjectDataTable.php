@@ -15,8 +15,8 @@ class ProjectDataTable extends DataTable
                 return view('admin.projects._index_actions', compact('project'));
             })
             ->editColumn('projects.name', function($project) {
-                $link = "<small>" . $project->number . "</small>";
-                $link .= "<br>" . link_to_route('admin.projects.show', $project->name, $project->id) ." ";
+                $link = "<small>" . $project->number .
+                        "<br>" . link_to_route('admin.projects.show', str_limit($project->name, 100), $project->id, ['title' => $project->name]) . "</small>";
                 return $link;
             })
             ->editColumn('project_progress', function($project) {
@@ -26,11 +26,7 @@ class ProjectDataTable extends DataTable
                 return view('admin.projects._index_status', compact('project'));
             })
             ->editColumn('project_manager', function($project) {
-                $managers = null;
-                foreach ($project->managers() as $manager) {
-                    $managers .= '<img src="' . Gravatar::src($manager->email, 40) . '" class="img-circle" alt="' . $manager->name . '" title="' . $manager->name . '">';
-                }
-                return $managers;
+                return view('admin.projects._index_managers', compact('project'));
             })
             ->editColumn('projects.created_at', function($project) {
                 return $project->created_at->format('d/m/Y H:i:s');
