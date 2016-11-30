@@ -8,19 +8,23 @@ use App\Vendor;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class VendorApproved extends Event
+class VendorApproved extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
+    public $users;
+
+    public $vendor;
+    
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user, Vendor $item)
+    public function __construct(Vendor $vendor)
     {
-        $this->user = $user;
-        $this->item = $item;
+        $this->users = $vendor->users;
+        $this->vendor = $vendor;
     }
 
     /**
@@ -30,6 +34,6 @@ class VendorApproved extends Event
      */
     public function broadcastOn()
     {
-        return [];
+        return ['notifications'];
     }
 }

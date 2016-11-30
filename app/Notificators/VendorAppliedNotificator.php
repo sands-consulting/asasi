@@ -11,20 +11,19 @@ class VendorAppliedNotificator
 
     public $vendor;
 
-    public function __construct(Vendor $vendor)
+    public function __construct()
     {
         $permission = Permission::where('name', 'vendor:approve')->first();
         $this->approvers = $permission->getUsers();
-        $this->vendor = $vendor;
     }
 
-    public function notify()
+    public function notify(Vendor $vendor)
     {
         foreach($this->approvers as $approver) {
             $approver->newNotification()
-                ->withContent(trans('vendors.notifications.vendor_applied.content', ['vendor_name' => $this->vendor->name]))
-                ->withLink(route('admin.vendors.show', $this->vendor->id))
-                ->regarding($this->vendor)
+                ->withContent(trans('vendors.notifications.applied.content', ['vendor_name' => $vendor->name]))
+                ->withLink(route('admin.vendors.show', $vendor->id))
+                ->regarding($vendor)
                 ->save();
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\VendorRejected;
+use App\Notificators\VendorRejectedNotificator;
 use App\Repositories\UserLogsRepository;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
@@ -15,9 +16,10 @@ class VendorRejectedListener
      *
      * @return void
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, VendorRejectedNotificator $notificator)
     {
         $this->request = $request;
+        $this->notificator = $notificator;
     }
 
     /**
@@ -28,6 +30,7 @@ class VendorRejectedListener
      */
     public function handle(VendorRejected $event)
     {
+        $this->notificator->notify($event->vendor);
         // UserLogsRepository::log($event->user, 'reject', $event->vendor, $this->request->getClientIp(), $event->remarks);
     }
 }

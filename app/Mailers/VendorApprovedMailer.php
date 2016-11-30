@@ -6,7 +6,7 @@ use App\User;
 use App\Vendor;
 use Illuminate\Contracts\Mail\Mailer;
 
-class VendorAppliedMailer
+class VendorApprovedMailer
 {
     public $from_address;
     public $from_name;
@@ -19,8 +19,8 @@ class VendorAppliedMailer
     {
         $this->from_address = config('mail.from.address');
         $this->from_name    = config('mail.from.name');
-        $this->subject      = trans('vendors.emails.applied.subject');
-        $this->view         = 'admin.vendors.emails.applied';
+        $this->subject      = trans('vendors.emails.approved.subject');
+        $this->view         = 'admin.vendors.emails.approved';
         $this->mailer       = $mailer;
     }
 

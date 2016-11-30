@@ -1,6 +1,7 @@
 $(function () {
   // socket
   var socket = io('http://prompt.dev:3000');
+  Vue.config.debug = true;
   vm_notifications = new Vue({
       el: '#notifications',
       data: {
@@ -24,7 +25,7 @@ $(function () {
         },
 
         listen() {
-          socket.on('notifications:App\\Events\\VendorApplied', function() {
+          socket.on('notifications', function() {
             this.getNotification(this.source);
           }.bind(this));  
         }

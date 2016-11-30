@@ -8,6 +8,8 @@ use App\DataTables\VendorsDataTable;
 use App\Events\VendorApproved;
 use App\Events\VendorRejected;
 use App\Http\Requests\VendorRequest;
+use App\Notificators\VendorApprovedNotificator;
+use App\Notificators\VendorRejectedNotificator;
 use App\Repositories\VendorsRepository;
 use App\Repositories\UsersRepository;
 use App\Repositories\UserLogsRepository;
@@ -91,10 +93,9 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         VendorsRepository::update($vendor, $inputs, ['status' => 'inactive']);
-
         UserLogsRepository::log($request->user(), 'Approve', $vendor, $request->getClientIp());
 
-        Event::fire(new VendorApproved($request->user(), $vendor));
+        Event::fire(new VendorApproved($vendor));
 
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -107,7 +108,7 @@ class VendorsController extends Controller
         VendorsRepository::update($vendor, $inputs, ['status' => 'rejected']);
         UserLogsRepository::log($request->user(), 'Reject', $vendor, $request->getClientIp(), $inputs['remarks']);
 
-        Event::fire(new VendorRejected($request->user(), $vendor, $inputs['remarks']));
+        Event::fire(new VendorRejected($vendor, $inputs['remarks']));
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))

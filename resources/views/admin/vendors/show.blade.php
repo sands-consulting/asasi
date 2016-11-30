@@ -80,4 +80,5 @@
 @section('content')
 @include('admin.vendors._vendor')
 @include('admin.vendors._show_details')
+@include('admin.vendors.modals.reject')
 @endsection

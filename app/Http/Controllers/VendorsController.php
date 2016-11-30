@@ -40,9 +40,6 @@ class VendorsController extends Controller
         if(isset($inputs['submit']))
         {
             $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending']);
-            
-            $notificator = new VendorAppliedNotificator($vendor);
-            $notificator->notify();
             event(new VendorApplied($vendor));
         }
 

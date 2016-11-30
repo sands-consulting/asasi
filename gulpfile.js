@@ -32,6 +32,7 @@ elixir(function(mix) {
         '../vendor/d3/d3.js',
         '../vendor/c3/c3.js',
         '../vendor/vue/dist/vue.js',
+        '../vendor/vue-resource/dist/vue-resource.min.js',
         '../vendor/pnotify/dist/pnotify.js',
         '../vendor/legitripple/js/ripple.js',
         '../vendor/moment/moment.js',
@@ -43,6 +44,7 @@ elixir(function(mix) {
         'vendor/limitless-four.js',
         'vendor/pnotify.js',
         'vendor/nicescroll.js',
+        'notification.js',
         'vendor.js',
         'public.js',
     ], 'public/assets/js/public.js')
@@ -77,8 +79,8 @@ elixir(function(mix) {
         'vendor/form_select2.js',
         'vendor/picker_date.js',
         'pages/admin.dashboard.user.js',
-        'vendor.js',
         'notification.js',
+        'vendor.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
     .version([

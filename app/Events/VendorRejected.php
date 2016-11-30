@@ -8,7 +8,7 @@ use App\Vendor;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class VendorRejected extends Event
+class VendorRejected extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
@@ -17,9 +17,8 @@ class VendorRejected extends Event
      *
      * @return void
      */
-    public function __construct(User $user, Vendor $vendor, $remarks)
+    public function __construct(Vendor $vendor, $remarks)
     {
-        $this->user    = $user;
         $this->vendor  = $vendor;
         $this->remarks = $remarks;
     }
@@ -31,6 +30,6 @@ class VendorRejected extends Event
      */
     public function broadcastOn()
     {
-        return [];
+        return ['notifications'];
     }
 }

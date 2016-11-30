@@ -168,14 +168,24 @@ return [
 
     'emails' => [
         'applied' => [
-            'subject' => 'Vendor Application For Approval',
+            'subject' => 'Vendor Application For Approval.',
+            ''
+        ],
+        'approved' => [
+            'subject' => 'Vendor Application Approved.',
             ''
         ]
     ], 
 
     'notifications' => [
-        'vendor_applied' => [
+        'applied' => [
             'content' => ':vendor_name needs your approval.'
+        ],
+        'approved' => [
+            'content' => ':vendor_name vendor application has been approved.'
+        ],
+        'rejected' => [
+            'content' => ':vendor_name vendor application has been rejected.'
         ]
     ],
 ];
