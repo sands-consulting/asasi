@@ -10,14 +10,14 @@ class DashboardEligiblesDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($notice) {
-                return view('admin.notices._index_actions', compact('notice'));
+            ->addColumn('action', function ($notice) {
+                return view('notices._index_actions', compact('notice'));
             })
-            ->editColumn('name', function($notice) {
-                return link_to_route('admin.notices.show', $notice->name, $notice->id);
+            ->editColumn('name', function ($notice) {
+                return link_to_route('notices.show', $notice->name, $notice->id);
             })
-            ->editColumn('status', function($notice) {
-                return view('admin.notices._index_status', compact('notice'));
+            ->editColumn('status', function ($notice) {
+                return view('notices._index_status', compact('notice'));
             })
             ->make(true);
     }
@@ -25,9 +25,7 @@ class DashboardEligiblesDataTable extends DataTable
     public function query()
     {
         $query = Notice::published();
-
-        if($this->datatables->request->input('q', null))
-        {
+        if ($this->datatables->request->input('q', null)) {
             $query->search($this->datatables->request->input('q', []));
         }
 

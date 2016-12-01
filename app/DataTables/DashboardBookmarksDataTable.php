@@ -14,7 +14,7 @@ class DashboardBookmarksDataTable extends DataTable
                 return view('dashboard._bookmarks_notice_actions', compact('bookmark'));
             })
             ->editColumn('name', function($notice) {
-                return link_to_route('admin.notices.show', $notice->name, $notice->id);
+                return link_to_route('notices.show', $notice->name, $notice->id);
             })
             ->make(true);
     }

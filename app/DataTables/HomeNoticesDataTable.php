@@ -20,7 +20,7 @@ class HomeNoticesDataTable extends DataTable
             ->editColumn('name', function($notice) {
                 $name = "<span class='text-header'>$notice->number</span> <br />";
                 $name .= "<span class='text-header text-italic'>" . $notice->organization->short_name . "</span> <br />";
-                $name .= link_to_route('admin.notices.show', $notice->name, $notice->id);
+                $name .= link_to_route('notices.show', $notice->name, $notice->id);
                 return $name;
             })
             ->editColumn('purchased_at', function($notice) {

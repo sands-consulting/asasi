@@ -17,12 +17,6 @@ class HomeController extends Controller
         return $table->render('home.index', compact('numbers'));
     }
 
-    public function submissions(Request $request, HomeSubmissionsDataTable $table)
-    {
-        $vendor = $request->user()->vendor()->first();
-        return $table->forVendor($vendor)->render('home.submissions');
-    }
-
     public function awards(Request $request, HomeNoticesDataTable $table)
     {
         return $table->render('home.awards');

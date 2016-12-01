@@ -25,6 +25,12 @@ class NoticesController extends Controller
         return $table->render('admin.notices.index');
     }
 
+    public function show(Notice $notice)
+    {
+        $vendorAwarded = $notice->vendors()->awarded()->first();
+        return view('notices.show', compact('notice', 'vendorAwarded'));
+    }
+
     public function myNotices(Request $request)
     {
         $vendor = $request->user()->vendor->first();

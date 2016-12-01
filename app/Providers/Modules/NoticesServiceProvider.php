@@ -8,7 +8,8 @@ class NoticesServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\NoticesPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\Admin\NoticesPolicy');
+        // app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\NoticesPolicy');
     }
 
     /**
@@ -113,7 +114,7 @@ class NoticesServiceProvider extends ServiceProvider
                 'as' => 'notices.submission-slip',
                 'uses' => 'NoticesController@submissionSlip'
             ]);
-            $router->resource('notices', 'NoticesController', ['only' => ['index']]);
+            $router->resource('notices', 'NoticesController', ['only' => ['index', 'show']]);
         });
 
         // api routing

@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12 col-md-2">
-		<a href="{{ route('home') }}" class="prompt-box border border-bottom-green-600">
+		<a href="{{ route('home') }}" class="prompt-box border border-bottom-grey-600">
 			<div class="title text-right">{{ trans('dashboard.numbers.all') }}</div>
 			<div class="number text-green-600">{{ App\Repositories\DashboardRepository::getAllNumber(Auth::user()) }}</div>
 		</a>

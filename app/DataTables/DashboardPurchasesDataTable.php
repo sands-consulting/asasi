@@ -14,10 +14,10 @@ class DashboardPurchasesDataTable extends DataTable
                 return view('dashboard._purchases_index_actions', compact('notice'));
             })
             ->editColumn('notice_name', function($notice) {
-                return link_to_route('admin.notices.show', $notice->notice_name, $notice->notice_id);
+                return link_to_route('notices.show', $notice->notice_name, $notice->notice_id);
             })
             ->editColumn('status', function($notice) {
-                return view('admin.notices._index_status', compact('notice'));
+                return view('notices._index_status', compact('notice'));
             })
             ->make(true);
     }

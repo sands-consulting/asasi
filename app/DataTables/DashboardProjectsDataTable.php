@@ -11,14 +11,14 @@ class DashboardProjectsDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                // return view('admin.notices._index_actions', compact('notice'));
+                // return view('notices._index_actions', compact('notice'));
             })
             ->addColumn('code', function() {
                 return '-';
             })
             ->editColumn('name', function($notice) {
                 $name  = "<span class='text-header'>$notice->number</span> <br />";
-                $name .= link_to_route('admin.notices.show', $notice->name, $notice->id);
+                $name .= link_to_route('notices.show', $notice->name, $notice->id);
                 return $name;
             })
             ->editColumn('purchased_at', function($notice) {
@@ -28,7 +28,7 @@ class DashboardProjectsDataTable extends DataTable
                 return $notice->expired_at->getFromSetting();
             })
             ->editColumn('status', function($notice) {
-                // return view('admin.notices._index_status', compact('notice'));
+                // return view('notices._index_status', compact('notice'));
             })
             ->removeColumn('number')
             ->make(true);

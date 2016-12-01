@@ -39,6 +39,6 @@ class DashboardRepository extends BaseRepository
 
     public static function getProjectsNumber(User $user)
     {
-        return Project::whereVendorId($user->vendor->first()->id)->count();
+        return Project::whereVendorId($user->vendor->id)->count();
     }
 }
