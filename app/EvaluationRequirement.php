@@ -107,4 +107,13 @@ class EvaluationRequirement extends Model
     {
         return $this->hasMany(EvaluationScore::class);
     }
+
+    public function submissions()
+    {
+        return $this->belongsToMany(Submission::class, 'evaluation_scores')
+            // ->whereNull(with(new Submission)->getTable() . '.deleted_at')
+            ->wherePivot('deleted_at', null)
+            ->withPivot(['score'])
+            ->withTimestamps();
+    }
 }

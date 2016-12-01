@@ -110,7 +110,8 @@ class Submission extends Model
 
     public function scores()
     {
-        return $this->hasMany(EvaluationScore::class);
+        return $this->hasMany(EvaluationScore::class)
+            ->where('submission_id', $this->id);
     }
 
     public function evaluators()
@@ -125,6 +126,14 @@ class Submission extends Model
       return $this->hasOne(EvaluationScore::class)
         ->selectRaw('submission_id, avg(score) as score_avg')
         ->groupBy('submission_id');
+    }
+
+    public function requirements()
+    {
+        return $this->belongsToMany(EvaluationRequirement::class, 'evaluation_scores')
+            ->wherePivot('deleted_at', null)
+            ->withPivot(['score'])
+            ->withTimestamps();
     }
 
     /*

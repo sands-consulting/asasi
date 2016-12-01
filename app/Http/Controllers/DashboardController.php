@@ -18,6 +18,10 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
+    public function index(Request $request, DashboardAllDataTable $table)
+    {
+        return $table->render('dashboard.index', compact('numbers'));
+    }
 
     public function eligibles(Request $request, DashboardEligiblesDataTable $table)
     {
