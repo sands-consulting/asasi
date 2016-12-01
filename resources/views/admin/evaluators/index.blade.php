@@ -23,9 +23,9 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
         <div class="row">
-            <div class="col-sm-10 panel-title"><span class="text-muted">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</span>
+            <div class="col-sm-10"><span class="text-muted">{{ $notice->number}} (<i>{{ $notice->organization->name}}</i>)</span>
             <br>{{ $notice->name }}</div>
-            <div class="col-sm-2 heading-elements">
+            <div class="heading-elements">
                 @if ($notice->status == 'published')
                     <span class="label label-success heading-text">
                 @elseif ($notice->status == 'cancelled')
