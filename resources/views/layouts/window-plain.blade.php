@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<script src="{{ elixir('assets/js/admin.js') }}"></script>
+<script src="{{ elixir('assets/js/window.js') }}"></script>
 @yield('scripts')
 {!! flash_messages() !!}
 </body>

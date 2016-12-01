@@ -83,12 +83,36 @@ elixir(function(mix) {
         'vendor.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
+    .scripts([
+        '../vendor/PACE/pace.js',
+        '../vendor/jquery/dist/jquery.js',
+        '../vendor/jquery-ujs/src/rails.js',
+        '../vendor/bootstrap/dist/js/bootstrap.js',
+        '../vendor/datatables.net/js/jquery.dataTables.js',
+        '../vendor/datatables.net-buttons/js/dataTables.buttons.min.js',
+        '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
+        '../vendor/vue/dist/vue.js',
+        '../vendor/vue-resource/dist/vue-resource.min.js',
+        '../vendor/pnotify/dist/pnotify.js',
+        '../vendor/legitripple/js/ripple.js',
+        '../vendor/moment/moment.js',
+        '../vendor/select2/dist/js/select2.js',
+        'vendor/pnotify.min.js',
+        'vendor/pickers/daterangepicker.js',
+        'vendor/uniform.min.js',
+        'vendor/buttons.server-side.js',
+        'vendor/limitless-four.js',
+        'vendor/pnotify.js',
+        'vendor/nicescroll.js',
+        'window.js',
+    ], 'public/assets/js/window.js')
     .version([
         'assets/css/public.css',
         'assets/css/window.css',
         'assets/css/admin.css',
         'assets/css/print.css',
         'assets/js/public.js',
+        'assets/js/window.js',
         'assets/js/admin.js',
     ])
     .copy([
