@@ -13,7 +13,7 @@
                             </div>
 
                             <div class="media-body">
-                                <h6 class="media-heading">{{ $evaluator->user->name }}</h6>
+                                <div class="small">{{ $evaluator->user->name }}</div>
                                 <span class="text-muted">{{ $evaluator->type->name }}</span>
                             </div>
 
@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <a href="{{ route('admin.notices.summary-by-type', [$notice->id, 1]) }}" class="btn btn-default">
-                <span class="text-thin">Show Summary</span>
+                <span class="small">Show Summary</span>
             </a>
         </div>
     </div>
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="media-body">
-                                <h6 class="media-heading">{{ $evaluator->user->name }}</h6>
+                                <div class="small">{{ $evaluator->user->name }}</div>
                                 <span class="text-muted">{{ $evaluator->type->name }}</span>
                             </div>
 
@@ -74,7 +74,7 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <a href="{{ route('admin.notices.summary-by-type', [$notice->id, 2]) }}" class="btn btn-default">
-                <span class="text-thin">Show Summary</span>
+                <span class="small">Show Summary</span>
             </a>
         </div>
     </div>
