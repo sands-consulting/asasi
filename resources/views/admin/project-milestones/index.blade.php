@@ -8,9 +8,6 @@
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
-		{{-- <a href="{{ route('admin.projects.create') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
-			<i class=" icon-plus-circle2"></i> <span>{{ trans('projects.buttons.create') }}</span>
-		</a> --}}
         <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
         </a>
@@ -20,10 +17,12 @@
 
 @section('content')
 <div class="panel panel-flat">
-    <div class="panel-heading">
-        <h6 class="title-header">  {{ trans('projects.title_singular') }}: <br>{{ ucwords(strtolower($project->name)) }}</h6>
+    <div class="panel-body">
+        <span><small>{{ $project->number }}</small> <br> {{ $project->name }}</span>
     </div> 
-    <div id="gantt_here" style='width:100%; min-height:600px;'></div>
+</div>
+<div class="panel panel-flat">
+    <div id="gantt_here" style='width:100%; min-height:500px;'></div>
     <div class="panel-body">
         <div class="text-right">
             <button class="btn btn-default" onclick="exportGantt('pdf')"><i class="icon-file-pdf"></i>  Export to PDF</button>
