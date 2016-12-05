@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Events\VendorApplied;
-use App\Notificators\VendorAppliedNotificator;
-use App\Vendor;
+use App\Events\VendorCancelled;
 use App\Http\Requests\VendorRequest;
+use App\Notificators\VendorAppliedNotificator;
 use App\Repositories\VendorsRepository;
+use App\Vendor;
 use Auth;
 use Illuminate\Http\Request;
+use Route;
 
 class VendorsController extends Controller
 {
@@ -37,8 +39,7 @@ class VendorsController extends Controller
         $inputs = $request->all();
         $vendor = VendorsRepository::update($vendor, $inputs);
 
-        if(isset($inputs['submit']))
-        {
+        if (isset($inputs['submit'])) {
             $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending']);
             event(new VendorApplied($vendor));
         }
@@ -51,6 +52,11 @@ class VendorsController extends Controller
     public function show(Vendor $vendor)
     {
         return view('vendors.show', compact('vendor'));
+    }
+
+    public function subscriptions(Request $request, Vendor $vendor)
+    {
+        return view('vendors.show-subscription', compact('vendor'));
     }
 
     public function completeApplication(Request $request, Vendor $vendor)
@@ -71,6 +77,7 @@ class VendorsController extends Controller
     {
         if ($vendor->status == 'pending') {
             VendorsRepository::update($vendor, ['status' => 'draft']);
+            event(new VendorCancelled($vendor));
 
             return redirect()
                 ->route('vendors.edit', $vendor->id)

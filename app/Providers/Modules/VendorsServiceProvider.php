@@ -59,6 +59,31 @@ class VendorsServiceProvider extends ServiceProvider
                 $router->resource('vendors', 'VendorsController');
             });
             
+            $router->get('vendors/{vendors}/qualifications', [
+                'as'    => 'vendors.qualifications',
+                'uses'  => 'VendorsController@qualifications'
+            ]);
+
+            $router->get('vendors/{vendors}/users', [
+                'as'    => 'vendors.users',
+                'uses'  => 'VendorsController@users'
+            ]);
+
+            $router->get('vendors/{vendors}/subscriptions', [
+                'as'    => 'vendors.subscriptions',
+                'uses'  => 'VendorsController@subscriptions'
+            ]);
+
+            $router->get('vendors/{vendors}/purchases', [
+                'as'    => 'vendors.purchases',
+                'uses'  => 'VendorsController@purchases'
+            ]);
+
+            $router->get('vendors/{vendors}/transactions', [
+                'as'    => 'vendors.transactions',
+                'uses'  => 'VendorsController@transactions'
+            ]);
+
             $router->resource('vendors', 'VendorsController', [
                 'except' => ['index', 'destroy']
             ]);

@@ -169,11 +169,12 @@ return [
     'emails' => [
         'applied' => [
             'subject' => 'Vendor Application For Approval.',
-            ''
         ],
         'approved' => [
             'subject' => 'Vendor Application Approved.',
-            ''
+        ],
+        'cancelled' => [
+            'subject' => 'Vendor Application Deleted.',
         ]
     ], 
 

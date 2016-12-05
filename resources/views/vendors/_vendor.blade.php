@@ -58,11 +58,23 @@
 
 <div class="navbar navbar-default mb-15">
 	<ul class="nav navbar-nav">
-		<li class="active"><a href="#">{{ trans('vendors.views._show.nav.details') }}</a></li>
-		<li><a href="#">{{ trans('vendors.views._show.nav.qualification_codes') }}</a></li>
-		<li><a href="#">{{ trans('vendors.views._show.nav.users') }}</a></li>
-		<li><a href="#">{{ trans('vendors.views._show.nav.subscriptions') }}</a></li>
-		<li><a href="#">{{ trans('vendors.views._show.nav.purchases') }}</a></li>
-		<li><a href="#">{{ trans('vendors.views._show.nav.transactions') }}</a></li>
+		<li class="{{ is_route_active('vendors.show') }}">
+			<a href="{{ route('vendors.show', $vendor->id) }}">{{ trans('vendors.views._show.nav.details') }}</a>
+		</li>
+		<li class="{{ is_route_active('vendors.qualifications') }}">
+			<a href="{{ route('vendors.qualifications', $vendor->id) }}">{{ trans('vendors.views._show.nav.qualification_codes') }}</a>
+		</li>
+		<li class="{{ is_route_active('vendors.users') }}">
+			<a href="{{ route('vendors.users', $vendor->id) }}">{{ trans('vendors.views._show.nav.users') }}</a>
+		</li>
+		<li class="{{ is_route_active('vendors.subscriptions') }}">
+			<a href="{{ route('vendors.subscriptions', $vendor->id) }}">{{ trans('vendors.views._show.nav.subscriptions') }}</a>
+		</li>
+		<li class="{{ is_route_active('vendors.purchases') }}">
+			<a href="{{ route('vendors.purchases', $vendor->id) }}">{{ trans('vendors.views._show.nav.purchases') }}</a>
+		</li>
+		<li class="{{ is_route_active('vendors.transactions') }}">
+			<a href="{{ route('vendors.transactions', $vendor->id) }}">{{ trans('vendors.views._show.nav.transactions') }}</a>
+		</li>
 	</ul>
 </div>

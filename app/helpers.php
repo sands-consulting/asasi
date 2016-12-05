@@ -5,6 +5,12 @@ function is_path_active($path, $active = 'active')
     return call_user_func_array('Request::is', (array) $path) ? $active : '';
 }
 
+function is_route_active($routeNamed, $active = 'active')
+{
+    $route = call_user_func_array('Route::getFacadeRoot', []);
+    return $route->currentRouteName() === $routeNamed ? $active : '';
+}
+
 function str_titleize($value)
 {
     $value = str_replace('-', ' ', $value);
