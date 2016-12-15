@@ -40,16 +40,16 @@ class SettingSeeder extends Seeder
 
         $settings = [
             [
+                'key' => 'currency',
+                'value' => 'MYR'
+            ],
+            [
                 'key' => 'date_format',
-                'value' =>  'd/m/Y',
-                'item_type' =>  null,
-                'item_id' => null,
+                'value' =>  'd/m/Y'
             ],
             [
                 'key' => 'vendor_role_id',
-                'value' =>  '2',
-                'item_type' =>  null,
-                'item_id' => null,
+                'value' =>  '2'
             ]
         ];
 
