@@ -26,7 +26,7 @@ class DropTypeIdToSubmissions extends Migration
     public function down()
     {
         Schema::table('submissions', function (Blueprint $table) {
-            $table->unsignedInteger('type_id')->after('notice_id');
+            $table->unsignedInteger('type_id')->after('notice_id')->nullable();
             $table->foreign('type_id')
                 ->references('id')
                 ->on('evaluation_types')
