@@ -55,7 +55,7 @@ class AsasiMigrations extends Migration
             $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
-            $table->datetime('expired_at');
+            $table->timestamp('expired_at');
 
             $table->foreign('user_id')
                 ->references('id')

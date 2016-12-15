@@ -43,10 +43,10 @@ class CreateNoticesTable extends Migration
             $table->text('description');
             $table->text('rules');
             $table->decimal('price');
-            $table->dateTime('published_at')->nullable();
-            $table->dateTime('expired_at')->nullable();
-            $table->dateTime('purchased_at')->nullable();
-            $table->dateTime('submission_at')->nullable();
+            $table->timestamp('published_at')->nullable();
+            $table->timestamp('expired_at')->nullable();
+            $table->timestamp('purchased_at')->nullable();
+            $table->timestamp('submission_at')->nullable();
             $table->text('submission_address');
             $table->unsignedInteger('notice_type_id')->nullable();
             $table->unsignedInteger('notice_category_id')->nullable();
@@ -74,7 +74,7 @@ class CreateNoticesTable extends Migration
         Schema::create('notice_events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->datetime('event_at')->nullable();
+            $table->timestamp('event_at')->nullable();
             $table->string('location');
             $table->boolean('required');
             $table->unsignedInteger('notice_id')->nullable();

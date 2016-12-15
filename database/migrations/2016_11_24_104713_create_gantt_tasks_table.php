@@ -16,12 +16,12 @@ class CreateGanttTasksTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('duration');
-            $table->datetime('start_date')->nullable();
-            $table->datetime('end_date')->nullable();
-            $table->datetime('planned_start')->nullable();
-            $table->datetime('planned_end')->nullable();
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
+            $table->timestamp('planned_start')->nullable();
+            $table->timestamp('planned_end')->nullable();
             $table->decimal('progress');
-            $table->datetime('deadline')->nullable();
+            $table->timestamp('deadline')->nullable();
             $table->unsignedInteger('parent');
             $table->unsignedInteger('project_id');
             $table->nullableTimestamps();
