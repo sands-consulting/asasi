@@ -9,10 +9,10 @@ return [
         'description' => 'Description',
         'rules' => 'Rules',
         'price' => 'Price',
-        'published_at' => 'Published At',
-        'expired_at' => 'Expired At',
-        'purchased_at' => 'Purchased At',
-        'submission_at' => 'Submission At',
+        'published_at' => 'Publication Date & Time',
+        'expired_at' => 'Expiration Date & Time',
+        'purchased_at' => 'Availability Date & Time',
+        'submission_at' => 'Submission Date & Time',
         'submission_address' => 'Submission Address',
         'notice_type_id' => 'Type',
         'notice_category_id' => 'Category',
@@ -32,6 +32,21 @@ return [
         'submission' => 'Submission',
         'invoice' => 'Invoice',
         'receipt' => 'Receipt',
+    ],
+
+    'navs' => [
+        'details' => 'Details',
+        'events' => 'Events',
+        'qualification_codes' => 'Qualification Codes',
+        'files' => 'Files',
+        'purchases' => 'Purchases',
+        'submissions' => 'Submissions',
+        'evaluations' => 'Evaluations',
+        'award' => 'Award',
+
+        'settings' => 'Settings',
+        'evaluators' => 'Evaluators',
+        'evaluation_criterias' => 'Evaluation Criterias'
     ],
 
     'notices' => [
@@ -66,7 +81,15 @@ return [
             'title' => 'Edit',
         ],
         'revisions' => [
-
+        ],
+        'events' => [
+            'empty' => 'No event information.',
+            'table' => [
+                'name' => 'Name',
+                'type' => 'Type',
+                'datetime' => 'Date & Time',
+                'location' => 'Location'
+            ]
         ],
         'my_notices' => [
             'title' => 'My Notices'

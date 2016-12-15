@@ -34,7 +34,7 @@ class Carbon extends NesbotCarbon
         return $this->format($format);
     }
 
-    public function formatDateTimeFromSetting($format = 'd/m/Y H:i a')
+    public function formatDateTimeFromSetting($format = 'd/m/Y H:i')
     {
         $setting = Setting::where('key', 'datetime_format')->first();
         

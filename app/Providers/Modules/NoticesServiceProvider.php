@@ -49,10 +49,25 @@ class NoticesServiceProvider extends ServiceProvider
                     'as'    => 'admin.notices.duplicate',
                     'uses'  => 'NoticesController@duplicate'
                 ]);
-                $router->get('notices/{notices}/settings', [
-                    'as'    => 'admin.notices.settings',
-                    'uses'  => 'NoticesController@settings'
+
+                $router->get('notices/{notices}/events', [
+                    'as'    => 'admin.notices.events',
+                    'uses'  => 'NoticesController@events'
                 ]);
+                $router->get('notices/{notices}/qualification_codes', [
+                    'as'    => 'admin.notices.qualification_codes',
+                    'uses'  => 'NoticesController@qualification_codes'
+                ]);
+                 $router->get('notices/{notices}/files', [
+                    'as'    => 'admin.notices.files',
+                    'uses'  => 'NoticesController@files'
+                ]);
+                $router->get('notices/{notices}/purchases', [
+                    'as'    => 'admin.notices.purchases',
+                    'uses'  => 'NoticesController@purchases'
+                ]);
+                
+
                 $router->post('notices/{notices}/award/{vendors}', [
                     'as' => 'admin.notices.award',
                     'uses' => 'NoticesController@award'
@@ -75,7 +90,7 @@ class NoticesServiceProvider extends ServiceProvider
                     'uses' => 'NoticesController@summaryEvaluators'
                 ]);
 
-                $router->resource('notices', 'NoticesController');
+                $router->resource('notices',                'NoticesController');
             });
 
             $router->get('notices/my-notices', [

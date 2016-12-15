@@ -48,6 +48,10 @@ class SettingSeeder extends Seeder
                 'value' =>  'd/m/Y'
             ],
             [
+                'key' => 'datetime_format',
+                'value' => 'd/m/Y H:i'
+            ],
+            [
                 'key' => 'vendor_role_id',
                 'value' =>  '2'
             ]

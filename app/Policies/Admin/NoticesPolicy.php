@@ -96,4 +96,9 @@ class NoticesPolicy extends BasePolicy
     {
         return $this->award();
     }
+
+    public function events()
+    {
+        return $this->show();
+    }
 }
