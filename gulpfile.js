@@ -1,5 +1,8 @@
 var elixir = require('laravel-elixir');
 
+require('laravel-elixir-vue');
+require('laravel-elixir-livereload');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -21,8 +24,8 @@ elixir(function(mix) {
 
   mix
     .scripts([
-        '../vendor/PACE/pace.js',
         '../vendor/jquery/dist/jquery.js',
+        '../vendor/PACE/pace.js',
         '../vendor/jquery-ujs/src/rails.js',
         '../vendor/bootstrap/dist/js/bootstrap.js',
         '../vendor/datatables.net/js/jquery.dataTables.js',
@@ -48,9 +51,10 @@ elixir(function(mix) {
         'vendor.js',
         'public.js',
     ], 'public/assets/js/public.js')
+
     .scripts([
-        '../vendor/PACE/pace.js',
         '../vendor/jquery/dist/jquery.js',
+        '../vendor/PACE/pace.js',
         '../vendor/jquery-ujs/src/rails.js',
         '../vendor/bootstrap/dist/js/bootstrap.js',
         '../vendor/datatables/media/js/jquery.dataTables.js',
@@ -83,6 +87,7 @@ elixir(function(mix) {
         'vendor.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
+
     .scripts([
         '../vendor/PACE/pace.js',
         '../vendor/jquery/dist/jquery.js',
@@ -106,6 +111,7 @@ elixir(function(mix) {
         'vendor/nicescroll.js',
         'window.js',
     ], 'public/assets/js/window.js')
+
     .version([
         'assets/css/public.css',
         'assets/css/window.css',
@@ -119,7 +125,10 @@ elixir(function(mix) {
       'resources/assets/fonts',
       'resources/assets/vendor/bootstrap/fonts'
     ], 'public/assets/fonts')
+
     .copy('resources/assets/images', 'public/assets/images')
+
     .copy('resources/assets/vendor/ckeditor', 'public/assets/ckeditor')
+
     .copy('resources/assets/js/vendor/dhtmlxGantt', 'public/assets/dhtmlxGantt');
 });

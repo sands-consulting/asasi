@@ -1,14 +1,17 @@
 <?php namespace App;
 
-use Cache;
 use Cart;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cache;
+use Illuminate\Support\Facades\Auth;
+use App\Libraries\Traits\DateAccessorTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use RevisionableTrait,
+        DateAccessorTrait,
         SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
@@ -213,7 +216,7 @@ class User extends Authenticatable
 
     public function canSuspend()
     {
-        return $this->status != 'suspended';
+        return Auth::user()->id != $this->id && $this->status != 'suspended';
     }
 
     /*

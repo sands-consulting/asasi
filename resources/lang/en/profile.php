@@ -4,8 +4,8 @@ return [
 	'title' => 'My Profile',
 
 	'attributes' => [
-		'name' => 'Your Name',
-		'email' => 'Your Email',
+		'name' => 'Name',
+		'email' => 'Email',
 		'password' => 'Password',
 		'password_confirmation' => 'Confirm Password',
 		'current_password' => 'Current Password',

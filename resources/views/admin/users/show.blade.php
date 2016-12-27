@@ -65,32 +65,108 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-	<div class="panel-heading">
-		<h5 class="panel-title">{{ $user->name }}</h5>
-		<div class="heading-elements">
-			@include('admin.users._index_status')
+<div class="row">
+	<div class="col-md-3">
+		<div class="thumbnail">
+			<div class="thumb thumb-rounded thumb-slide">
+				{{-- <a class="btn bg-primary-400 btn-rounded btn-icon legitRipple">
+					<span class="letter-icon">{{ get_initial($user->name) }}</span>
+				</a> --}}
+				<img src="{{ Gravatar::src($user->email, 100) }}" 
+					class="img-circle" 
+					alt="{{ $user->name }}">
+
+				<div class="caption">
+					<span>
+						<a href="#" class="btn bg-success-400 btn-icon btn-xs legitRipple" data-popup="lightbox"><i class="icon-plus2"></i></a>
+						<a href="user_pages_profile.html" class="btn bg-success-400 btn-icon btn-xs legitRipple"><i class="icon-link"></i></a>
+					</span>
+				</div>
+			</div>
+		
+	    	<div class="caption text-center">
+	    		<h6 class="text-semibold">
+	    			{{ $user->name }}
+	    			@if ($user->vendor) 
+	    				<small class="display-block">{{ $user->vendor->name }}</small>
+	    			@endif
+	    		</h6>
+
+	    	</div>
+		</div>
+
+		{{-- <div class="well">
+			 @if($user->canActivate() && Auth::user()->hasPermission('user:activate'))
+				<a href="{{ route('admin.users.activate', $user->id) }}" 
+					class="btn btn-success btn-labeled btn-block legitRipple"
+					data-method="PUT">
+					<b><i class="icon-user-check"></i></b> Activate
+				</a>
+			@endif
+		
+			@if($user->canSuspend() 
+				&& Auth::user()->hasPermission('user:suspend'))
+				<a href="{{ route('admin.users.suspend', $user->id) }}" 
+					class="btn btn-danger btn-labeled btn-block legitRipple"
+					data-method="PUT">
+					<b><i class="icon-user-block"></i></b> Suspend user
+				</a>
+			@endif
+		
+			@if(Auth::user()->id != $user->id
+				&& Auth::user()->hasPermission('user:assume'))
+				<a  href="{{ route('admin.users.assume', $user->id) }}"
+					class="btn btn-primary btn-labeled btn-block legitRipple"
+					data-method="POST">
+					<b><i class="icon-user-lock"></i></b> Login as user
+				</a>
+			@endif 
+		</div> --}}
+	</div>
+
+	<div class="col-md-9">
+		<div class="panel panel-flat">
+			<div class="panel-body">
+				<fieldset>
+					<legend>User Information</legend>
+					<dl>
+						<div class="col-md-6 mb-15">
+							<dt>{{ trans('users.attributes.email') }}</dt>
+							<dd>{{ $user->email }}</dd>
+						</div>
+						<div class="col-md-6 mb-15">
+							<dt>{{ trans('users.attributes.roles') }}</dt>
+							<dd>@include('admin.users._index_roles')</dd>
+						</div>
+						<div class="col-md-6 mb-15">
+							<dt>{{ trans('users.attributes.created_at') }}</dt>
+							<dd>{{ $user->created_at->formatDateTimeFromSetting() }}</dd>
+						</div>
+						<div class="col-md-6 mb-15">
+							<dt>{{ trans('users.attributes.updated_at') }}</dt>
+							<dd>{{ $user->updated_at->formatDateTimeFromSetting() }}</dd>
+						</div>
+					</dl>
+				</fieldset>
+				
+				@if ($user->vendor)
+					<fieldset>
+						<legend>Vendor Information</legend>
+						<dl>
+							<div class="col-md-6 mb-15">
+								<dt>{{ trans('vendors.attributes.name') }}</dt>
+								<dd>{{ $user->vendor->name }}</dd>
+							</div>
+							<div class="col-md-6 mb-15">
+								<dt>{{ trans('vendors.attributes.registration_number') }}</dt>
+								<dd>{{ $user->vendor->registration_number }}</dd>
+							</div>
+						</dl>
+					</fieldset>
+				@endif
+			</div>
 		</div>
 	</div>
-	<div class="table-responsive">
-		<table class="table">
-			<tr>
-				<th class="col-xs-3">{{ trans('users.attributes.email') }}</th>
-				<td>{{ $user->email }}</td>
-			</tr>
-			<tr>
-				<th class="col-xs-3">{{ trans('users.attributes.roles') }}</th>
-				<td>@include('admin.users._index_roles')</td>
-			</tr>
-			<tr>
-				<th class="col-xs-3">{{ trans('users.attributes.created_at') }}</th>
-				<td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
-			</tr>
-			<tr>
-				<th class="col-xs-3">{{ trans('users.attributes.updated_at') }}</th>
-				<td>{{ $user->updated_at->format('d/m/Y H:i:s') }}</td>
-			</tr>
-		</table>
-	</div>
 </div>
+
 @endsection
