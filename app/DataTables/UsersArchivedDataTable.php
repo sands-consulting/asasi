@@ -4,14 +4,14 @@ namespace App\DataTables;
 
 use App\User;
 
-class UsersDataTable extends DataTable
+class UsersArchivedDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($user) {
-                return view('admin.users._index_actions', compact('user'));
+                return view('admin.users._archives_actions', compact('user'));
             })
             ->addColumn('roles', function($user) {
                 return view('admin.users._index_roles', compact('user'));
@@ -25,15 +25,12 @@ class UsersDataTable extends DataTable
 
                 return $string;
             })
-            ->editColumn('status', function($user) {
-                return view('admin.users._index_status', compact('user'));
-            })
             ->make(true);
     }
 
     public function query()
     {
-        $query = User::with('roles', 'vendors');
+        $query = User::onlyTrashed()->with('roles', 'vendors');
 
         if($this->datatables->request->input('q', null))
         {
@@ -71,11 +68,6 @@ class UsersDataTable extends DataTable
                 'searchable'    => false,
                 'orderable'     => false,
                 'title'         => trans('users.attributes.roles'),
-            ],
-            [
-                'data'  => 'status',
-                'name'  => 'status',
-                'title' => trans('users.attributes.status'),
             ]
         ];
     }

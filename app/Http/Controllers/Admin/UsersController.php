@@ -4,19 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\User;
-use App\DataTables\UsersDataTable;
-use App\DataTables\UserLogsDataTable;
-use App\DataTables\RevisionsDataTable;
-use App\Http\Requests\UserRequest;
-use App\Repositories\UsersRepository;
-use App\Repositories\UserLogsRepository;
 use Illuminate\Http\Request;
+use App\DataTables\UsersDataTable;
+use App\Http\Requests\UserRequest;
+use App\DataTables\UserLogsDataTable;
+use App\Repositories\UsersRepository;
+use App\DataTables\RevisionsDataTable;
+use App\Repositories\UserLogsRepository;
+use App\DataTables\UsersArchivedDataTable;
 
 class UsersController extends Controller
 {
     public function index(UsersDataTable $table)
     {
         return $table->render('admin.users.index');
+    }
+
+    public function archives(UsersArchivedDataTable $table)
+    {
+        return $table->render('admin.users.archives');
     }
 
     public function create(Request $request)
@@ -120,5 +126,13 @@ class UsersController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.users.show', $user->id)))
             ->with('notice', trans('users.notices.suspended', ['name' => $user->name]));
+    }
+
+    public function restore(Request $request, User $user)
+    {
+        UsersRepository::restore($user);
+        return redirect()
+            ->back()
+            ->with('notice', trans('users.notices.restored', ['name' => $user->name]));
     }
 }

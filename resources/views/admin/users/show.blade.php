@@ -37,7 +37,7 @@
 
 		@if(Auth::user()->id != $user->id && Auth::user()->hasPermission('user:delete'))
 		<a href="{{ route('admin.users.destroy', $user->id) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
-			<i class="icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
+			<i class="icon-trash"></i> <span>{{ trans('actions.archive') }}</span>
 		</a>
 		@endif
 	</div>
@@ -45,6 +45,12 @@
 @endsection
 
 @section('secondary-header')
+<ul class="breadcrumb">
+	<li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+	<li><a href="{{ route('admin.users.index') }}">{{ trans('users.title') }}</a></li>
+	<li class="active">{{ trans('users.views.show.title') }}</li>
+</ul>
+
 <ul class="breadcrumb-elements">
     @if(Auth::user()->hasPermission('user:logs'))
 	<li>

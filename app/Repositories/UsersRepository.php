@@ -61,4 +61,9 @@ class UsersRepository extends BaseRepository
             ->where('created_at', '<=', $today->subDays($days))
             ->forceDelete();
     }
+
+    public static function restore(User $user)
+    {
+        $user->restore();
+    }
 }

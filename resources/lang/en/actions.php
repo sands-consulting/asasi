@@ -2,6 +2,7 @@
 
 return [
 	'activate' => 'Activate',
+	'archive' => 'Archive',
 	'add' => 'Add',
 	'assign' => 'Assign',
 	'evaluate' => 'Evaluate',

@@ -21,6 +21,14 @@
 </div>
 @endsection
 
+@section('secondary-header')
+<ul class="breadcrumb breadcrumb-caret">
+    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+    <li><a href="{{ route('admin.users.create') }}">{{ trans('users.title') }}</a></li>
+    <li class="active">{{ trans('users.views.create.title') }}</li>
+</ul>
+@endsection
+
 @section('content')
 <div class="panel panel-flat">
 	<div class="panel-body">

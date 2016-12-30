@@ -13,7 +13,6 @@ class DashboardController extends Controller
     public function index(DashboardUsersDataTable $table)
     {
         $lastLogins = UserLog::lastLogin(5)->get();
-        // return \App\User::with('latestLog')->first()->latestLog;
 
         return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
