@@ -35,9 +35,10 @@ return [
         'show' => [
         ],
         'create' => [
-            'title' => 'New News',
+            'title' => 'New',
         ],
         'edit' => [
+            'title' => 'Edit',
         ]
     ]
 ];

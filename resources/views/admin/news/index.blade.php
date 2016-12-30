@@ -15,6 +15,20 @@
 </div>
 @endsection
 
+@section('secondary-header')
+<ul class="breadcrumb breadcrumb-caret">
+    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+    <li class="active">{{ trans('news.title') }}</li>
+</ul>
+<ul class="breadcrumb-elements">
+    {{-- <li>
+        <a href="{{ route('admin.users.archives') }}" class="legitRipple">
+            <i class="icon-trash"></i> {{ trans('news.views.archives.link') }}
+        </a>
+    </li> --}}
+</ul>
+@endsection
+
 @section('content')
 <div class="panel panel-flat">
 	{!! $dataTable->table() !!}
