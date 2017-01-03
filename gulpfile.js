@@ -47,6 +47,7 @@ elixir(function(mix) {
         'vendor/limitless-four.js',
         'vendor/pnotify.js',
         'vendor/nicescroll.js',
+        'vendor/jquery-news-box/jquery.bootstrap.newsbox.js',
         'notification.js',
         'vendor.js',
         'public.js',

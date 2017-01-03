@@ -28,3 +28,13 @@ $(window).resize(function(){
     $(".row-eq-height .eq-element").height(maxHeight);
   } 
 });
+
+$("#demo3").bootstrapNews({
+  newsPerPage: 1,
+  autoplay: true,
+  navigation:false,
+  
+  onToDo: function () {
+    //console.log(this);
+  }
+});
