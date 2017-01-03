@@ -81,6 +81,11 @@ function get_initial($str, $length = 2)
     $initial = '';
     $str_part = explode(' ', $str);
 
+    /* reset length if array length less than $length */
+    if (count($str_part) < $length) {
+        $length = count($str_part);
+    }
+
     for ($i=0; $i < $length; $i++) { 
         $initial .= substr($str_part[$i], 0, 1);
     }

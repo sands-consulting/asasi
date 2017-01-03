@@ -76,7 +76,7 @@
 	        <div class="panel-body">
 	            <div class="row">
 	                <div class="col-xs-12">
-	                    <ul id="demo3">
+	                    <ul id="news">
 	                        @forelse (App\News::published()->get() as $news)
 	                        <li class="news-item">
 								<span class="text-semibold"> {!! $news->title !!} </span> <br>

@@ -17,10 +17,26 @@ class EvaluationSummaryDataTable extends DataTable
 
         foreach($this->types as $type) {
             $dt->editColumn($type->name . '_score', function($vendor) use ($type) {
-                return link_to_route('admin.notices.summary-evaluators', $vendor->{$type->name .'_score'}, [$vendor->notice_id, $vendor->submission_id, $type->id]);
+                if ($vendor->{$type->name .'_score'}) {
+                    return link_to_route(
+                        'admin.notices.summary-evaluators',
+                        $vendor->{$type->name .'_score'}, 
+                        [$vendor->notice_id, $vendor->submission_id, $type->id ]
+                    );
+                } else {
+                    return '- NIL -';
+                }
             });
             $dt->editColumn($type->name . '_sum', function($vendor) use ($type) {
-                return link_to_route('admin.notices.summary-evaluators', $vendor->{$type->name .'_sum'}, [$vendor->notice_id, $vendor->submission_id, $type->id]);
+                if ($vendor->{$type->name .'_score'}) {
+                    return link_to_route(
+                        'admin.notices.summary-evaluators',
+                        $vendor->{$type->name .'_sum'}, 
+                        [$vendor->notice_id, $vendor->submission_id, $type->id]
+                    );
+                } else {
+                    return '- NIL -';
+                }
             });
         }
 

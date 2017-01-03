@@ -29,8 +29,9 @@ $(window).resize(function(){
   } 
 });
 
-$("#demo3").bootstrapNews({
-  newsPerPage: 1,
+// news
+$("#news").bootstrapNews({
+  newsPerPage: 2,
   autoplay: true,
   navigation:false,
   
