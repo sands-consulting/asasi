@@ -50,7 +50,7 @@ class User extends Authenticatable
     
     public function latestLog()
     {
-      return $this->hasOne(UserLog::class, 'user_id')->latest();
+        return $this->hasOne(UserLog::class, 'user_id')->latest();
     }
 
     public function logs()
@@ -136,12 +136,12 @@ class User extends Authenticatable
     {
         if (isset($queries['keywords']) && !empty($queries['keywords'])) {
             $keywords = $queries['keywords'];
-            $query->where(function($query) use($keywords) {
+            $query->where(function ($query) use ($keywords) {
                 foreach ($this->searchable as $column) {
                     $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
                 }
             });
-            $query->orWhereHas('vendors', function($query) use($keywords) {
+            $query->orWhereHas('vendors', function ($query) use ($keywords) {
                 $query->where('name', 'LIKE', "%$keywords%");
             });
             unset($queries['keywords']);
@@ -180,7 +180,7 @@ class User extends Authenticatable
 
     public function scopeEvaluators($query)
     {
-        $query->whereHas('roles', function($roles) {
+        $query->whereHas('roles', function ($roles) {
             return $roles->whereName('evaluator');
         });
     }
@@ -195,8 +195,8 @@ class User extends Authenticatable
         return $query->where('status', 'suspended');
     }
 
-    /* 
-     * State controls 
+    /**
+     * State controls
      */
     public function canActivate()
     {
@@ -207,7 +207,7 @@ class User extends Authenticatable
     {
         $inCart = false;
         if ($content = Cart::content()) {
-            $inCart = Cart::content()->search(function($cartItem) use ($noticeId){
+            $inCart = Cart::content()->search(function ($cartItem) use ($noticeId) {
                 return $cartItem->id == $noticeId;
             });
         }
@@ -238,12 +238,12 @@ class User extends Authenticatable
         return in_array($permission, $this->cachedPermissions());
     }
 
-    public function hasPermissions($permissions=[])
+    public function hasPermissions($permissions = [])
     {
         return count(array_intersect($this->cachedPermissions(), $permissions)) > 0;
     }
 
-    public function hasAllPermissions($permissions=[])
+    public function hasAllPermissions($permissions = [])
     {
         return count(array_intersect($this->cachedPermissions(), $permissions)) == count($permissions);
     }
@@ -254,8 +254,7 @@ class User extends Authenticatable
 
     public function cachedPermissions()
     {
-        if( ! Cache::has($this->permissions_cache_key) )
-        {
+        if (! Cache::has($this->permissions_cache_key)) {
             $this->cachePermissions();
         }
 
@@ -264,8 +263,7 @@ class User extends Authenticatable
 
     public function cachePermissions()
     {
-        if(Cache::has('user_'))
-        {
+        if (Cache::has('user_')) {
             Cache::forget($this->permissions_cache_key);
         }
 
@@ -303,7 +301,7 @@ class User extends Authenticatable
     
     public static function options()
     {
-        return static::lists('name','id')->toArray();
+        return static::lists('name', 'id')->toArray();
     }
     
     public function newNotification()
@@ -322,7 +320,7 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        parent::creating(function($user) {
+        parent::creating(function ($user) {
             $user->confirmation_token = str_random(64);
         });
     }
