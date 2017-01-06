@@ -11,11 +11,38 @@ function is_route_active($routeNamed, $active = 'active')
     return $route->currentRouteName() === $routeNamed ? $active : '';
 }
 
+/**
+ * Titleize the given value
+ * @param  String $value
+ * @return String
+ */
 function str_titleize($value)
 {
     $value = str_replace('-', ' ', $value);
     $value = str_replace('_', ' ', $value);
     return \Illuminate\Support\Str::title($value);
+}
+
+if (! function_exists('alternator')) {
+    /**
+     * Alternator
+     *
+     * Allows strings to be alternated. See docs...
+     *
+     * @param string (as many parameters as needed)
+     * @return string
+     */
+    function alternator($args)
+    {
+        static $i;
+
+        if (func_num_args() === 0) {
+            $i = 0;
+            return '';
+        }
+        $args = func_get_args();
+        return $args[($i++ % count($args))];
+    }
 }
 
 function flash_messages()
@@ -32,7 +59,7 @@ function flash_messages()
     return $content;
 }
 
-function blank_icon($value=null)
+function blank_icon($value = null)
 {
     return empty($value) ? '<i class="icon-cross2"></i>' : $value;
 }
@@ -40,8 +67,15 @@ function blank_icon($value=null)
 function body_classes($additional)
 {
     $current_route      = Route::getCurrentRoute()->getAction();
-    $current_controller = explode('@', str_replace($current_route['namespace']. "\\", '', $current_route['controller']))[0];
-    $current_action     = explode('@', str_replace($current_route['namespace']. "\\", '', $current_route['controller']))[1];
+    $current_controller = explode(
+        '@',
+        str_replace($current_route['namespace']. "\\", '', $current_route['controller'])
+    )[0];
+
+    $current_action = explode(
+        '@',
+        str_replace($current_route['namespace']. "\\", '', $current_route['controller'])
+    )[1];
 
     $classes = is_array($additional) ? $additional : [$additional];
     $classes[] = str_slug(snake_case($current_controller));
@@ -66,7 +100,7 @@ function is_complete_form($attributes)
 
 function trim_trailing_zeroes($nbr)
 {
-    return strpos($nbr,'.')!==false ? rtrim(rtrim($nbr,'0'),'.') : $nbr;
+    return strpos($nbr, '.') !==false ? rtrim(rtrim($nbr, '0'), '.') : $nbr;
 }
 
 function normalize_registration_number($string)
@@ -86,7 +120,7 @@ function get_initial($str, $length = 2)
         $length = count($str_part);
     }
 
-    for ($i=0; $i < $length; $i++) { 
+    for ($i=0; $i < $length; $i++) {
         $initial .= substr($str_part[$i], 0, 1);
     }
 
