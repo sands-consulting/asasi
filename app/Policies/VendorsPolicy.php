@@ -13,7 +13,7 @@ class VendorsPolicy extends BasePolicy
 
     public function show(Vendor $vendor)
     {
-        if($this->user->hasPermission('access:vendor'))
+        if($this->user->hasPermission('access:vendor') && $this->user->vendor)
         {
             return $this->user->hasPermission('vendor:show') && $vendor->id === $this->user->vendor->id;
         }
