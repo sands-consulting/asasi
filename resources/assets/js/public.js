@@ -28,3 +28,14 @@ $(window).resize(function(){
     $(".row-eq-height .eq-element").height(maxHeight);
   } 
 });
+
+// news
+$("#news").bootstrapNews({
+  newsPerPage: 2,
+  autoplay: true,
+  navigation:false,
+  
+  onToDo: function () {
+    //console.log(this);
+  }
+});

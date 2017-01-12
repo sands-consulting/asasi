@@ -24,19 +24,26 @@ return [
     'notices' => [
         'created' => 'User :name created',
         'updated' => 'User :name updated',
-        'deleted' => 'User :name deleted',
+        'deleted' => 'User :name archived',
         'assumed' => 'Logged in as :name',
         'activated' => 'User :name activated',
-        'suspended' => 'User :name suspended'
+        'suspended' => 'User :name suspended',
+        'restored' => 'User :name restored'
     ],
 
     'views' => [
         'index' => [
             'keywords' => 'Search Name or Email',
             'role' => 'By Role',
-            'status' => 'By Status'
+            'status' => 'By Status',
+            'link' => 'Users'
+        ],
+        'archives' => [
+            'title' => 'User Archives',
+            'link' => 'Archives',
         ],
         'show' => [
+            'title' => 'Show'
         ],
         'create' => [
             'title' => 'New User',

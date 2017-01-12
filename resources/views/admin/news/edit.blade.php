@@ -40,6 +40,11 @@
 @endsection
 
 @section('secondary-header')
+<ul class="breadcrumb breadcrumb-caret">
+    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+    <li><a href="{{ route('admin.news.index') }}">{{ trans('news.title') }}</a></li>
+    <li class="active">{{ trans('news.views.edit.title') }}</li>
+</ul>
 <ul class="breadcrumb-elements">
     @if(Auth::user()->hasPermission('news:logs'))
 	<li>

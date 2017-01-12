@@ -51,9 +51,9 @@
 @endsection
 
 @section('content')
-<div class="row row-eq-height">
-    <div class="col-sm-8">
-        <div class="panel panel-flat  eq-element">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-flat">
             <div class="panel-body">
                 <div class="row mb-20">
                     <div class="col-sm-10">
@@ -74,39 +74,48 @@
                         </span>
                     </div>
                 </div>
-                <div class="row mb-20">
-                    <div class="col-md-4">
-                        <div class="well bg-white">
-                            <div class="text-center">
-                                Approved Allocation
-                            </div>
-                            <div class="text-center text-size-xlarge text-grey">
-                                RM {{ $project->cost }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="well bg-white">
-                            <div class="text-center">
-                                Disbursement
-                            </div>
-                            <div class="text-center text-size-xlarge text-orange">
-                                RM 20,000
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="well bg-white">
-                            <div class="text-center">
-                                Balance
-                            </div>
-                            <div class="text-center text-size-xlarge text-grey-300">
-                                RM 1000,000
-                            </div>
-                        </div>
-                    </div>                  
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row row-eq-height">
+    <div class="col-md-4">
+        <div class="panel panel-flat eq-element">
+            <div class="panel-heading">
+                <p class="panel-title text-center"> Approved Allocation </p>
+            </div>
+            <div class="panel-body">
+                <div class="text-center text-size-xlarge text-grey">
+                    RM {{ $project->cost }}
                 </div>
-
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-flat eq-element">
+            <div class="panel-heading">
+                <p class="panel-title text-center"> Disbursement </p>
+            </div>
+            <div class="panel-body">
+                <div class="text-center text-size-xlarge text-orange"> RM 20,000 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-flat eq-element">
+            <div class="panel-heading">
+                <p class="panel-title text-center"> Balance </p>
+            </div>
+            <div class="panel-body">
+                <div class="text-center text-size-xlarge text-grey-300"> RM 1000,000 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-flat  eq-element">
+            <div class="panel-body">
                 <div class="row mb-20">
                     <div class="col-sm-12">
                         <fieldset>
@@ -160,49 +169,42 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="panel panel-flat  eq-element">
-            <div class="panel-heading">
-                <h6 class="panel-title">Project Milestone<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-            </div>
-            <div class="panel-body eq-element">
+    <div class="col-sm-12">
                 
-                <div class="timeline timeline-left">
-                    <div class="timeline-container">
-                        
-                        <!-- Milestone -->
-                        
-                        <!-- /Milestone -->
+        <div class="timeline timeline-center">
+            <div class="timeline-container">
+                
+                <!-- Milestone -->
+                
+                <!-- /Milestone -->
 
-                        <!-- Gantt Task -->
-                        @foreach($ganttTasks as $task)
-                        <div class="timeline-row">
-                            <div class="timeline-icon">
-                                <a href="#">{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}</a>
-                            </div>
+                <!-- Gantt Task -->
+                @foreach($ganttTasks as $task)
+                <div class="timeline-row">
+                    <div class="timeline-icon">
+                        <div class="bg-info"><i class="icon-pencil5"></i></div>
+                    </div>
 
-                            <div class="panel panel-flat timeline-content">
-                                <div class="panel-heading">
-                                    <h6 class="panel-title">{{ $task->text }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-                                    <div class="heading-elements">
-                                        <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated {{ $task->created_at->diffForHumans() }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="panel-body">
-                                    {{ str_limit($task->description, 45) }}
-                                </div>
+                    <div class="panel panel-flat timeline-content">
+                        <div class="panel-heading">
+                            <h6 class="panel-title">{{ $task->title }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                            <div class="heading-elements">
+                                <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated {{ $task->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
-                        @endforeach
-                        <!-- /Gantt Task -->
 
-                        
+                        <div class="panel-body">
+                            {{ str_limit($task->description, 45) }}
+                        </div>
                     </div>
-                <a href="{{ route('admin.projects.milestones.index', $project->id) }}" class="btn btn-default btn-block">View Full Timeline</a>
                 </div>
+                @endforeach
+                <!-- /Gantt Task -->
+
+                
             </div>
         </div>
     </div>
+    <a href="{{ route('admin.projects.milestones.index', $project->id) }}" class="btn btn-default btn-block">View Full Timeline</a>
 </div>
 @endsection

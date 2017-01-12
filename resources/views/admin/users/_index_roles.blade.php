@@ -1,5 +1,5 @@
 @if(count($user->roles) > 0)
-<ul class="list-unstyled no-margin">
+<ul class="list-inline list-inline-separate">
 	@foreach($user->roles as $role)<li>{{ $role->display_name}}</li>@endforeach
 </ul>
 @else

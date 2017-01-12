@@ -1,7 +1,7 @@
 <div class="col-xs-12 col-md-3">
+
 	<form class="form-horizontal form-login" role="form" method="POST" action="{{ url('login') }}">
 		{!! csrf_field() !!}
-
 		<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback has-feedback-left">
 			<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.attributes.email') }}">
 			<div class="form-control-feedback">
@@ -27,13 +27,17 @@
 
 	<hr>
 
-	<a href="{{ url('register') }}" class="btn border-grey-300 text-grey-300 btn-flat btn-block btn-register legitRipple">{{ trans('home.views.index.user.register_button') }}</a>
+	<a href="{{ url('register') }}" class="btn border-grey-300 text-grey-300 btn-flat btn-block btn-register legitRipple">
+		{{ trans('home.views.index.user.register_button') }}
+	</a>
 
 	<p class="text-center text-grey-600">{{ trans('home.views.index.user.register_text') }}</p>
 
 	<hr>
 
-	<p class="text-center"><a href="{{ url('/') }}" class="text-grey-600"><i class="icon icon-list3"></i> {{ trans('home.views.index.user.register_help') }}</a></p>
+	<p class="text-center">
+		<a href="{{ url('/') }}" class="text-grey-600"><i class="icon icon-list3"></i> {{ trans('home.views.index.user.register_help') }}</a>
+	</p>
 
 	<hr>
 </div>

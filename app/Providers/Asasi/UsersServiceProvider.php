@@ -2,6 +2,7 @@
 
 namespace App\Providers\Asasi;
 
+use App\User;
 use Illuminate\Support\ServiceProvider;
 
 class UsersServiceProvider extends ServiceProvider
@@ -27,9 +28,19 @@ class UsersServiceProvider extends ServiceProvider
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('users', 'App\User');
+            $router->bind('users', function($id) {    
+                return User::withTrashed()->find($id);
+            });
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+                $router->get('users/archives', [
+                    'as'    => 'admin.users.archives',
+                    'uses'  => 'UsersController@archives'
+                ]);
+                $router->put('users/{users}/restore', [
+                    'as'    => 'admin.users.restore',
+                    'uses'  => 'UsersController@restore'
+                ]);
                 $router->get('users/{users}/logs', [
                     'as'    => 'admin.users.logs',
                     'uses'  => 'UsersController@logs'

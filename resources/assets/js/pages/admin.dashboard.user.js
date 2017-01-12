@@ -24,7 +24,7 @@ $(function () {
       x: {
         type: 'timeseries',
         tick: {
-          format: '%d/%m/%Y'
+          format: '%d/%m'
         }
       }
     },

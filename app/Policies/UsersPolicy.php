@@ -11,6 +11,11 @@ class UsersPolicy extends BasePolicy
         return $this->user->hasPermission('user:index');
     }
 
+    public function archives()
+    {
+        return $this->index();
+    }
+
     public function show()
     {
         return $this->user->hasPermission('user:show');
@@ -69,5 +74,10 @@ class UsersPolicy extends BasePolicy
     public function suspend(User $user)
     {
         return $this->user->hasPermission('user:suspend') && $user->canSuspend();
+    }
+
+    public function restore(User $user)
+    {
+        return true;
     }
 }

@@ -57,6 +57,13 @@ class News extends Model
         return $this->status != 'not-published';
     }
 
+    /* Scope */
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
     public function sluggable()
     {
         return [
