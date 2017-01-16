@@ -2,17 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Baum\Node;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class QualificationCodeType extends Model
+class QualificationCodeType extends Node
 {
     use RevisionableTrait, SoftDeletes;
 
     protected $fillable = [
         'name',
         'status',
+        'parent_id'
     ];
 
     protected $attributes = [
