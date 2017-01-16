@@ -1,6 +1,6 @@
 @if($vendor->status == 'active')
 <span class="label label-success">
-@elseif($vendor->status == 'suspended')
+@elseif($vendor->status == 'rejected')
 <span class="label label-danger">
 @else
 <span class="label label-default">
