@@ -56,19 +56,20 @@ class Allocation extends Model
     
     public function notices()
     {
-        return $this
-            ->belongsToMany(Notice::class)
+        return $this->belongsToMany(Notice::class)
             ->withPivot('amount')
             ->withTimestamps();
     }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
     /*
      * Mutators
      */
     
-    public function getValueAttribute($value)
-    {
-        return number_format($value, '0', '.', ',');
-    }
 
     /*
      * Helpers

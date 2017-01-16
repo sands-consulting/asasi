@@ -95,7 +95,7 @@
 					<div class="panel panel-flat eq-element border-bottom-teal-400 form-datatable-search">
 						<div class="panel-body valign-middle">
 							<span class="text-muted text-size-large">{{ trans('allocations.views.show.panels.allocated') }}</span><br>
-							<div class="text-center text-size-xlarge text-teal-400 pt-10">RM 8,000</div>
+							<div class="text-center text-size-xlarge text-teal-400 pt-10">RM {{ $allocation->projects()->sum('amount') }}</div>
 						</div>
 					</div>
 				</a>
@@ -105,7 +105,7 @@
 					<div class="panel panel-flat eq-element border-bottom-orange-600">
 						<div class="panel-body valign-middle">
 							<span class="text-muted text-size-large">{{ trans('allocations.views.show.panels.reserved') }}</span><br>
-							<div class="text-center text-size-xlarge text-orange-600 pt-10">RM 42,000</div>
+							<div class="text-center text-size-xlarge text-orange-600 pt-10">RM {{ $allocation->notices()->sum('amount') }}</div>
 						</div>
 					</div>	
 				</a>
