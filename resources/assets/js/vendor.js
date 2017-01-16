@@ -71,13 +71,13 @@ vm_vendor = new Vue({
       collections.splice(index, 1);
     },
     addAccount: function() {
-      this.accounts.push(Object.create(this.placeholders.account));
+      this.accounts.push(JSON.parse(JSON.stringify(this.placeholders.account)));
     },
     addEmployee: function() {
-      this.employees.push(Object.create(this.placeholders.employee));
+      this.employees.push(JSON.parse(JSON.stringify(this.placeholders.employee)));
     },
     addShareholder: function() {
-      this.shareholders.push(Object.create(this.placeholders.shareholder));
+      this.shareholders.push(JSON.parse(JSON.stringify(this.placeholders.shareholder)));
     },
     addQualificationCodes: function() {
       this.qualification_codes.push({
