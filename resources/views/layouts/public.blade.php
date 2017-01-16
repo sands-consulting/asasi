@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-param" content="_token">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="socket-url" content="{{ env('SOCKET_URL') }}">
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
 </head>
@@ -99,7 +100,7 @@
 </div>
 
 <script src="{{ elixir('assets/js/public.js') }}"></script>
-<script src="http://prompt.dev:3000/socket.io/socket.io.js"></script>
+<script src="{{ env('SOCKET_URL') }}/socket.io/socket.io.js"></script>
 @yield('scripts')
 {!! flash_messages() !!}
 </body>

@@ -1,7 +1,6 @@
 $(function () {
-  // socket
-  //var socket = io('http://prompt.dev:3000');
-  var socket = io('http://127.0.0.1:3000');
+  var url = $('meta[name="socket-url"]').attr('content');
+  var socket = io(url);
   Vue.config.debug = true;
   vm_notifications = new Vue({
       el: '#notifications',
