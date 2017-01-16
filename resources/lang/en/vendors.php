@@ -42,6 +42,26 @@ return [
         'updated_at' => 'Updated At',
         'deleted_at' => 'Deleted At',
 
+        'accounts' => [
+            'account_name' => 'Account Name',
+            'account_number' => 'Account Number',
+            'bank_name' => 'Bank Name',
+            'bank_iban' => 'Bank IBAN',
+            'bank_address' => 'Bank Address'
+        ],
+
+        'employees' => [
+            'name' => 'Name',
+            'designation' => 'Designation',
+            'role' => 'Role',
+
+            'roles' => [
+                'management' => 'Management',
+                'executive' => 'Executive',
+                'non-executive' => 'Non Executive'
+            ]
+        ],
+
         'shareholders' => [
             'name' => 'Name',
             'identity_number' => 'Identity Number',
@@ -64,6 +84,9 @@ return [
         'activate' => 'Activate',
         'blacklist' => 'Blacklist',
         'unblacklist' => 'Unblacklist',
+
+        'add-account' => 'Add Account',
+        'add-employee' => 'Add Employee',
         'add-shareholder' => 'Add Shareholder',
     ],
 

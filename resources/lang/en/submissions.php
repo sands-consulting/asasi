@@ -41,6 +41,7 @@ return [
         'published' => 'Submission :name published.',
         'unpublished' => 'Submission :name unpublished.',
     ],
+
     'types' => [
         'commercial' => 'Commercial',
         'technical' => 'Technical'

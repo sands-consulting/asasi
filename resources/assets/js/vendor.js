@@ -2,9 +2,34 @@ vm_vendor = new Vue({
   el: '.form-vendor',
   data: {
     last_tab: false,
-    shareholders: [],
+    accounts: [],
     employees: [],
-    accounts: []
+    shareholders: [],
+    placeholders: {
+      account: {
+        id: null,
+        account_name: '',
+        account_number: '',
+        bank_name: '',
+        bank_iban: '',
+        bank_address: '',
+        _delete: false
+      },
+      employee: {
+        id: null,
+        name: '',
+        designation: '',
+        role: '',
+        _delete: false
+      },
+      shareholder: {
+        id: null,
+        name: '',
+        identity_number: '',
+        nationality_id: null,
+        _delete: false
+      }
+    }
   },
   methods: {
     next: function() {
@@ -42,18 +67,25 @@ vm_vendor = new Vue({
 
       return current.index() == (num_tabs - 1);
     },
-    setDelete: function(object) {
-      object._delete = true;
-    },
-    addShareholder: function() {
-      this.shareholders.push({id: null, name: '', identity_number: '', nationality_id: null, _delete: false})
-    },
-    addEmployee: function() {
-      this.employees.push({id: null, name: '', designation: '', role: '', _delete: false})
+    deleteItem: function(collections, index) {
+      collections.splice(index, 1);
     },
     addAccount: function() {
-      this.accounts.push({id: null, account_name: '', account_number: '', account_bank_name: '', account_bank_iban: '', account_bank_address: '', _delete: false})
+      this.accounts.push(Object.create(this.placeholders.account));
+    },
+    addEmployee: function() {
+      this.employees.push(Object.create(this.placeholders.employee));
+    },
+    addShareholder: function() {
+      this.shareholders.push(Object.create(this.placeholders.shareholder));
+    },
+    addQualificationCodes: function() {
+      this.qualification_codes.push({
+        id: null,
+        type: '',
+        codes: [
+        ]
+      })
     }
-
   }
 });

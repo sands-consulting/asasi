@@ -17,8 +17,9 @@ class VendorAccount extends Model
     protected $fillable = [
     	'account_name',
     	'account_number',
-    	'account_bank_name',
-    	'account_bank_iban'
+    	'bank_name',
+    	'bank_iban',
+        'bank_address'
     ];
 
     public function vendor()

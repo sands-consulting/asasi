@@ -20,6 +20,12 @@ class VendorEmployee extends Model
     	'role'
     ];
 
+    public static $roles = [
+        'management',
+        'executive',
+        'non-executive'
+    ];
+
     public function vendor()
     {
     	return $this->belongsTo(Vendor::class);
