@@ -30,7 +30,7 @@ class BookmarksController extends Controller
         BookmarksRepository::remove($request->user(), $notice);
         return redirect()
             ->back()
-            ->with('notice', trans('bookmark.notices.removed', ['name' => $notice->number]));
+            ->with('notice', trans('bookmarks.notices.removed', ['name' => $notice->number]));
     }
 
     public function destroy()

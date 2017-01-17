@@ -10,9 +10,6 @@ class DashboardProjectsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($notice) {
-                // return view('notices._index_actions', compact('notice'));
-            })
             ->addColumn('code', function() {
                 return '-';
             })
@@ -20,12 +17,6 @@ class DashboardProjectsDataTable extends DataTable
                 $name  = "<span class='text-header'>$notice->number</span> <br />";
                 $name .= link_to_route('notices.show', $notice->name, $notice->id);
                 return $name;
-            })
-            ->editColumn('purchased_at', function($notice) {
-                return $notice->purchased_at->getFromSetting();
-            })
-            ->editColumn('expired_at', function($notice) {
-                return $notice->expired_at->getFromSetting();
             })
             ->editColumn('status', function($notice) {
                 // return view('notices._index_status', compact('notice'));
@@ -51,7 +42,6 @@ class DashboardProjectsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -61,7 +51,7 @@ class DashboardProjectsDataTable extends DataTable
             [
                 'data' => 'name',
                 'name' => 'name',
-                'title' => trans('notices.attributes.name'),
+                'title' => trans('projects.attributes.name'),
                 'width' => '40%'
             ],
             [
@@ -71,21 +61,9 @@ class DashboardProjectsDataTable extends DataTable
                 'width' => '15%'
             ],
             [
-                'data' => 'purchased_at',
-                'name' => 'purchased_at',
-                'title' => trans('notices.attributes.purchased_at'),
-                'width' => '15%'
-            ],
-            [
-                'data' => 'expired_at',
-                'name' => 'expired_at',
-                'title' => trans('notices.attributes.expired_at'),
-                'width' => '15%'
-            ],
-            [
-                'data' => 'price',
-                'name' => 'price',
-                'title' => trans('notices.attributes.price'),
+                'data' => 'cost',
+                'name' => 'cost',
+                'title' => trans('projects.attributes.costs'),
                 'width' => '15%'
             ],
         ];

@@ -31,6 +31,11 @@
 @endsection
 
 @section('secondary-header')
+<ul class="breadcrumb breadcrumb-caret">
+    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+    <li><a href="{{ route('admin.projects.index') }}">{{ trans('projects.title') }}</a></li>
+    <li class="active">{{ $project->number }}</li>
+</ul>
 <ul class="breadcrumb-elements">
     @if(Auth::user()->hasPermission('project:logs'))
     <li>
@@ -169,9 +174,9 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12">
+    <div class="col-md-12">
                 
-        <div class="timeline timeline-center">
+        <div class="timeline timeline-left">
             <div class="timeline-container">
                 
                 <!-- Milestone -->
@@ -194,17 +199,20 @@
                         </div>
 
                         <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis cupiditate mollitia eius, inventore unde suscipit!
                             {{ str_limit($task->description, 45) }}
                         </div>
                     </div>
                 </div>
                 @endforeach
+                <div class="timeline-date text-muted text-left">
+                    <a href="{{ route('admin.projects.milestones.index', $project->id) }}">Full Timeline</a>
+                </div>
                 <!-- /Gantt Task -->
 
                 
             </div>
         </div>
     </div>
-    <a href="{{ route('admin.projects.milestones.index', $project->id) }}" class="btn btn-default btn-block">View Full Timeline</a>
 </div>
 @endsection
