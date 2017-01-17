@@ -65,7 +65,7 @@
             @include('admin.notices._index_status')
         </div>
         <div class="clearfix"></div>
-        <h1 class="text-thin pull-left">{{ $notice->name }}</h1>
+        <h4 class="text-thin pull-left">{{ $notice->name }}</h4>
     </div>
 </div>
 
