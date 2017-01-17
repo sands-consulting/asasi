@@ -25,16 +25,104 @@
 	</div>
 
 	<div class="col-xs-12 col-md-9 col-md-pull-3">
-		<div class="panel prompt-box full">
-			<h4 class="title">{{ trans('vendors.views._show_details.shareholders.title') }}</h4>
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h6 class="panel-title">{{ trans('vendors.views._show_details.shareholders.title') }}</h6>
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="col-xs-1">#</th>
+						<th>{{ trans('vendors.attributes.shareholders.name') }}</th>
+						<th>{{ trans('vendors.attributes.shareholders.identity_number') }}</th>
+						<th>{{ trans('vendors.attributes.shareholders.nationality') }}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php $index = 1; ?>
+				@forelse($vendor->shareholders()->get() as $shareholder)
+					<tr>
+						<td>{{ $index }}</td>
+						<td>{{ $shareholder->name }}</td>
+						<td>{{ $shareholder->identity_number }}</td>
+						<td>{{ $shareholder->nationality->name }}</td>
+					</tr>
+					<?php $index++; ?>
+				@empty
+					<tr>
+						<td colspan="4">{{ trans('vendor.views._show_details.shareholders.empty') }}</td>
+					</tr>
+				@endforelse
+				</tbody>
+			</table>
 		</div>
 
-		<div class="panel prompt-box full">
-			<h4 class="title">{{ trans('vendors.views._show_details.employees.title') }}</h4>
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h6 class="panel-title">{{ trans('vendors.views._show_details.employees.title') }}</h6>
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="col-xs-1">#</th>
+						<th>{{ trans('vendors.attributes.employees.name') }}</th>
+						<th>{{ trans('vendors.attributes.employees.designation') }}</th>
+						<th>{{ trans('vendors.attributes.employees.role') }}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php $index = 1; ?>
+				@forelse($vendor->employees()->get() as $employee)
+					<tr>
+						<td>{{ $index }}</td>
+						<td>{{ $employee->name }}</td>
+						<td>{{ $employee->designation }}</td>
+						<td>{{ trans('vendors.attributes.employees.roles.' . $employee->role) }}</td>
+					</tr>
+					<?php $index++; ?>
+				@empty
+					<tr>
+						<td colspan="4">{{ trans('vendor.views._show_details.employees.empty') }}</td>
+					</tr>
+				@endforelse
+				</tbody>
+			</table>
 		</div>
 
-		<div class="panel prompt-box full">
-			<h4 class="title">{{ trans('vendors.views._show_details.accounts.title') }}</h4>
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h6 class="panel-title">{{ trans('vendors.views._show_details.accounts.title') }}</h6>
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="col-xs-1">#</th>
+						<th>{{ trans('vendors.attributes.accounts.account_name') }}</th>
+						<th>{{ trans('vendors.attributes.accounts.account_number') }}</th>
+						<th>{{ trans('vendors.attributes.accounts.bank_name') }}</th>
+						<th>{{ trans('vendors.attributes.accounts.bank_iban') }}</th>
+						<th>{{ trans('vendors.attributes.accounts.bank_address') }}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php $index = 1; ?>
+				@forelse($vendor->accounts()->get() as $account)
+					<tr>
+						<td>{{ $index }}</td>
+						<td>{{ $account->account_name }}</td>
+						<td>{{ $account->account_number }}</td>
+						<td>{{ $account->bank_name }}</td>
+						<td>{{ $account->bank_iban }}</td>
+						<td>{{ $account->bank_address }}</td>
+					</tr>
+					<?php $index++; ?>
+				@empty
+					<tr>
+						<td colspan="4">{{ trans('vendor.views._show_details.accounts.empty') }}</td>
+					</tr>
+				@endforelse
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

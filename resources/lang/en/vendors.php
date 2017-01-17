@@ -156,14 +156,17 @@ return [
         '_show_details' => [
             'shareholders' => [
                 'title' => 'Shareholders',
+                'empty' => 'No shareholder details'
             ],
 
             'employees' => [
-                'title' => 'Employees'
+                'title' => 'Employees',
+                'empty' => 'No employee details'
             ],
 
             'accounts' => [
-                'title' => 'Accounts'
+                'title' => 'Accounts',
+                'empty' => 'No account details'
             ],
 
             'contact_person' => [
