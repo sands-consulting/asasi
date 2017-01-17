@@ -106,7 +106,7 @@
             <a href="{{ route('admin.evaluators.index', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluators*', ' bg-blue-300') }}">
                 <i class="icon-user-check"></i> {{ trans('notices.navs.evaluators') }}
             </a>
-            <a href="#" class="list-group-item">
+            <a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluators*', ' bg-blue-300') }}">
                 <i class="icon-list2"></i> {{ trans('notices.navs.evaluation_criterias') }}
             </a>
         </ul>
