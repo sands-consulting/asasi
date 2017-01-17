@@ -133,6 +133,11 @@ class VendorsRepository extends BaseRepository
         $vendor->employees()->whereNotIn('id', $exists)->delete();
     }
 
+    public static function files(Vendor $vendor, $files)
+    {
+        
+    }
+
     public static function qualificationCodes(Vendor $vendor, $data)
     {
         $types  = QualificationCodeType::whereStatus('active')->get();
