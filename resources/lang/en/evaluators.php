@@ -25,6 +25,7 @@ return [
         'deactivated' => 'Evaluator :name deactivated.',
         'accepted' => 'Evaluator request for notice :number accepted.',
         'declined' => 'Evaluator request for notice :number declined.',
+        'assigned' => 'Submission has been assigned to evaluator'
     ],
     
     'views' => [
