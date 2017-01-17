@@ -96,6 +96,11 @@ class Vendor extends Model
         return $query->where('status', '=', 'active');
     }
 
+    public function scopeDraft($query)
+    {
+        return $query->where('status', '=', 'draft');
+    }
+
     public function scopeInactive($query)
     {
         return $query->where('status', '=', 'inactive');
@@ -104,6 +109,11 @@ class Vendor extends Model
     public function scopeBlacklisted($query)
     {
         return $query->where('status', '=', 'blacklisted');
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('status', '=', 'rejected');
     }
 
     /* 
