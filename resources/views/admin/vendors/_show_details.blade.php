@@ -50,7 +50,7 @@
 					<?php $index++; ?>
 				@empty
 					<tr>
-						<td colspan="4">{{ trans('vendor.views._show_details.shareholders.empty') }}</td>
+						<td colspan="4" class="text-center">{{ trans('vendors.views._show_details.shareholders.empty') }}</td>
 					</tr>
 				@endforelse
 				</tbody>
@@ -82,7 +82,7 @@
 					<?php $index++; ?>
 				@empty
 					<tr>
-						<td colspan="4">{{ trans('vendor.views._show_details.employees.empty') }}</td>
+						<td colspan="4" class="text-center">{{ trans('vendors.views._show_details.employees.empty') }}</td>
 					</tr>
 				@endforelse
 				</tbody>
@@ -118,7 +118,7 @@
 					<?php $index++; ?>
 				@empty
 					<tr>
-						<td colspan="4">{{ trans('vendor.views._show_details.accounts.empty') }}</td>
+						<td colspan="6" class="text-center">{{ trans('vendors.views._show_details.accounts.empty') }}</td>
 					</tr>
 				@endforelse
 				</tbody>
