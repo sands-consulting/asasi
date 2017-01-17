@@ -20,7 +20,7 @@
 <div class="panel panel-flat">
 	<div class="panel-body">
 		{!! Former::open(action('Admin\VendorsController@create'))->method('POST') !!}
-			@include('admin.vendors.form')
+			@include('admin.vendors._form')
 			<div class="form-group">
 			    <div class="col-lg-10 col-sm-8 col-lg-offset-2 col-sm-offset-4">
 			        {!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}

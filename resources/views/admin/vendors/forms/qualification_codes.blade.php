@@ -11,7 +11,7 @@
 			@foreach($type->codes()->whereStatus('active')->orderBy('code')->get() as $code)
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" name="qualification_codes[{{ $type->code }}][]" value="{{ $code->id }}">
+					<input type="checkbox" name="qualification_codes[{{ $type->code }}][{{ $code->id }}]" value="1"{{ request(implode('.', ['qualification_codes', $type->code, $code->id]), $vendor->qualificationCodes()->whereId($code->id)->count()) ? 'checked="checked"' : '' }}>
 					<strong>{{ $code->code }}</strong> {{ $code->name }}
 				</label>
 			</div>
@@ -22,11 +22,11 @@
 					<h6 class="panel-title">{{ $child->name }}</h6>
 				</div>
 				<div class="panel-body">
-					@foreach($child->codes()->whereStatus('active')->orderBy('code')->get() as $code)
+					@foreach($child->codes()->whereStatus('active')->orderBy('code')->get() as $childCode)
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="qualification_codes[{{ $type->code }}][{{ $code->id }}][]" value="{{ $code->id }}">
-							<strong>{{ $code->code }}</strong> {{ $code->name }}
+							<input type="checkbox" name="qualification_codes[{{ $type->code }}][{{ $code->id }}][{{ $childCode->id }}]" value="1"{{ request(implode('.', ['qualification_codes', $type->code, $code->id, $childCode->id]), $vendor->qualificationCodes()->whereId($childCode->id)->count()) ? 'checked="checked"' : '' }}>
+							<strong>{{ $childCode->code }}</strong> {{ $childCode->name }}
 						</label>
 					</div>
 					@endforeach
@@ -40,11 +40,12 @@
 	@endif
 
 	@if($type->type == 'boolean')
+	<?php $code = $type->codes()->first(); ?>
 	<div class="panel panel-flat">
 		<div class="panel-heading">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" name="qualification_codes[{{ $type->code }}]" value="{{ $type->codes()->first()->id }}">
+					<input type="checkbox" name="qualification_codes[{{ $type->code }}]" value="{{ $code->id }}" {{ request(implode('.', ['qualification_codes', $type->code]), $vendor->qualificationCodes()->whereId($code->id)->count()) ? 'checked="checked"' : '' }}>
 					{{ $type->name }}
 				</label>
 			</div>

@@ -17,6 +17,7 @@ class VendorShareholder extends Model
     protected $fillable = [
     	'name',
     	'identity_number',
+        'designation',
     	'nationality_id'
     ];
 

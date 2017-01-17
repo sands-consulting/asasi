@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 use Carbon\Carbon;
 use App\Vendor;
+use App\VendorAccount;
+use App\VendorEmployee;
+use App\VendorShareholder;
 use App\Package;
 use App\Subscription;
 use App\User;
@@ -76,5 +79,84 @@ class VendorsRepository extends BaseRepository
         }
 
         return $subscription;
+    }
+
+    public static function accounts(Vendor $vendor, $accounts)
+    {
+        $exists = [];
+
+        foreach($accounts as $data)
+        {
+            if(empty($data['id']))
+            {
+                unset($data['id']);
+                $account = new VendorAccount($data);
+                $vendor->accounts()->save($account);
+            }
+            else
+            {
+                $account = $vendor->accounts()->find($data['id']);
+                unset($data['id']);
+                $account->update($data);
+            }
+
+            $exists[] = $account->id;
+        }
+
+        $vendor->accounts()->whereNotIn('id', $exists)->delete();
+    }
+
+    public static function employees(Vendor $vendor, $employees)
+    {
+        $exists = [];
+
+        foreach($employees as $data)
+        {
+            if(empty($data['id']))
+            {
+                unset($data['id']);
+                $employee = new VendorEmployee($data);
+                $vendor->employees()->save($employee);
+            }
+            else
+            {
+                $employee = $vendor->employees()->find($data['id']);
+                unset($data['id']);
+                $employee->update($data);
+            }
+
+            $exists[] = $employee->id;
+        }
+
+        $vendor->employees()->whereNotIn('id', $exists)->delete();
+    }
+
+    public static function qualificationCodes(Vendor $vendor, $codes)
+    {
+    }
+
+    public static function shareholders(Vendor $vendor, $shareholders)
+    {
+        $exists = [];
+
+        foreach($shareholders as $data)
+        {
+            if(empty($data['id']))
+            {
+                unset($data['id']);
+                $shareholder = new VendorShareholder($data);
+                $vendor->shareholders()->save($shareholder);
+            }
+            else
+            {
+                $shareholder = $vendor->shareholders()->find($data['id']);
+                unset($data['id']);
+                $shareholder->update($data);
+            }
+
+            $exists[] = $shareholder->id;
+        }
+
+        $vendor->shareholders()->whereNotIn('id', $exists)->delete();
     }
 }

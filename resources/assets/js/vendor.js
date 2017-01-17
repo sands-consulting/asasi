@@ -12,23 +12,33 @@ vm_vendor = new Vue({
         account_number: '',
         bank_name: '',
         bank_iban: '',
-        bank_address: '',
-        _delete: false
+        bank_address: ''
       },
       employee: {
         id: null,
         name: '',
         designation: '',
-        role: '',
-        _delete: false
+        role: ''
       },
       shareholder: {
         id: null,
         name: '',
         identity_number: '',
-        nationality_id: null,
-        _delete: false
+        nationality_id: null
       }
+    }
+  },
+  ready: function() {
+    for (var i = Vendor.accounts.length - 1; i >= 0; i--) {
+      this.accounts.push(Vendor.accounts[i]);
+    }
+
+    for (var i = Vendor.employees.length - 1; i >= 0; i--) {
+      this.employees.push(Vendor.employees[i]);
+    }
+
+    for (var i = Vendor.shareholders.length - 1; i >= 0; i--) {
+      this.shareholders.push(Vendor.shareholders[i]);
     }
   },
   methods: {

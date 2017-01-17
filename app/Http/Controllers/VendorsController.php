@@ -37,7 +37,11 @@ class VendorsController extends Controller
     public function update(VendorRequest $request, Vendor $vendor)
     {
         $inputs = $request->all();
-        $vendor = VendorsRepository::update($vendor, $inputs);
+        $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'draft']);
+        VendorsRepository::accounts($vendor, $request->input('accounts', []));
+        VendorsRepository::employees($vendor, $request->input('employees', []));
+        VendorsRepository::qualificationCodes($vendor, $request->input('qualification_codes', []));
+        VendorsRepository::shareholders($vendor, $request->input('shareholders', []));
 
         if (isset($inputs['submit'])) {
             $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending']);
