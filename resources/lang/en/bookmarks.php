@@ -35,14 +35,8 @@ return [
     ],
 
     'notices' => [
-        'created' => 'Notice :name created.',
-        'updated' => 'Notice :name updated.',
-        'deleted' => 'Notice :name deleted.',
-        'activated' => 'Notice :name activated.',
-        'deactivated' => 'Notice :name deactivated.',
-        'published' => 'Notice :name published.',
-        'unpublished' => 'Notice :name unpublished.',
-        'cancelled' => 'Notice :name cancelled.',
+        'added' => 'Bookmark successfully saved',
+        'removed' => 'Bookmark successfully removed',
     ],
     
     'views' => [
