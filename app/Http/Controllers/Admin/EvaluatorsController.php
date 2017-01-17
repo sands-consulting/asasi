@@ -75,7 +75,7 @@ class EvaluatorsController extends Controller
 
         return redirect()
             ->back()
-            ->with('notices', trans('evaluators.notices.assigned'));
+            ->with('notice', trans('evaluators.notices.assigned'));
     }
 
     public function accept(NoticeEvaluator $evaluator)

@@ -12,12 +12,17 @@
                 <legend class="text-semibold"> <i class="icon-clipboard3"></i> Submission List</legend>
                 <div class="row">
                     @foreach ($notice->submissions as $submission)
+                        @php
+                            $evaluator_submission = $evaluator->submissions()->wherePivot('submission_id', $submission->id)->first();
+                            $checked = $evaluator_submission ? true: false;
+                        @endphp
                         <div class="col-sm-3">
                             {!! Former::checkboxes('submission_id[]')
                                 ->checkboxes([ 
                                     "Submission " . $submission->id => [
                                         'name' => 'submission_id[]', 
-                                        'value' => $submission->id
+                                        'value' => $submission->id,
+                                        'checked' => $checked
                                     ]
                                 ])
                                 ->label(false) !!}
