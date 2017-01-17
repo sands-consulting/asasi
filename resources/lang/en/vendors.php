@@ -34,7 +34,6 @@ return [
         'cidb_expiry_date' => 'CIDB Expiry Date',
         'cidb_gred' => 'CIDB Gred',
         'cidb_qualification_code' => 'CIDB Qualification Code',
-        'capital_paid_up' => 'Capital Paid Up',
         'remarks' => 'Remarks',
         'type_id' => 'Vendor Type',
         'status' => 'Status',

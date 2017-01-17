@@ -30,7 +30,7 @@ vm_vendor = new Vue({
         _delete: false
       }
     }
-  },
+  }
   methods: {
     next: function() {
       active = $(this.$el).find('.nav').find('[role=presentation].active');
@@ -78,14 +78,6 @@ vm_vendor = new Vue({
     },
     addShareholder: function() {
       this.shareholders.push(JSON.parse(JSON.stringify(this.placeholders.shareholder)));
-    },
-    addQualificationCodes: function() {
-      this.qualification_codes.push({
-        id: null,
-        type: '',
-        codes: [
-        ]
-      })
     }
   }
 });

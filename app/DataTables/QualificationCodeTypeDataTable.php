@@ -13,6 +13,16 @@ class QualificationCodeTypeDataTable extends DataTable
             ->addColumn('action', function($type) {
                 return view('admin.qualification-code-types._index_actions', compact('type'));
             })
+            ->editColumn('name', function($type) {
+                $names = [];
+
+                foreach($type->getAncestorsAndSelf() as $type)
+                {
+                    $names[] = $type->name;
+                }
+
+                return implode(' > ' , $names);
+            })
             ->editColumn('status', function($type) {
                 return view('admin.qualification-code-types._index_status', compact('type'));
             })

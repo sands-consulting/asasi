@@ -7,6 +7,9 @@ return [
         'name' => 'Name',
         'status' => 'Status',
         'created_at' => 'Created At',
+        'parent' => 'Parent Type',
+        'code' => 'Code',
+        'type' => 'Type'
     ],
 
     'buttons' => [
@@ -19,6 +22,11 @@ return [
         'created' => 'Qualification Code Type :name created',
         'updated' => 'Qualification Code Type :name updated',
         'deleted' => 'Qualification Type :name deleted'
+    ],
+
+    'types' => [
+        'list' => 'List',
+        'boolean' => 'Boolean'
     ],
 
     'views' => [

@@ -1,6 +1,17 @@
 {!! Former::text('name')
 	->label('qualification-code-types.attributes.name')
 	->required() !!}
+{!! Former::text('code')
+	->label('qualification-code-types.attributes.code')
+	->required() !!}
+{!! Former::select('parent_id')
+	->label('qualification-code-types.attributes.parent')
+	->options(App\QualificationCodeType::getOptions('name', 'id', '-')) !!}
+{!! Former::select('type')
+	->label('qualification-code-types.attributes.type')
+	->options(trans('qualification-code-types.types'))
+	->addClass('select2')
+	->required() !!}
 {!! Former::select('status')
 	->label('qualification-code-types.attributes.status')
 	->options(collect(trans('statuses'))->only('active', 'inactive'))

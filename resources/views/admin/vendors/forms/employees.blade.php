@@ -6,7 +6,7 @@
 				<th>{{ trans('vendors.attributes.employees.name') }}</th>
 				<th>{{ trans('vendors.attributes.employees.designation') }}</th>
 				<th>{{ trans('vendors.attributes.employees.role') }}</th>
-				<th>&nbsp;</th>
+				<th width="40">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,8 +22,8 @@
 					</select>
 				</td>
 				<td>
-					<a href="#" class="btn btn-xs btn-danger" @click.prevent="deleteItem(employees, index)">{{ trans('actions.delete') }}</a>
-					<input type="accounts[@{{ $index }}][id]" class="form-control" v-model="account.id">
+					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteItem(employees, index)"><i class="icon-cross2"></i></a>
+					<input type="hidden" name="accounts[@{{ $index }}][id]" class="form-control" v-model="account.id">
 				</td>
 			</tr>
 			<tr>
