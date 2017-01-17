@@ -55,13 +55,33 @@ class VendorsServiceProvider extends ServiceProvider
                     'as'    => 'admin.vendors.logs',
                     'uses'  => 'VendorsController@logs'
                 ]);
+
+                $router->get('vendors/{vendors}/qualification-codes', [
+                    'as'    => 'admin.vendors.qualification-codes',
+                    'uses'  => 'VendorsController@qualificationCodes'
+                ]);
+
+                $router->get('vendors/{vendors}/users', [
+                    'as'    => 'admin.vendors.users',
+                    'uses'  => 'VendorsController@users'
+                ]);
+
+                $router->get('vendors/{vendors}/subscriptions', [
+                    'as'    => 'admin.vendors.subscriptions',
+                    'uses'  => 'VendorsController@subscriptions'
+                ]);
+
+                $router->get('vendors/{vendors}/purchases', [
+                    'as'    => 'admin.vendors.purchases',
+                    'uses'  => 'VendorsController@purchases'
+                ]);
                 
                 $router->resource('vendors', 'VendorsController');
             });
             
-            $router->get('vendors/{vendors}/qualifications', [
-                'as'    => 'vendors.qualifications',
-                'uses'  => 'VendorsController@qualifications'
+            $router->get('vendors/{vendors}/qualification-codes', [
+                'as'    => 'vendors.qualification-codes',
+                'uses'  => 'VendorsController@qualificationCodes'
             ]);
 
             $router->get('vendors/{vendors}/users', [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserLogsDataTable;
+use App\DataTables\VendorSubscriptionsDataTable;
 use App\DataTables\VendorsDataTable;
 use App\Events\VendorApproved;
 use App\Events\VendorRejected;
@@ -173,5 +174,16 @@ class VendorsController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
             ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
+    }
+
+    public function subscriptions(Vendor $vendor, VendorSubscriptionsDataTable $table)
+    {
+        $table->vendor = $vendor;
+        return $table->render('admin.vendors.subscriptions', compact('vendor'));
+    }
+
+    public function qualificationCodes(Vendor $vendor)
+    {
+        return view('admin.vendors.subscriptions', compact('vendor'));
     }
 }

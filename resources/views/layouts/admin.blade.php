@@ -147,19 +147,19 @@
                         <ul class="navigation">
                             <li>
                                 <a href="{{ route('profile') }}">
-                                    <i class="icon-user"></i> <span>{{ trans('menu.my_profile') }}</span>
+                                    <i class="icon-user"></i> <span>{{ trans('menu.user.my_profile') }}</span>
                                 </a>
                             </li>
                             @if(session('original_user_id'))
                             <li>
                                 <a href="{{ route('profile.resume') }}" data-method="POST">
-                                    <i class="icon-user-cancel"></i> <span>{{ trans('menu.release_user') }}</span>
+                                    <i class="icon-user-cancel"></i> <span>{{ trans('menu.user.release_user') }}</span>
                                 </a>
                             </li>
                             @endif
                             <li>
                                 <a href="{{ url('logout') }}">
-                                    <i class="icon-switch2"></i> <span>{{ trans('menu.sign_out') }}</span>
+                                    <i class="icon-switch2"></i> <span>{{ trans('menu.user.sign_out') }}</span>
                                 </a>
                             </li>
                         </ul>

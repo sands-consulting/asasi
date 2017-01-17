@@ -61,8 +61,8 @@
 		<li class="{{ is_route_active('vendors.show') }}">
 			<a href="{{ route('vendors.show', $vendor->id) }}">{{ trans('vendors.views._show.nav.details') }}</a>
 		</li>
-		<li class="{{ is_route_active('vendors.qualifications') }}">
-			<a href="{{ route('vendors.qualifications', $vendor->id) }}">{{ trans('vendors.views._show.nav.qualification_codes') }}</a>
+		<li class="{{ is_route_active('vendors.qualification-codes') }}">
+			<a href="{{ route('vendors.qualification-codes', $vendor->id) }}">{{ trans('vendors.views._show.nav.qualification_codes') }}</a>
 		</li>
 		<li class="{{ is_route_active('vendors.users') }}">
 			<a href="{{ route('vendors.users', $vendor->id) }}">{{ trans('vendors.views._show.nav.users') }}</a>

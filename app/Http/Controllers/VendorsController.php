@@ -65,6 +65,11 @@ class VendorsController extends Controller
         return $table->render('vendors.subscriptions', compact('vendor'));
     }
 
+    public function qualificationCodes(Vendor $vendor)
+    {
+        return view('vendors.qualification_codes', compact('vendor'));
+    }
+
     public function completeApplication(Request $request, Vendor $vendor)
     {
         if (is_complete_form($vendor)) {
