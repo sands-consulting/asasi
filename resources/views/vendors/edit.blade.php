@@ -1,7 +1,10 @@
 @extends('layouts.public')
 
 @section('content')
-	{!! Former::open_vertical(route('vendors.update', $vendor->id))->method('PUT')->addClass('panel form-vendor')->novalidate() !!}
+	{!! Former::open_vertical_for_files(route('vendors.update', $vendor->id))
+		->method('PUT')
+		->addClass('panel form-vendor')
+		->novalidate() !!}
 		{{ Former::populate($vendor) }}
         <div class="panel-heading">
             <h4 class="panel-title">{{ trans($vendor->status == 'pending' ? 'vendors.views.edit.application.title' : 'vendors.views.edit.details.title') }}</h4>

@@ -100,7 +100,7 @@
         </ul>
 
         <ul class="list-group panel panel-flat">
-            <a href="#" class="list-group-item">
+            <a href="{{ route('admin.notices.settings', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.settings', ' bg-blue-300') }}">
                 <i class="icon-cogs"></i> {{ trans('notices.navs.settings') }}
             </a>
             <a href="{{ route('admin.evaluators.index', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluators*', ' bg-blue-300') }}">

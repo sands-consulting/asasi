@@ -61,6 +61,11 @@ return [
             ]
         ],
 
+        'files' => [
+            'name' => 'Name',
+            'file' => 'File'
+        ],
+
         'shareholders' => [
             'name' => 'Name',
             'identity_number' => 'Identity Number',

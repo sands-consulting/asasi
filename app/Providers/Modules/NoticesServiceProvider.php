@@ -54,6 +54,10 @@ class NoticesServiceProvider extends ServiceProvider
                     'as'    => 'admin.notices.events',
                     'uses'  => 'NoticesController@events'
                 ]);
+                $router->get('notices/{notices}/settings', [
+                    'as'    => 'admin.notices.settings',
+                    'uses'  => 'NoticesController@settings'
+                ]);
                 $router->get('notices/{notices}/qualification_codes', [
                     'as'    => 'admin.notices.qualification_codes',
                     'uses'  => 'NoticesController@qualification_codes'
