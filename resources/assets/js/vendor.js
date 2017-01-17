@@ -30,7 +30,7 @@ vm_vendor = new Vue({
         _delete: false
       }
     }
-  }
+  },
   methods: {
     next: function() {
       active = $(this.$el).find('.nav').find('[role=presentation].active');
