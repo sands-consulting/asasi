@@ -24,8 +24,10 @@
 		<a href="{{ route('vendors.edit', Auth::user()->vendor->id) }}"><i class="icon icon-pen6"></i><br>{{ trans('dashboard.vendor.continue_registration') }}</a>
 		@else
 		<a href="{{ route('vendors.show', Auth::user()->vendor->id) }}"><i class="icon icon-file-text2"></i><br>{{ trans('dashboard.vendor.company_details') }}</a>
+		@if(Auth::user()->vendor->status != 'pending')
 		<a href="#"><i class="icon icon-pen6"></i><br>{{ trans('dashboard.vendor.change_requests') }}</a>
 		<a href="#"><i class="icon icon-folder-download"></i><br>{{ trans('dashboard.vendor.submissions') }}</a>
+		@endif
 		@endif
 	</div>
 </div>
