@@ -15,6 +15,14 @@ use Illuminate\Http\Request;
 
 class AllocationsController extends Controller
 {
+    protected $allocation;
+
+    public function __construct(AllocationsRepository $allocation)
+    {
+        parent::__construct();
+        $this->allocation = $allocation;
+    }
+
     public function index(Request $request, AllocationDataTable $table)
     {
         $table->setUser($request->user());

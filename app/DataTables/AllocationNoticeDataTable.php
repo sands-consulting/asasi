@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Notice;
+use App\Project;
 
 class AllocationNoticeDataTable extends DataTable
 {
@@ -21,26 +22,26 @@ class AllocationNoticeDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::whereNotNull('name');
+        
 
         switch ($this->datatables->request->input('filter', null)) {
             case 'allocated':
-                $query->whereHas('allocations', function($subquery) {
-                    $subquery->where('allocations.id', $this->id);
-                })->where('notices.status', '!=', 'awarded');
+                $query = Project::query();
 
                 break;
             case 'reserved':
-                $query->whereHas('allocations', function($subquery) {
-                    $subquery->where('allocations.id', $this->id);
-                })->where('notices.status', 'awarded');
+                $query = Notice::query();
+
                 break;
             default:
-                $query->whereHas('allocations', function($subquery) {
-                    $subquery->where('allocations.id', $this->id);
-                });
+                $first = Notice::select('name', 'number', 'status')->getQuery();
+                $query = Project::select('name', 'number', 'status')->union($first);
                 break;
         }
+
+        $query->whereHas('allocations', function($subquery) {
+            $subquery->where('allocations.id', $this->id);
+        });
 
         if($this->datatables->request->input('q', null))
         {
@@ -60,32 +61,26 @@ class AllocationNoticeDataTable extends DataTable
 
     protected function getColumns()
     {
-        return [
+
+        $columns = [
             [
                 'data' => 'name',
                 'name' => 'name',
-                'title' => trans('notices.attributes.name'),
-                'width' => '40%'
+                'title' => trans('notices.attributes.name')
             ],
             [
                 'data' => 'number',
                 'name' => 'number',
-                'title' => trans('notices.attributes.number'),
-                'width' => '15%'
-            ],
-            [
-                'data' => 'published_at',
-                'name' => 'published_at',
-                'title' => trans('notices.attributes.published_at'),
-                'width' => '15%'
+                'title' => trans('notices.attributes.number')
             ],
             [
                 'data' => 'status',
                 'name' => 'status',
-                'title' => trans('notices.attributes.status'),
-                'width' => '15%'
+                'title' => trans('notices.attributes.status')
             ],
         ];
+                
+        return $columns;
     }
 
     protected function filename()
