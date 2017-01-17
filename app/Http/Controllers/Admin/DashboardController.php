@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\UserLog;
+use App\Notice;
 use App\Vendor;
 use App\DataTables\DashboardUsersDataTable;
 use App\DataTables\DashboardVendorsDataTable;
@@ -28,13 +29,14 @@ class DashboardController extends Controller
 
     public function vendor(DashboardVendorsDataTable $table)
     {
-        $topPurchasers = Vendor::purchaseCount();
+        $topPurchasers = Vendor::purchaseCount(5);
         return $table->render('admin.dashboard.vendor', compact('topPurchasers'));
     }
 
     public function tender()
     {
-        return view('admin.dashboard.tender');
+        $notices = Notice::all();
+        return view('admin.dashboard.tender', compact('notices'));
     }
 
     public function transaction()
