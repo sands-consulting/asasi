@@ -41,7 +41,8 @@ return [
         'index' => [
             'keywords' => 'Search Name or Email',
             'category' => 'By Category',
-            'status' => 'By Status'
+            'status' => 'By Status',
+            'title' => 'Projects'
         ],
         'show' => [
             'panels' => [
@@ -50,7 +51,8 @@ return [
                 'allocated' => 'Allocated',
                 'balance' => 'Balance',
                 'notices' => 'Notices',
-            ]
+            ],
+            'title' => 'Show',
         ],
         'create' => [
             'title' => 'New Project',
