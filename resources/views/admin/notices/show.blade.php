@@ -58,15 +58,14 @@
 
 @section('content')
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title pull-left">{{ $notice->organization->name }}</h4>
-        <span class="label label-default pull-right">{{ $notice->type->name }}</span>
-        <div class="clearfix"></div>
-    </div>
     <div class="panel-body">
-        <div class="pull-right">@include('admin.notices._index_status')</div>
-        {{ $notice->name }}<br>
-        <span class="text-thin">{{ $notice->number }}</span>
+        <div class="pull-left text-thin"><strong>{{ $notice->organization->name }}</strong> {{ $notice->number }}</div>
+        <div class="pull-right">
+            <span class="label label-default">{{ $notice->type->name }}</span>
+            @include('admin.notices._index_status')
+        </div>
+        <div class="clearfix"></div>
+        <h1 class="text-thin pull-left">{{ $notice->name }}</h1>
     </div>
 </div>
 
@@ -82,11 +81,38 @@
             <a href="{{ route('admin.notices.qualification_codes', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.qualification_codes', ' bg-blue-300') }}">
                 <i class="icon-stack2"></i> {{ trans('notices.navs.qualification_codes') }}
             </a>
+            <a href="{{ route('admin.notices.allocations', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.allocations', ' bg-blue-300') }}">
+                <i class="icon-copy3"></i> {{ trans('notices.navs.allocations') }}
+            </a>
             <a href="{{ route('admin.notices.files', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.files', ' bg-blue-300') }}">
                 <i class="icon-copy3"></i> {{ trans('notices.navs.files') }}
             </a>
+            <a href="{{ route('admin.notices.submission_criterias', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.submission_criterias', ' bg-blue-300') }}">
+                <i class="icon-copy3"></i> {{ trans('notices.navs.submission_criterias') }}
+            </a>
+            <a href="{{ route('admin.notices.evaluation_criterias', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.evaluation_criterias', ' bg-blue-300') }}">
+                <i class="icon-copy3"></i> {{ trans('notices.navs.evaluation_criterias') }}
+            </a>
+            <a href="{{ route('admin.notices.evaluators', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.evaluators', ' bg-blue-300') }}">
+                <i class="icon-copy3"></i> {{ trans('notices.navs.evaluators') }}
+            </a>
+        </ul>
+
+        <ul class="list-group panel panel-flat">
+            <a href="{{ route('admin.notices.eligibles', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.eligibles', ' bg-blue-300') }}">
+                <i class="icon-user-check"></i> {{ trans('notices.navs.eligibles') }}
+            </a>
             <a href="{{ route('admin.notices.purchases', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.purchases', ' bg-blue-300') }}">
                 <i class="icon-basket"></i> {{ trans('notices.navs.purchases') }}
+            </a>
+            <a href="{{ route('admin.notices.submissions', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.submissions', ' bg-blue-300') }}">
+                <i class="icon-user-check"></i> {{ trans('notices.navs.eligibles') }}
+            </a>
+            <a href="{{ route('admin.notices.eligibles', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.eligibles', ' bg-blue-300') }}">
+                <i class="icon-user-check"></i> {{ trans('notices.navs.evaluations') }}
+            </a>
+            <a href="{{ route('admin.notices.eligibles', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.eligibles', ' bg-blue-300') }}">
+                <i class="icon-user-check"></i> {{ trans('notices.navs.eligibles') }}
             </a>
             <a href="#" class="list-group-item">
                 <i class="icon-file-presentation"></i> {{ trans('notices.navs.submissions') }}

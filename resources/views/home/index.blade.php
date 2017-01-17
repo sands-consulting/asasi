@@ -12,7 +12,7 @@
 @endif
 
 <div class="panel panel-notice">
-    <div class="panel-heading {{ Auth::check() ? 'bg-grey-300' : 'bg-slate-300' }}">
+    <div class="panel-heading {{ Auth::check() ? 'bg-success-600' : 'bg-slate-300' }}">
         <h1 class="panel-title">{{ trans('home.views.index.notices.title') }}</h1>
 
         <div class="heading-elements">

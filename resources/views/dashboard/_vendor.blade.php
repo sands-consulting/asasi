@@ -1,4 +1,4 @@
-<div class="prompt-box panel-vendor">
+<div class="prompt-box panel-vendor bg-white">
 	<h1>{{ Auth::user()->vendor->name }}</h1>
 	@if(Auth::user()->vendor->status == 'active')
 	<span class="label label-warning">

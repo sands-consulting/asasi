@@ -12,7 +12,7 @@
 @endif
 
 <div class="panel panel-notice">
-    <div class="panel-heading bg-purple-400">
+    <div class="panel-heading bg-violet-600">
         <h1 class="panel-title">{{ trans('dashboard.projects.title') }}</h1>
 
         <div class="heading-elements">

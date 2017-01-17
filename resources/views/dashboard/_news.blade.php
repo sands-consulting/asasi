@@ -1,4 +1,4 @@
-<div id="carousel-dashboard-news" class="carousel news slide prompt-box" data-ride="carousel">
+<div id="carousel-dashboard-news" class="carousel news slide prompt-box bg-white" data-ride="carousel">
 	<ol class="carousel-indicators">
 		<li data-target="#carousel-dashboard-news" data-slide-to="0" class="active"></li>
 		<li data-target="#carousel-dashboard-news" data-slide-to="1"></li>
