@@ -20,7 +20,7 @@
 	</p>
 	@if(Auth::user()->vendor->expiring)<a href="#" class="text-danger-700 btn-renew">{{ trans('dashboard.vendor.renew') }}</a>@endif
 	<div class="btn-group">
-		@if(Auth::user()->vendor->status == 'draft')
+		@if(in_array(Auth::user()->vendor->status, ['draft', 'rejected']))
 		<a href="{{ route('vendors.edit', Auth::user()->vendor->id) }}"><i class="icon icon-pen6"></i><br>{{ trans('dashboard.vendor.continue_registration') }}</a>
 		@else
 		<a href="{{ route('vendors.show', Auth::user()->vendor->id) }}"><i class="icon icon-file-text2"></i><br>{{ trans('dashboard.vendor.company_details') }}</a>

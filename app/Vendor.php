@@ -203,6 +203,32 @@ class Vendor extends Model
     {
         return $this->belongsTo(VendorType::class, 'type_id');
     }
+
+    public function accounts()
+    {
+        return $this->hasMany(VendorAccount::class);
+    }
+
+    public function employees()
+    {
+        return $this->hasMany(VendorEmployee::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(VendorFile::class);
+    }
+
+    public function shareholders()
+    {
+        return $this->hasMany(VendorShareholder::class);
+    }
+
+    public function qualificationCodes()
+    {
+        return $this->hasMany(VendorQualificationCode::class);
+    }
+
     /*
      * Scopes
      */

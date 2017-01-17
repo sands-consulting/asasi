@@ -12,8 +12,8 @@
 		<tbody>
 			<tr v-for="employee in employees">
 				<td>@{{ $index + 1}}</td>
-				<td><input type="employees[@{{ $index }}][name]" class="form-control" v-model="employee.name"></td>
-				<td><input type="employees[@{{ $index }}][identity_number]" class="form-control" v-model="employee.identity_number"></td>
+				<td><input type="text" name="employees[@{{ $index }}][name]" class="form-control" v-model="employee.name"></td>
+				<td><input type="text" name="employees[@{{ $index }}][designation]" class="form-control" v-model="employee.designation"></td>
 				<td>
 					<select name="employees[@{{ $index }}][role]" class="form-control select2" v-model="employee.role">
 						@foreach(trans('vendors.attributes.employees.roles') as $key => $value)
