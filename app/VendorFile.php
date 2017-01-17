@@ -25,7 +25,7 @@ class VendorFile extends Model
     	return $this->belongsTo(File::class);
     }
 
-    public function file()
+    public function upload()
     {
     	return $this->belongsTo(Upload::class);
     }

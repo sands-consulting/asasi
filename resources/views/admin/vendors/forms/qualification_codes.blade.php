@@ -11,7 +11,7 @@
 			@foreach($type->codes()->whereStatus('active')->orderBy('code')->get() as $code)
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" name="qualification_codes[{{ $type->code }}][{{ $code->id }}]" value="1"{{ request(implode('.', ['qualification_codes', $type->code, $code->id]), $vendor->qualificationCodes()->whereId($code->id)->count()) ? 'checked="checked"' : '' }}>
+					<input type="checkbox" name="qualification_codes[{{ $type->code }}][{{ $code->id }}]" value="1"{{ request(implode('.', ['qualification_codes', $type->code, $code->id]), $vendor->qualificationCodes()->whereCodeId($code->id)->count()) ? 'checked="checked"' : '' }}>
 					<strong>{{ $code->code }}</strong> {{ $code->name }}
 				</label>
 			</div>
@@ -25,7 +25,7 @@
 					@foreach($child->codes()->whereStatus('active')->orderBy('code')->get() as $childCode)
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="qualification_codes[{{ $type->code }}][{{ $code->id }}][{{ $childCode->id }}]" value="1"{{ request(implode('.', ['qualification_codes', $type->code, $code->id, $childCode->id]), $vendor->qualificationCodes()->whereId($childCode->id)->count()) ? 'checked="checked"' : '' }}>
+							<input type="checkbox" name="qualification_codes[{{ $type->code }}][{{ $code->id }}][{{ $childCode->id }}]" value="1"{{ request(implode('.', ['qualification_codes', $type->code, $code->id, $childCode->id]), $vendor->qualificationCodes()->whereParentId($code->id)->whereCodeId($childCode->id)->count()) ? 'checked="checked"' : '' }}>
 							<strong>{{ $childCode->code }}</strong> {{ $childCode->name }}
 						</label>
 					</div>
@@ -45,7 +45,7 @@
 		<div class="panel-heading">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" name="qualification_codes[{{ $type->code }}]" value="{{ $code->id }}" {{ request(implode('.', ['qualification_codes', $type->code]), $vendor->qualificationCodes()->whereId($code->id)->count()) ? 'checked="checked"' : '' }}>
+					<input type="checkbox" name="qualification_codes[{{ $type->code }}]" value="{{ $code->id }}" {{ request(implode('.', ['qualification_codes', $type->code]), $vendor->qualificationCodes()->whereCodeId($code->id)->count()) ? 'checked="checked"' : '' }}>
 					{{ $type->name }}
 				</label>
 			</div>

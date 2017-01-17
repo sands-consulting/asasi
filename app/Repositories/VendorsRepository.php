@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use Carbon\Carbon;
+use App\QualificationCode;
+use App\QualificationCodeType;
 use App\Vendor;
 use App\VendorAccount;
 use App\VendorEmployee;
@@ -131,8 +133,59 @@ class VendorsRepository extends BaseRepository
         $vendor->employees()->whereNotIn('id', $exists)->delete();
     }
 
-    public static function qualificationCodes(Vendor $vendor, $codes)
+    public static function qualificationCodes(Vendor $vendor, $data)
     {
+        $types  = QualificationCodeType::whereStatus('active')->get();
+        $exists = [];
+
+        foreach($types as $type)
+        {
+            if($type->type == 'boolean')
+            {
+                $codeId = array_get($data, $type->code, null);
+
+                if(!empty($codeId))
+                {
+                    $code       = $vendor->qualificationCodes()->firstOrCreate([
+                        'type_id' => $type->id,
+                        'code_id' => $codeId
+                    ]);
+                    $exists[]   = $code->id;
+                }
+            }
+
+            if($type->type == 'list')
+            {
+                $codes  = array_get($data, $type->code, []);
+
+                foreach($codes as $id => $value)
+                {
+                    $code = $vendor->qualificationCodes()->firstOrCreate([
+                        'type_id' => $type->id,
+                        'code_id' => $id
+                    ]);
+
+                    $exists[] = $code->id;
+
+                    if(is_array($value))
+                    {
+                        foreach($value as $child => $boolean)
+                        {
+                            $reference = QualificationCode::find($child);
+                            if(empty($reference)) continue;
+                            $childCode = $vendor->qualificationCodes()->firstOrCreate([
+                                'type_id' => $reference->type_id,
+                                'code_id' => $reference->id,
+                                'parent_id' => $code->id
+                            ]);
+                            $exists[] = $childCode->id;
+                        }
+                    }
+                }
+            }
+        }
+
+        $vendor->qualificationCodes()->whereNotIn('id', $exists)->delete();
     }
 
     public static function shareholders(Vendor $vendor, $shareholders)

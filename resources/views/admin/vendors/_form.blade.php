@@ -24,6 +24,6 @@
 	window.Vendor = {!! json_encode([
 		'accounts' => $vendor->accounts()->get(),
 		'employees' => $vendor->employees()->get(),
-		'shareholders' => $vendor->employees()->get()
+		'shareholders' => $vendor->shareholders()->get()
 	]) !!};
 </script>
