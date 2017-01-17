@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class File extends Model
+class FileType extends Model
 {
     use RevisionableTrait,
         SoftDeletes;
@@ -24,9 +24,4 @@ class File extends Model
     protected $attributes = [
     	'status' => 'active'
     ];
-
-    public function rules()
-    {
-    	return $this->hasMany(FileRule::class);
-    }
 }
