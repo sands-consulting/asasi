@@ -36,8 +36,7 @@ class UsersController extends Controller
         $inputs['password'] = bcrypt($request->input('password'));
         $user               = UsersRepository::create(new User, $inputs);
 
-        if ($roles = $request->get('roles', []))
-        {
+        if ($roles = $request->get('roles', [])) {
             $user->roles()->sync($roles);
         }
 
@@ -62,15 +61,13 @@ class UsersController extends Controller
     {
         $inputs = $request->only('name', 'email');
 
-        if($request->has('password'))
-        {
+        if ($request->has('password')) {
             $inputs['password'] = bcrypt($request->input('password'));
         }
 
         $user = UsersRepository::update($user, $inputs);
 
-        if ($roles = $request->get('roles', []))
-        {
+        if ($roles = $request->get('roles', [])) {
             $user->roles()->sync($roles);
         }
 
@@ -106,6 +103,12 @@ class UsersController extends Controller
     public function assume(Request $request, User $user)
     {
         UsersRepository::assume($user);
+
+        if ($user->hasRole('Evaluator')) {
+            return redirect()
+                ->route('admin.evaluations.index')
+                ->with('notice', trans('users.notices.assumed', ['name' => $user->name]));
+        }
 
         return redirect()
             ->to('/')

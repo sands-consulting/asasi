@@ -32,6 +32,12 @@ return [
         'unpublished' => 'Evaluation :name unpublished.',
     ],
     
+    'numbers' => [
+        'all' => 'All',
+        'commercials' => 'Commercials',
+        'technicals' => 'Technicals',
+    ],
+
     'views' => [
         'index' => [
             'title' => 'Evaluations',

@@ -10,10 +10,13 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(DashboardUsersDataTable $table)
+    public function index(Request $request, DashboardUsersDataTable $table)
     {
-        $lastLogins = UserLog::lastLogin(5)->get();
+        if ($request->user()->hasRole('Evaluator')) {
+            return redirect()->route('admin.evaluations.index');
+        }
 
+        $lastLogins = UserLog::lastLogin(5)->get();
         return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
 
