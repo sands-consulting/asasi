@@ -228,4 +228,9 @@ class NoticesController extends Controller
             ->route('admin.projects.edit', $project->id)
             ->with('notices', trans('projects.notices.create', ['number' => $project->number]));
     }
+
+    public function settings(Notice $notice)
+    {
+        return view('admin.notices.show.settings', compact('notice'));
+    }
 }

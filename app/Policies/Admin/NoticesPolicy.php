@@ -101,4 +101,9 @@ class NoticesPolicy extends BasePolicy
     {
         return $this->show();
     }
+
+    public function settings()
+    {
+        return $this->show();
+    }
 }
