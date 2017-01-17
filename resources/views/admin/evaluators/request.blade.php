@@ -1,23 +1,4 @@
-@extends('layouts.admin')
-
-@section('header')
-<div class="page-title">
-    <h4>
-        <span>{{ trans('evaluators.title') }}</span> /
-        <span class="text-semibold">{{ trans('notices.views.settings.title') }}</span>
-    </h4>
-</div>
-<div class="heading-elements">
-    <div class="heading-btn-group">
-        <a href="{{ route('admin.evaluators.edit', $evaluator->notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
-            <i class=" icon-pencil"></i> <span>{{ trans('actions.edit') }}</span>
-        </a>
-        <a href="{{ route('admin.notices.show', $evaluator->notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
-            <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
-        </a>
-    </div>
-</div>
-@endsection
+@extends('layouts.public')
 
 @section('content')
     <div class="row">

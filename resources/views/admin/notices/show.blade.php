@@ -48,6 +48,14 @@
 </div>
 @endsection
 
+@section('secondary-header')
+<ul class="breadcrumb breadcrumb-caret">
+    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+    <li><a href="{{ route('admin.notices.index') }}">{{ trans('notices.title') }}</a></li>
+    <li class="active">{{ trans('notices.views.show.title') }}</li>
+</ul>
+@endsection
+
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -95,7 +103,7 @@
             <a href="#" class="list-group-item">
                 <i class="icon-cogs"></i> {{ trans('notices.navs.settings') }}
             </a>
-            <a href="#" class="list-group-item">
+            <a href="{{ route('admin.evaluators.index', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluators*', ' bg-blue-300') }}">
                 <i class="icon-user-check"></i> {{ trans('notices.navs.evaluators') }}
             </a>
             <a href="#" class="list-group-item">

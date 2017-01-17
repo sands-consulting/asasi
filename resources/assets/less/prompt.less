@@ -323,3 +323,25 @@ a {
 [v-cloak] {
   display: none;
 }
+
+/* Flex equal height */
+.row.is-flex,
+.row.is-flex > [class*='col-'] {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+
+.row.is-flex > [class*='col-'] div {
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}

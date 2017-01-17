@@ -15,12 +15,12 @@ class EvaluatorsController extends Controller
 {
     public function index(EvaluatorsDataTable $table, Notice $notice)
     {
-        return $table->with('notice', $notice)->render('admin.evaluators.index', compact('notice'));
+        return $table->with('notice', $notice)->render('admin.notices.show.evaluators', compact('notice'));
     }
 
     public function edit(Notice $notice)
     {
-        return view('admin.evaluators.create', compact('notice'));
+        return view('admin.notices.show.evaluators-edit', compact('notice'));
     }
 
     public function save(Request $request, Notice $notice)
@@ -53,7 +53,7 @@ class EvaluatorsController extends Controller
 
     public function assign(NoticeEvaluator $evaluator, Notice $notice)
     {
-        return view('admin.evaluators.assign', compact('evaluator', 'notice'));
+        return view('admin.notices.show.evaluators-assign', compact('evaluator', 'notice'));
     }
 
     public function assigned(Request $request, NoticeEvaluator $evaluator, Notice $notice)
