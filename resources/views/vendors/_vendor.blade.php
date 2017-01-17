@@ -70,11 +70,5 @@
 		<li class="{{ is_route_active('vendors.subscriptions') }}">
 			<a href="{{ route('vendors.subscriptions', $vendor->id) }}">{{ trans('vendors.views._show.nav.subscriptions') }}</a>
 		</li>
-		<li class="{{ is_route_active('vendors.purchases') }}">
-			<a href="{{ route('vendors.purchases', $vendor->id) }}">{{ trans('vendors.views._show.nav.purchases') }}</a>
-		</li>
-		<li class="{{ is_route_active('vendors.transactions') }}">
-			<a href="{{ route('vendors.transactions', $vendor->id) }}">{{ trans('vendors.views._show.nav.transactions') }}</a>
-		</li>
 	</ul>
 </div>

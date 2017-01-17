@@ -2,10 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Subscription;
-use Auth;
-
-class SubscriptionHitoriesDataTable extends DataTable
+class VendorSubscriptionsDataTable extends DataTable
 {
     public function ajax()
     {
@@ -25,8 +22,7 @@ class SubscriptionHitoriesDataTable extends DataTable
 
     public function query()
     {
-        $query = Auth::user()
-            ->subscriptions()
+        $query = $this->vendor->subscriptions()
             ->select(
                 'packages.name',
                 'subscriptions.started_at',
@@ -79,14 +75,13 @@ class SubscriptionHitoriesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'subscriptions_dt_' . time();
+        return 'vendor_subscriptions_dt_' . time();
     }
 
     protected function getBuilderParameters()
     {
         $data = parent::getBuilderParameters();
-        $data['dom'] = '<"datatable-header"Bl><"datatable-scroll"t><"datatable-footer"ip>';
-        $data['buttons'] = ['excel', 'print', 'pdf'];
+        $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
         return $data;
     }
 }

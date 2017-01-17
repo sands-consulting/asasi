@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\VendorSubscriptionsDataTable;
 use App\Events\VendorApplied;
 use App\Events\VendorCancelled;
 use App\Http\Requests\VendorRequest;
@@ -58,9 +59,10 @@ class VendorsController extends Controller
         return view('vendors.show', compact('vendor'));
     }
 
-    public function subscriptions(Request $request, Vendor $vendor)
+    public function subscriptions(Vendor $vendor, VendorSubscriptionsDataTable $table)
     {
-        return view('vendors.show-subscription', compact('vendor'));
+        $table->vendor = $vendor;
+        return $table->render('vendors.subscriptions', compact('vendor'));
     }
 
     public function completeApplication(Request $request, Vendor $vendor)
