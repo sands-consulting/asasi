@@ -1,5 +1,6 @@
 <?php
 
+use App\QualificationCodeType;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -17,7 +18,12 @@ class AddNodeToQualificationCodeTypesTable extends Migration
             $table->integer('lft')->nullable()->after('parent_id')->index();
             $table->integer('rgt')->nullable()->after('lft')->index();
             $table->integer('depth')->after('rgt')->nullable();
+            $table->string('code')->after('name')->index();
+            $table->string('type')->after('code')->index();
         });
+
+        QualificationCodeType::rebuild();
+        QualificationCodeType::query()->update(['type' => 'list']);
     }
 
     /**
@@ -32,6 +38,8 @@ class AddNodeToQualificationCodeTypesTable extends Migration
             $table->dropColumn('lft');
             $table->dropColumn('rgt');
             $table->dropColumn('depth');
+            $table->dropColumn('type');
+            $table->dropColumn('code');
         });
     }
 }

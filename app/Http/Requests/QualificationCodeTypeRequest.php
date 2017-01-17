@@ -11,11 +11,25 @@ class QualificationCodeTypeRequest extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function storeRules()
     {
         return [
             'name'      => 'required',
-            'status'    => 'required|in:active,inactive'
+            'code'      => 'required|unique:qualification_code_types',
+            'type'      => 'required|in:list,boolean',
+            'status'    => 'required|in:active,inactive',
+            'parent_id' => 'exists:qualification_code_types,id'
+        ];
+    }
+
+    public function updateRules()
+    {
+        return [
+            'name'      => 'required',
+            'code'      => 'required|unique:qualification_code_types,code,' . $this->route('qualification_code_types')->id,
+            'type'      => 'required|in:list,boolean',
+            'status'    => 'required|in:active,inactive',
+            'parent_id' => 'exists:qualification_code_types,id'
         ];
     }
 }

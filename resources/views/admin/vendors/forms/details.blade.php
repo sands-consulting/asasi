@@ -57,11 +57,6 @@
 			{!! Former::text('address_2')
 				->label(null)
 				->placeholder('vendors.attributes.address_2') !!}
-			{!! Former::select('address_city_id')
-				->label(null)
-				->placeholder('vendors.attributes.address_city_id')
-				->options(App\Place::type('city')->active()->lists('name', 'id'))
-				->addClass('select2') !!}
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
 					{!! Former::text('address_postcode')
@@ -69,18 +64,29 @@
 						->placeholder('vendors.attributes.address_postcode') !!}
 				</div>
 				<div class="col-xs-12 col-md-8">
+					{!! Former::select('address_city_id')
+						->label(null)
+						->placeholder('vendors.attributes.address_city_id')
+						->options(App\Place::type('city')->active()->lists('name', 'id'))
+						->addClass('select2') !!}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
 					{!! Former::select('address_state_id')
 						->label(null)
 						->placeholder('vendors.attributes.address_state_id')
 						->options(App\Place::type('state')->active()->lists('name', 'id'))
 						->addClass('select2') !!}
 				</div>
+				<div class="col-xs-12 col-md-6">
+					{!! Former::select('address_country_id')
+						->label(null)
+						->placeholder('vendors.attributes.address_country_id')
+						->options(App\Place::type('country')->active()->lists('name', 'id'))
+						->addClass('select2') !!}
+				</div>
 			</div>
-			{!! Former::select('address_country_id')
-				->label(null)
-				->placeholder('vendors.attributes.address_country_id')
-				->options(App\Place::type('country')->active()->lists('name', 'id'))
-				->addClass('select2') !!}
 		</div>
 
 		<div class="col-xs-12 col-md-6">

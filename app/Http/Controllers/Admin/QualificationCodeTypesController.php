@@ -25,7 +25,17 @@ class QualificationCodeTypesController extends Controller
 
     public function store(QualificationCodeTypeRequest $request)
     {
-        $type = QualificationCodeTypeRepository::create(new QualificationCodeType, $request->only('name', 'status'));
+        $type = QualificationCodeTypeRepository::create(new QualificationCodeType, $request->only('name', 'type', 'code', 'status'));
+
+        if($request->input('parent_id', null) && $request->input('parent_id') != $type->parent_id)
+        {
+            $type->makeChildOf(QualificationCodeType::find($request->input('parent_id')));
+        }
+        else
+        {
+            $type->makeRoot();
+        }
+
         UserLogsRepository::log($request->user(), 'create', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-code-types.index')
@@ -39,7 +49,17 @@ class QualificationCodeTypesController extends Controller
 
     public function update(QualificationCodeTypeRequest $request, QualificationCodeType $type)
     {
-        QualificationCodeTypeRepository::update($type, $request->only('name', 'status'));
+        $type = QualificationCodeTypeRepository::update($type, $request->only('name', 'type', 'code', 'status'));
+
+        if($request->input('parent_id', null) && $request->input('parent_id') != $type->parent_id)
+        {
+            $type->makeChildOf(QualificationCodeType::find($request->input('parent_id')));
+        }
+        else if($type->isChild())
+        {
+            $type->makeRoot();
+        }
+
         UserLogsRepository::log($request->user(), 'update', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-code-types.index')
