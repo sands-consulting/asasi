@@ -41,7 +41,7 @@
                     <div class="col-sm-8 col-sm-offset-1">
                         {!! Former::select('qualification_code_id[]')
                             ->label(false)
-                            ->options(['' => 'Select MOF Field Code']  + App\QualificationCode::whereStatus('active')->whereTypeId(1)->get()->pluck('full_name', 'id')->toArray()) !!}
+                            ->options(['' => 'Select MOF Field Code'] + App\QualificationCode::whereStatus('active')->whereTypeId(1)->get()->pluck('full_name', 'id')->toArray())  !!}
 
                         {!! Former::hidden('condition[]')->value('or') !!}
                     </div>
@@ -62,7 +62,7 @@
                     <div class="col-sm-8">
                         {!! Former::select('qualification_code_id[]')
                             ->label(false)
-                            ->options(['' => 'Select MOF Field Code']  + App\QualificationCode::whereStatus('active')->whereTypeId(1)->get()->pluck('full_name', 'id')->toArray()) !!}
+                            ->options(['' => 'Select MOF Field Code'] + App\QualificationCode::whereStatus('active')->whereTypeId(1)->get()->pluck('full_name', 'id')->toArray())  !!}
 
                         {!! Former::hidden('condition[]')->value('and') !!}
                     </div>
