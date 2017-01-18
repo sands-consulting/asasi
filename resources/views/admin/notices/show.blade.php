@@ -90,7 +90,7 @@
             {{-- <a href="{{ route('admin.notices.submission_criterias', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.submission_criterias', ' bg-blue-300') }}">
                 <i class="icon-copy3"></i> {{ trans('notices.navs.submission_criterias') }}
             </a> --}}
-            <a href="{{ route('admin.evaluation-requirements.index', $notice->id) }}" class="list-group-item{{ is_route_active('admin.evaluation-requirements.edit', ' bg-blue-300') }}">
+            <a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}" class="list-group-item{{ is_route_active('admin.evaluation-requirements.edit', ' bg-blue-300') }}">
                 <i class="icon-copy3"></i> {{ trans('notices.navs.evaluation_criterias') }}
             </a>
             <a href="{{ route('admin.evaluators.index', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluators*', ' bg-blue-300') }}">
