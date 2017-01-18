@@ -270,7 +270,7 @@ class Vendor extends Model
     {
         $vendors = Vendor::with('notices')
             ->get()
-            ->sortBy(function($vendors) {
+            ->sortByDesc(function($vendors) {
                 return $vendors->notices->count();
             })
             ->take($limit);

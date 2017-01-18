@@ -65,7 +65,7 @@
             @include('admin.notices._index_status')
         </div>
         <div class="clearfix"></div>
-        <h1 class="text-thin pull-left">{{ $notice->name }}</h1>
+        <h4 class="text-thin pull-left">{{ $notice->name }}</h4>
     </div>
 </div>
 
@@ -81,13 +81,13 @@
             <a href="{{ route('admin.notices.qualification_codes', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.qualification_codes', ' bg-blue-300') }}">
                 <i class="icon-stack2"></i> {{ trans('notices.navs.qualification_codes') }}
             </a>
-            <a href="{{ route('admin.notices.allocations', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.allocations', ' bg-blue-300') }}">
+            {{-- <a href="{{ route('admin.notices.allocations', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.allocations', ' bg-blue-300') }}">
                 <i class="icon-copy3"></i> {{ trans('notices.navs.allocations') }}
-            </a>
+            </a> --}}
             <a href="{{ route('admin.notices.files', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.files', ' bg-blue-300') }}">
                 <i class="icon-copy3"></i> {{ trans('notices.navs.files') }}
             </a>
-            <a href="{{ route('admin.notices.submission_criterias', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.submission_criterias', ' bg-blue-300') }}">
+            {{-- <a href="{{ route('admin.notices.submission_criterias', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.submission_criterias', ' bg-blue-300') }}">
                 <i class="icon-copy3"></i> {{ trans('notices.navs.submission_criterias') }}
             </a>
             <a href="{{ route('admin.notices.evaluation_criterias', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.evaluation_criterias', ' bg-blue-300') }}">
@@ -95,10 +95,10 @@
             </a>
             <a href="{{ route('admin.notices.evaluators', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.evaluators', ' bg-blue-300') }}">
                 <i class="icon-copy3"></i> {{ trans('notices.navs.evaluators') }}
-            </a>
+            </a> --}}
         </ul>
 
-        <ul class="list-group panel panel-flat">
+        {{-- <ul class="list-group panel panel-flat">
             <a href="{{ route('admin.notices.eligibles', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.eligibles', ' bg-blue-300') }}">
                 <i class="icon-user-check"></i> {{ trans('notices.navs.eligibles') }}
             </a>
@@ -123,7 +123,7 @@
             <a href="#" class="list-group-item">
                 <i class="icon-medal2"></i> {{ trans('notices.navs.award') }}
             </a>
-        </ul>
+        </ul> --}}
 
         <ul class="list-group panel panel-flat">
             <a href="{{ route('admin.notices.settings', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.settings', ' bg-blue-300') }}">
@@ -132,7 +132,7 @@
             <a href="{{ route('admin.evaluators.index', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluators*', ' bg-blue-300') }}">
                 <i class="icon-user-check"></i> {{ trans('notices.navs.evaluators') }}
             </a>
-            <a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluators*', ' bg-blue-300') }}">
+            <a href="{{ route('admin.evaluation-requirements.edit', $notice->id) }}" class="list-group-item{{ is_path_active('admin/evaluation-requirements*', ' bg-blue-300') }}">
                 <i class="icon-list2"></i> {{ trans('notices.navs.evaluation_criterias') }}
             </a>
         </ul>
