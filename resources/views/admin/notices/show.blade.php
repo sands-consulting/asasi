@@ -117,7 +117,7 @@
             <a href="#" class="list-group-item">
                 <i class="icon-medal2"></i> {{ trans('notices.navs.award') }}
             </a>
-        </ul> --}}
+        </ul>
     </div>
 
     <div class="col-xs-12 col-md-9">

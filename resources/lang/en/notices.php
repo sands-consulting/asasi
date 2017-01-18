@@ -39,6 +39,8 @@ return [
         'events' => 'Events',
         'qualification_codes' => 'Qualification Codes',
         'files' => 'Files',
+
+        'eligibles' => 'Eligibles',
         'purchases' => 'Purchases',
         'submissions' => 'Submissions',
         'evaluations' => 'Evaluations',

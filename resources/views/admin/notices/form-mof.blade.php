@@ -11,7 +11,7 @@
                     <div class="col-sm-8">
                         {!! Former::select('qualification_code_id[]')
                             ->label(false)
-                            ->options(['' => 'Select MOF Field Code'])  !!}
+                            ->options(['' => 'Select MOF Field Code'] + App\QualificationCode::whereStatus('active')->whereTypeId(1)->get()->pluck('full_name', 'id'))  !!}
                         {!! Former::hidden('condition[]')->value(null) !!}
                     </div>
                 </div>
