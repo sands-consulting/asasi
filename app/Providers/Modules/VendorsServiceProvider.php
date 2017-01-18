@@ -61,6 +61,11 @@ class VendorsServiceProvider extends ServiceProvider
                     'uses'  => 'VendorsController@qualificationCodes'
                 ]);
 
+                $router->get('vendors/{vendors}/subscriptions', [
+                    'as'    => 'admin.vendors.subscriptions',
+                    'uses'  => 'VendorsController@subscriptions'
+                ]);
+
                 $router->get('vendors/{vendors}/users', [
                     'as'    => 'admin.vendors.users',
                     'uses'  => 'VendorsController@users'

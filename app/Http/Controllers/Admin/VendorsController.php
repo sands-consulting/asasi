@@ -176,14 +176,14 @@ class VendorsController extends Controller
             ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
     }
 
+    public function qualificationCodes(Vendor $vendor)
+    {
+        return view('admin.vendors.subscriptions', compact('vendor'));
+    }
+
     public function subscriptions(Vendor $vendor, VendorSubscriptionsDataTable $table)
     {
         $table->vendor = $vendor;
         return $table->render('admin.vendors.subscriptions', compact('vendor'));
-    }
-
-    public function qualificationCodes(Vendor $vendor)
-    {
-        return view('admin.vendors.subscriptions', compact('vendor'));
     }
 }

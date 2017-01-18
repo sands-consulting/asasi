@@ -90,4 +90,14 @@ class VendorsPolicy extends BasePolicy
     {
         return $this->user->hasPermission('vendor:unblacklist') && $vendor->canUnblacklist();
     }
+
+    public function qualificationCodes(Vendor $vendor)
+    {
+        return $this->show($vendor);
+    }
+
+    public function subscriptions(Vendor $vendor)
+    {
+        return $this->show($vendor);
+    }
 }
