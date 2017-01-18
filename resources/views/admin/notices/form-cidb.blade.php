@@ -11,7 +11,7 @@
                     <div class="col-sm-8">
                         {!! Former::select('cidb_field_code')
                             ->label(false)
-                            ->options(['' => 'Select CIDB Field Code']) !!}
+                            ->options(['' => 'Select CIDB Field Code']  + App\QualificationCode::whereStatus('active')->whereIn('type_id', [3,4 5])->get()->pluck('full_name', 'id')->toArray()) !!}
                     </div>
                 </div>
                 
@@ -40,7 +40,7 @@
                     <div class="col-sm-8 col-sm-offset-1">
                         {!! Former::select('cidb_field_code[]')
                             ->label(false)
-                            ->options(['' => 'Select CIDB Field Code']) !!}
+                            ->options(['' => 'Select CIDB Field Code']  + App\QualificationCode::whereStatus('active')->whereIn('type_id', [3,4 5])->get()->pluck('full_name', 'id')->toArray()) !!}
                     </div>
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-xs btn-danger btn-remove-rule" data-url="/api/requirement-commercials/delete/"><i class="icon-cross2"></i></button>
@@ -59,7 +59,7 @@
                     <div class="col-sm-8">
                         {!! Former::select('cidb_field_code[]')
                             ->label(false)
-                            ->options(['' => 'Select CIDB Field Code']) !!}
+                            ->options(['' => 'Select CIDB Field Code']  + App\QualificationCode::whereStatus('active')->whereIn('type_id', [3,4 5])->get()->pluck('full_name', 'id')->toArray()) !!}
                     </div>
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-xs btn-danger btn-remove-rule" data-url="/api/requirement-commercials/delete/"><i class="icon-cross2"></i></button>
