@@ -106,4 +106,14 @@ class NoticesPolicy extends BasePolicy
     {
         return $this->show();
     }
+
+    public function qualificationCodes()
+    {
+        return $this->show();
+    }
+
+    public function files()
+    {
+        return $this->show();
+    }
 }

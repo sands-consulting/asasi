@@ -233,4 +233,14 @@ class NoticesController extends Controller
     {
         return view('admin.notices.show.settings', compact('notice'));
     }
+
+    public function qualificationCodes(Notice $notice)
+    {
+        return view('admin.notices.show.qualification-codes', compact('notice'));
+    }
+
+    public function files(Notice $notice)
+    {
+        return view('admin.notices.show.files', compact('notice'));
+    }
 }

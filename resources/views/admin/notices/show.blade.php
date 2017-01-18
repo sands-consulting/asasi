@@ -78,7 +78,7 @@
             <a href="{{ route('admin.notices.events', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.events', ' bg-blue-300') }}">
                 <i class="icon-calendar3"></i> {{ trans('notices.navs.events') }}
             </a>
-            <a href="{{ route('admin.notices.qualification_codes', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.qualification_codes', ' bg-blue-300') }}">
+            <a href="{{ route('admin.notices.qualification-codes', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.qualification-codes', ' bg-blue-300') }}">
                 <i class="icon-stack2"></i> {{ trans('notices.navs.qualification_codes') }}
             </a>
             {{-- <a href="{{ route('admin.notices.allocations', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.allocations', ' bg-blue-300') }}">
