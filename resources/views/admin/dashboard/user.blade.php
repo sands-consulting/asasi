@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col-xs-12 col-md-3">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-primary" 
+                class="prompt-box bg-white border border-bottom-primary" 
                 data-filter="all"
                 data-color="primary">
                 <div class="title"><i class="icon-users"></i> All</div>
@@ -61,7 +61,7 @@
         </div>
         <div class="col-xs-12 col-md-3">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-success" 
+                class="prompt-box bg-white border border-bottom-success" 
                 data-filter="active"
                 data-color="success">
                 <div class="title"><i class="icon-user"></i> Active</div>
@@ -70,7 +70,7 @@
         </div>
         <div class="col-xs-12 col-md-3">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-warning" 
+                class="prompt-box bg-white border border-bottom-warning" 
                 data-filter="inactive"
                 data-color="warning">
                 <div class="title"><i class="icon-user"></i> Inactive</div>
@@ -79,7 +79,7 @@
         </div>
         <div class="col-xs-12 col-md-3">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-danger" 
+                class="prompt-box bg-white border border-bottom-danger" 
                 data-filter="suspended"
                 data-color="danger">
                 <div class="title"><i class="icon-user"></i> Suspended</div>

@@ -1,4 +1,4 @@
-<div class="prompt-box full">
+<div class="prompt-box bg-white full">
 	<div class="row">
 		<div class="col-xs-12 col-md-4 panel-vendor">
 			<h1>{{ $vendor->name }}</h1>
@@ -61,7 +61,7 @@
 			<a href="{{ route('vendors.users', $vendor->id) }}">{{ trans('vendors.views._show.nav.users') }}</a>
 		</li>
 		<li class="{{ is_route_active('admin.vendors.subscriptions') }}">
-			<a href="{{ route('vendors.subscriptions', $vendor->id) }}">{{ trans('vendors.views._show.nav.subscriptions') }}</a>
+			<a href="{{ route('admin.vendors.subscriptions', $vendor->id) }}">{{ trans('vendors.views._show.nav.subscriptions') }}</a>
 		</li>
 	</ul>
 </div>

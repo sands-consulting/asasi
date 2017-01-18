@@ -1,4 +1,4 @@
-<div class="prompt-box full">
+<div class="prompt-box bg-white full">
 	<div class="row">
 		<div class="col-xs-12 col-md-4 panel-vendor">
 			<h1>{{ $vendor->name }}</h1>

@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-xs-12 col-md-2">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-primary" 
+                class="prompt-box bg-white border border-bottom-primary" 
                 data-filter="all"
                 data-color="primary">
                 <div class="title">All</div>
@@ -27,7 +27,7 @@
         </div>
         <div class="col-xs-12 col-md-2">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-grey" 
+                class="prompt-box bg-white border border-bottom-grey" 
                 data-filter="active"
                 data-color="grey">
                 <div class="title">Draft</div>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-xs-12 col-md-2">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-success" 
+                class="prompt-box bg-white border border-bottom-success" 
                 data-filter="active"
                 data-color="success">
                 <div class="title">Active</div>
@@ -45,7 +45,7 @@
         </div>
         <div class="col-xs-12 col-md-2">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-warning" 
+                class="prompt-box bg-white border border-bottom-warning" 
                 data-filter="inactive"
                 data-color="warning">
                 <div class="title">Inactive</div>
@@ -54,7 +54,7 @@
         </div>
         <div class="col-xs-12 col-md-2">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-danger" 
+                class="prompt-box bg-white border border-bottom-danger" 
                 data-filter="blacklisted"
                 data-color="danger">
                 <div class="title">Rejected</div>
@@ -63,7 +63,7 @@
         </div>
         <div class="col-xs-12 col-md-2">
             <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box border border-bottom-default" 
+                class="prompt-box bg-white border border-bottom-default" 
                 data-filter="blacklisted"
                 data-color="default">
                 <div class="title">Blacklisted</div>
