@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use Cart;
+use Illuminate\Http\Request;
 
-class CartsController extends Controller
+class CartController extends Controller
 {
     public function index()
     {
-        $contents = Cart::content();
-        return view()->make('carts.index', compact('contents'));
+        $items  = Cart::contents();
+        return view('cart.index', compact('items'));
     }
 
     public function add($item)
@@ -33,13 +32,12 @@ class CartsController extends Controller
             ->with('notice', trans('carts.notices.removed', ['name' => $item->options->number]));
     }
 
-    public function save($cart)
-    {
-        $cart = serialize(Cart::content());
-    }
-
     public function destroy()
     {
         Cart::destroy();
+    }
+
+    public function checkout()
+    {
     }
 }

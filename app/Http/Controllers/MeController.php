@@ -9,19 +9,14 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
-class ProfileController extends Controller
+class Me extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function show(Guard $auth)
-    {
-        return view('profile.show', ['user' => $auth->user()]);
-    }
-
-    public function edit(Guard $auth)
+    public function update(Guard $auth)
     {
         return view('profile.edit', ['user' => $auth->user()]);
     }
@@ -41,6 +36,19 @@ class ProfileController extends Controller
         return redirect()
             ->route('profile')
             ->with('notice', trans('profile.notices.updated'));
+    }
+
+    public function contact(Guard $auth)
+    {
+        return view('me.contact');
+    }
+
+    public function storeContact(Request $request)
+    {
+    }
+
+    public function notifications(Request $request)
+    {
     }
 
     public function resume(Request $request, Guard $auth)
