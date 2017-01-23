@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Libraries\Traits;
+namespace App\Traits;
 
 use App\Libraries\Carbon;
 
