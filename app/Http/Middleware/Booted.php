@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class MenuMiddleware
+class Booted
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class MenuMiddleware
      */
     public function handle($request, Closure $next)
     {
-        app('menu')->buildCurrentRouteMenus();
+        app('events')->fire('booted');
         return $next($request);
     }
 }

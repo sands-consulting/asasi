@@ -2,13 +2,10 @@
 
 namespace App;
 
-class UserLog extends Model
+class UserHistory extends Model
 {
     protected $fillable = [
-        'action',
-        'remarks',
-        'ip_address',
-        'user_id'
+        'action', 'remarks', 'ip_address', 'user_id'
     ];
 
     public function user()

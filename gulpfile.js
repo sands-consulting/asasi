@@ -1,4 +1,6 @@
-var elixir = require('laravel-elixir');
+const elixir = require('laravel-elixir');
+
+require('laravel-elixir-vue-2');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,9 +13,8 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-  // styles
-  mix
+elixir(mix => {
+    mix
     .sass('app.scss', 'public/assets/css/app.css')
     // .less('app.less', 'public/assets/css/app.css')
     .styles([
@@ -22,9 +23,7 @@ elixir(function(mix) {
         'datatables-bootstrap3-plugin/media/css/datatables-bootstrap3.min.css',
         'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
         '../public/assets/css/app.css',
-    ], 'public/assets/build.css', 'node_modules/');
-
-  mix
+    ], 'public/assets/build.css', 'node_modules/')
     .scripts([
         'jquery/dist/jquery.min.js',
         'bootstrap/dist/js/bootstrap.min.js',
@@ -34,8 +33,8 @@ elixir(function(mix) {
         'eonasdan-bootstrap-datetimepicker/node_modules/moment/min/moment-with-locales.min.js',
         'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
         '../resources/assets/scripts/app.js',
-    ], 'public/assets/build.js', 'node_modules/');
-
-  mix
-    .version(['assets/build.js', 'assets/build.css']);
+    ], 'public/assets/build.js', 'node_modules/')
+    .version(
+        ['assets/build.js', 'assets/build.css']
+    );
 });

@@ -31,7 +31,7 @@ class PermissionsProvider extends ServiceProvider
     {
 
         // register policies
-        app('policy')->register($this->controller, 'App\Policies\PermissionsPolicy');
+        app('policy')->register($this->controller, 'App\Policies\PermissionPolicy');
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers', 'prefix' => 'admin'], function ($router) {

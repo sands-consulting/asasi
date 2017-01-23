@@ -31,7 +31,7 @@ class UserBlacklistsProvider extends ServiceProvider
     {
 
         // register policies
-        app('policy')->register($this->controller, 'App\Policies\UserBlacklistsPolicy');
+        app('policy')->register($this->controller, 'App\Policies\UserBlacklistPolicy');
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers', 'prefix' => 'admin'], function ($router) {

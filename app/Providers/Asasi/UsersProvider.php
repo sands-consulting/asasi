@@ -31,7 +31,7 @@ class UsersProvider extends ServiceProvider
     {
 
         // register policies
-        app('policy')->register($this->controller, 'App\Policies\UsersPolicy');
+        app('policy')->register($this->controller, 'App\Policies\UserPolicy');
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {

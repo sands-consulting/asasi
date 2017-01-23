@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\PermissionGroupsRepository;
-<<<<<<< HEAD
-use App\Http\Controllers\Controller;
-use Yajra\Datatables\Html\Builder;
-=======
 use yajra\Datatables\Html\Builder;
->>>>>>> d180ac2... Update to 5.2
 use App\PermissionGroup;
 
 class PermissionGroupsController extends Controller

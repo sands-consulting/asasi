@@ -31,7 +31,7 @@ class RolesProvider extends ServiceProvider
     {
 
         // register policies
-        app('policy')->register($this->controller, 'App\Policies\RolesPolicy');
+        app('policy')->register($this->controller, 'App\Policies\RolePolicy');
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers', 'prefix' => 'admin'], function ($router) {

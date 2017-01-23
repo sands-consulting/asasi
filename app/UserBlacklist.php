@@ -2,19 +2,14 @@
 
 namespace App;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Venturecraft\Revisionable\RevisionableTrait;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserBlacklist extends Model implements SluggableInterface
+class UserBlacklist extends Model
 {
-    use RevisionableTrait;
+    use SoftDeletes;
 
     protected $fillable = [
-        'reason',
-        'user_id',
-        'expired_at'
+        'reason', 'user_id', 'expired_at'
     ];
 
     public function user()

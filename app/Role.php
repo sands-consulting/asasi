@@ -9,9 +9,7 @@ class Role extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
-        'display_name',
-        'description'
+        'name', 'display_name', 'description'
     ];
 
     public function permissions()
