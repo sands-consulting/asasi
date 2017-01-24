@@ -164,6 +164,17 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Packages Service Providers
+         */
+        Sands\Asasi\Policy\PolicyServiceProvider::class,
+        Former\FormerServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Irazasyed\LaravelIdenticon\ServiceProvider::class,
+
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -173,24 +184,12 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Packages Service Providers
-         */
-        Sands\Asasi\Booted\BootedServiceProvider::class,
-        Sands\Asasi\Policy\PolicyServiceProvider::class,
-        Former\FormerServiceProvider::class,
-        Cviebrock\EloquentSluggable\ServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
-        Irazasyed\LaravelIdenticon\ServiceProvider::class,
-
-        /*
          * Asasi Core ServiceProviders
          */
         App\Providers\AsasiServiceProvider::class,
-        App\Providers\Asasi\PermissionsProvider::class,
-        App\Providers\Asasi\UserBlacklistsProvider::class,
-        App\Providers\Asasi\UsersProvider::class,
-        App\Providers\Asasi\RolesProvider::class,
+        App\Providers\Asasi\PermissionsServiceProvider::class,
+        App\Providers\Asasi\RolesServiceProvider::class,
+        App\Providers\Asasi\UsersServiceProvider::class,
     ],
 
     /*

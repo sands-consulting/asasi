@@ -112,6 +112,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'current_password' => 'Current Password',
+        'email' => 'E-mail Address',
+        'password' => 'Password',
+        'password_confirmation' => 'Confirm Password',
+        'remember_me' => 'Remember Me',
+    ],
 
 ];

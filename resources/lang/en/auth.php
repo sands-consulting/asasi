@@ -15,19 +15,17 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'unauthorized' => 'Unauthorized',
-    'register' => 'Register',
-    'name' => 'Name',
-    'login' => 'Login',
-    'logout' => 'Logout',
-    'forgot_password' => 'Forgot Password?',
-    'remember_me' => 'Remember Me',
-    'password' => 'Password',
-    'confirm_password' => 'Confirm Password',
-    'email' => 'E-mail',
-    'send_password_link' => 'Send Password Link',
-    'reset_password' => 'Reset Password',
-    'click_here_reset_password' => 'Click here to reset your password',
-    'problem_input' => '<strong>Whoops!</strong> There were some problems with your input.',
 
+    'attributes' => [
+        'login' => 'Login',
+        'register' => 'Register',
+        'forgot_password' => 'Forgot Password',
+        'reset_password' => 'Reset Password',
+        'send_password_reset_link' => 'Send Password Reset Link',
+    ],
+
+    'notices' => [
+        'not_active' => 'Account inactive or suspended.',
+        'unauthorized' => 'Unauthorized',
+    ],
 ];

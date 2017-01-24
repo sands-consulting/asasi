@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Repositories\UserLogsRepository;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class UserLogin
@@ -14,6 +14,6 @@ class UserLogin
 
     public function handle($event)
     {
-        UserLogsRepository::log($event->user, 'login', $this->request->getClientIp());
+        UserHistoryService::log($event->user, 'login', $this->request->user(), $this->request->getClientIp());
     }
 }

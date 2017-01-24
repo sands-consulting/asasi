@@ -6,10 +6,11 @@ use App\Traits\Roleable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, Roleable, SoftDeletes;
+    use Notifiable, RevisionableTrait, Roleable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

@@ -5,7 +5,7 @@ namespace App;
 class UserHistory extends Model
 {
     protected $fillable = [
-        'action', 'remarks', 'ip_address', 'user_id'
+        'action', 'actionable_id', 'actionable_type', 'remarks', 'ip_address', 'user_id'
     ];
 
     public function user()

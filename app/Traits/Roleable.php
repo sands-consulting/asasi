@@ -2,6 +2,10 @@
 
 namespace App\Traits;
 
+use App\Permission;
+use App\Role;
+use Cache;
+
 trait Roleable
 {
     public function roles()
@@ -42,6 +46,15 @@ trait Roleable
      * Permissions caching
      */
 
+    public function cachedPermissions()
+    {
+        if (!Cache::has($this->permissions_cache_key)) {
+            $this->cachePermissions();
+        }
+
+        return Cache::get($this->permissions_cache_key);
+    }
+
     public function cachePermissions()
     {
         if (Cache::has($this->permissions_cache_key)) {
@@ -51,8 +64,8 @@ trait Roleable
         $that = $this;
         Cache::rememberForever($this->permissions_cache_key, function () use ($that) {
             return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
-                                        ->whereIn('permission_role.role_id', $that->roles->lists('id')->toArray())
-                                        ->lists('name')
+                                        ->whereIn('permission_role.role_id', $that->roles->pluck('id')->toArray())
+                                        ->pluck('name')
                                         ->toArray();
         });
     }

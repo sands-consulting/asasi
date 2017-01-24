@@ -1,11 +1,9 @@
 <?php
 
-use App\Repositories\PermissionGroupsRepository;
-use App\Repositories\PermissionsRepository;
-use App\Repositories\UsersRepository;
-use App\Repositories\RolesRepository;
+use App\Services\PermissionService;
+use App\Services\RoleService;
+use App\Services\UserService;
 use Illuminate\Database\Seeder;
-use App\PermissionGroup;
 use App\Permission;
 use App\User;
 use App\Role;
@@ -23,7 +21,7 @@ class AsasiSeeder extends Seeder
         DB::table('role_user')->truncate();
         DB::table('permissions')->truncate();
         DB::table('roles')->truncate();
-        DB::table('user_logs')->truncate();
+        DB::table('user_histories')->truncate();
         DB::table('user_blacklists')->truncate();
         DB::table('password_resets')->truncate();
         DB::table('users')->truncate();
@@ -38,7 +36,7 @@ class AsasiSeeder extends Seeder
         ];
 
         foreach ($roles as $roleData) {
-            RolesRepository::create(new Role(), $roleData);
+            RoleService::create(new Role(), $roleData);
         }
 
         $users = [
@@ -52,48 +50,59 @@ class AsasiSeeder extends Seeder
 
         foreach ($users as $userData) {
             $userData['password'] = app()->make('hash')->make($userData['password']);
-            UsersRepository::create(new User(), $userData);
+            UserService::create(new User(), $userData);
         }
 
         User::find(1)->roles()->attach(Role::first());
 
         $permissions = [
             ['permission:index',        'List all permissions'],
+            ['permission:show',         'View permission details'],
+            ['permission:create',       'Create new permission'],
+            ['permission:update',       'Update existing permission'],
+            ['permission:delete',       'Delete existing permission'],
+            ['permission:revisions',    'View all permissions'],
+            ['permission:histories',    'View all permissions'],
 
             ['role:index',              'List all roles'],
             ['role:show',               'View role details'],
             ['role:create',             'Create new role'],
             ['role:update',             'Update exisiting role'],
-            ['role:revisions',          'View role revisions'],
             ['role:delete',             'Delete exisiting role'],
+            ['role:revisions',          'View role revisions'],
+            ['role:histories',          'View role histories'],
 
             ['user:index',              'List all users'],
             ['user:show',               'View user details'],
             ['user:create',             'Create new user'],
             ['user:update',             'Update exisiting user'],
             ['user:revisions',          'View user revisions'],
-            ['user:duplicate',          'Duplicate exisiting user'],
             ['user:delete',             'Delete existing user'],
-            ['user:assume',             'Login as another user'],
+            ['user:restore',            'Restore deleted user'],
+            ['user:revisions',          'View user revisions'],
+            ['user:histories',          'View user histories'],
+            ['user:duplicate',          'Duplicate exisiting user'],
             ['user:activate',           'Activate a user'],
             ['user:suspend',            'Suspend a user'],
+            ['user:assume',             'Login as another user'],
 
             ['user-blacklist:index',        'List all user blacklists'],
             ['user-blacklist:show',         'View blacklist details'],
             ['user-blacklist:create',       'Blacklist a user'],
             ['user-blacklist:update',       'Update user blacklist'],
-            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
-            ['user-blacklist:revisions',    'List blacklist revisions'],
             ['user-blacklist:delete',       'Delete existing user blacklist']
+            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
+            ['user-blacklist:revisions',    'View blacklist revisions'],
+            ['user-blacklist:histories',    'View blacklist histories'],
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            PermissionService::create(new Permission(), [
                 'name'          => $permissionData[0],
                 'description'   => $permissionData[1],
             ]);
         }
 
-        Role::first()->permissions()->sync(Permission::all()->lists('id')->toArray());
+        Role::first()->permissions()->sync(Permission::all()->pluck('id')->toArray());
     }
 }

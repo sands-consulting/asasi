@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8702aaa0d6da185d2098126e45b8a769",
-    "content-hash": "6657764aba8bcbf1fdb6b72bfff38f2e",
+    "hash": "37e6f94d5df332e183ae12fa93ca942d",
+    "content-hash": "3b62fa1124707f887cd2a2c74ef275a1",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -642,16 +642,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.9",
+            "version": "v2.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "0d2f8187d4b4c7b72d8e2acba359e25c36feaf5e"
+                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0d2f8187d4b4c7b72d8e2acba359e25c36feaf5e",
-                "reference": "0d2f8187d4b4c7b72d8e2acba359e25c36feaf5e",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fc376f7a61498e18520cd6fa083752a4ca08072b",
+                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b",
                 "shasum": ""
             },
             "require": {
@@ -709,7 +709,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-01-19 13:27:33"
+            "time": "2017-01-23 23:17:10"
         },
         {
             "name": "doctrine/inflector",
@@ -1270,16 +1270,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.32",
+            "version": "1.0.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "1b5c4a0031697f46e779a9d1b309c2e1b24daeab"
+                "reference": "5c7f98498b12d47f9de90ec9186a90000125777c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
-                "reference": "1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5c7f98498b12d47f9de90ec9186a90000125777c",
+                "reference": "5c7f98498b12d47f9de90ec9186a90000125777c",
                 "shasum": ""
             },
             "require": {
@@ -1349,7 +1349,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-10-19 20:38:46"
+            "time": "2017-01-23 10:32:09"
         },
         {
             "name": "league/fractal",
@@ -1561,16 +1561,16 @@
         },
         {
             "name": "mtdowling/cron-expression",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mtdowling/cron-expression.git",
-                "reference": "c9ee7886f5a12902b225a1a12f36bb45f9ab89e5"
+                "reference": "9504fa9ea681b586028adaaa0877db4aecf32bad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/c9ee7886f5a12902b225a1a12f36bb45f9ab89e5",
-                "reference": "c9ee7886f5a12902b225a1a12f36bb45f9ab89e5",
+                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/9504fa9ea681b586028adaaa0877db4aecf32bad",
+                "reference": "9504fa9ea681b586028adaaa0877db4aecf32bad",
                 "shasum": ""
             },
             "require": {
@@ -1581,8 +1581,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Cron": "src/"
+                "psr-4": {
+                    "Cron\\": "src/Cron/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1601,7 +1601,7 @@
                 "cron",
                 "schedule"
             ],
-            "time": "2016-01-26 21:23:30"
+            "time": "2017-01-23 04:29:33"
         },
         {
             "name": "nesbot/carbon",
@@ -2127,16 +2127,16 @@
         },
         {
             "name": "sands/asasi-policy",
-            "version": "0.1",
+            "version": "0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-policy.git",
-                "reference": "6c6e762ee5f3a478e8102f129f8fd3d7e80ce815"
+                "reference": "24711101434cb29880fcf525cbce3efc039a8aae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-policy/zipball/6c6e762ee5f3a478e8102f129f8fd3d7e80ce815",
-                "reference": "6c6e762ee5f3a478e8102f129f8fd3d7e80ce815",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-policy/zipball/24711101434cb29880fcf525cbce3efc039a8aae",
+                "reference": "24711101434cb29880fcf525cbce3efc039a8aae",
                 "shasum": ""
             },
             "require": {
@@ -2167,20 +2167,20 @@
                 "authorization",
                 "laravel"
             ],
-            "time": "2017-01-20 12:23:22"
+            "time": "2017-01-24 04:27:16"
         },
         {
             "name": "sands/asasi-service",
-            "version": "0.1",
+            "version": "0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-service.git",
-                "reference": "1afd25a795b1e40945193b1dd7ac1e30ea4dcfbc"
+                "reference": "b70c0f8f7030173440f3b5ef69ee8c2b23a74fc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-service/zipball/1afd25a795b1e40945193b1dd7ac1e30ea4dcfbc",
-                "reference": "1afd25a795b1e40945193b1dd7ac1e30ea4dcfbc",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-service/zipball/b70c0f8f7030173440f3b5ef69ee8c2b23a74fc3",
+                "reference": "b70c0f8f7030173440f3b5ef69ee8c2b23a74fc3",
                 "shasum": ""
             },
             "require": {
@@ -2211,7 +2211,7 @@
                 "model",
                 "service"
             ],
-            "time": "2017-01-20 01:53:14"
+            "time": "2017-01-23 09:20:53"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3247,16 +3247,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v6.23.0",
+            "version": "v6.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "a7029901adf79a4bf1ab463e63d83d8b7408fef8"
+                "reference": "593a9205c7d9816d2d8b639ca08000ae5c5f378c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/a7029901adf79a4bf1ab463e63d83d8b7408fef8",
-                "reference": "a7029901adf79a4bf1ab463e63d83d8b7408fef8",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/593a9205c7d9816d2d8b639ca08000ae5c5f378c",
+                "reference": "593a9205c7d9816d2d8b639ca08000ae5c5f378c",
                 "shasum": ""
             },
             "require": {
@@ -3303,7 +3303,7 @@
                 "laravel4",
                 "laravel5"
             ],
-            "time": "2017-01-21 06:23:59"
+            "time": "2017-01-24 02:46:52"
         },
         {
             "name": "yzalis/identicon",
