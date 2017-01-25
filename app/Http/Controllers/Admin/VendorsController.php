@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\DataTables\VendorSubscriptionsDataTable;
 use App\DataTables\VendorsDataTable;
 use App\Events\VendorApproved;
@@ -11,9 +11,9 @@ use App\Events\VendorRejected;
 use App\Http\Requests\VendorRequest;
 use App\Notificators\VendorApprovedNotificator;
 use App\Notificators\VendorRejectedNotificator;
-use App\Repositories\VendorsRepository;
-use App\Repositories\UsersRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\VendorsService;
+use App\Services\UsersService;
+use App\Services\UserHistoriesService;
 use App\Setting;
 use App\User;
 use App\Vendor;
@@ -40,7 +40,7 @@ class VendorsController extends Controller
     public function store(VendorRequest $request)
     {
         $inputs = $request->all();
-        $vendor = VendorsRepository::create(new Vendor, $inputs);
+        $vendor = VendorsService::create(new Vendor, $inputs);
 
         return redirect()
             ->route('vendors.pending', $vendor->id)
@@ -56,8 +56,8 @@ class VendorsController extends Controller
     {
         $inputs = $request->all();
 
-        $vendor = VendorsRepository::update($vendor, $inputs);
-        UserLogsRepository::log($request->user(), 'Update', $vendor, $request->getClientIp());
+        $vendor = VendorsService::update($vendor, $inputs);
+        UserHistoriesService::log($request->user(), 'Update', $vendor, $request->getClientIp());
         return redirect()
             ->route('admin.vendors.edit', $vendor->id)
             ->with('notice', trans('vendors.notices.updated', ['name' => $vendor->name]));
@@ -65,11 +65,11 @@ class VendorsController extends Controller
 
     public function destroy(Request $request, Vendor $vendor)
     {
-        VendorsRepository::delete($vendor);
-        UserLogsRepository::log($request->user(), 'Delete', $vendor, $request->getClientIp());
+        VendorsService::delete($vendor);
+        UserHistoriesService::log($request->user(), 'Delete', $vendor, $request->getClientIp());
         if ($vendor->users) {
             foreach($vendor->users as $user) {
-                UsersRepository::delete($user);
+                UsersService::delete($user);
             }
         }
 
@@ -78,7 +78,7 @@ class VendorsController extends Controller
             ->with('notice', trans('vendors.notices.deleted', ['name' => $vendor->name]));
     }
 
-    public function logs(Vendor $vendor, UserLogsDataTable $table)
+    public function logs(Vendor $vendor, UserHistoriesDataTable $table)
     {
         $table->setActionable($vendor);
         return $table->render('admin.vendors.logs', compact('vendor'));
@@ -93,8 +93,8 @@ class VendorsController extends Controller
     public function approve(Request $request, Vendor $vendor)
     {
         $inputs = $request->only(['redirect_to']);
-        VendorsRepository::update($vendor, $inputs, ['status' => 'inactive']);
-        UserLogsRepository::log($request->user(), 'Approve', $vendor, $request->getClientIp());
+        VendorsService::update($vendor, $inputs, ['status' => 'inactive']);
+        UserHistoriesService::log($request->user(), 'Approve', $vendor, $request->getClientIp());
 
         Event::fire(new VendorApproved($vendor));
 
@@ -106,8 +106,8 @@ class VendorsController extends Controller
     public function reject(Request $request, Vendor $vendor)
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
-        VendorsRepository::update($vendor, $inputs, ['status' => 'rejected']);
-        UserLogsRepository::log($request->user(), 'Reject', $vendor, $request->getClientIp(), $inputs['remarks']);
+        VendorsService::update($vendor, $inputs, ['status' => 'rejected']);
+        UserHistoriesService::log($request->user(), 'Reject', $vendor, $request->getClientIp(), $inputs['remarks']);
 
         Event::fire(new VendorRejected($vendor, $inputs['remarks']));
         
@@ -120,15 +120,15 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
         
-        VendorsRepository::update($vendor, $inputs, ['status' => 'suspended']);
+        VendorsService::update($vendor, $inputs, ['status' => 'suspended']);
 
         if ($vendor->users) {
             foreach($vendor->users as $user) {
-                UsersRepository::suspend($user);
+                UsersService::suspend($user);
             }
         }
 
-        UserLogsRepository::log($request->user(), 'Suspend', $vendor, $request->getClientIp(), $inputs['remarks']);
+        UserHistoriesService::log($request->user(), 'Suspend', $vendor, $request->getClientIp(), $inputs['remarks']);
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -139,13 +139,13 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         
-        VendorsRepository::update($vendor, $inputs, ['status' => 'active']);
+        VendorsService::update($vendor, $inputs, ['status' => 'active']);
 
         foreach($vendor->users as $user) {
-            UsersRepository::activate($user);
+            UsersService::activate($user);
         }
 
-        UserLogsRepository::log($request->user(), 'Activate Vendor', $vendor, $request->getClientIp());
+        UserHistoriesService::log($request->user(), 'Activate Vendor', $vendor, $request->getClientIp());
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -156,8 +156,8 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
         
-        VendorsRepository::update($vendor, $inputs, ['status' => 'blacklisted']);
-        UserLogsRepository::log($request->user(), 'Blacklist', $vendor, $request->getClientIp(), $inputs['remarks']);
+        VendorsService::update($vendor, $inputs, ['status' => 'blacklisted']);
+        UserHistoriesService::log($request->user(), 'Blacklist', $vendor, $request->getClientIp(), $inputs['remarks']);
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -168,8 +168,8 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         
-        VendorsRepository::update($vendor, $inputs, ['status' => 'active']);
-        UserLogsRepository::log($request->user(), 'Unblacklist', $vendor, $request->getClientIp());
+        VendorsService::update($vendor, $inputs, ['status' => 'active']);
+        UserHistoriesService::log($request->user(), 'Unblacklist', $vendor, $request->getClientIp());
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\EvaluationRequirement;
 use App\EvaluationType;
 use App\Notice;
-use App\Repositories\EvaluationRequirementsRepository;
+use App\Services\EvaluationRequirementsService;
 
 class EvaluationRequirementsController extends Controller
 {
@@ -27,7 +27,7 @@ class EvaluationRequirementsController extends Controller
         $inputs['mandatory'] = $inputs['mandatory'][0] ?: 0;
         $inputs['evaluation_type_id'] = EvaluationType::whereName($inputs['type'])->first()->id;
 
-        $requirement = EvaluationRequirementsRepository::create(new EvaluationRequirement, $inputs);
+        $requirement = EvaluationRequirementsService::create(new EvaluationRequirement, $inputs);
 
         return response()->json($requirement);
     }
@@ -47,7 +47,7 @@ class EvaluationRequirementsController extends Controller
 
     public function delete(EvaluationRequirement $requirement)
     {
-        EvaluationRequirementsRepository::delete($requirement);
+        EvaluationRequirementsService::delete($requirement);
         return response()->json($requirement);
     }
 }

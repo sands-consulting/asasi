@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use App\Organization;
 use App\Place;
 use App\Permission;
@@ -11,6 +12,15 @@ use App\Repositories\PermissionsRepository;
 use App\Repositories\RolesRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Database\Seeder;
+=======
+use App\Services\PermissionService;
+use App\Services\RoleService;
+use App\Services\UserService;
+use Illuminate\Database\Seeder;
+use App\Permission;
+use App\User;
+use App\Role;
+>>>>>>> upstream/5.3
 
 class AsasiSeeder extends Seeder
 {
@@ -29,7 +39,7 @@ class AsasiSeeder extends Seeder
         DB::table('role_user')->truncate();
         DB::table('permissions')->truncate();
         DB::table('roles')->truncate();
-        DB::table('user_logs')->truncate();
+        DB::table('user_histories')->truncate();
         DB::table('user_blacklists')->truncate();
         DB::table('password_resets')->truncate();
         DB::table('users')->truncate();
@@ -45,7 +55,7 @@ class AsasiSeeder extends Seeder
         ];
 
         foreach ($roles as $roleData) {
-            RolesRepository::create(new Role(), $roleData);
+            RoleService::create(new Role(), $roleData);
         }
 
         $users = [
@@ -59,7 +69,7 @@ class AsasiSeeder extends Seeder
 
         foreach ($users as $userData) {
             $userData['password'] = app()->make('hash')->make($userData['password']);
-            UsersRepository::create(new User(), $userData);
+            UserService::create(new User(), $userData);
         }
 
         User::find(1)->roles()->attach(Role::first());
@@ -70,6 +80,12 @@ class AsasiSeeder extends Seeder
             ['access:vendor',           'Access vendor module'],
 
             ['permission:index',        'List all permissions'],
+            ['permission:show',         'View permission details'],
+            ['permission:create',       'Create new permission'],
+            ['permission:update',       'Update existing permission'],
+            ['permission:delete',       'Delete existing permission'],
+            ['permission:revisions',    'View all permissions'],
+            ['permission:histories',    'View all permissions'],
 
             ['role:index',              'List all roles'],
             ['role:show',               'View role details'],
@@ -77,12 +93,17 @@ class AsasiSeeder extends Seeder
             ['role:update',             'Update exisiting role'],
             ['role:delete',             'Delete exisiting role'],
             ['role:revisions',          'View role revisions'],
+<<<<<<< HEAD
             ['role:logs',               'View role logs'],
+=======
+            ['role:histories',          'View role histories'],
+>>>>>>> upstream/5.3
 
             ['user:index',              'List all users'],
             ['user:show',               'View user details'],
             ['user:create',             'Create new user'],
             ['user:update',             'Update exisiting user'],
+<<<<<<< HEAD
             ['user:duplicate',          'Duplicate exisiting user'],
             ['user:assume',             'Login as another user'],
             ['user:activate',           'Activate a user'],
@@ -90,11 +111,23 @@ class AsasiSeeder extends Seeder
             ['user:delete',             'Delete existing user'],
             ['user:revisions',          'View user revisions'],
             ['user:logs',               'View user logs'],
+=======
+            ['user:revisions',          'View user revisions'],
+            ['user:delete',             'Delete existing user'],
+            ['user:restore',            'Restore deleted user'],
+            ['user:revisions',          'View user revisions'],
+            ['user:histories',          'View user histories'],
+            ['user:duplicate',          'Duplicate exisiting user'],
+            ['user:activate',           'Activate a user'],
+            ['user:suspend',            'Suspend a user'],
+            ['user:assume',             'Login as another user'],
+>>>>>>> upstream/5.3
 
             ['user-blacklist:index',        'List all user blacklists'],
             ['user-blacklist:show',         'View blacklist details'],
             ['user-blacklist:create',       'Blacklist a user'],
             ['user-blacklist:update',       'Update user blacklist'],
+<<<<<<< HEAD
             ['user-blacklist:duplicate',    'Duplicate a blacklist'],
             ['user-blacklist:delete',       'Delete existing user blacklist'],
             ['user-blacklist:revisions',    'List blacklist revisions'],
@@ -122,15 +155,22 @@ class AsasiSeeder extends Seeder
             ['place:delete',            'Delete existing place'],
             ['place:revisions',         'View place revisions'],
             ['place:logs',              'View place logs']
+=======
+            ['user-blacklist:delete',       'Delete existing user blacklist']
+            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
+            ['user-blacklist:revisions',    'View blacklist revisions'],
+            ['user-blacklist:histories',    'View blacklist histories'],
+>>>>>>> upstream/5.3
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            PermissionService::create(new Permission(), [
                 'name'          => $permissionData[0],
                 'description'   => $permissionData[1],
             ]);
         }
 
+<<<<<<< HEAD
         Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
 
         OrganizationsRepository::create(new Organization, [
@@ -172,5 +212,8 @@ class AsasiSeeder extends Seeder
             ]);
         }
 
+=======
+        Role::first()->permissions()->sync(Permission::all()->pluck('id')->toArray());
+>>>>>>> upstream/5.3
     }
 }

@@ -100,7 +100,7 @@
 </div>
 
 <script src="{{ elixir('assets/js/public.js') }}"></script>
-<script src="{{ env('SOCKET_URL') }}/socket.io/socket.io.js"></script>
+<script src="{{ env('APP_SOCKET_URL') }}/socket.io/socket.io.js"></script>
 @yield('scripts')
 {!! flash_messages() !!}
 </body>

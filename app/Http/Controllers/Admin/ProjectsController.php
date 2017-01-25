@@ -8,10 +8,10 @@ use App\Organization;
 use App\DataTables\ProjectDataTable;
 use App\DataTables\ProjectNoticeDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\ProjectRequest;
-use App\Repositories\ProjectsRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\ProjectsService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -50,8 +50,8 @@ class ProjectsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        $project = ProjectsRepository::create(new Project, $inputs);
-        UserLogsRepository::log($request->user(), 'create', $project, $request->getClientIp());
+        $project = ProjectsService::create(new Project, $inputs);
+        UserHistoriesService::log($request->user(), 'create', $project, $request->getClientIp());
         return redirect()
             ->route('admin.projects.show', $project->id)
             ->with('notice', trans('projects.notices.created', ['name' => $project->name]));
@@ -90,7 +90,7 @@ class ProjectsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        ProjectsRepository::update($project, $inputs);
+        ProjectsService::update($project, $inputs);
 
         $managers = [];
         if (count($inputs['managers']) > 0) {
@@ -103,7 +103,7 @@ class ProjectsController extends Controller
         }
         $project->users()->sync($managers);
 
-        UserLogsRepository::log($request->user(), 'update', $project, $request->getClientIp());
+        UserHistoriesService::log($request->user(), 'update', $project, $request->getClientIp());
         return redirect()
             ->route('admin.projects.show', $project->id)
             ->with('notice', trans('projects.notices.updated', ['number' => $project->number]));
@@ -111,14 +111,14 @@ class ProjectsController extends Controller
 
     public function destroy(Project $project)
     {
-        ProjectsRepository::delete($project);
-        UserLogsRepository::log($request->user(), 'delete', $project, $request->getClientIp());
+        ProjectsService::delete($project);
+        UserHistoriesService::log($request->user(), 'delete', $project, $request->getClientIp());
         return redirect()
             ->route('admin.projects.index')
             ->with('notice', trans('projects.notices.deleted', ['name' => $project->name]));
     }
 
-    public function logs(Project $project, UserLogsDataTable $table)
+    public function logs(Project $project, UserHistoriesDataTable $table)
     {
         $table->setActionable($project);
         return $table->render('admin.projects.logs', compact('project'));

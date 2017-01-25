@@ -8,7 +8,7 @@ use App\DataTables\SubmissionsDataTable;
 use App\DataTables\SubmissionNoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\SubmissionRequest;
-use App\Repositories\SubmissionsRepository;
+use App\Services\SubmissionsService;
 use Illuminate\Http\Request;
 
 class SubmissionsController extends Controller
@@ -33,7 +33,7 @@ class SubmissionsController extends Controller
     {
         $inputs = $request->only('name');
 
-        $submission  = SubmissionsRepository::create(new Submission, $inputs);
+        $submission  = SubmissionsService::create(new Submission, $inputs);
         return redirect()
             ->route('admin.submissions.show', $submission->id)
             ->with('notice', trans('submissions.notices.created', ['name' => $submission->name]));
@@ -55,7 +55,7 @@ class SubmissionsController extends Controller
             'name'
         );
         
-        $submission  = SubmissionsRepository::update($submission, $inputs);
+        $submission  = SubmissionsService::update($submission, $inputs);
         return redirect()
             ->route('admin.submissions.show', $submission->id)
             ->with('notice', trans('submissions.notices.updated', ['name' => $submission->name]));
@@ -63,7 +63,7 @@ class SubmissionsController extends Controller
 
     public function destroy(Submission $submission)
     {
-        SubmissionsRepository::delete($submission);
+        SubmissionsService::delete($submission);
         return redirect()
             ->route('admin.submissions.index')
             ->with('notice', trans('submissions.notices.deleted', ['name' => $submission->name]));
@@ -83,7 +83,7 @@ class SubmissionsController extends Controller
 
     public function activate(Request $request, Submission $submission)
     {
-        SubmissionsRepository::activate($submission);
+        SubmissionsService::activate($submission);
         return redirect()
             ->to($request->input('redirect_to', route('admin.submissions.show', $submission->id)))
             ->with('notice', trans('submissions.notices.activated', ['name' => $submission->name]));
@@ -91,7 +91,7 @@ class SubmissionsController extends Controller
 
     public function deactivate(Request $request, Submission $submission)
     {
-        SubmissionsRepository::deactivate($submission);
+        SubmissionsService::deactivate($submission);
         return redirect()
             ->to($request->input('redirect_to', route('admin.submissions.show', $submission->id)))
             ->with('notice', trans('submissions.notices.deactivated', ['name' => $submission->name]));

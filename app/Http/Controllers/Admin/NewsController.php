@@ -6,10 +6,10 @@ use App\News;
 use App\Organization;
 use App\DataTables\NewsDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\NewsRequest;
-use App\Repositories\NewsRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\NewsService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -35,8 +35,8 @@ class NewsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        $news   = NewsRepository::create(new News, $inputs);
-        UserLogsRepository::log($request->user(), 'create', $news, $request->getClientIp());
+        $news   = NewsService::create(new News, $inputs);
+        UserHistoriesService::log($request->user(), 'create', $news, $request->getClientIp());
         return redirect()
             ->route('admin.news.edit', $news->slug)
             ->with('notice', trans('news.notices.created', ['title' => $news->title]));
@@ -60,8 +60,8 @@ class NewsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        NewsRepository::update($news, $inputs);
-        UserLogsRepository::log($request->user(), 'update', $news, $request->getClientIp());
+        NewsService::update($news, $inputs);
+        UserHistoriesService::log($request->user(), 'update', $news, $request->getClientIp());
         return redirect()
             ->route('admin.news.edit', $news->id)
             ->with('notice', trans('news.notices.updated', ['title' => $news->title]));
@@ -69,14 +69,14 @@ class NewsController extends Controller
 
     public function destroy(Request $request, News $news)
     {
-        NewsRepository::delete($news);
-        UserLogsRepository::log($request->user(), 'delete', $news, $request->getClientIp());
+        NewsService::delete($news);
+        UserHistoriesService::log($request->user(), 'delete', $news, $request->getClientIp());
         return redirect()
             ->route('admin.news.index')
             ->with('notice', trans('news.notices.deleted', ['title' => $news->title]));
     }
 
-    public function logs(News $news, UserLogsDataTable $table)
+    public function logs(News $news, UserHistoriesDataTable $table)
     {
         $table->setActionable($news);
         return $table->render('admin.news.logs', compact('news'));
@@ -90,16 +90,16 @@ class NewsController extends Controller
 
     public function publish(Request $request, News $news)
     {
-        NewsRepository::publish($news);
-        UserLogsRepository::log($request->user(), 'publish', $news, $request->getClientIp());
+        NewsService::publish($news);
+        UserHistoriesService::log($request->user(), 'publish', $news, $request->getClientIp());
         return redirect($request->input('redirect_to', route('admin.news.edit', $news->slug)))
                 ->with('notice', trans('news.notices.published', ['title' => $news->title]));
     }
 
     public function unpublish(Request $request, News $news)
     {
-        NewsRepository::unpublish($news);
-        UserLogsRepository::log($request->user(), 'unpublish', $news, $request->getClientIp());
+        NewsService::unpublish($news);
+        UserHistoriesService::log($request->user(), 'unpublish', $news, $request->getClientIp());
         return redirect($request->input('redirect_to', route('admin.news.edit', $news->slug)))
                 ->with('notice', trans('news.notices.unpublished', ['title' => $news->title]));
     }

@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\EvaluatorSubmissionAssigned;
 use App\Mailers\EvaluatorSubmissionMailer;
-use App\Repositories\NoticeEvaluatorsRepository;
+use App\Services\NoticeEvaluatorsService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
@@ -29,7 +29,7 @@ class EvaluatorSubmissionAssignedListener
      */
     public function handle(EvaluatorSubmissionAssigned $event)
     {
-        NoticeEvaluatorsRepository::update($event->evaluator, ['status' => 'active']);
+        NoticeEvaluatorsService::update($event->evaluator, ['status' => 'active']);
         $this->mailer->send($event->evaluator);
     }
 }

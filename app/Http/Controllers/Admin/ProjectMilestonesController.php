@@ -10,10 +10,10 @@ use App\ProjectMilestone;
 use App\Organization;
 use App\DataTables\ProjectMilestoneDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\ProjectMilestoneRequest;
-use App\Repositories\ProjectMilestonesRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\ProjectMilestonesService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 use Dhtmlx\Connector\GanttConnector;
 
@@ -51,8 +51,8 @@ class ProjectMilestonesController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        $milestone = ProjectMilestonesRepository::create(new ProjectMilestone, $inputs);
-        UserLogsRepository::log($request->user(), 'create', $milestone, $request->getClientIp());
+        $milestone = ProjectMilestonesService::create(new ProjectMilestone, $inputs);
+        UserHistoriesService::log($request->user(), 'create', $milestone, $request->getClientIp());
         return redirect()
             ->route('admin.project-milestones.show', $milestone->id)
             ->with('notice', trans('milestones.notices.created', ['name' => $milestone->name]));
@@ -91,7 +91,7 @@ class ProjectMilestonesController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        ProjectMilestonesRepository::update($milestone, $inputs);
+        ProjectMilestonesService::update($milestone, $inputs);
 
         $managers = [];
         if (count($inputs['managers']) > 0) {
@@ -104,7 +104,7 @@ class ProjectMilestonesController extends Controller
         }
         $milestone->users()->sync($managers);
 
-        UserLogsRepository::log($request->user(), 'update', $milestone, $request->getClientIp());
+        UserHistoriesService::log($request->user(), 'update', $milestone, $request->getClientIp());
         return redirect()
             ->route('admin.project-milestones.show', $milestone->id)
             ->with('notice', trans('milestones.notices.updated', ['number' => $milestone->number]));
@@ -112,14 +112,14 @@ class ProjectMilestonesController extends Controller
 
     public function destroy(ProjectMilestone $milestone)
     {
-        ProjectMilestonesRepository::delete($milestone);
-        UserLogsRepository::log($request->user(), 'delete', $milestone, $request->getClientIp());
+        ProjectMilestonesService::delete($milestone);
+        UserHistoriesService::log($request->user(), 'delete', $milestone, $request->getClientIp());
         return redirect()
             ->route('admin.project-milestones.index')
             ->with('notice', trans('milestones.notices.deleted', ['name' => $milestone->name]));
     }
 
-    public function logs(ProjectMilestone $milestone, UserLogsDataTable $table)
+    public function logs(ProjectMilestone $milestone, UserHistoriesDataTable $table)
     {
         $table->setActionable($milestone);
         return $table->render('admin.project-milestones.logs', compact('milestone'));

@@ -1,14 +1,39 @@
 {
   "private": true,
-  "devDependencies": {
-    "gulp": "^3.8.8",
-    "laravel-elixir-browsersync-official": "^1.0.0",
-    "laravel-elixir-livereload": "^1.1.6",
-    "laravel-elixir-webpack-official": "^1.0.10"
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
   },
-  "dependencies": {
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "c3": "^0.4.11",
+    "ckeditor": "^4.6.2",
+    "d3": "^4.4.4",
+    "datatables.net": "^2.1.1",
+    "datatables.net-bs": "^2.1.1",
+    "datatables.net-buttons": "^1.2.4",
+    "datatables.net-buttons-bs": "^1.2.4",
+    "daterangepicker": "0.0.3",
+    "gulp": "^3.9.1",
+    "humane-js": "^3.2.2",
     "ioredis": "^2.4.0",
+    "jquery": "^3.1.0",
+    "jquery-ui": "^1.12.1",
+    "jquery-ujs": "^1.2.2",
+    "jquery.nicescroll": "^3.6.8",
+    "jquery.uniform": "^4.0.1",
     "laravel-elixir": "^6.0.0-15",
-    "socket.io": "^1.5.1"
+    "laravel-elixir-vue-2": "^0.2.0",
+    "laravel-elixir-webpack-official": "^1.0.10",
+    "lodash": "^4.16.2",
+    "moment": "^2.17.1",
+    "pace-progress": "^1.0.2",
+    "pnotify": "^3.0.0",
+    "select2": "^4.0.3",
+    "socket.io": "^1.5.1",
+    "switchery": "0.0.2",
+    "vue": "^2.0.1",
+    "vue-resource": "^1.0.3",
+    "x-editable": "^1.5.1"
   }
 }

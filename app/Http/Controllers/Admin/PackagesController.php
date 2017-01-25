@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Package;
 use App\DataTables\PackagesDataTable;
 use App\Http\Requests\PackageRequest;
-use App\Repositories\PackagesRepository;
+use App\Services\PackagesService;
 use Illuminate\Http\Request;
 
 class PackagesController extends Controller
@@ -23,7 +23,7 @@ class PackagesController extends Controller
     public function store(PackageRequest $request)
     {
         $inputs  = $request->all();
-        $package = PackagesRepository::create(new Package, $inputs);
+        $package = PackagesService::create(new Package, $inputs);
 
         return redirect()
             ->route('admin.packages.show', $package->id)
@@ -44,7 +44,7 @@ class PackagesController extends Controller
     {
         $inputs = $request->all();
 
-        $package = PackagesRepository::update($package, $inputs);
+        $package = PackagesService::update($package, $inputs);
 
         if ($roles = $request->get('roles', [])) {
             $package->roles()->sync($roles);
@@ -58,7 +58,7 @@ class PackagesController extends Controller
     public function duplicate(Package $package)
     {
         $package->name = $package->name . '-' . str_random(4);
-        $package = PackagesRepository::duplicate($package);
+        $package = PackagesService::duplicate($package);
         return redirect()
             ->action('PackagesController@edit', $package->getSlug())
             ->with('success', trans('packages.created', ['name' => $package->name]));
@@ -66,7 +66,7 @@ class PackagesController extends Controller
 
     public function destroy(Package $package)
     {
-        PackagesRepository::delete($package);
+        PackagesService::delete($package);
         return redirect()
             ->route('admin.packages.index')
             ->with('notice', trans('packages.notices.deleted', ['name' => $package->name]));
@@ -80,7 +80,7 @@ class PackagesController extends Controller
 
     public function activate(Request $request, Package $package)
     {
-        PackagesRepository::activate($package);
+        PackagesService::activate($package);
         return redirect()
             ->to($request->input('redirect_to', route('admin.packages.show', $package->id)))
             ->with('notice', trans('packages.notices.activated', ['name' => $package->name]));
@@ -88,7 +88,7 @@ class PackagesController extends Controller
 
     public function deactivate(Request $request, Package $package)
     {
-        PackagesRepository::deactivate($package);
+        PackagesService::deactivate($package);
         return redirect()
             ->to($request->input('redirect_to', route('admin.packages.show', $package->id)))
             ->with('notice', trans('packages.notices.deactivated', ['name' => $package->name]));

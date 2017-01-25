@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\VendorRejected;
 use App\Notificators\VendorRejectedNotificator;
-use App\Repositories\UserLogsRepository;
+use App\Services\UserHistoriesService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
@@ -31,6 +31,5 @@ class VendorRejectedListener
     public function handle(VendorRejected $event)
     {
         $this->notificator->notify($event->vendor);
-        // UserLogsRepository::log($event->user, 'reject', $event->vendor, $this->request->getClientIp(), $event->remarks);
     }
 }

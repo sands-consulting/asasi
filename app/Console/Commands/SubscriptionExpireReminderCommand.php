@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Events\SubscriptionExpireReminder;
-use App\Repositories\SubscriptionsRepository;
+use App\Services\SubscriptionsService;
 use App\Subscription;
 use Event;
 use Illuminate\Console\Command;
@@ -44,7 +44,7 @@ class SubscriptionExpireReminderCommand extends Command
     {
         // Fixme: find better solution to get days var for array value.
         $days = 30;
-        $subscriptions = SubscriptionsRepository::getSubscriptionsExpiredIn($days);
+        $subscriptions = SubscriptionsService::getSubscriptionsExpiredIn($days);
         foreach ($subscriptions as $subscription) {
             Event::fire(new SubscriptionExpireReminder($subscription->vendor->user, $days));
         }

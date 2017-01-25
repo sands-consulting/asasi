@@ -7,7 +7,7 @@ use App\Events\EvaluatorAssigned;
 use App\Events\EvaluatorSubmissionAssigned;
 use App\Notice;
 use App\NoticeEvaluator;
-use App\Repositories\NoticeEvaluatorsRepository;
+use App\Services\NoticeEvaluatorsService;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -80,7 +80,7 @@ class EvaluatorsController extends Controller
 
     public function accept(NoticeEvaluator $evaluator)
     {
-        NoticeEvaluatorsRepository::update($evaluator, ['status' => 'accepted']);
+        NoticeEvaluatorsService::update($evaluator, ['status' => 'accepted']);
 
         return redirect()
             ->route('admin.evaluations.index')
@@ -89,7 +89,7 @@ class EvaluatorsController extends Controller
 
     public function decline(NoticeEvaluator $evaluator)
     {
-        NoticeEvaluatorsRepository::update($evaluator, ['status' => 'declined']);
+        NoticeEvaluatorsService::update($evaluator, ['status' => 'declined']);
 
         return redirect()
             ->route('admin.evaluations.index')

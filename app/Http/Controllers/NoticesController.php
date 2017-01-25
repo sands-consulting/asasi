@@ -6,10 +6,10 @@ use App\Notice;
 use App\Submission;
 use App\SubmissionDetail;
 use App\Http\Requests\NoticeRequest;
-use App\Repositories\NoticesRepository;
-use App\Repositories\SubmissionsRepository;
-use App\Repositories\SubmissionDetailsRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\NoticesService;
+use App\Services\SubmissionsService;
+use App\Services\SubmissionDetailsService;
+use App\Services\UserHistoriesService;
 use Auth;
 use Illuminate\Http\Request;
 

@@ -1,47 +1,42 @@
-<?php namespace App;
+<?php
 
-use Cart;
-use Cache;
-use Illuminate\Support\Facades\Auth;
-use App\Libraries\Traits\DateAccessorTrait;
+namespace App;
+
+use App\Traits\Roleable;
+use App\Traits\DateAccessor;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Venturecraft\Revisionable\RevisionableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
-    use RevisionableTrait,
-        DateAccessorTrait,
-        SoftDeletes;
+    use Notifiable, RevisionableTrait, Roleable, SoftDeletes;
 
-    protected $revisionCreationsEnabled = true;
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'status',
-        'confirmation_token',
+        'name', 'email', 'password', 'status'
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    protected $attributes = [
-        'status' => 'inactive',
+        'confirmation_token', 'password', 'remember_token',
     ];
 
     protected $searchable = [
-        'name',
-        'email'
+        'name', 'email'
     ];
 
     protected $sortable = [
-        'name',
-        'email',
-        'status'
+        'name', 'email', 'status'
     ];
 
     /*
@@ -50,12 +45,12 @@ class User extends Authenticatable
     
     public function latestLog()
     {
-        return $this->hasOne(UserLog::class, 'user_id')->latest();
+        return $this->hasOne(UserHistory::class, 'user_id')->latest();
     }
 
-    public function logs()
+    public function histories()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistories::class, 'actionable');
     }
 
     public function bookmarks()
@@ -78,11 +73,6 @@ class User extends Authenticatable
     public function organizations()
     {
         return $this->belongsToMany(Organization::class);
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
     }
 
     public function submissions()
@@ -203,82 +193,9 @@ class User extends Authenticatable
         return $this->status != 'active';
     }
 
-    public function canAddNoticeToCart($noticeId)
-    {
-        $inCart = false;
-        if ($content = Cart::content()) {
-            $inCart = Cart::content()->search(function ($cartItem) use ($noticeId) {
-                return $cartItem->id == $noticeId;
-            });
-        }
-        return $this->hasSubscription() && !$this->hasBoughtNotice($noticeId) && !$inCart;
-    }
-
     public function canSuspend()
     {
         return Auth::user()->id != $this->id && $this->status != 'suspended';
-    }
-
-    /*
-     * ACL functions
-     */
-
-    public function hasRole($role)
-    {
-        return $this->roles()->whereName($role)->count() == 1;
-    }
-
-    public function hasRoles($roles)
-    {
-        return $this->roles()->whereName($roles)->count() > 0;
-    }
-
-    public function hasPermission($permission)
-    {
-        return in_array($permission, $this->cachedPermissions());
-    }
-
-    public function hasPermissions($permissions = [])
-    {
-        return count(array_intersect($this->cachedPermissions(), $permissions)) > 0;
-    }
-
-    public function hasAllPermissions($permissions = [])
-    {
-        return count(array_intersect($this->cachedPermissions(), $permissions)) == count($permissions);
-    }
-
-    /*
-     * Permissions caching
-     */
-
-    public function cachedPermissions()
-    {
-        if (! Cache::has($this->permissions_cache_key)) {
-            $this->cachePermissions();
-        }
-
-        return Cache::get($this->permissions_cache_key);
-    }
-
-    public function cachePermissions()
-    {
-        if (Cache::has('user_')) {
-            Cache::forget($this->permissions_cache_key);
-        }
-
-        $that = $this;
-        Cache::rememberForever($this->permissions_cache_key, function () use ($that) {
-            return Permission::join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
-                                        ->whereIn('permission_role.role_id', $that->roles->lists('id')->toArray())
-                                        ->lists('name')
-                                        ->toArray();
-        });
-    }
-
-    protected function getPermissionsCacheKeyAttribute()
-    {
-        return 'user_permissions_' . $this->getKey();
     }
 
     /*

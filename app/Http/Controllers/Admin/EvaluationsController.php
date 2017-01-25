@@ -12,7 +12,7 @@ use App\Notice;
 use App\NoticeEvaluator;
 use App\User;
 use App\Vendor;
-use App\Repositories\EvaluationScoresRepository;
+use App\Services\EvaluationScoresService;
 use Illuminate\Http\Request;
 
 class EvaluationsController extends Controller

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\NewsCategory;
 use App\DataTables\NewsCategoriesDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\NewsCategoryRequest;
-use App\Repositories\NewsCategoriesRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\NewsCategoriesService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
 class NewsCategoriesController extends Controller
@@ -26,8 +26,8 @@ class NewsCategoriesController extends Controller
     public function store(NewsCategoryRequest $request)
     {
         $inputs     = $request->only('name', 'status');
-        $category   = NewsCategoriesRepository::create(new NewsCategory, $inputs);
-        UserLogsRepository::log($request->user(), 'create', $category, $request->getClientIp());
+        $category   = NewsCategoriesService::create(new NewsCategory, $inputs);
+        UserHistoriesService::log($request->user(), 'create', $category, $request->getClientIp());
         return redirect()
             ->route('admin.news-categories.edit', $category->slug)
             ->with('notice', trans('news-categories.notices.created', ['name' => $category->name]));
@@ -41,8 +41,8 @@ class NewsCategoriesController extends Controller
     public function update(NewsCategoryRequest $request, NewsCategory $category)
     {
         $inputs = $request->only('name', 'status');
-        NewsCategoriesRepository::update($category, $inputs);
-        UserLogsRepository::log($request->user(), 'update', $category, $request->getClientIp());
+        NewsCategoriesService::update($category, $inputs);
+        UserHistoriesService::log($request->user(), 'update', $category, $request->getClientIp());
         return redirect()
             ->route('admin.news-categories.edit', $category->slug)
             ->with('notice', trans('news-categories.notices.updated', ['name' => $category->name]));
@@ -50,14 +50,14 @@ class NewsCategoriesController extends Controller
 
     public function destroy(Request $request, NewsCategory $category)
     {
-        NewsCategoriesRepository::delete($category);
-        UserLogsRepository::log($request->user(), 'delete', $category, $request->getClientIp());
+        NewsCategoriesService::delete($category);
+        UserHistoriesService::log($request->user(), 'delete', $category, $request->getClientIp());
         return redirect()
             ->route('admin.news-categories.index')
             ->with('notice', trans('news-categories.notices.deleted', ['name' => $category->name]));
     }
 
-    public function logs(NewsCategory $category, UserLogsDataTable $table)
+    public function logs(NewsCategory $category, UserHistoriesDataTable $table)
     {
         $table->setActionable($category);
         return $table->render('admin.news-categories.logs', compact('category'));

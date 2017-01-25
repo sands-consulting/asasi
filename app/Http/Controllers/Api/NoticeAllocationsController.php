@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\Notice;
 use App\AllocationNotice;
-use App\Repositories\AllocationNoticeRepository;
+use App\Services\AllocationNoticeService;
 
 class NoticeAllocationsController extends Controller
 {
@@ -42,7 +42,7 @@ class NoticeAllocationsController extends Controller
 
     public function delete(AllocationNotice $noticeAllocation)
     {
-        AllocationNoticeRepository::delete($noticeAllocation);
+        AllocationNoticeService::delete($noticeAllocation);
         return response()->json($noticeAllocation);
     }
 }

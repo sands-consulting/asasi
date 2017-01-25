@@ -2,41 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\UsersRepository;
-use App\Repositories\UserLogsRepository;
-use App\Http\Requests\AccountRequest;
-use Auth;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateMe;
+use Illuminate\Http\MeRequest;
 use Illuminate\Contracts\Auth\Guard;
 
-class Me extends Controller
+class MeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+	public function edit()
+	{
+		return view('me.edit');
+	}
 
-    public function update(Guard $auth)
-    {
-        return view('profile.edit', ['user' => $auth->user()]);
-    }
+	public function update(MeRequest $request, Guard $auth)
+	{
+		$inputs	= $request->only('name', 'email');
 
-    public function update(AccountRequest $request, Guard $auth)
-    {
-        $inputs = $request->only('name');
-        if($request->has('password'))
-        {
-            $inputs['password'] = bcrypt($request->input('password'));
-        }
+		if(isset($inputs['password']))
+		{
+			$inputs['password']	= bcrypt($inputs['password']);
+		}
+		else
+		{
+			unset($inputs['password']);
+		}
 
-        $user = UsersRepository::update($auth->user(), $inputs);
+		$auth->update($inputs);
 
-        UserLogsRepository::log(Auth::user(), 'Update-Profile', $user, $request->getClientIp());
+		return redirect()
+                ->route('me')
+                ->with('notice', trans('me.notices.updated'));
+	}
 
+	public function resume(Request $request, Guard $auth)
+	{
+		$current_user = $auth->user();
+        $original_user = UsersService::resume();
         return redirect()
-            ->route('profile')
-            ->with('notice', trans('profile.notices.updated'));
-    }
+                ->route('admin.users.show', $current_user->id)
+                ->with('notice', trans('me.notices.resumed', ['name' => $original_user->name]));
+	}
 
     public function contact(Guard $auth)
     {
@@ -49,14 +53,5 @@ class Me extends Controller
 
     public function notifications(Request $request)
     {
-    }
-
-    public function resume(Request $request, Guard $auth)
-    {
-        $current_user = $auth->user();
-        $original_user = UsersRepository::resume();
-        return redirect()
-                ->route('admin.users.show', $current_user->id)
-                ->with('notice', trans('profile.notices.resumed', ['name' => $original_user->name]));
     }
 }

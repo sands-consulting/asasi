@@ -7,7 +7,7 @@ use App\Events\VendorApplied;
 use App\Events\VendorCancelled;
 use App\Http\Requests\VendorRequest;
 use App\Notificators\VendorAppliedNotificator;
-use App\Repositories\VendorsRepository;
+use App\Services\VendorsService;
 use App\Vendor;
 use Auth;
 use Illuminate\Http\Request;

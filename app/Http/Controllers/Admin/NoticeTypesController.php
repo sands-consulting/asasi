@@ -6,7 +6,7 @@ use App\NoticeType;
 use App\DataTables\NoticeTypesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeTypeRequest;
-use App\Repositories\NoticeTypesRepository;
+use App\Services\NoticeTypesService;
 use Illuminate\Http\Request;
 
 class NoticeTypesController extends Controller
@@ -25,7 +25,7 @@ class NoticeTypesController extends Controller
     {
         $inputs = $request->only('name');
 
-        $noticeType  = NoticeTypesRepository::create(new NoticeType, $inputs);
+        $noticeType  = NoticeTypesService::create(new NoticeType, $inputs);
         return redirect()
             ->route('admin.notice-types.show', $noticeType->id)
             ->with('notice', trans('notice-types.notices.created', ['name' => $noticeType->name]));
@@ -47,7 +47,7 @@ class NoticeTypesController extends Controller
             'name'
         );
         
-        $noticeType  = NoticeTypesRepository::update($noticeType, $inputs);
+        $noticeType  = NoticeTypesService::update($noticeType, $inputs);
         return redirect()
             ->route('admin.notice-types.show', $noticeType->id)
             ->with('notice', trans('notice-types.notices.updated', ['name' => $noticeType->name]));
@@ -55,7 +55,7 @@ class NoticeTypesController extends Controller
 
     public function destroy(NoticeType $noticeType)
     {
-        NoticeTypesRepository::delete($noticeType);
+        NoticeTypesService::delete($noticeType);
         return redirect()
             ->route('admin.notice-types.index')
             ->with('notice', trans('notice-types.notices.deleted', ['name' => $noticeType->name]));
@@ -75,7 +75,7 @@ class NoticeTypesController extends Controller
 
     public function activate(Request $request, NoticeType $noticeType)
     {
-        NoticeTypesRepository::activate($noticeType);
+        NoticeTypesService::activate($noticeType);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notice-types.show', $noticeType->id)))
             ->with('notice', trans('notice-types.notices.activated', ['name' => $noticeType->name]));
@@ -83,7 +83,7 @@ class NoticeTypesController extends Controller
 
     public function deactivate(Request $request, NoticeType $noticeType)
     {
-        NoticeTypesRepository::deactivate($noticeType);
+        NoticeTypesService::deactivate($noticeType);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notice-types.show', $noticeType->id)))
             ->with('notice', trans('notice-types.notices.deactivated', ['name' => $noticeType->name]));

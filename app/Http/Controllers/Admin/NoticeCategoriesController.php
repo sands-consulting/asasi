@@ -6,7 +6,7 @@ use App\NoticeCategory;
 use App\DataTables\NoticeCategoriesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeCategoryRequest;
-use App\Repositories\NoticeCategoriesRepository;
+use App\Services\NoticeCategoriesService;
 use Illuminate\Http\Request;
 
 class NoticeCategoriesController extends Controller
@@ -25,7 +25,7 @@ class NoticeCategoriesController extends Controller
     {
         $inputs = $request->only('name');
 
-        $noticeCategory  = NoticeCategoriesRepository::create(new NoticeCategory, $inputs);
+        $noticeCategory  = NoticeCategoriesService::create(new NoticeCategory, $inputs);
         return redirect()
             ->route('admin.notice-categories.show', $noticeCategory->id)
             ->with('notice', trans('notice-categories.notices.created', ['name' => $noticeCategory->name]));
@@ -47,7 +47,7 @@ class NoticeCategoriesController extends Controller
             'name'
         );
         
-        $noticeCategory  = NoticeCategoriesRepository::update($noticeCategory, $inputs);
+        $noticeCategory  = NoticeCategoriesService::update($noticeCategory, $inputs);
         return redirect()
             ->route('admin.notice-categories.show', $noticeCategory->id)
             ->with('notice', trans('notice-categories.notices.updated', ['name' => $noticeCategory->name]));
@@ -55,7 +55,7 @@ class NoticeCategoriesController extends Controller
 
     public function destroy(NoticeCategory $noticeCategory)
     {
-        NoticeCategoriesRepository::delete($noticeCategory);
+        NoticeCategoriesService::delete($noticeCategory);
         return redirect()
             ->route('admin.notice-categories.index')
             ->with('notice', trans('notice-categories.notices.deleted', ['name' => $noticeCategory->name]));
@@ -75,7 +75,7 @@ class NoticeCategoriesController extends Controller
 
     public function activate(Request $request, NoticeCategory $noticeCategory)
     {
-        NoticeCategoriesRepository::activate($noticeCategory);
+        NoticeCategoriesService::activate($noticeCategory);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notice-categories.show', $noticeCategory->id)))
             ->with('notice', trans('notice-categories.notices.activated', ['name' => $noticeCategory->name]));
@@ -83,7 +83,7 @@ class NoticeCategoriesController extends Controller
 
     public function deactivate(Request $request, NoticeCategory $noticeCategory)
     {
-        NoticeCategoriesRepository::deactivate($noticeCategory);
+        NoticeCategoriesService::deactivate($noticeCategory);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notice-categories.show', $noticeCategory->id)))
             ->with('notice', trans('notice-categories.notices.deactivated', ['name' => $noticeCategory->name]));

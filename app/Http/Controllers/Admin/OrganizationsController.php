@@ -6,7 +6,7 @@ use App\Organization;
 use App\DataTables\OrganizationsDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\OrganizationRequest;
-use App\Repositories\OrganizationsRepository;
+use App\Services\OrganizationsService;
 use Illuminate\Http\Request;
 
 class OrganizationsController extends Controller
@@ -24,7 +24,7 @@ class OrganizationsController extends Controller
     public function store(OrganizationRequest $request)
     {
         $inputs         = $request->only('name', 'short_name', 'parent_id');
-        $organization   = OrganizationsRepository::create(new Organization, $inputs);
+        $organization   = OrganizationsService::create(new Organization, $inputs);
         return redirect()
             ->route('admin.organizations.index')
             ->with('notice', trans('organizations.notices.created', ['name' => $organization->name]));
@@ -43,7 +43,7 @@ class OrganizationsController extends Controller
     public function update(OrganizationRequest $request, Organization $organization)
     {
         $inputs         = $request->only('name', 'short_name', 'parent_id');
-        $organization   = OrganizationsRepository::update($organization, $inputs);
+        $organization   = OrganizationsService::update($organization, $inputs);
         return redirect()
             ->route('admin.organizations.index')
             ->with('notice', trans('organizations.notices.updated', ['name' => $organization->name]));
@@ -51,7 +51,7 @@ class OrganizationsController extends Controller
 
     public function destroy(Organization $organization)
     {
-        OrganizationsRepository::delete($organization);
+        OrganizationsService::delete($organization);
         return redirect()
             ->route('admin.organizations.index')
             ->with('notice', trans('organizations.notices.deleted', ['name' => $organization->name]));
@@ -71,7 +71,7 @@ class OrganizationsController extends Controller
 
     public function activate(Request $request, Organization $organization)
     {
-        OrganizationsRepository::activate($organization);
+        OrganizationsService::activate($organization);
         return redirect()
             ->to($request->input('redirect_to', route('admin.organizations.show', $organization->id)))
             ->with('notice', trans('organizations.notices.activated', ['name' => $organization->name]));
@@ -79,7 +79,7 @@ class OrganizationsController extends Controller
 
     public function deactivate(Request $request, Organization $organization)
     {
-        OrganizationsRepository::deactivate($organization);
+        OrganizationsService::deactivate($organization);
         return redirect()
             ->to($request->input('redirect_to', route('admin.organizations.show', $organization->id)))
             ->with('notice', trans('organizations.notices.deactivated', ['name' => $organization->name]));
@@ -87,7 +87,7 @@ class OrganizationsController extends Controller
 
     public function suspend(Request $request, Organization $organization)
     {
-        OrganizationsRepository::suspend($organization);
+        OrganizationsService::suspend($organization);
         return redirect()
             ->to($request->input('redirect_to', route('admin.organizations.show', $organization->id)))
             ->with('notice', trans('organizations.notices.suspended', ['name' => $organization->name]));

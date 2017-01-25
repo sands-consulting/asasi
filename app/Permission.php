@@ -14,9 +14,7 @@ class Permission extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'group',
-        'name',
-        'description'
+        'group', 'name', 'description'
     ];
 
     protected $searchable = [

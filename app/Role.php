@@ -14,9 +14,7 @@ class Role extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'name',
-        'display_name',
-        'description'
+        'name', 'display_name', 'description'
     ];
 
     public function logs()

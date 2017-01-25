@@ -6,10 +6,10 @@ use App\Notice;
 use App\Submission;
 use App\SubmissionDetail;
 use App\Http\Requests\NoticeRequest;
-use App\Repositories\NoticesRepository;
-use App\Repositories\SubmissionsRepository;
-use App\Repositories\SubmissionDetailsRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\NoticesService;
+use App\Services\SubmissionsService;
+use App\Services\SubmissionDetailsService;
+use App\Services\UserHistoriesService;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -111,10 +111,10 @@ class NoticeSubmissionsController extends Controller
             ->first();
 
         if (!$submission) {
-            $submission = SubmissionsRepository::create(new Submission, $input);
+            $submission = SubmissionsService::create(new Submission, $input);
         } else {
             $submission = Submission::find($submission->id);
-            $submission = SubmissionsRepository::update($submission, $input);
+            $submission = SubmissionsService::update($submission, $input);
         }
 
         if ($input['type_id'] == 1)
@@ -145,7 +145,7 @@ class NoticeSubmissionsController extends Controller
                 $carry['submission_id'] = $submission->id;
                 $carry['type_id'] = $input['type_id'];
                 
-                $submissionDetail = SubmissionDetailsRepository::create(new SubmissionDetail, $carry);
+                $submissionDetail = SubmissionDetailsService::create(new SubmissionDetail, $carry);
                 isset($file) ? $submissionDetail->attachFiles($file) : false;
             } else {
                 $submissionDetail = SubmissionDetail::find($input['submission_detail_id'][$requirement->id]);
@@ -163,7 +163,7 @@ class NoticeSubmissionsController extends Controller
                     }
                 }
 
-                SubmissionDetailsRepository::update($submissionDetail, $carry);
+                SubmissionDetailsService::update($submissionDetail, $carry);
             }
 
         }, null);
@@ -175,7 +175,7 @@ class NoticeSubmissionsController extends Controller
 
     public function submissionSubmit(Request $request, Submission $submission)
     {
-        $submission = SubmissionsRepository::update($submission, [
+        $submission = SubmissionsService::update($submission, [
             'status' => 'submitted',
             'submitted_at' => \Carbon\Carbon::now()
         ]);

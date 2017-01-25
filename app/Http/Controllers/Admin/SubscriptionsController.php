@@ -6,8 +6,8 @@ use Auth;
 use App\Subscription;
 use App\DataTables\SubscriptionsDataTable;
 use App\Http\Requests\SubscriptionRequest;
-use App\Repositories\SubscriptionsRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\SubscriptionsService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
 class SubscriptionsController extends Controller
@@ -28,7 +28,7 @@ class SubscriptionsController extends Controller
         $exists = Subscription::where('vendor_id', $inputs['vendor_id'])->active()->first();
 
         if (!$exists) {
-            $subscription = SubscriptionsRepository::create(new Subscription, $inputs);
+            $subscription = SubscriptionsService::create(new Subscription, $inputs);
         } else {
             return redirect()
                 ->route('admin.subscriptions.create')
@@ -55,7 +55,7 @@ class SubscriptionsController extends Controller
     public function update(SubscriptionRequest $request, Subscription $subscription)
     {
         $inputs = $request->all();
-        $subscription = SubscriptionsRepository::update($subscription, $inputs);
+        $subscription = SubscriptionsService::update($subscription, $inputs);
 
         return redirect()
             ->route('admin.subscriptions.edit', $subscription->id)
@@ -65,7 +65,7 @@ class SubscriptionsController extends Controller
     public function duplicate(Subscription $subscription)
     {
         $subscription->name = $subscription->name . '-' . str_random(4);
-        $subscription = SubscriptionsRepository::duplicate($subscription);
+        $subscription = SubscriptionsService::duplicate($subscription);
         return redirect()
             ->action('SubscriptionsController@edit', $subscription->getSlug())
             ->with('success', trans('subscriptions.created', ['name' => $subscription->name]));
@@ -73,7 +73,7 @@ class SubscriptionsController extends Controller
 
     public function destroy(Subscription $subscription)
     {
-        SubscriptionsRepository::delete($subscription);
+        SubscriptionsService::delete($subscription);
         return redirect()
             ->route('admin.subscriptions.index')
             ->with('notice', trans('subscriptions.notices.deleted', ['name' => $subscription->name]));
@@ -87,7 +87,7 @@ class SubscriptionsController extends Controller
 
     public function activate(Request $request, Subscription $subscription)
     {
-        SubscriptionsRepository::activate($subscription);
+        SubscriptionsService::activate($subscription);
         return redirect()
             ->to($request->input('redirect_to', route('admin.subscriptions.show', $subscription->id)))
             ->with('notice', trans('subscriptions.notices.activated', ['name' => $subscription->name]));
@@ -95,8 +95,8 @@ class SubscriptionsController extends Controller
 
     public function deactivate(Request $request, Subscription $subscription)
     {
-        SubscriptionsRepository::deactivate($subscription);
-        UserLogsRepository::log(Auth::user(), 'Deactivate', $subscription, $request->getClientIp(), $request->remarks);
+        SubscriptionsService::deactivate($subscription);
+        UserHistoriesService::log(Auth::user(), 'Deactivate', $subscription, $request->getClientIp(), $request->remarks);
         return redirect()
             ->to($request->input('redirect_to', route('admin.subscriptions.show', $subscription->id)))
             ->with('notice', trans('subscriptions.notices.deactivated', ['name' => $subscription->name]));
@@ -104,8 +104,8 @@ class SubscriptionsController extends Controller
 
     public function cancel(Request $request, Subscription $subscription)
     {
-        SubscriptionsRepository::cancel($subscription);
-        UserLogsRepository::log(Auth::user(), 'Cancel', $subscription, $request->getClientIp(), $request->remarks);
+        SubscriptionsService::cancel($subscription);
+        UserHistoriesService::log(Auth::user(), 'Cancel', $subscription, $request->getClientIp(), $request->remarks);
         return redirect()
             ->to($request->input('redirect_to', route('admin.subscriptions.show', $subscription->id)))
             ->with('notice', trans('subscriptions.notices.cancelled', ['name' => $subscription->name]));

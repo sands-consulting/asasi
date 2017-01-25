@@ -2,36 +2,35 @@
 
 namespace App\Policies;
 
-class DashboardPolicy extends BasePolicy
+use App\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class DashboardPolicy
 {
-    public function index()
+    use HandlesAuthorization;
+
+    public function portfolio(User $user)
     {
-        return true;
-        // return $this->user->hasPermission('dashboard:index');
+        return $user->hasPermission('dashboard:portfolio');
     }
 
-    public function user()
+    public function tender(User $user)
     {
-        return true;
+        return $user->hasPermission('dashboard:portfolio');
     }
 
-    public function vendor()
+    public function transaction(User $user)
     {
-        return true;
+        return $user->hasPermission('dashboard:transaction');
     }
 
-    public function transaction()
+    public function user(User $user)
     {
-        return true;
+        return $user->hasPermission('dashboard:user');
     }
 
-    public function portfolio()
+    public function vendor(User $user)
     {
-        return true;
-    }
-
-    public function tender()
-    {
-        return true;
+        return $user->hasPermission('dashboard:vendor');
     }
 }

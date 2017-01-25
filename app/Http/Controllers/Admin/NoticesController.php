@@ -15,9 +15,9 @@ use App\DataTables\EvaluatorSummaryDataTable;
 use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeRequest;
-use App\Repositories\NoticesRepository;
-use App\Repositories\ProjectsRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\NoticesService;
+use App\Services\ProjectsService;
+use App\Services\UserHistoriesService;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -52,8 +52,8 @@ class NoticesController extends Controller
 
         $allocations = $request->only('allocations');
 
-        $notice  = NoticesRepository::create(new Notice, $inputs);
-        UserLogsRepository::log(Auth::user(), 'Create', $notice, $request->getClientIp());
+        $notice  = NoticesService::create(new Notice, $inputs);
+        UserHistoriesService::log(Auth::user(), 'Create', $notice, $request->getClientIp());
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.created', ['name' => $notice->name]));
@@ -95,8 +95,8 @@ class NoticesController extends Controller
             'status'
         );
         
-        $notice  = NoticesRepository::update($notice, $inputs);
-        UserLogsRepository::log(Auth::user(), 'Update', $notice, $request->getClientIp());
+        $notice  = NoticesService::update($notice, $inputs);
+        UserHistoriesService::log(Auth::user(), 'Update', $notice, $request->getClientIp());
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.updated', ['name' => $notice->name]));
@@ -104,8 +104,8 @@ class NoticesController extends Controller
 
     public function destroy(Request $request, Notice $notice)
     {
-        NoticesRepository::delete($notice);
-        UserLogsRepository::log(Auth::user(), 'Delete', $notice, $request->getClientIp(), $request->remarks);
+        NoticesService::delete($notice);
+        UserHistoriesService::log(Auth::user(), 'Delete', $notice, $request->getClientIp(), $request->remarks);
         return redirect()
             ->route('admin.notices.index')
             ->with('notice', trans('notices.notices.deleted', ['name' => $notice->name]));
@@ -125,8 +125,8 @@ class NoticesController extends Controller
 
     public function publish(Request $request, Notice $notice)
     {
-        NoticesRepository::publish($notice);
-        UserLogsRepository::log(Auth::user(), 'Publish', $notice, $request->getClientIp());
+        NoticesService::publish($notice);
+        UserHistoriesService::log(Auth::user(), 'Publish', $notice, $request->getClientIp());
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.published', ['name' => $notice->name]));
@@ -134,8 +134,8 @@ class NoticesController extends Controller
 
     public function unpublish(Request $request, Notice $notice)
     {
-        NoticesRepository::unpublish($notice);
-        UserLogsRepository::log(Auth::user(), 'Unpublish', $notice, $request->getClientIp());
+        NoticesService::unpublish($notice);
+        UserHistoriesService::log(Auth::user(), 'Unpublish', $notice, $request->getClientIp());
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.unpublished', ['name' => $notice->name]));
@@ -144,8 +144,8 @@ class NoticesController extends Controller
     public function cancel(Request $request, Notice $notice)
     {
         $input = $request->only(['remarks']);
-        NoticesRepository::cancel($notice);
-        UserLogsRepository::log(Auth::user(), 'Cancel', $notice, $request->getClientIp(), $input['remarks']);
+        NoticesService::cancel($notice);
+        UserHistoriesService::log(Auth::user(), 'Cancel', $notice, $request->getClientIp(), $input['remarks']);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.cancelled', ['name' => $notice->name]));
@@ -202,7 +202,7 @@ class NoticesController extends Controller
             }
         }
 
-        $project = ProjectsRepository::create(new Project(), [
+        $project = ProjectsService::create(new Project(), [
             'name'            => $notice->name,
             'slug'            => null,
             'number'          => $notice->number,
@@ -220,7 +220,7 @@ class NoticesController extends Controller
 
         $project->allocations()->sync($allocations);
         
-        NoticesRepository::update($notice, ['status', 'awarded']);
+        NoticesService::update($notice, ['status', 'awarded']);
         
         event(new NoticeAwarded($notice, $vendor));
 

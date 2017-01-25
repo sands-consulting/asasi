@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\Notification;
-use App\Repositories\NotificationsRepository;
+use App\Services\NotificationsService;
 
 class NotificationsController extends Controller
 {

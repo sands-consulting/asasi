@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\Notice;
-use App\Repositories\NoticesRepository;
+use App\Services\NoticesService;
 
 class NoticesController extends Controller
 {
@@ -32,9 +32,9 @@ class NoticesController extends Controller
 
         if (isset($input['id'])) {
             $record = Notice::find($input['id']);
-            $notice = NoticesRepository::update($record, $input);
+            $notice = NoticesService::update($record, $input);
         } else {
-            $notice = NoticesRepository::create(new Notice, $input);
+            $notice = NoticesService::create(new Notice, $input);
         }
 
         return response()->json($notice);
@@ -59,7 +59,7 @@ class NoticesController extends Controller
             'organization_id'
         );
 
-        $notice = NoticesRepository::update($notice, $input);
+        $notice = NoticesService::update($notice, $input);
 
         return response()->json($notice);
 

@@ -6,10 +6,10 @@ use App\QualificationCode;
 use App\QualificationCodeType;
 use App\DataTables\QualificationCodeDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\QualificationCodeRequest;
-use App\Repositories\QualificationCodeRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\QualificationCodeService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
 class QualificationCodesController extends Controller
@@ -26,8 +26,8 @@ class QualificationCodesController extends Controller
 
     public function store(QualificationCodeRequest $request)
     {
-        $code = QualificationCodeRepository::create(new QualificationCode, $request->only('code', 'name', 'status', 'type_id'));
-        UserLogsRepository::log($request->user(), 'create', $code, $request->getClientIp());
+        $code = QualificationCodeService::create(new QualificationCode, $request->only('code', 'name', 'status', 'type_id'));
+        UserHistoriesService::log($request->user(), 'create', $code, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-codes.index')
             ->with('notice', trans('qualification-codes.notices.created', ['code' => $code->code, 'name' => $code->name]));
@@ -40,8 +40,8 @@ class QualificationCodesController extends Controller
 
     public function update(QualificationCodeRequest $request, QualificationCode $code)
     {
-        QualificationCodeRepository::update($code, $request->only('code', 'name', 'status', 'type_id'));
-        UserLogsRepository::log($request->user(), 'update', $code, $request->getClientIp());
+        QualificationCodeService::update($code, $request->only('code', 'name', 'status', 'type_id'));
+        UserHistoriesService::log($request->user(), 'update', $code, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-codes.index')
             ->with('notice', trans('qualification-codes.notices.updated', ['code' => $code->code, 'name' => $code->name]));
@@ -49,14 +49,14 @@ class QualificationCodesController extends Controller
 
     public function destroy(Request $request, QualificationCode $code)
     {
-        QualificationCodeRepository::delete($code);
-        UserLogsRepository::log($request->user(), 'delete', $code, $request->getClientIp());
+        QualificationCodeService::delete($code);
+        UserHistoriesService::log($request->user(), 'delete', $code, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-codes.index')
             ->with('alert', trans('qualification-codes.notices.deleted', ['code' => $code->code, 'name' => $code->name]));
     }
 
-    public function logs(Qualification $code, UserLogsDataTable $table)
+    public function logs(Qualification $code, UserHistoriesDataTable $table)
     {
         $table->setActionable($code);
         return $table->render('admin.qualification-codes.logs', compact('code'));

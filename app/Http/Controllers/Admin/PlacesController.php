@@ -6,7 +6,7 @@ use App\Place;
 use App\DataTables\PlacesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\PlaceRequest;
-use App\Repositories\PlacesRepository;
+use App\Services\PlacesService;
 use Illuminate\Http\Request;
 
 class PlacesController extends Controller
@@ -24,7 +24,7 @@ class PlacesController extends Controller
     public function store(PlaceRequest $request)
     {
         $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id');
-        $place  = PlacesRepository::create(new Place, $inputs);
+        $place  = PlacesService::create(new Place, $inputs);
         return redirect()
             ->route('admin.places.show', $place->id)
             ->with('notice', trans('places.notices.created', ['name' => $place->name]));
@@ -43,7 +43,7 @@ class PlacesController extends Controller
     public function update(PlaceRequest $request, Place $place)
     {
         $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id');
-        $place  = PlacesRepository::update($place, $inputs);
+        $place  = PlacesService::update($place, $inputs);
         return redirect()
             ->route('admin.places.show', $place->id)
             ->with('notice', trans('places.notices.updated', ['name' => $place->name]));
@@ -51,7 +51,7 @@ class PlacesController extends Controller
 
     public function destroy(Place $place)
     {
-        PlacesRepository::delete($place);
+        PlacesService::delete($place);
         return redirect()
             ->route('admin.places.index')
             ->with('notice', trans('places.notices.deleted', ['name' => $place->name]));
@@ -71,7 +71,7 @@ class PlacesController extends Controller
 
     public function activate(Request $request, Place $place)
     {
-        PlacesRepository::activate($place);
+        PlacesService::activate($place);
         return redirect()
             ->to($request->input('redirect_to', route('admin.places.show', $place->id)))
             ->with('notice', trans('places.notices.activated', ['name' => $place->name]));
@@ -79,7 +79,7 @@ class PlacesController extends Controller
 
     public function deactivate(Request $request, Place $place)
     {
-        PlacesRepository::deactivate($place);
+        PlacesService::deactivate($place);
         return redirect()
             ->to($request->input('redirect_to', route('admin.places.show', $place->id)))
             ->with('notice', trans('places.notices.deactivated', ['name' => $place->name]));

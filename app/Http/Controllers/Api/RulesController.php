@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\Rule;
-use App\Repositories\RulesRepository;
+use App\Services\RulesService;
 
 class RulesController extends Controller
 {
@@ -25,11 +25,11 @@ class RulesController extends Controller
         $noticeId = $inputs['id'];
 
         if (count($qcids) > 0) {
-            $data = RulesRepository::create(new Rule, ['notice_id' => $noticeId]);
+            $data = RulesService::create(new Rule, ['notice_id' => $noticeId]);
 
             foreach ($qcids as $qcid) {
                 if ($rule['condition'] == 'or') {
-                    $data = RulesRepository::create(new Rule, ['notice_id' => $noticeId]);
+                    $data = RulesService::create(new Rule, ['notice_id' => $noticeId]);
                 }
 
                 $data->qualificationCodes->attach($rule['field_code_id']);

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\QualificationCodeType;
 use App\DataTables\QualificationCodeTypeDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\QualificationCodeTypeRequest;
-use App\Repositories\QualificationCodeTypeRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\QualificationCodeTypeService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
 class QualificationCodeTypesController extends Controller
@@ -25,7 +25,7 @@ class QualificationCodeTypesController extends Controller
 
     public function store(QualificationCodeTypeRequest $request)
     {
-        $type = QualificationCodeTypeRepository::create(new QualificationCodeType, $request->only('name', 'type', 'code', 'status'));
+        $type = QualificationCodeTypeService::create(new QualificationCodeType, $request->only('name', 'type', 'code', 'status'));
 
         if($request->input('parent_id', null) && $request->input('parent_id') != $type->parent_id)
         {
@@ -36,7 +36,7 @@ class QualificationCodeTypesController extends Controller
             $type->makeRoot();
         }
 
-        UserLogsRepository::log($request->user(), 'create', $type, $request->getClientIp());
+        UserHistoriesService::log($request->user(), 'create', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-code-types.index')
             ->with('notice', trans('qualification-code-types.notices.created', ['name' => $type->name]));
@@ -49,7 +49,7 @@ class QualificationCodeTypesController extends Controller
 
     public function update(QualificationCodeTypeRequest $request, QualificationCodeType $type)
     {
-        $type = QualificationCodeTypeRepository::update($type, $request->only('name', 'type', 'code', 'status'));
+        $type = QualificationCodeTypeService::update($type, $request->only('name', 'type', 'code', 'status'));
 
         if($request->input('parent_id', null) && $request->input('parent_id') != $type->parent_id)
         {
@@ -60,7 +60,7 @@ class QualificationCodeTypesController extends Controller
             $type->makeRoot();
         }
 
-        UserLogsRepository::log($request->user(), 'update', $type, $request->getClientIp());
+        UserHistoriesService::log($request->user(), 'update', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-code-types.index')
             ->with('notice', trans('qualification-code-types.notices.updated', ['name' => $type->name]));
@@ -68,14 +68,14 @@ class QualificationCodeTypesController extends Controller
 
     public function destroy(Request $request, QualificationCodeType $type)
     {
-        QualificationCodeTypeRepository::delete($type);
-        UserLogsRepository::log($request->user(), 'delete', $type, $request->getClientIp());
+        QualificationCodeTypeService::delete($type);
+        UserHistoriesService::log($request->user(), 'delete', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-code-types.index')
             ->with('alert', trans('qualification-code-types.notices.deleted', ['name' => $type->name]));
     }
 
-    public function logs(QualificationCodeType $type, UserLogsDataTable $table)
+    public function logs(QualificationCodeType $type, UserHistoriesDataTable $table)
     {
         $table->setActionable($type);
         return $table->render('admin.qualification-code-types.logs', compact('type'));

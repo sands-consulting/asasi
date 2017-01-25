@@ -7,7 +7,7 @@ use App\Events\VendorApplied;
 use App\Events\VendorCancelled;
 use App\Http\Requests\VendorRequest;
 use App\Notificators\VendorAppliedNotificator;
-use App\Repositories\VendorsRepository;
+use App\Services\VendorsService;
 use App\Vendor;
 use Auth;
 use Illuminate\Http\Request;
@@ -28,14 +28,14 @@ class VendorsController extends Controller
     public function update(VendorRequest $request, Vendor $vendor)
     {
         $inputs = $request->all();
-        $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'draft']);
-        VendorsRepository::accounts($vendor, $request->input('accounts', []));
-        VendorsRepository::employees($vendor, $request->input('employees', []));
-        VendorsRepository::qualificationCodes($vendor, $request->input('qualification_codes', []));
-        VendorsRepository::shareholders($vendor, $request->input('shareholders', []));
+        $vendor = VendorsService::update($vendor, $inputs, ['status' => 'draft']);
+        VendorsService::accounts($vendor, $request->input('accounts', []));
+        VendorsService::employees($vendor, $request->input('employees', []));
+        VendorsService::qualificationCodes($vendor, $request->input('qualification_codes', []));
+        VendorsService::shareholders($vendor, $request->input('shareholders', []));
 
         if (isset($inputs['submit'])) {
-            $vendor = VendorsRepository::update($vendor, $inputs, ['status' => 'pending']);
+            $vendor = VendorsService::update($vendor, $inputs, ['status' => 'pending']);
             event(new VendorApplied($vendor));
         }
 

@@ -7,17 +7,17 @@ use App\Organization;
 use App\DataTables\AllocationDataTable;
 use App\DataTables\AllocationNoticeDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\DataTables\UserLogsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\AllocationRequest;
-use App\Repositories\AllocationsRepository;
-use App\Repositories\UserLogsRepository;
+use App\Services\AllocationsService;
+use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
 class AllocationsController extends Controller
 {
     protected $allocation;
 
-    public function __construct(AllocationsRepository $allocation)
+    public function __construct(AllocationsService $allocation)
     {
         parent::__construct();
         $this->allocation = $allocation;
@@ -49,8 +49,8 @@ class AllocationsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        $allocation   = AllocationsRepository::create(new Allocation, $inputs);
-        UserLogsRepository::log($request->user(), 'create', $allocation, $request->getClientIp());
+        $allocation   = AllocationsService::create(new Allocation, $inputs);
+        UserHistoriesService::log($request->user(), 'create', $allocation, $request->getClientIp());
         return redirect()
             ->route('admin.allocations.show', $allocation->id)
             ->with('notice', trans('allocations.notices.created', ['name' => $allocation->name]));
@@ -74,8 +74,8 @@ class AllocationsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        AllocationsRepository::update($allocation, $inputs);
-        UserLogsRepository::log($request->user(), 'update', $allocation, $request->getClientIp());
+        AllocationsService::update($allocation, $inputs);
+        UserHistoriesService::log($request->user(), 'update', $allocation, $request->getClientIp());
         return redirect()
             ->route('admin.allocations.show', $allocation->id)
             ->with('notice', trans('allocations.notices.updated', ['name' => $allocation->name]));
@@ -83,14 +83,14 @@ class AllocationsController extends Controller
 
     public function destroy(Allocation $allocation)
     {
-        AllocationsRepository::delete($allocation);
-        UserLogsRepository::log($request->user(), 'delete', $allocation, $request->getClientIp());
+        AllocationsService::delete($allocation);
+        UserHistoriesService::log($request->user(), 'delete', $allocation, $request->getClientIp());
         return redirect()
             ->route('admin.allocations.index')
             ->with('notice', trans('allocations.notices.deleted', ['name' => $allocation->name]));
     }
 
-    public function logs(Allocation $allocation, UserLogsDataTable $table)
+    public function logs(Allocation $allocation, UserHistoriesDataTable $table)
     {
         $table->setActionable($allocation);
         return $table->render('admin.allocations.logs', compact('allocation'));

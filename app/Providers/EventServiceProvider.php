@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -18,6 +18,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\UserLogout',
+<<<<<<< HEAD
         ],
         'App\Events\SubscriptionStatusChanged' => [
             'App\Listeners\EmailSubscriptionStatusChanged',
@@ -45,19 +46,19 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\NoticeAwarded' => [
             'App\Listeners\NoticeAwardedListener',
+=======
+>>>>>>> upstream/5.3
         ],
     ];
 
     /**
-     * Register any other events for your application.
-     *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * Register any events for your application.
      *
      * @return void
      */
-    public function boot(DispatcherContract $events)
+    public function boot()
     {
-        parent::boot($events);
+        parent::boot();
 
         //
     }

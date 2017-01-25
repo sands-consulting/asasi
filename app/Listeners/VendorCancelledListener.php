@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\VendorCancelled;
 use App\Mailers\VendorCancelledMailer;
-use App\Repositories\UserLogsRepository;
+use App\Services\UserHistoriesService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;

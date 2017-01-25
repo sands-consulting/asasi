@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Repositories\UserLogsRepository;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class UserLogout
@@ -14,8 +14,6 @@ class UserLogout
 
     public function handle($event)
     {
-        if ($event->user) {
-            UserLogsRepository::log($event->user, 'logout', $event->user, $this->request->getClientIp());
-        }
+        UserHistoryService::log($event->user, 'logout', $this->request->user(), $this->request->getClientIp());
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Subscription;
-use App\Repositories\SubscriptionsRepository;
+use App\Services\SubscriptionsService;
 use Illuminate\Console\Command;
 
 class SubscriptionUpdateStatusCommand extends Command
@@ -39,6 +39,6 @@ class SubscriptionUpdateStatusCommand extends Command
      */
     public function handle()
     {
-        SubscriptionsRepository::updateStatusExpired();
+        SubscriptionsService::updateStatusExpired();
     }
 }

@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\VendorApproved;
 use App\Mailers\VendorApprovedMailer;
 use App\Notificators\VendorApprovedNotificator;
-use App\Repositories\UserLogsRepository;
+use App\Services\UserHistoriesService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;

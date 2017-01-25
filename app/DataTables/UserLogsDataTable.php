@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-class UserLogsDataTable extends DataTable
+class UserHistoriesDataTable extends DataTable
 {
     protected $actionable;
 

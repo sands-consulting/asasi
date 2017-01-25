@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\Notice;
 use App\SubmissionRequirement;
-use App\Repositories\SubmissionRequirementsRepository;
+use App\Services\SubmissionRequirementsService;
 
 class RequirementTechnicalsController extends Controller
 {
@@ -26,7 +26,7 @@ class RequirementTechnicalsController extends Controller
         $inputs['field_type'] = $inputs['require_file'] == 1 ? 'file' : 'check';
         $inputs['type_id'] = 2;
         $inputs['notice_id'] = $notice->id;
-        $submissionRequirement = SubmissionRequirementsRepository::create(new SubmissionRequirement, $inputs);
+        $submissionRequirement = SubmissionRequirementsService::create(new SubmissionRequirement, $inputs);
 
         return response()->json($submissionRequirement);
     }
@@ -46,7 +46,7 @@ class RequirementTechnicalsController extends Controller
 
     public function delete(SubmissionRequirement $submissionRequirement)
     {
-        SubmissionRequirementsRepository::delete($submissionRequirement);
+        SubmissionRequirementsService::delete($submissionRequirement);
         return response()->json($submissionRequirement);
     }
 }

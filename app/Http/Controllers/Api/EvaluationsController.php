@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\SubmissionEvaluation;
-use App\Repositories\SubmissionEvaluationsRepository;
+use App\Services\SubmissionEvaluationsService;
 
 class EvaluationsController extends Controller
 {
@@ -20,7 +20,7 @@ class EvaluationsController extends Controller
         $response = [];
         foreach ($inputs['submission_evaluation'] as $key => $value) {
             $value['submission_detail_id'] = $key;
-            $evaluation = SubmissionEvaluationsRepository::create(new SubmissionEvaluation, $value);
+            $evaluation = SubmissionEvaluationsService::create(new SubmissionEvaluation, $value);
             $response['data'][] = $evaluation;
         }
 
@@ -42,7 +42,7 @@ class EvaluationsController extends Controller
 
     public function delete(SubmissionEvaluation $evaluation)
     {
-        SubmissionEvaluationsRepository::delete($evaluation);
+        SubmissionEvaluationsService::delete($evaluation);
         return response()->json($evaluation);
     }
 }

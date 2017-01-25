@@ -26,7 +26,7 @@ class CommRequirementsController extends Controller
     public function store(CommRequirementRequest $request)
     {
         $inputs = $request->only('title', 'mandatory', 'require_file');
-        $commRequirement = CommRequirementsRepositories::create(new CommRequirement, $inputs);
+        $commRequirement = CommRequirementsServices::create(new CommRequirement, $inputs);
 
         return redirect()
             ->route()

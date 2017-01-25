@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Repositories\AuthLogsRepository;
+use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
 use App\Notice;
 use App\NoticeEvent;
-use App\Repositories\NoticeEventsRepository;
+use App\Services\NoticeEventsService;
 
 class NoticeEventsController extends Controller
 {
@@ -25,7 +25,7 @@ class NoticeEventsController extends Controller
         // Fixme: temp solution
         $inputs['required'] = $inputs['required'][0];
         $inputs['notice_id'] = $notice->id;
-        $noticeEvent = NoticeEventsRepository::create(new NoticeEvent, $inputs);
+        $noticeEvent = NoticeEventsService::create(new NoticeEvent, $inputs);
 
         return response()->json($noticeEvent);
     }
@@ -45,7 +45,7 @@ class NoticeEventsController extends Controller
 
     public function delete(NoticeEvent $noticeEvent)
     {
-        NoticeEventsRepository::delete($noticeEvent);
+        NoticeEventsService::delete($noticeEvent);
         return response()->json($noticeEvent);
     }
 }

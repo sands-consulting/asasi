@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\User;
-use App\Repositories\UsersRepository;
+use App\Services\UsersService;
 use Illuminate\Console\Command;
 
 class DeleteNonVerifiedAccountCommand extends Command
@@ -39,6 +39,6 @@ class DeleteNonVerifiedAccountCommand extends Command
      */
     public function handle()
     {
-        $this->comment(UsersRepository::deleteNonVerified(3));
+        $this->comment(UsersService::deleteNonVerified(3));
     }
 }

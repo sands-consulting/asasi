@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\User;
-use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
-use App\Http\Requests\UserRequest;
-use App\DataTables\UserLogsDataTable;
-use App\Repositories\UsersRepository;
+use App\DataTables\UserHistoriesDataTable;
 use App\DataTables\RevisionsDataTable;
-use App\Repositories\UserLogsRepository;
 use App\DataTables\UsersArchivedDataTable;
+use App\Http\Requests\UserRequest;
+use App\Services\UsersService;
+use App\Services\UserHistoriesService;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -27,20 +27,18 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.users.create', ['user' => new User]);
+        $user = new User;
+        return view('admin.users.create', compact('user'));
     }
 
     public function store(UserRequest $request)
     {
         $inputs             = $request->only('name', 'email', 'password');
         $inputs['password'] = bcrypt($request->input('password'));
-        $user               = UsersRepository::create(new User, $inputs);
+        $user               = UserService::create(new User, $inputs);
 
-        if ($roles = $request->get('roles', [])) {
-            $user->roles()->sync($roles);
-        }
-
-        UserLogsRepository::log(Auth::user(), 'Create', $user, $request->getClientIp());
+        $user->roles()->sync($request->input('roles', []));
+        UserHistoryService::log($request->user(), 'create', $user, $request->getClientIp());
 
         return redirect()
             ->route('admin.users.show', $user->id)
@@ -65,13 +63,13 @@ class UsersController extends Controller
             $inputs['password'] = bcrypt($request->input('password'));
         }
 
-        $user = UsersRepository::update($user, $inputs);
+        $user = UserService::update($user, $inputs);
 
         if ($roles = $request->get('roles', [])) {
             $user->roles()->sync($roles);
         }
 
-        UserLogsRepository::log(Auth::user(), 'Update', $user, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'update', $user, $request->getClientIp());
 
         return redirect()
             ->route('admin.users.edit', $user->id)
@@ -80,15 +78,15 @@ class UsersController extends Controller
 
     public function destroy(Request $request, User $user)
     {
-        UsersRepository::delete($user);
-        UserLogsRepository::log(Auth::user(), 'Delete', $user, $request->getClientIp());
+        UserService::delete($user);
+        UserHistoryService::log($request->user(), 'delete', $user, $request->getClientIp());
 
         return redirect()
             ->route('admin.users.index')
             ->with('notice', trans('users.notices.deleted', ['name' => $user->name]));
     }
 
-    public function logs(User $user, UserLogsDataTable $table)
+    public function logs(User $user, UserHistoriesDataTable $table)
     {
         $table->setActionable($user);
         return $table->render('admin.users.logs', compact('user'));
@@ -102,7 +100,7 @@ class UsersController extends Controller
 
     public function assume(Request $request, User $user)
     {
-        UsersRepository::assume($user);
+        UsersService::assume($user);
 
         if ($user->hasRole('Evaluator')) {
             return redirect()
@@ -117,7 +115,7 @@ class UsersController extends Controller
 
     public function activate(Request $request, User $user)
     {
-        UsersRepository::activate($user);
+        UsersService::activate($user);
         return redirect()
             ->to($request->input('redirect_to', route('admin.users.show', $user->id)))
             ->with('notice', trans('users.notices.activated', ['name' => $user->name]));
@@ -125,7 +123,7 @@ class UsersController extends Controller
 
     public function suspend(Request $request, User $user)
     {
-        UsersRepository::suspend($user);
+        UsersService::suspend($user);
         return redirect()
             ->to($request->input('redirect_to', route('admin.users.show', $user->id)))
             ->with('notice', trans('users.notices.suspended', ['name' => $user->name]));
@@ -133,9 +131,8 @@ class UsersController extends Controller
 
     public function restore(Request $request, User $user)
     {
-        UsersRepository::restore($user);
+        UserService::restore($user);
         return redirect()
             ->back()
             ->with('notice', trans('users.notices.restored', ['name' => $user->name]));
-    }
 }

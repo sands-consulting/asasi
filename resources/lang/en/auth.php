@@ -33,6 +33,7 @@ return [
     'required' => 'Please enter your login and password.',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+<<<<<<< HEAD
     'unauthorized' => 'You are not authorized to access previous page.',
 
     'register' => 'Register new account',
@@ -40,4 +41,19 @@ return [
     'forgot_password' => 'Forgot Password?',
     'reset_password' => 'Reset Password',
     'confirmation' => 'Confirm Your Email Address'
+=======
+
+    'attributes' => [
+        'login' => 'Login',
+        'register' => 'Register',
+        'forgot_password' => 'Forgot Password',
+        'reset_password' => 'Reset Password',
+        'send_password_reset_link' => 'Send Password Reset Link',
+    ],
+
+    'notices' => [
+        'not_active' => 'Account inactive or suspended.',
+        'unauthorized' => 'Unauthorized',
+    ],
+>>>>>>> upstream/5.3
 ];
