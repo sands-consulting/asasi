@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use Illuminate\Http\Request;
-
-use App\User;
-use App\Http\Requests;
 
 class NotificationsController extends Controller
 {
-    public function index(User $user)
+    public function __construct()
     {
-        return view('notifications.index');
+        parent::__construct();
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        $notifications = auth()->user()->notifications;
+        return view('notifications.index', compact('notifications'));
+    }
+
+    public function show(Notification $notification)
+    {
+        return view('notifications.show', compact('notification'));
     }
 }

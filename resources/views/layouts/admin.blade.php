@@ -322,7 +322,9 @@
                 </div>
             </div>
         </div>
-
+        
+        @yield('secondary-sidebar')
+        
         <div class="content-wrapper">
             <div class="page-header page-header-default">
                 <div class="page-header-content">

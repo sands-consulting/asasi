@@ -109,6 +109,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Vendor::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
     /*
      * Custom Attributes
      */
@@ -281,6 +286,7 @@ class User extends Authenticatable
         return 'user_permissions_' . $this->getKey();
     }
 
+
     /*
      * Helpers
      */
@@ -311,6 +317,7 @@ class User extends Authenticatable
      
         return $notification;
     }
+
 
     /**
      * Boot
