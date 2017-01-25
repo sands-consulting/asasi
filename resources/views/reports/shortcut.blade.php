@@ -1,10 +1,12 @@
 <div class="form-group">
     <div class="col-lg-10 col-sm-8 col-lg-offset-2 col-sm-offset-4">
         <?php $today_start = Carbon\Carbon::today()->format('Y-m-d'); ?>
-        <a href="#" class="btn btn-shortcut btn-xs btn-default" data-date-start="{{ $today_start }}">Today</a>
+        <?php $today_end = Carbon\Carbon::today()->format('Y-m-d'); ?>
+        <a href="#" class="btn btn-shortcut btn-xs btn-default" data-date-start="{{ $today_start }}" data-date-end="{{ $today_end }}">Today</a>
 
         <?php $yesterday_start = Carbon\Carbon::today()->subDay()->format('Y-m-d'); ?>
-        <a href="#" class="btn btn-shortcut btn-xs btn-default" data-date-start="{{ $yesterday_start }}">Yesterday</a>
+        <?php $yesterday_end = Carbon\Carbon::today()->subDay()->format('Y-m-d'); ?>
+        <a href="#" class="btn btn-shortcut btn-xs btn-default" data-date-start="{{ $yesterday_start }}" data-date-end="{{ $yesterday_end }}">Yesterday</a>
 
         <?php $tw_start = Carbon\Carbon::today()->startOfWeek()->format('Y-m-d'); ?>
         <?php $tw_end = Carbon\Carbon::today()->endOfWeek()->format('Y-m-d'); ?>
