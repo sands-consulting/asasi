@@ -83,11 +83,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-<<<<<<< HEAD
-    'error'     => 'Validation Error',
-    'matches_hashed_password' => 'The :attribute is invalid.',
-=======
->>>>>>> upstream/5.3
+    'hash'                 => 'The :attribute is invalid.',
 
     /*
     |--------------------------------------------------------------------------

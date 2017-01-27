@@ -9,23 +9,18 @@ class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
 
-<<<<<<< HEAD:app/Http/Controllers/Auth/PasswordController.php
-    protected $redirectTo = '/login';
-
-=======
     /**
      * Where to redirect users after resetting their password.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
->>>>>>> upstream/5.3:app/Http/Controllers/Auth/ResetPasswordController.php
     public function __construct()
     {
         $this->middleware($this->guestMiddleware());
