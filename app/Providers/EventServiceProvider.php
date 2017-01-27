@@ -18,7 +18,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\UserLogout',
-<<<<<<< HEAD
         ],
         'App\Events\SubscriptionStatusChanged' => [
             'App\Listeners\EmailSubscriptionStatusChanged',
@@ -46,8 +45,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\NoticeAwarded' => [
             'App\Listeners\NoticeAwardedListener',
-=======
->>>>>>> upstream/5.3
         ],
     ];
 
