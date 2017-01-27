@@ -54,18 +54,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::group([
             'middleware' => 'web',
             'namespace' => $this->namespace,
-        ], function ($router) {
-            $router->group(['middleware' => 'auth'], function($router) {
-                $router->get('/', 'MeController@edit')
-                    ->name('root');
-            });
-
-            $router->auth();
-
-            $router->get('set/{locale}', function($locale) {
-                return redirect()->back()->withCookie(cookie()->forever('locale', $locale));
-            });
-            
+        ], function ($router) {            
             require base_path('routes/web.php');
         });
     }

@@ -198,7 +198,6 @@ return [
          * Asasi Core ServiceProviders
          */
         App\Providers\AsasiServiceProvider::class,
-        App\Providers\Asasi\HomeServiceProvider::class,
         App\Providers\Asasi\OrganizationsServiceProvider::class,
         App\Providers\Asasi\PlacesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,

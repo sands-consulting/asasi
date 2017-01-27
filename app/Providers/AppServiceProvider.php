@@ -23,6 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
+            $router->group(['middleware' => 'auth'], function($router) {
+                $router->get('/', 'MeController@edit')
+                    ->name('root');
+            });
+
+            $router->auth();
+
+            $router->get('set/{locale}', function($locale) {
+                return redirect()->back()->withCookie(cookie()->forever('locale', $locale));
+            });
+        });
     }
 }

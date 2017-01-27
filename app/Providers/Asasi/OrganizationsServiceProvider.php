@@ -2,6 +2,8 @@
 
 namespace App\Providers\Asasi;
 
+use App\Organization;
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class OrganizationsServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class OrganizationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\OrganizationsController', 'App\Policies\OrganizationsPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\OrganizationsController', 'App\Policies\OrganizationPolicy');
+
+        Gate::policy("App\Organization", "App\Policies\OrganizationPolicy");
     }
 
     /**
@@ -26,26 +30,24 @@ class OrganizationsServiceProvider extends ServiceProvider
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('organizations', 'App\Organization');
-
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->get('organizations/{organizations}/revisions', [
+                $router->resource('organizations', 'OrganizationsController');
+                $router->get('organizations/{organization}/revisions', [
                     'as'    => 'admin.organizations.revisions',
                     'uses'  => 'OrganizationsController@revisions'
                 ]);
-                $router->put('organizations/{organizations}/activate', [
+                $router->put('organizations/{organization}/activate', [
                     'as'    => 'admin.organizations.activate',
                     'uses'  => 'OrganizationsController@activate',
                 ]);
-                $router->put('organizations/{organizations}/deactivate', [
+                $router->put('organizations/{organization}/deactivate', [
                     'as'    => 'admin.organizations.deactivate',
                     'uses'  => 'OrganizationsController@deactivate',
                 ]);
-                $router->put('organizations/{organizations}/suspend', [
+                $router->put('organizations/{organization}/suspend', [
                     'as'    => 'admin.organizations.suspend',
                     'uses'  => 'OrganizationsController@suspend',
                 ]);
-                $router->resource('organizations', 'OrganizationsController');
             });
         });
     }

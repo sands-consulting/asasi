@@ -2,6 +2,8 @@
 
 namespace App\Providers\Asasi;
 
+use App\Place;
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class PlacesServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class PlacesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\PlacesController', 'App\Policies\PlacesPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\PlacesController', 'App\Policies\PlacePolicy');
+
+        Gate::policy("App\Place", "App\Policies\PlacePolicy");
     }
 
     /**
@@ -26,9 +30,8 @@ class PlacesServiceProvider extends ServiceProvider
 
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('places', 'App\Place');
-
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+                $router->resource('places', 'PlacesController');
                 $router->get('places/{places}/revisions', [
                     'as'    => 'admin.places.revisions',
                     'uses'  => 'PlacesController@revisions'
@@ -41,7 +44,6 @@ class PlacesServiceProvider extends ServiceProvider
                     'as'    => 'admin.places.deactivate',
                     'uses'  => 'PlacesController@deactivate'
                 ]);
-                $router->resource('places', 'PlacesController');
             });
         });
     }
