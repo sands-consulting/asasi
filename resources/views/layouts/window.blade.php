@@ -14,7 +14,7 @@
 	<div class="page-content">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                <a href="{{ route('home') }}" class="window-header hidden-print">{{ config('app.description') }}</a>
+                <a href="{{ route('contact') }}" class="window-header hidden-print">{{ config('app.description') }}</a>
     			@yield('content')
             </div>
 		</div>

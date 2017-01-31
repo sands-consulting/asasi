@@ -81,7 +81,7 @@
                 <li><a href="{{ url('register') }}">{{ trans('menu.user.register') }}</a></li>
                 @else
                 <li>
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('contact') }}">
                         <i class="icon-atom2"></i> {{ trans('menu.access.portal') }}
                     </a>
                 </li>

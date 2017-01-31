@@ -14,7 +14,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
 	<div class="navbar-boxed">
 		<div class="navbar-header">
-			<a class="navbar-brand prompt" href="{{ route('home') }}">
+			<a class="navbar-brand prompt" href="{{ route('root') }}">
                 {{ config('app.name') }}
             </a>
 

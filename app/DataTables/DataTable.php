@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use Illuminate\Http\Request;
 use Yajra\Datatables\Services\DataTable as DataTableService;
 
 abstract class DataTable extends DataTableService

@@ -5,7 +5,7 @@
         <h4><i class="icon-stack3 position-left"></i> <span class="text-semibold">{{ trans('subscriptions.views.index.public.title') }}</span></h4>
 
         <ul class="breadcrumb breadcrumb-caret position-right">
-            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('contact') }}">Home</a></li>
             <li class="active">{{ trans('subscriptions.views.index.public.title') }}</li>
         </ul>
     </div>

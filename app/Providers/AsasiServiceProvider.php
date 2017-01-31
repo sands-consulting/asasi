@@ -31,11 +31,15 @@ class AsasiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->group(['middleware' => 'auth'], function($router) {
-                $router->get('/', 'MeController@edit')
-                    ->name('root');
-            });
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web',
+        ], function ($router) {
+            $router->get('/', 'NoticesController@index')
+                ->name('root');
+
+            $router->get('contact', 'MeController@contact')
+                ->name('contact');
 
             $router->auth();
 

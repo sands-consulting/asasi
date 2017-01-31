@@ -14,7 +14,7 @@
 		<div class="panel-footer">
 			<div class="row">
 				<div class="col-xs-12 col-md-9 col-md-offset-3">
-					<a href="{{ route('home') }}" class="btn btn-danger">{{ trans('actions.cancel') }}</a>
+					<a href="{{ route('contact') }}" class="btn btn-danger">{{ trans('actions.cancel') }}</a>
 
 					<a href="#" class="btn btn-default pull-right" v-if="!last_tab" v-on:click="next">{{ trans('actions.next') }}</a>
 					<input name="submit" type="submit" class="btn bg-success pull-right" value="{{ trans('vendors.views._form.submit_application') }}" v-show="last_tab">
