@@ -3,10 +3,11 @@
 namespace App;
 
 use App\Traits\DateAccessor;
+use Illuminate\Database\Eloquent\Model;
 
 class UserHistory extends Model
 {
-    use DateAccessorTrait;
+    use DateAccessor;
 
     protected $fillable = [
         'action', 'actionable_id', 'actionable_type', 'remarks', 'ip_address', 'user_id'

@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Libraries\Traits\DateAccessorTrait;
+use App\Traits\DateAccessor;
 use Illuminate\Database\Eloquent\Model;
 
 class Bookmark extends Model
 {
-    use DateAccessorTrait;
+    use DateAccessor;
 
     protected $fillable = [
         'bookmarkable_type',

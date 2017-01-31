@@ -3,12 +3,12 @@
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
-use App\Libraries\Traits\DateAccessorTrait;
+use App\Traits\DateAccessor;
 
 class Cart extends Model
 {
     use RevisionableTrait,
-        DateAccessorTrait;
+        DateAccessor;
 
     protected $revisionCreationsEnabled = true;
 

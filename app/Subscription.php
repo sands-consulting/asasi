@@ -1,6 +1,6 @@
 <?php namespace App;
 
-use App\Libraries\Traits\DateAccessorTrait;
+use App\Traits\DateAccessor;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +12,7 @@ class Subscription extends Authenticatable
 {
     use RevisionableTrait,
         SoftDeletes,
-        DateAccessorTrait;
+        DateAccessor;
 
     protected $revisionCreationsEnabled = true;
 

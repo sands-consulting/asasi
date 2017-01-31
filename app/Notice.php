@@ -1,16 +1,16 @@
 <?php namespace App;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Carbon\Carbon;
+use App\Traits\DateAccessor;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
-use App\Libraries\Traits\DateAccessorTrait;
 
 class Notice extends Model
 {
     use RevisionableTrait,
-        DateAccessorTrait,
+        DateAccessor,
         SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
