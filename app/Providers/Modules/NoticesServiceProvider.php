@@ -9,7 +9,6 @@ class NoticesServiceProvider extends ServiceProvider
     public function boot()
     {
         app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\Admin\NoticesPolicy');
-        // app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\NoticesPolicy');
     }
 
     /**
@@ -20,7 +19,7 @@ class NoticesServiceProvider extends ServiceProvider
     public function register()
     {
         // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
+        app('router')->group(['middleware' => 'web', 'namespace' => 'App\Http\Controllers'], function ($router) {
             $router->model('notices', 'App\Notice');
             $router->model('evaluation_types', 'App\EvaluationType');
 
@@ -94,8 +93,13 @@ class NoticesServiceProvider extends ServiceProvider
                     'uses' => 'NoticesController@summaryEvaluators'
                 ]);
 
-                $router->resource('notices',                'NoticesController');
+                $router->resource('notices', 'NoticesController');
             });
+
+            $router->get('/', [
+                'as' => 'notices',
+                'uses' => 'NoticesController@index'
+            ]);
 
             $router->get('notices/my-notices', [
                 'as' => 'notices.my-notices',
