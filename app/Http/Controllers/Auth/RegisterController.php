@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Mailers\AppMailer;
+use App\Role;
+use App\User;
+use App\Vendor;
+use DB;
+use Event;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -47,10 +54,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $data['vendor_registration_number'] = normalize_registration_number($data['vendor_registration_number']);
+
         return Validator::make($data, [
+            'vendor_registration_number' => 'required|unique:vendors,normalized_registration_number',
+            'vendor_name' => 'required|unique:vendors,name',
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:8|confirmed',
         ]);
     }
 
@@ -62,10 +73,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        return DB::transaction(function() use($data) {
+            $vendor = Vendor::create([
+                'name' => $data['vendor_name'],
+                'registration_number' => $data['vendor_registration_number'],
+                'contact_person_name' => $data['name'],
+                'contact_person_email' => $data['email']
+            ]);
+
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'confirmation_token' => str_random(30)
+            ]);
+            $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->lists('id')->toArray());
+            $user->vendors()->attach($vendor->id);
+            return $user;
+        });
     }
 }

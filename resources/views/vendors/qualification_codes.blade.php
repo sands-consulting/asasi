@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.portal')
 
 @section('content')
 @include('vendors._vendor')

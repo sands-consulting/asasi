@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.portal')
 
 @section('header')
     <div class="page-title">

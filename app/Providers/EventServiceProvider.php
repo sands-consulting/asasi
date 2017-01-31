@@ -13,36 +13,59 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'Illuminate\Auth\Events\Registered' => [
+            'App\Listeners\EmailUserConfirmationLink',
+        ],
+
+        'Illuminate\Auth\Events\Attempting' => [
+        ],
+
+        'Illuminate\Auth\Events\Authenticated' => [
+        ],
+
         'Illuminate\Auth\Events\Login' => [
             'App\Listeners\UserLogin',
         ],
+
+        'Illuminate\Auth\Events\Failed' => [
+        ],
+
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\UserLogout',
         ],
+
+        'Illuminate\Auth\Events\Lockout' => [
+            'App\Listeners\LogLockout',
+        ],
+
         'App\Events\SubscriptionStatusChanged' => [
             'App\Listeners\EmailSubscriptionStatusChanged',
         ],
+
         'App\Events\SubscriptionExpireReminder' => [
             'App\Listeners\EmailSubscriptionExpireReminder',
         ],
-        'App\Events\UserRegistered' => [
-            'App\Listeners\EmailUserConfirmationLink',
-        ],
+
         'App\Events\VendorApplied' => [
             'App\Listeners\VendorAppliedListener',
         ],
+
         'App\Events\VendorApproved' => [
             'App\Listeners\VendorApprovedListener',
         ],
+
         'App\Events\VendorRejected' => [
             'App\Listeners\VendorRejectedListener',
         ],
+
         'App\Events\EvaluatorAssigned' => [
             'App\Listeners\EmailEvaluatorApprovalLink',
         ],
+
         'App\Events\EvaluatorSubmissionAssigned' => [
             'App\Listeners\EvaluatorSubmissionAssignedListener',
         ],
+
         'App\Events\NoticeAwarded' => [
             'App\Listeners\NoticeAwardedListener',
         ],

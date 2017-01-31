@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateMe;
-use Illuminate\Http\MeRequest;
+use App\Http\Requests\MeRequest;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
 class MeController extends Controller
@@ -13,9 +13,9 @@ class MeController extends Controller
 		return view('me.edit');
 	}
 
-	public function update(MeRequest $request, Guard $auth)
+	public function update(Request $request, Guard $auth)
 	{
-		$inputs	= $request->only('name', 'email');
+		$inputs	= $request->only('name');
 
 		if(isset($inputs['password']))
 		{
@@ -26,7 +26,7 @@ class MeController extends Controller
 			unset($inputs['password']);
 		}
 
-		$auth->update($inputs);
+		$request->user()->update($inputs);
 
 		return redirect()
                 ->route('me')

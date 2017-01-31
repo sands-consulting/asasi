@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Hash;
 use Illuminate\Support\ServiceProvider;
 
 class AsasiServiceProvider extends ServiceProvider
@@ -35,17 +36,17 @@ class AsasiServiceProvider extends ServiceProvider
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web',
         ], function ($router) {
-            $router->get('/', 'NoticesController@index')
-                ->name('root');
+            $router->get('set/{locale}', function($locale) {
+                return redirect()->back()->withCookie(cookie()->forever('locale', $locale));
+            });
 
             $router->get('contact', 'MeController@contact')
                 ->name('contact');
 
             $router->auth();
 
-            $router->get('set/{locale}', function($locale) {
-                return redirect()->back()->withCookie(cookie()->forever('locale', $locale));
-            });
+            $router->get('/', 'NoticesController@index')
+                ->name('root');
         });
     }
 }

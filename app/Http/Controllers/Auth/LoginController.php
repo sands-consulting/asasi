@@ -47,10 +47,33 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()
-                ->route('login')
-                ->with('alert', trans('auth.not_active'));
+                ->back()
+                ->with('alert', trans('auth.notices.' . $user->status));
         }
 
         $user->cachePermissions();
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->with('alert', $this->getFailedLoginMessage());
+    }
+
+    public function logout()
+    {
+        Auth::guard($this->getGuard())->logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
+                ->with('notice', trans('auth.notices.logged_out'));
+    }
+
+    public function confirmation($token)
+    {
+        $user = User::whereConfirmationToken($token)->firstOrFail()->update(['status' => 'active']);
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
+            ->with('notice', trans('auth.notices.confirmed'));
     }
 }

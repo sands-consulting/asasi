@@ -6,10 +6,10 @@
 	</a>
 
 	<ul class="dropdown-menu dropdown-menu-right">
-		<li><a href="{{ route('profile') }}"><i class="icon-user"></i> {{ trans('menu.user.my_profile') }}</a></li>
+		<li><a href="{{ route('me') }}"><i class="icon-user"></i> {{ trans('menu.user.my_profile') }}</a></li>
 
 		@if(session('original_user_id'))
-		<li><a href="{{ route('profile.resume') }}" data-method="POST"><i class="icon-user-cancel"></i> {{ trans('menu.user.release_user') }}</a></li>
+		<li><a href="{{ route('me.resume') }}" data-method="POST"><i class="icon-user-cancel"></i> {{ trans('menu.user.release_user') }}</a></li>
 		@endif
 
 		@if(Auth::user()->hasPermissions(['access:admin', 'access:report']))

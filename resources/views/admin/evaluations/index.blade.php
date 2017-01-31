@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.portal')
 
 @section('page-title', trans('evaluations.title'))
 

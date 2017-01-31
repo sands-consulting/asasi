@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.portal')
 
 @section('content')
 <div class="page-container">

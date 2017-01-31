@@ -33,7 +33,10 @@ class UsersServiceProvider extends ServiceProvider
     public function register()
     {
         // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], function ($router) {
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => ['web', 'auth']
+        ], function ($router) {
             $router->group(['prefix' => 'admin', 'namespace' => 'Admin'], function($router) {
                 $router->resource('users', 'UsersController');
                 $router->resource('users.blacklists', 'UserBlacklistsController');

@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.portal')
 
 @section('content')
 	{!! Former::open_vertical_for_files(route('vendors.update', $vendor->id))
