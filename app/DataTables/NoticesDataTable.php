@@ -11,13 +11,13 @@ class NoticesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                return view('admin.notices._index_actions', compact('notice'));
+                return view('notices._index_actions', compact('notice'));
             })
             ->editColumn('name', function($notice) {
-                return link_to_route('admin.notices.show', $notice->name, $notice->id);
+                return link_to_route('notices.show', $notice->name, $notice->id);
             })
             ->editColumn('status', function($notice) {
-                return view('admin.notices._index_status', compact('notice'));
+                return view('notices._index_status', compact('notice'));
             })
             ->make(true);
     }

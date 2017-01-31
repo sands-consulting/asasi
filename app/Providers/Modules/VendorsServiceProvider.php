@@ -109,6 +109,11 @@ class VendorsServiceProvider extends ServiceProvider
                 'uses'  => 'VendorsController@transactions'
             ]);
 
+            $router->get('vendors/{vendors}/eligibles', [
+                'as' => 'vendors.eligibles',
+                'uses' => 'VendorsController@eligibles'
+            ]);
+
             $router->resource('vendors', 'VendorsController', [
                 'except' => ['index', 'destroy']
             ]);
