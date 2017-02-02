@@ -116,9 +116,11 @@ return [
     'attributes' => [
         'current_password' => 'Current Password',
         'email' => 'E-mail Address',
+        'message' => 'Message',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
         'remember_me' => 'Remember Me',
+        'title' => 'Title',
     ],
 
 ];

@@ -23,6 +23,7 @@ return [
 	'register' => 'Register',
 	'save' => 'Save',
 	'search' => 'Search',
+	'send' => 'Send',
 	'show' => 'Show',
 	'submit' => 'Submit',
 	'suspend' => 'Suspend',

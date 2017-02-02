@@ -7,12 +7,16 @@ return [
 		'updated_at' => 'Last Updated At'
 	],
 	
-	'notices' => [
+	'flash' => [
 		'updated' => 'Your account has been updated.',
-		'resumed' => 'Your session has been resumed as :name.'
+		'resumed' => 'Your session has been resumed as :name.',
+		'contacted' => 'The contact form is disabled.'
 	],
 
 	'views' => [
+		'contact' => [
+			'title' => 'Contact Us'
+		],
 		'edit' => [
 			'title' => 'My Account'
 		]

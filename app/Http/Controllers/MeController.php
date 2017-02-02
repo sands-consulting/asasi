@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Http\Requests\MeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
@@ -30,7 +31,7 @@ class MeController extends Controller
 
 		return redirect()
                 ->route('me')
-                ->with('notice', trans('me.notices.updated'));
+                ->with('notice', trans('me.flash.updated'));
 	}
 
 	public function resume(Request $request, Guard $auth)
@@ -39,7 +40,7 @@ class MeController extends Controller
         $original_user = UsersService::resume();
         return redirect()
                 ->route('admin.users.show', $current_user->id)
-                ->with('notice', trans('me.notices.resumed', ['name' => $original_user->name]));
+                ->with('notice', trans('me.flash.resumed', ['name' => $original_user->name]));
 	}
 
 	public function bookmarks()
@@ -57,7 +58,10 @@ class MeController extends Controller
         return view('me.contact');
     }
 
-    public function storeContact(Request $request)
+    public function storeContact(ContactRequest $request)
     {
+    	return redirect()
+    			->back()
+    			->with('alert', trans('me.flash.contacted'));
     }
 }

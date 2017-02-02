@@ -44,6 +44,7 @@ class AsasiServiceProvider extends ServiceProvider
                 'as' => 'contact',
                 'uses' => 'MeController@contact'
             ]);
+            $router->post('contact', 'MeController@storeContact');
 
             $router->auth();
 
