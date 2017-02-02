@@ -46,10 +46,10 @@
     <li class="active">{{ trans('news.views.edit.title') }}</li>
 </ul>
 <ul class="breadcrumb-elements">
-    @if(Auth::user()->hasPermission('news:logs'))
+    @if(Auth::user()->hasPermission('news:histories'))
 	<li>
-		<a href="{{ route('admin.news.logs', $news->id) }}" class="legitRipple">
-			<i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
+		<a href="{{ route('admin.news.histories', $news->id) }}" class="legitRipple">
+			<i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
 		</a>
 	</li>
 	@endif

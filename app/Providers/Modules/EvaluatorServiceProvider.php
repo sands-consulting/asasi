@@ -18,70 +18,59 @@ class EvaluatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('evaluators', 'App\NoticeEvaluator');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                
+       // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->get('evaluators/{notices}/index', [
-                    'as' => 'admin.evaluators.index',
+                    'as' => 'evaluators.index',
                     'uses' => 'EvaluatorsController@index'
                 ]);
                 $router->get('evaluators/{notices}/create', [
-                    'as' => 'admin.evaluators.create',
+                    'as' => 'evaluators.create',
                     'uses' => 'EvaluatorsController@create'
                 ]);
                 $router->post('evaluators/{notices}/store', [
-                    'as' => 'admin.evaluators.store',
+                    'as' => 'evaluators.store',
                     'uses' => 'EvaluatorsController@store'
                 ]);
                 $router->get('evaluators/{notices}/edit', [
-                    'as' => 'admin.evaluators.edit',
+                    'as' => 'evaluators.edit',
                     'uses' => 'EvaluatorsController@edit'
                 ]);
                 $router->get('evaluators/{evaluators}/assign/{notices}', [
-                    'as' => 'admin.evaluators.assign',
+                    'as' => 'evaluators.assign',
                     'uses' => 'EvaluatorsController@assign'
                 ]);
                 $router->post('evaluators/{evaluators}/assigned/{notices}', [
-                    'as' => 'admin.evaluators.assigned',
+                    'as' => 'evaluators.assigned',
                     'uses' => 'EvaluatorsController@assigned'
                 ]);
                 $router->get('evaluators/update', [
-                    'as' => 'admin.evaluators.update',
+                    'as' => 'evaluators.update',
                     'uses' => 'EvaluatorsController@update'
                 ]);
                 $router->post('evaluators/{notices}/save', [
-                    'as'    => 'admin.evaluators.save',
+                    'as'    => 'evaluators.save',
                     'uses'  => 'EvaluatorsController@save'
                 ]);
                 $router->get('evaluators/{evaluators}/request', [
-                    'as' => 'admin.evaluators.request',
+                    'as' => 'evaluators.request',
                     'uses' => 'EvaluatorsController@request'
                 ]);
                 $router->put('evaluators/{evaluators}/accept', [
-                    'as' => 'admin.evaluators.accept',
+                    'as' => 'evaluators.accept',
                     'uses' => 'EvaluatorsController@accept'
                 ]);
                 $router->put('evaluators/{evaluators}/decline', [
-                    'as' => 'admin.evaluators.decline',
+                    'as' => 'evaluators.decline',
                     'uses' => 'EvaluatorsController@decline'
-                ]);
-            });
-
-            $router->group(['namespace' => 'Api', 'prefix' => 'api'], function ($router) {
-                $router->post('evaluators/{notices}/store', [
-                    'as' => 'api.evaluators.store',
-                    'uses' => 'EvaluatorsController@store'
-                ]);
-                $router->post('evaluators/update', [
-                    'as' => 'api.evaluators.update',
-                    'uses' => 'EvaluatorsController@update'
-                ]);
-                $router->post('evaluators/delete/{evaluation_requirements}', [
-                    'as' => 'api.evaluators.delete',
-                    'uses' => 'EvaluatorsController@delete'
                 ]);
             });
         });

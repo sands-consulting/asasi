@@ -14,14 +14,12 @@ class NotificationsServiceProvider extends ServiceProvider
 
     public function register()
     {
+        // Module Routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function($router) {
-            $router->bind('notifications', function($id) {    
-                return Notification::withTrashed()->find($id);
-            });
+            $router->resource('notifications', 'NotificationsController',
+                ['only' => ['index', 'show']]);
 
-            $router->resource('notifications', 'NotificationsController', ['only' => ['index', 'show']]);
-
-            /* Api */
+            // Api Routing
             $router->group(['namespace' => 'Api', 'prefix' => 'api'], function ($router) {
                 $router->get('notifications', [
                     'as' => 'api.notifications',

@@ -29,10 +29,10 @@
 
 @section('secondary-header')
 <ul class="breadcrumb-elements">
-    @if(Auth::user()->hasPermission('qualification-code-type:logs'))
+    @if(Auth::user()->hasPermission('qualification-code-type:histories'))
 	<li>
-		<a href="{{ route('admin.qualification-code-types.logs', $type->id) }}" class="legitRipple">
-			<i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
+		<a href="{{ route('admin.qualification-code-types.histories', $type->id) }}" class="legitRipple">
+			<i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
 		</a>
 	</li>
 	@endif

@@ -18,11 +18,13 @@ class NoticeEventsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // api routing
-        app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
-            $router->model('notice_events', 'App\NoticeEvent');
-
-            $router->post('notice-events/{notices}/store', [
+        // API Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers\Api',
+            'prefix' => 'api',
+            'middleware' => 'api'
+        ], function ($router) {
+            $router->post('notice-events/{notice}/store', [
                 'as' => 'api.notice-events.store',
                 'uses' => 'NoticeEventsController@store'
             ]);
@@ -30,7 +32,7 @@ class NoticeEventsServiceProvider extends ServiceProvider
                 'as' => 'api.notice-events.update',
                 'uses' => 'NoticeEventsController@update'
             ]);
-            $router->post('notice-events/delete/{notice_events}', [
+            $router->post('notice-events/delete/{notice_event}', [
                 'as' => 'api.notice-events.delete',
                 'uses' => 'NoticeEventsController@delete'
             ]);

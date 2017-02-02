@@ -31,7 +31,7 @@ class CustomUpload extends Upload
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     public function user()

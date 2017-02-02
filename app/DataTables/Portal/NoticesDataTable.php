@@ -11,17 +11,8 @@ class NoticesDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($notice) {
-                return view('home._index_notice_actions', compact('notice'));
-            })
-            ->addColumn('code', function($notice) {
-                return '-'; 
-            })
             ->editColumn('name', function($notice) {
-                $name = "<span class='text-header'>$notice->number</span> <br />";
-                $name .= "<span class='text-header text-italic'>" . $notice->organization->short_name . "</span> <br />";
-                $name .= link_to_route('notices.show', $notice->name, $notice->id);
-                return $name;
+                return view('notices._index_name', compact('notice'));
             })
             ->editColumn('purchased_at', function($notice) {
                 return $notice->purchased_at->formatDateFromSetting();
@@ -29,17 +20,21 @@ class NoticesDataTable extends DataTable
             ->editColumn('expired_at', function($notice) {
                 return $notice->expired_at->formatDateFromSetting();
             })
-            ->editColumn('status', function($notice) {
-                // return view('admin.notices._index_status', compact('notice'));
+            ->editColumn('price', function($notice) {
+                return sprintf('%s %.2f', 'MYR', $notice->price);
             })
-            ->removeColumn('number')
+            ->editColumn('action', function($notice) {
+                return view('notices._index_actions', compact('notice'));
+            })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Notice::published();
-        if (isset($this->type)) {
+        $query = Notice::with('organization')->published();
+        
+        if (isset($this->type))
+        {
             $query->where('notice_type_id', $this->type);
         }
 
@@ -70,12 +65,6 @@ class NoticesDataTable extends DataTable
                 'width' => '30%'
             ],
             [
-                'data' => 'code',
-                'name' => 'code',
-                'title' => 'Code',
-                'width' => '15%'
-            ],
-            [
                 'data' => 'purchased_at',
                 'name' => 'purchased_at',
                 'title' => trans('notices.attributes.purchased_at'),
@@ -92,7 +81,7 @@ class NoticesDataTable extends DataTable
                 'name' => 'price',
                 'title' => trans('notices.attributes.price'),
                 'width' => '10%'
-            ],
+            ]
         ];
     }
 

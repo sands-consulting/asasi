@@ -19,25 +19,30 @@ class VendorTypesProvider extends ServiceProvider
      */
     public function register()
     {
-        # Register admin routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function($router) {
-            $router->model('vendor_types', 'App\VendorType');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->put('vendor-types/{vendor_types}/activate', [
-                    'as'    => 'admin.vendor-types.activate',
+        // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
+                $router->put('vendor-types/{vendor_type}/activate', [
+                    'as'    => 'vendor-types.activate',
                     'uses'  => 'VendorTypesController@activate'
                 ]);
-                $router->put('vendor-types/{vendor_types}/deactivate', [
-                    'as'    => 'admin.vendor-types.deactivate',
+                $router->put('vendor-types/{vendor_type}/deactivate', [
+                    'as'    => 'vendor-types.deactivate',
                     'uses'  => 'VendorTypesController@deactivate'
                 ]);
-                $router->get('vendor-types/{vendor_types}/revisions', [
-                    'as'    => 'admin.vendor-types.revisions',
+                $router->get('vendor-types/{vendor_type}/revisions', [
+                    'as'    => 'vendor-types.revisions',
                     'uses'  => 'VendorTypesController@revisions'
                 ]);
-                $router->post('vendor-types/{vendor_types}/duplicate', [
-                    'as'    => 'admin.vendor-types.duplicate',
+                $router->post('vendor-types/{vendor_type}/duplicate', [
+                    'as'    => 'vendor-types.duplicate',
                     'uses'  => 'VendorTypesController@duplicate'
                 ]);
                 $router->resource('vendor-types', 'VendorTypesController');

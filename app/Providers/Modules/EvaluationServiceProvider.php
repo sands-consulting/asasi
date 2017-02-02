@@ -18,68 +18,78 @@ class EvaluationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('evaluations', 'App\Evaluation');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+        // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->get('evaluations/{notices}/submission', [
-                    'as' => 'admin.evaluations.submission',
+                    'as' => 'evaluations.submission',
                     'uses' => 'EvaluationsController@submission'  
                 ]);
 
                 $router->get('evaluations/{notices}/{submissions}/create', [
-                    'as' => 'admin.evaluations.create',
+                    'as' => 'evaluations.create',
                     'uses' => 'EvaluationsController@create'  
                 ]);
 
                 $router->get('evaluations/{notices}/{submissions}/edit', [
-                    'as' => 'admin.evaluations.edit',
+                    'as' => 'evaluations.edit',
                     'uses' => 'EvaluationsController@edit'  
                 ]);
 
                 $router->put('evaluations/{notices}/{submissions}/update', [
-                    'as' => 'admin.evaluations.update',
+                    'as' => 'evaluations.update',
                     'uses' => 'EvaluationsController@update'  
                 ]);
 
                 $router->post('evaluations/{notices}/{submissions}/store', [
-                    'as' => 'admin.evaluations.store',
+                    'as' => 'evaluations.store',
                     'uses' => 'EvaluationsController@store'  
                 ]);
 
                 $router->get('evaluations/settings', [
-                    'as' => 'admin.evaluations.settings',
+                    'as' => 'evaluations.settings',
                     'uses' => 'EvaluationsController@settings'  
                 ]);
 
                 $router->get('evaluations/{notices}/requirements', [
-                    'as' => 'admin.evaluations.requirements',
+                    'as' => 'evaluations.requirements',
                     'uses' => 'EvaluationsController@requirements'  
                 ]);
 
                 $router->get('evaluations/{notices}/view/{users}/{submissions}', [
-                    'as' => 'admin.evaluations.view',
+                    'as' => 'evaluations.view',
                     'uses' => 'EvaluationsController@view'
                 ]);
 
                 $router->resource('evaluations', 'EvaluationsController', ['only' => ['index']]);
             });
+        });
 
-            $router->group(['namespace' => 'Api', 'prefix' => 'api'], function ($router) {
-                $router->post('evaluations/store', [
-                    'as' => 'api.evaluations.store',
-                    'uses' => 'EvaluationsController@store'
-                ]);
-                $router->post('evaluations/update', [
-                    'as' => 'api.evaluations.update',
-                    'uses' => 'EvaluationsController@update'
-                ]);
-                $router->post('evaluations/delete/{evaluations}', [
-                    'as' => 'api.evaluations.delete',
-                    'uses' => 'EvaluationsController@delete'
-                ]);
-            });
+         // API Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers\Api',
+            'prefix' => 'api',
+            'middleware' => 'api'
+        ], function ($router) {
+            $router->post('evaluations/store', [
+                'as' => 'api.evaluations.store',
+                'uses' => 'EvaluationsController@store'
+            ]);
+            $router->post('evaluations/update', [
+                'as' => 'api.evaluations.update',
+                'uses' => 'EvaluationsController@update'
+            ]);
+            $router->post('evaluations/delete/{evaluations}', [
+                'as' => 'api.evaluations.delete',
+                'uses' => 'EvaluationsController@delete'
+            ]);
         });
     }
 }

@@ -4,7 +4,7 @@ namespace App\DataTables\Portal;
 
 use App\Bookmark;
 
-class BookmarksDataTable extends DataTable
+class NoticeBookmarksDataTable extends DataTable
 {
     public function ajax()
     {

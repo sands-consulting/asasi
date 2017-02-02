@@ -3,117 +3,120 @@
 namespace App\Policies\Admin;
 
 use App\Notice;
-use App\Policies\BasePolicy;
+use App\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
-class NoticesPolicy extends BasePolicy
+class NoticePolicy
 {
-    public function index()
+    use HandlesAuthorization;
+
+    public function index(User $user)
     {
-        return $this->user->hasPermission('notice:index');
+        return $user->hasPermission('notice:index');
     }
 
-    public function show()
+    public function show(User $user)
     {
-        return $this->user->hasPermissions(['notice:show']);
+        return $user->hasPermissions(['notice:show']);
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return $this->user->hasPermission('notice:create');
+        return $user->hasPermission('notice:create');
     }
 
-    public function store()
+    public function store(User $user)
     {
-        return $this->create();
+        return $this->create($user);
     }
 
-    public function edit(Notice $notice)
+    public function edit(User $user, Notice $notice)
     {
-        return $this->user->hasPermission('notice:update');
+        return $user->hasPermission('notice:update');
     }
 
-    public function update(Notice $notice)
+    public function update(User $user, Notice $notice)
     {
         return $this->edit($notice);
     }
 
-    public function duplicate(Notice $notice)
+    public function duplicate(User $user, Notice $notice)
     {
-        return $this->user->hasPermission('notice:duplicate');
+        return $user->hasPermission('notice:duplicate');
     }
 
-    public function revisions(Notice $notice)
+    public function revisions(User $user, Notice $notice)
     {
-        return $this->user->hasPermission('notice:revisions');
+        return $user->hasPermission('notice:revisions');
     }
 
-    public function destroy(Notice $notice)
+    public function destroy(User $user, Notice $notice)
     {
-        return $this->user->hasPermission('notice:delete');
+        return $user->hasPermission('notice:delete');
     }
 
-    public function publish(Notice $notice)
+    public function publish(User $user, Notice $notice)
     {
-        return $this->user->hasPermission('notice:publish') && $notice->canPublish();
+        return $user->hasPermission('notice:publish') && $notice->canPublish();
     }
 
-    public function unpublish(Notice $notice)
+    public function unpublish(User $user, Notice $notice)
     {
-        return $this->user->hasPermission('notice:unpublish') && $notice->canUnpublish();
+        return $user->hasPermission('notice:unpublish') && $notice->canUnpublish();
     }
 
-    public function cancel(Notice $notice)
+    public function cancel(User $user, Notice $notice)
     {
-        return $this->user->hasPermission('notice:cancel') && $notice->canCancel();
+        return $user->hasPermission('notice:cancel') && $notice->canCancel();
     }
 
-    public function saveEvaluator(Notice $notice)
+    public function saveEvaluator(User $user, Notice $notice)
     {
-        return $this->create();
+        return $user->hasPermission('notice:create');
     }
 
-    public function summary()
+    public function summary(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 
-    public function summaryByType()
+    public function summaryByType(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 
-    public function summaryEvaluators()
+    public function summaryEvaluators(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 
-    public function award()
+    public function award(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 
-    public function storeAward()
+    public function storeAward(User $user, Notice $notice)
     {
-        return $this->award();
+        return $this->award($user, $notice);
     }
 
-    public function events()
+    public function events(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 
-    public function settings()
+    public function settings(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 
-    public function qualificationCodes()
+    public function qualificationCodes(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 
-    public function files()
+    public function files(User $user, Notice $notice)
     {
-        return $this->show();
+        return $this->show($user, $notice);
     }
 }

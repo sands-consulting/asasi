@@ -28,8 +28,15 @@ class PermissionsServiceProvider extends ServiceProvider
     public function register()
     {
         // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->group(['prefix' => 'admin', 'namespace' => 'Admin'], function($router) {
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->resource('permissions', 'PermissionsController');
             });
         });

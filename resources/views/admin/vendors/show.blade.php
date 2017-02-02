@@ -59,10 +59,10 @@
 
 @section('secondary-header')
 <ul class="breadcrumb-elements">
-    @if(Auth::user()->hasPermission('vendor:logs'))
+    @if(Auth::user()->hasPermission('vendor:histories'))
     <li>
-        <a href="{{ route('admin.vendors.logs', $vendor->id) }}" class="legitRipple">
-            <i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
+        <a href="{{ route('admin.vendors.histories', $vendor->id) }}" class="legitRipple">
+            <i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
         </a>
     </li>
     @endif

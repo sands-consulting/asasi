@@ -28,12 +28,12 @@ class QualificationCode extends Model
 
     public function type()
     {
-        return $this->belongsTo(QualificationCodeType::class, 'type_id');
+        return $this->belongsTo(QualifcationType::class, 'type_id');
     }
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     public function getFullNameAttribute()

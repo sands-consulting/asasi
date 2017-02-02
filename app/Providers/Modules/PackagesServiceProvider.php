@@ -18,29 +18,34 @@ class PackagesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('packages', 'App\Package');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->put('packages/{packages}/activate', [
-                    'as'    => 'admin.packages.activate',
+        // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
+                $router->put('packages/{package}/activate', [
+                    'as'    => 'packages.activate',
                     'uses'  => 'PackagesController@activate'
                 ]);
-                $router->put('packages/{packages}/deactivate', [
-                    'as'    => 'admin.packages.deactivate',
+                $router->put('packages/{package}/deactivate', [
+                    'as'    => 'packages.deactivate',
                     'uses'  => 'PackagesController@deactivate'
                 ]);
-                $router->get('packages/{packages}/logs', [
-                    'as'    => 'admin.packages.logs',
-                    'uses'  => 'PackagesController@logs'
+                $router->get('packages/{package}/histories', [
+                    'as'    => 'packages.histories',
+                    'uses'  => 'PackagesController@histories'
                 ]);
-                $router->get('packages/{packages}/revisions', [
-                    'as'    => 'admin.packages.revisions',
+                $router->get('packages/{package}/revisions', [
+                    'as'    => 'packages.revisions',
                     'uses'  => 'PackagesController@revisions'
                 ]);
-                $router->post('packages/{packages}/duplicate', [
-                    'as'    => 'admin.packages.duplicate',
+                $router->post('packages/{package}/duplicate', [
+                    'as'    => 'packages.duplicate',
                     'uses'  => 'PackagesController@duplicate'
                 ]);
                 $router->resource('packages', 'PackagesController');

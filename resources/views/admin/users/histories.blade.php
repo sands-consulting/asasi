@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
 @section('page-title', implode(' | ', [
-	trans('user-logs.title'),
-	$category->name,
-	trans('news-categories.title')
+	trans('user-histories.title'),
+	$user->name,
+	trans('users.title')
 ]))
 
 @section('header')
 <div class="page-title">
 	<h4>
-		{{ link_to_route('admin.news-categories.index', trans('news-categories.title')) }} /
-		{{ link_to_route('admin.news-categories.edit', $category->name, $category->id) }} /
-		<span class="text-semibold">{{ trans('user-logs.title') }}</span>
+		{{ link_to_route('admin.users.index', trans('users.title')) }} /
+		{{ link_to_route('admin.users.show', $user->name, $user->id) }} /
+		<span class="text-semibold">{{ trans('user-histories.title') }}</span>
 	</h4>
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
-		<a href="{{ route('admin.news-categories.edit', $category->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+		<a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
 			<i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
 		</a>
 	</div>

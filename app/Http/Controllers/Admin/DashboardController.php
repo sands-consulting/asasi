@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\UserLog;
+use App\UserHistory;
 use App\Notice;
 use App\Vendor;
 use App\DataTables\DashboardUsersDataTable;
@@ -17,13 +17,13 @@ class DashboardController extends Controller
             return redirect()->route('admin.evaluations.index');
         }
 
-        $lastLogins = UserLog::lastLogin(5)->get();
+        $lastLogins = UserHistory::lastLogin(5)->get();
         return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
 
     public function user(DashboardUsersDataTable $table)
     {
-        $lastLogins = UserLog::lastLogin(5)->get();
+        $lastLogins = UserHistory::lastLogin(5)->get();
         return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
 

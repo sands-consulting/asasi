@@ -118,10 +118,10 @@ class ProjectsController extends Controller
             ->with('notice', trans('projects.notices.deleted', ['name' => $project->name]));
     }
 
-    public function logs(Project $project, UserHistoriesDataTable $table)
+    public function histories(Project $project, UserHistoriesDataTable $table)
     {
         $table->setActionable($project);
-        return $table->render('admin.projects.logs', compact('project'));
+        return $table->render('admin.projects.histories', compact('project'));
     }
 
     public function revisions(Project $project, RevisionsDataTable $table)

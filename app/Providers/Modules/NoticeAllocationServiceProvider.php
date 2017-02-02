@@ -18,15 +18,17 @@ class NoticeAllocationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // api routing
-        app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
-            $router->model('allocation_notice', 'App\AllocationNotice');
-
-            $router->post('notice-allocations/{notices}/store', [
+        // API Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers\Api',
+            'prefix' => 'api',
+            'middleware' => 'api'
+        ], function ($router) {
+            $router->post('notice-allocations/{notice}/store', [
                 'as' => 'api.notice-allocations.store',
                 'uses' => 'NoticeAllocationsController@store'
             ]);
-            $router->post('notice-allocations/{notices}/update', [
+            $router->post('notice-allocations/{notice}/update', [
                 'as' => 'api.notice-allocations.update',
                 'uses' => 'NoticeAllocationsController@update'
             ]);

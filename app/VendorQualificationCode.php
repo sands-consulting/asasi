@@ -27,7 +27,7 @@ class VendorQualificationCode extends Model
 
     public function type()
     {
-    	return $this->belongsTo(QualificationCodeType::class);
+    	return $this->belongsTo(QualificationType::class);
     }
 
     public function parent()

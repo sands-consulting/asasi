@@ -13,11 +13,16 @@ class ProjectMilestonesServiceProvider extends ServiceProvider
 
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('project_milestones', 'App\ProjectMilestone');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-
+        // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->match(['get', 'post'], 'projects/{projects}/milestones/gantt_data', "ProjectMilestonesController@ganttData");
 
                 $router->resource('projects.milestones', 'ProjectMilestonesController');

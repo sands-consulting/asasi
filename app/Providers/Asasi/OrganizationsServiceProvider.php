@@ -29,25 +29,24 @@ class OrganizationsServiceProvider extends ServiceProvider
     {
 
         // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->resource('organizations', 'OrganizationsController');
-                $router->get('organizations/{organization}/revisions', [
-                    'as'    => 'admin.organizations.revisions',
-                    'uses'  => 'OrganizationsController@revisions'
-                ]);
-                $router->put('organizations/{organization}/activate', [
-                    'as'    => 'admin.organizations.activate',
-                    'uses'  => 'OrganizationsController@activate',
-                ]);
-                $router->put('organizations/{organization}/deactivate', [
-                    'as'    => 'admin.organizations.deactivate',
-                    'uses'  => 'OrganizationsController@deactivate',
-                ]);
-                $router->put('organizations/{organization}/suspend', [
-                    'as'    => 'admin.organizations.suspend',
-                    'uses'  => 'OrganizationsController@suspend',
-                ]);
+                $router->get('organizations/{organization}/revisions', 'OrganizationsController@revisions')
+                    ->name('organizations.revisions');
+                $router->put('organizations/{organization}/activate', 'OrganizationsController@activate')
+                    ->name('organizations.activate');
+                $router->put('organizations/{organization}/deactivate', 'OrganizationsController@deactivate')
+                    ->name('organizations.deactivate');
+                $router->put('organizations/{organization}/suspend', 'OrganizationsController@suspend')
+                    ->name('organizations.suspend');
             });
         });
     }

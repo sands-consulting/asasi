@@ -16,42 +16,48 @@ class NewsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('news', 'App\News');
-            $router->model('news_categories', 'App\NewsCategory');
-            $router->resource('news', 'NewsController', ['only' => ['index', 'show']]);
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                // news
+        // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
+                // News Routing
                 $router->get('news/{news}/revisions', [
-                    'as'    => 'admin.news.revisions',
+                    'as'    => 'news.revisions',
                     'uses'  => 'NewsController@revisions'
                 ]);
-                $router->get('news/{news}/logs', [
-                    'as'    => 'admin.news.logs',
-                    'uses'  => 'NewsController@logs'
+                $router->get('news/{news}/histories', [
+                    'as'    => 'news.histories',
+                    'uses'  => 'NewsController@histories'
                 ]);
                 $router->put('news/{news}/publish', [
-                    'as'    => 'admin.news.publish',
+                    'as'    => 'news.publish',
                     'uses'  => 'NewsController@publish'
                 ]);
                 $router->put('news/{news}/unpublish', [
-                    'as'    => 'admin.news.unpublish',
+                    'as'    => 'news.unpublish',
                     'uses'  => 'NewsController@unpublish'
                 ]);
                 $router->resource('news', 'NewsController', ['except' => 'show']);
 
-                // news-categories
+                // News Category Routing
                 $router->get('news-categories/{news_categories}/revisions', [
-                    'as'    => 'admin.news-categories.revisions',
+                    'as'    => 'news-categories.revisions',
                     'uses'  => 'NewsCategoriesController@revisions'
                 ]);
-                $router->get('news-categories/{news_categories}/logs', [
-                    'as'    => 'admin.news-categories.logs',
-                    'uses'  => 'NewsCategoriesController@logs'
+                $router->get('news-categories/{news_categories}/histories', [
+                    'as'    => 'news-categories.histories',
+                    'uses'  => 'NewsCategoriesController@histories'
                 ]);
                 $router->resource('news-categories', 'NewsCategoriesController', ['except' => 'show']);
             });
+
+            $router->resource('news', 'NewsController', ['only' => ['index', 'show']]);
         });
     }
 }

@@ -64,7 +64,7 @@ class ProjectMilestone extends Model
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     public function canActivate()

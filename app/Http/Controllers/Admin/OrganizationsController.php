@@ -57,10 +57,10 @@ class OrganizationsController extends Controller
             ->with('notice', trans('organizations.notices.deleted', ['name' => $organization->name]));
     }
 
-    public function logs(Organization $organization, OrganizationLogsDataTable $table)
+    public function histories(Organization $organization, OrganizationLogsDataTable $table)
     {
         $table->setActionable($organization);
-        return $table->render('admin.organizations.logs', compact('organization'));
+        return $table->render('admin.organizations.histories', compact('organization'));
     }
 
     public function revisions(Organization $organization, RevisionsDataTable $table)

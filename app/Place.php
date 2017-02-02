@@ -48,7 +48,7 @@ class Place extends Model
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     public function parent()
@@ -155,7 +155,7 @@ class Place extends Model
         // Fixme: Temp code to select state
         $cities = static::where('status', 'active')
             ->where('type', 'city')
-            ->lists('name', 'id');
+            ->pluck('name', 'id');
 
         return ['' => 'Select city ...'] + $cities->toArray();
     }
@@ -165,7 +165,7 @@ class Place extends Model
         // Fixme: Temp code to select state
         $states = static::where('status', 'active')
             ->where('type', 'state')
-            ->lists('name', 'id');
+            ->pluck('name', 'id');
 
         return ['' => 'Select state ...'] + $states->toArray();
     }
@@ -175,7 +175,7 @@ class Place extends Model
         // Fixme: Temp code to select state
         $countries = static::where('status', 'active')
             ->where('type', 'country')
-            ->lists('name', 'id');
+            ->pluck('name', 'id');
 
         return ['' => 'Select country ...'] + $countries->toArray();
     }

@@ -1,12 +1,12 @@
 @extends('layouts.portal')
 
-@section('page-title', trans('me.views.contact.title'))
+@section('page-title', trans('contact.views.create.title'))
 
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">
         <h5 class="panel-title">
-            {{ trans('me.views.contact.title') }}
+            {{ trans('contact.views.create.title') }}
         </h5>
     </div>
     <div class="panel-body">

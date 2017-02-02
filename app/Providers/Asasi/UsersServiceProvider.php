@@ -35,25 +35,29 @@ class UsersServiceProvider extends ServiceProvider
         // module routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
-            'middleware' => ['web', 'auth']
+            'middleware' => 'web'
         ], function ($router) {
-            $router->group(['prefix' => 'admin', 'namespace' => 'Admin'], function($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->resource('users', 'UsersController');
-                $router->resource('users.blacklists', 'UserBlacklistsController');
+                $router->resource('users.blacklists', 'UserBlacklistsPolicy');
                 $router->put('users/{user}/activate', 'UsersController@activate')
-                    ->name('admin.users.activate');
+                    ->name('users.activate');
                 $router->put('users/{user}/suspend', 'UsersController@suspend')
-                    ->name('admin.users.suspend');
+                    ->name('users.suspend');
                 $router->get('users/{user}/histories', 'UsersController@histories')
-                    ->name('admin.users.histories');
+                    ->name('users.histories');
                 $router->get('users/{user}/revisions', 'UsersController@revisions')
-                    ->name('admin.users.revisions');
+                    ->name('users.revisions');
                 $router->get('users/{user}/assume', 'UsersController@assume')
-                    ->name('admin.users.assume');
+                    ->name('users.assume');
                 $router->get('users/archives', 'UsersController@archives')
-                    ->name('admin.users.archives');
+                    ->name('users.archives');
                 $router->put('users/{user}/restore', 'UsersController@restore')
-                    ->name('admin.users.restore');
+                    ->name('users.restore');
             });
 
             $router->get('me', 'MeController@edit')
@@ -61,6 +65,8 @@ class UsersServiceProvider extends ServiceProvider
             $router->put('me', 'MeController@update');
             $router->get('me/resume', 'MeController@resume')
                 ->name('me.resume');
+
+            $router->resource('vendors.users', 'VendorUsersController');
         });
     }
 }

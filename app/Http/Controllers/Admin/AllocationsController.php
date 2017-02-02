@@ -90,10 +90,10 @@ class AllocationsController extends Controller
             ->with('notice', trans('allocations.notices.deleted', ['name' => $allocation->name]));
     }
 
-    public function logs(Allocation $allocation, UserHistoriesDataTable $table)
+    public function histories(Allocation $allocation, UserHistoriesDataTable $table)
     {
         $table->setActionable($allocation);
-        return $table->render('admin.allocations.logs', compact('allocation'));
+        return $table->render('admin.allocations.histories', compact('allocation'));
     }
 
     public function revisions(Allocation $allocation, RevisionsDataTable $table)

@@ -9,6 +9,11 @@ class DashboardPolicy
 {
     use HandlesAuthorization;
 
+    public function index(User $user)
+    {
+        return $user->hasPermission('access:admin');
+    }
+
     public function portfolio(User $user)
     {
         return $user->hasPermission('dashboard:portfolio');

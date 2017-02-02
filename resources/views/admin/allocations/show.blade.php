@@ -28,10 +28,10 @@
 
 @section('secondary-header')
 <ul class="breadcrumb-elements">
-    @if(Auth::user()->hasPermission('allocation:logs'))
+    @if(Auth::user()->hasPermission('allocation:histories'))
 	<li>
-		<a href="{{ route('admin.allocations.logs', $allocation->id) }}" class="legitRipple">
-			<i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
+		<a href="{{ route('admin.allocations.histories', $allocation->id) }}" class="legitRipple">
+			<i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
 		</a>
 	</li>
 	@endif

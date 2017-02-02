@@ -18,10 +18,10 @@ class SubmissionsController extends Controller
         return $table->render('admin.submissions.index');
     }
 
-    public function lists(Notice $notice)
+    public function pluck(Notice $notice)
     {
         $submissions = $notice->submissions;
-        return view('admin.submissions.lists', compact('notice', 'submissions'));
+        return view('admin.submissions.pluck', compact('notice', 'submissions'));
     }
 
     public function create(Request $request)
@@ -69,10 +69,10 @@ class SubmissionsController extends Controller
             ->with('notice', trans('submissions.notices.deleted', ['name' => $submission->name]));
     }
 
-    public function logs(Submission $submission, SubmissionLogsDataTable $table)
+    public function histories(Submission $submission, SubmissionLogsDataTable $table)
     {
         $table->setActionable($submission);
-        return $table->render('admin.submissions.logs', compact('submission'));
+        return $table->render('admin.submissions.histories', compact('submission'));
     }
 
     public function revisions(Submission $submission, RevisionsDataTable $table)

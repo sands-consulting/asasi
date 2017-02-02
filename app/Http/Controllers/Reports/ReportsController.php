@@ -6,6 +6,7 @@ use App\Application;
 use App\Setting;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ReportsController extends Controller
 {

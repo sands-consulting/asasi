@@ -26,7 +26,7 @@ class NewsCategory extends Model
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     public function news()
@@ -55,7 +55,7 @@ class NewsCategory extends Model
     
     public static function getOptions($label='name')
     {
-        return static::lists($label, 'id')->toArray();
+        return static::pluck($label, 'id')->toArray();
     }
 
     public static function boot()

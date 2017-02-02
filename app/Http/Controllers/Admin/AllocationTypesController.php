@@ -58,10 +58,10 @@ class AllocationTypesController extends Controller
             ->with('notice', trans('allocation-types.notices.deleted', ['name' => $type->name]));
     }
 
-    public function logs(AllocationType $type, UserHistoriesDataTable $table)
+    public function histories(AllocationType $type, UserHistoriesDataTable $table)
     {
         $table->setActionable($type);
-        return $table->render('admin.allocation-types.logs', compact('type'));
+        return $table->render('admin.allocation-types.histories', compact('type'));
     }
 
     public function revisions(AllocationType $type, RevisionsDataTable $table)

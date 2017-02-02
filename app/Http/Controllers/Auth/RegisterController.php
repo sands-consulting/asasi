@@ -87,7 +87,7 @@ class RegisterController extends Controller
                 'password' => bcrypt($data['password']),
                 'confirmation_token' => str_random(30)
             ]);
-            $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->lists('id')->toArray());
+            $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->pluck('id')->toArray());
             $user->vendors()->attach($vendor->id);
             return $user;
         });

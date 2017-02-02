@@ -14,27 +14,32 @@ class ProjectsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('projects', 'App\Project');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                
+        // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->get('projects/{projects}/revisions', [
-                    'as'    => 'admin.projects.revisions',
+                    'as'    => 'projects.revisions',
                     'uses'  => 'ProjectsController@revisions'
                 ]);
-                $router->get('projects/{projects}/logs', [
-                    'as'    => 'admin.projects.logs',
-                    'uses'  => 'ProjectsController@logs'
+                $router->get('projects/{projects}/histories', [
+                    'as'    => 'projects.histories',
+                    'uses'  => 'ProjectsController@histories'
                 ]);
 
                 $router->post('projects/create-by-notice', [
-                    'as'    => 'admin.projects.create-by-notice',
+                    'as'    => 'projects.create-by-notice',
                     'uses'  => 'ProjectsController@createByNotice'
                 ]);
 
                 $router->post('projects/store-by-notice', [
-                    'as'    => 'admin.projects.store-by-notice',
+                    'as'    => 'projects.store-by-notice',
                     'uses'  => 'ProjectsController@storeByNotice'
                 ]);
 

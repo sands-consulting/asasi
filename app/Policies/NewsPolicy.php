@@ -75,7 +75,7 @@ class NewsPolicy extends BasePolicy
 
         if($this->user->hasPermission('news:organization'))
         {
-            return $this->user->organizations->lists('id')->has($news->organization_id);
+            return $this->user->organizations->pluck('id')->has($news->organization_id);
         }
 
         return true;

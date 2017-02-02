@@ -28,13 +28,18 @@ class RolesServiceProvider extends ServiceProvider
     public function register()
     {
         // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->resource('roles',  'RolesController');
-                $router->get('roles/{role}/revisions', [
-                    'as'    => 'admin.roles.revisions',
-                    'uses'  => 'RolesController@revisions'
-                ]);
+                $router->get('roles/{role}/revisions', 'RolesController@revisions')
+                    ->name('roles.revisions');
             });
         });
     }

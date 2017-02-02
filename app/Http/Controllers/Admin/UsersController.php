@@ -86,10 +86,10 @@ class UsersController extends Controller
             ->with('notice', trans('users.notices.deleted', ['name' => $user->name]));
     }
 
-    public function logs(User $user, UserHistoriesDataTable $table)
+    public function histories(User $user, UserHistoriesDataTable $table)
     {
         $table->setActionable($user);
-        return $table->render('admin.users.logs', compact('user'));
+        return $table->render('admin.users.histories', compact('user'));
     }
 
     public function revisions(User $user, RevisionsDataTable $table)

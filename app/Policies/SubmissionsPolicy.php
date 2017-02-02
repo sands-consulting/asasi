@@ -11,7 +11,7 @@ class SubmissionsPolicy extends BasePolicy
         return $this->user->hasPermission('notice-type:index');
     }
 
-    public function lists()
+    public function pluck()
     {
         return $this->user->hasPermission('notice-type:show');
     }

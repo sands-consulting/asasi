@@ -73,7 +73,7 @@ class Permission extends Model
     
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     public function roles()
@@ -87,7 +87,7 @@ class Permission extends Model
     
     public static function getGroupOptions()
     {
-        return static::distinct('group')->orderBy('group')->lists('group');
+        return static::distinct('group')->orderBy('group')->pluck('group');
     }
 
     /**

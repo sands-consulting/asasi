@@ -17,28 +17,33 @@ class AllocationsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('allocations', 'App\Allocation');
-            $router->model('allocation_types', 'App\AllocationType');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->get('allocations/{allocations}/revisions', [
-                    'as'    => 'admin.allocations.revisions',
+        // Module Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
+                $router->get('allocations/{allocation}/revisions', [
+                    'as'    => 'allocations.revisions',
                     'uses'  => 'AllocationsController@revisions'
                 ]);
-                $router->get('allocations/{allocations}/logs', [
-                    'as'    => 'admin.allocations.logs',
-                    'uses'  => 'AllocationsController@logs'
+                $router->get('allocations/{allocation}/histories', [
+                    'as'    => 'allocations.histories',
+                    'uses'  => 'AllocationsController@histories'
                 ]);
                 $router->resource('allocations', 'AllocationsController');
 
-                $router->get('allocation-types/{allocation_types}/revisions', [
-                    'as'    => 'admin.allocation-types.revisions',
+                $router->get('allocation-types/{allocation_type}/revisions', [
+                    'as'    => 'allocation-types.revisions',
                     'uses'  => 'AllocationTypesController@revisions'
                 ]);
-                $router->get('allocation-types/{allocation_types}/logs', [
-                    'as'    => 'admin.allocation-types.logs',
-                    'uses'  => 'AllocationTypesController@logs'
+                $router->get('allocation-types/{allocation_type}/histories', [
+                    'as'    => 'allocation-types.histories',
+                    'uses'  => 'AllocationTypesController@histories'
                 ]);
                 $router->resource('allocation-types', 'AllocationTypesController');
             });

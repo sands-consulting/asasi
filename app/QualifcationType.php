@@ -6,7 +6,7 @@ use Baum\Node;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class QualificationCodeType extends Node
+class QualificationType extends Node
 {
     use RevisionableTrait, SoftDeletes;
 
@@ -34,7 +34,7 @@ class QualificationCodeType extends Node
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
 

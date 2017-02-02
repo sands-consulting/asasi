@@ -81,7 +81,7 @@ class ProjectMilestonesPolicy extends BasePolicy
 
         if($this->user->hasPermission('project-milestone:organization'))
         {
-            return $this->user->organizations->lists('id')->has($projectMilestone->organization_id);
+            return $this->user->organizations->pluck('id')->has($projectMilestone->organization_id);
         }
 
         return true;

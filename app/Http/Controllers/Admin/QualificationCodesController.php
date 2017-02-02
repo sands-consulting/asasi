@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\QualificationCode;
-use App\QualificationCodeType;
+use App\QualificationType;
 use App\DataTables\QualificationCodeDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
@@ -56,10 +56,10 @@ class QualificationCodesController extends Controller
             ->with('alert', trans('qualification-codes.notices.deleted', ['code' => $code->code, 'name' => $code->name]));
     }
 
-    public function logs(Qualification $code, UserHistoriesDataTable $table)
+    public function histories(Qualification $code, UserHistoriesDataTable $table)
     {
         $table->setActionable($code);
-        return $table->render('admin.qualification-codes.logs', compact('code'));
+        return $table->render('admin.qualification-codes.histories', compact('code'));
     }
 
     public function revisions(Qualification $code, RevisionsDataTable $table)

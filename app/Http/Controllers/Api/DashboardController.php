@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
-use App\UserLog;
+use App\UserHistory;
 use App\Services\SubmissionEvaluationsService;
 
 class DashboardController extends Controller
 {
     public function chartLoginActivity()
     {
-        $activities = UserLog::select([
+        $activities = UserHistory::select([
                 \DB::raw('DATE(created_at) as date'),
                 \DB::raw('COUNT(id) as count')
             ])

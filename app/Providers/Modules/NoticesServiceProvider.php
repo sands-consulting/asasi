@@ -8,9 +8,9 @@ class NoticesServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\NoticesController', 'App\Policies\Admin\NoticesPolicy');
+        app('policy')->register('App\Http\Controllers\NoticesController', 'App\Policies\Admin\NoticePolicy');
 
-        app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\Admin\NoticesPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\Admin\NoticePolicy');
 
     }
 
@@ -21,80 +21,84 @@ class NoticesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
+        // Module Routing
         app('router')->group([
-            'middleware' => 'web',
-            'namespace' => 'App\Http\Controllers'
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
         ], function ($router) {
-            $router->model('evaluation_types', 'App\EvaluationType');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
-                $router->put('notices/{notices}/publish', [
-                    'as'    => 'admin.notices.publish',
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
+                $router->put('notices/{notice}/publish', [
+                    'as'    => 'notices.publish',
                     'uses'  => 'NoticesController@publish'
                 ]);
-                $router->put('notices/{notices}/unpublish', [
-                    'as'    => 'admin.notices.unpublish',
+                $router->put('notices/{notice}/unpublish', [
+                    'as'    => 'notices.unpublish',
                     'uses'  => 'NoticesController@unpublish'
                 ]);
-                $router->put('notices/{notices}/cancel', [
-                    'as'    => 'admin.notices.cancel',
+                $router->put('notices/{notice}/cancel', [
+                    'as'    => 'notices.cancel',
                     'uses'  => 'NoticesController@cancel'
                 ]);
-                $router->get('notices/{notices}/logs', [
-                    'as'    => 'admin.notices.logs',
-                    'uses'  => 'NoticesController@logs'
+                $router->get('notices/{notice}/histories', [
+                    'as'    => 'notices.histories',
+                    'uses'  => 'NoticesController@histories'
                 ]);
-                $router->get('notices/{notices}/revisions', [
-                    'as'    => 'admin.notices.revisions',
+                $router->get('notices/{notice}/revisions', [
+                    'as'    => 'notices.revisions',
                     'uses'  => 'NoticesController@revisions'
                 ]);
-                $router->post('notices/{notices}/duplicate', [
-                    'as'    => 'admin.notices.duplicate',
+                $router->post('notices/{notice}/duplicate', [
+                    'as'    => 'notices.duplicate',
                     'uses'  => 'NoticesController@duplicate'
                 ]);
 
-                $router->get('notices/{notices}/events', [
-                    'as'    => 'admin.notices.events',
+                $router->get('notices/{notice}/events', [
+                    'as'    => 'notices.events',
                     'uses'  => 'NoticesController@events'
                 ]);
-                $router->get('notices/{notices}/settings', [
-                    'as'    => 'admin.notices.settings',
-                    'uses'  => 'NoticesController@settings'
-                ]);
-                $router->get('notices/{notices}/qualification-codes', [
-                    'as'    => 'admin.notices.qualification-codes',
+                $router->get('notices/{notice}/qualification-codes', [
+                    'as'    => 'notices.qualification-codes',
                     'uses'  => 'NoticesController@qualificationCodes'
                 ]);
-                 $router->get('notices/{notices}/files', [
-                    'as'    => 'admin.notices.files',
+                $router->get('notices/{notice}/files', [
+                    'as'    => 'notices.files',
                     'uses'  => 'NoticesController@files'
                 ]);
-                $router->get('notices/{notices}/purchases', [
-                    'as'    => 'admin.notices.purchases',
+                $router->get('notices/{notice}/settings', [
+                    'as'    => 'notices.settings',
+                    'uses'  => 'NoticesController@settings'
+                ]);
+
+                $router->get('notices/{notice}/purchases', [
+                    'as'    => 'notices.purchases',
                     'uses'  => 'NoticesController@purchases'
                 ]);
                 
 
-                $router->post('notices/{notices}/award/{vendors}', [
-                    'as' => 'admin.notices.award',
+                $router->post('notices/{notice}/award/{vendors}', [
+                    'as' => 'notices.award',
                     'uses' => 'NoticesController@award'
                 ]);
-                $router->post('notices/{notices}/store-award', [
-                    'as' => 'admin.notices.store-award',
+                $router->post('notices/{notice}/store-award', [
+                    'as' => 'notices.store-award',
                     'uses' => 'NoticesController@storeAward'  
                 ]);
+
                 // Summary
-                $router->get('notices/{notices}/summary', [
-                    'as' => 'admin.notices.summary',
+                $router->get('notices/{notice}/summary', [
+                    'as' => 'notices.summary',
                     'uses' => 'NoticesController@summary'
                 ]);
-                $router->get('notices/{notices}/summary/{evaluation_types}', [
-                    'as' => 'admin.notices.summary-by-type',
+                $router->get('notices/{notice}/summary/{evaluation_types}', [
+                    'as' => 'notices.summary-by-type',
                     'uses' => 'NoticesController@summaryByType'
                 ]);
-                $router->get('notices/{notices}/summary/{submissions}/evaluators/{evaluation_types}', [
-                    'as' => 'admin.notices.summary-evaluators',
+                $router->get('notices/{notice}/summary/{submissions}/evaluators/{evaluation_types}', [
+                    'as' => 'notices.summary-evaluators',
                     'uses' => 'NoticesController@summaryEvaluators'
                 ]);
 
@@ -105,27 +109,27 @@ class NoticesServiceProvider extends ServiceProvider
                 'as' => 'notices.my-notices',
                 'uses' => 'NoticesController@myNotices'
             ]);
-            $router->get('notices/{notices}/submission/', [
+            $router->get('notices/{notice}/submission/', [
                 'as' => 'notices.submission',
                 'uses' => 'NoticesController@submission'
             ]);
-            $router->post('notices/{notices}/commercial/', [
+            $router->post('notices/{notice}/commercial/', [
                 'as' => 'notices.commercial',
                 'uses' => 'NoticesController@commercial'
             ]);
-            $router->post('notices/{notices}/commercial-edit/{submissions}', [
+            $router->post('notices/{notice}/commercial-edit/{submissions}', [
                 'as' => 'notices.commercial-edit',
                 'uses' => 'NoticesController@commercialEdit'
             ]);
-            $router->post('notices/{notices}/technical/', [
+            $router->post('notices/{notice}/technical/', [
                 'as' => 'notices.technical',
                 'uses' => 'NoticesController@technical'
             ]);
-            $router->post('notices/{notices}/technical-edit/{submissions}', [
+            $router->post('notices/{notice}/technical-edit/{submissions}', [
                 'as' => 'notices.technical-edit',
                 'uses' => 'NoticesController@technicalEdit'
             ]);
-            $router->post('notices/{notices}/save-submission/', [
+            $router->post('notices/{notice}/save-submission/', [
                 'as' => 'notices.save-submission',
                 'uses' => 'NoticesController@saveSubmission'
             ]);
@@ -147,7 +151,7 @@ class NoticesServiceProvider extends ServiceProvider
                 'uses' => 'NoticesController@save'
             ]);
 
-            $router->put('notices/{notices}/update', [
+            $router->put('notices/{notice}/update', [
                 'as' => 'api.notices.update',
                 'uses' => 'NoticesController@update'
             ]);

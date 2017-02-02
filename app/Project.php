@@ -102,7 +102,7 @@ class Project extends Model
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     /*
@@ -120,7 +120,7 @@ class Project extends Model
     
     public static function options()
     {
-        return static::lists('name', 'id');
+        return static::pluck('name', 'id');
     }
 
     public function managers()

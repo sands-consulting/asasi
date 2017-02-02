@@ -27,23 +27,19 @@ class PlacesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->resource('places', 'PlacesController');
-                $router->get('places/{places}/revisions', [
-                    'as'    => 'admin.places.revisions',
-                    'uses'  => 'PlacesController@revisions'
-                ]);
-                $router->put('places/{places}/activate', [
-                    'as'    => 'admin.places.activate',
-                    'uses'  => 'PlacesController@activate'
-                ]);
-                $router->put('places/{places}/deactivate', [
-                    'as'    => 'admin.places.deactivate',
-                    'uses'  => 'PlacesController@deactivate'
-                ]);
+                $router->get('places/{places}/revisions', 'PlacesController@revisions')
+                    ->name('places.revisions');
             });
         });
     }

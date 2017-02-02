@@ -61,10 +61,10 @@ class NoticeTypesController extends Controller
             ->with('notice', trans('notice-types.notices.deleted', ['name' => $noticeType->name]));
     }
 
-    public function logs(NoticeType $noticeType, NoticeTypeLogsDataTable $table)
+    public function histories(NoticeType $noticeType, NoticeTypeLogsDataTable $table)
     {
         $table->setActionable($noticeType);
-        return $table->render('admin.notice-types.logs', compact('noticeType'));
+        return $table->render('admin.notice-types.histories', compact('noticeType'));
     }
 
     public function revisions(NoticeType $noticeType, RevisionsDataTable $table)

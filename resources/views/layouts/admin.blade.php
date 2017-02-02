@@ -101,23 +101,7 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li>
-                            <a href="{{ route('profile') }}">
-                                <i class="icon-user"></i> {{ trans('menu.user.my_profile') }}
-                            </a>
-                        </li>
-                        @if(session('original_user_id'))
-                        <li>
-                            <a href="{{ route('profile.resume') }}" data-method="POST">
-                                <i class="icon-user-cancel"></i> {{ trans('menu.user.release_user') }}
-                            </a>
-                        </li>
-                        @endif
-                        <li>
-                            <a href="{{ url('logout') }}">
-                                <i class="icon-switch2"></i> {{ trans('menu.user.sign_out') }}
-                            </a>
-                        </li>
+                        @include('layouts.portal.user')
                     </ul>
                 </li>
                 @endif
@@ -146,7 +130,7 @@
                     <div class="navigation-wrapper collapse" id="user-nav">
                         <ul class="navigation">
                             <li>
-                                <a href="{{ route('profile') }}">
+                                <a href="{{ route('me') }}">
                                     <i class="icon-user"></i> <span>{{ trans('menu.user.my_profile') }}</span>
                                 </a>
                             </li>
@@ -258,7 +242,7 @@
                             @endif
 
                             @if(Auth::user()->hasPermissions(['qualification-code:index', 'qualification-code-type:index']))
-                            <li class="{{is_path_active(['admin/qualification-codes*', 'admin/qualification-code-types*']) }}">
+                            <li class="{{is_path_active('admin/qualification*') }}">
                                 <a href="{{ route('admin.qualification-codes.index') }}" class="has-ul legitRipple">
                                     <i class="icon-drawer3"></i> <span>{{ trans('menu.admin.administration.qualification-codes') }}</span>
                                 </a>
@@ -266,8 +250,8 @@
                                     <li class="{{ is_path_active('admin/qualification-codes*') }}">
                                         <a href="{{ route('admin.qualification-codes.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-codes') }}</a>
                                     </li>
-                                    <li class="{{ is_path_active('admin/qualification-code-types*') }}">
-                                        <a href="{{ route('admin.qualification-code-types.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-code-types') }}</a>
+                                    <li class="{{ is_path_active('admin/qualification-types*') }}">
+                                        <a href="{{ route('admin.qualification-types.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-types') }}</a>
                                     </li>
                                 </ul>
                             </li>
@@ -357,7 +341,7 @@
 </div>
 
 <script src="{{ elixir('assets/js/admin.js') }}"></script>
-<script src="{{ env('SOCKET_URL') }}/socket.io/socket.io.js"></script>
+<script src="{{ env('APP_SOCKET_URL') }}/socket.io/socket.io.js"></script>
 @yield('scripts')
 {!! flash_messages() !!}
 </body>

@@ -11,7 +11,7 @@ use App\Services\NewsCategoriesService;
 use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
-class NewsCategoriesController extends Controller
+class VendorTypesController extends Controller
 {
     public function index(Request $request, NewsCategoriesDataTable $table)
     {

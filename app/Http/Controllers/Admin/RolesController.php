@@ -58,10 +58,10 @@ class RolesController extends Controller
             ->with('notice', trans('roles.notices.deleted', ['name' => $role->name]));
     }
 
-    public function logs(Role $role, UserHistoriesDataTable $table)
+    public function histories(Role $role, UserHistoriesDataTable $table)
     {
         $table->setActionable($role);
-        return $table->render('admin.roles.logs', compact('role'));
+        return $table->render('admin.roles.histories', compact('role'));
     }
 
     public function revisions(Role $role, RevisionsDataTable $table)

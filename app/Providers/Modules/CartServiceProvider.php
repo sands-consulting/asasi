@@ -18,7 +18,7 @@ class CartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
+        // Module Routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
             $router->get('cart', [
                 'uses' => 'CartController@index',

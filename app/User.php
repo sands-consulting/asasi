@@ -58,7 +58,7 @@ class User extends Authenticatable
         return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
-    public function blacklists()
+    public function blackpluck()
     {
         return $this->hasMany(UserBlacklist::class);
     }
@@ -115,7 +115,7 @@ class User extends Authenticatable
 
     public function getBlacklistedAttribute()
     {
-        return $this->blacklists()->active()->count() > 0;
+        return $this->blackpluck()->active()->count() > 0;
     }
 
     public function getVendorAttribute()
@@ -223,7 +223,7 @@ class User extends Authenticatable
     
     public static function options()
     {
-        return static::lists('name', 'id')->toArray();
+        return static::pluck('name', 'id')->toArray();
     }
     
     public function newNotification()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notice;
 use Cart;
 use Illuminate\Http\Request;
 
@@ -13,23 +14,27 @@ class CartController extends Controller
         return view('cart.index', compact('items'));
     }
 
-    public function add($item)
+    public function add(Request $request)
     {
-        $cartItem = Cart::add($item->id, $item->name, 1, $item->price, ['number' => $item->number,'description' => $item->description]);
-        $cartItem->associate('Notice');
+        $notice = Notice::with('organization')->published()->find($request->input('id'));
+        $item   = Cart::add($notice->id, $notice->name, 1, $notice->price, [
+                    'number' => $notice->number,
+                    'organization' => $notice->organization->short_name
+                ]);
+        $item->associate('Notice');
 
         return redirect()
             ->back()
-            ->with('notice', trans('carts.notices.added', ['name' => $item->number]));
+            ->with('notice', trans('cart.flash.added', ['name' => $item->number]));
     }
 
-    public function remove($rowId)
+    public function remove(Request $request)
     {
-        $item = Cart::get($rowId);
-        Cart::remove($rowId);
+        $item = Cart::get($request->input('id'));
+        Cart::remove($item->id);
         return redirect()
-            ->route('carts.index')
-            ->with('notice', trans('carts.notices.removed', ['name' => $item->options->number]));
+            ->route('cart')
+            ->with('notice', trans('cart.flash.removed', ['name' => $item->options->number]));
     }
 
     public function destroy()

@@ -155,7 +155,7 @@ class Vendor extends Model
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
     
     public function user()
@@ -263,7 +263,7 @@ class Vendor extends Model
 
     public static function options()
     {
-        return Vendor::lists('name', 'id')->toArray();
+        return Vendor::pluck('name', 'id')->toArray();
     }
 
     public static function purchaseCount($limit = null)

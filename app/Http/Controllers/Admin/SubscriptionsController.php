@@ -79,10 +79,10 @@ class SubscriptionsController extends Controller
             ->with('notice', trans('subscriptions.notices.deleted', ['name' => $subscription->name]));
     }
 
-    public function logs(Subscription $subscription, SubscriptionLogsDataTable $table)
+    public function histories(Subscription $subscription, SubscriptionLogsDataTable $table)
     {
         $table->setActionable($subscription);
-        return $table->render('admin.subscriptions.logs', compact('subscription'));
+        return $table->render('admin.subscriptions.histories', compact('subscription'));
     }
 
     public function activate(Request $request, Subscription $subscription)

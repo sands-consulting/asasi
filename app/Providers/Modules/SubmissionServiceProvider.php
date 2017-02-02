@@ -37,13 +37,5 @@ class SubmissionServiceProvider extends ServiceProvider
                 $router->resource('submissions', 'SubmissionsController');
             });
         });
-
-        // api routing
-        app('router')->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function ($router) {
-            $router->post('submissions/save', [
-                'as' => 'submissions.save',
-                'uses' => 'SubmissionsController@save'
-            ]);
-        });
     }
 }

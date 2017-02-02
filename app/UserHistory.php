@@ -29,7 +29,7 @@ class UserHistory extends Model
         $logins = $query->with('user')
             ->select(\DB::raw('MAX(created_at) as created_at, action, user_id'))
             ->where('action', 'login')
-            ->groupBy('user_id')
+            ->groupBy('user_id', 'action')
             ->orderBy('created_at');
 
             if (!is_null($limit)) 

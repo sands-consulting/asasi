@@ -59,7 +59,7 @@ class Package extends Model
 
     public function logs()
     {
-        return $this->morphMany(UserLog::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     /*
@@ -121,7 +121,7 @@ class Package extends Model
 
     public static function options()
     {
-        return ['' => 'Select One'] + Package::lists('name', 'id')->toArray();
+        return ['' => 'Select One'] + Package::pluck('name', 'id')->toArray();
     }
 
     public static function boot()

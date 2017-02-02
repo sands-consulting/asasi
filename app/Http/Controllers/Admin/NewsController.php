@@ -76,10 +76,10 @@ class NewsController extends Controller
             ->with('notice', trans('news.notices.deleted', ['title' => $news->title]));
     }
 
-    public function logs(News $news, UserHistoriesDataTable $table)
+    public function histories(News $news, UserHistoriesDataTable $table)
     {
         $table->setActionable($news);
-        return $table->render('admin.news.logs', compact('news'));
+        return $table->render('admin.news.histories', compact('news'));
     }
 
     public function revisions(News $news, RevisionsDataTable $table)

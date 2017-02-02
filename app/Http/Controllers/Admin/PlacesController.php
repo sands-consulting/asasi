@@ -57,10 +57,10 @@ class PlacesController extends Controller
             ->with('notice', trans('places.notices.deleted', ['name' => $place->name]));
     }
 
-    public function logs(Place $place, PlaceLogsDataTable $table)
+    public function histories(Place $place, PlaceLogsDataTable $table)
     {
         $table->setActionable($place);
-        return $table->render('admin.places.logs', compact('place'));
+        return $table->render('admin.places.histories', compact('place'));
     }
 
     public function revisions(Place $place, RevisionsDataTable $table)

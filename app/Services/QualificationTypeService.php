@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\QualificationCodeType;
+use App\QualificationType;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
-class QualificationCodeTypeService extends BaseService 
+class QualificationTypeService extends BaseService 
 {
 	//
 }

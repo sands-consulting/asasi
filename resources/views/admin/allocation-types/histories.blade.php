@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
 @section('page-title', implode(' | ', [
-	trans('user-logs.title'),
-	$allocation->name,
-	trans('allocations.title')
+	trans('user-histories.title'),
+	$type->name,
+	trans('allocation-types.title')
 ]))
 
 @section('header')
 <div class="page-title">
 	<h4>
-		{{ link_to_route('admin.allocations.index', trans('allocations.title')) }} /
-		{{ link_to_route('admin.allocations.show', $allocation->name, $allocation->id) }} /
-		<span class="text-semibold">{{ trans('user-logs.title') }}</span>
+		{{ link_to_route('admin.allocation-types.index', trans('allocation-types.title')) }} /
+		{{ link_to_route('admin.allocation-types.edit', $type->name, $type->id) }} /
+		<span class="text-semibold">{{ trans('user-histories.title') }}</span>
 	</h4>
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
-		<a href="{{ route('admin.allocations.show', $allocation->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+		<a href="{{ route('admin.allocation-types.edit', $type->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
 			<i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
 		</a>
 	</div>

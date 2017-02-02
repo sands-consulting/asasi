@@ -37,10 +37,10 @@
     <li class="active">{{ $project->number }}</li>
 </ul>
 <ul class="breadcrumb-elements">
-    @if(Auth::user()->hasPermission('project:logs'))
+    @if(Auth::user()->hasPermission('project:histories'))
     <li>
-        <a href="{{ route('admin.projects.logs', $project->id) }}" class="legitRipple">
-            <i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
+        <a href="{{ route('admin.projects.histories', $project->id) }}" class="legitRipple">
+            <i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
         </a>
     </li>
     @endif

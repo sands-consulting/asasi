@@ -24,14 +24,14 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\UserLogin',
+            'App\Listeners\UserHistoryin',
         ],
 
         'Illuminate\Auth\Events\Failed' => [
         ],
 
         'Illuminate\Auth\Events\Logout' => [
-            'App\Listeners\UserLogout',
+            'App\Listeners\UserHistoryout',
         ],
 
         'Illuminate\Auth\Events\Lockout' => [

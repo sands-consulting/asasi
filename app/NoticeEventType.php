@@ -94,6 +94,6 @@ class NoticeEventType extends Model
     
     public static function options()
     {
-        return static::lists('name', 'id');
+        return static::pluck('name', 'id');
     }
 }

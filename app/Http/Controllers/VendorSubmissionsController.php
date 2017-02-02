@@ -13,7 +13,7 @@ use App\Services\UserHistoriesService;
 use Auth;
 use Illuminate\Http\Request;
 
-class NoticeSubmissionsController extends Controller
+class VendorSubmissionsController extends Controller
 {    
     public function index(NoticesDataTable $table)
     {

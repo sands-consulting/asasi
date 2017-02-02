@@ -6,5 +6,13 @@ use App\Notice;
 
 class NoticesPolicy extends BasePolicy
 {
-    // Public Policy
+    public function index(User $auth)
+    {
+    	return true;
+    }
+
+    public function show(User $auth)
+    {
+    	return true;
+    }
 }

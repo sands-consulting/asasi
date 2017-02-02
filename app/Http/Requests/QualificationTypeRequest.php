@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Sands\Asasi\Foundation\Http\FormRequest;
 
-class QualificationCodeTypeRequest extends FormRequest
+class QualificationTypeRequest extends FormRequest
 {
     public function authorize()
     {
@@ -15,10 +15,10 @@ class QualificationCodeTypeRequest extends FormRequest
     {
         return [
             'name'      => 'required',
-            'code'      => 'required|unique:qualification_code_types',
+            'code'      => 'required|unique:qualification_types',
             'type'      => 'required|in:list,boolean',
             'status'    => 'required|in:active,inactive',
-            'parent_id' => 'exists:qualification_code_types,id'
+            'parent_id' => 'exists:qualification_types,id'
         ];
     }
 
@@ -26,10 +26,10 @@ class QualificationCodeTypeRequest extends FormRequest
     {
         return [
             'name'      => 'required',
-            'code'      => 'required|unique:qualification_code_types,code,' . $this->route('qualification_code_types')->id,
+            'code'      => 'required|unique:qualification_types,code,' . $this->route('qualification_types')->id,
             'type'      => 'required|in:list,boolean',
             'status'    => 'required|in:active,inactive',
-            'parent_id' => 'exists:qualification_code_types,id'
+            'parent_id' => 'exists:qualification_types,id'
         ];
     }
 }

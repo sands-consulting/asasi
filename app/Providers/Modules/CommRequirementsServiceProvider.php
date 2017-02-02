@@ -18,29 +18,34 @@ class CommRequirementsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('comm_requirements', 'App\CommRequirement');
-
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+        // Module routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+                'as' => 'admin.'
+            ], function ($router) {
                 $router->put('requirement-commercials/{comm_requirements}/activate', [
-                    'as'    => 'admin.requirement-commercials.activate',
+                    'as'    => 'requirement-commercials.activate',
                     'uses'  => 'CommRequirementsController@activate'
                 ]);
                 $router->put('requirement-commercials/{comm_requirements}/deactivate', [
-                    'as'    => 'admin.requirement-commercials.deactivate',
+                    'as'    => 'requirement-commercials.deactivate',
                     'uses'  => 'CommRequirementsController@deactivate'
                 ]);
-                $router->get('requirement-commercials/{comm_requirements}/logs', [
-                    'as'    => 'admin.requirement-commercials.logs',
-                    'uses'  => 'CommRequirementsController@logs'
+                $router->get('requirement-commercials/{comm_requirements}/histories', [
+                    'as'    => 'requirement-commercials.histories',
+                    'uses'  => 'CommRequirementsController@histories'
                 ]);
                 $router->get('requirement-commercials/{comm_requirements}/revisions', [
-                    'as'    => 'admin.requirement-commercials.revisions',
+                    'as'    => 'requirement-commercials.revisions',
                     'uses'  => 'CommRequirementsController@revisions'
                 ]);
                 $router->post('requirement-commercials/{comm_requirements}/duplicate', [
-                    'as'    => 'admin.requirement-commercials.duplicate',
+                    'as'    => 'requirement-commercials.duplicate',
                     'uses'  => 'CommRequirementsController@duplicate'
                 ]);
                 $router->resource('requirement-commercials', 'CommRequirementsController');

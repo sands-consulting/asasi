@@ -29,10 +29,10 @@
 
 @section('secondary-header')
 <ul class="breadcrumb-elements">
-    @if(Auth::user()->hasPermission('news-category:logs'))
+    @if(Auth::user()->hasPermission('news-category:histories'))
 	<li>
-		<a href="{{ route('admin.news-categories.logs', $category->slug) }}" class="legitRipple">
-			<i class="icon-database-time2"></i> {{ trans('user-logs.title') }}
+		<a href="{{ route('admin.news-categories.histories', $category->slug) }}" class="legitRipple">
+			<i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
 		</a>
 	</li>
 	@endif

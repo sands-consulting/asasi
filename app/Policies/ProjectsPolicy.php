@@ -80,7 +80,7 @@ class ProjectsPolicy extends BasePolicy
 
         if($this->user->hasPermission('project:organization'))
         {
-            return $this->user->organizations->lists('id')->has($project->organization_id);
+            return $this->user->organizations->pluck('id')->has($project->organization_id);
         }
 
         return true;

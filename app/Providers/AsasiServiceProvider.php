@@ -40,18 +40,14 @@ class AsasiServiceProvider extends ServiceProvider
                 return redirect()->back()->withCookie(cookie()->forever('locale', $locale));
             });
 
-            $router->get('contact', [
-                'as' => 'contact',
-                'uses' => 'MeController@contact'
-            ]);
-            $router->post('contact', 'MeController@storeContact');
+            $router->get('contact', 'ContactController@create')
+                ->name('contact');
+            $router->post('contact', 'ContactController@store');
 
             $router->auth();
 
-            $router->get('/', [
-                'uses' => 'NoticesController@index',
-                'as' => 'root'
-            ]);
+            $router->get('/', 'NoticesController@index')
+                ->name('root');
         });
     }
 }

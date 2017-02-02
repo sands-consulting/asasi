@@ -78,10 +78,10 @@ class VendorsController extends Controller
             ->with('notice', trans('vendors.notices.deleted', ['name' => $vendor->name]));
     }
 
-    public function logs(Vendor $vendor, UserHistoriesDataTable $table)
+    public function histories(Vendor $vendor, UserHistoriesDataTable $table)
     {
         $table->setActionable($vendor);
-        return $table->render('admin.vendors.logs', compact('vendor'));
+        return $table->render('admin.vendors.histories', compact('vendor'));
     }
 
     public function revisions(Vendor $vendor, RevisionsDataTable $table)

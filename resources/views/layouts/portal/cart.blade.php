@@ -34,7 +34,7 @@
 		</ul>
 
 		<div class="dropdown-content-footer">
-			<a href="{{ route('carts.index') }}" data-popup="tooltip" title="" data-original-title="{{ trans('app.cart.view') }}"><i class="icon-menu display-block"></i></a>
+			<a href="{{ route('cart') }}" data-popup="tooltip" title="" data-original-title="{{ trans('app.cart.view') }}"><i class="icon-menu display-block"></i></a>
 		</div>
 	</div>	
 </li>

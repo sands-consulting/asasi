@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title', implode(' | ', [
-	trans('user-logs.title'),
+	trans('user-histories.title'),
 	$type->name,
 	trans('qualification-code-types.title')
 ]))
@@ -11,7 +11,7 @@
 	<h4>
 		{{ link_to_route('admin.qualification-code-types.index', trans('qualification-code-types.title')) }} /
 		{{ link_to_route('admin.qualification-code-types.edit', $type->name, $type->id) }} /
-		<span class="text-semibold">{{ trans('user-logs.title') }}</span>
+		<span class="text-semibold">{{ trans('user-histories.title') }}</span>
 	</h4>
 </div>
 <div class="heading-elements">

@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-class QualificationCodeTypesPolicy extends BasePolicy
+class QualificationTypesPolicy extends BasePolicy
 {
     public function index()
     {

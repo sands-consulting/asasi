@@ -119,10 +119,10 @@ class ProjectMilestonesController extends Controller
             ->with('notice', trans('milestones.notices.deleted', ['name' => $milestone->name]));
     }
 
-    public function logs(ProjectMilestone $milestone, UserHistoriesDataTable $table)
+    public function histories(ProjectMilestone $milestone, UserHistoriesDataTable $table)
     {
         $table->setActionable($milestone);
-        return $table->render('admin.project-milestones.logs', compact('milestone'));
+        return $table->render('admin.project-milestones.histories', compact('milestone'));
     }
 
     public function revisions(ProjectMilestone $milestone, RevisionsDataTable $table)

@@ -72,10 +72,10 @@ class PackagesController extends Controller
             ->with('notice', trans('packages.notices.deleted', ['name' => $package->name]));
     }
 
-    public function logs(Package $package, PackageLogsDataTable $table)
+    public function histories(Package $package, PackageLogsDataTable $table)
     {
         $table->setActionable($package);
-        return $table->render('admin.packages.logs', compact('package'));
+        return $table->render('admin.packages.histories', compact('package'));
     }
 
     public function activate(Request $request, Package $package)

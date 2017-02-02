@@ -91,6 +91,6 @@ class NoticeType extends Model
 
     public static function options()
     {
-        return ['Select Notice Type'] + static::lists('name','id')->toArray();
+        return ['Select Notice Type'] + static::pluck('name','id')->toArray();
     }
 }

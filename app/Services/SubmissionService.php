@@ -23,6 +23,6 @@ class SubmissionService extends BaseService {
             $detailsData->whereNotNull('value');
         }
 
-        return $requirementData->lists('id') == $detailsData->lists('requirement_id');
+        return $requirementData->pluck('id') == $detailsData->pluck('requirement_id');
     }
 }

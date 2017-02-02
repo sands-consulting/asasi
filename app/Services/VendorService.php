@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Carbon\Carbon;
 use App\QualificationCode;
-use App\QualificationCodeType;
+use App\QualificationType;
 use App\Vendor;
 use App\VendorAccount;
 use App\VendorEmployee;
@@ -139,7 +139,7 @@ class VendorService extends BaseService
 
     public static function qualificationCodes(Vendor $vendor, $data)
     {
-        $types  = QualificationCodeType::whereStatus('active')->get();
+        $types  = QualificationType::whereStatus('active')->get();
         $exists = [];
 
         foreach($types as $type)

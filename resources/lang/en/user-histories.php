@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Activity Logs',
+    'title' => 'Histories',
 
     'attributes' => [
         'action' => 'Action',
@@ -13,7 +13,7 @@ return [
 
     'views' => [
         'tables' => [
-            'empty' => 'No logs found.'
+            'empty' => 'No history recorded.'
         ]
     ]
 ];

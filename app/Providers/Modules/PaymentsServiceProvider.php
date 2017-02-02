@@ -32,9 +32,9 @@ class PaymentsServiceProvider extends ServiceProvider
                     'as'    => 'admin.payments.deactivate',
                     'uses'  => 'PaymentsController@deactivate'
                 ]);
-                $router->get('payments/{payments}/logs', [
-                    'as'    => 'admin.payments.logs',
-                    'uses'  => 'PaymentsController@logs'
+                $router->get('payments/{payments}/histories', [
+                    'as'    => 'admin.payments.histories',
+                    'uses'  => 'PaymentsController@histories'
                 ]);
                 $router->get('payments/{payments}/revisions', [
                     'as'    => 'admin.payments.revisions',

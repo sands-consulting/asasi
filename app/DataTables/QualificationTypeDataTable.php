@@ -2,9 +2,9 @@
 
 namespace App\DataTables;
 
-use App\QualificationCodeType;
+use App\QualificationType;
 
-class QualificationCodeTypeDataTable extends DataTable
+class QualificationTypeDataTable extends DataTable
 {
     public function ajax()
     {
@@ -34,7 +34,7 @@ class QualificationCodeTypeDataTable extends DataTable
 
     public function query()
     {
-        $query = QualificationCodeType::query();
+        $query = QualificationType::query();
 
         if($this->datatables->request->input('q', null))
         {
