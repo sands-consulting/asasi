@@ -54,16 +54,14 @@ class LoginController extends Controller
         $user->cachePermissions();
     }
 
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->with('alert', $this->getFailedLoginMessage());
-    }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::guard($this->getGuard())->logout();
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/')
                 ->with('notice', trans('auth.notices.logged_out'));

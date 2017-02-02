@@ -13,7 +13,7 @@ class MeController extends Controller
 		return view('me.edit');
 	}
 
-	public function update(Request $request, Guard $auth)
+	public function update(MeRequest $request, Guard $auth)
 	{
 		$inputs	= $request->only('name');
 
@@ -42,16 +42,22 @@ class MeController extends Controller
                 ->with('notice', trans('me.notices.resumed', ['name' => $original_user->name]));
 	}
 
+	public function bookmarks()
+	{
+		return view('me.bookmarks');
+	}
+
+	public function notifications(Request $request)
+    {
+    	return view('me.notifications');
+    }
+
     public function contact(Guard $auth)
     {
         return view('me.contact');
     }
 
     public function storeContact(Request $request)
-    {
-    }
-
-    public function notifications(Request $request)
     {
     }
 }

@@ -24,61 +24,13 @@
 		</div>
 
 		<div class="navbar-collapse collapse" id="navbar-mobile">
-			<ul class="nav navbar-nav">
-                @if (Auth::user())
-                <li id="notifications" class="dropdown" data-source="{{ route('api.notifications', ['status' => 'unread']) }}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-bubble-notification"></i>
-                        <span class="visible-xs-inline-block position-right">Notifications</span>
-                        <span class="badge bg-warning-400" v-cloak v-if="count > 0">@{{ count }}</span>
-                        <span class="status-mark border-orange-400" v-cloak v-if="count == 0"></span>
-                    </a>
-                    
-                    <div class="dropdown-menu dropdown-content">
-                        <div class="dropdown-content-heading">
-                            Notifications
-                            <ul class="icons-list">
-                                <li><a href="#"><i class="icon-sync"></i></a></li>
-                            </ul>
-                        </div>
-
-                        <ul class="media-list dropdown-content-body width-350">
-                            <template v-if="notifications.length > 0">
-                                <li class="media" v-for="notification in notifications">
-                                    <div class="media-left">
-                                        <a href="@{{ notification.link }}" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm"><i class="icon-user-plus"></i></a>
-                                    </div>
-
-                                    <div class="media-body">
-                                        @{{ notification.content }}
-                                        <div class="media-annotation">@{{ notification.created_at_human }}</div>
-                                    </div>
-                                </li>
-                            </template>
-                            <template v-else>
-                                <li class="media">
-                                    <div class="media-body">
-                                        <div class="text-center">You have no notification.</div>
-                                    </div>
-                                </li>
-                            </template>
-                        </ul>
-
-                        <div class="dropdown-content-footer">
-                            <a href="{{ route('notifications.index') }}" data-popup="tooltip" title="All Notifications"><i class="icon-menu display-block"></i></a>
-                        </div>
-                    </div>
-                </li>
-                @endif
-            </ul>
-
             <ul class="nav navbar-nav navbar-right">
-            	<li class="{{ is_path_active('helps') }}"><a href="{{ url('/') }}">{{ trans('menu.app.help') }}</a></li>
-                <li class="{{ is_path_active('contact') }}"><a href="{{ route('contact') }}">{{ trans('menu.app.contact') }}</a></li>
+            	<li class="{{ is_path_active('contact') }}"><a href="{{ route('contact') }}">{{ trans('menu.app.contact') }}</a></li>
 
                 @if(Auth::user())
-				@include('layouts._cart')
-				@include('layouts._user')
+				@include('layouts.portal.cart')
+                @include('layouts.portal.notifications')
+				@include('layouts.portal.user')
 				@endif
 			</ul>
 		</div>

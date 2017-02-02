@@ -1,32 +1,33 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Portal;
 
-use App\Notice;
+use App\Project;
 
-class DashboardInvitationsDataTable extends DataTable
+class ProjectsDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($notice) {
-                return view('notices._index_actions', compact('notice'));
+            ->addColumn('code', function() {
+                return '-';
             })
             ->editColumn('name', function($notice) {
-                return link_to_route('notices.show', $notice->name, $notice->id);
+                $name  = "<span class='text-header'>$notice->number</span> <br />";
+                $name .= link_to_route('notices.show', $notice->name, $notice->id);
+                return $name;
             })
             ->editColumn('status', function($notice) {
-                return view('notices._index_status', compact('notice'));
+                // return view('notices._index_status', compact('notice'));
             })
+            ->removeColumn('number')
             ->make(true);
     }
 
     public function query()
     {
-        $query = Notice::leftJoin('notice_invitation', 'notice_invitation.id', '=', 'notices.id')
-            ->where('notice_invitation.vendor_id', $this->vendor_id)
-            ->limited();
+        $query = Project::where('vendor_id', $this->vendor_id);
 
         if($this->datatables->request->input('q', null))
         {
@@ -41,7 +42,6 @@ class DashboardInvitationsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -51,15 +51,21 @@ class DashboardInvitationsDataTable extends DataTable
             [
                 'data' => 'name',
                 'name' => 'name',
-                'title' => trans('notices.attributes.name'),
+                'title' => trans('projects.attributes.name'),
                 'width' => '40%'
             ],
             [
-                'data' => 'expired_at',
-                'name' => 'expired_at',
-                'title' => trans('notices.attributes.expired_at'),
+                'data' => 'code',
+                'name' => 'code',
+                'title' => 'Code',
                 'width' => '15%'
-            ]
+            ],
+            [
+                'data' => 'cost',
+                'name' => 'cost',
+                'title' => trans('projects.attributes.costs'),
+                'width' => '15%'
+            ],
         ];
     }
 
@@ -74,6 +80,12 @@ class DashboardInvitationsDataTable extends DataTable
         $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
         return $data;
+    }
+
+    public function forType($type)
+    {
+        $this->type = $type;
+        return $this;
     }
 
     public function forVendor($vendorId)

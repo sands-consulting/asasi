@@ -9,7 +9,7 @@ use App\DataTables\AllocationNoticeDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\AllocationRequest;
-use App\Services\AllocationsService;
+use App\Services\AllocationService;
 use App\Services\UserHistoriesService;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class AllocationsController extends Controller
 {
     protected $allocation;
 
-    public function __construct(AllocationsService $allocation)
+    public function __construct(AllocationService $allocation)
     {
         parent::__construct();
         $this->allocation = $allocation;
@@ -49,7 +49,7 @@ class AllocationsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        $allocation   = AllocationsService::create(new Allocation, $inputs);
+        $allocation   = AllocationService::create(new Allocation, $inputs);
         UserHistoriesService::log($request->user(), 'create', $allocation, $request->getClientIp());
         return redirect()
             ->route('admin.allocations.show', $allocation->id)
@@ -74,7 +74,7 @@ class AllocationsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        AllocationsService::update($allocation, $inputs);
+        AllocationService::update($allocation, $inputs);
         UserHistoriesService::log($request->user(), 'update', $allocation, $request->getClientIp());
         return redirect()
             ->route('admin.allocations.show', $allocation->id)
@@ -83,7 +83,7 @@ class AllocationsController extends Controller
 
     public function destroy(Allocation $allocation)
     {
-        AllocationsService::delete($allocation);
+        AllocationService::delete($allocation);
         UserHistoriesService::log($request->user(), 'delete', $allocation, $request->getClientIp());
         return redirect()
             ->route('admin.allocations.index')

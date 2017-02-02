@@ -135,4 +135,5 @@ class UsersController extends Controller
         return redirect()
             ->back()
             ->with('notice', trans('users.notices.restored', ['name' => $user->name]));
+    }
 }

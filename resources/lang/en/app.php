@@ -9,9 +9,15 @@ return [
     'incomplete_tooltip' => 'Please complete form above before proceed.',
     'report' => 'Report',
 
+    'notifications' => [
+        'title' => 'Notifications',
+        'empty' => 'You have no notification.',
+        'view' => 'All Notifications.'
+    ],
+
     'cart' => [
     	'title'	=> 'Cart',
-    	'empty' => 'Cart is empty',
+    	'empty' => 'Cart is empty.',
     	'view'	=> 'View Cart'
     ]
 ];

@@ -11,7 +11,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, RevisionableTrait, Roleable, SoftDeletes;
+    use DateAccessor, Notifiable, RevisionableTrait, Roleable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

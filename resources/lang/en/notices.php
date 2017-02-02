@@ -66,50 +66,39 @@ return [
     
     'views' => [
         'index' => [
-            'title' => 'Notices',
-            'keywords' => 'Keywords',
-            'status' => 'Status',
-        ],
-        'show' => [
-            'title' => 'View Notice',
-        ],
-        'create' => [
-            'title' => 'New',
-            'table' => [
-                'empty' => 'No record found. Please create new row by clicking on <i class="icon-add"></i> button on top right corner of this table.'
-            ],
-        ],
-        'edit' => [
-            'title' => 'Edit',
-        ],
-        'revisions' => [
-        ],
-        'events' => [
-            'empty' => 'No event information.',
-            'table' => [
-                'name' => 'Name',
-                'type' => 'Type',
-                'datetime' => 'Date & Time',
-                'location' => 'Location'
+            'notices' => [
+                'title' => 'All Notices'
             ]
         ],
-        'my_notices' => [
-            'title' => 'My Notices'
-        ],
-        'submission' => [
-            'title' => 'Submission'
-        ],
-        'commercial' => [
-            'title' => 'Commercial Requirements'
-        ],
-        'technical' => [
-            'title' => 'Technical Requirements'
-        ],
-        'settings' => [
-            'title' => 'Settings'
-        ],
-        'summary' => [
-            'title' => 'Summary',
+        'admin' => [
+            'index' => [
+                'title' => 'Notices',
+                'keywords' => 'Keywords',
+                'status' => 'Status',
+            ],
+            'show' => [
+                'title' => 'View Notice',
+            ],
+            'create' => [
+                'title' => 'New',
+                'table' => [
+                    'empty' => 'No record found. Please create new row by clicking on <i class="icon-add"></i> button on top right corner of this table.'
+                ],
+            ],
+            'edit' => [
+                'title' => 'Edit',
+            ],
+            'revisions' => [
+            ],
+            'events' => [
+                'empty' => 'No event information.',
+                'table' => [
+                    'name' => 'Name',
+                    'type' => 'Type',
+                    'datetime' => 'Date & Time',
+                    'location' => 'Location'
+                ]
+            ]
         ]
     ],
 ];

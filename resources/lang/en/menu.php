@@ -7,7 +7,7 @@ return [
 
     'access' => [
         'portal'    => 'Portal',
-        'admin'     => 'Admin Area',
+        'admin'     => 'Administration',
         'report'    => 'Reports'
     ],
 

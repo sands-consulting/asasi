@@ -208,7 +208,6 @@ return [
          * Modules
          */
         App\Providers\Modules\AllocationsServiceProvider::class,
-        App\Providers\Modules\BookmarksServiceProvider::class,
         App\Providers\Modules\DashboardServiceProvider::class,
         App\Providers\Modules\PackagesServiceProvider::class,
         App\Providers\Modules\NewsServiceProvider::class,

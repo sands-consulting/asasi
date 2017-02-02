@@ -1,20 +1,20 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Portal;
 
 use App\Notice;
 
-class DashboardPurchasesDataTable extends DataTable
+class InvitationsDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                return view('dashboard._purchases_index_actions', compact('notice'));
+                return view('notices._index_actions', compact('notice'));
             })
-            ->editColumn('notice_name', function($notice) {
-                return link_to_route('notices.show', $notice->notice_name, $notice->notice_id);
+            ->editColumn('name', function($notice) {
+                return link_to_route('notices.show', $notice->name, $notice->id);
             })
             ->editColumn('status', function($notice) {
                 return view('notices._index_status', compact('notice'));
@@ -24,16 +24,9 @@ class DashboardPurchasesDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::whereHas('vendors', function($query) {
-                $query->where('vendors.id', $this->vendor_id);
-            })
-            ->select([
-                'notices.id as notice_id',
-                'notices.name as notice_name',
-                'notices.number as notice_number',
-                'notices.expired_at',
-                'notices.status'
-            ]);
+        $query = Notice::leftJoin('notice_invitation', 'notice_invitation.id', '=', 'notices.id')
+            ->where('notice_invitation.vendor_id', $this->vendor_id)
+            ->limited();
 
         if($this->datatables->request->input('q', null))
         {
@@ -56,29 +49,17 @@ class DashboardPurchasesDataTable extends DataTable
     {
         return [
             [
-                'data' => 'notice_name',
-                'name' => 'notice_name',
+                'data' => 'name',
+                'name' => 'name',
                 'title' => trans('notices.attributes.name'),
                 'width' => '40%'
-            ],
-            [
-                'data' => 'notice_number',
-                'name' => 'notice_number',
-                'title' => trans('notices.attributes.number'),
-                'width' => '15%'
             ],
             [
                 'data' => 'expired_at',
                 'name' => 'expired_at',
                 'title' => trans('notices.attributes.expired_at'),
                 'width' => '15%'
-            ],
-            [
-                'data' => 'status',
-                'name' => 'status',
-                'title' => trans('notices.attributes.status'),
-                'width' => '15%'
-            ],
+            ]
         ];
     }
 
@@ -90,7 +71,7 @@ class DashboardPurchasesDataTable extends DataTable
     protected function getBuilderParameters()
     {
         $data = parent::getBuilderParameters();
-        $data['dom'] = '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>';
+        $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
         return $data;
     }

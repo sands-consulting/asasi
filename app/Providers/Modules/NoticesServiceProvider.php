@@ -19,8 +19,10 @@ class NoticesServiceProvider extends ServiceProvider
     public function register()
     {
         // module routing
-        app('router')->group(['middleware' => 'web', 'namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('notices', 'App\Notice');
+        app('router')->group([
+            'middleware' => 'web',
+            'namespace' => 'App\Http\Controllers'
+        ], function ($router) {
             $router->model('evaluation_types', 'App\EvaluationType');
 
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
@@ -95,11 +97,6 @@ class NoticesServiceProvider extends ServiceProvider
 
                 $router->resource('notices', 'NoticesController');
             });
-
-            $router->get('/', [
-                'as' => 'notices',
-                'uses' => 'NoticesController@index'
-            ]);
 
             $router->get('notices/my-notices', [
                 'as' => 'notices.my-notices',
