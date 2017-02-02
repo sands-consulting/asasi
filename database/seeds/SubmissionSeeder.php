@@ -5,10 +5,10 @@ use App\SubmissionDetail;
 use App\SubmissionRequirement;
 use App\Permission;
 use App\Role;
-use App\Repositories\SubmissionsRepository;
-use App\Repositories\SubmissionDetailsRepository;
-use App\Repositories\SubmissionRequirementsRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\SubmissionService;
+use App\Services\SubmissionDetailService;
+use App\Services\SubmissionRequirementService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class SubmissionSeeder extends Seeder
@@ -59,7 +59,7 @@ class SubmissionSeeder extends Seeder
 
         foreach ($permissions as $group => $data) {
             foreach($data as $action => $description) {
-                $perm = PermissionsRepository::create(new Permission(), [
+                $perm = PermissionService::create(new Permission(), [
                     'name'          => $group . ':' . $action,
                     'description'   => $description
                 ]);
@@ -203,7 +203,7 @@ class SubmissionSeeder extends Seeder
         ];
 
         foreach ($requirementData as $requirement) {
-            $requirement = SubmissionRequirementsRepository::create(new SubmissionRequirement(), $requirement);
+            $requirement = SubmissionRequirementService::create(new SubmissionRequirement(), $requirement);
         }
 
         $submissionData = [
@@ -216,7 +216,7 @@ class SubmissionSeeder extends Seeder
         ];
 
         foreach ($submissionData as $submission) {
-            $submission = SubmissionsRepository::create(new Submission(), $submission);
+            $submission = SubmissionService::create(new Submission(), $submission);
         }
 
         $submissionDetailsData = [
@@ -293,7 +293,7 @@ class SubmissionSeeder extends Seeder
         ];
 
         foreach ($submissionDetailsData as $submissionDetails) {
-            SubmissionDetailsRepository::create(new SubmissionDetail(), $submissionDetails);
+            SubmissionDetailService::create(new SubmissionDetail(), $submissionDetails);
         }
     }
 }

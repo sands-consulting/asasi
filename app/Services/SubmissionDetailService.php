@@ -2,13 +2,6 @@
 
 namespace App\Services;
 
-use App\RequirementCommercial;
-use App\RequirementTechnical;
-use App\Submission;
-use App\SubmissionDetail;
-use App\Notice;
-use App\Vendor;
-
 class SubmissionDetailService extends BaseService
 {
     public static function statusCheck($submission, $requirements)

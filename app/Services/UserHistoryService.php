@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\User;
 use App\UserHistory;
-use Sands\Asasi\Service as BaseService;
 
 class UserHistoryService extends BaseService
 {

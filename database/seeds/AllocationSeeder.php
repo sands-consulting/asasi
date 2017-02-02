@@ -4,9 +4,9 @@ use App\Allocation;
 use App\AllocationType;
 use App\Permission;
 use App\Role;
-use App\Repositories\AllocationsRepository;
-use App\Repositories\AllocationTypesRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\AllocationService;
+use App\Services\AllocationTypeService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class AllocationSeeder extends Seeder
@@ -49,7 +49,7 @@ class AllocationSeeder extends Seeder
 
         foreach ($permissions as $group => $data) {
             foreach($data as $action => $description) {
-                $perm = PermissionsRepository::create(new Permission(), [
+                $perm = PermissionService::create(new Permission(), [
                     'name'          => $group . ':' . $action,
                     'description'   => $description
                 ]);
@@ -74,7 +74,7 @@ class AllocationSeeder extends Seeder
         ];
 
         foreach ($allocationTypeData as $allocationType) {
-            AllocationTypesRepository::create(new AllocationType(), $allocationType);
+            AllocationTypeService::create(new AllocationType(), $allocationType);
         }
 
         $allocationData = [
@@ -102,7 +102,7 @@ class AllocationSeeder extends Seeder
         ];
 
         foreach ($allocationData as $allocation) {
-            $allocation = AllocationsRepository::create(new Allocation(), $allocation);
+            $allocation = AllocationService::create(new Allocation(), $allocation);
             $allocation->notices()->attach(1, ['amount' => '100000']);
         }
     }

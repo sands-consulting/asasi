@@ -4,10 +4,10 @@ namespace App\Services;
 
 use App\Package;
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
-class PackageService extends BaseService {
+class PackageService extends BaseService
+{
     public static function activate(Package $package)
     {
         if($package->status == 'active')

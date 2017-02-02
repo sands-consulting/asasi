@@ -5,7 +5,7 @@ namespace App\Services;
 use App\NoticeCategory;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
-class NoticeCategorieService extends BaseService 
+class NoticeCategoryService extends BaseService 
 {
     public static function activate(NoticeCategory $noticeCategory)
     {

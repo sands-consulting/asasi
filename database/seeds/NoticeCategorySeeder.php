@@ -3,8 +3,8 @@
 use App\NoticeCategory;
 use App\Permission;
 use App\Subscription;
-use App\Repositories\NoticeCategoriesRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\NoticeCategoryService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class NoticeCategorySeeder extends Seeder
@@ -32,14 +32,14 @@ class NoticeCategorySeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            PermissionService::create(new Permission(), [
                 'name'        => $permissionData[0],
                 'description' => $permissionData[1],
             ]);
         }
 
          // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(App\Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
+        App\Role::first()->permissions()->sync(App\Permission::whereNotIn('name', ['access:vendor'])->pluck('id')->toArray());
         
         $noticeEventTypeData = [
             [
@@ -53,7 +53,7 @@ class NoticeCategorySeeder extends Seeder
         ];
 
         foreach ($noticeEventTypeData as $noticeEventType) {
-            NoticeCategoriesRepository::create(new NoticeCategory(), $noticeEventType);
+            NoticeCategoryService::create(new NoticeCategory(), $noticeEventType);
         }
     }
 }

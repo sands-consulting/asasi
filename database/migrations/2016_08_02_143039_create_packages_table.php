@@ -19,7 +19,6 @@ class CreatePackagesTable extends Migration
             $table->text('description');
             $table->string('validity_type');
             $table->string('validity_quantity');
-            $table->text('meta');
             $table->decimal('fee_amount');
             $table->string('fee_tax_code');
             $table->decimal('fee_tax_rate');

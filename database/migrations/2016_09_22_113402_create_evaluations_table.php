@@ -68,7 +68,7 @@ class CreateEvaluationsTable extends Migration
             $table->increments('id');
             $table->integer('sequence')->nullable;
             $table->boolean('mandatory')->default(0);
-            $table->string('title');
+            $table->text('title');
             $table->unsignedInteger('full_score')->default(0);
             $table->unsignedInteger('evaluation_type_id');
             $table->unsignedInteger('notice_id');

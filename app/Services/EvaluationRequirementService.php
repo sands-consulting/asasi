@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
-use Sands\Asasi\Service\Exceptions\ServiceException;
-
-class EvaluationRequirementService extends BaseService {}
+class EvaluationRequirementService extends BaseService
+{
+	//	
+}

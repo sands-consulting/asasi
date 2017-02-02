@@ -5,7 +5,7 @@ namespace App\Services;
 use App\News;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
-class NewService extends BaseService 
+class NewsService extends BaseService 
 {
 	public static function publish(News $news)
     {

@@ -5,11 +5,11 @@ use App\EvaluationType;
 use App\EvaluationRequirement;
 use App\Role;
 use App\User;
-use App\Repositories\EvaluationTypesRepository;
-use App\Repositories\EvaluationRequirementsRepository;
-use App\Repositories\RolesRepository;
-use App\Repositories\UsersRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\EvaluationTypeService;
+use App\Services\EvaluationRequirementService;
+use App\Services\RoleService;
+use App\Services\UserService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class EvaluationSeeder extends Seeder
@@ -25,7 +25,7 @@ class EvaluationSeeder extends Seeder
         DB::table('evaluation_requirements')->truncate();
         DB::table('evaluation_types')->truncate();
 
-        $role = RolesRepository::create(new Role(), [
+        $role = RoleService::create(new Role(), [
             'name'          => 'evaluator',
             'display_name'  => 'Evaluator',
             'description'   => 'Evaluator.',
@@ -47,7 +47,7 @@ class EvaluationSeeder extends Seeder
         ];
 
         foreach($users as $userData) {
-            $user = UsersRepository::create(new User(), $userData);
+            $user = UserService::create(new User(), $userData);
             // assign user to role
             $user->roles()->attach($role);
         }
@@ -61,7 +61,7 @@ class EvaluationSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            $perm = PermissionsRepository::create(new Permission(), [
+            $perm = PermissionService::create(new Permission(), [
                 'name'        => $permissionData[0],
                 'description' => $permissionData[1],
             ]);
@@ -72,7 +72,7 @@ class EvaluationSeeder extends Seeder
         }
 
         // assign role to permission
-        $role->permissions()->attach(Permission::whereName('access:admin')->lists('id')->toArray());
+        $role->permissions()->attach(Permission::whereName('access:admin')->pluck('id')->toArray());
 
         // Evaluation Type Data
         $evaluationTypeData = [
@@ -81,7 +81,7 @@ class EvaluationSeeder extends Seeder
         ];
 
         foreach ($evaluationTypeData as $evaluationType) {
-            EvaluationTypesRepository::create(new EvaluationType(), $evaluationType);
+            EvaluationTypeService::create(new EvaluationType(), $evaluationType);
         }
 
         $evaluationRequirementData = [
@@ -323,7 +323,7 @@ class EvaluationSeeder extends Seeder
         ];
 
         foreach ($evaluationRequirementData as $evaluationRequirement) {
-            EvaluationRequirementsRepository::create(new EvaluationRequirement(), $evaluationRequirement);
+            EvaluationRequirementService::create(new EvaluationRequirement(), $evaluationRequirement);
         }
     }
 }

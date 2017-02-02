@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\User;
-use Carbon\Carbon;
-use Sands\Asasi\Service as BaseService;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
 class UserService extends BaseService

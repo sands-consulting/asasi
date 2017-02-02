@@ -3,8 +3,8 @@
 use App\Package;
 use App\Permission;
 use App\Subscription;
-use App\Repositories\PackagesRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\PackageService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class PackageSeeder extends Seeder
@@ -32,7 +32,7 @@ class PackageSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            PermissionService::create(new Permission(), [
                 'name'        => $permissionData[0],
                 'description' => $permissionData[1],
             ]);
@@ -72,7 +72,7 @@ class PackageSeeder extends Seeder
         ];
 
         foreach ($packageData as $package) {
-            PackagesRepository::create(new Package(), $package);
+            PackageService::create(new Package(), $package);
         }
     }
 }

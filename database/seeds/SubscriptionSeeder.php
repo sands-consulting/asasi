@@ -2,8 +2,8 @@
 
 use App\Permission;
 use App\Subscription;
-use App\Repositories\SubscriptionsRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\SubscriptionService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class SubscriptionSeeder extends Seeder
@@ -32,16 +32,16 @@ class SubscriptionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            PermissionsRepository::create(new Permission(), [
+            PermissionService::create(new Permission(), [
                 'name'        => $permissionData[0],
                 'description' => $permissionData[1],
             ]);
         }
 
         // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
+        App\Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->pluck('id')->toArray());
 
-        SubscriptionsRepository::create(new Subscription, [
+        SubscriptionService::create(new Subscription, [
             'started_at' => '2016-08-01',
             'expired_at' => '2017-08-01',
             'vendor_id' => 1,

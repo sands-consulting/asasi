@@ -6,10 +6,10 @@ use App\ProjectMilestone;
 use App\ProjectType;
 use App\Permission;
 use App\Role;
-use App\Repositories\ProjectsRepository;
-use App\Repositories\ProjectMilestonesRepository;
-use App\Repositories\ProjectTypesRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\ProjectService;
+use App\Services\ProjectMilestoneService;
+use App\Services\ProjectTypeService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class ProjectSeeder extends Seeder
@@ -54,7 +54,7 @@ class ProjectSeeder extends Seeder
 
         foreach ($permissions as $group => $data) {
             foreach($data as $action => $description) {
-                $perm = PermissionsRepository::create(new Permission(), [
+                $perm = PermissionService::create(new Permission(), [
                     'name'          => $group . ':' . $action,
                     'description'   => $description
                 ]);
@@ -65,7 +65,7 @@ class ProjectSeeder extends Seeder
 
         $projectData = [
             [
-                'name' => 'CADANGAN KERJA-KERJA KUTIPAN SAMPAH DI SELURUH KAWASAN PERUMAHAN, KOMERSIAL, KILANG, TONG BERPUSAT DAN KAWASAN BERKAITAN DI TAMAN PUCHONG UTAMA DAN PERINDUSTRIAN PUCHONG UTAMA, SELANGOR DARUL EHSAN UNTUK MAJLIS PERBANDARAN SUBANG JAYA BAGI TEMPOH DUA (2) TAHUN + 1 TAHUN',
+                'name' => 'KERJA-KERJA KUTIPAN SAMPAH DI SELURUH KAWASAN PERUMAHAN, KOMERSIAL, KILANG, TONG BERPUSAT DAN KAWASAN BERKAITAN DI TAMAN PUCHONG UTAMA DAN PERINDUSTRIAN PUCHONG UTAMA, SELANGOR DARUL EHSAN UNTUK MAJLIS PERBANDARAN SUBANG JAYA BAGI TEMPOH DUA TAHUN',
                 'number' => 'MPSJ.KUB.400-10/3/69 (2016)',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, soluta, id. Consectetur itaque, dignissimos, enim et delectus eligendi. Quaerat dolor unde fugit quam animi repudiandae minus tempore saepe quos ipsum.',
                 'contact_name' => 'Sufian Bin Khalid',
@@ -83,7 +83,7 @@ class ProjectSeeder extends Seeder
         ];
 
         foreach ($projectData as $project) {
-            $project = ProjectsRepository::create(new Project(), $project);
+            $project = ProjectService::create(new Project(), $project);
             $project->allocations()->attach(1, ['status' => 'active']);
             $project->users()->attach(1, ['position' => 'manager', 'status' => 'active']);
         }
@@ -123,7 +123,7 @@ class ProjectSeeder extends Seeder
         ];
 
         foreach ($milestoneData as $milestone) {
-            $milestone = ProjectMilestonesRepository::create(new ProjectMilestone(), $milestone);
+            $milestone = ProjectMilestoneService::create(new ProjectMilestone(), $milestone);
         }
     }
 }

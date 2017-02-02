@@ -13,7 +13,7 @@ class AddAmountToAllocationProjectTable extends Migration
     public function up()
     {
         Schema::table('allocation_project', function (Blueprint $table) {
-            $table->decimal('amount')->after('project_id');
+            $table->decimal('amount')->nullable()->after('project_id');
         });
     }
 

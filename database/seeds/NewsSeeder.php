@@ -6,10 +6,10 @@ use App\News;
 use App\NewsCategory;
 use App\Permission;
 use App\Role;
-use App\Repositories\BannerRepository;
-use App\Repositories\NewsRepository;
-use App\Repositories\NewsCategoriesRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\BannerRepository;
+use App\Services\NewsService;
+use App\Services\NewsCategoryService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class NewsSeeder extends Seeder
@@ -60,7 +60,7 @@ class NewsSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            $perm = PermissionsRepository::create(new Permission(), [
+            $perm = PermissionService::create(new Permission(), [
                 'name'          => $permissionData[0],
                 'description'   => $permissionData[1],
             ]);
@@ -79,10 +79,10 @@ class NewsSeeder extends Seeder
 
         foreach($news_categories as $category)
         {
-            NewsCategoriesRepository::create(new NewsCategory, $category);
+            NewsCategoryService::create(new NewsCategory, $category);
         }
 
-        $news = NewsRepository::create(new News, [
+        $news = NewsService::create(new News, [
             'title' => 'PROMPT 1.0',
             'content' => "<p>This is PROMPT 1.0 developed by Sands Consulting",
             'category_id' => NewsCategory::first()->id,

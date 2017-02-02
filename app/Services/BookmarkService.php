@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Bookmark;
 use App\User;
 
-class BookmarkService extends BaseService
+class BookmarkService
 {
     public static function add(User $user, $item)
     {

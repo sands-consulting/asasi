@@ -4,8 +4,8 @@ use App\Organization;
 use App\PaymentGateway;
 use App\Permission;
 use App\Role;
-use App\Repositories\PaymentGatewaysRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\PaymentGatewayService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class PaymentGatewaySeeder extends Seeder
@@ -36,7 +36,7 @@ class PaymentGatewaySeeder extends Seeder
 
         foreach ($permissions as $group => $data) {
             foreach($data as $action => $description) {
-                $perm = PermissionsRepository::create(new Permission(), [
+                $perm = PermissionService::create(new Permission(), [
                     'name'          => $group . ':' . $action,
                     'description'   => $description
                 ]);
@@ -44,7 +44,7 @@ class PaymentGatewaySeeder extends Seeder
             }
         }
 
-        $gateway = PaymentGatewaysRepository::create(new PaymentGateway, ['name' => 'Default eBPG', 'label' => 'eBPG', 'type' => 'Ebpg']);
+        $gateway = PaymentGatewayService::create(new PaymentGateway, ['name' => 'Default eBPG', 'label' => 'eBPG', 'type' => 'Ebpg']);
         $gateway->organizations()->attach(Organization::first());
     }
 }

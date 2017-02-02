@@ -1,26 +1,16 @@
 <?php
 
-<<<<<<< HEAD
 use App\Organization;
 use App\Place;
 use App\Permission;
 use App\Role;
 use App\User;
-use App\Repositories\OrganizationsRepository;
-use App\Repositories\PlacesRepository;
-use App\Repositories\PermissionsRepository;
-use App\Repositories\RolesRepository;
-use App\Repositories\UsersRepository;
-use Illuminate\Database\Seeder;
-=======
+use App\Services\OrganizationService;
+use App\Services\PlaceService;
 use App\Services\PermissionService;
 use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Database\Seeder;
-use App\Permission;
-use App\User;
-use App\Role;
->>>>>>> upstream/5.3
 
 class AsasiSeeder extends Seeder
 {
@@ -76,8 +66,9 @@ class AsasiSeeder extends Seeder
 
         $permissions = [
             ['access:admin',            'Access admin area'],
+            ['access:cart',             'Access cart'],
+            ['access:portal',           'Access portal'],
             ['access:report',           'Access reporting module'],
-            ['access:vendor',           'Access vendor module'],
 
             ['permission:index',        'List all permissions'],
             ['permission:show',         'View permission details'],
@@ -93,26 +84,12 @@ class AsasiSeeder extends Seeder
             ['role:update',             'Update exisiting role'],
             ['role:delete',             'Delete exisiting role'],
             ['role:revisions',          'View role revisions'],
-<<<<<<< HEAD
-            ['role:logs',               'View role logs'],
-=======
             ['role:histories',          'View role histories'],
->>>>>>> upstream/5.3
 
             ['user:index',              'List all users'],
             ['user:show',               'View user details'],
             ['user:create',             'Create new user'],
             ['user:update',             'Update exisiting user'],
-<<<<<<< HEAD
-            ['user:duplicate',          'Duplicate exisiting user'],
-            ['user:assume',             'Login as another user'],
-            ['user:activate',           'Activate a user'],
-            ['user:suspend',            'Suspend a user'],
-            ['user:delete',             'Delete existing user'],
-            ['user:revisions',          'View user revisions'],
-            ['user:logs',               'View user logs'],
-=======
-            ['user:revisions',          'View user revisions'],
             ['user:delete',             'Delete existing user'],
             ['user:restore',            'Restore deleted user'],
             ['user:revisions',          'View user revisions'],
@@ -121,18 +98,16 @@ class AsasiSeeder extends Seeder
             ['user:activate',           'Activate a user'],
             ['user:suspend',            'Suspend a user'],
             ['user:assume',             'Login as another user'],
->>>>>>> upstream/5.3
 
-            ['user-blacklist:index',        'List all user blacklists'],
+            ['user-blacklist:index',        'List all user blacklist'],
             ['user-blacklist:show',         'View blacklist details'],
             ['user-blacklist:create',       'Blacklist a user'],
             ['user-blacklist:update',       'Update user blacklist'],
-<<<<<<< HEAD
-            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
             ['user-blacklist:delete',       'Delete existing user blacklist'],
-            ['user-blacklist:revisions',    'List blacklist revisions'],
-            ['user-blacklist:logs',         'View blacklist logs'],
-
+            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
+            ['user-blacklist:revisions',    'View blacklist revisions'],
+            ['user-blacklist:histories',    'View blacklist histories'],
+            
             ['organization:index',      'List all organization'],
             ['organization:show',       'View organization details'],
             ['organization:create',     'Create new organization'],
@@ -155,12 +130,6 @@ class AsasiSeeder extends Seeder
             ['place:delete',            'Delete existing place'],
             ['place:revisions',         'View place revisions'],
             ['place:logs',              'View place logs']
-=======
-            ['user-blacklist:delete',       'Delete existing user blacklist']
-            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
-            ['user-blacklist:revisions',    'View blacklist revisions'],
-            ['user-blacklist:histories',    'View blacklist histories'],
->>>>>>> upstream/5.3
         ];
 
         foreach ($permissions as $permissionData) {
@@ -170,10 +139,9 @@ class AsasiSeeder extends Seeder
             ]);
         }
 
-<<<<<<< HEAD
-        Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->lists('id')->toArray());
+        Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->pluck('id')->toArray());
 
-        OrganizationsRepository::create(new Organization, [
+        OrganizationService::create(new Organization, [
             'name' => 'ACME Inc.',
             'short_name' => 'ACME'
         ]);
@@ -203,7 +171,7 @@ class AsasiSeeder extends Seeder
         ];
 
         foreach($places as $place) {
-            PlacesRepository::create(new Place(), [
+            PlaceService::create(new Place(), [
                 'name'      => $place[0],
                 'code_2'    => $place[1],
                 'code_3'    => $place[2],
@@ -211,9 +179,5 @@ class AsasiSeeder extends Seeder
                 'parent_id' => $place[4]
             ]);
         }
-
-=======
-        Role::first()->permissions()->sync(Permission::all()->pluck('id')->toArray());
->>>>>>> upstream/5.3
     }
 }

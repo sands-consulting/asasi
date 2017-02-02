@@ -2,11 +2,7 @@
 
 namespace App\Services;
 
-use App\Events\SubscriptionStatusChanged;
 use App\Subscription;
-use Carbon\Carbon;
-use Event;
-use Illuminate\Database\Eloquent\Model;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
 class SubscriptionService extends BaseService 

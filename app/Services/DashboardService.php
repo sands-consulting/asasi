@@ -7,7 +7,7 @@ use App\Notice;
 use App\Project;
 use App\User;
 
-class DashboardService extends BaseService
+class DashboardService
 {
     public static function getAllNumber(User $user)
     {

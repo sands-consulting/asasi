@@ -55,7 +55,7 @@ class AsasiMigrations extends Migration
             $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
-            $table->timestamp('expired_at');
+            $table->timestamp('expired_at')->nullable();
 
             $table->foreign('user_id')
                 ->references('id')
@@ -163,7 +163,7 @@ class AsasiMigrations extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->integer('lft')->nullable();
             $table->integer('rgt')->nullable();
-            $table->integer('depth');
+            $table->integer('depth')->nullable();
             $table->string('name');
             $table->string('short_name');
             $table->string('status');

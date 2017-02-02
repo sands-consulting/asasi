@@ -5,11 +5,11 @@ use App\Role;
 use App\User;
 use App\Vendor;
 use App\VendorType;
-use App\Repositories\PermissionsRepository;
-use App\Repositories\RolesRepository;
-use App\Repositories\UsersRepository;
-use App\Repositories\VendorsRepository;
-use App\Repositories\VendorTypesRepository;
+use App\Services\PermissionService;
+use App\Services\RoleService;
+use App\Services\UserService;
+use App\Services\VendorService;
+use App\Services\VendorTypeService;
 use Illuminate\Database\Seeder;
 
 class VendorSeeder extends Seeder
@@ -54,7 +54,7 @@ class VendorSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            $perm = PermissionsRepository::create(new Permission(), [
+            $perm = PermissionService::create(new Permission(), [
                 'name'          => $permissionData[0],
                 'description'   => $permissionData[1],
             ]);
@@ -75,8 +75,9 @@ class VendorSeeder extends Seeder
         ];
 
         foreach ($roles as $roleData) {
-            $role = RolesRepository::create(new Role(), $roleData);
-            $role->permissions()->attach(Permission::where('name', 'access:vendor')->first()->id);
+            $role = RoleService::create(new Role(), $roleData);
+            $role->permissions()->attach(Permission::where('name', 'access:portal')->first()->id);
+            $role->permissions()->attach(Permission::where('name', 'access:cart')->first()->id);
         }
 
         $vendor_types = [
@@ -98,13 +99,13 @@ class VendorSeeder extends Seeder
 
         foreach($vendor_types as $type)
         {
-            VendorTypesRepository::create(new VendorType, [
+            VendorTypeService::create(new VendorType, [
                 'incorporation_authority' => $type[0],
                 'incorporation_type' => $type[1]
             ]);
         }
 
-        $vendor = VendorsRepository::create(new Vendor, [
+        $vendor = VendorService::create(new Vendor, [
             'name' => 'Thera Future Inc.',
             'registration_number' => '123456-TF',
             'normalized_registration_number' => '123456TF',
@@ -134,13 +135,13 @@ class VendorSeeder extends Seeder
         ]);
 
         
-        $user = UsersRepository::create(new User(), [
+        $user = UserService::create(new User(), [
             'name'      => 'Amin Adha',
             'email'     => 'amin@my-sands.com',
             'password'  => app()->make('hash')->make('amin1234'),
             'status'    => 'active',
         ]);
-        $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->lists('id')->toArray());
+        $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->pluck('id')->toArray());
         $vendor->users()->attach($user, ['status' => 'active']);
     }
 }

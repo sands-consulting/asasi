@@ -7,4 +7,5 @@ use Sands\Asasi\Service\Exceptions\ServiceException;
 
 class QualificationCodeTypeService extends BaseService 
 {
+	//
 }

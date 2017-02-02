@@ -3,9 +3,9 @@
 use App\Permission;
 use App\Role;
 use App\User;
-use App\Repositories\RolesRepository;
-use App\Repositories\UsersRepository;
-use App\Repositories\PermissionsRepository;
+use App\Services\RoleService;
+use App\Services\UserService;
+use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
 class EvaluatorSeeder extends Seeder
@@ -30,7 +30,7 @@ class EvaluatorSeeder extends Seeder
         ];
 
         foreach ($permissions as $permissionData) {
-            $perm = PermissionsRepository::create(new Permission(), [
+            $perm = PermissionService::create(new Permission(), [
                 'name'        => $permissionData[0],
                 'description' => $permissionData[1],
             ]);

@@ -2,11 +2,9 @@
 
 namespace App\Services;
 
+use Sands\Asasi\Service;
 
-class BaseService
+abstract class BaseService extends Service
 {
-    function __construct()
-    {
-        # code...
-    }
+	//
 }

@@ -92,8 +92,8 @@ class CreateProjectsTable extends Migration
             $table->string('slug');
             $table->string('name');
             $table->text('description');
-            $table->timestamp('baseline_start');
-            $table->timestamp('baseline_end');
+            $table->timestamp('baseline_start')->nullable();
+            $table->timestamp('baseline_end')->nullable();
             $table->integer('baseline_duration');
             $table->timestamp('actual_start')->nullable();
             $table->timestamp('actual_end')->nullable();
@@ -103,7 +103,7 @@ class CreateProjectsTable extends Migration
             $table->decimal('cost')->nullable();
             $table->string('status');
             $table->unsignedInteger('project_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->nullableTimestamps();
             $table->softDeletes();
 
