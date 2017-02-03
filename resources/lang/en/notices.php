@@ -78,6 +78,8 @@ return [
             ],
             'show' => [
                 'title' => 'View Notice',
+                'invitation' => 'By Invitation',
+                'advertise' => 'Advertise Only',
             ],
             'create' => [
                 'title' => 'New',
