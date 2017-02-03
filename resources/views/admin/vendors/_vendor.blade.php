@@ -58,7 +58,7 @@
 			<a href="{{ route('admin.vendors.qualification-codes', $vendor->id) }}">{{ trans('vendors.views._show.nav.qualification_codes') }}</a>
 		</li>
 		<li class="{{ is_route_active('admin.vendors.users') }}">
-			<a href="{{ route('vendors.users', $vendor->id) }}">{{ trans('vendors.views._show.nav.users') }}</a>
+			<a href="{{ route('admin.vendors.users', $vendor->id) }}">{{ trans('vendors.views._show.nav.users') }}</a>
 		</li>
 		<li class="{{ is_route_active('admin.vendors.subscriptions') }}">
 			<a href="{{ route('admin.vendors.subscriptions', $vendor->id) }}">{{ trans('vendors.views._show.nav.subscriptions') }}</a>

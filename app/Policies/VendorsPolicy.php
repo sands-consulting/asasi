@@ -2,102 +2,106 @@
 
 namespace App\Policies;
 
+use App\User;
 use App\Vendor;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
-class VendorsPolicy extends BasePolicy
+class VendorsPolicy
 {
-    public function index()
+    use HandlesAuthorization;
+
+    public function index(User $user)
     {
-        return $this->user->hasPermission('vendor:index');
+        return $user->hasPermission('vendor:index');
     }
 
-    public function show(Vendor $vendor)
+    public function show(User $user, Vendor $vendor)
     {
-        if($this->user->hasPermission('access:vendor') && $this->user->vendor)
+        if($user->hasPermission('access:vendor') && $user->vendor)
         {
-            return $this->user->hasPermission('vendor:show') && $vendor->id === $this->user->vendor->id;
+            return $user->hasPermission('vendor:show') && $vendor->id === $user->vendor->id;
         }
 
-        return $this->user->hasPermission('vendor:show');
+        return $user->hasPermission('vendor:show');
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return $this->user->hasPermission('vendor:create');
+        return $user->hasPermission('vendor:create');
     }
 
-    public function store()
+    public function store(User $user)
     {
-        return $this->create();
+        return $this->create($user);
     }
 
-    public function edit(Vendor $vendor)
+    public function edit(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:update');
+        return $user->hasPermission('vendor:update');
     }
 
-    public function update(Vendor $vendor)
+    public function update(User $user, Vendor $vendor)
     {
-        return $this->edit($vendor);
+        return $this->edit($user, $vendor);
     }
 
-    public function destroy(Vendor $vendor)
+    public function destroy(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:delete');
+        return $user->hasPermission('vendor:delete');
     }
 
-    public function duplicate(Vendor $vendor)
+    public function duplicate(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:duplicate');
+        return $user->hasPermission('vendor:duplicate');
     }
 
-    public function revisions(Vendor $vendor)
+    public function revisions(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:revisions');
+        return $user->hasPermission('vendor:revisions');
     }
 
-    public function logs(Vendor $vendor)
+    public function logs(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:logs');
+        return $user->hasPermission('vendor:logs');
     }
 
-    public function approve()
+    public function approve(User $user)
     {
-        return $this->user->hasPermission('vendor:approve');
+        return $user->hasPermission('vendor:approve');
     }
 
-    public function reject()
+    public function reject(User $user)
     {
-        return $this->user->hasPermission('vendor:reject');
+        return $user->hasPermission('vendor:reject');
     }
 
-    public function activate(Vendor $vendor)
+    public function activate(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:activate') && $vendor->canActivate();
+        return $user->hasPermission('vendor:activate') && $vendor->canActivate($user);
     }
 
-    public function suspend(Vendor $vendor)
+    public function suspend(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:suspend') && $vendor->canSuspend();
+        return $user->hasPermission('vendor:suspend') && $vendor->canSuspend($user);
     }
 
-    public function blacklist(Vendor $vendor)
+    public function blacklist(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:blacklist') && $vendor->canBlacklist();
+        return $user->hasPermission('vendor:blacklist') && $vendor->canBlacklist($user);
     }
 
-    public function unblacklist(Vendor $vendor)
+    public function unblacklist(User $user, Vendor $vendor)
     {
-        return $this->user->hasPermission('vendor:unblacklist') && $vendor->canUnblacklist();
+        return $user->hasPermission('vendor:unblacklist') && $vendor->canUnblacklist($user);
     }
 
-    public function qualificationCodes(Vendor $vendor)
+    public function qualificationCodes(User $user, Vendor $vendor)
     {
-        return $this->show($vendor);
+        return $this->show($user, $vendor);
     }
 
-    public function subscriptions(Vendor $vendor)
+    public function subscriptions(User $user, Vendor $vendor)
     {
-        return $this->show($vendor);
+        return $this->show($user, $vendor);
     }
 }
