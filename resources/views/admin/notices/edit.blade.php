@@ -3,8 +3,8 @@
 @section('header')
 <div class="page-title">
     <h4>
-        {{ link_to_route('admin.notices.index', trans('notices.views.index.title')) }} /
-        <span class="text-semibold">{{ trans('notices.views.edit.title') }}</span>
+        {{ link_to_route('admin.notices.index', trans('notices.views.admin.index.title')) }} /
+        <span class="text-semibold">{{ trans('notices.views.admin.edit.title') }}</span>
     </h4>
 </div>
 <div class="heading-elements">

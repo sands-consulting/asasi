@@ -2,7 +2,7 @@
 
 @section('header')
 <div class="page-title">
-    <h4>{{ trans('notices.views.index.title') }}</h4>
+    <h4>{{ trans('notices.views.admin.index.title') }}</h4>
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
@@ -16,16 +16,16 @@
 @section('secondary-header')
 <ul class="breadcrumb breadcrumb-caret">
     <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-    <li class="active">{{ trans('notices.views.index.title') }}</li>
+    <li class="active">{{ trans('notices.views.admin.index.title') }}</li>
 </ul>
 @endsection
 
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-body form-datatable-search form-inline">
-        <input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('notices.views.index.keywords') }}" v-model="q.keywords">
+        <input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('notices.views.admin.index.keywords') }}" v-model="q.keywords">
         <select name="q[status]" class="form-control input-sm" v-model="q.status">
-            <option value="" selected="selected">{{ trans('notices.views.index.status') }}</option>
+            <option value="" selected="selected">{{ trans('notices.views.admin.index.status') }}</option>
             @foreach(collect(trans('statuses'))->only('published', 'draft') as $key => $value)<option value="{{ $key }}">{{ $value }}</option>@endforeach
         </select>
         <a href="#" class="btn btn-sm btn-primary" v-on:click="perform_search">{{ trans('actions.search') }}</a>

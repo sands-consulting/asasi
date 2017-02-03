@@ -1,4 +1,4 @@
-<span class="text-header"><span class="text-semibold">{{ $notice->organization->short_name }}</span> {{ $notice->number }}</span>
+<span class="text-thin"><strong>{{ $notice->organization->name }}</strong> {{ $notice->number }}</span>
 
 <br>
 

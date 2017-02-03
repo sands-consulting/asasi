@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\DateAccessor;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,8 @@ use Venturecraft\Revisionable\RevisionableTrait;
 
 class Notification extends Model
 {
-    use RevisionableTrait,
+    use DateAccessor,
+        RevisionableTrait,
         SoftDeletes;
 
     protected $revisionCreationsEnabled = true;

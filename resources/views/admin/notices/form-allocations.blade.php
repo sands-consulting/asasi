@@ -15,7 +15,7 @@
                     @if (!$notice->allocations->isEmpty())
                         <tr class="table-empty" style="display:none">
                             <td colspan="4">
-                                {!! trans('notices.views.create.table.empty') !!}
+                                {!! trans('notices.views.admin.create.table.empty') !!}
                             </td>
                         </tr>
                         @foreach($notice->allocations as $allocation)
@@ -46,7 +46,7 @@
                     @else
                         <tr class="table-empty">
                             <td colspan="6">
-                                {!! trans('notices.views.create.table.empty') !!}
+                                {!! trans('notices.views.admin.create.table.empty') !!}
                             </td>
                         </tr>
                     @endif

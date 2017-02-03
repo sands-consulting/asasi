@@ -52,7 +52,7 @@
 <ul class="breadcrumb breadcrumb-caret">
     <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
     <li><a href="{{ route('admin.notices.index') }}">{{ trans('notices.title') }}</a></li>
-    <li class="active">{{ trans('notices.views.show.title') }}</li>
+    <li class="active">{{ trans('notices.views.admin.show.title') }}</li>
 </ul>
 @endsection
 

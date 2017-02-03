@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Services\AuthLogsService;
-use App\Http\Controllers\Controller;
 use App\Notification;
+use App\Http\Controllers\Controller;
 use App\Services\NotificationsService;
+use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
 {
     public function index(Request $request)
     {
         $notifications = Notification::whereUserId($request->user()->id)
-            ->status($request->get('status'))
+            ->status($request->input('status'))
             ->get();
 
         $notifications = $notifications->each(function($notification) {

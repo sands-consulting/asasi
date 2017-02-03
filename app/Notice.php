@@ -205,6 +205,11 @@ class Notice extends Model
     {
         return $this->belongsToMany(Vendor::class, 'notice_invitation');
     }
+
+    public function settings()
+    {
+        return $this->morphMany(Setting::class, 'item');
+    }
     
     /*
      * Helpers
