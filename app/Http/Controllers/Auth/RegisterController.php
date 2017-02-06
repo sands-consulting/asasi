@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
-use App\Mailers\AppMailer;
 use App\Role;
 use App\User;
 use App\Vendor;
 use DB;
-use Event;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -85,11 +83,28 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'confirmation_token' => str_random(30)
+                'confirmation_token' => str_random(30),
+                'status' => 'inactive'
             ]);
             $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->pluck('id')->toArray());
             $user->vendors()->attach($vendor->id);
+
             return $user;
         });
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return redirect()->back()->with('notice', trans('auth.notices.inactive'));
     }
 }

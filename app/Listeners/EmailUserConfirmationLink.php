@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
-use App\Mailers\UserConfirmationMailer;
+use App\Notifications\UserConfirmation;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -14,9 +14,9 @@ class EmailUserConfirmationLink
      *
      * @return void
      */
-    public function __construct(UserConfirmationMailer $mailer)
+    public function __construct(UserConfirmation $notification)
     {
-        $this->mailer = $mailer;
+        $this->notification = $notification;
     }
 
     /**
@@ -25,8 +25,8 @@ class EmailUserConfirmationLink
      * @param  UserRegistered  $event
      * @return void
      */
-    public function handle(UserRegistered $event)
+    public function handle($event)
     {
-        $this->mailer->send($event->user);
+        $event->user->notify($this->notification);
     }
 }

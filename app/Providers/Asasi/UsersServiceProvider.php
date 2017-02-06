@@ -69,6 +69,8 @@ class UsersServiceProvider extends ServiceProvider
                 ->name('me.bookmarks');
 
             $router->resource('vendors.users', 'VendorUsersController');
+            $router->get('confirmation/{token}', 'Auth\LoginController@confirmation')
+                ->name('confirmation');
         });
     }
 }

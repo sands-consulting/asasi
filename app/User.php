@@ -13,20 +13,10 @@ class User extends Authenticatable
 {
     use DateAccessor, Notifiable, RevisionableTrait, Roleable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'email', 'password', 'status'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'confirmation_token', 'password', 'remember_token',
     ];
@@ -37,6 +27,10 @@ class User extends Authenticatable
 
     protected $sortable = [
         'name', 'email', 'status'
+    ];
+
+    protected $attributes = [
+        'status' => 'inactive'
     ];
 
     /*
