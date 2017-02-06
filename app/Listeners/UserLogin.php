@@ -6,7 +6,7 @@ use App\User;
 use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
-class UserHistoryin
+class UserLogin
 {
     public function __construct(Request $request)
     {

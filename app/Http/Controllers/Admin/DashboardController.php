@@ -7,6 +7,7 @@ use App\Notice;
 use App\Vendor;
 use App\DataTables\DashboardUsersDataTable;
 use App\DataTables\DashboardVendorsDataTable;
+use App\UserLog;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller

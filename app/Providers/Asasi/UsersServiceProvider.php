@@ -65,6 +65,8 @@ class UsersServiceProvider extends ServiceProvider
             $router->put('me', 'MeController@update');
             $router->get('me/resume', 'MeController@resume')
                 ->name('me.resume');
+            $router->get('me/bookmarks', 'MeController@bookmarks')
+                ->name('me.bookmarks');
 
             $router->resource('vendors.users', 'VendorUsersController');
         });

@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
-class UserHistoryout
+class UserLogout
 {
     public function __construct(Request $request)
     {

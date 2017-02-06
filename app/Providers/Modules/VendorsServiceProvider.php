@@ -88,11 +88,6 @@ class VendorsServiceProvider extends ServiceProvider
                 
                 $router->resource('vendors', 'VendorsController');
             });
-            
-            $router->get('vendors/{vendor}/qualification-codes', [
-                'as'    => 'vendors.qualification-codes',
-                'uses'  => 'VendorsController@qualificationCodes'
-            ]);
 
             $router->get('vendors/{vendor}/purchases', [
                 'as'    => 'vendors.purchases',
@@ -107,6 +102,16 @@ class VendorsServiceProvider extends ServiceProvider
             $router->get('vendors/{vendor}/eligibles', [
                 'as' => 'vendors.eligibles',
                 'uses' => 'VendorsController@eligibles'
+            ]);
+
+            $router->get('vendors/{vendor}/invitations', [
+                'as' => 'vendors.invitations',
+                'uses' => 'VendorsController@invitations'
+            ]);
+
+            $router->get('vendors/{vendor}/projects', [
+                'as' => 'vendors.projects',
+                'uses' => 'VendorsController@projects'
             ]);
 
             $router->resource('vendors', 'VendorsController', [

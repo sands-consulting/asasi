@@ -14,15 +14,15 @@
 
 		@if(Auth::user()->hasPermissions(['access:admin', 'access:report']))
 
-		<li class="divider"></li>
+			<li class="divider"></li>
 
-		@if(Auth::user()->hasPermission('access:admin'))
-		<li><a href="{{ route('admin') }}"><i class="icon-cog52"></i> {{ trans('menu.access.admin') }}</a></li>
-		@endif
+			@if(Auth::user()->hasPermission('access:admin'))
+			<li><a href="{{ route('admin') }}"><i class="icon-cog52"></i> {{ trans('menu.access.admin') }}</a></li>
+			@endif
 
-		@if(Auth::user()->hasPermission('access:report'))
-		<li><a href="{{ route('admin') }}"><i class="icon-file-text"></i> {{ trans('menu.access.report') }}</a></li>
-		@endif
+			@if(Auth::user()->hasPermission('access:report'))
+			<li><a href="{{ route('admin') }}"><i class="icon-file-text"></i> {{ trans('menu.access.report') }}</a></li>
+			@endif
 
 		@endif
 
