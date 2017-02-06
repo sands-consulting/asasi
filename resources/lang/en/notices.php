@@ -37,7 +37,7 @@ return [
     'navs' => [
         'details' => 'Details',
         'events' => 'Events',
-        'qualification_codes' => 'Qualification Codes',
+        'qualifications' => 'Qualifications',
         'files' => 'Files',
 
         'eligibles' => 'Eligibles',
@@ -69,6 +69,10 @@ return [
             'notices' => [
                 'title' => 'All Notices'
             ]
+        ],
+        'show' => [
+            'back' => 'All Notices',
+            'purchase' => 'Add to Cart'
         ],
         'admin' => [
             'index' => [

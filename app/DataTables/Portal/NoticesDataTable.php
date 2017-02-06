@@ -12,7 +12,7 @@ class NoticesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->editColumn('name', function($notice) {
-                return view('notices._index_name', compact('notice'));
+                return view('notices.index.name', compact('notice'));
             })
             ->editColumn('purchased_at', function($notice) {
                 return $notice->purchased_at->formatDateFromSetting();
@@ -24,7 +24,7 @@ class NoticesDataTable extends DataTable
                 return sprintf('%s %.2f', 'MYR', $notice->price);
             })
             ->editColumn('action', function($notice) {
-                return view('notices._index_actions', compact('notice'));
+                return view('notices.index.actions', compact('notice'));
             })
             ->make(true);
     }

@@ -65,7 +65,12 @@
     </div>
 
     <div class="col-xs-12 col-md-9">
+        @if(is_route_active('admin.notices.show'))
+        @include('admin.notices.show.details')
+        @include('admin.notices.show.events')
+        @else
         @yield('show')
+        @endif
     </div>
 </div>
 

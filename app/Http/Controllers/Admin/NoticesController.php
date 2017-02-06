@@ -61,7 +61,7 @@ class NoticesController extends Controller
 
     public function show(Notice $notice)
     {
-        return view('admin.notices.show.details', compact('notice'));
+        return view('admin.notices.show', compact('notice'));
     }
 
     public function events(Notice $notice)

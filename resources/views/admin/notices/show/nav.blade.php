@@ -1,19 +1,35 @@
-<ul class="list-group panel panel-flat">
-    <a href="{{ route('admin.notices.show', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.show', ' bg-blue-300') }}">
-        <i class="icon-clipboard3"></i> {{ trans('notices.navs.details') }}
-    </a>
-    <a href="{{ route('admin.notices.events', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.events', ' bg-blue-300') }}">
-        <i class="icon-calendar3"></i> {{ trans('notices.navs.events') }}
-    </a>
-    <a href="{{ route('admin.notices.qualification-codes', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.qualification-codes', ' bg-blue-300') }}">
-        <i class="icon-stack2"></i> {{ trans('notices.navs.qualification_codes') }}
-    </a>
-    <a href="{{ route('admin.notices.files', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.files', ' bg-blue-300') }}">
-        <i class="icon-copy3"></i> {{ trans('notices.navs.files') }}
-    </a>
+<ul class="list-group list-notice panel panel-flat" role="tablist">
+    <li role="presentation">
+        <a href="#tab-notice-details" aria-controls="tab-notice-details" role="tab" data-toggle="tab" class="list-group-item">
+            <i class="icon-clipboard3"></i> {{ trans('notices.navs.details') }}
+        </a>
+    </li>
+    <li role="presentation">
+        <a href="#tab-notice-events" aria-controls="tab-notice-events" role="tab" data-toggle="tab" class="list-group-item">
+            <i class="icon-calendar3"></i> {{ trans('notices.navs.events') }}
+        </a>
+    </li>
+    <li role="presentation">
+        <a href="#tab-notice-qualifications" aria-controls="tab-notice-qualifications" role="tab" data-toggle="tab" class="list-group-item">
+            <i class="icon-stack2"></i> {{ trans('notices.navs.qualifications') }}
+        </a>
+    </li>
+    <li role="presentation">
+        <a href="#tab-notice-files" aria-controls="tab-notice-files" role="tab" data-toggle="tab" class="list-group-item">
+            <i class="icon-copy3"></i> {{ trans('notices.navs.files') }}
+        </a>
+    </li>
+
+    @if(!is_path_active('admin*') && $notice->awarded)
+    <li role="presentation">
+        <a href="#tab-notice-award" aria-controls="tab-notice-award" role="tab" data-toggle="tab" class="list-group-item">
+            <i class="icon-medal2"></i> {{ trans('notices.navs.award') }}
+        </a>
+    </li>
+    @endif
 </ul>
 
-@if(Auth::user()->hasPermission('access:admin'))
+@if(is_path_active('admin*'))
 <ul class="list-group panel panel-flat">
     {{-- <a href="{{ route('admin.notices.allocations', $notice->id) }}" class="list-group-item{{ is_route_active('admin.notices.allocations', ' bg-blue-300') }}">
         <i class="icon-copy3"></i> {{ trans('notices.navs.allocations') }}

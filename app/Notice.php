@@ -130,14 +130,6 @@ class Notice extends Model
      * Relationship
      */
 
-    public function allocations()
-    {
-        return $this->belongsToMany(Allocation::class)
-            ->withPivot(['id', 'amount'])
-            ->wherePivot('deleted_at', NULL)
-            ->withTimestamps();
-    }
-
     public function type()
     {
         return $this->belongsTo(NoticeType::class, 'notice_type_id');
@@ -148,9 +140,22 @@ class Notice extends Model
         return $this->belongsTo(Organization::class, 'organization_id');
     }
 
+    public function allocations()
+    {
+        return $this->belongsToMany(Allocation::class)
+            ->withPivot(['id', 'amount'])
+            ->wherePivot('deleted_at', NULL)
+            ->withTimestamps();
+    }
+
     public function activities()
     {
         return $this->hasMany(NoticeActivity::class);
+    }
+
+    public function qualifications()
+    {
+        return $this->hasMany(NoticeQualification::class);
     }
 
     public function requirementCommercials()
