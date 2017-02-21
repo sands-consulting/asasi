@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-param" content="_token">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="socket-url" content="{{ env('APP_SOCKET_URL') }}">
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
@@ -45,6 +46,7 @@
 </div>
 
 <script src="{{ elixir('assets/js/window.js') }}"></script>
+<script src="{{ env('APP_SOCKET_URL') }}/socket.io/socket.io.js"></script>
 @yield('scripts')
 {!! flash_messages() !!}
 </body>

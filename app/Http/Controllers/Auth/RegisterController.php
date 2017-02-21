@@ -105,6 +105,6 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect()->back()->with('notice', trans('auth.notices.inactive'));
+        return redirect(route('root'))->with('notice', trans('auth.notices.inactive'));
     }
 }
