@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					{!! Former::select('notice_id')
-						->options(App\Notice::awarded()->lists('name', 'id'))
+						->options(App\Notice::awarded()->pluck('name', 'id'))
 						->label('projects.attributes.notice')
 						->placeholder('Select from notice')
 						->addClass('select2') !!}

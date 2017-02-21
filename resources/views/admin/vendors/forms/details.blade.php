@@ -15,7 +15,7 @@
 		<div class="col-xs-12 col-md-6">
 			{!! Former::select('type_id')
 				->label('vendors.attributes.type_id')
-				->options(App\VendorType::active()->get()->lists('label', 'id'))
+				->options(App\VendorType::active()->get()->pluck('label', 'id'))
 				->required()
 				->addClass('select2') !!}
 		</div>
@@ -67,7 +67,7 @@
 					{!! Former::select('address_city_id')
 						->label(null)
 						->placeholder('vendors.attributes.address_city_id')
-						->options(App\Place::type('city')->active()->lists('name', 'id'))
+						->options(App\Place::type('city')->active()->pluck('name', 'id'))
 						->addClass('select2') !!}
 				</div>
 			</div>
@@ -76,14 +76,14 @@
 					{!! Former::select('address_state_id')
 						->label(null)
 						->placeholder('vendors.attributes.address_state_id')
-						->options(App\Place::type('state')->active()->lists('name', 'id'))
+						->options(App\Place::type('state')->active()->pluck('name', 'id'))
 						->addClass('select2') !!}
 				</div>
 				<div class="col-xs-12 col-md-6">
 					{!! Former::select('address_country_id')
 						->label(null)
 						->placeholder('vendors.attributes.address_country_id')
-						->options(App\Place::type('country')->active()->lists('name', 'id'))
+						->options(App\Place::type('country')->active()->pluck('name', 'id'))
 						->addClass('select2') !!}
 				</div>
 			</div>

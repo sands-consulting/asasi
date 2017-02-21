@@ -10,9 +10,9 @@
                             {!! Former::select("evaluators[{$evaluationType->id}][]")
                                 ->multiple(true)
                                 ->label(false)
-                                ->options(App\User::evaluators()->lists('name','id'))
+                                ->options(App\User::evaluators()->pluck('name','id'))
                                 ->data_placeholder('Click here to select evaluator from user list.')
-                                ->value($notice->evaluators()->wherePivot('type_id', $evaluationType->id)->lists('user_id'))
+                                ->value($notice->evaluators()->wherePivot('type_id', $evaluationType->id)->pluck('user_id'))
                                 ->addClass('select') !!}
                         </div>
                     </div>

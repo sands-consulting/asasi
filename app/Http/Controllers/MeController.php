@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Portal\BookmarksDataTable;
 use App\Http\Requests\ContactRequest;
 use App\Http\Requests\MeRequest;
 use Illuminate\Http\Request;
@@ -43,9 +44,10 @@ class MeController extends Controller
                 ->with('notice', trans('me.flash.resumed', ['name' => $original_user->name]));
 	}
 
-	public function bookmarks()
+	public function bookmarks(Request $request, BookmarksDataTable $table)
 	{
-		return view('me.bookmarks');
+		$table->user_id = $request->user()->id;
+		return $table->render('me.bookmarks');
 	}
 
 	public function notifications(Request $request)

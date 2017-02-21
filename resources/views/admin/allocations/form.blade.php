@@ -6,7 +6,7 @@
 	->required() !!}
 {!! Former::select('type_id')
 	->label('allocations.attributes.type')
-	->options(\App\AllocationType::lists('name', 'id'), null)
+	->options(\App\AllocationType::pluck('name', 'id'), null)
 	->addClass('select2')
 	->required() !!}
 @if(!Auth::user()->hasPermission('allocation:organization'))

@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="vendor-qualification-codes">
-@foreach(\App\QualificationCodeType::roots()->activeCodes()->get() as $type)
+@foreach(\App\QualificationType::roots()->activeCodes()->get() as $type)
 
 	@if($type->type == 'list')
 	<div class="panel panel-white">

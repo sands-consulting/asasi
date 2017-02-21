@@ -7,7 +7,7 @@
 	<div class="col-lg-10 col-sm-8">
 		@foreach(\App\Role::all() as $role)
 		<div class="checkbox">
-			<label>{{ Form::checkbox('roles[]', $role->id, in_array($role->id, request('roles', $user->roles->lists('id')->toArray()))) }} {{ $role->display_name }}</label>
+			<label>{{ Form::checkbox('roles[]', $role->id, in_array($role->id, request('roles', $user->roles->pluck('id')->toArray()))) }} {{ $role->display_name }}</label>
 		</div>
 		@endforeach
 	</div>

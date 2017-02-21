@@ -94,7 +94,7 @@
 
 <div class="panel panel-flat">
     <div class="panel-body">
-        <a href="{{ route('admin.submissions.lists', $submission->notice->id) }}" class="btn btn-default">Back</a>
+        <a href="{{ route('admin.submissions.pluck', $submission->notice->id) }}" class="btn btn-default">Back</a>
         <button class="btn btn-primary pull-right">Save</button>
     </div>
 </div>

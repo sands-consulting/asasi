@@ -6,7 +6,7 @@
 	->required() !!}
 {!! Former::select('parent_id')
 	->label('qualification-code-types.attributes.parent')
-	->options(App\QualificationCodeType::getOptions('name', 'id', '-')) !!}
+	->options(App\QualificationType::getOptions('name', 'id', '-')) !!}
 {!! Former::select('type')
 	->label('qualification-code-types.attributes.type')
 	->options(trans('qualification-code-types.types'))

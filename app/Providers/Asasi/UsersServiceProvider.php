@@ -52,7 +52,7 @@ class UsersServiceProvider extends ServiceProvider
                     ->name('users.histories');
                 $router->get('users/{user}/revisions', 'UsersController@revisions')
                     ->name('users.revisions');
-                $router->get('users/{user}/assume', 'UsersController@assume')
+                $router->post('users/{user}/assume', 'UsersController@assume')
                     ->name('users.assume');
                 $router->get('users/archives', 'UsersController@archives')
                     ->name('users.archives');

@@ -1,1 +1,1 @@
-<a href="{{ route('admin.submissions.lists', $notice->id) }}" class="btn btn-primary btn-xs">Submissions</a>
+<a href="{{ route('admin.submissions.pluck', $notice->id) }}" class="btn btn-primary btn-xs">Submissions</a>

@@ -145,6 +145,12 @@ return [
                 'description' => 'All fields are compulsary. The form can be save and update later for completion'
             ]
         ],
+        'eligibles' => [
+            'title' => 'Eligibles'
+        ],
+        'invitations' => [
+            'title' => 'Invitations'
+        ],
         '_show' => [
             'nav' => [
                 'details' => 'Details',

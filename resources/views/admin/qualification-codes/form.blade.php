@@ -6,7 +6,7 @@
 	->required() !!}
 {!! Former::select('type_id')
 	->label('qualification-codes.attributes.type')
-	->options(\App\QualificationCodeType::lists('name', 'id'), null)
+	->options(\App\QualificationType::pluck('name', 'id'), null)
 	->addClass('select2')
 	->required() !!}
 {!! Former::select('status')

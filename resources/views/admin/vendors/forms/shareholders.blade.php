@@ -16,7 +16,7 @@
 				<td><input type="text" name="shareholders[@{{ $index }}][identity_number]" class="form-control" v-model="shareholder.identity_number"></td>
 				<td>
 					<select name="shareholders[@{{ $index }}][nationality_id]" class="form-control select2" v-model="shareholder.nationality_id">
-						@foreach(App\Place::type('country')->active()->lists('name', 'id') as $key => $value)
+						@foreach(App\Place::type('country')->active()->pluck('name', 'id') as $key => $value)
 						<option value="{{ $key }}">{{ $value }}</option>
 						@endforeach
 					</select>

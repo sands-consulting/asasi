@@ -9,8 +9,8 @@ use App\DataTables\UserHistoriesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UsersArchivedDataTable;
 use App\Http\Requests\UserRequest;
-use App\Services\UsersService;
-use App\Services\UserHistoriesService;
+use App\Services\UserService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -100,7 +100,7 @@ class UsersController extends Controller
 
     public function assume(Request $request, User $user)
     {
-        UsersService::assume($user);
+        UserService::assume($user);
 
         if ($user->hasRole('Evaluator')) {
             return redirect()
@@ -115,7 +115,7 @@ class UsersController extends Controller
 
     public function activate(Request $request, User $user)
     {
-        UsersService::activate($user);
+        UserService::activate($user);
         return redirect()
             ->to($request->input('redirect_to', route('admin.users.show', $user->id)))
             ->with('notice', trans('users.notices.activated', ['name' => $user->name]));
@@ -123,7 +123,7 @@ class UsersController extends Controller
 
     public function suspend(Request $request, User $user)
     {
-        UsersService::suspend($user);
+        UserService::suspend($user);
         return redirect()
             ->to($request->input('redirect_to', route('admin.users.show', $user->id)))
             ->with('notice', trans('users.notices.suspended', ['name' => $user->name]));

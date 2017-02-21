@@ -1,4 +1,4 @@
-@foreach(App\QualificationCodeType::roots()->whereStatus('active')->get() as $type)
+@foreach(App\QualificationType::roots()->whereStatus('active')->get() as $type)
 @if($type->type == 'list' && $vendor->qualificationCodes()->whereTypeId($type->id)->count())
 <div class="panel panel-white">
 	<div class="panel-heading">

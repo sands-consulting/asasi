@@ -27,7 +27,7 @@
 						@foreach($perms as $perm)
 							<div class="col-xs-12 col-sm-6">
 								<label class="matrix-label">
-									{{ Form::checkbox('permissions[]', $perm->id, in_array($perm->id, $role->permissions->lists('id')->toArray())) }}
+									{{ Form::checkbox('permissions[]', $perm->id, in_array($perm->id, $role->permissions->pluck('id')->toArray())) }}
 									{{ $perm->description }}
 								</label>
 							</div>

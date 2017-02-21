@@ -194,7 +194,7 @@ class User extends Authenticatable
 
     public function canSuspend()
     {
-        return Auth::user()->id != $this->id && $this->status != 'suspended';
+        return $this->status != 'suspended';
     }
 
     /*

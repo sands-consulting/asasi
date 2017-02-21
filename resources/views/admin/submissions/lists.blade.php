@@ -2,16 +2,16 @@
 
 @section('header')
 <div class="page-title">
-    <h4>{{ trans('submissions.views.lists.title', ['notice' => $notice->name ]) }}</h4>
+    <h4>{{ trans('submissions.views.pluck.title', ['notice' => $notice->name ]) }}</h4>
 </div>
 @endsection
 
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-body form-datatable-search form-inline">
-        <input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('submissions.views.lists.keywords') }}" v-model="q.keywords">
+        <input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('submissions.views.pluck.keywords') }}" v-model="q.keywords">
         <select name="q[status]" class="form-control input-sm" v-model="q.status">
-            <option value="" selected="selected">{{ trans('submissions.views.lists.type') }}</option>
+            <option value="" selected="selected">{{ trans('submissions.views.pluck.type') }}</option>
             @foreach(collect(trans('submissions.types'))->only('commercial', 'technical') as $key => $value)<option value="{{ $key }}">{{ $value }}</option>@endforeach
         </select>
         <a href="#" class="btn btn-sm btn-primary" v-on:click="perform_search">{{ trans('actions.search') }}</a>
