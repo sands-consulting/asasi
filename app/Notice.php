@@ -130,6 +130,11 @@ class Notice extends Model
      * Relationship
      */
 
+    public function settings()
+    {
+        return $this->morphMany(Setting::class, 'item');
+    }
+
     public function type()
     {
         return $this->belongsTo(NoticeType::class, 'notice_type_id');
@@ -173,12 +178,6 @@ class Notice extends Model
         return $this->hasMany(NoticeEvent::class);
     }
 
-    public function vendors()
-    {
-        return $this->belongsToMany(Vendor::class)
-            ->withTimestamps();
-    }
-
     public function submissions()
     {
         return $this->hasMany(Submission::class);
@@ -191,11 +190,6 @@ class Notice extends Model
             ->withTimestamps();
     }
 
-    public function transactionDetails()
-    {
-        return $this->morphMany(TransactionDetail::class, 'detailable');
-    }
-
     public function evaluationRequirements()
     {
         return $this->hasMany(EvaluationRequirement::class);
@@ -206,14 +200,19 @@ class Notice extends Model
         return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
-    public function invitations()
+    public function eligibles()
     {
-        return $this->belongsToMany(Vendor::class, 'notice_invitation');
+        return $this->hasMany(NoticeEligible::class);
     }
 
-    public function settings()
+    public function invitations()
     {
-        return $this->morphMany(Setting::class, 'item');
+        return $this->hasMany(NoticeInvitation::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(NoticePurchase::class);
     }
     
     /*

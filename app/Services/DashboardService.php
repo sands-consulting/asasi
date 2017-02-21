@@ -9,35 +9,38 @@ use App\User;
 
 class DashboardService
 {
-    public static function getAllNumber(User $user)
+    public static function notices(User $user)
     {
         return Notice::published()->count();
     }
 
-    public static function getEligiblesNumber(User $user)
+    public static function eligibles(User $user)
     {
-        return '1';
+        return Notice::published()->whereHas('eligibles', function($query) use($user) {
+            $query->where('vendor_id', $user->vendor->id);
+        })->count();
     }
 
-    public static function getInvitationsNumber(User $user)
+    public static function invitations(User $user)
     {
-        return Notice::leftJoin('notice_invitation', 'notice_invitation.vendor_id', '=', 'notices.id')
-            ->where('notice_invitation.vendor_id', $user->vendor->id)
-            ->where('status', 'limited')
-            ->count();
+        return Notice::published()->whereHas('invitations', function($query) use($user) {
+            $query->where('vendor_id', $user->vendor->id);
+        })->count();
     }
 
-    public static function getBookmarksNumber(User $user)
+    public static function bookmarks(User $user)
     {
         return Bookmark::whereUserId($user->id)->count();
     }
 
-    public static function getPurchasesNumber(User $user)
+    public static function purchases(User $user)
     {
-        return $user->vendor->notices->count();
+        return Notice::whereHas('purchases', function($query) use($user) {
+            $query->where('vendor_id', $user->vendor->id);
+        })->count();
     }
 
-    public static function getProjectsNumber(User $user)
+    public static function projects(User $user)
     {
         return Project::whereVendorId($user->vendor->id)->count();
     }

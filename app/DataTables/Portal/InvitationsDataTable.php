@@ -11,22 +11,20 @@ class InvitationsDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                return view('notices._index_actions', compact('notice'));
+                return view('notices.index.actions', compact('notice'));
             })
             ->editColumn('name', function($notice) {
-                return link_to_route('notices.show', $notice->name, $notice->id);
-            })
-            ->editColumn('status', function($notice) {
-                return view('notices._index_status', compact('notice'));
+                return view('notices.index.name', compact('notice'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Notice::leftJoin('notice_invitation', 'notice_invitation.id', '=', 'notices.id')
-            ->where('notice_invitation.vendor_id', $this->vendor_id)
-            ->limited();
+        $query = Notice::published();
+        $query = $query->whereHas('invitations', function($query) {
+            $query->where('vendor_id', $this->vendor_id);
+        });
 
         if($this->datatables->request->input('q', null))
         {
@@ -52,20 +50,32 @@ class InvitationsDataTable extends DataTable
                 'data' => 'name',
                 'name' => 'name',
                 'title' => trans('notices.attributes.name'),
-                'width' => '40%'
+                'width' => '30%'
+            ],
+            [
+                'data' => 'purchased_at',
+                'name' => 'purchased_at',
+                'title' => trans('notices.attributes.purchased_at'),
+                'width' => '15%'
             ],
             [
                 'data' => 'expired_at',
                 'name' => 'expired_at',
                 'title' => trans('notices.attributes.expired_at'),
                 'width' => '15%'
+            ],
+            [
+                'data' => 'price',
+                'name' => 'price',
+                'title' => trans('notices.attributes.price'),
+                'width' => '10%'
             ]
         ];
     }
 
     protected function filename()
     {
-        return 'notices_dt_' . time();
+        return 'portal_invitations_dt_' . time();
     }
 
     protected function getBuilderParameters()

@@ -11,13 +11,10 @@ class EligiblesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function ($notice) {
-                return view('notices._index_actions', compact('notice'));
+                return view('notices.index.actions', compact('notice'));
             })
             ->editColumn('name', function ($notice) {
-                return link_to_route('notices.show', $notice->name, $notice->id);
-            })
-            ->editColumn('status', function ($notice) {
-                return view('notices._index_status', compact('notice'));
+                return view('notices.index.name', compact('notice'));
             })
             ->make(true);
     }
@@ -25,7 +22,12 @@ class EligiblesDataTable extends DataTable
     public function query()
     {
         $query = Notice::published();
-        if ($this->datatables->request->input('q', null)) {
+        $query = $query->whereHas('eligibles', function($query) {
+            $query->where('vendor_id', $this->vendor_id);
+        });
+
+        if ($this->datatables->request->input('q', null))
+        {
             $query->search($this->datatables->request->input('q', []));
         }
 
@@ -48,12 +50,12 @@ class EligiblesDataTable extends DataTable
                 'data' => 'name',
                 'name' => 'name',
                 'title' => trans('notices.attributes.name'),
-                'width' => '40%'
+                'width' => '30%'
             ],
             [
-                'data' => 'number',
-                'name' => 'number',
-                'title' => trans('notices.attributes.number'),
+                'data' => 'purchased_at',
+                'name' => 'purchased_at',
+                'title' => trans('notices.attributes.purchased_at'),
                 'width' => '15%'
             ],
             [
@@ -63,17 +65,17 @@ class EligiblesDataTable extends DataTable
                 'width' => '15%'
             ],
             [
-                'data' => 'status',
-                'name' => 'status',
-                'title' => trans('notices.attributes.status'),
-                'width' => '15%'
-            ],
+                'data' => 'price',
+                'name' => 'price',
+                'title' => trans('notices.attributes.price'),
+                'width' => '10%'
+            ]
         ];
     }
 
     protected function filename()
     {
-        return 'notices_dt_' . time();
+        return 'portal_eligibles_dt_' . time();
     }
 
     protected function getBuilderParameters()
