@@ -9,6 +9,7 @@ return [
 	'back' => 'Back',
 	'cancel' => 'Cancel',
 	'clear' => 'Clear',
+	'checkout' => 'Checkout',
 	'create' => 'Create',
 	'deactivate' => 'Deactivate',
 	'delete' => 'Delete',

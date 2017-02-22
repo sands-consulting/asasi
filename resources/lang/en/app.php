@@ -19,5 +19,15 @@ return [
     	'title'	=> 'Cart',
     	'empty' => 'Cart is empty.',
     	'view'	=> 'View Cart'
+    ],
+
+    'widgets' => [
+        'portal' => [
+            'wizard' => [
+                'application' => 'Vendor Application',
+                'approval' => 'Vendor Approval',
+                'subscription' => 'Pacakge Subscription'
+            ]
+        ]
     ]
 ];

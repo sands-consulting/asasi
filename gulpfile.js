@@ -1,10 +1,5 @@
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue-2');
-
-require('laravel-elixir-vue');
-require('laravel-elixir-livereload');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -17,31 +12,29 @@ require('laravel-elixir-livereload');
  */
 
 elixir(function(mix) {
-  // styles
-  mix
-    .less('public.less', 'public/assets/css/public.css')
-    .less('window.less', 'public/assets/css/window.css')
-    .less('admin.less', 'public/assets/css/admin.css')
-    .less('print.less', 'public/assets/css/print.css');
 
   mix
+    .less('portal.less', 'public/assets/css/portal.css')
+    .less('window.less', 'public/assets/css/window.css')
+    .less('admin.less', 'public/assets/css/admin.css')
+    .less('print.less', 'public/assets/css/print.css')
+
     .scripts([
-        '../vendor/jquery/dist/jquery.js',
-        '../vendor/PACE/pace.js',
-        '../vendor/jquery-ujs/src/rails.js',
-        '../vendor/bootstrap/dist/js/bootstrap.js',
-        '../vendor/datatables.net/js/jquery.dataTables.js',
-        // '../vendor/datatables/media/js/jquery.dataTables.js',
-        '../vendor/datatables.net-buttons/js/dataTables.buttons.min.js',
-        '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
-        '../vendor/d3/d3.js',
-        '../vendor/c3/c3.js',
-        '../vendor/vue/dist/vue.js',
-        '../vendor/vue-resource/dist/vue-resource.min.js',
-        '../vendor/pnotify/dist/pnotify.js',
-        '../vendor/legitripple/js/ripple.js',
-        '../vendor/moment/moment.js',
-        '../vendor/select2/dist/js/select2.js',
+        '../../../node_modules/jquery/dist/jquery.js',
+        '../../../node_modules/pace-progress/pace.js',
+        '../../../node_modules/jquery-ujs/src/rails.js',
+        '../../../node_modules/bootstrap-less/js/bootstrap.js',
+        '../../../node_modules/datatables.net/js/jquery.dataTables.js',
+        '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
+        '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
+        '../../../node_modules/d3/build/d3.js',
+        '../../../node_modules/c3/c3.js',
+        '../../../node_modules/vue/dist/vue.js',
+        '../../../node_modules/vue-resource/dist/vue-resource.min.js',
+        '../../../node_modules/pnotify/dist/pnotify.js',
+        '../../../node_modules/legitRipple.js/js/ripple.js',
+        '../../../node_modules/moment/moment.js',
+        '../../../node_modules/select2/dist/js/select2.js',
         'vendor/pnotify.min.js',
         'vendor/pickers/daterangepicker.js',
         'vendor/uniform.min.js',
@@ -52,25 +45,25 @@ elixir(function(mix) {
         'vendor/jquery-news-box/jquery.bootstrap.newsbox.js',
         'notification.js',
         'vendor.js',
-        'public.js',
-    ], 'public/assets/js/public.js')
+        'portal.js',
+    ], 'public/assets/js/portal.js')
 
     .scripts([
-        '../vendor/jquery/dist/jquery.js',
-        '../vendor/PACE/pace.js',
-        '../vendor/jquery-ujs/src/rails.js',
-        '../vendor/bootstrap/dist/js/bootstrap.js',
-        '../vendor/datatables/media/js/jquery.dataTables.js',
-        '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
-        '../vendor/stepy/lib/jquery.stepy.js',
-        '../vendor/d3/d3.js',
-        '../vendor/c3/c3.js',
-        '../vendor/vue/dist/vue.js',
-        '../vendor/vue-resource/dist/vue-resource.min.js',
-        // '../vendor/pnotify/dist/pnotify.js',
-        '../vendor/legitripple/js/ripple.js',
-        '../vendor/moment/moment.js',
-        '../vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
+        '../../../node_modules/jquery/dist/jquery.js',
+        '../../../node_modules/pace-progress/pace.js',
+        '../../../node_modules/jquery-ujs/src/rails.js',
+        '../../../node_modules/bootstrap-less/js/bootstrap.js',
+        '../../../node_modules/datatables.net/js/jquery.dataTables.js',
+        '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
+        '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
+        '../../../node_modules/d3/build/d3.js',
+        '../../../node_modules/c3/c3.js',
+        '../../../node_modules/vue/dist/vue.js',
+        '../../../node_modules/vue-resource/dist/vue-resource.min.js',
+        '../../../node_modules/pnotify/dist/pnotify.js',
+        '../../../node_modules/legitRipple.js/js/ripple.js',
+        '../../../node_modules/moment/moment.js',
+        '../../../node_modules/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
         'vendor/switchery.min.js',
         'vendor/limitless-one.js',
         'vendor/select2.min.js',
@@ -85,6 +78,7 @@ elixir(function(mix) {
         'vendor/notice_wizard.js',
         'vendor/form_select2.js',
         'vendor/picker_date.js',
+        'vendor/stepy.js',
         'pages/admin.dashboard.user.js',
         'notification.js',
         'vendor.js',
@@ -92,19 +86,19 @@ elixir(function(mix) {
     ], 'public/assets/js/admin.js')
 
     .scripts([
-        '../vendor/PACE/pace.js',
-        '../vendor/jquery/dist/jquery.js',
-        '../vendor/jquery-ujs/src/rails.js',
-        '../vendor/bootstrap/dist/js/bootstrap.js',
-        '../vendor/datatables.net/js/jquery.dataTables.js',
-        '../vendor/datatables.net-buttons/js/dataTables.buttons.min.js',
-        '../vendor/jquery.nicescroll/dist/jquery.nicescroll.min.js',
-        '../vendor/vue/dist/vue.js',
-        '../vendor/vue-resource/dist/vue-resource.min.js',
-        '../vendor/pnotify/dist/pnotify.js',
-        '../vendor/legitripple/js/ripple.js',
-        '../vendor/moment/moment.js',
-        '../vendor/select2/dist/js/select2.js',
+        '../../../node_modules/pace-progress/pace.js',
+        '../../../node_modules/jquery/dist/jquery.js',
+        '../../../node_modules/jquery-ujs/src/rails.js',
+        '../../../node_modules/bootstrap-less/js/bootstrap.js',
+        '../../../node_modules/datatables.net/js/jquery.dataTables.js',
+        '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
+        '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
+        '../../../node_modules/vue/dist/vue.js',
+        '../../../node_modules/vue-resource/dist/vue-resource.min.js',
+        '../../../node_modules/pnotify/dist/pnotify.js',
+        '../../../node_modules/legitRipple.js/js/ripple.js',
+        '../../../node_modules/moment/moment.js',
+        '../../../node_modules/select2/dist/js/select2.js',
         'vendor/pnotify.min.js',
         'vendor/pickers/daterangepicker.js',
         'vendor/uniform.min.js',
@@ -116,22 +110,20 @@ elixir(function(mix) {
     ], 'public/assets/js/window.js')
 
     .version([
-        'assets/css/public.css',
+        'assets/css/portal.css',
         'assets/css/window.css',
         'assets/css/admin.css',
         'assets/css/print.css',
-        'assets/js/public.js',
+        'assets/js/portal.js',
         'assets/js/window.js',
         'assets/js/admin.js',
     ])
+
     .copy([
       'resources/assets/fonts',
       'resources/assets/vendor/bootstrap/fonts'
     ], 'public/assets/fonts')
-
     .copy('resources/assets/images', 'public/assets/images')
-
     .copy('resources/assets/vendor/ckeditor', 'public/assets/ckeditor')
-
     .copy('resources/assets/js/vendor/dhtmlxGantt', 'public/assets/dhtmlxGantt');
 });

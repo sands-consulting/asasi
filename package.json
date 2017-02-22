@@ -5,7 +5,7 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
-    "bootstrap-sass": "^3.3.7",
+    "bootstrap-less": "^3.3.5",
     "c3": "^0.4.11",
     "ckeditor": "^4.6.2",
     "d3": "^4.4.4",
@@ -35,5 +35,8 @@
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3",
     "x-editable": "^1.5.1"
+  },
+  "dependencies": {
+    "legitRipple.js": "git+https://github.com/matthias-vogt/legitRipple.js.git#gh-pages"
   }
 }

@@ -65,7 +65,7 @@
 
                         <div class="panel-footer">
                             <div class="heading-elements">
-                                <a href="{{ route('payments.index') }}" class="heading-text text-default pull-right">{{ trans('carts.buttons.proceed_to_payment') }} <i class="icon-arrow-right14 position-right"></i></a> 
+                                <a href="{{ route('cart') }}" class="heading-text text-default pull-right" data-method="POST">{{ trans('actions.checkout') }} <i class="icon-arrow-right14 position-right"></i></a> 
                             </div>
                             <a class="heading-elements-toggle"><i class="icon-more"></i></a>
                         </div>

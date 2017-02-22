@@ -8,9 +8,9 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="socket-url" content="{{ env('APP_SOCKET_URL') }}">
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
-<link href="{{ elixir('assets/css/public.css') }}" rel="stylesheet">
+<link href="{{ elixir('assets/css/portal.css') }}" rel="stylesheet">
 </head>
-<body class="{{ body_classes('navbar-top layout-boxed public') }}">
+<body class="{{ body_classes('navbar-top layout-boxed portal') }}">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
 	<div class="navbar-boxed">
 		<div class="navbar-header">
@@ -41,6 +41,8 @@
 @yield('ahead')
 @endif
 
+@include('layouts.portal.wizard')
+
 <div class="page-container">
 	<div class="page-content">
     	@yield('content')
@@ -51,7 +53,7 @@
 	{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}
 </div>
 
-<script src="{{ elixir('assets/js/public.js') }}"></script>
+<script src="{{ elixir('assets/js/portal.js') }}"></script>
 <script src="{{ env('APP_SOCKET_URL') }}/socket.io/socket.io.js"></script>
 @yield('scripts')
 {!! flash_messages() !!}

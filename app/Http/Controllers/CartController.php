@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $items  = Cart::contents();
+        $items  = Cart::content();
         return view('cart.index', compact('items'));
     }
 

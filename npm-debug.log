@@ -1,0 +1,89 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/aa/.nvm/versions/node/v7.2.1/bin/node',
+1 verbose cli   '/Users/aa/.nvm/versions/node/v7.2.1/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   'git+https://github.com/wbotelhos/stepy' ]
+2 info using npm@3.10.10
+3 info using node@v7.2.1
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData git+https://github.com/wbotelhos/stepy
+8 silly fetchOtherPackageData git+https://github.com/wbotelhos/stepy
+9 silly cache add args [ 'git+https://github.com/wbotelhos/stepy', null ]
+10 verbose cache add spec git+https://github.com/wbotelhos/stepy
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: 'git+https://github.com/wbotelhos/stepy',
+11 silly cache add   scope: null,
+11 silly cache add   escapedName: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'git+https://github.com/wbotelhos/stepy',
+11 silly cache add   spec: 'git+https://github.com/wbotelhos/stepy.git',
+11 silly cache add   type: 'hosted',
+11 silly cache add   hosted:
+11 silly cache add    { type: 'github',
+11 silly cache add      ssh: 'git@github.com:wbotelhos/stepy.git',
+11 silly cache add      sshUrl: 'git+ssh://git@github.com/wbotelhos/stepy.git',
+11 silly cache add      httpsUrl: 'git+https://github.com/wbotelhos/stepy.git',
+11 silly cache add      gitUrl: 'git://github.com/wbotelhos/stepy.git',
+11 silly cache add      shortcut: 'github:wbotelhos/stepy',
+11 silly cache add      directUrl: 'https://raw.githubusercontent.com/wbotelhos/stepy/master/package.json' } }
+12 verbose addRemoteGit caching git+https://github.com/wbotelhos/stepy
+13 verbose addRemoteGit git+https://github.com/wbotelhos/stepy.git is a repository hosted by github
+14 silly tryClone cloning git+https://github.com/wbotelhos/stepy.git via git+https://github.com/wbotelhos/stepy.git
+15 verbose tryClone git-https-github-com-wbotelhos-stepy-git-66a1c92d not in flight; caching
+16 verbose correctMkdir /Users/aa/.npm/_git-remotes correctMkdir not in flight; initializing
+17 info git [ 'config', '--get', 'remote.origin.url' ]
+18 silly validateExistingRemote git+https://github.com/wbotelhos/stepy.git remote.origin.url: https://github.com/wbotelhos/stepy.git
+19 verbose validateExistingRemote git+https://github.com/wbotelhos/stepy.git is updating existing cached remote /Users/aa/.npm/_git-remotes/git-https-github-com-wbotelhos-stepy-git-66a1c92d
+20 info git [ 'fetch', '-a', 'origin' ]
+21 verbose updateRemote git fetch -a origin (https://github.com/wbotelhos/stepy.git)
+22 verbose correctMkdir /Users/aa/.npm/_git-remotes correctMkdir not in flight; initializing
+23 verbose setPermissions git+https://github.com/wbotelhos/stepy.git set permissions on /Users/aa/.npm/_git-remotes/git-https-github-com-wbotelhos-stepy-git-66a1c92d
+24 verbose resolveHead git+https://github.com/wbotelhos/stepy.git original treeish: master
+25 info git [ 'rev-list', '-n1', 'master' ]
+26 silly resolveHead git+https://github.com/wbotelhos/stepy.git resolved treeish: 57c04febb5d44aafba64676c0c33a9326f3fa64e
+27 verbose resolveHead git+https://github.com/wbotelhos/stepy.git resolved Git URL: git+https://github.com/wbotelhos/stepy.git#57c04febb5d44aafba64676c0c33a9326f3fa64e
+28 silly resolveHead Git working directory: /var/folders/1y/gjjsvj812kj62svdv3hz54tc0000gn/T/npm-11082-60ac107f/git-cache-f02b0eb2/57c04febb5d44aafba64676c0c33a9326f3fa64e
+29 info git [ 'clone',
+29 info git   '/Users/aa/.npm/_git-remotes/git-https-github-com-wbotelhos-stepy-git-66a1c92d',
+29 info git   '/var/folders/1y/gjjsvj812kj62svdv3hz54tc0000gn/T/npm-11082-60ac107f/git-cache-f02b0eb2/57c04febb5d44aafba64676c0c33a9326f3fa64e' ]
+30 verbose cloneResolved git+https://github.com/wbotelhos/stepy.git clone Cloning into '/var/folders/1y/gjjsvj812kj62svdv3hz54tc0000gn/T/npm-11082-60ac107f/git-cache-f02b0eb2/57c04febb5d44aafba64676c0c33a9326f3fa64e'...
+30 verbose cloneResolved done.
+31 info git [ 'checkout', '57c04febb5d44aafba64676c0c33a9326f3fa64e' ]
+32 verbose checkoutTreeish git+https://github.com/wbotelhos/stepy.git checkout Note: checking out '57c04febb5d44aafba64676c0c33a9326f3fa64e'.
+32 verbose checkoutTreeish
+32 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+32 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+32 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+32 verbose checkoutTreeish
+32 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+32 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+32 verbose checkoutTreeish
+32 verbose checkoutTreeish   git checkout -b <new-branch-name>
+32 verbose checkoutTreeish
+32 verbose checkoutTreeish HEAD is now at 57c04fe... add minify version
+33 info git [ 'submodule', '-q', 'update', '--init', '--recursive' ]
+34 verbose updateSubmodules git+https://github.com/wbotelhos/stepy.git submodule update
+35 error addLocal Could not install /var/folders/1y/gjjsvj812kj62svdv3hz54tc0000gn/T/npm-11082-60ac107f/git-cache-f02b0eb2/57c04febb5d44aafba64676c0c33a9326f3fa64e
+36 silly fetchPackageMetaData Error: EISDIR: illegal operation on a directory, read
+36 silly fetchPackageMetaData  error for git+https://github.com/wbotelhos/stepy { Error: EISDIR: illegal operation on a directory, read errno: -21, code: 'EISDIR', syscall: 'read' }
+37 silly rollbackFailedOptional Starting
+38 silly rollbackFailedOptional Finishing
+39 silly runTopLevelLifecycles Finishing
+40 silly install printInstalled
+41 verbose stack Error: EISDIR: illegal operation on a directory, read
+42 verbose cwd /Users/aa/Works/sands/prompt
+43 error Darwin 15.6.0
+44 error argv "/Users/aa/.nvm/versions/node/v7.2.1/bin/node" "/Users/aa/.nvm/versions/node/v7.2.1/bin/npm" "install" "--save" "git+https://github.com/wbotelhos/stepy"
+45 error node v7.2.1
+46 error npm  v3.10.10
+47 error code EISDIR
+48 error errno -21
+49 error syscall read
+50 error eisdir EISDIR: illegal operation on a directory, read
+51 error eisdir This is most likely not a problem with npm itself
+51 error eisdir and is related to npm not being able to find a package.json in
+51 error eisdir a package you are trying to install.
+52 verbose exit [ -21, true ]
