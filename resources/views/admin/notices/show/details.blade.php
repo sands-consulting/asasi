@@ -1,7 +1,10 @@
 <div role="tabpanel" class="tab-pane active" id="tab-notice-details">
     @if($notice->description)
-    <div class="panel panel-flat">
-        <div class="panel-body text-thin">{{ nl2br($notice->description) }}</div>
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h6 class="panel-title">{{ trans('notices.attributes.description') }}</h6>
+        </div>
+        <div class="panel-body">{{ nl2br($notice->description) }}</div>
     </div>
     @endif
 

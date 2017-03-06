@@ -93,17 +93,8 @@
                     </a>
                 </li>
                 @endif
-                <li class="dropdown dropdown-user">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        {!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
-                        <span>{{ Auth::user()->name }}</span>
-                        <i class="caret"></i>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        @include('layouts.portal.user')
-                    </ul>
-                </li>
+                
+                @include('layouts.menu.user')
                 @endif
             </ul>
         </div>

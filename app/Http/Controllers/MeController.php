@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\Portal\BookmarksDataTable;
-use App\Http\Requests\ContactRequest;
 use App\Http\Requests\MeRequest;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
@@ -38,7 +38,7 @@ class MeController extends Controller
 	public function resume(Request $request, Guard $auth)
 	{
 		$current_user = $auth->user();
-        $original_user = UsersService::resume();
+        $original_user = UserService::resume();
         return redirect()
                 ->route('admin.users.show', $current_user->id)
                 ->with('notice', trans('me.flash.resumed', ['name' => $original_user->name]));
@@ -53,17 +53,5 @@ class MeController extends Controller
 	public function notifications(Request $request)
     {
     	return view('me.notifications');
-    }
-
-    public function contact(Guard $auth)
-    {
-        return view('me.contact');
-    }
-
-    public function storeContact(ContactRequest $request)
-    {
-    	return redirect()
-    			->back()
-    			->with('alert', trans('me.flash.contacted'));
     }
 }

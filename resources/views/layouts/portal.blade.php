@@ -28,9 +28,9 @@
             	<li class="{{ is_path_active('contact') }}"><a href="{{ route('contact') }}">{{ trans('menu.app.contact') }}</a></li>
 
                 @if(Auth::user())
-				@include('layouts.portal.cart')
-                @include('layouts.portal.notifications')
-				@include('layouts.portal.user')
+				@include('layouts.menu.cart')
+                @include('layouts.menu.notifications')
+				@include('layouts.menu.user')
 				@endif
 			</ul>
 		</div>
@@ -41,7 +41,7 @@
 @yield('ahead')
 @endif
 
-@include('layouts.portal.wizard')
+@include('layouts.portal.widgets.wizard')
 
 <div class="page-container">
 	<div class="page-content">

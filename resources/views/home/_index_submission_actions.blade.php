@@ -1,1 +1,0 @@
-<a href="{{ route('notices.submission', $notice->id) }}" class="btn btn-xs"><i class="icon-envelop3"></i></a>

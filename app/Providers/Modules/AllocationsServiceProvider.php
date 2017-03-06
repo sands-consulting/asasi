@@ -10,9 +10,9 @@ class AllocationsServiceProvider extends ServiceProvider
     public function boot()
     {
         app('policy')
-            ->register('App\Http\Controllers\Admin\AllocationsController', 'App\Policies\AllocationsPolicy');
+            ->register('App\Http\Controllers\Admin\AllocationsController', 'App\Policies\AllocationPolicy');
         app('policy')
-            ->register('App\Http\Controllers\Admin\AllocationTypesController', 'App\Policies\AllocationTypesPolicy');
+            ->register('App\Http\Controllers\Admin\AllocationTypesController', 'App\Policies\AllocationTypePolicy');
     }
 
     public function register()

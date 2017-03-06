@@ -25,7 +25,7 @@ class AllocationPolicy
 
     public function store(User $user)
     {
-        return $this->create(User $user);
+        return $this->create($user);
     }
 
     public function edit(User $user, Allocation $allocation)

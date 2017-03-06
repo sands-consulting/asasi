@@ -2,14 +2,12 @@
 
 @unless(Auth::check())
     @section('ahead')
-        @include('home._landing')
+        @include('layouts.portal.aheads.public')
     @endsection
 @endunless
 
 @section('content')
-@if(Auth::check())
-    @include('dashboard._landing')
-@endif
+@include('layouts.portal.aheads.vendor')
 
 <div class="panel panel-notice">
     <div class="panel-heading {{ Auth::check() ? 'bg-success-600' : 'bg-slate-300' }}">

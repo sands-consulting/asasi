@@ -63,7 +63,7 @@ class UsersServiceProvider extends ServiceProvider
             $router->get('me', 'MeController@edit')
                 ->name('me');
             $router->put('me', 'MeController@update');
-            $router->get('me/resume', 'MeController@resume')
+            $router->post('me/resume', 'MeController@resume')
                 ->name('me.resume');
             $router->get('me/bookmarks', 'MeController@bookmarks')
                 ->name('me.bookmarks');

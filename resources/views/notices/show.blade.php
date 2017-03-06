@@ -10,13 +10,11 @@
         </a>
     </div>
 
-    @can('purchase', $notice)
     <div class="col-xs-12 col-md-2 col-md-offset-8">
-        <a href="{{ route('root') }}" class="btn btn-primary btn-block btn-raised legitRipple">
+        <a href="{{ route('cart.add', $notice->id) }}" class="btn btn-danger btn-block btn-raised legitRipple">
             {{ trans('notices.views.show.purchase') }} <i class=" icon-cart-add2 position-right"></i>
         </a>
     </div>
-    @endcan
 </div>
 
 @include('admin.notices.show.header')

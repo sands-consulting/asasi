@@ -27,11 +27,11 @@ class CartServiceProvider extends ServiceProvider
             $router->post('cart', 'CartController@checkout');
             $router->delete('cart', ['CartController@destroy']);
 
-            $router->put('cart/add', [
+            $router->put('cart/add/{notice}', [
                 'uses' => 'CartController@add',
                 'as' => 'cart.add'
             ]);
-            $router->delete('cart/remove', [
+            $router->delete('cart/remove/{notice}', [
                 'uses' => 'CartController@remove',
                 'as' => 'cart.remove'
             ]);
