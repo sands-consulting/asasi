@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\CommercialRequirement;
 
-class CommercialRequirementsPolicy extends BasePolicy
+class CommercialRequirementsPolicy
 {
     public function index()
     {

@@ -1,12 +1,14 @@
 <?php namespace App;
 
+use App\Traits\DateAccessor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class NoticeCategory extends Model
+class NoticeQualification extends Model
 {
     use RevisionableTrait,
+        SoftDeletes,
         DateAccessor;
 
     protected $revisionCreationsEnabled = true;

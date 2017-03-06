@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controller\Admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class CommRequirementsController extends Controller
 
     public function show(CommRequirement $commRequirement)
     {
-        return view()->make('admin.comm-requirements.show', compact('commRequirement'))
+        return view()->make('admin.comm-requirements.show', compact('commRequirement'));
     }
 
     public function create()

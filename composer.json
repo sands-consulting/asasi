@@ -36,7 +36,8 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "sands/asasi-scaffold": "^1.0"
+        "sands/asasi-scaffold": "^1.0",
+        "barryvdh/laravel-ide-helper": "^2.3"
     },
     "autoload": {
         "classmap": [

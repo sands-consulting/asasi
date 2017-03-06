@@ -21,9 +21,6 @@ class AddNodeToQualificationCodeTypesTable extends Migration
             $table->string('code')->after('name')->index();
             $table->string('type')->after('code')->index();
         });
-
-        QualificationCodeType::rebuild();
-        QualificationCodeType::query()->update(['type' => 'list']);
     }
 
     /**

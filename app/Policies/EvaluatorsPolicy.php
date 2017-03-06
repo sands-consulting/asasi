@@ -6,7 +6,7 @@ use App\Evaluation;
 use App\NoticeEValuator;
 use App\Notice;
 
-class EvaluatorsPolicy extends BasePolicy
+class EvaluatorsPolicy
 {
     public function index()
     {

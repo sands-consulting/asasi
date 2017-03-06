@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Subscription;
 
-class SubscriptionsPolicy extends BasePolicy
+class SubscriptionsPolicy
 {
     public function index()
     {

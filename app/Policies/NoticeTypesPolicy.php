@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\NoticeType;
 
-class NoticeTypesPolicy extends BasePolicy
+class NoticeTypesPolicy
 {
     public function index()
     {

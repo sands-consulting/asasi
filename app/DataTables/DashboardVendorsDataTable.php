@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Vendor;
-use Yajra\Datatables\Services\DataTable;
 
 class DashboardVendorsDataTable extends DataTable
 {

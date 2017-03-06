@@ -1,7 +1,5 @@
 <?php namespace App;
 
-use Cviebrock\EloquentSluggable\Sluggable;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;

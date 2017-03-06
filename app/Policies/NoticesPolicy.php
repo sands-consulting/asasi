@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Notice;
 
-class NoticesPolicy extends BasePolicy
+class NoticesPolicy
 {
     public function index(User $auth)
     {

@@ -5,7 +5,7 @@ namespace App\Policies;
 use Session;
 use App\User;
 
-class ProfilePolicy extends BasePolicy
+class ProfilePolicy
 {
     public function show()
     {

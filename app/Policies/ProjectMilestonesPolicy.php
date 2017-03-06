@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Project;
 use App\ProjectMilestone;
 
-class ProjectMilestonesPolicy extends BasePolicy
+class ProjectMilestonesPolicy
 {
     public function index()
     {

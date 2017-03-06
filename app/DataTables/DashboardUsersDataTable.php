@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\User;
-use Yajra\Datatables\Services\DataTable;
 
 class DashboardUsersDataTable extends DataTable
 {

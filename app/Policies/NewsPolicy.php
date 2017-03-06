@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\News;
 
-class NewsPolicy extends BasePolicy
+class NewsPolicy
 {
     public function index()
     {

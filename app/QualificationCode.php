@@ -28,7 +28,7 @@ class QualificationCode extends Model
 
     public function type()
     {
-        return $this->belongsTo(QualifcationType::class, 'type_id');
+        return $this->belongsTo(QualificationType::class, 'type_id');
     }
 
     public function logs()

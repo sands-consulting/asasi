@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Place;
 
-class PlacesPolicy extends BasePolicy
+class PlacesPolicy
 {
     public function index()
     {

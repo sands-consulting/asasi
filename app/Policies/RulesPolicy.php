@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Rule;
 
-class RulesPolicy extends BasePolicy
+class RulesPolicy
 {
     public function index()
     {

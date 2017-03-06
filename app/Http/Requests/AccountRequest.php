@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Auth;
-use Sands\Asasi\Foundation\Http\FormRequest;
+use Sands\Asasi\Http\FormRequest;
 
 class AccountRequest extends FormRequest
 {

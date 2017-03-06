@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Permission;
 
-class PermissionsPolicy extends BasePolicy
+class PermissionsPolicy
 {
     public function index()
     {

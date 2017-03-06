@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Evaluation;
 
-class EvaluationsPolicy extends BasePolicy
+class EvaluationsPolicy
 {
     public function index()
     {
