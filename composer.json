@@ -22,7 +22,7 @@
         "yajra/laravel-datatables-oracle": "^6.22",
         "baum/baum": "~1.1",
         "sands/asasi-http": "~0.1",
-        "sands/asasi-policy": "~0.2",
+        "sands/asasi-policy": "~0.4",
         "sands/asasi-service": "~0.2",
         "thomaswelton/laravel-gravatar": "~1.0",
         "gloudemans/shoppingcart": "^2.1",

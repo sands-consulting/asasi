@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef941957345c2491905f6dcc0d68a6af",
-    "content-hash": "fe6e22b22567c490d96d26b3a54a2b99",
+    "hash": "7d4427e6e3f3dddf296f56cf51075aa4",
+    "content-hash": "b070ae755ae0ef225051ba0aa852fb21",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -2672,16 +2672,16 @@
         },
         {
             "name": "sands/asasi-policy",
-            "version": "0.3",
+            "version": "0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sands-consulting/asasi-policy.git",
-                "reference": "b3788598a43714c48ad8de5032573684be13a5bd"
+                "reference": "dcf1796f4966f759f4109bd215855da9438593e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sands-consulting/asasi-policy/zipball/b3788598a43714c48ad8de5032573684be13a5bd",
-                "reference": "b3788598a43714c48ad8de5032573684be13a5bd",
+                "url": "https://api.github.com/repos/sands-consulting/asasi-policy/zipball/dcf1796f4966f759f4109bd215855da9438593e1",
+                "reference": "dcf1796f4966f759f4109bd215855da9438593e1",
                 "shasum": ""
             },
             "require": {
@@ -2712,7 +2712,7 @@
                 "authorization",
                 "laravel"
             ],
-            "time": "2017-01-24 04:56:59"
+            "time": "2017-03-06 12:42:27"
         },
         {
             "name": "sands/asasi-service",
