@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Payment;
 
-class PaymentsPolicy extends BasePolicy
+class PaymentsPolicy
 {
     public function index()
     {

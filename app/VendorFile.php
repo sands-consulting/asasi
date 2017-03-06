@@ -28,14 +28,17 @@ class VendorFile extends Model
         ]
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function file()
     {
-    	return $this->belongsTo(File::class);
+    	return $this->belongsTo(FileType::class);
     }
 
     public function upload()
     {
-    	return $this->belongsTo(Upload::class);
+    	// return $this->belongsTo(Upload::class);
     }
 
     public function vendor()

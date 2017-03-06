@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Evaluation;
 use App\Notice;
 
-class EvaluationRequirementsPolicy extends BasePolicy
+class EvaluationRequirementsPolicy
 {
     public function index()
     {

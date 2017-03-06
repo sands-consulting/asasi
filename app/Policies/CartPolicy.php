@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Notice;
 use App\User;
 
-class CartPolicy extends BasePolicy
+class CartPolicy
 {
     public function index(User $auth)
     {

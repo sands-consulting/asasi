@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Place;
-use Sands\Asasi\Foundation\Http\FormRequest;
+use Sands\Asasi\Http\FormRequest;
 
 class PlaceRequest extends FormRequest
 {

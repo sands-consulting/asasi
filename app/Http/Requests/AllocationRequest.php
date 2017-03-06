@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Sands\Asasi\Foundation\Http\FormRequest;
+use Sands\Asasi\Http\FormRequest;
 
 class AllocationRequest extends FormRequest
 {

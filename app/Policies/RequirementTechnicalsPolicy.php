@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\RequirementTechnical;
 
-class RequirementTechnicalsPolicy extends BasePolicy
+class RequirementTechnicalsPolicy
 {
     public function index()
     {

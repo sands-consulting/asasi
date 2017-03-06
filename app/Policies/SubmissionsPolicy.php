@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Submission;
 
-class SubmissionsPolicy extends BasePolicy
+class SubmissionsPolicy
 {
     public function index()
     {

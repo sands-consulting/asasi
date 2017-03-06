@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Package;
 
-class PackagesPolicy extends BasePolicy
+class PackagesPolicy
 {
     public function index()
     {

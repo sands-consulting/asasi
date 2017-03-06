@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Project;
 
-class ProjectsPolicy extends BasePolicy
+class ProjectsPolicy
 {
     public function index()
     {

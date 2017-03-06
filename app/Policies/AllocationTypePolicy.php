@@ -6,7 +6,7 @@ use App\AllocationType;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AllocationTypePolicy extends BasePolicy
+class AllocationTypePolicy
 {
     use HandlesAuthorization;
 

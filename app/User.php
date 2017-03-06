@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function histories()
     {
-        return $this->morphMany(UserHistories::class, 'actionable');
+        return $this->morphMany(UserHistory::class, 'actionable');
     }
 
     public function bookmarks()

@@ -28,11 +28,11 @@ class ManageFileTables extends Migration
             $table->increments('id');
             $table->string('scope')->index();
             $table->text('rule');
-            $table->unsignedInteger('file_id');
+            $table->unsignedInteger('file_type_id');
             $table->nullableTimestamps();
             $table->softDeletes();
 
-            $table->foreign('file_id')
+            $table->foreign('file_type_id')
                 ->references('id')
                 ->on('files')
                 ->onUpdate('cascade')
