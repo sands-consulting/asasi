@@ -23,6 +23,25 @@ return [
 
     'widgets' => [
         'portal' => [
+            'numbers' => [
+                'all' => 'All Notices',
+                'eligibles' => 'Eligibles',
+                'invitations' => 'Invitations',
+                'bookmarks' => 'Bookmarks',
+                'purchases' => 'Purchases',
+                'projects' => 'Projects'
+            ],
+
+            'vendor' => [
+                'bookmarks' => 'Bookmarks',
+                'expiry' => 'Subscription Expiry Date',
+                'no_subscription' => 'You have no active subscription',
+                'renew' => 'Renew',
+                'continue_registration' => 'Continue Registration',
+                'company_details' => 'Company Details',
+                'change_requests' => 'Change Requests'
+            ],
+
             'wizard' => [
                 'application' => 'Vendor Application',
                 'approval' => 'Vendor Approval',

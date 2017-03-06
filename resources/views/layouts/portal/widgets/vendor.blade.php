@@ -13,20 +13,20 @@
 	</span>
 	<p class="text-muted expiry">
 		@if(Auth::user()->vendor->active_subscription)
-		{{ trans('dashboard.vendor.expiry') }}: {{ Auth::user()->vendor->active_subscription->expired_at->format('d/m/Y') }}
+		{{ trans('app.widgets.portal.vendor.expiry') }}: {{ Auth::user()->vendor->active_subscription->expired_at->format('d/m/Y') }}
 		@else
-		{{ trans('dashboard.vendor.no_subscription') }}
+		{{ trans('app.widgets.portal.vendor.no_subscription') }}
 		@endif
 	</p>
-	@if(Auth::user()->vendor->expiring)<a href="#" class="text-danger-700 btn-renew">{{ trans('dashboard.vendor.renew') }}</a>@endif
+	@if(Auth::user()->vendor->expiring)<a href="#" class="text-danger-700 btn-renew">{{ trans('app.widgets.portal.vendor.renew') }}</a>@endif
 	<div class="btn-group">
 		@if(in_array(Auth::user()->vendor->status, ['draft', 'rejected']))
-		<a href="{{ route('vendors.edit', Auth::user()->vendor->id) }}"><i class="icon icon-pen6"></i><br>{{ trans('dashboard.vendor.continue_registration') }}</a>
+		<a href="{{ route('vendors.edit', Auth::user()->vendor->id) }}"><i class="icon icon-pen6"></i><br>{{ trans('app.widgets.portal.vendor.continue_registration') }}</a>
 		@else
-		<a href="{{ route('vendors.show', Auth::user()->vendor->id) }}"><i class="icon icon-file-text2"></i><br>{{ trans('dashboard.vendor.company_details') }}</a>
+		<a href="{{ route('vendors.show', Auth::user()->vendor->id) }}"><i class="icon icon-file-text2"></i><br>{{ trans('app.widgets.portal.vendor.company_details') }}</a>
 		@if(Auth::user()->vendor->status != 'pending')
-		<a href="#"><i class="icon icon-pen6"></i><br>{{ trans('dashboard.vendor.change_requests') }}</a>
-		<a href="#"><i class="icon icon-folder-download"></i><br>{{ trans('dashboard.vendor.submissions') }}</a>
+		<a href="#"><i class="icon icon-pen6"></i><br>{{ trans('app.widgets.portal.vendor.change_requests') }}</a>
+		<a href="#"><i class="icon icon-bookmarks"></i><br>{{ trans('app.widgets.portal.vendor.bookmarks') }}</a>
 		@endif
 		@endif
 	</div>

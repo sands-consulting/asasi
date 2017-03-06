@@ -1,15 +1,7 @@
 @extends('layouts.portal')
 
-@unless(Auth::check())
-    @section('ahead')
-        @include('home._landing')
-    @endsection
-@endunless
-
 @section('content')
-@if(Auth::check())
-    @include('dashboard._landing')
-@endif
+@include('layouts.portal.aheads.vendor')
 
 <div class="panel panel-notice">
     <div class="panel-heading bg-teal-600">

@@ -56,11 +56,7 @@ class VendorsController extends Controller
 
     public function purchases(Vendor $vendor)
     {
+        $table->vendor_id = $vendor->id;
         return view('vendors.purchases', compact('vendor'));
-    }
-
-    public function bookmarks(Vendor $vendor)
-    {
-        return view('vendors.bookmarks', compact('vendor'));
     }
 }

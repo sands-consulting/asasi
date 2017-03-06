@@ -15,13 +15,18 @@ use Route;
 
 class VendorSubscriptionsController extends Controller
 {
-    public function index(Vendor $vendor, Request $request)
+    public function index(Vendor $vendor)
     {
         return view('vendors.users.index');
     }
 
-    public function show(Vendor $vendor, User $user)
+    public function show(Vendor $vendor, Subscription $subscription)
     {
         return view('vendors.users.show', compact('vendor'));
+    }
+
+    public function create(Vendor $vendor)
+    {
+
     }
 }
