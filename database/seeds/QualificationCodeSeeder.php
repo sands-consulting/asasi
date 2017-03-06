@@ -14,7 +14,7 @@ class QualificationCodeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('qualification_code_types')->truncate();
+        DB::table('qualification_types')->truncate();
         DB::table('qualification_codes')->truncate();
 
         $permissions = [
@@ -29,8 +29,8 @@ class QualificationCodeSeeder extends Seeder
                 'revisions' => 'View qualification code revisions',
                 'logs' => 'View qualification code logs'
             ],
-            'qualification-code-type' => [
-                'index' => 'List all qualifiction code types',
+            'qualification-type' => [
+                'index' => 'List all qualification code types',
                 'show' => 'View qualification code type details',
                 'create' => 'Create new qualification code type',
                 'update' => 'Update existing qualification code type',
