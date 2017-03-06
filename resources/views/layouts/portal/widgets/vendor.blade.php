@@ -26,7 +26,7 @@
 		<a href="{{ route('vendors.show', Auth::user()->vendor->id) }}"><i class="icon icon-file-text2"></i><br>{{ trans('app.widgets.portal.vendor.company_details') }}</a>
 		@if(Auth::user()->vendor->status != 'pending')
 		<a href="#"><i class="icon icon-pen6"></i><br>{{ trans('app.widgets.portal.vendor.change_requests') }}</a>
-		<a href="#"><i class="icon icon-bookmarks"></i><br>{{ trans('app.widgets.portal.vendor.bookmarks') }}</a>
+		<a href="{{ route('me.bookmarks') }}"><i class="icon icon-bookmarks"></i><br>{{ trans('app.widgets.portal.vendor.bookmarks') }}</a>
 		@endif
 		@endif
 	</div>

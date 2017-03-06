@@ -27,9 +27,9 @@ return [
                 'all' => 'All Notices',
                 'eligibles' => 'Eligibles',
                 'invitations' => 'Invitations',
-                'bookmarks' => 'Bookmarks',
                 'purchases' => 'Purchases',
-                'projects' => 'Projects'
+                'projects' => 'Projects',
+                'submissions' => 'Submissions'
             ],
 
             'vendor' => [

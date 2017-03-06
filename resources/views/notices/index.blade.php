@@ -10,7 +10,7 @@
 @include('layouts.portal.aheads.vendor')
 
 <div class="panel panel-notice">
-    <div class="panel-heading {{ Auth::check() ? 'bg-success-600' : 'bg-slate-300' }}">
+    <div class="panel-heading bg-success-600">
         <h1 class="panel-title">{{ trans('notices.views.index.notices.title') }}</h1>
 
         <div class="heading-elements">

@@ -22,20 +22,21 @@ class SubmissionServiceProvider extends ServiceProvider
     {
         // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->model('submissions', 'App\Submission');
-
-            // admin
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin'], function ($router) {
+            $router->group(['namespace' => 'Admin', 'prefix' => 'admin.'], function ($router) {
                 $router->get('submissions/{notices}/lists', [
                     'as' => 'admin.submissions.lists',
                     'uses' => 'SubmissionsController@lists'
                 ]);
-                $router->get('submissions/{submissions}/evaluate', [
+                $router->get('submissions/{submission}/evaluate', [
                     'as' => 'admin.submissions.evaluate',
                     'uses' => 'SubmissionsController@evaluate'
                 ]);
                 $router->resource('submissions', 'SubmissionsController');
             });
+
+            $router->resource('vendors.submissions', 'VendorSubmissionsController', [
+                'except' => 'index'
+            ]);
         });
     }
 }

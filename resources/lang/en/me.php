@@ -14,9 +14,10 @@ return [
 	],
 
 	'views' => [
-		'contact' => [
-			'title' => 'Contact Us'
+		'bookmarks' => [
+			'title' => 'Bookmarks'
 		],
+
 		'edit' => [
 			'title' => 'My Account'
 		]

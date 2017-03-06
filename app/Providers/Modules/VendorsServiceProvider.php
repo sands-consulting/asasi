@@ -87,6 +87,20 @@ class VendorsServiceProvider extends ServiceProvider
                 ]);
                 
                 $router->resource('vendors', 'VendorsController');
+
+                $router->get('vendor-types/{vendor_type}/revisions', [
+                    'as'    => 'vendor-types.revisions',
+                    'uses'  => 'VendorTypesController@revisions'
+                ]);
+                $router->get('vendors/{vendor}/histories', [
+                    'as'    => 'vendor-types.histories',
+                    'uses'  => 'VendorTypesController@histories'
+                ]);
+                $router->post('vendor-types/{vendor_type}/duplicate', [
+                    'as'    => 'vendor-types.duplicate',
+                    'uses'  => 'VendorTypesController@duplicate'
+                ]);
+                $router->resource('vendor-types', 'VendorTypesController');
             });
 
             $router->get('vendors/{vendor}/purchases', [

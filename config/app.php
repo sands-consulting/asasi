@@ -221,7 +221,6 @@ return [
         App\Providers\Modules\QualificationCodesServiceProvider::class,
         App\Providers\Modules\SubscriptionsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
-        App\Providers\Modules\VendorTypesProvider::class,
         App\Providers\Modules\CartServiceProvider::class,
         App\Providers\Modules\RequirementCommercialsServiceProvider::class,
         App\Providers\Modules\ProjectsServiceProvider::class,

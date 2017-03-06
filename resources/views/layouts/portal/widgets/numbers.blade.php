@@ -21,16 +21,16 @@
 	</div>
 
 	<div class="col-xs-12 col-md-2">
-		<a href="{{ route('me.bookmarks') }}" class="prompt-box border border-bottom-blue-800 bg-blue-600">
-			<div class="title text-white text-right">{{ trans('app.widgets.portal.numbers.bookmarks') }}</div>
-			<div class="number text-white">{{ App\Services\DashboardService::bookmarks(Auth::user()) }}</div>
+		<a href="{{ route('vendors.purchases', Auth::user()->vendor->id) }}" class="prompt-box border border-bottom-blue-800 bg-blue-600">
+			<div class="title text-white text-right">{{ trans('app.widgets.portal.numbers.purchases') }}</div>
+			<div class="number text-white">{{ App\Services\DashboardService::purchases(Auth::user()) }}</div>
 		</a>
 	</div>
 
 	<div class="col-xs-12 col-md-2">
-		<a href="{{ route('vendors.purchases', Auth::user()->vendor->id) }}" class="prompt-box border border-bottom-indigo-800 bg-indigo-600">
+		<a href="{{ route('vendors.submissions.index', Auth::user()->vendor->id) }}" class="prompt-box border border-bottom-indigo-800 bg-indigo-600">
 			<div class="title text-white text-right">{{ trans('app.widgets.portal.numbers.purchases') }}</div>
-			<div class="number text-white">{{ App\Services\DashboardService::purchases(Auth::user()) }}</div>
+			<div class="number text-white">{{ App\Services\DashboardService::submissions(Auth::user()) }}</div>
 		</a>
 	</div>
 
