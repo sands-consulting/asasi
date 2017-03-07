@@ -52,7 +52,7 @@ class User extends Authenticatable
         return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
-    public function blackpluck()
+    public function blacklists()
     {
         return $this->hasMany(UserBlacklist::class);
     }
