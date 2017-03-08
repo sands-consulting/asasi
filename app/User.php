@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\Roleable;
 use App\Traits\DateAccessor;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +12,12 @@ use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
-    use DateAccessor, Notifiable, RevisionableTrait, Roleable, SoftDeletes;
+    use DateAccessor,
+        Notifiable,
+        RevisionableTrait,
+        Roleable,
+        Sluggable,
+        SoftDeletes;
 
     protected $fillable = [
         'name', 'email', 'password', 'status'
