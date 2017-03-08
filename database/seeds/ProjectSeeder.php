@@ -25,44 +25,6 @@ class ProjectSeeder extends Seeder
         DB::table('project_user')->truncate();
         DB::table('projects')->truncate();
 
-        $permissions = [
-            'project' => [
-                'index' => 'List all projects',
-                'show' => 'View project details',
-                'create' => 'Create new project',
-                'update' => 'Update existing project',
-                'delete' => 'Delete existing project',
-                'activate' => 'Activate project',
-                'deactivate' => 'Deactivate project',
-                'revisions' => 'View project revisions',
-                'logs' => 'View project logs',
-                'organization' => 'Allow to manage project with organization'
-            ],
-            'project-milestone' => [
-                'index' => 'List all project milstones',
-                'show' => 'View project milstone details',
-                'create' => 'Create new project milstone',
-                'update' => 'Update existing project milstone',
-                'delete' => 'Delete existing project milstone',
-                'activate' => 'Activate project milstone',
-                'deactivate' => 'Deactivate project milstone',
-                'revisions' => 'View project milstone revisions',
-                'logs' => 'View project milstone logs',
-                'organization' => 'Allow to manage project milstone with organization'
-            ]
-        ];
-
-        foreach ($permissions as $group => $data) {
-            foreach($data as $action => $description) {
-                $perm = PermissionService::create(new Permission(), [
-                    'name'          => $group . ':' . $action,
-                    'description'   => $description
-                ]);
-                if ($action != 'organization')
-                    $perm->roles()->attach(Role::first());
-            }
-        }
-
         $projectData = [
             [
                 'name' => 'KERJA-KERJA KUTIPAN SAMPAH DI SELURUH KAWASAN PERUMAHAN, KOMERSIAL, KILANG, TONG BERPUSAT DAN KAWASAN BERKAITAN DI TAMAN PUCHONG UTAMA DAN PERINDUSTRIAN PUCHONG UTAMA, SELANGOR DARUL EHSAN UNTUK MAJLIS PERBANDARAN SUBANG JAYA BAGI TEMPOH DUA TAHUN',

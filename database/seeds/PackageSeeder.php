@@ -18,26 +18,6 @@ class PackageSeeder extends Seeder
     {
         DB::table('packages')->truncate();
 
-        $permissions = [
-            ['package:index', 'List all packages'],
-            ['package:show', 'View a package'],
-            ['package:create', 'Create new package'],
-            ['package:update', 'Update existing package'],
-            ['package:duplicate', 'Duplicate existing package'],
-            ['package:activate', 'Activate existing package'],
-            ['package:deactivate', 'Deactivate existing package'],
-            ['package:delete', 'Delete existing package'],
-            ['package:revisions', 'View package revisions'],
-            ['package:logs', 'View package logs']
-        ];
-
-        foreach ($permissions as $permissionData) {
-            PermissionService::create(new Permission(), [
-                'name'        => $permissionData[0],
-                'description' => $permissionData[1],
-            ]);
-        }
-
         $packageData = [
             [
                 'name' => 'Package 1',

@@ -18,32 +18,6 @@ class NoticeSeeder extends Seeder
     {
         DB::table('notices')->truncate();
 
-        $permissions = [
-            ['notice:index', 'List all notices'],
-            ['notice:show', 'View a notice'],
-            ['notice:create', 'Create new notice'],
-            ['notice:update', 'Update existing notice'],
-            ['notice:duplicate', 'Duplicate existing notice'],
-            ['notice:activate', 'Activate existing notice'],
-            ['notice:deactivate', 'Deactivate existing notice'],
-            ['notice:cancel', 'Cancel existing notice'],
-            ['notice:publish', 'Publish existing notice'],
-            ['notice:unpublish', 'Unpublish existing notice'],
-            ['notice:delete', 'Delete existing notice'],
-            ['notice:revisions', 'View notice revisions'],
-            ['notice:logs', 'View notice logs']
-        ];
-
-        foreach ($permissions as $permissionData) {
-            PermissionService::create(new Permission(), [
-                'name'        => $permissionData[0],
-                'description' => $permissionData[1],
-            ]);
-        }
-
-         // Assign admin role to all permission.
-        App\Role::first()->permissions()->sync(App\Permission::whereNotIn('name', ['access:vendor'])->pluck('id')->toArray());
-
         $noticeData = [
             [
                 'name' => 'SEBUT HARGA MEMBEKAL DAN MENGHANTAR BAHAN BINAAN, PERALATAN MENTERNAK, BAKA TERNAKAN, MAKANAN TERNAKAN DAN PELBAGAI BAGI PESERTA GENERASI MUDA (AGROGEMS) TAHUN 2016 DI BAWAH JABATAN PERKHIDMATAN VETERINAR NEGERI SELANGOR',

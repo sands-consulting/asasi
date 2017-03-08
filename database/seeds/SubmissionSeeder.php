@@ -24,50 +24,6 @@ class SubmissionSeeder extends Seeder
         DB::table('submissions')->truncate();
         DB::table('submission_details')->truncate();
 
-        $permissions = [
-            'submission-requirement' => [
-                'index' => 'List all submission requirements',
-                'show' => 'View submission requirement details',
-                'create' => 'Create new submission requirement',
-                'update' => 'Update existing submission requirement',
-                'delete' => 'Delete existing submission requirement',
-                'revisions' => 'View submission requirement revisions',
-                'logs' => 'View submission requirement logs',
-                'organization' => 'Allow to manage submission requirement with organization'
-            ],
-            'submission' => [
-                'index' => 'List all submissions',
-                'show' => 'View submission details',
-                'create' => 'Create new submission',
-                'update' => 'Update existing submission',
-                'delete' => 'Delete existing submission',
-                'revisions' => 'View submission revisions',
-                'logs' => 'View submission logs',
-                'organization' => 'Allow to manage submission with organization'
-            ],
-            'submission-detail' => [
-                'show' => 'View submission details',
-                'create' => 'Create new submission details',
-                'update' => 'Update existing submission details',
-                'delete' => 'Delete existing submission details',
-                'activate' => 'Activate submission details',
-                'deactivate' => 'Deactivate submission details',
-                'revisions' => 'View submission details revisions',
-                'logs' => 'View submission details logs'
-            ]
-        ];
-
-        foreach ($permissions as $group => $data) {
-            foreach($data as $action => $description) {
-                $perm = PermissionService::create(new Permission(), [
-                    'name'          => $group . ':' . $action,
-                    'description'   => $description
-                ]);
-
-                if ($action != 'oraganization') 
-                    $perm->roles()->attach(Role::first());
-            }
-        }
 
         $requirementData = [
             [

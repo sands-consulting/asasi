@@ -27,7 +27,6 @@ class AsasiSeeder extends Seeder
         DB::table('uploads')->truncate();
         DB::table('permission_role')->truncate();
         DB::table('role_user')->truncate();
-        DB::table('permissions')->truncate();
         DB::table('roles')->truncate();
         DB::table('user_histories')->truncate();
         DB::table('user_blacklists')->truncate();
@@ -36,100 +35,10 @@ class AsasiSeeder extends Seeder
         DB::table('revisions')->truncate();
         DB::table('places')->truncate();
 
-        $roles = [
-            [
-                'name'          => 'admin',
-                'display_name'  => 'Admin',
-                'description'   => 'System Administrator. Should be able to do everything.',
-            ]
-        ];
 
-        foreach ($roles as $roleData) {
-            RoleService::create(new Role(), $roleData);
-        }
-
-        $users = [
-            [
-                'name'      => 'Super Admin',
-                'email'     => 'admin@example.com',
-                'password'  => 'admin123',
-                'status'    => 'active',
-            ],
-        ];
-
-        foreach ($users as $userData) {
-            $userData['password'] = app()->make('hash')->make($userData['password']);
-            UserService::create(new User(), $userData);
-        }
-
-        User::find(1)->roles()->attach(Role::first());
 
         $permissions = [
-            ['access:portal',           'Access portal'],
-            ['access:admin',            'Access admin area'],
-            ['access:report',           'Access reporting module'],
-            ['access:vendor',           'Access vendor module'],
 
-            ['permission:index',        'List all permissions'],
-            ['permission:show',         'View permission details'],
-            ['permission:create',       'Create new permission'],
-            ['permission:update',       'Update existing permission'],
-            ['permission:delete',       'Delete existing permission'],
-            ['permission:revisions',    'View all permissions'],
-            ['permission:histories',    'View all permissions'],
-
-            ['role:index',              'List all roles'],
-            ['role:show',               'View role details'],
-            ['role:create',             'Create new role'],
-            ['role:update',             'Update exisiting role'],
-            ['role:delete',             'Delete exisiting role'],
-            ['role:revisions',          'View role revisions'],
-            ['role:histories',          'View role histories'],
-
-            ['user:index',              'List all users'],
-            ['user:show',               'View user details'],
-            ['user:create',             'Create new user'],
-            ['user:update',             'Update exisiting user'],
-            ['user:delete',             'Delete existing user'],
-            ['user:restore',            'Restore deleted user'],
-            ['user:revisions',          'View user revisions'],
-            ['user:histories',          'View user histories'],
-            ['user:duplicate',          'Duplicate exisiting user'],
-            ['user:activate',           'Activate a user'],
-            ['user:suspend',            'Suspend a user'],
-            ['user:assume',             'Login as another user'],
-
-            ['user-blacklist:index',        'List all user blacklist'],
-            ['user-blacklist:show',         'View blacklist details'],
-            ['user-blacklist:create',       'Blacklist a user'],
-            ['user-blacklist:update',       'Update user blacklist'],
-            ['user-blacklist:delete',       'Delete existing user blacklist'],
-            ['user-blacklist:duplicate',    'Duplicate a blacklist'],
-            ['user-blacklist:revisions',    'View blacklist revisions'],
-            ['user-blacklist:histories',    'View blacklist histories'],
-            
-            ['organization:index',      'List all organization'],
-            ['organization:show',       'View organization details'],
-            ['organization:create',     'Create new organization'],
-            ['organization:update',     'Update exisiting organization'],
-            ['organization:duplicate',  'Duplicate exisiting organization'],
-            ['organization:activate',   'Activate an organization'],
-            ['organization:deactivate', 'Deactivate an organization'],
-            ['organization:suspend',    'Suspend an organization'],
-            ['organization:delete',     'Delete exisitign organization'],
-            ['organization:revisions',  'View organization revisions'],
-            ['organization:logs',       'View organization logs'],
-
-            ['place:index',             'List all places'],
-            ['place:show',              'View place details'],
-            ['place:create',            'Create new place'],
-            ['place:update',            'Update existing place'],
-            ['place:duplicate',         'Duplicate existing place'],
-            ['place:activate',          'Activate existing place'],
-            ['place:deactivate',        'Deactivate existing place'],
-            ['place:delete',            'Delete existing place'],
-            ['place:revisions',         'View place revisions'],
-            ['place:logs',              'View place logs']
         ];
 
         foreach ($permissions as $permissionData) {

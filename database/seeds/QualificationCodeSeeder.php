@@ -16,40 +16,5 @@ class QualificationCodeSeeder extends Seeder
     {
         DB::table('qualification_types')->truncate();
         DB::table('qualification_codes')->truncate();
-
-        $permissions = [
-            'qualification-code' => [
-                'index' => 'List all qualification codes',
-                'show' => 'View qualification code details',
-                'create' => 'Create new qualification code',
-                'update' => 'Update existing qualification code',
-                'delete' => 'Delete existing qualification code',
-                'activate' => 'Activate qualification code',
-                'deactivate' => 'Deactivate qualification code',
-                'revisions' => 'View qualification code revisions',
-                'logs' => 'View qualification code logs'
-            ],
-            'qualification-type' => [
-                'index' => 'List all qualification code types',
-                'show' => 'View qualification code type details',
-                'create' => 'Create new qualification code type',
-                'update' => 'Update existing qualification code type',
-                'delete' => 'Delete existing qualification code type',
-                'activate' => 'Activate qualification code type',
-                'deactivate' => 'Deactivate qualification code type',
-                'revisions' => 'View qualification code type revisions',
-                'logs' => 'View qualification code type logs'
-            ]
-        ];
-
-        foreach ($permissions as $group => $data) {
-            foreach($data as $action => $description) {
-                $perm = PermissionService::create(new Permission(), [
-                    'name'          => $group . ':' . $action,
-                    'description'   => $description
-                ]);
-                $perm->roles()->attach(Role::first());
-            }
-        }
     }
 }

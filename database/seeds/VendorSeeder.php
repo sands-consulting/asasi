@@ -25,61 +25,6 @@ class VendorSeeder extends Seeder
         DB::table('vendor_types')->truncate();
         DB::table('vendors')->truncate();
 
-        $permissions = [
-            ['vendor:index',             'List all vendors'],
-            ['vendor:show',              'View vendor details'],
-            ['vendor:create',            'Create new vendor'],
-            ['vendor:update',            'Update existing vendor'],
-            ['vendor:duplicate',         'Duplicate existing vendor'],
-            ['vendor:approve',           'Approve vendor\'s applications'],
-            ['vendor:reject',            'Reject vendor\'s applications'],
-            ['vendor:activate',          'Activate suspended vendor'],
-            ['vendor:suspend',           'Suspend existing vendor'],
-            ['vendor:blacklist',         'Blacklist existing vendor'],
-            ['vendor:unblacklist',       'Unblacklist existing vendor'],
-            ['vendor:delete',            'Delete existing vendor'],
-            ['vendor:revisions',         'View vendor revisions'],
-            ['vendor:logs',              'View vendor logs'],
-
-            ['vendor-type:index',             'List all vendor types'],
-            ['vendor-type:show',              'View vendor type details'],
-            ['vendor-type:create',            'Create new vendor type'],
-            ['vendor-type:update',            'Update existing vendor type'],
-            ['vendor-type:duplicate',         'Duplicate existing vendor type'],
-            ['vendor-type:activate',          'Activate existing vendor type'],
-            ['vendor-type:deactivate',        'Deactivate existing vendor type'],
-            ['vendor-type:delete',            'Delete existing vendor type'],
-            ['vendor-type:revisions',         'View vendor type revisions'],
-            ['vendor-type:logs',              'View vendor type logs']
-        ];
-
-        foreach ($permissions as $permissionData) {
-            $perm = PermissionService::create(new Permission(), [
-                'name'          => $permissionData[0],
-                'description'   => $permissionData[1],
-            ]);
-            $perm->roles()->attach(Role::first());
-        }
-
-        $roles = [
-            [
-                'name'          => 'vendor',
-                'display_name'  => 'Vendor',
-                'description'   => 'Vendor.',
-            ],
-            [
-                'name'          => 'vendor-admin',
-                'display_name'  => 'Vendor Admin',
-                'description'   => 'Vendor Admin.',
-            ]
-        ];
-
-        foreach ($roles as $roleData) {
-            $role = RoleService::create(new Role(), $roleData);
-            $role->permissions()->attach(Permission::where('name', 'access:portal')->first()->id);
-            $role->permissions()->attach(Permission::where('name', 'access:cart')->first()->id);
-        }
-
         $vendor_types = [
             ['SSM',     'Sole Proprietorship'],
             ['SSM',     'Partnership'],
@@ -141,6 +86,7 @@ class VendorSeeder extends Seeder
             'password'  => app()->make('hash')->make('amin1234'),
             'status'    => 'active',
         ]);
+
         $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->pluck('id')->toArray());
         $vendor->users()->attach($user, ['status' => 'active']);
     }
