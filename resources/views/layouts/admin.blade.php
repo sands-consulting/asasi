@@ -30,7 +30,7 @@
                         <i class="icon-paragraph-justify3"></i>
                     </a>
                 </li>
-                <li id="notifications" class="dropdown" data-source="{{ route('api.notifications', ['status' => 'unread']) }}">
+                <li :id="notifications" class="dropdown" data-source="{{ route('api.notifications', ['status' => 'unread']) }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon-bubble-notification"></i>
                         <span class="visible-xs-inline-block position-right">Notifications</span>
