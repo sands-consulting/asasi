@@ -24,6 +24,7 @@ class AclSeeder extends Seeder
         $permissions = [
             // Access
             ['access:admin', 'Access admin area'],
+            ['access:cart', 'Access notice cart'],
             ['access:report', 'Access reporting module'],
             ['access:vendor', 'Access vendor module'],
 
@@ -423,6 +424,7 @@ class AclSeeder extends Seeder
         $vendorAdmin = Role::whereName('vendor-admin')->first();
         $vendorAdmin->permissions()->attach(Permission::whereIn('name', [
             'access:vendor',
+            'access:cart',
             'user:index',
             'user:show',
             'user:create',
@@ -436,7 +438,8 @@ class AclSeeder extends Seeder
 
         $vendor = Role::whereName('vendor')->first();
         $vendor->permissions()->attach(Permission::whereIn('name', [
-            'access:vendor'
+            'access:vendor',
+            'access:cart',
         ])->pluck('id')->toArray());
 
         $evaluator = Role::whereName('evaluator')->first();
