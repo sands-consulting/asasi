@@ -18,6 +18,11 @@ class VendorsController extends Controller
         return view('vendors.show', compact('vendor'));
     }
 
+    public function pending(Vendor $vendor)
+    {
+        return view('vendors.pending', compact('vendor'));
+    }
+
     public function edit(Vendor $vendor)
     {
         return view('vendors.edit', ['vendor' => $vendor]);
@@ -32,14 +37,22 @@ class VendorsController extends Controller
         VendorService::qualificationCodes($vendor, $request->input('qualification_codes', []));
         VendorService::shareholders($vendor, $request->input('shareholders', []));
 
-        if (isset($inputs['submit'])) {
+        if (isset($inputs['submit']))
+        {
             $vendor = VendorService::update($vendor, $inputs, ['status' => 'pending']);
             event(new VendorApplied($vendor));
+
+            return redirect()
+                ->route('vendors.pending', $vendor->id);
+        }
+        else
+        {
+            return redirect()
+                ->route('vendors.show', $vendor->id)
+                ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
         }
 
-        return redirect()
-            ->route('home')
-            ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
+        
     }
 
     public function eligibles(EligiblesDataTable $table, Vendor $vendor)

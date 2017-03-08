@@ -58,8 +58,25 @@ class LoginController extends Controller
         {
             return redirect()->intended(route('admin'));
         }
-    }
 
+        if($user->hasPermission('access:vendor'))
+        {
+            if(in_array($user->vendor->status, ['draft', 'rejected']))
+            {
+                return redirect(route('vendors.edit', $user->vendor->id));
+            }
+
+            if($user->vendor->status == 'pending')
+            {
+                return redirect(route('vendors.pending', $user->vendor->id));
+            }
+
+            if($user->vendor->status == 'approved')
+            {
+                return redirect(route('vendor.subscriptions.create', $user->vendor->id));
+            }
+        }
+    }
 
     public function logout(Request $request)
     {

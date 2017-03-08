@@ -145,6 +145,11 @@ return [
                 'description' => 'All fields are compulsary. The form can be save and update later for completion'
             ]
         ],
+        'pending' => [
+            'title' => 'Vendor Application Pending Approval',
+            'content' => 'Application for <strong>:vendor-name</strong> is pending for approval by PROMPT adminstrator.<br><br>If have any enqiries, please contact us via contact form made available in PROMPT',
+            'back' => 'Back to Home'
+        ],
         'eligibles' => [
             'title' => 'Eligibles'
         ],

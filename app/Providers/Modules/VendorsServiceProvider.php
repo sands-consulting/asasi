@@ -103,6 +103,10 @@ class VendorsServiceProvider extends ServiceProvider
                 $router->resource('vendor-types', 'VendorTypesController');
             });
 
+            $router->get('vendors/{vendor}/pending', [
+                'as'    => 'vendors.pending',
+                'uses'  => 'VendorsController@pending'
+            ]);
             $router->get('vendors/{vendor}/purchases', [
                 'as'    => 'vendors.purchases',
                 'uses'  => 'VendorsController@purchases'

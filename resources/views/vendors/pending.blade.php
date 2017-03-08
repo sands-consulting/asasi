@@ -6,22 +6,14 @@
         <div class="content-wrapper">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-white">
                         <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h5 class="panel-title">{{ trans('vendors.views.pending.title') }}</h5>
-                                </div>
-                            </div>
+                            <h4 class="panel-title pull-left">{{ trans('vendors.views.pending.title') }}</h4>
+                            {!! link_to_route('root', trans('vendors.views.pending.back'), [], ['class' => 'btn bg-blue-700 pull-right legitRipple']) !!}
+                            <div class="clearfix"></div>
                         </div>
-
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <p>Pending Notes</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident sed error libero consectetur est facilis veniam cumque deserunt quo tenetur, ipsam nisi quas a. Nam, tempora laborum. Ducimus, sequi necessitatibus.</p>
-                                </div>
-                            </div>
+                            {!! trans('vendors.views.pending.content', ['vendor-name' => $vendor->name]) !!}
                         </div>
                     </div>
                 </div>

@@ -104,4 +104,9 @@ class VendorsPolicy
     {
         return $this->show($user, $vendor);
     }
+
+    public function pending(User $user, Vendor $vendor)
+    {
+        return $user->hasPermission('access:vendor') && $vendor->status == 'pending';
+    }
 }

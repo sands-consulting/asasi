@@ -19,6 +19,7 @@ return [
 	'logout' => 'Logout',
 	'next' => 'Next',
 	'pay' => 'Pay',
+	'print' => 'Print',
 	'proceed' => 'Proceed',
 	'publish' => 'Publish',
 	'register' => 'Register',
@@ -30,5 +31,4 @@ return [
 	'suspend' => 'Suspend',
 	'unpublish' => 'Unpublish',
 	'view' => 'View',
-	'print' => 'Print',
 ];
