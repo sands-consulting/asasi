@@ -33,7 +33,7 @@ class AsasiSeeder extends Seeder
             [
                 'name'      => 'Super Admin',
                 'email'     => 'admin@example.com',
-                'password'  => 'admin123',
+                'password'  => app()->make('hash')->make('admin123'),
                 'status'    => 'active',
                 'roles'     => [
                     'admin'
