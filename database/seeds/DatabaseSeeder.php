@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
         } catch (Exception $e) {
         }
 
+        $this->call(AclSeeder::class);
         $this->call(AsasiSeeder::class);
+
         $this->call(AllocationSeeder::class);
         $this->call(QualificationCodeSeeder::class);
         $this->call(NewsSeeder::class);

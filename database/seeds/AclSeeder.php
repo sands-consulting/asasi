@@ -70,6 +70,7 @@ class AclSeeder extends Seeder
             ['evaluator:revisions', 'View evaluator revisions'],
             ['evaluator:histories', 'View evaluator histories'],
 
+            // Evaluation
             ['evaluation:index', 'View list of notices assigned.'],
             ['evaluation:submission', 'View list of submisssion.'],
             ['evaluation:create', 'Create new evaluation.'],
@@ -114,6 +115,7 @@ class AclSeeder extends Seeder
             ['notice:delete', 'Delete existing notice'],
             ['notice:revisions', 'View notice revisions'],
             ['notice:histories', 'View notice histories'],
+            ['notice:purchase', 'Can purchase notice'],
 
             // Notice Category
             ['notice-category:index', 'List all notice categories'],
@@ -342,7 +344,7 @@ class AclSeeder extends Seeder
             ['user:assume', 'Login as another user'],
 
             // User Blacklist
-            [ƒ'user-blacklist:index', 'List all user blacklist'],
+            ['user-blacklist:index', 'List all user blacklist'],
             ['user-blacklist:show', 'View blacklist details'],
             ['user-blacklist:create', 'Blacklist a user'],
             ['user-blacklist:update', 'Update user blacklist'],
@@ -414,5 +416,36 @@ class AclSeeder extends Seeder
         foreach ($roles as $roleData) {
             RoleService::create(new Role(), $roleData);
         }
+
+        $admin = Role::whereName('admin')->first();
+        $admin->permissions()->attach(Permission::whereNotIn('name', ['access:vendor'])->pluck('id')->toArray());
+
+        $vendorAdmin = Role::whereName('vendor-admin')->first();
+        $vendorAdmin->permissions()->attach(Permission::whereIn('name', [
+            'access:vendor',
+            'user:index',
+            'user:show',
+            'user:create',
+            'user:update',
+            'user:revisions',
+            'user:histories',
+            'user:activate',
+            'user:suspend',
+            'user:assume'
+        ])->pluck('id')->toArray());
+
+        $vendor = Role::whereName('vendor')->first();
+        $vendor->permissions()->attach(Permission::whereIn('name', [
+            'access:vendor'
+        ])->pluck('id')->toArray());
+
+        $evaluator = Role::whereName('evaluator')->first();
+        $evaluator->permissions()->attach(Permission::whereIn('name', [
+            'access:admin',
+            'evaluation:index',
+            'evaluation:submission',
+            'evaluation:create',
+            'evaluation:update'
+        ])->pluck('id')->toArray());
     }
 }
