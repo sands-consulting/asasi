@@ -234,6 +234,14 @@ class User extends Authenticatable
         return $notification;
     }
 
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     /**
      * Boot
