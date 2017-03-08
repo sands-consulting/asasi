@@ -45,6 +45,13 @@ class ProjectsServiceProvider extends ServiceProvider
 
                 $router->resource('projects', 'ProjectsController');
             });
+
+             $router->resource('vendors.projects', 'VendorProjectsController', [
+                'only' => [
+                    'index',
+                    'show'
+                ]
+            ]);
         });
     }
 }

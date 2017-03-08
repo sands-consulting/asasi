@@ -123,11 +123,6 @@ class VendorsServiceProvider extends ServiceProvider
                 'uses' => 'VendorsController@invitations'
             ]);
 
-            $router->get('vendors/{vendor}/projects', [
-                'as' => 'vendors.projects',
-                'uses' => 'VendorsController@projects'
-            ]);
-
             $router->resource('vendors', 'VendorsController', [
                 'except' => ['index', 'destroy']
             ]);

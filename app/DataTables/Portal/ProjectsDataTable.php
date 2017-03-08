@@ -10,18 +10,12 @@ class ProjectsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('code', function() {
-                return '-';
+            ->addColumn('action', function($notice) {
+                return view('vendors.projects.index.actions', compact('notice'));
             })
             ->editColumn('name', function($notice) {
-                $name  = "<span class='text-header'>$notice->number</span> <br />";
-                $name .= link_to_route('notices.show', $notice->name, $notice->id);
-                return $name;
+                return view('notices.index.name', compact('notice'));
             })
-            ->editColumn('status', function($notice) {
-                // return view('notices._index_status', compact('notice'));
-            })
-            ->removeColumn('number')
             ->make(true);
     }
 

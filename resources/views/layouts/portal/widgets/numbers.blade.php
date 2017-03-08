@@ -35,7 +35,7 @@
 	</div>
 
 	<div class="col-xs-12 col-md-2">
-		<a href="{{ route('vendors.projects', Auth::user()->vendor->id) }}" class="prompt-box border border-bottom-violet-800 bg-violet-600">
+		<a href="{{ route('vendors.projects.index', Auth::user()->vendor->id) }}" class="prompt-box border border-bottom-violet-800 bg-violet-600">
 			<div class="title text-white text-right">{{ trans('app.widgets.portal.numbers.projects') }}</div>
 			<div class="number text-white">{{ App\Services\PortalService::projects(Auth::user()) }}</div>
 		</a>

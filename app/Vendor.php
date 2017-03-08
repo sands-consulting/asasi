@@ -189,6 +189,11 @@ class Vendor extends Model
             ->withTimestamps();
     }
 
+    public function purchases()
+    {
+        return $this->hasMany(NoticePurchase::class);
+    }
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
