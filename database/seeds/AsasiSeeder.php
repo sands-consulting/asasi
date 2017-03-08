@@ -2,13 +2,10 @@
 
 use App\Organization;
 use App\Place;
-use App\Permission;
 use App\Role;
 use App\User;
 use App\Services\OrganizationService;
 use App\Services\PlaceService;
-use App\Services\PermissionService;
-use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Database\Seeder;
 
@@ -25,30 +22,32 @@ class AsasiSeeder extends Seeder
         DB::table('organizations')->truncate();
         DB::table('settings')->truncate();
         DB::table('uploads')->truncate();
-        DB::table('permission_role')->truncate();
-        DB::table('role_user')->truncate();
-        DB::table('roles')->truncate();
         DB::table('user_histories')->truncate();
         DB::table('user_blacklists')->truncate();
         DB::table('password_resets')->truncate();
-        DB::table('users')->truncate();
         DB::table('revisions')->truncate();
         DB::table('places')->truncate();
+        DB::table('users')->truncate();
 
-
-
-        $permissions = [
-
+        $users = [
+            [
+                'name'      => 'Super Admin',
+                'email'     => 'admin@example.com',
+                'password'  => 'admin123',
+                'status'    => 'active',
+                'roles'     => [
+                    'admin'
+                ]
+            ]
         ];
 
-        foreach ($permissions as $permissionData) {
-            PermissionService::create(new Permission(), [
-                'name'          => $permissionData[0],
-                'description'   => $permissionData[1],
-            ]);
-        }
+        foreach($users as $userData) {
+            $roles  = $userData['roles'];
+            unset($userData['roles']);
 
-        Role::first()->permissions()->sync(Permission::whereNotIn('name', ['access:vendor'])->pluck('id')->toArray());
+            $user = UserService::create(new User(), $userData);
+            $user->roles()->sync(Role::whereIn('name', $roles)->pluck('id')->toArray());
+        }
 
         OrganizationService::create(new Organization, [
             'name' => 'ACME Inc.',

@@ -21,15 +21,10 @@ class EvaluationSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('notice_evaluator')->truncate();
         DB::table('evaluation_scores')->truncate();
         DB::table('evaluation_requirements')->truncate();
         DB::table('evaluation_types')->truncate();
-
-        $role = RoleService::create(new Role(), [
-            'name'          => 'evaluator',
-            'display_name'  => 'Evaluator',
-            'description'   => 'Evaluator.',
-        ]);
 
         $users = [
             [
@@ -37,42 +32,28 @@ class EvaluationSeeder extends Seeder
                 'email'     => 'evaluator.technical@example.com',
                 'password'  => app()->make('hash')->make('evaluator123'),
                 'status'    => 'active',
+                'roles'     => [
+                    'evaluator'
+                ]
             ],
             [
                 'name'      => 'Commercial Evaluator',
                 'email'     => 'evaluator.commercial@example.com',
                 'password'  => app()->make('hash')->make('evaluator123'),
                 'status'    => 'active',
+                'roles'     => [
+                    'evaluator'
+                ]
             ],
         ];
 
         foreach($users as $userData) {
+            $roles  = $userData['roles'];
+            unset($userData['roles']);
+
             $user = UserService::create(new User(), $userData);
-            // assign user to role
-            $user->roles()->attach($role);
+            $user->roles()->sync(Role::whereIn('name', $roles)->pluck('id')->toArray());
         }
-
-        $permissions = [
-            ['evaluation:index', 'View list of notices assigned.'],
-            ['evaluation:submission', 'View list of submisssion.'],
-            ['evaluation:create', 'Create new evaluation.'],
-            ['evaluation:update', 'Update existing evaluation.'],
-            ['evaluation:delete', 'Delete existing evaluation.'],
-        ];
-
-        foreach ($permissions as $permissionData) {
-            $perm = PermissionService::create(new Permission(), [
-                'name'        => $permissionData[0],
-                'description' => $permissionData[1],
-            ]);
-
-            // assign all permission to admin role
-            $perm->roles()->attach(Role::first());
-            $perm->roles()->attach($role);
-        }
-
-        // assign role to permission
-        $role->permissions()->attach(Permission::whereName('access:admin')->pluck('id')->toArray());
 
         // Evaluation Type Data
         $evaluationTypeData = [

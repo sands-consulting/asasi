@@ -34,7 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SubscriptionSeeder::class);
         $this->call(PaymentGatewaySeeder::class);
         $this->call(EvaluationSeeder::class);
-        $this->call(EvaluatorSeeder::class);
         $this->call(ProjectSeeder::class);
 
         Model::reguard();
