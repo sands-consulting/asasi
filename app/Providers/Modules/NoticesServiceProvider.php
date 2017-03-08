@@ -8,10 +8,7 @@ class NoticesServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\NoticesController', 'App\Policies\Admin\NoticePolicy');
-
-        app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\Admin\NoticePolicy');
-
+        app('policy')->register('App\Http\Controllers\Admin\NoticesController', 'App\Policies\NoticePolicy');
     }
 
     /**

@@ -43,7 +43,7 @@ class UsersServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->resource('users', 'UsersController');
-                $router->resource('users.blacklists', 'UserBlacklistsPolicy');
+                $router->resource('users.blacklists', 'UserBlacklistsController');
                 $router->put('users/{user}/activate', 'UsersController@activate')
                     ->name('users.activate');
                 $router->put('users/{user}/suspend', 'UsersController@suspend')

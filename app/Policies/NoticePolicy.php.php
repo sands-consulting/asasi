@@ -4,6 +4,7 @@ namespace App\Policies\Admin;
 
 use App\Notice;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class NoticePolicy
@@ -118,5 +119,28 @@ class NoticePolicy
     public function files(User $user, Notice $notice)
     {
         return $this->show($user, $notice);
+    }
+
+    public function purchase(User $user, Notice $notice)
+    {
+    	if($user->hasAllPermissions(['access:vendor', 'access:cart']))
+    	{
+    		$eligibles = $notice->eligibles()->get();
+
+    		if($notice->eligibles()->count() == 0 || $notice->eligibles()->whereVendorId($user->vendor->id)->first())
+    		{
+    			$now = Carbon::now();
+    			
+    			if($notice->)
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    	}
+    	else
+    	{
+    		return false;
+    	}
     }
 }

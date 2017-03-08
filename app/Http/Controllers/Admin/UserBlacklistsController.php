@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\UserBlacklist;
-use App\DataTables\UserBlackpluckDataTable;
+use App\DataTables\UserBlacklistDataTable;
 use App\Http\Requests\UserBlacklistRequest;
 use App\Services\UserBlacklistService;
 use Illuminate\Http\Request;
 
-class UserBlackpluckController extends Controller
+class UserBlacklistsController extends Controller
 {
     public function index(UsersDataTable $table)
     {

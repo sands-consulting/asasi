@@ -1,3 +1,4 @@
+@if(Auth::user()->hasPermission('access:cart'))
 <li class="dropdown">
 	<a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false">
 		<i class="icon-cart4"></i>
@@ -38,3 +39,4 @@
 		</div>
 	</div>	
 </li>
+@endif

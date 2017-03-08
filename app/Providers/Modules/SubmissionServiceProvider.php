@@ -35,7 +35,7 @@ class SubmissionServiceProvider extends ServiceProvider
             });
 
             $router->resource('vendors.submissions', 'VendorSubmissionsController', [
-                'except' => 'index'
+                'except' => 'destroy'
             ]);
         });
     }

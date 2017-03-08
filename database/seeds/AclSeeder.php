@@ -419,7 +419,7 @@ class AclSeeder extends Seeder
         }
 
         $admin = Role::whereName('admin')->first();
-        $admin->permissions()->attach(Permission::whereNotIn('name', ['access:vendor'])->pluck('id')->toArray());
+        $admin->permissions()->attach(Permission::whereNotIn('name', ['access:cart', 'access:vendor'])->pluck('id')->toArray());
 
         $vendorAdmin = Role::whereName('vendor-admin')->first();
         $vendorAdmin->permissions()->attach(Permission::whereIn('name', [

@@ -6,8 +6,9 @@ use App\Bookmark;
 use App\Notice;
 use App\Project;
 use App\User;
+use Carbon\Carbon;
 
-class DashboardService
+class PortalService
 {
     public static function notices(User $user)
     {
@@ -38,6 +39,11 @@ class DashboardService
         return Notice::whereHas('purchases', function($query) use($user) {
             $query->where('vendor_id', $user->vendor->id);
         })->count();
+    }
+
+    public static function submissions(User $user)
+    {
+        return 0;
     }
 
     public static function projects(User $user)
