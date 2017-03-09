@@ -50,7 +50,7 @@
 </div>
 <!-- end: login activity & last login -->
 
-<div class="datatable-filter">
+<div id="datatable-filter">
     <div class="row">
         <div class="col-xs-12 col-md-3">
             <a href="#" @click.prevent="handle_dashboard($event)"
@@ -89,20 +89,20 @@
             </a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-flat border" v-bind:class="border_color">
-                <div class="panel-heading">
-                    
-                </div>
-                {!! $dataTable->table(['class' =>'table table-bordered table-striped']) !!}
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-flat border" v-bind:class="border_color">
+            <div class="panel-heading">
+
             </div>
+            {!! $dataTable->table(['class' =>'table table-bordered table-striped']) !!}
         </div>
     </div>
 </div>
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('assets/js/pages/dashboard/user.js') }}"></script>
     {!! $dataTable->scripts() !!}
+    <script src="{{ asset('assets/js/pages/dashboard/user.js') }}"></script>
 @endsection

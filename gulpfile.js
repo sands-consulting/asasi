@@ -80,7 +80,6 @@ elixir(function(mix) {
         'vendor/form_select2.js',
         'vendor/picker_date.js',
         'vendor/stepy.js',
-        'pages/admin.dashboard.user.js',
         'notification.js',
         'vendor.js',
         'admin.js',
