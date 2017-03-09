@@ -9,7 +9,7 @@ $(function () {
         count: null,
         source: null
       },
-      ready: function(ev) {
+      mounted: function(ev) {
         this.source = $(this.$el).data('source');
         this.listen();
         this.getNotification();

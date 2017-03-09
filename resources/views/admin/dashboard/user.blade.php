@@ -103,5 +103,6 @@
 @endsection
 
 @section('scripts')
-{!! $dataTable->scripts() !!}
+    <script src="{{ asset('assets/js/pages/dashboard/user.js') }}"></script>
+    {!! $dataTable->scripts() !!}
 @endsection

@@ -30,7 +30,7 @@
                         <i class="icon-paragraph-justify3"></i>
                     </a>
                 </li>
-                <li :id="notifications" class="dropdown" data-source="{{ route('api.notifications', ['status' => 'unread']) }}">
+                <li id="notifications" class="dropdown" data-source="{{ route('api.notifications', ['status' => 'unread']) }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon-bubble-notification"></i>
                         <span class="visible-xs-inline-block position-right">Notifications</span>
@@ -50,7 +50,7 @@
                             <template v-if="notifications.length > 0">
                                 <li class="media" v-for="notification in notifications">
                                     <div class="media-left">
-                                        <a href="@{{ notification.link }}" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm"><i class="icon-checkmark4"></i></a>
+                                        <a :href="'@{{ notification.link }}'" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm"><i class="icon-checkmark4"></i></a>
                                     </div>
 
                                     <div class="media-body">

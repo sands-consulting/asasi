@@ -125,6 +125,7 @@ elixir(function(mix) {
       'resources/assets/vendor/bootstrap/fonts'
     ], 'public/assets/fonts')
     .copy('resources/assets/images', 'public/assets/images')
+    .copy('resources/assets/js/pages', 'public/assets/js/pages')
     .copy('resources/assets/vendor/ckeditor', 'public/assets/ckeditor')
     .copy('resources/assets/js/vendor/dhtmlxGantt', 'public/assets/dhtmlxGantt');
 });
