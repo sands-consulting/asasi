@@ -36,6 +36,7 @@ $(function () {
     });
 });
 
+// Todo: Make datatable header to change color upon filter
 new Vue({
     el: '.datatable-filter',
     data: {

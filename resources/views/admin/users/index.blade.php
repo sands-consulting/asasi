@@ -33,16 +33,18 @@
 <div class="panel panel-flat">
 	<div class="panel-body form-datatable-search form-inline">
 		<input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('users.views.index.keywords') }}" v-model="q.keywords">
-		<select name="q[role]" class="form-control input-sm" v-model="q.role">
-			<option value="" selected="selected">{{ trans('users.views.index.role') }}</option>
-			@foreach(\App\Role::all() as $role)<option value="{{ $role->id }}">{{ $role->display_name }}</option>@endforeach
+        <select name="q[role]" class="form-control input-sm" v-model="q.role">
+            <option value="">{{ trans('users.views.index.role') }}</option>
+			@foreach(\App\Role::all() as $role)<option>{{ $role->display_name }}</option>@endforeach
 		</select>
+		@{{ q.role }}
 		<select name="q[status]" class="form-control input-sm" v-model="q.status">
-			<option value="" selected="selected">{{ trans('users.views.index.status') }}</option>
-			@foreach(collect(trans('statuses'))->only('active', 'suspended', 'inactive') as $key => $value)<option value="{{ $key }}">{{ $value }}</option>@endforeach
+			<option value="">{{ trans('users.views.index.status') }}</option>
+			@foreach(collect(trans('statuses'))->only('active', 'suspended', 'inactive') as $key => $value)<option>{{ $value }}</option>@endforeach
 		</select>
-		<a href="#" class="btn btn-sm btn-primary" v-on:click="perform_search">{{ trans('actions.search') }}</a>
-		<a href="#" class="btn btn-sm btn-default" v-show="searching" v-on:click="clear_search">{{ trans('actions.clear') }}</a>
+        @{{ q.status }}
+		<a href="#" class="btn btn-sm btn-primary" @click="perform_search">{{ trans('actions.search') }}</a>
+		<a href="#" class="btn btn-sm btn-default" v-show="searching" @click="clear_search">{{ trans('actions.clear') }}</a>
 	</div>
 </div>
 

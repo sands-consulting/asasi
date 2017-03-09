@@ -18,17 +18,23 @@ $(function () {
         }
     });
 
+    // Vue
+
     Vue.config.debug = true;
 
     vm_datatable_search = new Vue({
         el: '.form-datatable-search',
         data: {
             data_table: 'dataTableBuilder',
-            q: {},
+            q: {
+                keywords: '',
+                role: '',
+                status: ''
+            },
             table: null,
             url: null,
             searching: false,
-            panel_color: 'bg-slate-300'
+            panel_color: 'bg-slate-300',
         },
         computed: {
             can_search: function () {
@@ -37,12 +43,12 @@ $(function () {
                     if (!this.q.hasOwnProperty(key)) {
                         continue;
                     }
-                    is_searching = is_searching || this.q[key].length > 0;
+                    is_searching = key.length > 0;
                 }
                 return is_searching;
             },
             params: function () {
-                return $.param({q: this.$get('q')});
+                return $.param({q: this.q});
             }
         },
         mounted: function () {
@@ -51,6 +57,7 @@ $(function () {
         },
         methods: {
             perform_search: function () {
+                this.param = $.param({q: this.q});
                 if (this.can_search) {
                     this.table.ajax.url(this.url + '?' + this.params).load();
                     this.table.draw();
@@ -73,14 +80,7 @@ $(function () {
                         $(this).find('option:first').attr('selected', 'selected');
                     });
                 }
-            },
-            perform_filter: function (e) {
-                var filter = $(e.currentTarget).data('filter');
-                var color = $(e.currentTarget).data('color');
-                this.table.ajax.url(this.url + '?filter=' + filter).load();
-                this.table.draw();
-                this.panel_color = 'bg-' + color;
-            },
+            }
         }
     });
 });
