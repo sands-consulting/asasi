@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies\Admin;
+namespace App\Policies;
 
 use App\Notice;
 use App\User;
@@ -131,7 +131,7 @@ class NoticePolicy
     		{
     			$now = Carbon::now();
     			
-    			if($notice->)
+    			// if($notice->)
     		}
     		else
     		{
