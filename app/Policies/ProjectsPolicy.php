@@ -3,84 +3,154 @@
 namespace App\Policies;
 
 use App\Project;
+use App\User;
 
+/**
+ * Class ProjectsPolicy
+ * @package App\Policies
+ */
 class ProjectsPolicy
 {
-    public function index()
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function index(User $user)
     {
-        return $this->user->hasPermission('project:index');
+        return $user->hasPermission('project:index');
     }
 
-    public function show(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function show(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:show');
+        return $this->checkOrganization($user, $project, 'project:show');
     }
 
-    public function create()
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function create(User $user)
     {
-        return $this->user->hasPermission('project:create');
+        return $user->hasPermission('project:create');
     }
 
-    public function createByNotice()
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function createByNotice(User $user)
     {
-        return $this->create();
+        return $this->create($user);
     }
 
-    public function store()
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function store(User $user)
     {
-        return $this->create();
+        return $this->create($user);
     }
 
-    public function edit(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function edit(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:update');
+        return $this->checkOrganization($user, $project, 'project:update');
     }
 
-    public function update(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function update(User $user, Project $project)
     {
-        return $this->edit($project);
+        return $this->edit($user, $project);
     }
 
-    public function destroy(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function destroy(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:delete');
+        return $this->checkOrganization($user, $project, 'project:delete');
     }
 
-    public function duplicate(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function duplicate(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:duplicate');
+        return $this->checkOrganization($user, $project, 'project:duplicate');
     }
 
-    public function revisions(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function revisions(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:revisions');
+        return $this->checkOrganization($user, $project, 'project:revisions');
     }
 
-    public function logs(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function logs(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:logs');
+        return $this->checkOrganization($user, $project, 'project:logs');
     }
 
-    public function activate(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function activate(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:activate') && $project->canActivate();
+        return $this->checkOrganization($user, $project, 'project:activate') && $project->canActivate();
     }
 
-    public function deactivate(Project $project)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @return bool
+     */
+    public function deactivate(User $user, Project $project)
     {
-        return $this->checkOrganization($project, 'project:deactivate') && $project->canDeactivate();
+        return $this->checkOrganization($user, $project, 'project:deactivate') && $project->canDeactivate();
     }
 
-    protected function checkOrganization(Project $project, $permission)
+    /**
+     * @param User $user
+     * @param Project $project
+     * @param $permission
+     * @return bool
+     */
+    protected function checkOrganization(User $user, Project $project, $permission)
     {
-        if(!$this->user->hasPermission($permission))
-        {
+        if ( ! $user->hasPermission($permission)) {
             return false;
         }
 
-        if($this->user->hasPermission('project:organization'))
-        {
-            return $this->user->organizations->pluck('id')->has($project->organization_id);
+        if ($user->hasPermission('project:organization')) {
+            return $user->organizations->pluck('id')->has($project->organization_id);
         }
 
         return true;

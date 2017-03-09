@@ -10,6 +10,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
 
+/**
+ * Class User
+ * @package App
+ */
 class User extends Authenticatable
 {
     use DateAccessor,
@@ -19,22 +23,37 @@ class User extends Authenticatable
         Sluggable,
         SoftDeletes;
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'name', 'email', 'password', 'status'
     ];
 
+    /**
+     * @var array
+     */
     protected $hidden = [
         'confirmation_token', 'password', 'remember_token',
     ];
 
+    /**
+     * @var array
+     */
     protected $searchable = [
         'name', 'email'
     ];
 
+    /**
+     * @var array
+     */
     protected $sortable = [
         'name', 'email', 'status'
     ];
 
+    /**
+     * @var array
+     */
     protected $attributes = [
         'status' => 'inactive'
     ];
@@ -42,27 +61,42 @@ class User extends Authenticatable
     /*
      * Relationship
      */
-    
+
+    /**
+     * @return mixed
+     */
     public function latestLog()
     {
         return $this->hasOne(UserHistory::class, 'user_id')->latest();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function bookmarks()
     {
         return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function blacklists()
     {
         return $this->hasMany(UserBlacklist::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function notices()
     {
         return $this->belongsToMany(Notice::class, 'notice_evaluator', 'user_id', 'notice_id')
@@ -70,23 +104,35 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function organizations()
     {
         return $this->belongsToMany(Organization::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function submissions()
     {
         return $this->belongsToMany(User::class, 'submission_evaluator', 'user_id', 'submission_id')
             ->withPivot(['status'])
             ->withTimestamps();
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function subscriptions()
     {
         return $this->vendor->first()->subscriptions;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function vendor()
     {
         return $this->belongsToMany(Vendor::class)
@@ -94,11 +140,17 @@ class User extends Authenticatable
             ->wherePivot('status', 'active');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function vendors()
     {
         return $this->belongsToMany(Vendor::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function notifications()
     {
         return $this->hasMany(Notification::class);
@@ -108,16 +160,25 @@ class User extends Authenticatable
      * Custom Attributes
      */
 
+    /**
+     * @return bool
+     */
     public function getActiveAttribute()
     {
         return $this->status == 'active';
     }
 
+    /**
+     * @return bool
+     */
     public function getBlacklistedAttribute()
     {
         return $this->blackpluck()->active()->count() > 0;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getVendorAttribute()
     {
         return $this->hasRole('Vendor') ? $this->vendors()->first() : null;
@@ -127,6 +188,10 @@ class User extends Authenticatable
      * Search scopes
      */
 
+    /**
+     * @param $query
+     * @param array $queries
+     */
     public function scopeSearch($query, $queries = [])
     {
         if (isset($queries['keywords']) && !empty($queries['keywords'])) {
@@ -158,6 +223,11 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * @param $query
+     * @param $column
+     * @param $direction
+     */
     public function scopeSort($query, $column, $direction)
     {
         if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
@@ -168,11 +238,18 @@ class User extends Authenticatable
     /*
      * Scopes
      */
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeActive($query)
     {
         return $query->where('status', 'active');
     }
 
+    /**
+     * @param $query
+     */
     public function scopeEvaluators($query)
     {
         $query->whereHas('roles', function ($roles) {
@@ -180,11 +257,19 @@ class User extends Authenticatable
         });
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeInactive($query)
     {
         return $query->where('status', 'inactive');
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeSuspended($query)
     {
         return $query->where('status', 'suspended');
@@ -198,6 +283,9 @@ class User extends Authenticatable
         return $this->status != 'active';
     }
 
+    /**
+     * @return bool
+     */
     public function canSuspend()
     {
         return $this->status != 'suspended';
@@ -205,6 +293,9 @@ class User extends Authenticatable
 
     /*
      * Helpers
+     */
+    /**
+     * @return bool
      */
     public function hasSubscription()
     {
@@ -216,16 +307,26 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * @param $notice_id
+     * @return mixed
+     */
     public function hasBoughtNotice($notice_id)
     {
         return $this->vendor->notices()->find($notice_id);
     }
-    
+
+    /**
+     * @return mixed
+     */
     public static function options()
     {
         return static::pluck('name', 'id')->toArray();
     }
-    
+
+    /**
+     * @return Notification
+     */
     public function newNotification()
     {
         $notification = new Notification;
@@ -234,6 +335,9 @@ class User extends Authenticatable
         return $notification;
     }
 
+    /**
+     * @return array
+     */
     public function sluggable()
     {
         return [

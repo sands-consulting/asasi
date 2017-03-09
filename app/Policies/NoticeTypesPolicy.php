@@ -3,61 +3,62 @@
 namespace App\Policies;
 
 use App\NoticeType;
+use App\User;
 
 class NoticeTypesPolicy
 {
-    public function index()
+    public function index(User $user)
     {
-        return $this->user->hasPermission('notice-type:index');
+        return $user->hasPermission('notice-type:index');
     }
 
-    public function show()
+    public function show(User $user)
     {
-        return $this->user->hasPermission('notice-type:show');
+        return $user->hasPermission('notice-type:show');
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return $this->user->hasPermission('notice-type:create');
+        return $user->hasPermission('notice-type:create');
     }
 
-    public function store()
+    public function store(User $user)
     {
-        return $this->create();
+        return $this->create($user);
     }
 
-    public function edit(NoticeType $noticeType)
+    public function edit(User $user, NoticeType $noticeType)
     {
-        return $this->user->hasPermission('notice-type:update');
+        return $user->hasPermission('notice-type:update');
     }
 
-    public function update(NoticeType $noticeType)
+    public function update(User $user, NoticeType $noticeType)
     {
-        return $this->edit($noticeType);
+        return $this->edit($user, $noticeType);
     }
 
-    public function duplicate(NoticeType $noticeType)
+    public function duplicate(User $user, NoticeType $noticeType)
     {
-        return $this->user->hasPermission('notice-type:duplicate');
+        return $user->hasPermission('notice-type:duplicate');
     }
 
-    public function revisions(NoticeType $noticeType)
+    public function revisions(User $user, NoticeType $noticeType)
     {
-        return $this->user->hasPermission('notice-type:revisions');
+        return $user->hasPermission('notice-type:revisions');
     }
 
-    public function destroy(NoticeType $noticeType)
+    public function destroy(User $user, NoticeType $noticeType)
     {
-        return $this->user->hasPermission('notice-type:delete');
+        return $user->hasPermission('notice-type:delete');
     }
 
-    public function activate(NoticeType $noticeType)
+    public function activate(User $user, NoticeType $noticeType)
     {
-        return $this->user->hasPermission('notice-type:activate') && $noticeType->canActivate();
+        return $user->hasPermission('notice-type:activate') && $noticeType->canActivate();
     }
 
-    public function deactivate(NoticeType $noticeType)
+    public function deactivate(User $user, NoticeType $noticeType)
     {
-        return $this->user->hasPermission('notice-type:deactivate') && $noticeType->canDeactivate();
+        return $user->hasPermission('notice-type:deactivate') && $noticeType->canDeactivate();
     }
 }

@@ -2,55 +2,57 @@
 
 namespace App\Policies;
 
+use App\User;
+
 class QualificationCodesPolicy
 {
-    public function index()
+    public function index(User $user)
     {
-        return $this->user->hasPermission('qualification-code:index');
+        return $user->hasPermission('qualification-code:index');
     }
 
-    public function show()
+    public function show(User $user)
     {
-        return $this->user->hasPermission('qualification-code:show');
+        return $user->hasPermission('qualification-code:show');
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return $this->user->hasPermission('qualification-code:create');
+        return $user->hasPermission('qualification-code:create');
     }
 
-    public function store()
+    public function store(User $user)
     {
-        return $this->create();
+        return $this->create($user);
     }
 
-    public function edit()
+    public function edit(User $user)
     {
-        return $this->user->hasPermission('qualification-code:update');
+        return $user->hasPermission('qualification-code:update');
     }
 
-    public function update()
+    public function update(User $user)
     {
-        return $this->edit();
+        return $this->edit($user);
     }
 
-    public function destroy()
+    public function destroy(User $user)
     {
-        return $this->user->hasPermission('qualification-code:delete');
+        return $user->hasPermission('qualification-code:delete');
     }
 
-    public function duplicate()
+    public function duplicate(User $user)
     {
-        return $this->user->hasPermission('qualification-code:duplicate');
+        return $user->hasPermission('qualification-code:duplicate');
     }
 
-    public function revisions()
+    public function revisions(User $user)
     {
-        return $this->user->hasPermission('qualification-code:revisions');
+        return $user->hasPermission('qualification-code:revisions');
     }
 
-    public function logs()
+    public function logs(User $user)
     {
-        return $this->user->hasPermission('qualification-code:logs');
+        return $user->hasPermission('qualification-code:logs');
     }
 }

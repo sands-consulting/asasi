@@ -3,61 +3,62 @@
 namespace App\Policies;
 
 use App\Package;
+use App\User;
 
 class PackagesPolicy
 {
-    public function index()
+    public function index(User $user)
     {
-        return $this->user->hasPermission('package:index');
+        return $user->hasPermission('package:index');
     }
 
-    public function show()
+    public function show(User $user)
     {
-        return $this->user->hasPermission('package:show');
+        return $user->hasPermission('package:show');
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return $this->user->hasPermission('package:create');
+        return $user->hasPermission('package:create');
     }
 
-    public function store()
+    public function store(User $user)
     {
-        return $this->create();
+        return $this->create($user);
     }
 
-    public function edit(Package $package)
+    public function edit(User $user, Package $package)
     {
-        return $this->user->hasPermission('package:update');
+        return $user->hasPermission('package:update');
     }
 
-    public function update(Package $package)
+    public function update(User $user, Package $package)
     {
-        return $this->edit($package);
+        return $this->edit($user, $package);
     }
 
-    public function duplicate(Package $package)
+    public function duplicate(User $user, Package $package)
     {
-        return $this->user->hasPermission('package:duplicate');
+        return $user->hasPermission('package:duplicate');
     }
 
-    public function revisions(Package $package)
+    public function revisions(User $user, Package $package)
     {
-        return $this->user->hasPermission('package:revisions');
+        return $user->hasPermission('package:revisions');
     }
 
-    public function destroy(Package $package)
+    public function destroy(User $user, Package $package)
     {
-        return $this->user->hasPermission('package:delete');
+        return $user->hasPermission('package:delete');
     }
 
-    public function activate(Package $package)
+    public function activate(User $user, Package $package)
     {
-        return $this->user->hasPermission('package:activate') && $package->canActivate();
+        return $user->hasPermission('package:activate') && $package->canActivate();
     }
 
-    public function deactivate(Package $package)
+    public function deactivate(User $user, Package $package)
     {
-        return $this->user->hasPermission('package:deactivate') && $package->canDeactivate();
+        return $user->hasPermission('package:deactivate') && $package->canDeactivate();
     }
 }
