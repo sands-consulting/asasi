@@ -78,4 +78,9 @@ class UserPolicy
     {
         return app('session')->has('resume_user_id');
     }
+
+    public function archives(User $auth)
+    {
+        return $auth->hasPermission('user:suspend');
+    }
 }
