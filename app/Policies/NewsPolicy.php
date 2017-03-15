@@ -3,79 +3,136 @@
 namespace App\Policies;
 
 use App\News;
+use App\User;
 
+/**
+ * Class NewsPolicy
+ * @package App\Policies
+ */
 class NewsPolicy
 {
-    public function index()
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function index(User $user)
     {
-        return $this->user->hasPermission('news:index');
+        return $user->hasPermission('news:index');
     }
 
-    public function show(News $news)
+    /**
+     * @param User $user
+     * @param News $news
+     * @return bool
+     */
+    public function show(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:show');
+        return $this->checkOrganization($user, $news, 'news:show');
     }
 
-    public function create()
+    /**
+     * @return mixed
+     */
+    public function create(User $user)
     {
-        return $this->user->hasPermission('news:create');
+        return $user->hasPermission($user, 'news:create');
     }
 
+    /**
+     * @return mixed
+     */
     public function store()
     {
         return $this->create();
     }
 
-    public function edit(News $news)
+    /**
+     * @param News $news
+     * @return bool
+     */
+    public function edit(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:update');
+        return $this->checkOrganization($user, $news, 'news:update');
     }
 
+    /**
+     * @param News $news
+     * @return bool
+     */
     public function update(News $news)
     {
         return $this->edit($news);
     }
 
-    public function destroy(News $news)
+    /**
+     * @param News $news
+     * @return bool
+     */
+    public function destroy(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:delete');
+        return $this->checkOrganization($user, $news, 'news:delete');
     }
 
-    public function duplicate(News $news)
+    /**
+     * @param News $news
+     * @return bool
+     */
+    public function duplicate(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:duplicate');
+        return $this->checkOrganization($user, $news, 'news:duplicate');
     }
 
-    public function revisions(News $news)
+    /**
+     * @param News $news
+     * @return bool
+     */
+    public function revisions(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:revisions');
+        return $this->checkOrganization($user, $news, 'news:revisions');
     }
 
-    public function logs(News $news)
+    /**
+     * @param News $news
+     * @return bool
+     */
+    public function logs(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:logs');
+        return $this->checkOrganization($user, $news, 'news:logs');
     }
 
-    public function publish(News $news)
+    /**
+     * @param News $news
+     * @return bool
+     */
+    public function publish(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:publish') && $news->canPublish();
+        return $this->checkOrganization($user, $news, 'news:publish') && $news->canPublish();
     }
 
-    public function unpublish(News $news)
+    /**
+     * @param User $user
+     * @param News $news
+     * @return bool
+     */
+    public function unpublish(User $user, News $news)
     {
-        return $this->checkOrganization($news, 'news:unpublish') && $news->canUnpublish();
+        return $this->checkOrganization($user, $news, 'news:unpublish') && $news->canUnpublish();
     }
 
-    protected function checkOrganization(News $news, $permission)
+    /**
+     * @param User $user
+     * @param News $news
+     * @param $permission
+     * @return bool
+     */
+    protected function checkOrganization(User $user, News $news, $permission)
     {
-        if(!$this->user->hasPermission($permission))
-        {
+        if ( ! $user->hasPermission($permission)) {
             return false;
         }
 
-        if($this->user->hasPermission('news:organization'))
-        {
-            return $this->user->organizations->pluck('id')->has($news->organization_id);
+        if ($user->hasPermission('news:organization')) {
+            return $user->organizations->pluck('id')->has($news->organization_id);
         }
 
         return true;

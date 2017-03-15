@@ -21,20 +21,20 @@ elixir(function(mix) {
 
     .scripts([
         '../../../node_modules/jquery/dist/jquery.js',
+        '../../../node_modules/bootstrap-less/js/bootstrap.js',
         '../../../node_modules/pace-progress/pace.js',
         '../../../node_modules/jquery-ujs/src/rails.js',
-        '../../../node_modules/bootstrap-less/js/bootstrap.js',
         '../../../node_modules/datatables.net/js/jquery.dataTables.js',
         '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
         '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
-        '../../../node_modules/d3/build/d3.js',
-        '../../../node_modules/c3/c3.js',
         '../../../node_modules/vue/dist/vue.js',
         '../../../node_modules/vue-resource/dist/vue-resource.min.js',
         '../../../node_modules/pnotify/dist/pnotify.js',
         '../../../node_modules/legitRipple.js/js/ripple.js',
         '../../../node_modules/moment/moment.js',
         '../../../node_modules/select2/dist/js/select2.js',
+        'vendor/d3.min.js',
+        'vendor/c3.min.js',
         'vendor/pnotify.min.js',
         'vendor/pickers/daterangepicker.js',
         'vendor/uniform.min.js',
@@ -50,20 +50,21 @@ elixir(function(mix) {
 
     .scripts([
         '../../../node_modules/jquery/dist/jquery.js',
+        '../../../node_modules/bootstrap-less/js/bootstrap.js',
         '../../../node_modules/pace-progress/pace.js',
         '../../../node_modules/jquery-ujs/src/rails.js',
-        '../../../node_modules/bootstrap-less/js/bootstrap.js',
         '../../../node_modules/datatables.net/js/jquery.dataTables.js',
         '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
         '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
-        '../../../node_modules/d3/build/d3.js',
-        '../../../node_modules/c3/c3.js',
         '../../../node_modules/vue/dist/vue.js',
         '../../../node_modules/vue-resource/dist/vue-resource.min.js',
+        '../../../node_modules/c3/c3.js',
         '../../../node_modules/pnotify/dist/pnotify.js',
         '../../../node_modules/legitRipple.js/js/ripple.js',
         '../../../node_modules/moment/moment.js',
         '../../../node_modules/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
+        'vendor/d3.min.js',
+        'vendor/c3.min.js',
         'vendor/switchery.min.js',
         'vendor/limitless-one.js',
         'vendor/select2.min.js',
@@ -79,17 +80,16 @@ elixir(function(mix) {
         'vendor/form_select2.js',
         'vendor/picker_date.js',
         'vendor/stepy.js',
-        'pages/admin.dashboard.user.js',
         'notification.js',
         'vendor.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
 
     .scripts([
-        '../../../node_modules/pace-progress/pace.js',
         '../../../node_modules/jquery/dist/jquery.js',
-        '../../../node_modules/jquery-ujs/src/rails.js',
         '../../../node_modules/bootstrap-less/js/bootstrap.js',
+        '../../../node_modules/pace-progress/pace.js',
+        '../../../node_modules/jquery-ujs/src/rails.js',
         '../../../node_modules/datatables.net/js/jquery.dataTables.js',
         '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
         '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
@@ -124,6 +124,7 @@ elixir(function(mix) {
       'resources/assets/vendor/bootstrap/fonts'
     ], 'public/assets/fonts')
     .copy('resources/assets/images', 'public/assets/images')
+    .copy('resources/assets/js/pages', 'public/assets/js/pages')
     .copy('resources/assets/vendor/ckeditor', 'public/assets/ckeditor')
     .copy('resources/assets/js/vendor/dhtmlxGantt', 'public/assets/dhtmlxGantt');
 });

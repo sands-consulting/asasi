@@ -50,7 +50,7 @@
                             <template v-if="notifications.length > 0">
                                 <li class="media" v-for="notification in notifications">
                                     <div class="media-left">
-                                        <a href="@{{ notification.link }}" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm"><i class="icon-checkmark4"></i></a>
+                                        <a :href="'@{{ notification.link }}'" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm"><i class="icon-checkmark4"></i></a>
                                     </div>
 
                                     <div class="media-body">
@@ -241,9 +241,9 @@
                                     <li class="{{ is_path_active('admin/qualification-codes*') }}">
                                         <a href="{{ route('admin.qualification-codes.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-codes') }}</a>
                                     </li>
-                                    <li class="{{ is_path_active('admin/qualification-types*') }}">
-                                        <a href="{{ route('admin.qualification-types.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-types') }}</a>
-                                    </li>
+                                    {{--<li class="{{ is_path_active('admin/qualification-types*') }}">--}}
+                                        {{--<a href="{{ route('admin.qualification-types.index') }}" class="legitRipple">{{ trans('menu.admin.administration.qualification-types') }}</a>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </li>
                             @endif
@@ -257,17 +257,17 @@
                                     <li class="{{ is_path_active('admin/notice-types*') }}">
                                         <a href="{{ route('admin.notice-types.index') }}" class="legitRipple">{{ trans('menu.admin.administration.notice-types') }}</a>
                                     </li>
-                                    <li class="{{ is_path_active('admin/notice-categories*') }}">
-                                        <a href="{{ route('admin.notice-categories.index') }}" class="legitRipple">{{ trans('menu.admin.administration.notice-categories') }}</a>
-                                    </li>
+                                    {{--<li class="{{ is_path_active('admin/notice-categories*') }}">--}}
+                                        {{--<a href="{{ route('admin.notice-categories.index') }}" class="legitRipple">{{ trans('menu.admin.administration.notice-categories') }}</a>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </li>
                             @endif
 
                             @if(Auth::user()->hasPermission('place:index'))
-                            <li class="{{ is_path_active('admin/places*') }}">
-                                <a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>
-                            </li>
+                            {{--<li class="{{ is_path_active('admin/places*') }}">--}}
+                                {{--<a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.administration.places') }}</span></a>--}}
+                            {{--</li>--}}
                             @endif
 
                             <li class="navigation-header">                               
