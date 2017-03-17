@@ -71,9 +71,9 @@ class LoginController extends Controller
                 return redirect(route('vendors.pending', $user->vendor->id));
             }
 
-            if($user->vendor->status == 'approved')
+            if($user->vendor->status == 'inactive' && $user->vendor->subscriptions()->count() == 0)
             {
-                return redirect(route('vendor.subscriptions.create', $user->vendor->id));
+                return redirect(route('vendors.subscriptions.create', $user->vendor->id));
             }
         }
     }

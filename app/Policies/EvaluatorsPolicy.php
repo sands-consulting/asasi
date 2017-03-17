@@ -5,56 +5,57 @@ namespace App\Policies;
 use App\Evaluation;
 use App\NoticeEValuator;
 use App\Notice;
+use App\User;
 
 class EvaluatorsPolicy
 {
-    public function index()
+    public function index(User $auth)
     {
-        return $this->user->hasPermission('evaluator:index');
+        return $auth->hasPermission('evaluator:index');
     }
 
-    public function create()
+    public function create(User $auth)
     {
-        return $this->user->hasPermission('evaluator:create');
+        return $auth->hasPermission('evaluator:create');
     }
 
-    public function edit()
+    public function edit(User $auth)
     {
-        return $this->user->hasPermission('evaluator:edit');
+        return $auth->hasPermission('evaluator:edit');
     }
 
-    public function update()
+    public function update(User $auth)
     {
-        return $this->edit();
+        return $this->edit($auth);
     }
 
-    public function assign()
+    public function assign(User $auth)
     {
-        return $this->user->hasPermission('evaluator:index');
+        return $auth->hasPermission('evaluator:index');
     }
 
-    public function assigned()
+    public function assigned(User $auth)
     {
-        return $this->user->hasPermission('evaluator:index');
+        return $auth->hasPermission('evaluator:index');
     }
 
-    public function save()
+    public function save(User $auth)
     {
-        return $this->user->hasPermissions(['evaluator:create', 'evaluator:update']);
+        return $auth->hasPermissions(['evaluator:create', 'evaluator:update']);
     }
 
-    public function request(NoticeEvaluator $evaluator)
+    public function request(User $auth, NoticeEvaluator $evaluator)
     {
-        return $this->user->id == $evaluator->user_id;
+        return $auth->id == $evaluator->user_id;
     }
 
-    public function accept(NoticeEvaluator $evaluator)
+    public function accept(User $auth, NoticeEvaluator $evaluator)
     {
-        return $this->request($evaluator);
+        return $this->request($auth, $evaluator);
     }
 
-    public function decline(NoticeEvaluator $evaluator)
+    public function decline(User $auth, NoticeEvaluator $evaluator)
     {
-        return $this->request($evaluator);
+        return $this->request($auth, $evaluator);
     }
 }

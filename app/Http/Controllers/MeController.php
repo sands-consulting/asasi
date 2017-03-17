@@ -37,11 +37,11 @@ class MeController extends Controller
 
 	public function resume(Request $request, Guard $auth)
 	{
-		$current_user = $auth->user();
-        $original_user = UserService::resume();
+		$currentUser = $auth->user();
+        $originalUser = UserService::resume();
         return redirect()
-                ->route('admin.users.show', $current_user->id)
-                ->with('notice', trans('me.flash.resumed', ['name' => $original_user->name]));
+                ->route('admin.users.show', $currentUser->id)
+                ->with('notice', trans('me.flash.resumed', ['name' => $originalUser->name]));
 	}
 
 	public function bookmarks(Request $request, BookmarksDataTable $table)

@@ -14,23 +14,23 @@
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
-		@if($news->canPublish() && Auth::user()->hasPermission('news:publish'))
+		@can('publish', $news)
 		<a href="{{ route('admin.news.publish', $news->slug) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-blue legitRipple">
 			<i class="icon-check"></i> <span>{{ trans('actions.publish') }}</span>
 		</a>
-		@endif
+		@endcan
 
-		@if($news->canUnpublish() && Auth::user()->hasPermission('news:unpublish'))
+		@can('publish', $news)
 		<a href="{{ route('admin.news.unpublish', $news->slug) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
 			<i class="icon-blocked"></i> <span>{{ trans('actions.unpublish') }}</span>
 		</a>
-		@endif
+		@endcan
 
-		@if(Auth::user()->hasPermission('news:delete'))
+		@can('destroy', $news)
 		<a href="{{ route('admin.news.destroy', $news->slug) }}" data-method="DELETE" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
 			<i class="icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
 		</a>
-		@endif
+		@endcan
 
 		<a href="{{ route('admin.news.index') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
 			<i class="icon-undo2"></i> <span>{{ trans('news.buttons.all') }}</span>
@@ -40,13 +40,8 @@
 @endsection
 
 @section('secondary-header')
-<ul class="breadcrumb breadcrumb-caret">
-    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-    <li><a href="{{ route('admin.news.index') }}">{{ trans('news.title') }}</a></li>
-    <li class="active">{{ trans('news.views.edit.title') }}</li>
-</ul>
 <ul class="breadcrumb-elements">
-    @if(Auth::user()->hasPermission('news:histories'))
+    @can('histories', $news)
 	<li>
 		<a href="{{ route('admin.news.histories', $news->id) }}" class="legitRipple">
 			<i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
@@ -54,13 +49,13 @@
 	</li>
 	@endif
 
-	@if(Auth::user()->hasPermission('news:revisions'))
+	@can('revisions', $news)
 	<li>
 		<a href="{{ route('admin.news.revisions', $news->id) }}" class="legitRipple">
 			<i class="icon-database-edit2"></i> {{ trans('revisions.title') }}
 		</a>
 	</li>
-	@endif
+	@endcan
 </ul>
 @endsection
 

@@ -6,13 +6,13 @@
 		<ul class="dropdown-menu dropdown-menu-right">
 			<li><a href="{{ route('admin.news.edit', $news->slug) }}">{{ trans('actions.edit') }}</a></li>
 
-			@if($news->canPublish() && Auth::user()->hasPermission('news:publish'))
+			@can('publish', $news)
 			<li><a href="{{ route('admin.news.publish', [$news->slug, 'redirect_to' => route('admin.news.index')]) }}" data-method="PUT">{{ trans('actions.publish') }}</a></li>
-			@endif
+			@endcan
 
-			@if($news->canUnpublish() && Auth::user()->hasPermission('news:unpublish'))
+			@can('unpublish', $news)
 			<li><a href="{{ route('admin.news.unpublish', [$news->slug, 'redirect_to' => route('admin.news.index')]) }}" data-method="PUT">{{ trans('actions.unpublish') }}</a></li>
-			@endif
+			@endcan
 		</ul>
 	</li>
 </ul>

@@ -18,7 +18,7 @@ class NoticePolicy
 
     public function show(User $user)
     {
-        return $user->hasPermissions(['notice:show']);
+        return $user->hasPermission('notice:show');
     }
 
     public function create(User $user)
@@ -51,6 +51,11 @@ class NoticePolicy
         return $user->hasPermission('notice:revisions');
     }
 
+    public function histories(User $user, Notice $notice)
+    {
+        return $user->hasPermission('notice:histories');
+    }
+
     public function destroy(User $user, Notice $notice)
     {
         return $user->hasPermission('notice:delete');
@@ -58,17 +63,17 @@ class NoticePolicy
 
     public function publish(User $user, Notice $notice)
     {
-        return $user->hasPermission('notice:publish') && $notice->canPublish();
+        return $user->hasPermission('notice:publish') && !in_array($notice->status, ['published', 'cancelled']);
     }
 
     public function unpublish(User $user, Notice $notice)
     {
-        return $user->hasPermission('notice:unpublish') && $notice->canUnpublish();
+        return $user->hasPermission('notice:unpublish') && $notice->status == 'published';
     }
 
     public function cancel(User $user, Notice $notice)
     {
-        return $user->hasPermission('notice:cancel') && $notice->canCancel();
+        return $user->hasPermission('notice:cancel') && $notice->status != 'cancelled';
     }
 
     public function saveEvaluator(User $user, Notice $notice)

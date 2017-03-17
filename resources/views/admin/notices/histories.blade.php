@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('page-title', implode(' | ', [trans('revisions.title'), $notice->number, trans('notices.title')]))
+@section('page-title', implode(' | ', [trans('user-histories.title'), $notice->number, trans('notices.title')]))
 
 @section('header')
 <div class="page-title">
-    <h4>{{ trans('revisions.title') }}</h4>
+    <h4>{{ trans('user-histories.title') }}</h4>
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">

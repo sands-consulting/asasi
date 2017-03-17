@@ -58,7 +58,7 @@ class Notice extends Model
     ];
 
     /*
-     * Search scopes
+     * Query Scopes
      */
 
     public function scopeSearch($query, $queries = [])
@@ -103,31 +103,8 @@ class Notice extends Model
         return $query->where('status', 'limited');
     }
 
-    /* 
-     * State controls 
-     */
-    public function canPublish()
-    {
-        return $this->status != 'published' && $this->status != 'cancelled';
-    }
-
-    public function canUnpublish()
-    {
-        return $this->status == 'published';
-    }
-
-    public function canCancel()
-    {
-        return $this->status != 'cancelled';
-    }
-    
-    public function canAward()
-    {
-        return $this->status != 'awarded' && $this->status != 'cancelled';
-    }
-
     /*
-     * Relationship
+     * Relationships
      */
 
     public function settings()
@@ -140,9 +117,29 @@ class Notice extends Model
         return $this->belongsTo(NoticeType::class, 'notice_type_id');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(NoticeCategory::class, 'notice_category_id');
+    }
+
     public function organization()
     {
         return $this->belongsTo(Organization::class, 'organization_id');
+    }
+
+    public function events()
+    {
+        return $this->hasMany(NoticeEvent::class);
+    }
+
+    public function qualifications()
+    {
+        return $this->hasMany(NoticeQualification::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(NoticeFile::class);
     }
 
     public function allocations()
@@ -153,29 +150,20 @@ class Notice extends Model
             ->withTimestamps();
     }
 
+    public function submissionRequirements()
+    {
+        return $this->hasMany(SubmissionRequirement::class);
+    }
+
+    public function evaluationRequirements()
+    {
+        return $this->hasMany(EvaluationRequirement::class);
+    }
+
+
     public function activities()
     {
         return $this->hasMany(NoticeActivity::class);
-    }
-
-    public function qualifications()
-    {
-        return $this->hasMany(NoticeQualification::class);
-    }
-
-    public function requirementCommercials()
-    {
-        return $this->hasMany(SubmissionRequirement::class)->where('type_id', '1');
-    }
-
-    public function requirementTechnicals()
-    {
-        return $this->hasMany(SubmissionRequirement::class)->where('type_id', '2');
-    }
-
-    public function events()
-    {
-        return $this->hasMany(NoticeEvent::class);
     }
 
     public function submissions()
@@ -188,11 +176,6 @@ class Notice extends Model
         return $this->belongsToMany(User::class, 'notice_evaluator')
             ->withPivot(['type_id', 'status'])
             ->withTimestamps();
-    }
-
-    public function evaluationRequirements()
-    {
-        return $this->hasMany(EvaluationRequirement::class);
     }
 
     public function bookmarks()
@@ -222,6 +205,15 @@ class Notice extends Model
     public static function options()
     {
         return static::pluck('name','id');
+    }
+
+    /*
+     * Attributes
+    */
+    public function getInvitationAttribute()
+    {
+        $row = $this->settings()->whereKey('invitation')->first();
+        return $row && !!$row->value;
     }
 
     public function isExpired()

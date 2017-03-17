@@ -18,6 +18,8 @@ class AllocationSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('allocation_project')->truncate();
+        DB::table('allocation_notice')->truncate();
         DB::table('allocation_types')->truncate();
         DB::table('allocations')->truncate();
 

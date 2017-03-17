@@ -2,8 +2,9 @@
 
 @section('header')
 <div class="page-title">
-    <h4>{{ trans('notices.views.admin.index.title') }}</h4>
+    <h4>{{ trans('notices.title') }}</h4>
 </div>
+@can('create', App\Notice::class)
 <div class="heading-elements">
     <div class="heading-btn-group">
         <a href="{{ route('admin.notices.create') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
@@ -11,12 +12,12 @@
         </a>
     </div>
 </div>
+@endcan
 @endsection
 
 @section('secondary-header')
 <ul class="breadcrumb breadcrumb-caret">
-    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-    <li class="active">{{ trans('notices.views.admin.index.title') }}</li>
+    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> {{ trans('app.admin') }}</a></li>
 </ul>
 @endsection
 

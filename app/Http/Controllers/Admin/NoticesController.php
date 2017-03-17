@@ -14,10 +14,11 @@ use App\DataTables\EvaluationSummaryDataTable;
 use App\DataTables\EvaluatorSummaryDataTable;
 use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
+use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\NoticeRequest;
-use App\Services\NoticesService;
-use App\Services\ProjectsService;
-use App\Services\UserHistoriesService;
+use App\Services\NoticeService;
+use App\Services\ProjectService;
+use App\Services\UserHistoryService;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -52,8 +53,8 @@ class NoticesController extends Controller
 
         $allocations = $request->only('allocations');
 
-        $notice  = NoticesService::create(new Notice, $inputs);
-        UserHistoriesService::log(Auth::user(), 'Create', $notice, $request->getClientIp());
+        $notice  = NoticeService::create(new Notice, $inputs);
+        UserHistoryService::log(Auth::user(), 'Create', $notice, $request->getClientIp());
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.created', ['name' => $notice->name]));
@@ -62,11 +63,6 @@ class NoticesController extends Controller
     public function show(Notice $notice)
     {
         return view('admin.notices.show', compact('notice'));
-    }
-
-    public function events(Notice $notice)
-    {
-        return view('admin.notices.show.events', compact('notice'));
     }
 
     public function edit(Notice $notice)
@@ -95,8 +91,8 @@ class NoticesController extends Controller
             'status'
         );
         
-        $notice  = NoticesService::update($notice, $inputs);
-        UserHistoriesService::log(Auth::user(), 'Update', $notice, $request->getClientIp());
+        $notice  = NoticeService::update($notice, $inputs);
+        UserHistoryService::log(Auth::user(), 'Update', $notice, $request->getClientIp());
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.updated', ['name' => $notice->name]));
@@ -104,14 +100,14 @@ class NoticesController extends Controller
 
     public function destroy(Request $request, Notice $notice)
     {
-        NoticesService::delete($notice);
-        UserHistoriesService::log(Auth::user(), 'Delete', $notice, $request->getClientIp(), $request->remarks);
+        NoticeService::delete($notice);
+        UserHistoryService::log(Auth::user(), 'Delete', $notice, $request->getClientIp(), $request->remarks);
         return redirect()
             ->route('admin.notices.index')
             ->with('notice', trans('notices.notices.deleted', ['name' => $notice->name]));
     }
 
-    public function histories(Notice $notice, NoticeLogsDataTable $table)
+    public function histories(Notice $notice, UserHistoriesDataTable $table)
     {
         $table->setActionable($notice);
         return $table->render('admin.notices.histories', compact('notice'));
@@ -125,8 +121,8 @@ class NoticesController extends Controller
 
     public function publish(Request $request, Notice $notice)
     {
-        NoticesService::publish($notice);
-        UserHistoriesService::log(Auth::user(), 'Publish', $notice, $request->getClientIp());
+        NoticeService::publish($notice);
+        UserHistoryService::log(Auth::user(), 'Publish', $notice, $request->getClientIp());
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.published', ['name' => $notice->name]));
@@ -134,8 +130,8 @@ class NoticesController extends Controller
 
     public function unpublish(Request $request, Notice $notice)
     {
-        NoticesService::unpublish($notice);
-        UserHistoriesService::log(Auth::user(), 'Unpublish', $notice, $request->getClientIp());
+        NoticeService::unpublish($notice);
+        UserHistoryService::log(Auth::user(), 'Unpublish', $notice, $request->getClientIp());
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.unpublished', ['name' => $notice->name]));
@@ -144,8 +140,8 @@ class NoticesController extends Controller
     public function cancel(Request $request, Notice $notice)
     {
         $input = $request->only(['remarks']);
-        NoticesService::cancel($notice);
-        UserHistoriesService::log(Auth::user(), 'Cancel', $notice, $request->getClientIp(), $input['remarks']);
+        NoticeService::cancel($notice);
+        UserHistoryService::log(Auth::user(), 'Cancel', $notice, $request->getClientIp(), $input['remarks']);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.cancelled', ['name' => $notice->name]));
@@ -220,27 +216,12 @@ class NoticesController extends Controller
 
         $project->allocations()->sync($allocations);
         
-        NoticesService::update($notice, ['status', 'awarded']);
+        NoticeService::update($notice, ['status', 'awarded']);
         
         event(new NoticeAwarded($notice, $vendor));
 
         return redirect()
             ->route('admin.projects.edit', $project->id)
             ->with('notices', trans('projects.notices.create', ['number' => $project->number]));
-    }
-
-    public function settings(Notice $notice)
-    {
-        return view('admin.notices.show.settings', compact('notice'));
-    }
-
-    public function qualificationCodes(Notice $notice)
-    {
-        return view('admin.notices.show.qualification-codes', compact('notice'));
-    }
-
-    public function files(Notice $notice)
-    {
-        return view('admin.notices.show.files', compact('notice'));
     }
 }

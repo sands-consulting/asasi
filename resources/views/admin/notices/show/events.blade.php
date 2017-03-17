@@ -3,29 +3,26 @@
         <table class="table">
             <thead>
                 <th width="5%">#</th>
-                <th>{{ trans('notices.views.admin.events.table.name') }}</th>
-                <th>{{ trans('notices.views.admin.events.table.type') }}</th>
-                <th>{{ trans('notices.views.admin.events.table.datetime') }}</th>
-                <th>{{ trans('notices.views.admin.events.table.location') }}</th>
+                <th class="col-xs-1">{{ trans('notices.views.admin.events.table.type') }}</th>
+                <th class="col-xs-2">{{ trans('notices.views.admin.events.table.datetime') }}</th>
+                <th>{{ trans('notices.views.admin.events.table.details') }}</th>
             </thead>
             <tbody>
-                @if($notice->events()->count() > 0)
-                    <?php $index = 1; ?>
-                    @foreach ($notice->events as $event)
-                        <tr>
-                            <td>{{ $index }}</td>
-                            <td>{{ $event->name }}</td>
-                            <td>{{ $event->type->name }}</td>
-                            <td>{{ $event->event_at }}</td>
-                            <td>{{ $event->location }}</td>
-                        </tr>
-                        <?php $index++; ?>
-                    @endforeach
-                @else
-                    <tr>
-                        <td colspan="5" class="text-center">{{ trans('notices.views.admin.events.empty') }}</td>
-                    </tr>
-                @endif
+                @forelse ($notice->events as $event)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $event->type->name }}</td>
+                    <td>{{ $event->event_at->format('d/m/Y H:i') }}</td>
+                    <td>
+                        <strong>{{ $event->name }}</strong><br>
+                        {!! nl2br($event->location) !!}
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="5" class="text-center">{{ trans('notices.views.admin.events.empty') }}</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

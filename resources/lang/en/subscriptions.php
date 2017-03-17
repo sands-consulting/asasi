@@ -53,7 +53,11 @@ return [
             ],
         ],
         'create' => [
-            'title' => 'Create New Subscription',
+            'title' => 'Select Package',
+            'package' => [
+                'name' => 'Name',
+                'fee' => 'Fee'
+            ]
         ],
         'edit' => [
             'title' => 'Edit',

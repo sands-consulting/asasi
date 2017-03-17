@@ -1,4 +1,4 @@
-@if(Auth::check() && Auth::user()->hasPermission('access:vendor') && !in_array(Auth::user()->vendor->status, ['active', 'inactive', 'blacklisted']))
+@if(Auth::check() && Auth::user()->hasPermission('access:vendor') && !in_array(Auth::user()->vendor->status, ['active', 'blacklisted']) && Auth::user()->vendor->subscriptions()->count() == 0)
 <div class="wizard-vendor">
     <div class="wizard">
         <div class="steps clearfix">
@@ -42,9 +42,9 @@
                 </li>
                 @endif
 
-                @if(Auth::user()->vendor->status == 'approved')
+                @if(Auth::user()->vendor->status == 'inactive')
                 <li role="tab" class="last current" aria-disabled="false" aria-selected="true">
-                    <a href="#">
+                    <a href="{{ route('vendors.subscriptions.create', Auth::user()->vendor->id) }}">
                         <span class="number">3</span>
                         {{ trans('app.widgets.portal.wizard.subscription') }}
                     </a>

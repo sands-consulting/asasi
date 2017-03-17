@@ -195,9 +195,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Asasi Core ServiceProviders
+         * Asasi Core Service Providers
          */
         App\Providers\AsasiServiceProvider::class,
+        App\Providers\Asasi\NotificationsServiceProvider::class,
         App\Providers\Asasi\OrganizationsServiceProvider::class,
         App\Providers\Asasi\PlacesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,
@@ -205,33 +206,35 @@ return [
         App\Providers\Asasi\UsersServiceProvider::class,
 
         /*
-         * Modules
+         * Prompt Service Providers
          */
         App\Providers\Modules\AllocationsServiceProvider::class,
         App\Providers\Modules\DashboardServiceProvider::class,
-        App\Providers\Modules\PackagesServiceProvider::class,
         App\Providers\Modules\NewsServiceProvider::class,
-        App\Providers\Modules\NoticesServiceProvider::class,
-        App\Providers\Modules\NoticeTypesServiceProvider::class,
-        App\Providers\Modules\NoticeCategoriesServiceProvider::class,
-        App\Providers\Modules\NoticeEventsServiceProvider::class,
-        App\Providers\Modules\NoticeEvaluatorsServiceProvider::class,
-        App\Providers\Modules\NoticeAllocationServiceProvider::class,
-        App\Providers\Modules\NotificationsServiceProvider::class,
-        App\Providers\Modules\QualificationCodesServiceProvider::class,
-        App\Providers\Modules\SubscriptionsServiceProvider::class,
+        App\Providers\Modules\ReportsServiceProvider::class,
+        App\Providers\Modules\QualificationsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
-        App\Providers\Modules\CartServiceProvider::class,
-        App\Providers\Modules\RequirementCommercialsServiceProvider::class,
+
+        /*
+         * Subscription Service Providers
+         */
+        App\Providers\Modules\SubscriptionsServiceProvider::class,
+        App\Providers\Modules\PackagesServiceProvider::class,
+
+        /*
+         * Notice Service Providers 
+         */
+        App\Providers\Modules\NoticesServiceProvider::class,
+        App\Providers\Modules\NoticeAwardsServiceProvider::class,
+        App\Providers\Modules\NoticeEvaluationsServiceProvider::class,
+        App\Providers\Modules\NoticePurchasesServiceProvider::class,
+        App\Providers\Modules\NoticeSubmissionsServiceProvider::class,
+
+        /*
+         * Project Service Providers
+         */
         App\Providers\Modules\ProjectsServiceProvider::class,
         App\Providers\Modules\ProjectMilestonesServiceProvider::class,
-        App\Providers\Modules\RequirementTechnicalsServiceProvider::class,
-        App\Providers\Modules\RulesServiceProvider::class,
-        App\Providers\Modules\SubmissionServiceProvider::class,
-        App\Providers\Modules\EvaluationServiceProvider::class,
-        App\Providers\Modules\EvaluationRequirementServiceProvider::class,
-        App\Providers\Modules\EvaluatorServiceProvider::class,
-        App\Providers\Modules\ReportsServiceProvider::class,
     ],
 
     /*

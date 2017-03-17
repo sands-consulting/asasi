@@ -2,6 +2,7 @@
 
 namespace App\Providers\Modules;
 
+use Gate;
 use App\News;
 use Illuminate\Support\ServiceProvider;
 
@@ -9,6 +10,7 @@ class AllocationsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        Gate::policy("App\Allocation", "App\Policies\AllocationPolicy");
         app('policy')
             ->register('App\Http\Controllers\Admin\AllocationsController', 'App\Policies\AllocationPolicy');
         app('policy')

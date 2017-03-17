@@ -92,7 +92,7 @@ class VendorsServiceProvider extends ServiceProvider
                     'as'    => 'vendor-types.revisions',
                     'uses'  => 'VendorTypesController@revisions'
                 ]);
-                $router->get('vendors/{vendor}/histories', [
+                $router->get('vendor-types/{vendor}/histories', [
                     'as'    => 'vendor-types.histories',
                     'uses'  => 'VendorTypesController@histories'
                 ]);

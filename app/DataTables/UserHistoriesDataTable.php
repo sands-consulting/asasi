@@ -29,7 +29,7 @@ class UserHistoriesDataTable extends DataTable
 
     public function query()
     {
-        $query = $this->actionable->logs()->with('user');
+        $query = $this->actionable->histories()->with('user');
         return $this->applyScopes($query);
     }
 
@@ -45,28 +45,28 @@ class UserHistoriesDataTable extends DataTable
     {
         return [
             [
-                'data'  => 'action',
-                'title' => trans('user-logs.attributes.action'),
-            ],
-            [
-                'data'  => 'ip_address',
-                'title' => trans('user-logs.attributes.ip_address'),
+                'data'  => 'created_at',
+                'title' => trans('user-histories.attributes.created_at'),
             ],
             [
                 'data'          => 'user',
-                'title'         => trans('user-logs.attributes.user'),
+                'title'         => trans('user-histories.attributes.user'),
                 'searchable'    => false,
                 'orderable'     => false
             ],
             [
-                'data'  => 'created_at',
-                'title' => trans('user-logs.attributes.created_at'),
+                'data'  => 'action',
+                'title' => trans('user-histories.attributes.action'),
+            ],
+            [
+                'data'  => 'ip_address',
+                'title' => trans('user-histories.attributes.ip_address'),
             ],
         ];
     }
 
     protected function filename()
     {
-        return 'user_logs_' . time();
+        return 'user_histories_' . time();
     }
 }

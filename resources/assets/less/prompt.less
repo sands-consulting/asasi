@@ -356,3 +356,53 @@ a {
   -ms-flex-direction: column;
   flex-direction: column;
 }
+
+
+.qualification-wrap {
+  .panel {
+      margin: 0;
+
+      .panel-heading {
+        padding: 12px 20px;
+      }
+  }
+
+  .qualification-rule {
+    margin: 20px;
+
+    span {
+      font-size: 11px;
+      font-weight: bold;
+      color: #fff;
+      border-radius: 4px;
+      padding: 3px 6px;
+    }
+
+    &-AND {
+      span {
+        background: @color-danger-700;
+      }
+    }
+
+    &-OR {
+      span {
+        background: @color-blue-700;
+      }
+    }
+  }
+
+  .qualification-group {
+    background: #ddd;
+    padding: 20px;
+    border-radius: 4px;
+ }
+}
+
+.list-prompt-side-tab {
+  .active {
+    a {
+      color: #fff;
+      background: @color-blue-700;
+    }
+  }
+}

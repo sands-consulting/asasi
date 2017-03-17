@@ -4,12 +4,14 @@ namespace App\Providers\Modules;
 
 use App\News;
 use App\NewsCategory;
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class NewsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        Gate::policy("App\News", "App\Policies\NewsPolicy");
         app('policy')->register('App\Http\Controllers\Admin\NewsController', 'App\Policies\NewsPolicy');
         app('policy')->register('App\Http\Controllers\Admin\NewsCategoriesController', 'App\Policies\NewsCategoriesPolicy');
     }

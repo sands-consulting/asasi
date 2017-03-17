@@ -8,7 +8,7 @@
             <span class="label label-success">{{ trans('notices.views.admin.show.invitation') }}</span>
             @endif
 
-             @if(($advertise = $notice->settings()->whereKey('advertise')->first()) && $advertise->value == 1)
+            @if(($advertise = $notice->settings()->whereKey('advertise')->first()) && $advertise->value == 1)
             <span class="label label-danger">{{ trans('notices.views.admin.show.advertise') }}</span>
             @endif
 

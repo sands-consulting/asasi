@@ -4,55 +4,70 @@
 
 @section('header')
 <div class="page-title">
-    <h4>
-        {{ link_to_route('admin.notices.index', trans('notices.title')) }} /
-        <span class="text-semibold">{{ $notice->number }}</span>
-    </h4>
+    <h4>{{ $notice->number }}</h4>
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
-        @if($notice->canPublish() && Auth::user()->hasPermission('notice:publish'))
+        @can('publish', $notice)
         <a href="{{ route('admin.notices.publish', $notice->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-blue legitRipple">
             <i class="icon-check"></i> <span>{{ trans('actions.publish') }}</span>
         </a>
-        @endif
+        @endcan
 
-        @if($notice->canUnpublish() && Auth::user()->hasPermission('notice:unpublish'))
+        @can('unpublish', $notice)
         <a href="{{ route('admin.notices.unpublish', $notice->id) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-warning legitRipple">
             <i class="icon-minus-circle2"></i> <span>{{ trans('actions.unpublish') }}</span>
         </a>
-        @endif
+        @endcan
         
-        @if($notice->canCancel())
+        @can('cancel', $notice)
         <a href="{{ route('admin.notices.cancel', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#cancel-modal">
             <i class=" icon-cancel-circle2"></i> <span>{{ trans('actions.cancel') }}</span>
         </a>
-        @endif
+        @endcan
 
-        @if(Auth::user()->hasPermission('notice:delete'))
+        @can('destroy', $notice)
         <a href="#" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#delete-modal">
             <i class=" icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
         </a>
         @endif
 
-        @if(Auth::user()->hasPermission('notice:update'))
+        @can('edit', $notice)
         <a href="{{ route('admin.notices.edit', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class="icon-pencil5"></i> <span>{{ trans('actions.edit') }}</span>
         </a>
-        @endif
+        @endcan
 
+        @can('index', App\Notice::class)
         <a href="{{ route('admin.notices.index') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
         </a>
+        @endcan
     </div>
 </div>
 @endsection
 
 @section('secondary-header')
 <ul class="breadcrumb breadcrumb-caret">
-    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> {{ trans('app.admin') }}</a></li>
     <li><a href="{{ route('admin.notices.index') }}">{{ trans('notices.title') }}</a></li>
-    <li class="active">{{ trans('notices.views.admin.show.title') }}</li>
+</ul>
+<ul class="breadcrumb-elements">
+    @can('histories', $notice)
+    <li>
+        <a href="{{ route('admin.notices.histories', $notice->id) }}" class="legitRipple">
+            <i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
+        </a>
+    </li>
+    @endcan
+
+    @can('revisions', $notice)
+    <li>
+        <a href="{{ route('admin.notices.revisions', $notice->id) }}" class="legitRipple">
+            <i class="icon-database-edit2"></i> {{ trans('revisions.title') }}
+        </a>
+    </li>
+    @endcan
 </ul>
 @endsection
 
@@ -61,20 +76,30 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-3">
-        @include('admin.notices.show.nav')
+        @include('admin.notices.show.menu')
     </div>
 
     <div class="col-xs-12 col-md-9">
-        @if(is_route_active('admin.notices.show'))
-        @include('admin.notices.show.details')
-        @include('admin.notices.show.events')
-        @else
-        @yield('show')
-        @endif
+        <div class="tab-content">
+            @include('admin.notices.show.details')
+            @include('admin.notices.show.events')
+            @include('admin.notices.show.qualifications')
+            @include('admin.notices.show.files')
+
+            @include('admin.notices.show.allocations')
+            @include('admin.notices.show.submission-criterias')
+            @include('admin.notices.show.evaluation-criterias')
+
+            @include('admin.notices.show.eligibles')
+            @include('admin.notices.show.purchases')
+            @include('admin.notices.show.submissions')
+
+            @include('admin.notices.show.evaluations')
+            @include('admin.notices.show.award')
+        </div>
     </div>
 </div>
 
-{{-- Modals --}}
-@include('admin.notices.modals.cancel')
-@include('admin.notices.modals.delete')
+@include('admin.notices.show.modals.cancel')
+@include('admin.notices.show.modals.delete')
 @endsection

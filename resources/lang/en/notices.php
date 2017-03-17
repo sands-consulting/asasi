@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Notice',
+    'title' => 'Notices',
 
     'attributes' => [
         'name' => 'Name',
@@ -34,21 +34,26 @@ return [
         'receipt' => 'Receipt',
     ],
 
-    'navs' => [
+    'menu' => [
         'details' => 'Details',
         'events' => 'Events',
         'qualifications' => 'Qualifications',
         'files' => 'Files',
 
+        'allocations' => 'Allocations',
+        'evaluation-criterias' => 'Evaluation Criterias',
+        'submission-criterias' => 'Submission Criterias',
+
+        'invitations' => 'Invitatis',
         'eligibles' => 'Eligibles',
         'purchases' => 'Purchases',
         'submissions' => 'Submissions',
+        
+        'evaluators' => 'Evaluators',
         'evaluations' => 'Evaluations',
         'award' => 'Award',
 
         'settings' => 'Settings',
-        'evaluators' => 'Evaluators',
-        'evaluation_criterias' => 'Evaluation Criterias'
     ],
 
     'notices' => [
@@ -63,12 +68,20 @@ return [
         'submission_saved' => 'Your submission for Notice :number successfully saved.',
         'submission_submitted' => 'Your submission for Notice :number successfully submitted.',
     ],
+
+    'file_types' => [
+        'internal' => 'Internal Use Only',
+        'public' => 'For Public View',
+        'purchase' => 'For Purchase Only',
+    ],
+
+    'settings' => [
+        'invitation' => 'By Invitation',
+        'advertise' => 'Advertise Only',
+    ],
     
     'views' => [
         'index' => [
-            'notices' => [
-                'title' => 'All Notices'
-            ]
         ],
         'show' => [
             'back' => 'All Notices',
@@ -79,11 +92,6 @@ return [
                 'title' => 'Notices',
                 'keywords' => 'Keywords',
                 'status' => 'Status',
-            ],
-            'show' => [
-                'title' => 'View Notice',
-                'invitation' => 'By Invitation',
-                'advertise' => 'Advertise Only',
             ],
             'create' => [
                 'title' => 'New',
@@ -96,13 +104,55 @@ return [
             ],
             'revisions' => [
             ],
+
+            'allocations' => [
+                
+            ],
+
+            'allocations' => [
+                'empty' => 'No allocation information.',
+                'table' => [
+                    'type' => 'Type',
+                    'name' => 'Name',
+                    'amount' => 'Amount'
+                ]
+            ],
+
+            'evaluation-criterias' => [
+                'empty' => 'No criteria defined.',
+                'table' => [
+                    'title' => 'Title',
+                    'full-score' => 'Full Score'
+                ]
+            ],
+
             'events' => [
                 'empty' => 'No event information.',
                 'table' => [
-                    'name' => 'Name',
                     'type' => 'Type',
                     'datetime' => 'Date & Time',
-                    'location' => 'Location'
+                    'details' => 'Details'
+                ]
+            ],
+
+            'files' => [
+                'empty' => 'No file uploaded.',
+                'table' => [
+                    'type' => 'Type',
+                    'name' => 'Name',
+                    'size' => 'File Size'
+                ]
+            ],
+
+            'submission-criterias' => [
+                'empty' => 'No criteria defined.',
+            ],
+
+            'qualifications' => [
+                'empty' => 'No qualification information.',
+                'rules' => [
+                    'AND' => 'AND',
+                    'OR' => 'OR'
                 ]
             ]
         ]

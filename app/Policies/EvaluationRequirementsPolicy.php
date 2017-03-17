@@ -4,21 +4,22 @@ namespace App\Policies;
 
 use App\Evaluation;
 use App\Notice;
+use App\User;
 
 class EvaluationRequirementsPolicy
 {
-    public function index()
+    public function index(User $auth)
     {
-        return $this->user->hasPermission('evaluation:index');
+        return $auth->hasPermission('evaluation:index');
     }
 
-    public function create(Notice $notice)
+    public function create(User $auth, Notice $notice)
     {
-        return $this->user->hasPermission('evaluation:index');
+        return $auth->hasPermission('evaluation:index');
     }
 
-    public function edit(Notice $requirement)
+    public function edit(User $auth, Notice $notice)
     {
-        return $this->user->hasPermission('evaluation:index');
+        return $auth->hasPermission('evaluation:index');
     }
 }

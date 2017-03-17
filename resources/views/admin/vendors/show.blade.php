@@ -4,8 +4,7 @@
 <div class="page-title">
     <h4>
         {{ link_to_route('admin.vendors.index', trans('vendors.title')) }} /
-        {{ link_to_route('admin.vendors.show', $vendor->name, $vendor->id) }} /
-        <span class="text-semibold">{{ trans('vendors.views.show.title') }}</span>
+        <span class="text-semibold">{{ $vendor->name }}</span>
     </h4>
 </div>
 <div class="heading-elements">

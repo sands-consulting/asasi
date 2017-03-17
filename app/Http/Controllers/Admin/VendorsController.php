@@ -11,9 +11,9 @@ use App\Events\VendorRejected;
 use App\Http\Requests\VendorRequest;
 use App\Notificators\VendorApprovedNotificator;
 use App\Notificators\VendorRejectedNotificator;
-use App\Services\VendorsService;
-use App\Services\UsersService;
-use App\Services\UserHistoriesService;
+use App\Services\VendorService;
+use App\Services\UserService;
+use App\Services\UserHistoryService;
 use App\Setting;
 use App\User;
 use App\Vendor;
@@ -40,7 +40,7 @@ class VendorsController extends Controller
     public function store(VendorRequest $request)
     {
         $inputs = $request->all();
-        $vendor = VendorsService::create(new Vendor, $inputs);
+        $vendor = VendorService::create(new Vendor, $inputs);
 
         return redirect()
             ->route('vendors.pending', $vendor->id)
@@ -56,8 +56,8 @@ class VendorsController extends Controller
     {
         $inputs = $request->all();
 
-        $vendor = VendorsService::update($vendor, $inputs);
-        UserHistoriesService::log($request->user(), 'Update', $vendor, $request->getClientIp());
+        $vendor = VendorService::update($vendor, $inputs);
+        UserHistoryService::log($request->user(), 'Update', $vendor, $request->getClientIp());
         return redirect()
             ->route('admin.vendors.edit', $vendor->id)
             ->with('notice', trans('vendors.notices.updated', ['name' => $vendor->name]));
@@ -65,11 +65,11 @@ class VendorsController extends Controller
 
     public function destroy(Request $request, Vendor $vendor)
     {
-        VendorsService::delete($vendor);
-        UserHistoriesService::log($request->user(), 'Delete', $vendor, $request->getClientIp());
+        VendorService::delete($vendor);
+        UserHistoryService::log($request->user(), 'Delete', $vendor, $request->getClientIp());
         if ($vendor->users) {
             foreach($vendor->users as $user) {
-                UsersService::delete($user);
+                UserService::delete($user);
             }
         }
 
@@ -93,8 +93,8 @@ class VendorsController extends Controller
     public function approve(Request $request, Vendor $vendor)
     {
         $inputs = $request->only(['redirect_to']);
-        VendorsService::update($vendor, $inputs, ['status' => 'inactive']);
-        UserHistoriesService::log($request->user(), 'Approve', $vendor, $request->getClientIp());
+        VendorService::update($vendor, $inputs, ['status' => 'inactive']);
+        UserHistoryService::log($request->user(), 'Approve', $vendor, $request->getClientIp());
 
         Event::fire(new VendorApproved($vendor));
 
@@ -106,8 +106,8 @@ class VendorsController extends Controller
     public function reject(Request $request, Vendor $vendor)
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
-        VendorsService::update($vendor, $inputs, ['status' => 'rejected']);
-        UserHistoriesService::log($request->user(), 'Reject', $vendor, $request->getClientIp(), $inputs['remarks']);
+        VendorService::update($vendor, $inputs, ['status' => 'rejected']);
+        UserHistoryService::log($request->user(), 'Reject', $vendor, $request->getClientIp(), $inputs['remarks']);
 
         Event::fire(new VendorRejected($vendor, $inputs['remarks']));
         
@@ -120,15 +120,15 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
         
-        VendorsService::update($vendor, $inputs, ['status' => 'suspended']);
+        VendorService::update($vendor, $inputs, ['status' => 'suspended']);
 
         if ($vendor->users) {
             foreach($vendor->users as $user) {
-                UsersService::suspend($user);
+                UserService::suspend($user);
             }
         }
 
-        UserHistoriesService::log($request->user(), 'Suspend', $vendor, $request->getClientIp(), $inputs['remarks']);
+        UserHistoryService::log($request->user(), 'Suspend', $vendor, $request->getClientIp(), $inputs['remarks']);
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -139,13 +139,13 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         
-        VendorsService::update($vendor, $inputs, ['status' => 'active']);
+        VendorService::update($vendor, $inputs, ['status' => 'active']);
 
         foreach($vendor->users as $user) {
-            UsersService::activate($user);
+            UserService::activate($user);
         }
 
-        UserHistoriesService::log($request->user(), 'Activate Vendor', $vendor, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'Activate Vendor', $vendor, $request->getClientIp());
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -156,8 +156,8 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
         
-        VendorsService::update($vendor, $inputs, ['status' => 'blacklisted']);
-        UserHistoriesService::log($request->user(), 'Blacklist', $vendor, $request->getClientIp(), $inputs['remarks']);
+        VendorService::update($vendor, $inputs, ['status' => 'blacklisted']);
+        UserHistoryService::log($request->user(), 'Blacklist', $vendor, $request->getClientIp(), $inputs['remarks']);
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -168,8 +168,8 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         
-        VendorsService::update($vendor, $inputs, ['status' => 'active']);
-        UserHistoriesService::log($request->user(), 'Unblacklist', $vendor, $request->getClientIp());
+        VendorService::update($vendor, $inputs, ['status' => 'active']);
+        UserHistoryService::log($request->user(), 'Unblacklist', $vendor, $request->getClientIp());
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))

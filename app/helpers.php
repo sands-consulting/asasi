@@ -11,11 +11,6 @@ function is_route_active($routeNamed, $active = 'active')
     return $route->currentRouteName() === $routeNamed ? $active : '';
 }
 
-/**
- * Titleize the given value
- * @param  String $value
- * @return String
- */
 function str_titleize($value)
 {
     $value = str_replace('-', ' ', $value);
@@ -23,26 +18,16 @@ function str_titleize($value)
     return \Illuminate\Support\Str::title($value);
 }
 
-if (! function_exists('alternator')) {
-    /**
-     * Alternator
-     *
-     * Allows strings to be alternated. See docs...
-     *
-     * @param string (as many parameters as needed)
-     * @return string
-     */
-    function alternator($args)
-    {
-        static $i;
+function alternator($args)
+{
+    static $i;
 
-        if (func_num_args() === 0) {
-            $i = 0;
-            return '';
-        }
-        $args = func_get_args();
-        return $args[($i++ % count($args))];
+    if (func_num_args() === 0) {
+        $i = 0;
+        return '';
     }
+    $args = func_get_args();
+    return $args[($i++ % count($args))];
 }
 
 function flash_messages()
@@ -125,4 +110,18 @@ function get_initial($str, $length = 2)
     }
 
     return $initial;
+}
+
+function setting($key, $default=null)
+{
+    $row = \App\Setting::whereKey($key)->first();
+
+    if($row)
+    {
+        return $row->value;
+    }
+    else
+    {
+        return $default;
+    }
 }

@@ -8,6 +8,8 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AllocationPolicy
 {
+    use HandlesAuthorization;
+
     public function index(User $user)
     {
         return $user->hasPermission('allocation:index');

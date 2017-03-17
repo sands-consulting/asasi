@@ -397,20 +397,42 @@ class AclSeeder extends Seeder
                 'display_name'  => 'Admin',
                 'description'   => 'System Administrator. Should be able to do everything.',
             ],
+
             [
-                'name'         => 'vendor',
+                'name'         => 'vendor-user',
                 'display_name' => 'Vendor',
-                'description'  => 'Vendor user role',
+                'description'  => 'Access vendor portal.',
             ],
             [
                 'name'         => 'vendor-admin',
                 'display_name' => 'Vendor Admin',
-                'description'  => 'Vendor admin has access to add new vendor user.',
+                'description'  => 'Access vendor portal and manage vendor user',
+            ],
+
+            [
+                'name'          => 'organization-admin',
+                'display_name'  => 'Organization Admin',
+                'description'   => 'Able to manage organization allocations, notices, projects and users.'
             ],
             [
-                'name'          => 'evaluator',
-                'display_name'  => 'Evaluator',
-                'description'   => 'Evaluate any notice submission.',
+                'name'          => 'notice-staff',
+                'display_name'  => 'Notice Staff',
+                'description'   => 'Manage organization notices.'
+            ],
+            [
+                'name'          => 'finance-staff',
+                'display_name'  => 'Finance Staff',
+                'description'   => 'Manage organization allocations.'
+            ],
+            [
+                'name'          => 'project-manager',
+                'display_name'  => 'Project Manager',
+                'description'   => 'Manage organization projects.'
+            ],
+            [
+                'name'          => 'submission-evaluator',
+                'display_name'  => 'Submission Evaluator',
+                'description'   => 'Evaluation vendor notice submissions.',
             ]
         ];
 
@@ -442,11 +464,10 @@ class AclSeeder extends Seeder
             'access:cart',
         ])->pluck('id')->toArray());
 
-        $evaluator = Role::whereName('evaluator')->first();
+        $evaluator = Role::whereName('submission-evaluator')->first();
         $evaluator->permissions()->attach(Permission::whereIn('name', [
             'access:admin',
             'evaluation:index',
-            'evaluation:submission',
             'evaluation:create',
             'evaluation:update'
         ])->pluck('id')->toArray());
