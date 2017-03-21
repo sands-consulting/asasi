@@ -6,32 +6,69 @@ use App\Evaluation;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * Class EvaluationPolicy
+ * @package App\Policies
+ */
 class EvaluationPolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * @param User $auth
+     * @return bool
+     */
     public function index(User $auth)
     {
         return $auth->hasPermission('evaluation:index');
     }
 
-    public function submission(User $auth)
+    /**
+     * @param User $auth
+     * @return bool
+     */
+    public function show(User $auth, Evaluation $evaluation)
     {
-        return $auth->hasPermission('evaluation:submission');
-    }
-    
-    public function view(User $auth)
-    {
-        return true;
+        return $auth->hasPermission('evaluation:show');
     }
 
-    public function edit(User $auth)
+    /**
+     * @param User $auth
+     * @param Evaluation $evaluation
+     * @return bool
+     */
+    public function edit(User $auth, Evaluation $evaluation)
     {
         return $auth->hasPermission('evaluation:update');
     }
 
-    public function update(User $auth)
+    /**
+     * @param User $auth
+     * @param Evaluation $evaluation
+     * @return bool
+     */
+    public function update(User $auth, Evaluation $evaluation)
     {
-        return $this->edit($auth);
+        return $this->edit($auth, $evaluation);
+    }
+
+    /**
+     * @param User $auth
+     * @param Evaluation $evaluation
+     * @return bool
+     */
+    public function revisions(User $auth, Evaluation $evaluation)
+    {
+        return $auth->hasPermission('evaluation:revisions');
+    }
+
+    /**
+     * @param User $auth
+     * @param Evaluation $evaluation
+     * @return bool
+     */
+    public function histories(User $auth, Evaluation $evaluation)
+    {
+        return $auth->hasPermission('evaluation:histories');
     }
 }

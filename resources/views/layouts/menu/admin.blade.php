@@ -17,9 +17,7 @@
 
     @can('index', App\Evaluation::class)
     <li class="{{ is_path_active('admin/evaluations*') }}">
-        <a href="{{ route('admin.evaluations.index') }}" class="legitRipple">
-            <i class="icon-pencil"></i> <span>{{ trans('menu.admin.evaluations.index') }}</span>
-        </a>
+        <a href="{{ route('admin.evaluations.index') }}" class="legitRipple"><i class="icon-pencil"></i> <span>{{ trans('menu.admin.evaluations') }}</span></a>
     </li>
     @endcan
 
