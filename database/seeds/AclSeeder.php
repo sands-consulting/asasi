@@ -40,9 +40,6 @@ class AclSeeder extends Seeder
             ['organization:histories', 'View organization histories'],
             ['organization:archives', 'List deleted organziations'],
             ['organization:duplicate', 'Duplicate existing organization'],
-            ['organization:activate', 'Activate an organization'],
-            ['organization:deactivate', 'Deactivate an organization'],
-            ['organization:suspend', 'Suspend an organization'],
 
             // Permission
             ['permission:index', 'List all permissions'],

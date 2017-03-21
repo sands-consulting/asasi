@@ -129,26 +129,4 @@ class OrganizationPolicy
     {
         return $user->hasPermission('organization:duplicate');
     }
-
-    /**
-     * @param User $user
-     * @param Organization $organization
-     * @return bool
-     */
-    public function activate(User $user, Organization $organization)
-    {
-        return $user->hasPermission('organization:activate') 
-                && $organization->status != 'active';
-    }
-
-    /**
-     * @param User $user
-     * @param Organization $organization
-     * @return bool
-     */
-    public function suspend(User $user, Organization $organization)
-    {
-        return $user->hasPermission('organization:suspend')
-                && $organization->status != 'suspended';
-    }
 }

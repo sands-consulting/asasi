@@ -38,17 +38,13 @@ class OrganizationsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->resource('organizations', 'OrganizationsController');
                 $router->get('organizations/{organization}/histories', 'OrganizationsController@histories')
                     ->name('organizations.histories');
                 $router->get('organizations/{organization}/revisions', 'OrganizationsController@revisions')
                     ->name('organizations.revisions');
-                $router->put('organizations/{organization}/deactivate', 'OrganizationsController@deactivate')
-                    ->name('organizations.deactivate');
-                $router->put('organizations/{organization}/suspend', 'OrganizationsController@suspend')
-                    ->name('organizations.suspend');
                 $router->get('organizations/archives', 'OrganizationsController@archives')
                     ->name('organizations.archives');
+                $router->resource('organizations', 'OrganizationsController');
             });
         });
     }
