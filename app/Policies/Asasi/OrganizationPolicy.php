@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace App\Policies\Asasi;
 
 use App\Organization;
 use App\User;
@@ -12,7 +12,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
  */
 class OrganizationPolicy
 {
-    use HandlesAuthorization
+    use HandlesAuthorization;
 
     /**
      * @param User $user

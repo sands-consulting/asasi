@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace App\Policies\Asasi;
 
 use App\User;
 use App\UserBlacklist;
@@ -12,7 +12,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
  */
 class UserBlacklistPolicy
 {
-    use HandlesAuthorization
+    use HandlesAuthorization;
 
     /**
      * @param User $auth
