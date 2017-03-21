@@ -19,7 +19,6 @@ class SubscriptionsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        // Module Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'
@@ -48,7 +47,6 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 $router->resource('subscriptions', 'SubscriptionsController');
 
                 // Package
-
                 $router->put('packages/{package}/restore', 'PackagesController@restore')
                     ->name('packages.restore');
                 $router->get('packages/{package}/revisions', 'PackagesController@revisions')

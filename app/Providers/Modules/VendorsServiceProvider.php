@@ -16,14 +16,9 @@ class VendorsServiceProvider extends ServiceProvider
         app('policy')->register('App\Http\Controllers\VendorsController', 'App\Policies\VendorPolicy');
         app('policy')->register('App\Http\Controllers\VendorTypesController', 'App\Policies\VendorTypePolicy');
     }
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
+
     public function register()
     {
-      // Module Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'

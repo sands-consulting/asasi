@@ -20,7 +20,6 @@ class NoticesServiceProvider extends ServiceProvider
 
     public function register()
     {
-        // Module Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'
@@ -47,13 +46,6 @@ class NoticesServiceProvider extends ServiceProvider
                     ->name('notices.unpublish');
                 $router->put('notices/{notice}/cancel', 'NoticesController@cancel')
                     ->name('notices.cancel');
-
-                # To Remove
-
-                $router->post('notices/{notice}/award/{vendors}', 'NoticesController@award')
-                    ->name('notices.award');
-                $router->post('notices/{notice}/award/{vendors}', 'NoticesController@storeAward')
-                    ->name('notices.store-award');
 
                 $router->resource('notices', 'NoticesController');
 

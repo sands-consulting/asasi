@@ -2,25 +2,23 @@
 
 namespace App\Providers\Modules;
 
-use Illuminate\Support\ServiceProvider;
 use App\Filters\CustomSave;
+use Gate;
+use Illuminate\Support\ServiceProvider;
 
 class NoticeSubmissionsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        Gate::policy('App\Submission', 'SubmissionPolicy');
+
+        app('policy')->register('App\Http\Controllers\Admin\SubmissionsController', 'App\Policies\SubmissionPolicy');
+
         app('uploadable')->registerFilter('custom-save', CustomSave::class);
-        app('policy')->register('App\Http\Controllers\Admin\SubmissionsController', 'App\Policies\SubmissionsPolicy');
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        // module routing
         app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin.'], function ($router) {
                 $router->resource('notices.submissions', 'NoticeSubmissionsController');

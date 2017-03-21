@@ -31,8 +31,6 @@ class TransactionsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        // module routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'
@@ -64,6 +62,7 @@ class TransactionsServiceProvider extends ServiceProvider
 
                 $router->resource('transactions', 'TransactionsController');
 
+                // Payment Gateway
                 $router->put('payment-gateways/{payment_gateway}/restore', 'PaymentGatewaysController@restore')
                     ->name('payment-gateways.restore');
                 $router->get('payment-gateways/{payment_gateway}/revisions', 'PaymentGatewaysController@revisions')
@@ -77,6 +76,7 @@ class TransactionsServiceProvider extends ServiceProvider
 
                 $router->resource('payment-gateways', 'PaymentGatewaysController');
 
+                // Tax Code
                 $router->put('tax-codes/{tax_code}/restore', 'TaxCodesController@restore')
                     ->name('payment-gateways.restore');
                 $router->get('tax-codes/{tax_code}/revisions', 'TaxCodesController@revisions')

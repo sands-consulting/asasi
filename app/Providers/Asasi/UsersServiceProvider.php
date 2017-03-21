@@ -59,7 +59,7 @@ class UsersServiceProvider extends ServiceProvider
 
                 $router->resource('users', 'UsersController');
                 
-                // To Do
+                // User Blacklist - To Do
                 $router->resource('users.blacklists', 'UserBlacklistsController');
             });
 

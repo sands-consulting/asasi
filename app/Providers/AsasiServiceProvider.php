@@ -36,10 +36,6 @@ class AsasiServiceProvider extends ServiceProvider
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web',
         ], function ($router) {
-            $router->get('settings', 'SettingsController@edit')
-                ->name('settings');
-            $router->put('settings', 'SettingsController@update');
-
             $router->get('set/{locale}', function($locale) {
                 return redirect()->back()->withCookie(cookie()->forever('locale', $locale));
             });

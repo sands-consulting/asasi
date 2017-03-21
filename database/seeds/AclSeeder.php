@@ -211,6 +211,7 @@ class AclSeeder extends Seeder
             ['allocation:revisions', 'View allocation revisions'],
             ['allocation:histories', 'View allocation histories'],
             ['allocation:archives', 'List all deleted allocations'],
+            
             ['allocation:organization', 'Allow to manage allocation with organization'],
 
             // Allocation Type
@@ -224,21 +225,10 @@ class AclSeeder extends Seeder
             ['allocation-type:revisions', 'View allocation type revisions'],
             ['allocation-type:histories', 'View allocation type histories'],
 
-            // Evaluator
-            ['evaluator:index', 'List of evaluator\'s.'],
-            ['evaluator:create', 'Assign evaluator to notice.'],
-            ['evaluator:edit', 'Assign evaluator to notice.'],
-            ['evaluator:delete', "Delete notice evaluator."],
-            ['evaluator:assign', 'Assign evaluator to submission.'],
-            ['evaluator:revisions', 'View evaluator revisions'],
-            ['evaluator:histories', 'View evaluator histories'],
-
             // Evaluation
             ['evaluation:index', 'View list of notices assigned.'],
-            ['evaluation:submission', 'View list of submisssion.'],
-            ['evaluation:create', 'Create new evaluation.'],
-            ['evaluation:update', 'Update existing evaluation.'],
-            ['evaluation:delete', 'Delete existing evaluation.'],
+            ['evaluation:show', 'View evaluation details'],
+            ['evaluation:update', 'Update evaluation details'],
 
             // Notice
             ['notice:index', 'List all notices'],
@@ -279,18 +269,6 @@ class AclSeeder extends Seeder
             ['notice-event:delete', 'Delete existing notice event'],
             ['notice-event:revisions', 'View notice event revisions'],
             ['notice-event:histories', 'View notice event histories'],
-
-            // Notice Event Type
-            ['notice-event-type:index', 'List all notice event types'],
-            ['notice-event-type:show', 'View a notice event type'],
-            ['notice-event-type:create', 'Create new notice event type'],
-            ['notice-event-type:update', 'Update existing notice event type'],
-            ['notice-event-type:duplicate', 'Duplicate existing notice event type'],
-            ['notice-event-type:activate', 'Activate existing notice event type'],
-            ['notice-event-type:deactivate', 'Deactivate existing notice event type'],
-            ['notice-event-type:delete', 'Delete existing notice event type'],
-            ['notice-event-type:revisions', 'View notice event type revisions'],
-            ['notice-event-type:histories', 'View notice event type histories'],
 
             // Notice Type
             ['notice-type:index', 'List all notice types'],
@@ -352,16 +330,6 @@ class AclSeeder extends Seeder
             ['qualification-type:revisions', 'View qualification code type revisions'],
             ['qualification-type:histories', 'View qualification code type histories'],
 
-            // Submission Requirement
-            ['submission-requirement:index', 'List all submission requirements'],
-            ['submission-requirement:show', 'View submission requirement details'],
-            ['submission-requirement:create', 'Create new submission requirement'],
-            ['submission-requirement:update', 'Update existing submission requirement'],
-            ['submission-requirement:delete', 'Delete existing submission requirement'],
-            ['submission-requirement:revisions', 'View submission requirement revisions'],
-            ['submission-requirement:histories', 'View submission requirement histories'],
-            ['submission-requirement:organization', 'Allow to manage submission requirement with organization'],
-
             // Submission
             ['submission:index', 'List all submissions'],
             ['submission:show', 'View submission details'],
@@ -371,16 +339,6 @@ class AclSeeder extends Seeder
             ['submission:revisions', 'View submission revisions'],
             ['submission:histories', 'View submission histories'],
             ['submission:organization', 'Allow to manage submission with organization'],
-
-            // Submission Detail
-            ['submission-detail:show', 'View submission details'],
-            ['submission-detail:create', 'Create new submission details'],
-            ['submission-detail:update', 'Update existing submission details'],
-            ['submission-detail:delete', 'Delete existing submission details'],
-            ['submission-detail:activate', 'Activate submission details'],
-            ['submission-detail:deactivate', 'Deactivate submission details'],
-            ['submission-detail:revisions', 'View submission details revisions'],
-            ['submission-detail:histories', 'View submission details histories'],
 
             // Vendor
             ['vendor:index', 'List all vendors'],

@@ -14,11 +14,6 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
         app('policy')->register('App\Http\Controllers\Admin\EvaluationsController', 'App\Policies\EvaluationPolicy');
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
     public function register()
     {
         app('router')->group([

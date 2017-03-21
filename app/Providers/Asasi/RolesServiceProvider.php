@@ -27,7 +27,6 @@ class RolesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'

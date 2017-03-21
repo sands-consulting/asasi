@@ -10,14 +10,15 @@ class ProjectsServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::policy('App\Project', 'App\Policies\ProjectPolicy');
+        Gate::policy('App\ProjectMilestone', 'App\Policies\ProjectMilestonePolicy');
 
         app('policy')->register('App\Http\Controllers\VendorProjectsController', 'App\Policies\ProjectPolicy');
         app('policy')->register('App\Http\Controllers\Admin\ProjectsController', 'App\Policies\ProjectPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\ProjectMilestonesController', 'App\Policies\ProjectMilestonePolicy');
     }
 
     public function register()
     {
-        // Module Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'
@@ -56,6 +57,10 @@ class ProjectsServiceProvider extends ServiceProvider
                     'as'    => 'projects.store-by-notice',
                     'uses'  => 'ProjectsController@storeByNotice'
                 ]);
+
+                // Project Milestone
+                $router->match(['get', 'post'], 'projects/{projects}/milestones/gantt_data', "ProjectMilestonesController@ganttData");
+                $router->resource('projects.milestones', 'ProjectMilestonesController');
             });
 
             $router->resource('vendors.projects', 'VendorProjectsController', [

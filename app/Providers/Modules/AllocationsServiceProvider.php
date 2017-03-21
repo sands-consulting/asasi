@@ -19,7 +19,6 @@ class AllocationsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        // Module Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'

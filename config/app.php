@@ -204,6 +204,7 @@ return [
         App\Providers\Asasi\PlacesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,
         App\Providers\Asasi\RolesServiceProvider::class,
+        App\Providers\Asasi\SettingsServiceProvider::class,
         App\Providers\Asasi\SubscriptionsServiceProvider::class,
         App\Providers\Asasi\TransactionsServiceProvider::class,
         App\Providers\Asasi\UsersServiceProvider::class,
@@ -213,6 +214,7 @@ return [
          */
         App\Providers\Modules\AllocationsServiceProvider::class,
         App\Providers\Modules\DashboardServiceProvider::class,
+        App\Providers\Modules\ProjectsServiceProvider::class,
         App\Providers\Modules\ReportsServiceProvider::class,
         App\Providers\Modules\QualificationsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
@@ -225,12 +227,6 @@ return [
         App\Providers\Modules\NoticeEvaluationsServiceProvider::class,
         App\Providers\Modules\NoticePurchasesServiceProvider::class,
         App\Providers\Modules\NoticeSubmissionsServiceProvider::class,
-
-        /*
-         * Project Service Providers
-         */
-        App\Providers\Modules\ProjectsServiceProvider::class,
-        App\Providers\Modules\ProjectMilestonesServiceProvider::class,
     ],
 
     /*
