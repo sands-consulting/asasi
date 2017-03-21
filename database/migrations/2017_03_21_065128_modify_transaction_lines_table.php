@@ -15,7 +15,7 @@ class ModifyTransactionLinesTable extends Migration
     {
         Schema::table('transaction_lines', function (Blueprint $table) {
             $table->renameColumn('unit_price', 'price');
-            $table->unsignedInteger('tax_id')->nullable()->after('tax_rate');
+            $table->unsignedInteger('tax_id')->nullable()->after('item_id');
             $table->renameColumn('tax_rate', 'tax');
             $table->dropColumn('tax_code');
 
