@@ -20,7 +20,7 @@ class RolePolicy
      */
     public function index(User $auth)
     {
-        return $auth->hasPermission('place:index');
+        return $auth->hasPermission('role:index');
     }
 
     /**
@@ -29,7 +29,7 @@ class RolePolicy
      */
     public function show(User $auth)
     {
-        return $auth->hasPermission('place:show');
+        return $auth->hasPermission('role:show');
     }
 
     /**
@@ -38,7 +38,7 @@ class RolePolicy
      */
     public function create(User $auth)
     {
-        return $auth->hasPermission('place:create');
+        return $auth->hasPermission('role:create');
     }
 
     /**
@@ -57,7 +57,7 @@ class RolePolicy
      */
     public function edit(User $auth, Role $role)
     {
-        return $auth->hasPermission('place:update');
+        return $auth->hasPermission('role:update');
     }
 
     /**
@@ -77,7 +77,7 @@ class RolePolicy
      */
     public function destroy(User $auth, Role $role)
     {
-        return $auth->hasPermission('place:delete');
+        return $auth->hasPermission('role:delete');
     }
 
     /**
@@ -87,7 +87,7 @@ class RolePolicy
      */
     public function restore(User $auth, Role $role)
     {
-        return $auth->hasPermission('place:restore');
+        return $auth->hasPermission('role:restore');
     }
 
     /**
@@ -97,7 +97,7 @@ class RolePolicy
      */
     public function revisions(User $auth, Role $role)
     {
-        return $auth->hasPermission('place:revisions');
+        return $auth->hasPermission('role:revisions');
     }
 
     /**
@@ -107,7 +107,7 @@ class RolePolicy
      */
     public function histories(User $auth, Role $role)
     {
-        return $auth->hasPermission('place:histories');
+        return $auth->hasPermission('role:histories');
     }
 
     /**
@@ -117,7 +117,7 @@ class RolePolicy
      */
     public function archives(User $auth, Role $role)
     {
-        return $auth->hasPermission('place:archives');
+        return $auth->hasPermission('role:archives');
     }
 
     /**
@@ -127,6 +127,6 @@ class RolePolicy
      */
     public function duplicate(User $auth, Role $role)
     {
-        return $auth->hasPermission('place:duplicate');
+        return $auth->hasPermission('role:duplicate');
     }
 }

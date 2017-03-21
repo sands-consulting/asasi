@@ -131,14 +131,20 @@
     @endcan
 
     @can('index', App\QualificationType::class)
-    <li class="{{ is_path_active('admin/qualification-codes*') }}">
-        <a href="{{ route('admin.qualification-codes.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.admin.qualification-types') }}</span></a>
+    <li class="{{ is_path_active('admin/qualification-types*') }}">
+        <a href="{{ route('admin.qualification-types.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.admin.qualification-types') }}</span></a>
     </li>
     @endcan
 
      @can('index', App\Role::class)
     <li class="{{ is_path_active('admin/roles*') }}">
         <a href="{{ route('admin.roles.index') }}"><i class="icon-user-tie"></i> <span>{{ trans('menu.admin.roles') }}</span></a>
+    </li>
+    @endcan
+
+     @can('index', App\VendorType::class)
+    <li class="{{ is_path_active('admin/vendor-types*') }}">
+        <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.admin.vendor-types') }}</span></a>
     </li>
     @endcan
 </ul>
