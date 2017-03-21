@@ -301,10 +301,12 @@ class AclSeeder extends Seeder
             ['project:create', 'Create new project'],
             ['project:update', 'Update existing project'],
             ['project:delete', 'Delete existing project'],
-            ['project:activate', 'Activate project'],
-            ['project:deactivate', 'Deactivate project'],
+            ['project:restore', 'Restore deleted project'],
             ['project:revisions', 'View project revisions'],
             ['project:histories', 'View project histories'],
+            ['project:archives', 'List all deleted projects'],
+            ['project:activate', 'Activate project'],
+            ['project:suspend', 'Suspend project'],
             ['project:organization', 'Allow to manage project with organization'],
 
             // Project Milestone

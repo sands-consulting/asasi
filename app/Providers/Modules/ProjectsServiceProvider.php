@@ -2,14 +2,17 @@
 
 namespace App\Providers\Modules;
 
-use App\News;
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class ProjectsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\ProjectsController', 'App\Policies\ProjectsPolicy');
+        Gate::policy('App\Project', 'App\Policies\ProjectPolicy');
+
+        app('policy')->register('App\Http\Controllers\VendorProjectsController', 'App\Policies\ProjectPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\ProjectsController', 'App\Policies\ProjectPolicy');
     }
 
     public function register()
@@ -24,14 +27,25 @@ class ProjectsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->get('projects/{projects}/revisions', [
-                    'as'    => 'projects.revisions',
-                    'uses'  => 'ProjectsController@revisions'
-                ]);
-                $router->get('projects/{projects}/histories', [
-                    'as'    => 'projects.histories',
-                    'uses'  => 'ProjectsController@histories'
-                ]);
+                $router->put('projects/{project}/restore', 'ProjectsController@restore')
+                    ->name('projects.restore');
+                $router->get('projects/{project}/revisions', 'ProjectsController@revisions')
+                    ->name('projects.revisions');
+                $router->get('projects/{project}/histories', 'ProjectsController@histories')
+                    ->name('projects.histories');
+                $router->get('projects/archives', 'ProjectsController@archives')
+                    ->name('projects.archives');
+                $router->put('projects/{project}/duplicate', 'ProjectsController@duplicate')
+                    ->name('projects.duplicate');
+
+                $router->put('projects/{project}/activate', 'ProjectsController@activate')
+                    ->name('projects.activate');
+                $router->put('projects/{project}/suspend', 'ProjectsController@suspend')
+                    ->name('projects.suspend');
+
+                $router->resource('projects', 'ProjectsController');
+                
+                # To Remove
 
                 $router->post('projects/create-by-notice', [
                     'as'    => 'projects.create-by-notice',
@@ -42,16 +56,10 @@ class ProjectsServiceProvider extends ServiceProvider
                     'as'    => 'projects.store-by-notice',
                     'uses'  => 'ProjectsController@storeByNotice'
                 ]);
-
-                $router->resource('projects', 'ProjectsController');
             });
 
-             $router->resource('vendors.projects', 'VendorProjectsController', [
-                'only' => [
-                    'index',
-                    'show'
-                ]
-            ]);
+            $router->resource('vendors.projects', 'VendorProjectsController', [
+                'only' => ['index', 'show']]);
         });
     }
 }

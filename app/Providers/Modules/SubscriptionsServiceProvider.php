@@ -11,14 +11,10 @@ class SubscriptionsServiceProvider extends ServiceProvider
     {
         Gate::policy('App\Subscription', 'App\Policies\SubscriptionPolicy');
 
-        app('policy')->register('App\Http\Controllers\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
+        app('policy')->register('App\Http\Controllers\VendorSubscriptionsController', 'App\Policies\SubscriptionPolicy');
         app('policy')->register('App\Http\Controllers\Admin\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
     }
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
+
     public function register()
     {
         // Module Routing
@@ -31,12 +27,17 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->get('subscriptions/{subscription}/histories', 'SubscriptionsController@histories')
-                    ->name('subscriptions.histories');
-                $router->get('subscriptions/{subscription}/revisions', 'SubscriptionsController@revisions')
+                $router->put('subscriptions/{subscription}/restore', 'subscriptionsController@restore')
+                    ->name('subscriptions.restore');
+                $router->get('subscriptions/{subscription}/revisions', 'subscriptionsController@revisions')
                     ->name('subscriptions.revisions');
-                $router->get('subscriptions/archives', 'SubscriptionsController@archives')
+                $router->get('subscriptions/{subscription}/histories', 'subscriptionsController@histories')
+                    ->name('subscriptions.histories');
+                $router->get('subscriptions/archives', 'subscriptionsController@archives')
                     ->name('subscriptions.archives');
+                $router->put('subscriptions/{subscription}/duplicate', 'subscriptionsController@duplicate')
+                    ->name('subscriptions.duplicate');
+
                 $router->put('subscriptions/{subscription}/activate', [
                     'as'  => 'subscriptions.activate',
                     'uses' => 'SubscriptionsController@activate'
