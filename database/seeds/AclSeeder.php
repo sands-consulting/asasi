@@ -376,14 +376,14 @@ class AclSeeder extends Seeder
             ['subscription:show', 'View a subscription'],
             ['subscription:create', 'Create new subscription'],
             ['subscription:update', 'Update existing subscription'],
-            ['subscription:duplicate', 'Duplicate existing subscription'],
-            ['subscription:activate', 'Activate existing subscription'],
-            ['subscription:deactivate', 'Deactivate existing subscription'],
-            ['subscription:cancel', 'Cancel existing subscription'],
             ['subscription:delete', 'Delete existing subscription'],
+            ['subscription:restore', 'Restore deleted subscription'],
             ['subscription:revisions', 'View subscription revisions'],
             ['subscription:histories', 'View subscription histories'],
-
+            ['subscription:archives', 'List all deleted subscriptions'],
+            ['subscription:duplicate', 'Duplicate existing subscription'],
+            ['subscription:activate', 'Activate existing subscription'],
+            ['subscription:cancel', 'Cancel existing subscription'],
 
             // Vendor
             ['vendor:index', 'List all vendors'],

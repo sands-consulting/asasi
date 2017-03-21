@@ -2,14 +2,17 @@
 
 namespace App\Providers\Modules;
 
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class SubscriptionsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\SubscriptionsController', 'App\Policies\SubscriptionsPolicy');
-        app('policy')->register('App\Http\Controllers\Admin\SubscriptionsController', 'App\Policies\SubscriptionsPolicy');
+        Gate::policy('App\Subscription', 'App\Policies\SubscriptionPolicy');
+
+        app('policy')->register('App\Http\Controllers\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
     }
     /**
      * Register the application services.
@@ -28,15 +31,17 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->put('subscriptions/{subscriptions}/activate', [
+                $router->get('subscriptions/{subscription}/histories', 'SubscriptionsController@histories')
+                    ->name('subscriptions.histories');
+                $router->get('subscriptions/{subscription}/revisions', 'SubscriptionsController@revisions')
+                    ->name('subscriptions.revisions');
+                $router->get('subscriptions/archives', 'SubscriptionsController@archives')
+                    ->name('subscriptions.archives');
+                $router->put('subscriptions/{subscription}/activate', [
                     'as'  => 'subscriptions.activate',
                     'uses' => 'SubscriptionsController@activate'
                 ]);
-                $router->put('subscriptions/{subscriptions}/deactivate', [
-                    'as'  => 'subscriptions.deactivate',
-                    'uses' => 'SubscriptionsController@deactivate'
-                ]);
-                $router->put('subscriptions/{subscriptions}/cancel', [
+                $router->put('subscriptions/{subscription}/cancel', [
                     'as'  => 'subscriptions.cancel',
                     'uses' => 'SubscriptionsController@cancel'
                 ]);
