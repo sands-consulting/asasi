@@ -41,8 +41,6 @@ class UsersServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->resource('users', 'UsersController');
-                $router->resource('users.blacklists', 'UserBlacklistsController');
                 $router->get('users/{user}/histories', 'UsersController@histories')
                     ->name('users.histories');
                 $router->get('users/{user}/revisions', 'UsersController@revisions')
@@ -57,6 +55,8 @@ class UsersServiceProvider extends ServiceProvider
                     ->name('users.restore');
                 $router->get('users/archives', 'UsersController@archives')
                     ->name('users.archives');
+                $router->resource('users', 'UsersController');
+                $router->resource('users.blacklists', 'UserBlacklistsController');
             });
 
             $router->get('me', 'MeController@edit')

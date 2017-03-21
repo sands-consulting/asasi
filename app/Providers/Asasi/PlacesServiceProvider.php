@@ -37,13 +37,13 @@ class PlacesServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->resource('places', 'PlacesController');
-                $router->get('places/{places}/histories', 'PlacesController@histories')
+                $router->get('places/{place}/histories', 'PlacesController@histories')
                     ->name('places.histories');
-                $router->get('places/{places}/revisions', 'PlacesController@revisions')
+                $router->get('places/{place}/revisions', 'PlacesController@revisions')
                     ->name('places.revisions');
                 $router->get('places/archives', 'PlacesController@archives')
                     ->name('places.archives');
+                $router->resource('places', 'PlacesController');
             });
         });
     }

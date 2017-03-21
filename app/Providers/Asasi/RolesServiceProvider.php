@@ -37,13 +37,13 @@ class RolesServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->resource('roles',  'RolesController');
                 $router->get('roles/{role}/histories', 'RolesController@histories')
                     ->name('roles.histories');
                 $router->get('roles/{role}/revisions', 'RolesController@revisions')
                     ->name('roles.revisions');
                 $router->get('roles/archives', 'RolesController@archives')
                     ->name('roles.archives');
+                $router->resource('roles',  'RolesController');
             });
         });
     }
