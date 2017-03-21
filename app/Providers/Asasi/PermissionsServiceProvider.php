@@ -15,9 +15,9 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\PermissionsController', 'App\Policies\PermissionPolicy');
+        Gate::policy('App\Permission', 'App\Policies\PermissionPolicy');
 
-        Gate::policy("App\Permission", "App\Policies\PermissionPolicy");
+        app('policy')->register('App\Http\Controllers\Admin\PermissionsController', 'App\Policies\PermissionPolicy');
     }
 
     /**

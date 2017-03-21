@@ -23,7 +23,7 @@ class NotificationsServiceProvider extends ServiceProvider
                 ['only' => ['index', 'show']]);
         });
 
-        // Api Routing
+        // API Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers\Api',
             'middleware' => 'web',

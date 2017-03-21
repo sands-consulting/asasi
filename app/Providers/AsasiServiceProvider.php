@@ -45,6 +45,8 @@ class AsasiServiceProvider extends ServiceProvider
             $router->post('contact', 'ContactController@store');
 
             $router->auth();
+            $router->get('confirmation/{token}', 'Auth\LoginController@confirmation')
+                ->name('confirmation');
 
             $router->get('/', 'NoticesController@index')
                 ->name('root');

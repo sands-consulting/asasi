@@ -15,9 +15,9 @@ class OrganizationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\OrganizationsController', 'App\Policies\OrganizationPolicy');
+        Gate::policy('App\Organization', 'App\Policies\OrganizationPolicy');
 
-        Gate::policy("App\Organization", "App\Policies\OrganizationPolicy");
+        app('policy')->register('App\Http\Controllers\Admin\OrganizationsController', 'App\Policies\OrganizationPolicy');
     }
 
     /**
@@ -39,10 +39,10 @@ class OrganizationsServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->resource('organizations', 'OrganizationsController');
+                $router->get('organizations/{organization}/histories', 'OrganizationsController@histories')
+                    ->name('organizations.histories');
                 $router->get('organizations/{organization}/revisions', 'OrganizationsController@revisions')
                     ->name('organizations.revisions');
-                $router->put('organizations/{organization}/activate', 'OrganizationsController@activate')
-                    ->name('organizations.activate');
                 $router->put('organizations/{organization}/deactivate', 'OrganizationsController@deactivate')
                     ->name('organizations.deactivate');
                 $router->put('organizations/{organization}/suspend', 'OrganizationsController@suspend')

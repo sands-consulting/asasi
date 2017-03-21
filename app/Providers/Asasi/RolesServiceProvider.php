@@ -38,6 +38,8 @@ class RolesServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->resource('roles',  'RolesController');
+                $router->get('roles/{role}/histories', 'RolesController@histories')
+                    ->name('roles.histories');
                 $router->get('roles/{role}/revisions', 'RolesController@revisions')
                     ->name('roles.revisions');
             });

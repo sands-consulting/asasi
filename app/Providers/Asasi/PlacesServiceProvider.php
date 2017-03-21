@@ -38,6 +38,8 @@ class PlacesServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->resource('places', 'PlacesController');
+                $router->get('places/{places}/histories', 'PlacesController@histories')
+                    ->name('places.histories');
                 $router->get('places/{places}/revisions', 'PlacesController@revisions')
                     ->name('places.revisions');
             });
