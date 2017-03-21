@@ -10,6 +10,7 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::policy('App\NoticeEvaluator', 'App\Policies\NoticeEvaluatorPolicy');
+        
         app('policy')->register('App\Http\Controllers\Admin\EvaluationsController', 'App\Policies\EvaluationsPolicy');
     }
 

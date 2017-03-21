@@ -10,12 +10,11 @@ class AllocationsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Gate::policy("App\Allocation", "App\Policies\AllocationPolicy");
+        Gate::policy('App\Allocation', 'App\Policies\AllocationPolicy');
+        Gate::policy('App\AllocationType', 'App\Policies\AllocationTypePolicy');
 
-        app('policy')
-            ->register('App\Http\Controllers\Admin\AllocationsController', 'App\Policies\AllocationPolicy');
-        app('policy')
-            ->register('App\Http\Controllers\Admin\AllocationTypesController', 'App\Policies\AllocationTypePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\AllocationsController', 'App\Policies\AllocationPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\AllocationTypesController', 'App\Policies\AllocationTypePolicy');
     }
 
     public function register()
@@ -30,24 +29,28 @@ class AllocationsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->get('allocations/{allocation}/revisions', [
-                    'as'    => 'allocations.revisions',
-                    'uses'  => 'AllocationsController@revisions'
-                ]);
-                $router->get('allocations/{allocation}/histories', [
-                    'as'    => 'allocations.histories',
-                    'uses'  => 'AllocationsController@histories'
-                ]);
+                $router->put('allocations/{allocation}/restore', 'AllocationsController@restore')
+                    ->name('allocations.restore');
+                $router->get('allocations/{allocation}/revisions', 'AllocationsController@revisions')
+                    ->name('allocations.revisions');
+                $router->get('allocations/{allocation}/histories', 'AllocationsController@histories')
+                    ->name('allocations.histories');
+                $router->get('allocations/archives', 'AllocationsController@archives')
+                    ->name('allocations.archives');
+                $router->put('allocations/{allocation}/duplicate', 'AllocationsController@duplicate')
+                    ->name('allocations.duplicate');
                 $router->resource('allocations', 'AllocationsController');
 
-                $router->get('allocation-types/{allocation_type}/revisions', [
-                    'as'    => 'allocation-types.revisions',
-                    'uses'  => 'AllocationTypesController@revisions'
-                ]);
-                $router->get('allocation-types/{allocation_type}/histories', [
-                    'as'    => 'allocation-types.histories',
-                    'uses'  => 'AllocationTypesController@histories'
-                ]);
+                $router->put('allocation-types/{allocation_type}/restore', 'AllocationTypesController@restore')
+                    ->name('allocation-types.restore');
+                $router->get('allocation-types/{allocation_type}/revisions', 'AllocationTypesController@revisions')
+                    ->name('allocation-types.revisions');
+                $router->get('allocation-types/{allocation_type}/histories', 'AllocationTypesController@histories')
+                    ->name('allocation-types.histories');
+                $router->get('allocation-types/archives', 'AllocationTypesController@archives')
+                    ->name('allocation-types.archives');
+                $router->put('allocation-types/{allocation_type}/duplicate', 'AllocationTypesController@duplicate')
+                    ->name('allocation-types.duplicate');
                 $router->resource('allocation-types', 'AllocationTypesController');
             });
         });

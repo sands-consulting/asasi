@@ -6,78 +6,144 @@ use App\Allocation;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * Class AllocationPolicy
+ * @package App\Policies
+ */
 class AllocationPolicy
 {
     use HandlesAuthorization;
 
-    public function index(User $user)
+    /**
+     * @param User $auth
+     * @return bool
+     */
+    public function index(User $auth)
     {
-        return $user->hasPermission('allocation:index');
+        return $auth->hasPermission('allocation:index');
     }
 
-    public function show(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @return bool
+     */
+    public function show(User $auth)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:show');
+        return $auth->hasPermission('allocation:show');
     }
 
-    public function create(User $user)
+    /**
+     * @param User $auth
+     * @return bool
+     */
+    public function create(User $auth)
     {
-        return $user->hasPermission('allocation:create');
+        return $auth->hasPermission('allocation:create');
     }
 
-    public function store(User $user)
+    /**
+     * @param User $auth
+     * @return bool
+     */
+    public function store(User $auth)
     {
-        return $this->create($user);
+        return $this->create($auth);
     }
 
-    public function edit(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function edit(User $auth, Allocation $allocation)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:update');
+        return $auth->checkOrganization($auth, $allocation, 'allocation:update');
     }
 
-    public function update(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function update(User $auth, Allocation $allocation)
     {
-        return $this->edit($allocation);
+        return $this->edit($auth, $allocation);
     }
 
-    public function destroy(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function destroy(User $auth, Allocation $allocation)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:delete');
+        return $auth->checkOrganization($auth, $allocation, 'allocation:delete');
     }
 
-    public function duplicate(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function restore(User $auth, Allocation $allocation)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:duplicate');
+        return $auth->checkOrganization($auth, $allocation, 'allocation:restore');
     }
 
-    public function revisions(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function revisions(User $auth, Allocation $allocation)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:revisions');
+        return $auth->checkOrganization($auth, $allocation, 'allocation:revisions');
     }
 
-    public function histories(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function histories(User $auth, Allocation $allocation)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:histories');
+        return $auth->checkOrganization($auth, $allocation, 'allocation:histories');
     }
 
-    public function activate(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function archives(User $auth, Allocation $allocation)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:activate') && $allocation->status != 'active';
+        return $auth->checkOrganization($auth, $allocation, 'allocation:archives');
     }
 
-    public function deactivate(User $user, Allocation $allocation)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @return bool
+     */
+    public function duplicate(User $auth, Allocation $allocation)
     {
-        return $this->checkOrganization($user, $allocation, 'allocation:deactivate') && $allocation->status == 'active';
+        return $auth->hasPermission('allocation:duplicate');
     }
 
-    protected function checkOrganization(User $user, Allocation $allocation, $permission)
+    /**
+     * @param User $auth
+     * @param Allocation $allocation
+     * @param string $permission
+     * @return bool
+     */
+    protected function checkOrganization(User $auth, Allocation $allocation, $permission)
     {
-        if(!$user->hasPermission($permission))
+        if(!$auth->hasPermission($permission))
         {
             return false;
         }
 
-        if($user->hasPermission('allocation:organization'))
+        if($auth->hasPermission('allocation:organization'))
         {
             return $user->organizations->pluck('id')->has($allocation->organization_id);
         }

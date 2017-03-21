@@ -140,10 +140,10 @@ class AclSeeder extends Seeder
             ['allocation:create', 'Create new allocation'],
             ['allocation:update', 'Update existing allocation'],
             ['allocation:delete', 'Delete existing allocation'],
-            ['allocation:activate', 'Activate allocation'],
-            ['allocation:deactivate', 'Deactivate allocation'],
+            ['allocation:restore', 'Restore deleted allocation'],
             ['allocation:revisions', 'View allocation revisions'],
             ['allocation:histories', 'View allocation histories'],
+            ['allocation:archives', 'List all deleted allocations'],
             ['allocation:organization', 'Allow to manage allocation with organization'],
 
             // Allocation Type

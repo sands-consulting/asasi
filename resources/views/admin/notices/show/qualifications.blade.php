@@ -4,6 +4,7 @@
 
 	@if($group->count() > 1)<div class="qualification-group">@endif
 
+	{{ dd($group) }}
 		@foreach($group as $code)
 		<div class="panel panel-default">
 			<div class="panel-heading">

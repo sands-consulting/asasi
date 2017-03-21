@@ -70,10 +70,57 @@
         <span>{{ trans('menu.admin.administration') }}</span> <i class="icon-menu" title="{{ trans('menu.admin.administration') }}" data-original-title="{{ trans('menu.admin.administration') }}"></i>
     </li>
 
+    @can('index', App\AllocationType::class)
+    <li class="{{ is_path_active('admin/allocation-types*') }}">
+        <a href="{{ route('admin.allocation-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.allocation-types') }}</span></a>
+    </li>
+    @endif
+
+    @can('index', App\NewsCategory::class)
+    <li class="{{ is_path_active('admin/news-categories*') }}">
+        <a href="{{ route('admin.news-categories.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.news-categories') }}</span></a>
+    </li>
+    @endif
+
+    @can('index', App\NoticeCategory::class)
+    <li class="{{ is_path_active('admin/notice-categories*') }}">
+        <a href="{{ route('admin.notice-categories.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.notice-categories') }}</span></a>
+    </li>
+    @endif
+
+    @can('index', App\NoticeType::class)
+    <li class="{{ is_path_active('admin/notice-types*') }}">
+        <a href="{{ route('admin.notice-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.notice-types') }}</span></a>
+    </li>
+    @endif
 
     @can('index', App\Organization::class)
     <li class="{{ is_path_active('admin/organizations*') }}">
         <a href="{{ route('admin.organizations.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.admin.organizations') }}</span></a>
+    </li>
+    @endcan
+
+    @can('index', App\Package::class)
+    <li class="{{ is_path_active('admin/packages*') }}">
+        <a href="{{ route('admin.packages.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.packages') }}</span></a>
+    </li>
+    @endcan
+
+    @can('index', App\PaymentGateway::class)
+    <li class="{{ is_path_active('admin/payment-gateways*') }}">
+        <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.payment-gateways') }}</span></a>
+    </li>
+    @endcan
+
+    @can('index', App\Permission::class)
+    <li class="{{ is_path_active('admin/permissions*') }}">
+        <a href="{{ route('admin.permissions.index') }}"><i class="icon-unlocked2"></i> <span>{{ trans('menu.admin.permissions') }}</span></a>
+    </li>
+    @endcan
+
+    @can('index', App\Place::class)
+    <li class="{{ is_path_active('admin/places*') }}">
+        <a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.places') }}</span></a>
     </li>
     @endcan
 
@@ -83,51 +130,15 @@
     </li>
     @endcan
 
-    @can('index', App\QualifcationType::class)
+    @can('index', App\QualificationType::class)
     <li class="{{ is_path_active('admin/qualification-codes*') }}">
         <a href="{{ route('admin.qualification-codes.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.admin.qualification-types') }}</span></a>
     </li>
     @endcan
 
-    @if(Auth::user()->hasPermission('place:index'))
-    {{--<li class="{{ is_path_active('admin/places*') }}">--}}
-        {{--<a href="{{ route('admin.places.index') }}"><i class="icon-city"></i> <span>{{ trans('menu.admin.transactionplaces') }}</span></a>--}}
-    {{--</li>--}}
-    @endif
-
-    @if(Auth::user()->hasPermission('payment-gateways:index'))
-    <li class="{{ is_path_active('admin/payment-gateways*') }}">
-        <a href="{{ route('admin.organizations.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.payment-gateways') }}</span></a>
-    </li>
-    @endif
-
-    @if(Auth::user()->hasPermission('allocation-type:index'))
-    <li class="{{ is_path_active('admin/allocation-types*') }}">
-        <a href="{{ route('admin.allocation-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.allocation-types') }}</span></a>
-    </li>
-    @endif
-
-    @if(Auth::user()->hasPermission('news-category:index'))
-    <li class="{{ is_path_active('admin/news-categories*') }}">
-        <a href="{{ route('admin.news-categories.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.news-categories') }}</span></a>
-    </li>
-    @endif
-
-        @if(Auth::user()->hasPermission('role:index'))
+     @can('index', App\Role::class)
     <li class="{{ is_path_active('admin/roles*') }}">
-        <a href="{{ route('admin.roles.index') }}"><i class="icon-user-tie"></i> <span>{{ trans('menu.admin.transactionroles') }}</span></a>
+        <a href="{{ route('admin.roles.index') }}"><i class="icon-user-tie"></i> <span>{{ trans('menu.admin.roles') }}</span></a>
     </li>
-    @endif
-
-    @if(Auth::user()->hasPermission('permission:index'))
-    <li class="{{ is_path_active('admin/permissions*') }}">
-        <a href="{{ route('admin.permissions.index') }}"><i class="icon-unlocked2"></i> <span>{{ trans('menu.admin.transactionpermissions') }}</span></a>
-    </li>
-    @endif
-
-    @if(Auth::user()->hasPermission('package:index'))
-    <li class="{{ is_path_active('admin/packages*') }}">
-        <a href="{{ route('admin.packages.index') }}"><i class="icon-stack3"></i> <span>{{ trans('menu.admin.transactionpackages') }}</span></a>
-    </li>
-    @endif
+    @endcan
 </ul>

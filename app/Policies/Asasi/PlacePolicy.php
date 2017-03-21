@@ -1,4 +1,4 @@
-ƒ<?php
+<?php
 
 namespace App\Policies\Asasi;
 

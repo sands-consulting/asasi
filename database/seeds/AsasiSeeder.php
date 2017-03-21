@@ -20,7 +20,6 @@ class AsasiSeeder extends Seeder
     {
         DB::table('organization_user')->truncate();
         DB::table('organizations')->truncate();
-        DB::table('settings')->truncate();
         DB::table('uploads')->truncate();
         DB::table('user_histories')->truncate();
         DB::table('user_blacklists')->truncate();

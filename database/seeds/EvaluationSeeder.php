@@ -21,7 +21,7 @@ class EvaluationSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('notice_evaluator')->truncate();
+        DB::table('notice_evaluators')->truncate();
         DB::table('evaluation_scores')->truncate();
         DB::table('evaluation_requirements')->truncate();
         DB::table('evaluation_types')->truncate();
