@@ -9,6 +9,7 @@ return [
         'description' => 'Description',
         'rules' => 'Rules',
         'price' => 'Price',
+        'tax_id' => 'Tax',
         'published_at' => 'Publication Date & Time',
         'expired_at' => 'Expiration Date & Time',
         'purchased_at' => 'Availability Date & Time',
@@ -83,30 +84,41 @@ return [
     'views' => [
         'index' => [
         ],
+
         'show' => [
             'back' => 'All Notices',
             'purchase' => 'Add to Cart'
         ],
+
         'admin' => [
             'index' => [
                 'title' => 'Notices',
                 'keywords' => 'Keywords',
                 'status' => 'Status',
             ],
+
             'create' => [
-                'title' => 'New',
+                'title' => 'New Notice',
                 'table' => [
-                    'empty' => 'No record found. Please create new row by clicking on <i class="icon-add"></i> button on top right corner of this table.'
+                    'empty' => 'No record created.'
                 ],
             ],
+
             'edit' => [
-                'title' => 'Edit',
-            ],
-            'revisions' => [
+                'title' => 'Edit Notice',
             ],
 
-            'allocations' => [
-                
+            'form' => [
+                'settings' => [
+                    'type' => 'Please select notice type',
+                    'category' => 'Please select notice category',
+                    'organization' => 'Please select organization for this notice',
+                    'purchase' => 'Allow notice purchase via system',
+                    'submission' => 'Allow notice submission via system',
+                    'evaluation' => 'Allow notice evaluation via system',
+                    'evaluation-order' => 'Assign notice evaluation order',
+                    'award' => 'Allow notice award via system',
+                ]
             ],
 
             'allocations' => [

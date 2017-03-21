@@ -23,6 +23,8 @@
         </a>
     </li>
 
+    @unless(Auth::user()->hasPermission('access:vendor'))
+
 
     <li class="list-group-divider"></li>
 
@@ -104,4 +106,6 @@
             <i class="icon-cogs"></i> {{ trans('notices.menu.settings') }}
         </a>
     </li>
+
+    @endunless
 </ul>

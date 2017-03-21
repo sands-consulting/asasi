@@ -21,12 +21,15 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-3">
-        @include('admin.notices.show.nav')
+        @include('admin.notices.show.menu')
     </div>
 
     <div class="col-xs-12 col-md-9">
         <div class="tab-content">
             @include('admin.notices.show.details')
+            @include('admin.notices.show.events')
+            @include('admin.notices.show.qualifications')
+            @include('admin.notices.show.files')
         </div>
     </div>
 </div>

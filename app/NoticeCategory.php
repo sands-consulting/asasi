@@ -78,6 +78,15 @@ class NoticeCategory extends Model
         return $this->status != 'inactive';
     }
 
+    /**
+     * Helpers
+     */
+
+    public static function options()
+    {
+        return static::pluck('name','id')->toArray();
+    }
+
     public static function boot()
     {
         parent::boot();

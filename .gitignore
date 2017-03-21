@@ -10,3 +10,4 @@ Homestead.yaml
 /.phpstorm.meta.php
 /_ide_helper.php
 /.idea
+/resources/views/admin/notices-old
