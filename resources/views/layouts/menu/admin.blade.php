@@ -136,15 +136,27 @@
     </li>
     @endcan
 
-     @can('index', App\Role::class)
+    @can('index', App\Role::class)
     <li class="{{ is_path_active('admin/roles*') }}">
         <a href="{{ route('admin.roles.index') }}"><i class="icon-user-tie"></i> <span>{{ trans('menu.admin.roles') }}</span></a>
     </li>
     @endcan
 
-     @can('index', App\VendorType::class)
+    @if(Auth::user()->hasPermission('access:settings'))
+    <li class="{{ is_path_active('admin/settings') }}">
+        <a href="{{ route('admin.settings') }}"><i class="icon-cogs"></i> <span>{{ trans('menu.admin.settings') }}</span></a>
+    </li>
+    @endif
+
+    @can('index', App\TaxCode::class)
+    <li class="{{ is_path_active('admin/tax-codes*') }}">
+        <a href="{{ route('admin.tax-codes.index') }}"><i class="icon-percent"></i> <span>{{ trans('menu.admin.tax-codes') }}</span></a>
+    </li>
+    @endcan
+
+    @can('index', App\VendorType::class)
     <li class="{{ is_path_active('admin/vendor-types*') }}">
-        <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-grid5"></i> <span>{{ trans('menu.admin.vendor-types') }}</span></a>
+        <a href="{{ route('admin.vendor-types.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.vendor-types') }}</span></a>
     </li>
     @endcan
 </ul>

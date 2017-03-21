@@ -10,9 +10,11 @@ class VendorsServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::policy('App\Vendor', 'App\Policies\VendorPolicy');
+        Gate::policy('App\VendorType', 'App\Policies\VendorTypePolicy');
 
         app('policy')->register('App\Http\Controllers\Admin\VendorsController', 'App\Policies\VendorPolicy');
         app('policy')->register('App\Http\Controllers\VendorsController', 'App\Policies\VendorPolicy');
+        app('policy')->register('App\Http\Controllers\VendorTypesController', 'App\Policies\VendorTypePolicy');
     }
     /**
      * Register the application services.
@@ -31,108 +33,56 @@ class VendorsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->put('vendors/{vendor}/approve', [
-                    'as'    => 'vendors.approve',
-                    'uses'  => 'VendorsController@approve'
-                ]);
-                $router->put('vendors/{vendor}/reject', [
-                    'as'    => 'vendors.reject',
-                    'uses'  => 'VendorsController@reject'
-                ]);
-                $router->put('vendors/{vendor}/activate', [
-                    'as'    => 'vendors.activate',
-                    'uses'  => 'VendorsController@activate'
-                ]);
-                $router->put('vendors/{vendor}/suspend', [
-                    'as'    => 'vendors.suspend',
-                    'uses'  => 'VendorsController@suspend'
-                ]);
-                $router->put('vendors/{vendor}/blacklist', [
-                    'as'    => 'vendors.blacklist',
-                    'uses'  => 'VendorsController@blacklist'
-                ]);
-                $router->put('vendors/{vendor}/unblacklist', [
-                    'as'    => 'vendors.unblacklist',
-                    'uses'  => 'VendorsController@unblacklist'
-                ]);
-                $router->get('vendors/{vendor}/revisions', [
-                    'as'    => 'vendors.revisions',
-                    'uses'  => 'VendorsController@revisions'
-                ]);
-                $router->get('vendors/{vendor}/histories', [
-                    'as'    => 'vendors.histories',
-                    'uses'  => 'VendorsController@histories'
-                ]);
+                $router->put('vendors/{subscription}/restore', 'VendorsController@restore')
+                    ->name('vendors.restore');
+                $router->get('vendors/{subscription}/revisions', 'VendorsController@revisions')
+                    ->name('vendors.revisions');
+                $router->get('vendors/{subscription}/histories', 'VendorsController@histories')
+                    ->name('vendors.histories');
+                $router->get('vendors/archives', 'VendorsController@archives')
+                    ->name('vendors.archives');
+                $router->put('vendors/{subscription}/duplicate', 'VendorsController@duplicate')
+                    ->name('vendors.duplicate');
 
-                $router->get('vendors/{vendor}/qualification-codes', [
-                    'as'    => 'vendors.qualification-codes',
-                    'uses'  => 'VendorsController@qualificationCodes'
-                ]);
-
-                $router->get('vendors/{vendor}/subscriptions', [
-                    'as'    => 'vendors.subscriptions',
-                    'uses'  => 'VendorsController@subscriptions'
-                ]);
-
-                $router->get('vendors/{vendor}/users', [
-                    'as'    => 'vendors.users',
-                    'uses'  => 'VendorsController@users'
-                ]);
-
-                $router->get('vendors/{vendor}/subscriptions', [
-                    'as'    => 'vendors.subscriptions',
-                    'uses'  => 'VendorsController@subscriptions'
-                ]);
-
-                $router->get('vendors/{vendor}/purchases', [
-                    'as'    => 'vendors.purchases',
-                    'uses'  => 'VendorsController@purchases'
-                ]);
+                $router->put('vendors/{vendor}/approve', 'VendorsController@approve')
+                    ->name('vendors.approve');
+                $router->put('vendors/{vendor}/reject', 'VendorsController@reject')
+                    ->name('vendors.reject');
+                $router->put('vendors/{vendor}/activate', 'VendorsController@activate')
+                    ->name('vendors.activate');
+                $router->put('vendors/{vendor}/suspend', 'VendorsController@suspend')
+                    ->name('vendors.suspend');
                 
                 $router->resource('vendors', 'VendorsController');
 
-                $router->get('vendor-types/{vendor_type}/revisions', [
-                    'as'    => 'vendor-types.revisions',
-                    'uses'  => 'VendorTypesController@revisions'
-                ]);
-                $router->get('vendor-types/{vendor}/histories', [
-                    'as'    => 'vendor-types.histories',
-                    'uses'  => 'VendorTypesController@histories'
-                ]);
-                $router->post('vendor-types/{vendor_type}/duplicate', [
-                    'as'    => 'vendor-types.duplicate',
-                    'uses'  => 'VendorTypesController@duplicate'
-                ]);
+                // Vendor Type
+                $router->put('vendor-types{vendor_type}/restore', 'VendorTypesController@restore')
+                    ->name('vendor-types.restore');
+                $router->get('vendor-types{vendor_type}/revisions', 'VendorTypesController@revisions')
+                    ->name('vendor-types.revisions');
+                $router->get('vendor-types{vendor_type}/histories', 'VendorTypesController@histories')
+                    ->name('vendor-types.histories');
+                $router->get('vendor-typesarchives', 'VendorTypesController@archives')
+                    ->name('vendor-types.archives');
+                $router->put('vendor-types{vendor_type}/duplicate', 'VendorTypesController@duplicate')
+                    ->name('vendor-types.duplicate');
                 $router->resource('vendor-types', 'VendorTypesController');
             });
 
-            $router->get('vendors/{vendor}/pending', [
-                'as'    => 'vendors.pending',
-                'uses'  => 'VendorsController@pending'
-            ]);
-            $router->get('vendors/{vendor}/purchases', [
-                'as'    => 'vendors.purchases',
-                'uses'  => 'VendorsController@purchases'
-            ]);
-
-            $router->get('vendors/{vendor}/transactions', [
-                'as'    => 'vendors.transactions',
-                'uses'  => 'VendorsController@transactions'
-            ]);
-
-            $router->get('vendors/{vendor}/eligibles', [
-                'as' => 'vendors.eligibles',
-                'uses' => 'VendorsController@eligibles'
-            ]);
-
-            $router->get('vendors/{vendor}/invitations', [
-                'as' => 'vendors.invitations',
-                'uses' => 'VendorsController@invitations'
-            ]);
+            $router->get('vendors/{vendor}/pending', 'VendorsController@pending')
+                ->name('vendors.pending');
+            
+            $router->get('vendors/{vendor}/eligibles', 'VendorsController@eligibles')
+                ->name('vendors.eligibles');
+            $router->get('vendors/{vendor}/invitations', 'VendorsController@invitations')
+                ->name('vendors.invitations');
+            $router->get('vendors/{vendor}/purchases', 'VendorsController@purchases')
+                ->name('vendors.purchases');
 
             $router->resource('vendors', 'VendorsController', [
-                'except' => ['index', 'destroy']
-            ]);
+                'except' => ['index', 'destroy']]);
+            $router->resource('vendors.users', 'VendorUsersController', [
+                'except' => 'destroy']);
         });
     }
 }

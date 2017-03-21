@@ -45,6 +45,8 @@ return [
         'allocation-types'      => 'Allocation Types',
         'global-settings'       => 'Global Settings',
         'news-categories'       => 'News Categories',
+        'notice-categories'     => 'Notice Categories',
+        'notice-types'          => 'Notice Types',
         'organizations'         => 'Organizations',
         'packages'              => 'Packages',
         'payment-gateways'      => 'Payment Gateways',
@@ -53,8 +55,8 @@ return [
         'roles'                 => 'Roles',
         'qualification-codes'   => 'Qualification Codes',
         'qualification-types'   => 'Qualification Types',
-        'notice-categories'     => 'Notice Categories',
-        'notice-types'          => 'Notice Types',
+        'settings'              => 'Settings',
+        'tax-codes'             => 'Tax Codes',
         'vendor-types'          => 'Vendor Types',
     ]
 ];

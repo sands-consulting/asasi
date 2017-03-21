@@ -140,6 +140,18 @@ class AclSeeder extends Seeder
             ['subscription:activate', 'Activate existing subscription'],
             ['subscription:cancel', 'Cancel existing subscription'],
 
+            // Tax Code
+            ['tax-code:index', 'List all tax codes'],
+            ['tax-code:show', 'View tax code details'],
+            ['tax-code:create', 'Create new tax code'],
+            ['tax-code:update', 'Update existing tax code'],
+            ['tax-code:delete', 'Delete existing tax code'],
+            ['tax-code:restore', 'Restore deleted tax code'],
+            ['tax-code:revisions', 'View tax code revisions'],
+            ['tax-code:histories', 'View tax code histories'],
+            ['tax-code:archives', 'List deleted tax codes'],
+            ['tax-code:duplicate', 'Duplicate tax code'],
+
             // Transaction
             ['transaction:index', 'List all transactions'],
             ['transaction:show', 'View transaction details'],

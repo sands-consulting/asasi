@@ -29,15 +29,15 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->put('subscriptions/{subscription}/restore', 'subscriptionsController@restore')
+                $router->put('subscriptions/{subscription}/restore', 'SubscriptionsController@restore')
                     ->name('subscriptions.restore');
-                $router->get('subscriptions/{subscription}/revisions', 'subscriptionsController@revisions')
+                $router->get('subscriptions/{subscription}/revisions', 'SubscriptionsController@revisions')
                     ->name('subscriptions.revisions');
-                $router->get('subscriptions/{subscription}/histories', 'subscriptionsController@histories')
+                $router->get('subscriptions/{subscription}/histories', 'SubscriptionsController@histories')
                     ->name('subscriptions.histories');
-                $router->get('subscriptions/archives', 'subscriptionsController@archives')
+                $router->get('subscriptions/archives', 'SubscriptionsController@archives')
                     ->name('subscriptions.archives');
-                $router->put('subscriptions/{subscription}/duplicate', 'subscriptionsController@duplicate')
+                $router->put('subscriptions/{subscription}/duplicate', 'SubscriptionsController@duplicate')
                     ->name('subscriptions.duplicate');
 
                 $router->put('subscriptions/{subscription}/activate', 'SubscriptionsController@activate')
