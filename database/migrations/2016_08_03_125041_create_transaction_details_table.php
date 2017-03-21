@@ -15,14 +15,14 @@ class CreateTransactionDetailsTable extends Migration
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->increments('id');
             $table->text('description');
-            $table->decimal('unit_price');
-            $table->integer('quantity');
+            $table->decimal('unit_price', 10, 2);
+            $table->decimal('quantity', 10, 2);
             $table->string('tax_code');
-            $table->decimal('tax_rate');
-            $table->decimal('tax_amount');
+            $table->decimal('tax_rate', 10, 2);
+            $table->decimal('tax', 10, 2);
             $table->decimal('total');
-            $table->unsignedInteger('detailable_id');
-            $table->string('detailable_type');
+            $table->string('item_type')->index();
+            $table->unsignedInteger('item_id')->index();
             $table->unsignedInteger('transaction_id');
             $table->nullableTimestamps();
             $table->softDeletes();
@@ -41,8 +41,6 @@ class CreateTransactionDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::drop('transaction_details');
-        Schema::enableForeignKeyConstraints();
     }
 }

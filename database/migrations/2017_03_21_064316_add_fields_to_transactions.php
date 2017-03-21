@@ -13,6 +13,8 @@ class AddFieldsToTransactions extends Migration
      */
     public function up()
     {
+        Schema::rename('transaction_details', 'transaction_lines');
+
         Schema::table('transactions', function (Blueprint $table) {
             $table->renameColumn('number', 'transaction_number');
         });
@@ -33,5 +35,7 @@ class AddFieldsToTransactions extends Migration
             $table->dropColumn('invoice_number');
             $table->renameColumn('transaction_number', 'number');
         });
+
+        Schema::rename('transaction_lines', 'transaction_details');
     }
 }
