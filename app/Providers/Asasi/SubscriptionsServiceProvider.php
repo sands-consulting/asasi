@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers\Modules;
+namespace App\Providers\Asasi;
 
 use Gate;
 use Illuminate\Support\ServiceProvider;
@@ -9,9 +9,11 @@ class SubscriptionsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Gate::policy('App\Subscription', 'App\Policies\SubscriptionPolicy');
+        Gate::policy('App\Package', 'App\Policies\Asasi\PackagePolicy');
+        Gate::policy('App\Subscription', 'App\Policies\Asasi\SubscriptionPolicy');
 
-        app('policy')->register('App\Http\Controllers\VendorSubscriptionsController', 'App\Policies\SubscriptionPolicy');
+        app('policy')->register('App\Http\Controllers\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\PackagesController', 'App\Policies\PackagePolicy');
         app('policy')->register('App\Http\Controllers\Admin\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
     }
 
@@ -38,18 +40,29 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 $router->put('subscriptions/{subscription}/duplicate', 'subscriptionsController@duplicate')
                     ->name('subscriptions.duplicate');
 
-                $router->put('subscriptions/{subscription}/activate', [
-                    'as'  => 'subscriptions.activate',
-                    'uses' => 'SubscriptionsController@activate'
-                ]);
-                $router->put('subscriptions/{subscription}/cancel', [
-                    'as'  => 'subscriptions.cancel',
-                    'uses' => 'SubscriptionsController@cancel'
-                ]);
+                $router->put('subscriptions/{subscription}/activate', 'SubscriptionsController@activate')
+                    ->name('subscriptions.activate');
+                $router->put('subscriptions/{subscription}/cancel', 'SubscriptionsController@cancel')
+                    ->name('subscriptions.cancel');
+
                 $router->resource('subscriptions', 'SubscriptionsController');
+
+                // Package
+
+                $router->put('packages/{package}/restore', 'PackagesController@restore')
+                    ->name('packages.restore');
+                $router->get('packages/{package}/revisions', 'PackagesController@revisions')
+                    ->name('packages.revisions');
+                $router->get('packages/{package}/histories', 'PackagesController@histories')
+                    ->name('packages.histories');
+                $router->get('packages/archives', 'PackagesController@archives')
+                    ->name('packages.archives');
+                $router->put('packages/{package}/duplicate', 'PackagesController@duplicate')
+                    ->name('packages.duplicate');
+                $router->resource('packages', 'PackagesController');
             });
 
-            $router->resource('vendors.subscriptions', 'VendorSubscriptionsController',
+            $router->resource('subscriptions', 'SubscriptionsController',
                 ['only' => ['index', 'show', 'create', 'store']]);
         });
     }

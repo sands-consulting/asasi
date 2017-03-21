@@ -23,12 +23,47 @@ class AclSeeder extends Seeder
         DB::table('roles')->truncate();
 
         $permissions = [
-            // Access
+            /* 
+             * Access Permissions
+             */
             ['access:admin', 'Access admin area'],
             ['access:cart', 'Access notice cart'],
             ['access:report', 'Access reporting module'],
+            ['access:settings', 'Access global settings'],
             ['access:vendor', 'Access vendor module'],
 
+            /* 
+             * Asasi Permissions
+             */
+
+            // News
+            ['news:index', 'List all news'],
+            ['news:show', 'View a news'],
+            ['news:create', 'Create new news'],
+            ['news:update', 'Update existing news'],
+            ['news:delete', 'Delete exisiting news'],
+            ['news:restore', 'Restore deleted news'],
+            ['news:revisions', 'View all news revisions'],
+            ['news:histories', 'View all news histories'],
+            ['news:archives', 'List all deleted news'],
+            ['news:duplicate', 'Duplicate existing news'],
+
+            ['news:publish', 'Publish existing news'],
+            ['news:unpublish', 'Unpublish existing news'],
+
+            ['news:organization', 'Allow to manage news within user organization'],
+
+            // News Category
+            ['news-category:index', 'List all news categories'],
+            ['news-category:show', 'View a news category'],
+            ['news-category:create', 'Create new news category'],
+            ['news-category:update', 'Update existing news categort'],
+            ['news-category:delete', 'Delete exisiting news category'],
+            ['news-category:restore', 'Restore deleted news category'],
+            ['news-category:revisions', 'View all news category revisions'],
+            ['news-category:histories', 'View all news category histories'],
+            ['news-category:archives', 'List all deleted news categories'],
+            ['news-category:duplicate', 'Duplicate existing news category'],
 
             // Organization
             ['organization:index', 'List all organization'],
@@ -41,6 +76,18 @@ class AclSeeder extends Seeder
             ['organization:histories', 'View organization histories'],
             ['organization:archives', 'List deleted organziations'],
             ['organization:duplicate', 'Duplicate existing organization'],
+
+            // Package
+            ['package:index', 'List all packages'],
+            ['package:show', 'View package details'],
+            ['package:create', 'Create new package'],
+            ['package:update', 'Update existing package'],
+            ['package:delete', 'Delete existing package'],
+            ['package:restore', 'Restore deleted package'],
+            ['package:revisions', 'View all package revisions'],
+            ['package:histories', 'View all packages'],
+            ['package:archives', 'List delete packages'],
+            ['package:duplicate', 'Duplicate existing package'],
 
             // Permission
             ['permission:index', 'List all permissions'],
@@ -75,20 +122,23 @@ class AclSeeder extends Seeder
             ['role:restore', 'Restore deleted role'],
             ['role:revisions', 'View role revisions'],
             ['role:histories', 'View role histories'],
-            ['role:duplicate', 'Duplicate existing role'],
             ['role:archives', 'List deleted roles'],
+            ['role:duplicate', 'Duplicate existing role'],
 
-            // Settings
-            ['setting:index', 'List all settings'],
-            ['setting:show', 'View a setting'],
-            ['setting:create', 'Create new setting'],
-            ['setting:update', 'Update existing setting'],
-            ['setting:delete', 'Delete existing setting'],
-            ['setting:restore', 'Restore deleted setting'],
-            ['setting:revisions', 'View setting revisions'],
-            ['setting:histories', 'View setting histories'],
-            ['setting:archives', 'List deleted settings'],
-            ['setting:duplicate', 'Duplicate existing setting'],
+            // Subscription
+            ['subscription:index', 'List all subscriptions'],
+            ['subscription:show', 'View a subscription'],
+            ['subscription:create', 'Create new subscription'],
+            ['subscription:update', 'Update existing subscription'],
+            ['subscription:delete', 'Delete existing subscription'],
+            ['subscription:restore', 'Restore deleted subscription'],
+            ['subscription:revisions', 'View subscription revisions'],
+            ['subscription:histories', 'View subscription histories'],
+            ['subscription:archives', 'List all deleted subscriptions'],
+            ['subscription:duplicate', 'Duplicate existing subscription'],
+            
+            ['subscription:activate', 'Activate existing subscription'],
+            ['subscription:cancel', 'Cancel existing subscription'],
 
             // Transaction
             ['transaction:index', 'List all transactions'],
@@ -101,6 +151,7 @@ class AclSeeder extends Seeder
             ['transaction:histories', 'View transaction histories'],
             ['transaction:archives', 'List deleted transaction'],
             ['transaction:duplicate', 'Duplicate transaction'],
+            
             ['transaction:paid', 'Mark transaction as paid'],
             ['transaction:refund', 'Refund existing transaction'],
             ['transaction:cancel', 'Cancel existing transaction'],
@@ -117,6 +168,7 @@ class AclSeeder extends Seeder
             ['user:histories', 'View user histories'],
             ['user:archives', 'List deleted users'],
             ['user:duplicate', 'Duplicate existing user'],
+            
             ['user:activate', 'Activate a user'],
             ['user:suspend', 'Suspend a user'],
             ['user:assume', 'Login as another user'],
@@ -133,6 +185,9 @@ class AclSeeder extends Seeder
             ['user-blacklist:archives', 'List deleted user blacklists'],
             ['user-blacklist:duplicate', 'Duplicate a blacklist'],
 
+            /* 
+             * Application Permissions
+             */
 
             // Allocation
             ['allocation:index', 'List all allocations'],
@@ -157,17 +212,6 @@ class AclSeeder extends Seeder
             ['allocation-type:revisions', 'View allocation type revisions'],
             ['allocation-type:histories', 'View allocation type histories'],
 
-            // Banner
-            ['banner:index', 'List all banners'],
-            ['banner:show', 'View a banner'],
-            ['banner:create', 'Create new banner'],
-            ['banner:update', 'Update existing banner'],
-            ['banner:delete', 'Delete existing banner'],
-            ['banner:publish', 'Publish a banner'],
-            ['banner:unpublish', 'Unpublish a banner'],
-            ['banner:revisions', 'View banner revisions'],
-            ['banner:histories', 'View banner histories'],
-
             // Evaluator
             ['evaluator:index', 'List of evaluator\'s.'],
             ['evaluator:create', 'Assign evaluator to notice.'],
@@ -183,30 +227,6 @@ class AclSeeder extends Seeder
             ['evaluation:create', 'Create new evaluation.'],
             ['evaluation:update', 'Update existing evaluation.'],
             ['evaluation:delete', 'Delete existing evaluation.'],
-
-            // News
-            ['news:index', 'List all news'],
-            ['news:show', 'View a news'],
-            ['news:create', 'Create new news'],
-            ['news:update', 'Update existing news'],
-            ['news:delete', 'Delete exisiting news'],
-            ['news:publish', 'Publish existing news'],
-            ['news:unpublish', 'Unpublish existing news'],
-            ['news:revisions', 'View news revisions'],
-            ['news:histories', 'View news histories'],
-            ['news:organization', 'Allow to manage news within user organization'],
-
-            // News Category
-            ['news-category:index', 'List all news categories'],
-            ['news-category:show', 'View a news category'],
-            ['news-category:create', 'Create new news category'],
-            ['news-category:update', 'Update existing news category'],
-            ['news-category:duplicate', 'Duplicate existing new category'],
-            ['news-category:delete', 'Delete existing news category'],
-            ['news-category:activate', 'Activate news category'],
-            ['news-category:deactivate', 'Deactivate news category'],
-            ['news-category:revisions', 'View news category revisions'],
-            ['news-category:histories', 'View news category histories'],
 
             // Notice
             ['notice:index', 'List all notices'],
@@ -272,29 +292,6 @@ class AclSeeder extends Seeder
             ['notice-type:revisions', 'View notice type revisions'],
             ['notice-type:histories', 'View notice type histories'],
 
-            // Package
-            ['package:index', 'List all packages'],
-            ['package:show', 'View a package'],
-            ['package:create', 'Create new package'],
-            ['package:update', 'Update existing package'],
-            ['package:duplicate', 'Duplicate existing package'],
-            ['package:activate', 'Activate existing package'],
-            ['package:deactivate', 'Deactivate existing package'],
-            ['package:delete', 'Delete existing package'],
-            ['package:revisions', 'View package revisions'],
-            ['package:histories', 'View package histories'],
-
-            // Payment Gateway
-            ['payment-gateway:index', 'List all payment gateways'],
-            ['payment-gateway:show', 'View payment gateway details'],
-            ['payment-gateway:create', 'Create new payment gateway'],
-            ['payment-gateway:update', 'Update existing payment gateway'],
-            ['payment-gateway:delete', 'Delete existing payment gateway'],
-            ['payment-gateway:activate', 'Activate payment gateway'],
-            ['payment-gateway:deactivate', 'Deactivate payment gateway'],
-            ['payment-gateway:revisions', 'View payment gateway revisions'],
-            ['payment-gateway:histories', 'View payment gateway histories'],
-
             // Project
             ['project:index', 'List all projects'],
             ['project:show', 'View project details'],
@@ -353,7 +350,7 @@ class AclSeeder extends Seeder
             ['submission-requirement:histories', 'View submission requirement histories'],
             ['submission-requirement:organization', 'Allow to manage submission requirement with organization'],
 
-            // submission
+            // Submission
             ['submission:index', 'List all submissions'],
             ['submission:show', 'View submission details'],
             ['submission:create', 'Create new submission'],
@@ -363,7 +360,7 @@ class AclSeeder extends Seeder
             ['submission:histories', 'View submission histories'],
             ['submission:organization', 'Allow to manage submission with organization'],
 
-            // submission-detail
+            // Submission Detail
             ['submission-detail:show', 'View submission details'],
             ['submission-detail:create', 'Create new submission details'],
             ['submission-detail:update', 'Update existing submission details'],
@@ -372,20 +369,6 @@ class AclSeeder extends Seeder
             ['submission-detail:deactivate', 'Deactivate submission details'],
             ['submission-detail:revisions', 'View submission details revisions'],
             ['submission-detail:histories', 'View submission details histories'],
-
-            // Subscription
-            ['subscription:index', 'List all subscriptions'],
-            ['subscription:show', 'View a subscription'],
-            ['subscription:create', 'Create new subscription'],
-            ['subscription:update', 'Update existing subscription'],
-            ['subscription:delete', 'Delete existing subscription'],
-            ['subscription:restore', 'Restore deleted subscription'],
-            ['subscription:revisions', 'View subscription revisions'],
-            ['subscription:histories', 'View subscription histories'],
-            ['subscription:archives', 'List all deleted subscriptions'],
-            ['subscription:duplicate', 'Duplicate existing subscription'],
-            ['subscription:activate', 'Activate existing subscription'],
-            ['subscription:cancel', 'Cancel existing subscription'],
 
             // Vendor
             ['vendor:index', 'List all vendors'],

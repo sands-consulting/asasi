@@ -204,6 +204,7 @@ return [
         App\Providers\Asasi\PlacesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,
         App\Providers\Asasi\RolesServiceProvider::class,
+        App\Providers\Asasi\SubscriptionsServiceProvider::class,
         App\Providers\Asasi\TransactionsServiceProvider::class,
         App\Providers\Asasi\UsersServiceProvider::class,
 
@@ -215,12 +216,6 @@ return [
         App\Providers\Modules\ReportsServiceProvider::class,
         App\Providers\Modules\QualificationsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
-
-        /*
-         * Subscription Service Providers
-         */
-        App\Providers\Modules\SubscriptionsServiceProvider::class,
-        App\Providers\Modules\PackagesServiceProvider::class,
 
         /*
          * Notice Service Providers 
