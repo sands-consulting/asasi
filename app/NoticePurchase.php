@@ -28,4 +28,9 @@ class NoticePurchase extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function submission()
+    {
+        return $this->hasOne(Submission::class);
+    }
 }

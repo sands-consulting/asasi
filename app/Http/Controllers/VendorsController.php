@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\Portal\EligiblesDataTable;
 use App\DataTables\Portal\InvitationsDataTable;
+use App\DataTables\SubmissionsDataTable;
 use App\Events\VendorApplied;
 use App\Http\Requests\VendorRequest;
 use App\Services\VendorService;
@@ -52,7 +53,7 @@ class VendorsController extends Controller
                 ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
         }
 
-        
+
     }
 
     public function eligibles(EligiblesDataTable $table, Vendor $vendor)
@@ -71,5 +72,11 @@ class VendorsController extends Controller
     {
         $table->vendor_id = $vendor->id;
         return view('vendors.purchases', compact('vendor'));
+    }
+
+    public function submissions(SubmissionsDataTable $table, Vendor $vendor)
+    {
+        $table->vendor_id = $vendor->id;
+        return $table->render('vendors.eligibles', compact('vendor'));
     }
 }

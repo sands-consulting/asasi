@@ -165,7 +165,7 @@ class SubmissionSeeder extends Seeder
         $submissionData = [
             [
                 'price' => '500000',
-                'notice_id' =>  1,
+                'purchase_id' =>  1,
                 'vendor_id' => 1,
                 'status' =>  'completed'
             ]
