@@ -198,6 +198,7 @@ return [
          * Asasi Core Service Providers
          */
         App\Providers\AsasiServiceProvider::class,
+        App\Providers\Asasi\NewsServiceProvider::class,
         App\Providers\Asasi\NotificationsServiceProvider::class,
         App\Providers\Asasi\OrganizationsServiceProvider::class,
         App\Providers\Asasi\PlacesServiceProvider::class,
@@ -211,7 +212,6 @@ return [
          */
         App\Providers\Modules\AllocationsServiceProvider::class,
         App\Providers\Modules\DashboardServiceProvider::class,
-        App\Providers\Modules\NewsServiceProvider::class,
         App\Providers\Modules\ReportsServiceProvider::class,
         App\Providers\Modules\QualificationsServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
