@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class TransactionDetail extends Model
+class TransactionLine extends Model
 {
     use RevisionableTrait,
         SoftDeletes;
@@ -48,7 +48,7 @@ class TransactionDetail extends Model
         return $this->belongsTo(Transaction::class);
     }
 
-    public function detailable()
+    public function item()
     {
         return $this->morphTo();
     }
