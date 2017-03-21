@@ -12,9 +12,9 @@ class SubscriptionsServiceProvider extends ServiceProvider
         Gate::policy('App\Package', 'App\Policies\Asasi\PackagePolicy');
         Gate::policy('App\Subscription', 'App\Policies\Asasi\SubscriptionPolicy');
 
-        app('policy')->register('App\Http\Controllers\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
-        app('policy')->register('App\Http\Controllers\Admin\PackagesController', 'App\Policies\PackagePolicy');
-        app('policy')->register('App\Http\Controllers\Admin\SubscriptionsController', 'App\Policies\SubscriptionPolicy');
+        app('policy')->register('App\Http\Controllers\SubscriptionsController', 'App\Policies\Asasi\SubscriptionPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\PackagesController', 'App\Policies\Asasi\PackagePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\SubscriptionsController', 'App\Policies\Asasi\SubscriptionPolicy');
     }
 
     public function register()
