@@ -15,9 +15,9 @@ class RolesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\RolesController', 'App\Policies\RolePolicy');
+        Gate::policy('App\Role', 'App\Policies\Asasi\RolePolicy');
 
-        Gate::policy("App\Role", "App\Policies\RolePolicy");
+        app('policy')->register('App\Http\Controllers\Admin\RolesController', 'App\Policies\RolePolicy');
     }
 
     /**

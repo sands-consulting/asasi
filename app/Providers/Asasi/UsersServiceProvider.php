@@ -15,14 +15,13 @@ class UsersServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Gate::policy('App\User', 'App\Policies\Asasi\UserPolicy');
+        Gate::policy('App\UserBlacklist', 'App\Policies\Asasi\UserBlacklistPolicy');
 
         app('policy')->register('App\Http\Controllers\UsersController', 'App\Policies\UserPolicy');
         app('policy')->register('App\Http\Controllers\MeController', 'App\Policies\MePolicy');
 
         app('policy')->register('App\Http\Controllers\Admin\UsersController', 'App\Policies\UserPolicy');
-
-        Gate::policy('App\User', 'App\Policies\UserPolicy');
-        Gate::policy('App\UserBlacklist', 'App\Policies\UserBlacklistPolicy');
     }
 
     /**

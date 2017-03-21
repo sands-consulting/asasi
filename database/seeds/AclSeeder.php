@@ -28,6 +28,98 @@ class AclSeeder extends Seeder
             ['access:report', 'Access reporting module'],
             ['access:vendor', 'Access vendor module'],
 
+
+            // Organization
+            ['organization:index', 'List all organization'],
+            ['organization:show', 'View organization details'],
+            ['organization:create', 'Create new organization'],
+            ['organization:update', 'Update existing organization'],
+            ['organization:delete', 'Delete existing organization'],
+            ['organization:restore', 'Restore deleted organization'],
+            ['organization:revisions', 'View organization revisions'],
+            ['organization:histories', 'View organization histories'],
+            ['organization:archives', 'List deleted organziations'],
+            ['organization:duplicate', 'Duplicate existing organization'],
+            ['organization:activate', 'Activate an organization'],
+            ['organization:deactivate', 'Deactivate an organization'],
+            ['organization:suspend', 'Suspend an organization'],
+
+            // Permission
+            ['permission:index', 'List all permissions'],
+            ['permission:show', 'View permission details'],
+            ['permission:create', 'Create new permission'],
+            ['permission:update', 'Update existing permission'],
+            ['permission:delete', 'Delete existing permission'],
+            ['permission:restore', 'Restore deleted permission'],
+            ['permission:revisions', 'View all permission revisions'],
+            ['permission:histories', 'View all permissions'],
+            ['permission:archives', 'List delete permissions'],
+            ['permission:duplicate', 'Duplicate existing permission'],
+
+            // Place
+            ['place:index', 'List all places'],
+            ['place:show', 'View place details'],
+            ['place:create', 'Create new place'],
+            ['place:update', 'Update existing place'],
+            ['place:delete', 'Delete existing place'],
+            ['place:restore', 'Restore deleted place'],
+            ['place:revisions', 'View place revisions'],
+            ['place:histories', 'View place histories'],
+            ['place:archives', 'List deleted places'],
+            ['place:duplicate', 'Duplicate existing place'],
+
+            // Role
+            ['role:index', 'List all roles'],
+            ['role:show', 'View role details'],
+            ['role:create', 'Create new role'],
+            ['role:update', 'Update existing role'],
+            ['role:delete', 'Delete existing role'],
+            ['role:restore', 'Restore deleted role'],
+            ['role:revisions', 'View role revisions'],
+            ['role:histories', 'View role histories'],
+            ['role:duplicate', 'Duplicate existing role'],
+            ['role:archives', 'List deleted roles'],
+
+            // Settings
+            ['setting:index', 'List all settings'],
+            ['setting:show', 'View a setting'],
+            ['setting:create', 'Create new setting'],
+            ['setting:update', 'Update existing setting'],
+            ['setting:delete', 'Delete existing setting'],
+            ['setting:restore', 'Restore deleted setting'],
+            ['setting:revisions', 'View setting revisions'],
+            ['setting:histories', 'View setting histories'],
+            ['setting:archives', 'List deleted settings'],
+            ['setting:duplicate', 'Duplicate existing setting'],
+
+            // User
+            ['user:index', 'List all users'],
+            ['user:show', 'View user details'],
+            ['user:create', 'Create new user'],
+            ['user:update', 'Update existing user'],
+            ['user:delete', 'Delete existing user'],
+            ['user:restore', 'Restore deleted user'],
+            ['user:revisions', 'View user revisions'],
+            ['user:histories', 'View user histories'],
+            ['user:archives', 'List deleted users'],
+            ['user:duplicate', 'Duplicate existing user'],
+            ['user:activate', 'Activate a user'],
+            ['user:suspend', 'Suspend a user'],
+            ['user:assume', 'Login as another user'],
+
+            // User Blacklist
+            ['user-blacklist:index', 'List all user blacklists'],
+            ['user-blacklist:show', 'View blacklist details'],
+            ['user-blacklist:create', 'Blacklist a user'],
+            ['user-blacklist:update', 'Update user blacklist'],
+            ['user-blacklist:delete', 'Delete existing user blacklist'],
+            ['user-blacklist:restore', 'Restore deleted user blacklist'],
+            ['user-blacklist:revisions', 'View blacklist revisions'],
+            ['user-blacklist:histories', 'View blacklist histories'],
+            ['user-blacklist:archives', 'List deleted user blacklists'],
+            ['user-blacklist:duplicate', 'Duplicate a blacklist'],
+
+
             // Allocation
             ['allocation:index', 'List all allocations'],
             ['allocation:show', 'View allocation details'],
@@ -166,19 +258,6 @@ class AclSeeder extends Seeder
             ['notice-type:revisions', 'View notice type revisions'],
             ['notice-type:histories', 'View notice type histories'],
 
-            // Organization
-            ['organization:index', 'List all organization'],
-            ['organization:show', 'View organization details'],
-            ['organization:create', 'Create new organization'],
-            ['organization:update', 'Update existing organization'],
-            ['organization:duplicate', 'Duplicate existing organization'],
-            ['organization:activate', 'Activate an organization'],
-            ['organization:deactivate', 'Deactivate an organization'],
-            ['organization:suspend', 'Suspend an organization'],
-            ['organization:delete', 'Delete existing organization'],
-            ['organization:revisions', 'View organization revisions'],
-            ['organization:histories', 'View organization histories'],
-
             // Package
             ['package:index', 'List all packages'],
             ['package:show', 'View a package'],
@@ -201,27 +280,6 @@ class AclSeeder extends Seeder
             ['payment-gateway:deactivate', 'Deactivate payment gateway'],
             ['payment-gateway:revisions', 'View payment gateway revisions'],
             ['payment-gateway:histories', 'View payment gateway histories'],
-
-            // Permission
-            ['permission:index', 'List all permissions'],
-            ['permission:show', 'View permission details'],
-            ['permission:create', 'Create new permission'],
-            ['permission:update', 'Update existing permission'],
-            ['permission:delete', 'Delete existing permission'],
-            ['permission:revisions', 'View all permission revisions'],
-            ['permission:histories', 'View all permissions'],
-
-            // Place
-            ['place:index', 'List all places'],
-            ['place:show', 'View place details'],
-            ['place:create', 'Create new place'],
-            ['place:update', 'Update existing place'],
-            ['place:duplicate', 'Duplicate existing place'],
-            ['place:activate', 'Activate existing place'],
-            ['place:deactivate', 'Deactivate existing place'],
-            ['place:delete', 'Delete existing place'],
-            ['place:revisions', 'View place revisions'],
-            ['place:histories', 'View place histories'],
 
             // Project
             ['project:index', 'List all projects'],
@@ -269,24 +327,6 @@ class AclSeeder extends Seeder
             ['qualification-type:revisions', 'View qualification code type revisions'],
             ['qualification-type:histories', 'View qualification code type histories'],
 
-            // Role
-            ['role:index', 'List all roles'],
-            ['role:show', 'View role details'],
-            ['role:create', 'Create new role'],
-            ['role:update', 'Update existing role'],
-            ['role:delete', 'Delete existing role'],
-            ['role:revisions', 'View role revisions'],
-            ['role:histories', 'View role histories'],
-
-            // Settings
-            ['setting:index', 'List all settings'],
-            ['setting:show', 'View a setting'],
-            ['setting:create', 'Create new setting'],
-            ['setting:update', 'Update existing setting'],
-            ['setting:delete', 'Delete existing setting'],
-            ['setting:revisions', 'View setting revisions'],
-            ['setting:histories', 'View setting histories'],
-
             // Submission Requirement
             ['submission-requirement:index', 'List all submission requirements'],
             ['submission-requirement:show', 'View submission requirement details'],
@@ -329,30 +369,6 @@ class AclSeeder extends Seeder
             ['subscription:delete', 'Delete existing subscription'],
             ['subscription:revisions', 'View subscription revisions'],
             ['subscription:histories', 'View subscription histories'],
-
-            // User
-            ['user:index', 'List all users'],
-            ['user:show', 'View user details'],
-            ['user:create', 'Create new user'],
-            ['user:update', 'Update existing user'],
-            ['user:delete', 'Delete existing user'],
-            ['user:restore', 'Restore deleted user'],
-            ['user:revisions', 'View user revisions'],
-            ['user:histories', 'View user histories'],
-            ['user:duplicate', 'Duplicate existing user'],
-            ['user:activate', 'Activate a user'],
-            ['user:suspend', 'Suspend a user'],
-            ['user:assume', 'Login as another user'],
-
-            // User Blacklist
-            ['user-blacklist:index', 'List all user blacklist'],
-            ['user-blacklist:show', 'View blacklist details'],
-            ['user-blacklist:create', 'Blacklist a user'],
-            ['user-blacklist:update', 'Update user blacklist'],
-            ['user-blacklist:delete', 'Delete existing user blacklist'],
-            ['user-blacklist:duplicate', 'Duplicate a blacklist'],
-            ['user-blacklist:revisions', 'View blacklist revisions'],
-            ['user-blacklist:histories', 'View blacklist histories'],
 
             // Vendor
             ['vendor:index', 'List all vendors'],
@@ -441,7 +457,7 @@ class AclSeeder extends Seeder
         }
 
         $admin = Role::whereName('admin')->first();
-        $admin->permissions()->attach(Permission::whereNotIn('name', ['access:cart', 'access:vendor'])->pluck('id')->toArray());
+        $admin->permissions()->attach(Permission::whereNotIn('name', ['access:cart', 'access:vendor', 'permission:create', 'permission:delete', 'permission:restore'])->pluck('id')->toArray());
 
         $vendorAdmin = Role::whereName('vendor-admin')->first();
         $vendorAdmin->permissions()->attach(Permission::whereIn('name', [

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         } catch (Exception $e) {
         }
 
+        $this->call(SettingSeeder::class);
         $this->call(AclSeeder::class);
         $this->call(AsasiSeeder::class);
 
@@ -32,7 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SubmissionSeeder::class);
         $this->call(PackageSeeder::class);
         $this->call(VendorSeeder::class);
-        $this->call(SettingSeeder::class);
         $this->call(SubscriptionSeeder::class);
         $this->call(PaymentGatewaySeeder::class);
         $this->call(EvaluationSeeder::class);

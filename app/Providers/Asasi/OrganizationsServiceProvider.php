@@ -15,7 +15,7 @@ class OrganizationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::policy('App\Organization', 'App\Policies\OrganizationPolicy');
+        Gate::policy('App\Organization', 'App\Policies\Asasi\OrganizationPolicy');
 
         app('policy')->register('App\Http\Controllers\Admin\OrganizationsController', 'App\Policies\OrganizationPolicy');
     }

@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Organization;
 use App\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
  * Class OrganizationPolicy
@@ -11,6 +12,8 @@ use App\User;
  */
 class OrganizationPolicy
 {
+    use HandlesAuthorization
+
     /**
      * @param User $user
      * @return bool
@@ -74,7 +77,7 @@ class OrganizationPolicy
      */
     public function destroy(User $user, Organization $organization)
     {
-        return $user->hasPermission('organization:delete') && $organization->name != 'admin';
+        return $user->hasPermission('organization:delete');
     }
 
     /**
@@ -82,9 +85,9 @@ class OrganizationPolicy
      * @param Organization $organization
      * @return bool
      */
-    public function duplicate(User $user, Organization $organization)
+    public function restore(User $user, Organization $organization)
     {
-        return $user->hasPermission('organization:duplicate');
+        return $user->hasPermission('organization:restore');
     }
 
     /**
@@ -102,9 +105,29 @@ class OrganizationPolicy
      * @param Organization $organization
      * @return bool
      */
-    public function logs(User $user, Organization $organization)
+    public function histories(User $user, Organization $organization)
     {
-        return $user->hasPermission('organization:logs');
+        return $user->hasPermission('organization:histories');
+    }
+
+    /**
+     * @param User $user
+     * @param Organization $organization
+     * @return bool
+     */
+    public function archives(User $user, Organization $organization)
+    {
+        return $user->hasPermission('organization:archives');
+    }
+
+    /**
+     * @param User $user
+     * @param Organization $organization
+     * @return bool
+     */
+    public function duplicate(User $user, Organization $organization)
+    {
+        return $user->hasPermission('organization:duplicate');
     }
 
     /**
@@ -114,17 +137,8 @@ class OrganizationPolicy
      */
     public function activate(User $user, Organization $organization)
     {
-        return $user->hasPermission('organization:activate') && $organization->canActivate();
-    }
-
-    /**
-     * @param User $user
-     * @param Organization $organization
-     * @return bool
-     */
-    public function deactivate(User $user, Organization $organization)
-    {
-        return $user->hasPermission('organization:deactivate') && $organization->canDeactivate();
+        return $user->hasPermission('organization:activate') 
+                && $organization->status != 'active';
     }
 
     /**
@@ -134,6 +148,7 @@ class OrganizationPolicy
      */
     public function suspend(User $user, Organization $organization)
     {
-        return $user->hasPermission('organization:suspend') && $organization->can->Suspend();
+        return $user->hasPermission('organization:suspend')
+                && $organization->status != 'suspended';
     }
 }
