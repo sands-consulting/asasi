@@ -2,14 +2,17 @@
 
 namespace App\Providers\Modules;
 
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class VendorsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app('policy')->register('App\Http\Controllers\Admin\VendorsController', 'App\Policies\VendorsPolicy');
-        app('policy')->register('App\Http\Controllers\VendorsController', 'App\Policies\VendorsPolicy');
+        Gate::policy('App\Vendor', 'App\Policies\VendorPolicy');
+
+        app('policy')->register('App\Http\Controllers\Admin\VendorsController', 'App\Policies\VendorPolicy');
+        app('policy')->register('App\Http\Controllers\VendorsController', 'App\Policies\VendorPolicy');
     }
     /**
      * Register the application services.

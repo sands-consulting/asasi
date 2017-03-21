@@ -11,6 +11,7 @@ class AllocationsServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::policy("App\Allocation", "App\Policies\AllocationPolicy");
+
         app('policy')
             ->register('App\Http\Controllers\Admin\AllocationsController', 'App\Policies\AllocationPolicy');
         app('policy')

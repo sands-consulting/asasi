@@ -28,6 +28,7 @@ class SubmissionSeeder extends Seeder
         $requirementData = [
             [
                 "id" => 1,
+                "sequence" => 1,
                 "title" => "Repairs and Maintenance Services Including Electrical Reticulation and Lighting, Air Conditioning Systems, Mechanical Maintenance, Plumbing and Drainage, Minor and Major Civil works, Building Maintenance, SeweragePlants, Water Treatment Plants, Shop-fitti",
                 "field_required" => 1,
                 "field_type" => "checkbox",
@@ -40,9 +41,9 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 2,
+                "sequence" => 2,
                 "title" => "Maintenance, Inspections, Edging, Watering, Topdressing, Replacement of Grass, Indoor Plants etc., Garden Services",
                 "field_required" => 0,
-                "require_file" => 1,
                 "field_type" => "file",
                 "notice_id" => 1,
                 "type_id" => 1,
@@ -53,6 +54,7 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 3,
+                "sequence" => 3,
                 "title" => "Reception, Switch Board manning, Postal, Franking, and Printing, Office Services (Manning the Boardrooms, Audio Visual and Electronics, Handyman Services, Voicemail, Water Feature, Pest Control.",
                 "field_required" => 1,
                 "field_type" => "checkbox",
@@ -65,6 +67,7 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 4,
+                "sequence" => 4,
                 "title" => "General Cleaning Services, Offices, Passageways, Toilets, Reception Areas, Outside Cleaning Areas. Linen Rooms, Auditoriums, Domestic Waste Management, Deep Cleaning, Hygiene. Supply all consumables",
                 "field_required" => 0,
                 "field_type" => "checkbox",
@@ -77,9 +80,9 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 5,
+                "sequence" => 5,
                 "title" => "Manning of all the Call centers, includes the following services: Answering calls by call center operators in the employ of the contractor on the building maintenance services required by Eskom during the term of the contract. Includes receiving defaults ",
                 "field_required" => 0,
-                "require_file" => 1,
                 "field_type" => "checkbox",
                 "notice_id" => 1,
                 "type_id" => 1,
@@ -90,6 +93,7 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 6,
+                "sequence" => 1,
                 "title" => "Repairs and Maintenance Services Including Electrical Reticulation and Lighting, Air Conditioning Systems, Mechanical Maintenance, Plumbing and Drainage, Minor and Major Civil works, Building Maintenance, SeweragePlants, Water Treatment Plants, Shop-fitti",
                 "field_required" => 1,
                 "field_type" => "checkbox",
@@ -102,9 +106,9 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 7,
+                "sequence" => 2,
                 "title" => "Maintenance, Inspections, Edging, Watering, Topdressing, Replacement of Grass, Indoor Plants etc., Garden Services",
                 "field_required" => 0,
-                "require_file" => 1,
                 "field_type" => "file",
                 "notice_id" => 1,
                 "type_id" => 2,
@@ -115,6 +119,7 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 8,
+                "sequence" => 3,
                 "title" => "General Cleaning Services, Offices, Passageways, Toilets, Reception Areas, Outside Cleaning Areas. Linen Rooms, Auditoriums, Domestic Waste Management, Deep Cleaning, Hygiene. Supply all consumables",
                 "field_required" => 0,
                 "field_type" => "checkbox",
@@ -127,9 +132,9 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 9,
+                "sequence" => 4,
                 "title" => "Reception, Switch Board manning, Postal, Franking, and Printing, Office Services (Manning the Boardrooms, Audio Visual and Electronics, Handyman Services, Voicemail, Water Feature, Pest Control.",
                 "field_required" => 0,
-                "require_file" => 1,
                 "field_type" => "file",
                 "notice_id" => 1,
                 "type_id" => 2,
@@ -140,9 +145,9 @@ class SubmissionSeeder extends Seeder
             ],
             [
                 "id" => 10,
+                "sequence" => 5,
                 "title" => "Manning of all the Call centers, includes the following services: Answering calls by call center operators in the employ of the contractor on the building maintenance services required by Eskom during the term of the contract. Includes receiving defaults ",
                 "field_required" => 0,
-                "require_file" => 1,
                 "field_type" => "checkbox",
                 "notice_id" => 1,
                 "type_id" => 2,

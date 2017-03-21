@@ -5,6 +5,7 @@ use App\Role;
 use App\Services\PermissionService;
 use App\Services\RoleService;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 
 class AclSeeder extends Seeder
@@ -88,6 +89,22 @@ class AclSeeder extends Seeder
             ['setting:histories', 'View setting histories'],
             ['setting:archives', 'List deleted settings'],
             ['setting:duplicate', 'Duplicate existing setting'],
+
+            // Transaction
+            ['transaction:index', 'List all transactions'],
+            ['transaction:show', 'View transaction details'],
+            ['transaction:create', 'Create new transaction'],
+            ['transaction:update', 'Update existing transaction'],
+            ['transaction:delete', 'Delete existing transaction'],
+            ['transaction:restore', 'Restore deleted transaction'],
+            ['transaction:revisions', 'View transaction revisions'],
+            ['transaction:histories', 'View transaction histories'],
+            ['transaction:archives', 'List deleted transaction'],
+            ['transaction:duplicate', 'Duplicate transaction'],
+            ['transaction:paid', 'Mark transaction as paid'],
+            ['transaction:refund', 'Refund existing transaction'],
+            ['transaction:cancel', 'Cancel existing transaction'],
+            ['transaction:query', 'Query transaction information'],
 
             // User
             ['user:index', 'List all users'],
@@ -367,6 +384,7 @@ class AclSeeder extends Seeder
             ['subscription:revisions', 'View subscription revisions'],
             ['subscription:histories', 'View subscription histories'],
 
+
             // Vendor
             ['vendor:index', 'List all vendors'],
             ['vendor:show', 'View vendor details'],
@@ -471,7 +489,7 @@ class AclSeeder extends Seeder
             'user:assume'
         ])->pluck('id')->toArray());
 
-        $vendor = Role::whereName('vendor')->first();
+        $vendor = Role::whereName('vendor-user')->first();
         $vendor->permissions()->attach(Permission::whereIn('name', [
             'access:vendor',
             'access:cart',

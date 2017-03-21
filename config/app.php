@@ -203,6 +203,7 @@ return [
         App\Providers\Asasi\PlacesServiceProvider::class,
         App\Providers\Asasi\PermissionsServiceProvider::class,
         App\Providers\Asasi\RolesServiceProvider::class,
+        App\Providers\Asasi\TransactionsServiceProvider::class,
         App\Providers\Asasi\UsersServiceProvider::class,
 
         /*
