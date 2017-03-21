@@ -150,4 +150,14 @@ class UserPolicy
     {
         return $auth->hasPermission('user:assum');
     }
+
+    /**
+     * @param User $auth
+     * @param User $user
+     * @return bool
+     */
+    public function resume(User $auth, User $user)
+    {
+        return app('session')->has('resume_user_id');
+    }
 }
