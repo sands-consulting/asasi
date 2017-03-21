@@ -21,7 +21,6 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Module Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'
@@ -31,68 +30,29 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->get('evaluations/{notices}/submission', [
-                    'as' => 'evaluations.submission',
-                    'uses' => 'EvaluationsController@submission'  
-                ]);
+                $router->get('evaluations/{news}/revisions', 'EvaluationsController@revisions')
+                    ->name('evaluations.revisions');
+                $router->get('evaluations/{news}/histories', 'EvaluationsController@histories')
+                    ->name('evaluations.histories');
 
-                $router->get('evaluations/{notices}/{submissions}/create', [
-                    'as' => 'evaluations.create',
-                    'uses' => 'EvaluationsController@create'  
-                ]);
+                $router->put('evaluations/{evaluation}/accept', 'EvaluationsController@accept')
+                    ->name('evalutions.accept');
+                $router->put('evaluations/{evaluation}/reject', 'EvaluationsController@reject')
+                    ->name('evalutions.accept');
 
-                $router->get('evaluations/{notices}/{submissions}/edit', [
-                    'as' => 'evaluations.edit',
-                    'uses' => 'EvaluationsController@edit'  
-                ]);
-
-                $router->put('evaluations/{notices}/{submissions}/update', [
-                    'as' => 'evaluations.update',
-                    'uses' => 'EvaluationsController@update'  
-                ]);
-
-                $router->post('evaluations/{notices}/{submissions}/store', [
-                    'as' => 'evaluations.store',
-                    'uses' => 'EvaluationsController@store'  
-                ]);
-
-                $router->get('evaluations/settings', [
-                    'as' => 'evaluations.settings',
-                    'uses' => 'EvaluationsController@settings'  
-                ]);
-
-                $router->get('evaluations/{notices}/requirements', [
-                    'as' => 'evaluations.requirements',
-                    'uses' => 'EvaluationsController@requirements'  
-                ]);
-
-                $router->get('evaluations/{notices}/view/{users}/{submissions}', [
-                    'as' => 'evaluations.view',
-                    'uses' => 'EvaluationsController@view'
-                ]);
-
-                $router->resource('evaluations', 'EvaluationsController', ['only' => ['index']]);
+                $router->resource('evaluations', 'EvaluationsController', [
+                    'only' => ['index', 'show', 'edit', 'update']]);
             });
         });
 
-         // API Routing
+        // API Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers\Api',
             'prefix' => 'api',
             'middleware' => 'api'
         ], function ($router) {
-            $router->post('evaluations/store', [
-                'as' => 'api.evaluations.store',
-                'uses' => 'EvaluationsController@store'
-            ]);
-            $router->post('evaluations/update', [
-                'as' => 'api.evaluations.update',
-                'uses' => 'EvaluationsController@update'
-            ]);
-            $router->post('evaluations/delete/{evaluations}', [
-                'as' => 'api.evaluations.delete',
-                'uses' => 'EvaluationsController@delete'
-            ]);
+            $router->resource('users', 'EvaluationsController', [
+                'only' => ['index', 'store']]);
         });
     }
 }

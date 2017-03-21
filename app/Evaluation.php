@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -10,87 +9,87 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class Evaluation extends Model
 {
     use RevisionableTrait,
-        Sluggable,
         SoftDeletes;
+
+    protected $table = 'notice_evaluator';
 
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        // Payment fields
+        'remarks',
+        'total_score'
+        'notice_id',
+        'submission_id',
+        'type_id',
+        'user_id',
+        'status',
     ];
 
     protected $hidden = [
-        // hidden column
+        //
     ];
 
     protected $attributes = [
-        // default attributes value
+        'status' => 'pending'
     ];
 
     protected $searchacble = [
-        // fields
+        //
     ];
 
     protected $sortable = [
-        // fields
+        //
     ];
 
-    public function logs()
+    public function scopeType($query, $type)
+    {
+        return $query->where('type_id', $type);
+    }
+    
+    /*
+     * Relationsip
+     */
+    public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
 
-    /*
-     * Search scopes
-     */
-
-    public function scopeSearch($query, $queries = [])
+    public function notice()
     {
-        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
-            $keywords = $queries['keywords'];
-            $query->where(function($query) use($keywords) {
-                foreach ($this->searchable as $column) {
-                    $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
-                }
-            });
-            unset($queries['keywords']);
-        }
-
-        foreach ($queries as $key => $value) {
-            if (empty($value)) {
-                continue;
-            }
-            $query->where("{$this->getTable()}.{$key}", $value);
-        }
+        return $this->belongsTo(Notice::class);
     }
 
-    public function scopeSort($query, $column, $direction)
+    public function submission()
     {
-        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
-            $query->orderBy($column, $direction);
-        }
+        return $this->belongsTo(Submission::class);
     }
 
-    /* 
-     * State controls 
-     */
-
-    public function sluggable()
+    public function user()
     {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
+        return $this->belongsTo(User::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(EvaluationType::class, 'type_id');
     }
 
     /*
      * Helpers 
      */
 
-    public static function boot()
+    public function getProgress($type)
     {
-        parent::boot();
-    }
+        $progress = 0;
+        $total = $this->submissions()->count();
+        $completed = $this->submissions()
+                ->wherePivot('status', 'completed')
+                ->count();
 
+        if ($total > 0) 
+            $progress = $completed/$total * 100;
+
+        return $progress;
+
+    }
 }

@@ -29,7 +29,6 @@ class UsersServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // module routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'
@@ -64,6 +63,16 @@ class UsersServiceProvider extends ServiceProvider
                 ->name('me.resume');
             $router->get('me/bookmarks', 'MeController@bookmarks')
                 ->name('me.bookmarks');
+        });
+
+        // API Routing
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers\Api',
+            'prefix' => 'api',
+            'middleware' => 'api'
+        ], function ($router) {
+            $router->resource('users', 'UsersController', [
+                'only' => 'index']);
         });
     }
 }

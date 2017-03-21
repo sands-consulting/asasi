@@ -17,17 +17,23 @@ class EvaluationScore extends Model
 
     protected $fillable = [
         'score',
-        'submission_id',
+        'remarks',
+        'evaluation_id',
+        'requirement_id',
         'user_id',
-        'remark',
-        'evaluation_requirement_id'
     ];
 
-    protected $attributes = [];
+    protected $attributes = [
+        //
+    ];
 
-    protected $searchable = [];
+    protected $searchable = [
+        //
+    ];
 
-    protected $sortable = [];
+    protected $sortable = [
+        //
+    ];
 
     /*
      * Search scopes
@@ -64,12 +70,18 @@ class EvaluationScore extends Model
      * Relationship
      */
 
+    public function evaluation()
+    {
+        return $this->belongTo(Evaluation::class);
+    }
+
     public function requirement()
     {
         return $this->belongTo(EvaluationRequirement::class);
     }
 
-    /*
-     * Helpers
-     */
+    public function user()
+    {
+        return $this->belongTo(User::class);
+    }
 }

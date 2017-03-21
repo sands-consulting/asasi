@@ -20,7 +20,7 @@ class EvaluationRequirement extends Model
         'title',
         'full_score',
         'mandatory',
-        'evaluation_type_id',
+        'type_id',
         'notice_id',
         'status'
     ];
