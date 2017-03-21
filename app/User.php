@@ -181,7 +181,7 @@ class User extends Authenticatable
      */
     public function getVendorAttribute()
     {
-        return $this->hasRole('Vendor') ? $this->vendors()->first() : null;
+        return $this->hasPermission('access:vendor') ? $this->vendors()->first() : null;
     }
 
     /*
