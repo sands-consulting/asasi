@@ -1,7 +1,7 @@
 @if(is_path('admin*'))
 
     <li>
-        <a href="{{ route('contact') }}"><i class="icon-atom2"></i> {{ trans('menu.portal') }}</a>
+        <a href="{{ route('root') }}"><i class="icon-atom2"></i> {{ trans('menu.portal') }}</a>
     </li>
 
     @if(Auth::user()->hasPermission('access:reports'))
