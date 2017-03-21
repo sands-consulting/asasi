@@ -42,6 +42,8 @@ class PlacesServiceProvider extends ServiceProvider
                     ->name('places.histories');
                 $router->get('places/{places}/revisions', 'PlacesController@revisions')
                     ->name('places.revisions');
+                $router->get('places/archives', 'PlacesController@archives')
+                    ->name('places.archives');
             });
         });
     }

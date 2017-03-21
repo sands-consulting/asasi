@@ -47,6 +47,8 @@ class OrganizationsServiceProvider extends ServiceProvider
                     ->name('organizations.deactivate');
                 $router->put('organizations/{organization}/suspend', 'OrganizationsController@suspend')
                     ->name('organizations.suspend');
+                $router->get('organizations/archives', 'OrganizationsController@archives')
+                    ->name('organizations.archives');
             });
         });
     }

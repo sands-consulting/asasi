@@ -42,6 +42,8 @@ class RolesServiceProvider extends ServiceProvider
                     ->name('roles.histories');
                 $router->get('roles/{role}/revisions', 'RolesController@revisions')
                     ->name('roles.revisions');
+                $router->get('roles/archives', 'RolesController@archives')
+                    ->name('roles.archives');
             });
         });
     }
