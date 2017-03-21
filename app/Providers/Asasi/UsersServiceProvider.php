@@ -38,21 +38,28 @@ class UsersServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
-                $router->get('users/{user}/histories', 'UsersController@histories')
-                    ->name('users.histories');
+                $router->put('users/{user}/restore', 'UsersController@restore')
+                    ->name('user.restore');
                 $router->get('users/{user}/revisions', 'UsersController@revisions')
-                    ->name('users.revisions');
+                    ->name('user.revisions');
+                $router->get('users/{user}/histories', 'UsersController@histories')
+                    ->name('user.histories');
+                $router->get('users/archives', 'UsersController@archives')
+                    ->name('user.archives');
+                $router->put('users/{user}/duplicate', 'UsersController@duplicate')
+                    ->name('user.duplicate');
+                
+
                 $router->post('users/{user}/assume', 'UsersController@assume')
                     ->name('users.assume');
                 $router->put('users/{user}/activate', 'UsersController@activate')
                     ->name('users.activate');
                 $router->put('users/{user}/suspend', 'UsersController@suspend')
                     ->name('users.suspend');
-                $router->put('users/{user}/restore', 'UsersController@restore')
-                    ->name('users.restore');
-                $router->get('users/archives', 'UsersController@archives')
-                    ->name('users.archives');
+
                 $router->resource('users', 'UsersController');
+                
+                // To Do
                 $router->resource('users.blacklists', 'UserBlacklistsController');
             });
 

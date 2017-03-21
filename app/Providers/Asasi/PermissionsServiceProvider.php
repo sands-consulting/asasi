@@ -37,6 +37,16 @@ class PermissionsServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
+                $router->put('permissions/{permission}/restore', 'PermissionsController@restore')
+                    ->name('permission.restore');
+                $router->get('permissions/{permission}/revisions', 'PermissionsController@revisions')
+                    ->name('permission.revisions');
+                $router->get('permissions/{permission}/histories', 'PermissionsController@histories')
+                    ->name('permission.histories');
+                $router->get('permissions/archives', 'PermissionsController@archives')
+                    ->name('permission.archives');
+                $router->put('permissions/{permission}/duplicate', 'PermissionsController@duplicate')
+                    ->name('permission.duplicate');
                 $router->resource('permissions', 'PermissionsController');
             });
         });
