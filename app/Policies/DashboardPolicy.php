@@ -11,7 +11,7 @@ class DashboardPolicy
 
     public function index(User $user)
     {
-        return $user->hasPermission('access:admin');
+        return $user->hasPermission('access:administration');
     }
 
     public function portfolio(User $user)

@@ -54,7 +54,7 @@ class LoginController extends Controller
 
         $user->cachePermissions();
 
-        if($user->hasPermission('access:admin'))
+        if($user->hasPermission('access:administration'))
         {
             return redirect()->intended(route('admin'));
         }

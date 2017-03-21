@@ -42,7 +42,7 @@
 
     @if(Auth::user()->hasPermission('access:reports'))
     <li>
-        <a href="{{ route('admin') }}">{{ trans('menu.access.reports') }}</a>
+        <a href="{{ route('reports') }}">{{ trans('menu.access.reports') }}</a>
     </li>
     @endif
 
