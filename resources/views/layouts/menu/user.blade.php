@@ -12,22 +12,6 @@
 		<li><a href="{{ route('me.resume') }}" data-method="POST"><i class="icon-user-cancel"></i> {{ trans('menu.user.release_user') }}</a></li>
 		@endcan
 
-		@if(Auth::user()->hasPermissions(['access:admin', 'access:report']))
-
-			<li class="divider"></li>
-
-			@if(Auth::user()->hasPermission('access:admin'))
-			<li><a href="{{ route('admin') }}"><i class="icon-cog52"></i> {{ trans('menu.access.admin') }}</a></li>
-			@endif
-
-			@if(Auth::user()->hasPermission('access:report'))
-			<li><a href="{{ route('admin') }}"><i class="icon-file-text"></i> {{ trans('menu.access.report') }}</a></li>
-			@endif
-
-		@endif
-
-		<li class="divider"></li>
-
 		<li>
 			<a href="{{ url('/logout') }}"
 				onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

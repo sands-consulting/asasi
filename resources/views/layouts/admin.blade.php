@@ -30,72 +30,12 @@
                         <i class="icon-paragraph-justify3"></i>
                     </a>
                 </li>
-                <li id="notifications" class="dropdown" data-source="{{ route('api.notifications', ['status' => 'unread']) }}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-bubble-notification"></i>
-                        <span class="visible-xs-inline-block position-right">Notifications</span>
-                        <span class="badge bg-warning-400" v-cloak v-if="count > 0">@{{ count }}</span>
-                        <span class="status-mark border-orange-400" v-cloak v-if="count == 0"></span>
-                    </a>
-                    
-                    <div class="dropdown-menu dropdown-content">
-                        <div class="dropdown-content-heading">
-                            Notifications
-                            <ul class="icons-list">
-                                <li><a href="#"><i class="icon-sync"></i></a></li>
-                            </ul>
-                        </div>
-
-                        <ul class="media-list dropdown-content-body width-350">
-                            <template v-if="notifications.length > 0">
-                                <li class="media" v-for="notification in notifications">
-                                    <div class="media-left">
-                                        <a :href="'@{{ notification.link }}'" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm"><i class="icon-checkmark4"></i></a>
-                                    </div>
-
-                                    <div class="media-body">
-                                        @{{ notification.content }}
-                                        <div class="media-annotation">@{{ notification.created_at_human }}</div>
-                                    </div>
-                                </li>
-                            </template>
-                            <template v-else>
-                                <li class="media">
-                                    <div class="media-body">
-                                        <div class="text-center">You have no notification.</div>
-                                    </div>
-                                </li>
-                            </template>
-                        </ul>
-
-                        <div class="dropdown-content-footer">
-                            <a href="{{ route('notifications.index') }}" data-popup="tooltip" title="All Notifications"><i class="icon-menu display-block"></i></a>
-                        </div>
-                    </div>
-                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                @if(Auth::guest())
-                <li><a href="{{ url('login') }}">{{ trans('menu.user.login') }}</a></li>
-                <li><a href="{{ url('register') }}">{{ trans('menu.user.register') }}</a></li>
-                @else
-                <li>
-                    <a href="{{ route('contact') }}">
-                        <i class="icon-atom2"></i> {{ trans('menu.access.portal') }}
-                    </a>
-                </li>
-
-                @if(Auth::user()->hasPermission('access:report'))
-                <li>
-                    <a href="{{ route('admin') }}">
-                        <i class="icon-file-text"></i> {{ trans('menu.access.report') }}
-                    </a>
-                </li>
-                @endif
-                
+                @include('layouts.menu.access')
+                @include('layouts.menu.notifications')
                 @include('layouts.menu.user')
-                @endif
             </ul>
         </div>
     </div>

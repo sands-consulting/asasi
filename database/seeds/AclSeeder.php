@@ -26,9 +26,9 @@ class AclSeeder extends Seeder
             /* 
              * Access Permissions
              */
-            ['access:admin', 'Access admin area'],
+            ['access:administration', 'Access administration area'],
             ['access:cart', 'Access notice cart'],
-            ['access:report', 'Access reporting module'],
+            ['access:reports', 'Access reporting module'],
             ['access:settings', 'Access global settings'],
             ['access:vendor', 'Access vendor module'],
 

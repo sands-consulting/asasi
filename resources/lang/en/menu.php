@@ -4,11 +4,12 @@ return [
     'site_admin'    => 'Site Admin',
     'language'      => 'Language',
     'dashboard'     => 'Dashboard',
+    'portal'        => 'Portal',
 
     'access' => [
-        'portal'    => 'Portal',
-        'admin'     => 'Administration',
-        'report'    => 'Reports'
+        'administration'    => 'Administration',
+        'reports'           => 'Reports',
+        'settings'          => 'Settings',
     ],
 
     'app' => [
@@ -43,7 +44,6 @@ return [
         'vendors'               => 'Vendors',
 
         'allocation-types'      => 'Allocation Types',
-        'global-settings'       => 'Global Settings',
         'news-categories'       => 'News Categories',
         'notice-categories'     => 'Notice Categories',
         'notice-types'          => 'Notice Types',
@@ -55,7 +55,6 @@ return [
         'roles'                 => 'Roles',
         'qualification-codes'   => 'Qualification Codes',
         'qualification-types'   => 'Qualification Types',
-        'settings'              => 'Settings',
         'tax-codes'             => 'Tax Codes',
         'vendor-types'          => 'Vendor Types',
     ]

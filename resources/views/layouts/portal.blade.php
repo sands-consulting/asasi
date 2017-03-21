@@ -25,9 +25,8 @@
 
 		<div class="navbar-collapse collapse" id="navbar-mobile">
             <ul class="nav navbar-nav navbar-right">
-            	<li class="{{ is_path_active('contact') }}"><a href="{{ route('contact') }}">{{ trans('menu.app.contact') }}</a></li>
-
                 @if(Auth::user())
+                @include('layouts.menu.access')
 				@include('layouts.menu.cart')
                 @include('layouts.menu.notifications')
 				@include('layouts.menu.user')

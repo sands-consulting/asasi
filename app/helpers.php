@@ -1,5 +1,10 @@
 <?php
 
+function is_path($path)
+{
+    return call_user_func_array('Request::is', (array) $path);
+}
+
 function is_path_active($path, $active = 'active')
 {
     return call_user_func_array('Request::is', (array) $path) ? $active : '';

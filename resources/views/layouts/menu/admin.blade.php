@@ -140,12 +140,6 @@
     </li>
     @endcan
 
-    @if(Auth::user()->hasPermission('access:settings'))
-    <li class="{{ is_path_active('admin/settings') }}">
-        <a href="{{ route('admin.settings') }}"><i class="icon-cogs"></i> <span>{{ trans('menu.admin.settings') }}</span></a>
-    </li>
-    @endif
-
     @can('index', App\TaxCode::class)
     <li class="{{ is_path_active('admin/tax-codes*') }}">
         <a href="{{ route('admin.tax-codes.index') }}"><i class="icon-percent"></i> <span>{{ trans('menu.admin.tax-codes') }}</span></a>
