@@ -19,14 +19,20 @@ class NoticeSubmissionsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            $router->group(['namespace' => 'Admin', 'prefix' => 'admin.'], function ($router) {
-                $router->resource('notices.submissions', 'NoticeSubmissionsController');
-            });
+        app('router')->group(
+            [
+                'middleware' => 'web',
+                'namespace' => 'App\Http\Controllers',
+            ],
+            function ($router) {
+                $router->group(['namespace' => 'Admin', 'prefix' => 'admin.'], function ($router) {
+                    $router->resource('notices.submissions', 'NoticeSubmissionsController');
+                });
 
-            $router->resource('vendors.submissions', 'VendorSubmissionsController', [
-                'except' => 'destroy'
-            ]);
-        });
+                $router->resource('vendors.submissions', 'VendorSubmissionsController', [
+                    'except' => 'destroy',
+                ]);
+            }
+        );
     }
 }

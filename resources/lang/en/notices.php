@@ -83,6 +83,9 @@ return [
     
     'views' => [
         'index' => [
+            'notices' => [
+                'title' => 'Notices',
+            ]
         ],
 
         'show' => [

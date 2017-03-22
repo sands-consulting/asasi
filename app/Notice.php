@@ -54,7 +54,7 @@ class Notice extends Model
         'published_at',
         'expired_at',
         'purchased_at',
-        'submission_at'
+        'submission_at',
     ];
 
     /*

@@ -34,7 +34,9 @@ class Submission extends Model
         'status'
     ];
 
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = [
+        'submitted_at',
+    ];
 
     /*
      * Search scopes
