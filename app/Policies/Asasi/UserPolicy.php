@@ -148,7 +148,7 @@ class UserPolicy
      */
     public function assume(User $auth, User $user)
     {
-        return $auth->hasPermission('user:assum');
+        return $auth->hasPermission('user:assume');
     }
 
     /**

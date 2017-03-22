@@ -102,12 +102,6 @@ class UsersController extends Controller
     {
         UserService::assume($user);
 
-        if ($user->hasRole('Evaluator')) {
-            return redirect()
-                ->route('admin.evaluations.index')
-                ->with('notice', trans('users.notices.assumed', ['name' => $user->name]));
-        }
-
         return redirect()
             ->to('/')
             ->with('notice', trans('users.notices.assumed', ['name' => $user->name]));

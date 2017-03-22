@@ -39,17 +39,16 @@ class UsersServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->put('users/{user}/restore', 'UsersController@restore')
-                    ->name('user.restore');
+                    ->name('users.restore');
                 $router->get('users/{user}/revisions', 'UsersController@revisions')
-                    ->name('user.revisions');
+                    ->name('users.revisions');
                 $router->get('users/{user}/histories', 'UsersController@histories')
-                    ->name('user.histories');
+                    ->name('users.histories');
                 $router->get('users/archives', 'UsersController@archives')
-                    ->name('user.archives');
+                    ->name('users.archives');
                 $router->put('users/{user}/duplicate', 'UsersController@duplicate')
-                    ->name('user.duplicate');
+                    ->name('users.duplicate');
                 
-
                 $router->post('users/{user}/assume', 'UsersController@assume')
                     ->name('users.assume');
                 $router->put('users/{user}/activate', 'UsersController@activate')
