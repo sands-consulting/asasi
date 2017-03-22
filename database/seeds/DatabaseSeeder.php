@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
         try {
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
         } catch (Exception $e) {
@@ -38,7 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EvaluationSeeder::class);
         $this->call(ProjectSeeder::class);
 
-        Model::reguard();
         try {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
         } catch (Exception $e) {

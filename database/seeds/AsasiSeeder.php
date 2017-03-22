@@ -18,6 +18,7 @@ class AsasiSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('addresses')->truncate();
         DB::table('organization_user')->truncate();
         DB::table('organizations')->truncate();
         DB::table('uploads')->truncate();

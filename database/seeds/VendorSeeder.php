@@ -56,12 +56,6 @@ class VendorSeeder extends Seeder
             'normalized_registration_number' => '123456TF',
             'tax_1_number' => '123456',
             'tax_2_number' => '789012',
-            'address_1' => '11-2-2A, Jalan Pusat Bandar 2A',
-            'address_2' => 'Seksyen 9',
-            'address_postcode' => '43650',
-            'address_city_id' => 18,
-            'address_state_id' => 5,
-            'address_country_id' => 1,
             'contact_telephone' => '+60123456789',
             'contact_fax' => '+60323456788',
             'contact_email' => 'support@my-sands.com',
@@ -77,6 +71,14 @@ class VendorSeeder extends Seeder
             'status' => 'active',
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'address' => [
+                'line_one' => '11-2-2A, Jalan Pusat Bandar 2A',
+                'line_two' => 'Seksyen 9',
+                'postcode' => '43650',
+                'city_id' => 18,
+                'state_id' => 5,
+                'country_id' => 1,
+            ]
         ]);
 
         

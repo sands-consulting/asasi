@@ -3,19 +3,39 @@
 namespace App\Services;
 
 use Carbon\Carbon;
+use App\Address;
+use App\Package;
 use App\QualificationCode;
 use App\QualificationType;
+use App\Subscription;
 use App\Vendor;
 use App\VendorAccount;
 use App\VendorEmployee;
 use App\VendorShareholder;
-use App\Package;
-use App\Subscription;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
 class VendorService extends BaseService 
 {
+    public static function create(Model $model, $data, $params = [])
+    {
+        if(isset($data['address']))
+        {
+            $address = $data['address'];
+            unset($data['address']);
+        }
+
+        $model = parent::create($model, $data, $params);
+        
+        if(isset($address))
+        {
+            $model->address()->save(new Address($address));
+        }
+
+        return $model;
+    }
+
     public static function activate(Vendor $vendor)
     {
         if($vendor->status == 'active')

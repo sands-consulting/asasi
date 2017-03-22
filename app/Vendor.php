@@ -22,12 +22,6 @@ class Vendor extends Model
         'contact_fax',
         'contact_email',
         'contact_website',
-        'address_1',
-        'address_2',
-        'address_postcode',
-        'address_city_id',
-        'address_state_id',
-        'address_country_id',
         'contact_person_designation',
         'contact_person_name',
         'contact_person_telephone',
@@ -36,7 +30,6 @@ class Vendor extends Model
         'capital_authorized',
         'capital_paid_up',
         'type_id',
-        'user_id',
         'status',
     ];
 
@@ -61,7 +54,8 @@ class Vendor extends Model
 
     public function scopeSearch($query, $queries = [])
     {
-        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
+        if (isset($queries['keywords']) && !empty($queries['keywords']))
+        {
             $keywords = $queries['keywords'];
             $query->where(function($query) use($keywords) {
                 foreach ($this->searchable as $column) {
@@ -71,82 +65,53 @@ class Vendor extends Model
             unset($queries['keywords']);
         }
 
-        foreach ($queries as $key => $value) {
-            if (empty($value)) {
+        foreach ($queries as $key => $value)
+        {
+            if (empty($value))
+            {
                 continue;
             }
+            
             $query->where("{$this->getTable()}.{$key}", $value);
         }
     }
 
     public function scopeSort($query, $column, $direction)
     {
-        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
+        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc']))
+        {
             $query->orderBy($column, $direction);
         }
     }
 
-    public function scopeAwarded($query)
+    public function scopeAccepted($query)
     {
-        return $query->whereStatus('awarded');
+        return $query->whereStatus('accepted');
     }
 
     public function scopeActive($query)
     {
-        return $query->where('status', '=', 'active');
+        return $query->whereStatus('active');
+    }
+
+    public function scopeBlacklisted($query)
+    {
+        return $query->whereStatus('blacklisted');
     }
 
     public function scopeDraft($query)
     {
-        return $query->where('status', '=', 'draft');
+        return $query->whereStatus('draft');
     }
 
-    public function scopeInactive($query)
+    public function scopeSuspended($query)
     {
-        return $query->where('status', '=', 'inactive');
-    }
-    
-    public function scopeBlacklisted($query)
-    {
-        return $query->where('status', '=', 'blacklisted');
+        return $query->whereStatus('suspended');
     }
 
     public function scopeRejected($query)
     {
-        return $query->where('status', '=', 'rejected');
-    }
-
-    /* 
-     * State controls 
-     */
-    public function canApprove()
-    {
-        return $this->status == 'pending' && $this->status != 'rejected';
-    }
-
-    public function canReject()
-    {
-        return $this->status == 'pending' && $this->status != 'rejected';
-    }
-
-    public function canSuspend()
-    {
-        return $this->status != 'suspended' && $this->status != 'pending';
-    }
-
-    public function canActivate()
-    {
-        return $this->status == 'suspended';
-    }
-
-    public function canBlacklist()
-    {
-        return $this->status != 'blacklisted' && $this->status != 'pending';
-    }
-
-    public function canUnblacklist()
-    {
-        return $this->status == 'blacklisted';
+        return $query->whereStatus('rejected');
     }
 
     /*
@@ -157,66 +122,20 @@ class Vendor extends Model
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
-    
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
-    public function users()
+    public function address()
     {
-        return $this->belongsToMany(User::class);
-    }
-
-    public function city()
-    {
-        return $this->belongsTo(Place::class, 'address_city_id');
-    }
-
-    public function state()
-    {
-        return $this->belongsTo(Place::class, 'address_state_id');
-    }
-
-    public function country()
-    {
-        return $this->belongsTo(Place::class, 'address_country_id');
-    }
-
-    public function notices()
-    {
-        return $this->belongsToMany(Notice::class)
-            ->withTimestamps();
-    }
-
-    public function purchases()
-    {
-        return $this->hasMany(NoticePurchase::class);
-    }
-
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
-    public function submissions()
-    {
-        return $this->hasMany(Submission::class);
-    }
-
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
-
-    public function transactionDetails()
-    {
-        return $this->hasManyThrough(TransactionDetail::class, Transaction::class);
+        return $this->morphOne(Address::class, 'item');
     }
 
     public function type()
     {
         return $this->belongsTo(VendorType::class, 'type_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     public function accounts()
@@ -244,6 +163,36 @@ class Vendor extends Model
         return $this->hasMany(VendorQualificationCode::class);
     }
 
+    public function transactions()
+    {
+        return $this->morphMany(Subscription::class, 'payer');
+    }
+
+    public function subscriptions()
+    {
+        return $this->morphMany(Subscription::class, 'subscriber');
+    }
+
+    public function eligibles()
+    {
+        return $this->hasMany(NoticeEligible::class);
+    }
+
+    public function invitations()
+    {
+        return $this->hasMany(NoticeEligible::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(NoticePurchase::class);
+    }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
     /*
      * Scopes
      */
@@ -253,34 +202,9 @@ class Vendor extends Model
         return $this->subscriptions()->active()->first();
     }
 
-    public function getAddressAttribute()
-    {
-        $address = [
-            $this->address_1,
-            $this->address_2,
-            $this->address_postcode . ($this->city ? ' ' . $this->city->name : null),
-            $this->state ? $this->state->name : null,
-            $this->country ? $this->country->name : null
-        ];
-
-        return implode("\n", array_filter($address));
-    }
-
     public static function options()
     {
         return Vendor::pluck('name', 'id')->toArray();
-    }
-
-    public static function purchaseCount($limit = null)
-    {
-        $vendors = Vendor::with('notices')
-            ->get()
-            ->sortByDesc(function($vendors) {
-                return $vendors->notices->count();
-            })
-            ->take($limit);
-
-        return $vendors;
     }
 
     public static function boot()
