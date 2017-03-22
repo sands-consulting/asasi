@@ -30,11 +30,10 @@ class VendorSubmissionsDataTable extends DataTable
     public function query()
     {
         $query = NoticePurchase::query()
-        ->leftJoin('vendors', 'vendors.id', '=', 'notice_purchases.id')
-        ->leftJoin('notices', 'notices.id', '=', 'notice_purchases.notice_id')
-        ->leftJoin('submissions', 'submissions.purchase_id', '=', 'notice_purchases.id')
-        ->where('notice_purchases.vendor_id', $this->vendor->id);
-        // $query = Submission::whereNotNull('vendor_id');
+            ->leftJoin('vendors', 'vendors.id', '=', 'notice_purchases.id')
+            ->leftJoin('notices', 'notices.id', '=', 'notice_purchases.notice_id')
+            ->leftJoin('submissions', 'submissions.purchase_id', '=', 'notice_purchases.id')
+            ->where('notice_purchases.vendor_id', $this->vendor->id);
 
         if ($this->datatables->request->input('q', null)) {
             $query->search($this->datatables->request->input('q', []));
@@ -76,11 +75,6 @@ class VendorSubmissionsDataTable extends DataTable
         ];
     }
 
-    protected function filename()
-    {
-        return 'submission_dt_' . time();
-    }
-
     protected function getBuilderParameters()
     {
         $data = parent::getBuilderParameters();
@@ -92,5 +86,10 @@ class VendorSubmissionsDataTable extends DataTable
     {
         $this->vendor = $vendor;
         return $this;
+    }
+
+    protected function filename()
+    {
+        return 'submission_dt_' . time();
     }
 }
