@@ -28,10 +28,6 @@ class NoticeSubmissionsServiceProvider extends ServiceProvider
                 $router->group(['namespace' => 'Admin', 'prefix' => 'admin.'], function ($router) {
                     $router->resource('notices.submissions', 'NoticeSubmissionsController');
                 });
-
-                $router->resource('vendors.submissions', 'VendorSubmissionsController', [
-                    'except' => 'destroy',
-                ]);
             }
         );
     }
