@@ -91,9 +91,9 @@ class Submission extends Model
      * Relationship
      */
 
-    public function notice()
+    public function purchase()
     {
-        return $this->belongsTo(Notice::class);
+        return $this->belongsTo(NoticePurchase::class);
     }
 
     public function vendor()
@@ -138,6 +138,12 @@ class Submission extends Model
             ->withTimestamps();
     }
 
+    public function type()
+    {
+        return $this->belongsTo(EvaluationType::class);
+    }
+
+
     /*
      * accessors
      */
@@ -152,7 +158,17 @@ class Submission extends Model
         // then return the count directly
         return ($related) ? (int) $related->score_avg : 0;
     }
-    
+
+    public function getNoticeAttribute()
+    {
+        if (! array_key_exists('purchase', $this->relations)) {
+            $this->load('purchase');
+        }
+
+        $related = $this->getRelation('purchase');
+
+        return $related ? $related->notice : false;
+    }
     /**
      * Helpers
      */
