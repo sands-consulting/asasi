@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use App\Traits\DateAccessor;
+use App\Traits\Searchable;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class Subscription extends Authenticatable
 {
     use RevisionableTrait,
+        Searchable,
         SoftDeletes,
         DateAccessor;
 
@@ -19,8 +21,10 @@ class Subscription extends Authenticatable
     protected $fillable = [
         'started_at',
         'expired_at',
-        'vendor_id',
         'package_id',
+        'user_id',
+        'subscriber_type',
+        'subscriber_id',
         'status',
     ];
 
@@ -40,80 +44,29 @@ class Subscription extends Authenticatable
     protected $dates = ['started_at', 'expired_at'];
 
     /*
-     * Search scopes
+     * Scopes
      */
-
-    public function scopeSearch($query, $queries = [])
-    {
-        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
-            $keywords = $queries['keywords'];
-            $query->where(function($query) use($keywords) {
-                foreach ($this->searchable as $column) {
-                    $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
-                }
-            });
-            unset($queries['keywords']);
-        }
-
-        foreach ($queries as $key => $value) {
-            if (empty($value)) {
-                continue;
-            }
-            $query->where("{$this->getTable()}.{$key}", $value);
-        }
-    }
-
-    public function scopeSort($query, $column, $direction)
-    {
-        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
-            $query->orderBy($column, $direction);
-        }
-    }
-
-    /*
-     * Query scopes
-     */
-    
     public function scopeActive($query)
     {
         return $query->where('status', 'active');
     }
 
-    /* 
-     * State controls 
-     */
-    public function canActivate()
-    {
-        return $this->status == 'inactive' || $this->status == 'cancelled' ;
-    }
-
-    public function canDeactivate()
-    {
-        return $this->status == 'active';
-    }
-
-    public function canCancel()
-    {
-        return $this->status != 'cancelled';
-    }
-    
     /*
      * Relationship
      */
-
     public function package()
     {
         return $this->belongsTo(Package::class);
     }
 
-    public function vendor()
+    public function subscriber()
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->morphTo();
     }
 
-    public static function boot()
+    public function user()
     {
-        parent::boot();
+        return $this->belongsTo(User::class);
     }
 
     public function getExpiringAttribute()

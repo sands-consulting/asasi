@@ -17,95 +17,54 @@ class Transaction extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        // Transaction fields
+        'transaction_number',
+        'invoice_number',
+        'sub_total',
+        'tax',
+        'total',
+        'payee_type',
+        'payee_id',
+        'user_id'
     ];
 
     protected $hidden = [
-        // hidden column
     ];
 
     protected $attributes = [
-        // default attributes value
+        'status' => 'new'
     ];
 
-    protected $searchacble = [
-        // fields
+    protected $searchable = [
     ];
 
     protected $sortable = [
-        // fields
     ];
 
     /*
      * Relationships
      */
-    
-    public function details()
-    {
-        return $this->hasMany(TransactionDetail::class);
-    }
-
-    public function logs()
+    public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
 
-    public function vendor()
+    public function lines()
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->hasMany(TransactionLine::class);
     }
 
-    /*
-     * Search scopes
-     */
-
-    public function scopeSearch($query, $queries = [])
+    public function payer()
     {
-        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
-            $keywords = $queries['keywords'];
-            $query->where(function($query) use($keywords) {
-                foreach ($this->searchable as $column) {
-                    $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
-                }
-            });
-            unset($queries['keywords']);
-        }
-
-        foreach ($queries as $key => $value) {
-            if (empty($value)) {
-                continue;
-            }
-            $query->where("{$this->getTable()}.{$key}", $value);
-        }
+        return $this->morphTo();
     }
 
-    public function scopeSort($query, $column, $direction)
+    public function user()
     {
-        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
-            $query->orderBy($column, $direction);
-        }
+        return $this->belongsTo(User::class);
     }
 
-    /* 
-     * State controls 
-     */
-
-    // public function sluggable()
-    // {
-    //     return [
-    //         'slug' => [
-    //             'source' => 'name'
-    //         ]
-    //     ];
-    // }
-
-    /*
-     * Helpers 
-     */
-
-    public static function boot()
+    public function gateway()
     {
-        parent::boot();
+        return $this->belongsTo(PaymentGateway::class, 'gateway_id');
     }
-
 }

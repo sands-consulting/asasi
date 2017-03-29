@@ -2,6 +2,7 @@
 
 use App\Permission;
 use App\Subscription;
+use App\Vendor;
 use App\Services\SubscriptionService;
 use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
@@ -17,11 +18,13 @@ class SubscriptionSeeder extends Seeder
     {
         DB::table('subscriptions')->truncate();
 
-        SubscriptionService::create(new Subscription, [
+        $subscription = SubscriptionService::create(new Subscription, [
             'started_at' => '2016-08-01',
             'expired_at' => '2017-08-01',
-            'vendor_id' => 1,
             'package_id' => 1,
+            'subscriber_id' => 1,
+            'subscriber_type' => 'App\Vendor',
+            'user_id' => Vendor::first()->users()->first()->id,
             'status' => 'active'
         ]);
     }
