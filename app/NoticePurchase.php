@@ -31,6 +31,6 @@ class NoticePurchase extends Model
 
     public function submission()
     {
-        return $this->hasOne(Submission::class);
+        return $this->hasOne(Submission::class, 'purchase_id');
     }
 }

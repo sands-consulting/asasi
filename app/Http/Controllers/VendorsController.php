@@ -73,10 +73,4 @@ class VendorsController extends Controller
         $table->vendor_id = $vendor->id;
         return view('vendors.purchases', compact('vendor'));
     }
-
-    public function submissions(SubmissionsDataTable $table, Vendor $vendor)
-    {
-        $table->vendor_id = $vendor->id;
-        return $table->render('vendors.eligibles', compact('vendor'));
-    }
 }

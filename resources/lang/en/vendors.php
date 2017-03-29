@@ -156,6 +156,9 @@ return [
         'invitations' => [
             'title' => 'Invitations'
         ],
+        'submissions' => [
+            'title' => 'Submissions'
+        ],
         '_show' => [
             'nav' => [
                 'details' => 'Details',

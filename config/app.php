@@ -220,7 +220,7 @@ return [
         App\Providers\Modules\VendorsServiceProvider::class,
 
         /*
-         * Notice Service Providers 
+         * Notice Service Providers
          */
         App\Providers\Modules\NoticesServiceProvider::class,
         App\Providers\Modules\NoticeAwardsServiceProvider::class,

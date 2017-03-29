@@ -1,14 +1,14 @@
 <?php
 
+use App\Services\SubmissionItemService;
 use App\Submission;
 use App\SubmissionDetail;
+use App\SubmissionItem;
 use App\SubmissionRequirement;
-use App\Permission;
-use App\Role;
 use App\Services\SubmissionService;
 use App\Services\SubmissionDetailService;
 use App\Services\SubmissionRequirementService;
-use App\Services\PermissionService;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class SubmissionSeeder extends Seeder
@@ -23,9 +23,10 @@ class SubmissionSeeder extends Seeder
         DB::table('submission_requirements')->truncate();
         DB::table('submissions')->truncate();
         DB::table('submission_details')->truncate();
+        DB::table('submission_items')->truncate();
 
 
-        $requirementData = [
+        $requirements = [
             [
                 "id" => 1,
                 "sequence" => 1,
@@ -158,98 +159,96 @@ class SubmissionSeeder extends Seeder
             ],
         ];
 
-        foreach ($requirementData as $requirement) {
-            $requirement = SubmissionRequirementService::create(new SubmissionRequirement(), $requirement);
+        foreach ($requirements as $requirement) {
+            SubmissionRequirementService::create(new SubmissionRequirement(), $requirement);
         }
 
-        $submissionData = [
+        $submissions = [
             [
-                'price' => '500000',
+                'price'       => '500000',
                 'purchase_id' =>  1,
-                'vendor_id' => 1,
-                'status' =>  'completed'
+                'vendor_id'   => 1,
+                'status'      => 'pending',
             ]
         ];
 
-        foreach ($submissionData as $submission) {
-            $submission = SubmissionService::create(new Submission(), $submission);
+        foreach ($submissions as $submission) {
+            SubmissionService::create(new Submission(), $submission);
         }
 
-        $submissionDetailsData = [
+        $details = [
             [
-                'value' => 1,
-                'type_id' =>  1,
-                'submission_id' =>  1,
-                'requirement_id' =>  1,
-                'user_id' =>  2,
+                'submission_id' => 1,
+                'type_id'       =>  1,
+                'status'        => 'completed',
+                'completed_at'  => Carbon::now(),
             ],
             [
-                'value' => null,
-                'type_id' =>  1,
-                'submission_id' =>  1,
-                'requirement_id' =>  2,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => 1,
-                'type_id' =>  1,
-                'submission_id' =>  1,
-                'requirement_id' =>  3,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => 1,
-                'type_id' =>  1,
-                'submission_id' =>  1,
-                'requirement_id' =>  4,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => null,
-                'type_id' =>  1,
-                'submission_id' =>  1,
-                'requirement_id' =>  5,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => 1,
-                'type_id' =>  2,
-                'submission_id' =>  1,
-                'requirement_id' =>  6,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => null,
-                'type_id' =>  2,
-                'submission_id' =>  1,
-                'requirement_id' =>  7,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => 1,
-                'type_id' =>  2,
-                'submission_id' =>  1,
-                'requirement_id' =>  8,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => null,
-                'type_id' =>  2,
-                'submission_id' =>  1,
-                'requirement_id' =>  9,
-                'user_id' =>  2,
-            ],
-            [
-                'value' => null,
-                'type_id' =>  2,
-                'submission_id' =>  1,
-                'requirement_id' =>  10,
-                'user_id' =>  2,
+                'submission_id' => 1,
+                'type_id'       => 2,
+                'status'        => 'pending',
             ],
         ];
 
-        foreach ($submissionDetailsData as $submissionDetails) {
-            SubmissionDetailService::create(new SubmissionDetail(), $submissionDetails);
+        foreach ($details as $detail) {
+            SubmissionDetailService::create(new SubmissionDetail, $detail);
+        }
+
+        $items = [
+            [
+                'value'          => 1,
+                'detail_id'      => 1,
+                'requirement_id' =>  1,
+            ],
+            [
+                'value'          => null,
+                'detail_id'      => 1,
+                'requirement_id' =>  2,
+            ],
+            [
+                'value'          => 1,
+                'detail_id'      => 1,
+                'requirement_id' =>  3,
+            ],
+            [
+                'value'          => 1,
+                'detail_id'      => 1,
+                'requirement_id' =>  4,
+            ],
+            [
+                'value'          => null,
+                'detail_id'      => 1,
+                'requirement_id' =>  5,
+            ],
+            [
+                'value'          => 1,
+                'detail_id'      => 2,
+                'requirement_id' =>  6,
+            ],
+            [
+                'value'          => null,
+                'detail_id'      => 2,
+                'requirement_id' =>  7,
+            ],
+            [
+                'value'          => 1,
+                'detail_id'      => 2,
+                'requirement_id' =>  8,
+            ],
+            [
+                'value'          => null,
+                'detail_id'      => 2,
+                'requirement_id' =>  9,
+            ],
+            [
+                'value'          => null,
+                'detail_id'      => 2,
+                'requirement_id' =>  10,
+            ],
+        ];
+
+        foreach ($items as $item) {
+            SubmissionItemService::create(new SubmissionItem, $item);
         }
     }
 }

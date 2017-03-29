@@ -78,8 +78,8 @@
 				{{-- <a class="btn bg-primary-400 btn-rounded btn-icon legitRipple">
 					<span class="letter-icon">{{ get_initial($user->name) }}</span>
 				</a> --}}
-				<img src="{{ Gravatar::src($user->email, 100) }}" 
-					class="img-circle" 
+				<img src="{{ Gravatar::src($user->email, 100) }}"
+					class="img-circle"
 					alt="{{ $user->name }}">
 
 				<div class="caption">
@@ -89,11 +89,11 @@
 					</span>
 				</div>
 			</div>
-		
+
 	    	<div class="caption text-center">
 	    		<h6 class="text-semibold">
 	    			{{ $user->name }}
-	    			@if ($user->vendor) 
+	    			@if ($user->vendor)
 	    				<small class="display-block">{{ $user->vendor->name }}</small>
 	    			@endif
 	    		</h6>
@@ -103,22 +103,22 @@
 
 		{{-- <div class="well">
 			 @if($user->canActivate() && Auth::user()->hasPermission('user:activate'))
-				<a href="{{ route('admin.users.activate', $user->id) }}" 
+				<a href="{{ route('admin.users.activate', $user->id) }}"
 					class="btn btn-success btn-labeled btn-block legitRipple"
 					data-method="PUT">
 					<b><i class="icon-user-check"></i></b> Activate
 				</a>
 			@endif
-		
-			@if($user->canSuspend() 
+
+			@if($user->canSuspend()
 				&& Auth::user()->hasPermission('user:suspend'))
-				<a href="{{ route('admin.users.suspend', $user->id) }}" 
+				<a href="{{ route('admin.users.suspend', $user->id) }}"
 					class="btn btn-danger btn-labeled btn-block legitRipple"
 					data-method="PUT">
 					<b><i class="icon-user-block"></i></b> Suspend user
 				</a>
 			@endif
-		
+
 			@if(Auth::user()->id != $user->id
 				&& Auth::user()->hasPermission('user:assume'))
 				<a  href="{{ route('admin.users.assume', $user->id) }}"
@@ -126,7 +126,7 @@
 					data-method="POST">
 					<b><i class="icon-user-lock"></i></b> Login as user
 				</a>
-			@endif 
+			@endif
 		</div> --}}
 	</div>
 
@@ -154,7 +154,7 @@
 						</div>
 					</dl>
 				</fieldset>
-				
+
 				@if ($user->vendor)
 					<fieldset>
 						<legend>Vendor Information</legend>

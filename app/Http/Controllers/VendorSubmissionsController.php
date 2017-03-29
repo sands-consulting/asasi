@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\VendorSubmissionsDataTable;
 use App\Notice;
 use App\Submission;
 use App\SubmissionDetail;
-use App\Http\Requests\NoticeRequest;
 use App\Services\NoticesService;
 use App\Services\SubmissionsService;
 use App\Services\SubmissionDetailsService;
 use App\Services\UserHistoriesService;
-use Auth;
+use App\Vendor;
 use Illuminate\Http\Request;
 
 class VendorSubmissionsController extends Controller
-{    
-    public function index(NoticesDataTable $table)
+{
+    public function index(VendorSubmissionsDataTable $table, Vendor $vendor)
     {
-        return $table->render('admin.notices.index');
+        $table->vendor = $vendor;
+        return $table->render('vendors.submissions.index', compact('vendor'));
     }
+
 
     public function show()
     {
@@ -110,20 +112,21 @@ class VendorSubmissionsController extends Controller
             ->where('notice_id', $notice->id)
             ->first();
 
-        if (!$submission) {
+        if ( ! $submission) {
             $submission = SubmissionsService::create(new Submission, $input);
         } else {
             $submission = Submission::find($submission->id);
             $submission = SubmissionsService::update($submission, $input);
         }
 
-        if ($input['type_id'] == 1)
+        if ($input['type_id'] == 1) {
             $requirements = $notice->requirementCommercials;
-        elseif ($input['type_id'] == 2)
+        } elseif ($input['type_id'] == 2) {
             $requirements = $notice->requirementTechnicals;
+        }
 
         // Fixme: Temp solutions
-        $details = $requirements->reduce(function($carry, $requirement) use ($input, $submission, $request) {
+        $details = $requirements->reduce(function ($carry, $requirement) use ($input, $submission, $request) {
 
             $carry['value'] = null;
 
@@ -132,7 +135,7 @@ class VendorSubmissionsController extends Controller
                 $carry['value'] = 1;
             }
 
-            if (!$requirement->require_file) {
+            if ( ! $requirement->require_file) {
                 if (isset($input['value'][$requirement->id])) {
                     $carry['value'] = $input['value'][$requirement->id];
                 }
@@ -140,11 +143,11 @@ class VendorSubmissionsController extends Controller
 
             $carry['user_id'] = $request->user()->id;
 
-            if (!isset($input['submission_detail_id'][$requirement->id])) {
+            if ( ! isset($input['submission_detail_id'][$requirement->id])) {
                 $carry['requirement_id'] = $requirement->id;
                 $carry['submission_id'] = $submission->id;
                 $carry['type_id'] = $input['type_id'];
-                
+
                 $submissionDetail = SubmissionDetailsService::create(new SubmissionDetail, $carry);
                 isset($file) ? $submissionDetail->attachFiles($file) : false;
             } else {
@@ -176,8 +179,8 @@ class VendorSubmissionsController extends Controller
     public function submissionSubmit(Request $request, Submission $submission)
     {
         $submission = SubmissionsService::update($submission, [
-            'status' => 'submitted',
-            'submitted_at' => \Carbon\Carbon::now()
+            'status'       => 'submitted',
+            'submitted_at' => \Carbon\Carbon::now(),
         ]);
 
         return redirect()
