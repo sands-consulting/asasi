@@ -171,6 +171,11 @@ class Notice extends Model
         return $this->hasMany(Submission::class);
     }
 
+    public function evaluations()
+    {
+        return $this->hasMany(NoticeEvaluation::class);
+    }
+
     public function evaluators()
     {
         return $this->belongsToMany(User::class, 'notice_evaluator')
