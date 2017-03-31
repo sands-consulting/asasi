@@ -9,6 +9,11 @@
 <meta name="socket-url" content="{{ env('APP_SOCKET_URL') }}">
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ config('app.name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
+    <script>
+      window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 </head>
 <body class="navbar-top v-cloak">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">

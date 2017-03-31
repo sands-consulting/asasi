@@ -8,7 +8,12 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="socket-url" content="{{ env('APP_SOCKET_URL') }}">
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
-<link href="{{ elixir('assets/css/portal.css') }}" rel="stylesheet">
+    <link href="{{ elixir('assets/css/portal.css') }}" rel="stylesheet"/>
+    <script>
+      window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 </head>
 <body class="{{ body_classes('navbar-top layout-boxed portal') }}">
 <div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">

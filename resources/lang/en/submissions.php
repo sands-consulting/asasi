@@ -4,17 +4,17 @@ return [
     'title' => 'Submission',
 
     'attributes' => [
-        'id' => 'Submission Id',
-        'price' => 'Price',
-        'total_score' => 'Total Score',
-        'avg_score' => 'Average Score',
-        'notice_id' => 'Notice',
-        'vendor_id' => 'Vendor',
-        'status' => 'Status',
-        'submitted_at' => 'Submmission Date',
-        'created_at' => 'Created At',
-        'updated_at' => 'Last Updated At',
-        'deleted_at' => 'Deleted At',
+        'id'           => 'Submission Id',
+        'price'        => 'Price',
+        'total_score'  => 'Total Score',
+        'avg_score'    => 'Average Score',
+        'notice_id'    => 'Notice',
+        'vendor_id'    => 'Vendor',
+        'status'       => 'Status',
+        'submitted_at' => 'Submitted At',
+        'created_at'   => 'Created At',
+        'updated_at'   => 'Last Updated At',
+        'deleted_at'   => 'Deleted At',
     ],
 
     'buttons' => [

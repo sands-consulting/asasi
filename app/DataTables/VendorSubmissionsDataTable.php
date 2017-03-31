@@ -21,8 +21,8 @@ class VendorSubmissionsDataTable extends DataTable
                     ? Carbon::parse($notice->submitted_at)->formatDateFromSetting()
                     : '<span class="icon-cross3"></span>';
             })
-            ->addColumn('action', function ($submission) {
-                // return view('admin.submissions._index_actions', compact('submission'));
+            ->addColumn('action', function ($notice) {
+                return view('vendors.submissions._index_action', compact('notice'));
             })
             ->make(true);
     }
@@ -30,6 +30,14 @@ class VendorSubmissionsDataTable extends DataTable
     public function query()
     {
         $query = NoticePurchase::query()
+            ->select([
+                'notices.name',
+                'submissions.submitted_at as submitted_at',
+                'notices.submission_at',
+                'submissions.id as submission_id',
+                'notices.id as notice_id',
+                'vendors.id as vendor_id',
+            ])
             ->leftJoin('vendors', 'vendors.id', '=', 'notice_purchases.id')
             ->leftJoin('notices', 'notices.id', '=', 'notice_purchases.notice_id')
             ->leftJoin('submissions', 'submissions.purchase_id', '=', 'notice_purchases.id')
@@ -69,7 +77,7 @@ class VendorSubmissionsDataTable extends DataTable
             [
                 'data'  => 'submitted_at',
                 'name'  => 'submissions.submitted_at',
-                'title' => trans('submissions.attributes.created_at'),
+                'title' => trans('submissions.attributes.submitted_at'),
                 'class' => 'text-center',
             ],
         ];

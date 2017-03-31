@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\VendorSubmissionsDataTable;
+use App\EvaluationType;
 use App\Notice;
 use App\Submission;
 use App\SubmissionDetail;
@@ -15,27 +16,46 @@ use Illuminate\Http\Request;
 
 class VendorSubmissionsController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index(VendorSubmissionsDataTable $table, Vendor $vendor)
     {
         $table->vendor = $vendor;
         return $table->render('vendors.submissions.index', compact('vendor'));
     }
 
-
-    public function show()
+    public function show(Vendor $vendor, Submission $submission)
     {
+        $notice = $submission->notice;
+        return view('vendors.submissions.show', compact('notice', 'vendor', 'submission'));
     }
 
-    public function create()
+    public function create(Vendor $vendor, Submission $submission, EvaluationType $type)
     {
+        $notice = $submission->notice;
+        return view('vendors.submissions.commercial', compact('vendor', 'submission'));
     }
 
     public function store()
     {
+
     }
 
-    public function edit()
+    public function edit(Vendor $vendor, Submission $submission, EvaluationType $type)
     {
+        $notice = $submission->notice;
+        $details = $submission->details($type->id)->get();
+        // Fixme: fix code to reduce query.
+        $requirements = $notice->submissionRequirements()->where('type_id', $type->id)->get();
+
+        if ($details) {
+
+        }
+
+        return view('vendors.submissions.edit', compact('notice', 'submission', 'type', 'requirements'));
     }
 
     public function update()
@@ -54,7 +74,7 @@ class VendorSubmissionsController extends Controller
     {
         $vendor = $request->user()->vendor;
         // check if submission exists
-        $submission = Submission::firstOrNew([
+        $submission = SubmissionDetail::firstOrNew([
             'vendor_id' => $vendor->id,
             'notice_id' => $notice->id,
         ]);
@@ -188,7 +208,7 @@ class VendorSubmissionsController extends Controller
             ->with('notices', trans('notices.notices.submission_submitted', ['number' => $submission->notice->number]));
     }
 
-    public function submissionSlip(Request $request, Submission $submission)
+    public function slip(Submission $submission)
     {
         return view('notices.submission-slip', compact('submission'));
     }

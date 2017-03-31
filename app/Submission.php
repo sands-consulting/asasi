@@ -91,6 +91,20 @@ class Submission extends Model
      * Relationship
      */
 
+    public function details($type = null)
+    {
+        $details = $this->hasMany(SubmissionDetail::class);
+        if (!is_null($type))
+            $details->where('type_id', $type);
+
+        return $details;
+    }
+
+    public function notice()
+    {
+        return $this->belongsTo(Notice::class);
+    }
+
     public function purchase()
     {
         return $this->belongsTo(NoticePurchase::class);
@@ -101,14 +115,6 @@ class Submission extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-    public function details($type = null)
-    {
-        $details = $this->hasMany(SubmissionDetail::class);
-        if (!is_null($type))
-            $details->where('type_id', $type);
-
-        return $details;
-    }
 
     public function scores()
     {

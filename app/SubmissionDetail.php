@@ -77,6 +77,11 @@ class SubmissionDetail extends Model
         return $this->belongsTo(EvaluationType::class, 'type_id');
     }
 
+    public function items()
+    {
+        return $this->hasMany(SubmissionItem::class, 'detail_id');
+    }
+
     /**
      * Helpers
      */

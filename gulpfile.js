@@ -19,6 +19,8 @@ elixir(function(mix) {
     .less('admin.less', 'public/assets/css/admin.css')
     .less('print.less', 'public/assets/css/print.css')
 
+    .webpack('app.js')
+
     .scripts([
         '../../../node_modules/jquery/dist/jquery.js',
         '../../../node_modules/bootstrap-less/js/bootstrap.js',

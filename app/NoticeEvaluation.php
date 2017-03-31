@@ -25,4 +25,10 @@ class NoticeEvaluation extends Model
     {
         return $this->belongsTo(Notice::class);
     }
+
+    public function type()
+    {
+        return $this->belongsTo(NoticeType::class, 'type_id');
+    }
+
 }

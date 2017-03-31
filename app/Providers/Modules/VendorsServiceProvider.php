@@ -19,15 +19,8 @@ class VendorsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        app('router')->group([
-            'namespace' => 'App\Http\Controllers',
-            'middleware' => 'web'
-        ], function ($router) {
-            $router->group([
-                'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
-            ], function ($router) {
+        app('router')->group(['namespace' => 'App\Http\Controllers', 'middleware' => 'web'], function ($router) {
+            $router->group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function ($router) {
                 $router->put('vendors/{subscription}/restore', 'VendorsController@restore')
                     ->name('vendors.restore');
                 $router->get('vendors/{subscription}/revisions', 'VendorsController@revisions')
@@ -78,9 +71,6 @@ class VendorsServiceProvider extends ServiceProvider
                 'except' => ['index', 'destroy']]);
             $router->resource('vendors.users', 'VendorUsersController', [
                 'except' => 'destroy']);
-            $router->resource('vendors.submissions', 'VendorSubmissionsController', [
-                'except' => 'destroy',
-            ]);
         });
     }
 }

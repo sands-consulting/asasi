@@ -46,7 +46,7 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
             'prefix' => 'api',
             'middleware' => 'api'
         ], function ($router) {
-            $router->resource('users', 'EvaluationsController', [
+            $router->resource('evaluations', 'EvaluationsController', [
                 'only' => ['index', 'store']]);
         });
     }

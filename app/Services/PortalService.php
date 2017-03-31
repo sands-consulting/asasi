@@ -43,7 +43,12 @@ class PortalService
 
     public static function submissions(User $user)
     {
-        return 0;
+        return $user->vendor
+            ->purchases()
+            ->doesntHave('submission', 'and', function ($query) {
+                $query->where('status', 'completed');
+            })
+            ->count();
     }
 
     public static function projects(User $user)
