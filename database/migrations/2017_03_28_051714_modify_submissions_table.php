@@ -16,7 +16,12 @@ class ModifySubmissionsTable extends Migration
         Schema::table('submissions', function (Blueprint $table) {
             $table->string('submission_number')->nullable()->after('id');
             $table->string('label')->nullable()->after('submission_number');
-            $table->dropColumn('total_score');
+            $table->unsignedInteger('notice_id')->after('price');
+
+            $table->foreign('notice_id')
+                ->references('id')
+                ->on('notices')
+                ->onDelete('cascade');
         });
     }
 
@@ -28,9 +33,10 @@ class ModifySubmissionsTable extends Migration
     public function down()
     {
         Schema::table('submissions', function (Blueprint $table) {
+            $table->dropForeign(['notice_id']);
             $table->dropColumn('submission_number');
             $table->dropColumn('label');
-            $table->decimal('total_score')->nullable();
+            $table->dropColumn('notice_id');
         });
     }
 }

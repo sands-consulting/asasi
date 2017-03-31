@@ -168,6 +168,7 @@ class SubmissionSeeder extends Seeder
                 'price'       => '500000',
                 'purchase_id' =>  1,
                 'vendor_id'   => 1,
+                'notice_id'   => 1,
                 'status'      => 'pending',
             ]
         ];

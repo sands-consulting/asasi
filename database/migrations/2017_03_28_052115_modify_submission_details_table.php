@@ -16,9 +16,9 @@ class ModifySubmissionDetailsTable extends Migration
         Schema::table('submission_details', function (Blueprint $table) {
             $table->dropColumn('value');
             $table->dropColumn('requirement_id');
-            $table->string('status');
             $table->unsignedInteger('user_id')->nullable()->change();
             $table->timestamp('completed_at')->nullable()->after('user_id');
+            $table->string('status')->after('completed_at');
         });
     }
 
@@ -32,6 +32,7 @@ class ModifySubmissionDetailsTable extends Migration
         Schema::table('submission_details', function (Blueprint $table) {
 
             $table->dropColumn('completed_at');
+            $table->dropColumn('status');
             $table->string('value')->after('id')->nullable();
             $table->unsignedInteger('user_id')->change();
             $table->unsignedInteger('requirement_id')->after('id')->nullable();
