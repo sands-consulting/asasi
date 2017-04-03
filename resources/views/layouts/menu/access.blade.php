@@ -1,3 +1,4 @@
+@if(Auth::user())
 @if(is_path('admin*'))
 
     <li>
@@ -52,4 +53,5 @@
     </li>
     @endif
 
+@endif
 @endif

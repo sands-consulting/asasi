@@ -30,12 +30,10 @@
 
 		<div class="navbar-collapse collapse" id="navbar-mobile">
             <ul class="nav navbar-nav navbar-right">
-                @if(Auth::user())
                 @include('layouts.menu.access')
 				@include('layouts.menu.cart')
                 @include('layouts.menu.notifications')
 				@include('layouts.menu.user')
-				@endif
 			</ul>
 		</div>
 	</div>

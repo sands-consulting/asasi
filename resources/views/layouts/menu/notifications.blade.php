@@ -1,3 +1,4 @@
+@if(Auth::check())
 <li id="notifications" class="dropdown" data-source="{{ route('api.notifications', ['status' => 'unread']) }}">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="icon-bubble-dots4"></i>
@@ -41,3 +42,4 @@
         </div>
     </div>
 </li>
+@endif

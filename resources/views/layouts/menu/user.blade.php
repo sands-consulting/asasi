@@ -1,3 +1,5 @@
+@if(Auth::user())
+
 <li class="dropdown dropdown-user">
 	<a class="dropdown-toggle" data-toggle="dropdown">
 		{!! Gravatar::image(Auth::user()->email, Auth::user()->name, ['width' => 34, 'height' => 34]) !!}
@@ -24,3 +26,40 @@
 		</li>
 	</ul>
 </li>
+
+@else
+
+<li>
+    <a href="{{ route('register') }}">{{ trans('menu.user.register') }}</a>
+</li>
+
+<li class="dropdown dropdown-login">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('menu.user.login') }}</a>
+	<div class="dropdown-menu">
+		<form class="form" role="form" method="POST" action="{{ url('login') }}">
+			{!! csrf_field() !!}
+
+			<div class="input-group has-feedback has-feedback-left">
+				<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.attributes.email') }}">
+				<div class="form-control-feedback">
+					<i class="icon-envelop5 text-muted"></i>
+				</div>
+			</div>
+
+			<div class="input-group has-feedback has-feedback-left">
+				<input type="password" class="form-control" name="password" placeholder="{{ trans('auth.attributes.password') }}">
+				<div class="form-control-feedback">
+					<i class="icon-lock2 text-muted"></i>
+				</div>
+			</div>
+
+			<button type="submit" class="btn bg-blue-700 btn-block legitRipple">{{trans('actions.login')}}</button>
+
+			<div class="text-center">
+				<a href="{{ url('password/reset') }}">{{trans('auth.forgot_password')}}</a>
+			</div>
+		</form>
+	</div>
+</li>
+
+@endif
