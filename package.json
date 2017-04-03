@@ -37,6 +37,7 @@
     "x-editable": "^1.5.1"
   },
   "dependencies": {
+    "axios": "^0.16.0",
     "legitRipple.js": "git+https://github.com/matthias-vogt/legitRipple.js.git#gh-pages"
   }
 }
