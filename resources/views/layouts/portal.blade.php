@@ -16,7 +16,7 @@
     </script>
 </head>
 <body class="{{ body_classes('navbar-top layout-boxed portal') }}">
-<div class="navbar navbar-inverse navbar-fixed-top bg-blue-700">
+<div class="navbar navbar-fixed-top bg-white">
 	<div class="navbar-boxed">
 		<div class="navbar-header">
 			<a class="navbar-brand prompt" href="{{ route('root') }}">
