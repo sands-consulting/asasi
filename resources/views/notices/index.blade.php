@@ -7,7 +7,7 @@
 @section('content')
 @include('layouts.menu.portal')
 
-<div class="panel panel-notice">
+<div class="panel panel-flat">
     {!! $dataTable->table() !!}
 </div>
 @endsection

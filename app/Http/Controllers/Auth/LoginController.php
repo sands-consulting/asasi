@@ -39,13 +39,9 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    protected function sendFailedLoginResponse(Request $request)
+    protected function getRedirectUrl()
     {
-        return redirect(route('login'))
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors([
-                $this->username() => trans('auth.failed'),
-            ]);
+        return route('login');
     }
 
     protected function authenticated(Request $request, $user)
