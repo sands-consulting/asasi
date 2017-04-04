@@ -60,39 +60,30 @@ body {
 }
 
 .section-landing {
-  background: #eceff1;
-  margin: 0 0 -70px;
-  padding: 20px 0 50px;
+  background: @color-blue-700;
+  padding: 20px 0 70px;
+  position: relative;
+  overflow: hidden;
+  opacity: 1;
+
+  &:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.1;
+    background-image: url(@background-2);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: cover;
+  }
 
   .container {
     padding: 0 20px;
-  }
-
-  .form-login {
-    .form-group {
-      margin: 0 0 10px;
-
-      .form-control {
-        background-color: #fff;
-      }
-
-      > .form-control-feedback {
-        left: 10px;
-      }
-    }
-  }
-
-  .text-muted {
-    color: #6a6a6a;
-  }
-
-  .btn-register {
-    margin-bottom: 10px;
-  }
-
-  hr {
-    margin: 22px 0;
-    border-color: #ccc;
   }
 
   #carousel-banners {
@@ -107,6 +98,31 @@ body {
 
     .carousel-indicators {
       bottom: -14px;
+    }
+  }
+}
+
+#btn-portal {
+  background: #fff;
+  margin-top: -68px;
+  padding: 0 20px;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+
+  a {
+    color: #a5a5a5;
+    padding: 14px 17px;
+
+    &:hover {
+      color: @color-orange-700;
+    }
+
+    &.active {
+      color: @color-orange-700;
+      border-bottom: 3px solid @color-orange-700;
+      padding: 14px 17px 11px 17px;
+      border-radius: 0;
+      box-shadow: none;
     }
   }
 }

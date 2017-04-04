@@ -227,12 +227,6 @@ return [
         App\Providers\Modules\NoticeEvaluationsServiceProvider::class,
         App\Providers\Modules\NoticePurchasesServiceProvider::class,
         App\Providers\Modules\NoticeSubmissionsServiceProvider::class,
-
-        /*
-         * Vendor Service Provider
-         */
-        App\Providers\Modules\VendorSubmissionsServiceProvider::class,
-
     ],
 
     /*

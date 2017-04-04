@@ -1,31 +1,14 @@
 @extends('layouts.portal')
 
-@unless(Auth::check())
-    @section('ahead')
-        @include('layouts.portal.aheads.public')
-    @endsection
-@endunless
+@section('ahead')
+    @include('layouts.portal.aheads.public')
+@endsection
 
 @section('content')
-@include('layouts.portal.aheads.vendor')
+@include('layouts.menu.portal')
 
 <div class="panel panel-notice">
-    <div class="panel-heading bg-success-600">
-        <h1 class="panel-title">{{ trans('notices.views.index.notices.title') }}</h1>
-
-        <div class="heading-elements">
-            <ul class="list-inline heading-text">
-                <li class="active"><a href="#"><i class="icon icon-file-text3"></i> {{ trans('app.all') }}</a></li>
-                @foreach(\App\NoticeType::orderBy('name')->get() as $type)
-                    <li><a href="#"><i class="icon icon-file-text3"></i> {{ $type-> name }}</a></li>
-                @endforeach
-            </ul>
-        </div>
-        <a class="heading-elements-toggle"><i class="icon-more"></i></a>
-    </div>
-    <div class="panel-body">
-        {!! $dataTable->table() !!}
-    </div>
+    {!! $dataTable->table() !!}
 </div>
 @endsection
 

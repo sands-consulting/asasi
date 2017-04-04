@@ -2,6 +2,7 @@
 
 use App\Permission;
 use App\Subscription;
+use App\Transaction;
 use App\Vendor;
 use App\Services\SubscriptionService;
 use App\Services\PermissionService;
@@ -26,6 +27,10 @@ class SubscriptionSeeder extends Seeder
             'subscriber_type' => 'App\Vendor',
             'user_id' => Vendor::first()->users()->first()->id,
             'status' => 'active'
+        ]);
+
+        $transaction = TransactionService::create(new Transaction, [
+            
         ]);
     }
 }

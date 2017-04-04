@@ -29,6 +29,14 @@ return [
         'sign_out'      => 'Sign Out'
     ],
 
+    'portal' => [
+        'notices'       => 'Notices',
+        'submissions'   => 'Submissions',
+        'awards'        => 'Awards',
+        'news'          => 'News',
+        'contact'       => 'Contact'
+    ],
+
     'admin' => [
         'administration'        => 'Administration',
         'manage'                => 'Manage',
