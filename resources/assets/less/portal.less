@@ -85,34 +85,37 @@ body {
   .container {
     padding: 0 20px;
   }
+}
 
-  #carousel-banners {
-    min-height: 250px;
+#carousel-banners {
+  min-height: 250px;
 
-    .carousel-control {
-      background: none;
-    }
-
-    .item {
-      color: #fff;
-      text-align: center;
-
-      .title {
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 1.25;
-        margin: 100px 0 10px;
-      }
-    }
+  .carousel-control {
+    background: none;
   }
 
-  #carousel-news {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+  .item {
+    color: #fff;
+    text-align: center;
 
-    .carousel-indicators {
-      bottom: -14px;
+    .title {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.25;
+      margin: 100px 0 10px;
     }
+  }
+}
+
+#carousel-news {
+  .carousel-indicators {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .item {
+    color: #000;
+    padding-top: 10px;
   }
 }
 
