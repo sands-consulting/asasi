@@ -37,15 +37,15 @@ class RolesServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->put('roles/{role}/restore', 'RolesController@restore')
-                    ->name('role.restore');
+                    ->name('roles.restore');
                 $router->get('roles/{role}/revisions', 'RolesController@revisions')
-                    ->name('role.revisions');
+                    ->name('roles.revisions');
                 $router->get('roles/{role}/histories', 'RolesController@histories')
-                    ->name('role.histories');
+                    ->name('roles.histories');
                 $router->get('roles/archives', 'RolesController@archives')
-                    ->name('role.archives');
+                    ->name('roles.archives');
                 $router->put('roles/{role}/duplicate', 'RolesController@duplicate')
-                    ->name('role.duplicate');
+                    ->name('roles.duplicate');
                 $router->resource('roles',  'RolesController');
             });
         });

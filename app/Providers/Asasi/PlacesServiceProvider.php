@@ -37,15 +37,15 @@ class PlacesServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->put('places/{place}/restore', 'PlacesController@restore')
-                    ->name('place.restore');
+                    ->name('places.restore');
                 $router->get('places/{place}/revisions', 'PlacesController@revisions')
-                    ->name('place.revisions');
+                    ->name('places.revisions');
                 $router->get('places/{place}/histories', 'PlacesController@histories')
-                    ->name('place.histories');
+                    ->name('places.histories');
                 $router->get('places/archives', 'PlacesController@archives')
-                    ->name('place.archives');
+                    ->name('places.archives');
                 $router->put('places/{place}/duplicate', 'PlacesController@duplicate')
-                    ->name('place.duplicate');
+                    ->name('places.duplicate');
                 $router->resource('places', 'PlacesController');
             });
         });

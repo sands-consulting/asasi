@@ -17,7 +17,7 @@ class OrganizationsServiceProvider extends ServiceProvider
     {
         Gate::policy('App\Organization', 'App\Policies\Asasi\OrganizationPolicy');
 
-        app('policy')->register('App\Http\Controllers\Admin\OrganizationsController', 'App\Policies\OrganizationPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\OrganizationsController', 'App\Policies\Asasi\OrganizationPolicy');
     }
 
     /**
@@ -37,15 +37,15 @@ class OrganizationsServiceProvider extends ServiceProvider
                 'as' => 'admin.'
             ], function ($router) {
                 $router->put('organizations/{organization}/restore', 'OrganizationsController@restore')
-                    ->name('organization.restore');
+                    ->name('organizations.restore');
                 $router->get('organizations/{organization}/revisions', 'OrganizationsController@revisions')
-                    ->name('organization.revisions');
+                    ->name('organizations.revisions');
                 $router->get('organizations/{organization}/histories', 'OrganizationsController@histories')
-                    ->name('organization.histories');
+                    ->name('organizations.histories');
                 $router->get('organizations/archives', 'OrganizationsController@archives')
-                    ->name('organization.archives');
+                    ->name('organizations.archives');
                 $router->put('organizations/{organization}/duplicate', 'OrganizationsController@duplicate')
-                    ->name('organization.duplicate');
+                    ->name('organizations.duplicate');
                 $router->resource('organizations', 'OrganizationsController');
             });
         });
