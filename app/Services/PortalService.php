@@ -32,7 +32,7 @@ class PortalService
 
     public static function bookmarks(User $user)
     {
-        return Bookmark::whereUserId($user->id)->count();
+        return $user->bookmarks()->count();
     }
 
     public static function purchases(User $user)

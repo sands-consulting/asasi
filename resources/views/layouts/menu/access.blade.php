@@ -27,11 +27,11 @@
     @if(Auth::user()->hasPermission('access:vendor'))
     @if(is_path(['vendors*', 'subscriptions*', 'transactions*']))
     <li>
-        <a href="{{ route('vendors.eligibles', Auth::user()->vendor->id) }}">{{ trans('menu.access.dashboard') }}</a>
+        <a href="{{ route('root') }}">{{ trans('menu.access.portal') }}</a>
     </li>
     @else
     <li>
-        <a href="{{ route('root') }}">{{ trans('menu.access.portal') }}</a>
+        <a href="{{ route('vendors.eligibles', Auth::user()->vendor->id) }}">{{ trans('menu.access.dashboard') }}</a>
     </li>
     @endif
     @endif

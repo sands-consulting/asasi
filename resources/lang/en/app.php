@@ -24,12 +24,12 @@ return [
     'widgets' => [
         'portal' => [
             'numbers' => [
-                'all' => 'All Notices',
                 'eligibles' => 'Eligibles',
                 'invitations' => 'Invitations',
                 'purchases' => 'Purchases',
                 'projects' => 'Projects',
-                'submissions' => 'Submissions'
+                'submissions' => 'Submissions',
+                'bookmarks' => 'Bookmarks'
             ],
 
             'vendor' => [

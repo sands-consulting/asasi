@@ -7,7 +7,7 @@ use App\Package;
 use App\Vendor;
 use Illuminate\Http\Request;
 
-class VendorSubscriptionsController extends Controller
+class SubscriptionsController extends Controller
 {
     public function index(Vendor $vendor)
     {

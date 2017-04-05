@@ -4,7 +4,7 @@
 @include('layouts.portal.aheads.vendor')
 
 <div class="panel panel-notice">
-    <div class="panel-heading bg-slate-600">
+    <div class="panel-heading bg-violet-600">
         <h1 class="panel-title">{{ trans('me.views.bookmarks.title') }}</h1>
     </div>
     <div class="panel-body">

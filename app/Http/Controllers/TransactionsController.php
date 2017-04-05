@@ -13,7 +13,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Route;
 
-class VendorTransactionsController extends Controller
+class TransactionsController extends Controller
 {
     public function index(Vendor $vendor, Request $request)
     {

@@ -21,14 +21,4 @@
 			<p class="text-muted">11 May 2016</p>
 		</div>
 	</div>
-
-	<a class="left carousel-control" href="#carousel-dashboard-news" role="button" data-slide="prev">
-		<span class="glyphicon glyphicon-chevron-left text-slate-700" aria-hidden="true"></span>
-		<span class="sr-only">{{ trans('actions.previous') }}</span>
-	</a>
-
-	<a class="right carousel-control" href="#carousel-dashboard-news" role="button" data-slide="next">
-		<span class="glyphicon glyphicon-chevron-right text-slate-700" aria-hidden="true"></span>
-		<span class="sr-only">{{ trans('actions.next') }}</span>
-	</a>
 </div>
