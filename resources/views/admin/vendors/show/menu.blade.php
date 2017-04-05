@@ -6,13 +6,7 @@
     </li>
 
     <li role="presentation">
-        <a href="#tab-vendor-events" aria-controls="tab-vendor-contact-person" role="tab" data-toggle="tab" class="list-group-item">
-            <i class="icon-user-tie"></i> {{ trans('vendors.menu.contact-person') }}
-        </a>
-    </li>
-
-    <li role="presentation">
-        <a href="#tab-vendor-events" aria-controls="tab-vendor-details" role="tab" data-toggle="tab" class="list-group-item">
+        <a href="#tab-vendor-shareholders" aria-controls="tab-vendor-shareholders" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-portfolio"></i> {{ trans('vendors.menu.shareholders') }}
         </a>
     </li>

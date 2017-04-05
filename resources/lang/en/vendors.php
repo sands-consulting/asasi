@@ -141,10 +141,6 @@ return [
                 'status'   => 'Status',
                 'keywords' => 'Keywords',
             ],
-            'show' => [
-                'title' => 'View',
-                'legend' => 'Vendor Details',
-            ],
             'create' => [
                 'title' => 'Create New Vendor',
             ],
@@ -160,6 +156,14 @@ return [
                     'title' => 'Edit Company Details',
                     'description' => 'All fields are compulsary. The form can be save and update later for completion'
                 ]
+            ],
+            'show' => [
+                'accounts' => [
+                    'empty' => 'No account recorded.'
+                ],
+                'employees' => [
+                    'empty' => 'No employee recorded.'
+                ],
             ],
         ],
         'pending' => [

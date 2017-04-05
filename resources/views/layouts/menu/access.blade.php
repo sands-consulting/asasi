@@ -25,15 +25,19 @@
 @else
 
     @if(Auth::user()->hasPermission('access:vendor'))
-    @if(is_path(['vendors*', 'subscriptions*', 'transactions*']))
+
+    @unless(is_path(['/', 'notices*', 'news*', 'submissions*', 'awards*', 'contact*']))
     <li>
         <a href="{{ route('root') }}">{{ trans('menu.access.portal') }}</a>
     </li>
-    @else
+    @endunless
+    
+    @unless(is_path(['vendors*', 'me/bookmarks']))
     <li>
         <a href="{{ route('vendors.eligibles', Auth::user()->vendor->id) }}">{{ trans('menu.access.dashboard') }}</a>
     </li>
-    @endif
+    @endunless
+
     @endif
 
     @if(Auth::user()->hasPermission('access:administration'))
