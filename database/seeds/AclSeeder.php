@@ -27,7 +27,6 @@ class AclSeeder extends Seeder
              * Access Permissions
              */
             ['access:administration', 'Access administration area'],
-            ['access:cart', 'Access notice cart'],
             ['access:reports', 'Access reporting module'],
             ['access:settings', 'Access global settings'],
             ['access:vendor', 'Access vendor module'],
@@ -427,7 +426,17 @@ class AclSeeder extends Seeder
         }
 
         $admin = Role::whereName('admin')->first();
-        $admin->permissions()->attach(Permission::whereNotIn('name', ['access:cart', 'access:vendor', 'permission:create', 'permission:delete', 'permission:restore'])->pluck('id')->toArray());
+        $admin->permissions()->attach(Permission::whereNotIn('name', [
+            'access:vendor',
+            'permission:create',
+            'permission:delete',
+            'permission:restore',
+            'news:organization',
+            'allocation:organization',
+            'project:organization',
+            'project-milestone:organization',
+            'submission:organization'
+        ])->pluck('id')->toArray());
 
         $vendorAdmin = Role::whereName('vendor-admin')->first();
         $vendorAdmin->permissions()->attach(Permission::whereIn('name', [

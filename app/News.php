@@ -18,6 +18,7 @@ class News extends Model
     protected $fillable = [
         'title',
         'content',
+        'summary',
         'category_id',
         'organization_id',
         'status'
@@ -27,7 +28,7 @@ class News extends Model
         'status' => 'draft',
     ];
 
-    public function logs()
+    public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
@@ -46,18 +47,6 @@ class News extends Model
     {
         return $this->belongsTo(Organization::class);
     }
-
-    public function canPublish()
-    {
-        return $this->status != 'published';
-    }
-
-    public function canUnpublish()
-    {
-        return $this->status != 'not-published';
-    }
-
-    /* Scope */
 
     public function scopePublished($query)
     {

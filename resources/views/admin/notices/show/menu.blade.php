@@ -23,7 +23,7 @@
         </a>
     </li>
 
-    @unless(Auth::user()->hasPermission('access:vendor'))
+    @if(Auth::check() && is_path('admin*') && !Auth::user()->hasPermission('access:vendor'))
 
 
     <li class="list-group-divider"></li>
@@ -107,5 +107,5 @@
         </a>
     </li>
 
-    @endunless
+    @endif
 </ul>

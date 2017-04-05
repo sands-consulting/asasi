@@ -1,20 +1,11 @@
 <div id="carousel-banners" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carousel-banners" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-banners" data-slide-to="1"></li>
-        <li data-target="#carousel-banners" data-slide-to="2"></li>
-    </ol>
-
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="/assets/images/banner-01.jpg" alt="landing-page-image" class="img-responsive" alt="PROMPT">
-        </div>
-        <div class="item">
-            <img src="/assets/images/banner-02.jpg" alt="landing-page-image" class="img-responsive" alt="PROMPT">
-        </div>
-        <div class="item">
-            <img src="/assets/images/banner-03.jpg" alt="landing-page-image" class="img-responsive" alt="PROMPT">
-        </div>
+    @foreach(App\Services\PortalService::banners() as $banner)
+        <a href="{{ route('news.show', $banner->slug) }}" class="item{{ $loop->index == 0 ? ' active': '' }}">
+            <div class="title">{{ $banner->title }}</div>
+            <div class="summary">{{ $banner->summary }}</div>
+        </a>
+    @endforeach
     </div>
 
     <a class="left carousel-control" href="#carousel-banners" role="button" data-slide="prev">

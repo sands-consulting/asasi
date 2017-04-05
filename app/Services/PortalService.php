@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Bookmark;
+use App\News;
 use App\Notice;
 use App\Project;
 use App\User;
@@ -54,5 +55,10 @@ class PortalService
     public static function projects(User $user)
     {
         return Project::whereVendorId($user->vendor->id)->count();
+    }
+
+    public static function banners()
+    {
+        return News::published()->orderBy('created_at', 'desc')->take(10)->get();
     }
 }
