@@ -10,13 +10,13 @@
 <div class="page-title">
 	<h4>
 		{{ link_to_route('admin.news.index', trans('news.title')) }} /
-		{{ link_to_route('admin.news.edit', $news->title, $news->id) }} /
+		{{ link_to_route('admin.news.edit', $news->title, $news->slug) }} /
 		<span class="text-semibold">{{ trans('user-histories.title') }}</span>
 	</h4>
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">
-		<a href="{{ route('admin.news.edit', $news->id) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
+		<a href="{{ route('admin.news.edit', $news->slug) }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
 			<i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
 		</a>
 	</div>

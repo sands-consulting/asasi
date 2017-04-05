@@ -43,7 +43,7 @@
 <ul class="breadcrumb-elements">
     @can('histories', $news)
 	<li>
-		<a href="{{ route('admin.news.histories', $news->id) }}" class="legitRipple">
+		<a href="{{ route('admin.news.histories', $news->slug) }}" class="legitRipple">
 			<i class="icon-database-time2"></i> {{ trans('user-histories.title') }}
 		</a>
 	</li>
@@ -51,7 +51,7 @@
 
 	@can('revisions', $news)
 	<li>
-		<a href="{{ route('admin.news.revisions', $news->id) }}" class="legitRipple">
+		<a href="{{ route('admin.news.revisions', $news->slug) }}" class="legitRipple">
 			<i class="icon-database-edit2"></i> {{ trans('revisions.title') }}
 		</a>
 	</li>
@@ -60,7 +60,7 @@
 @endsection
 
 @section('content')
-{!! Former::vertical_open(route('admin.news.update', $news->id))->method('PUT') !!}
+{!! Former::vertical_open(route('admin.news.update', $news->slug))->method('PUT') !!}
 	{!! Former::populate($news) !!}
 	@include('admin.news.form')
 {!! Former::close() !!}

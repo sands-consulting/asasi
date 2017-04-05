@@ -9,7 +9,7 @@ use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\NewsRequest;
 use App\Services\NewsService;
-use App\Services\UserHistoriesService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -27,7 +27,7 @@ class NewsController extends Controller
 
     public function store(NewsRequest $request)
     {
-        $inputs = $request->only('title', 'content', 'category_id');
+        $inputs = $request->only('title', 'content', 'summary', 'category_id');
 
         if($request->user()->hasPermission('news:organization')) {
             $inputs['organization_id'] = $request->user()->organizations()->first()->id;
@@ -36,7 +36,7 @@ class NewsController extends Controller
         }
 
         $news   = NewsService::create(new News, $inputs);
-        UserHistoriesService::log($request->user(), 'create', $news, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'create', $news, $request->getClientIp());
         return redirect()
             ->route('admin.news.edit', $news->slug)
             ->with('notice', trans('news.notices.created', ['title' => $news->title]));
@@ -49,7 +49,7 @@ class NewsController extends Controller
 
     public function update(NewsRequest $request, News $news)
     {
-        $inputs = $request->only('title', 'content', 'category_id');
+        $inputs = $request->only('title', 'content', 'summary', 'category_id');
 
         if($request->user()->hasPermission('news:organization'))
         {
@@ -61,16 +61,16 @@ class NewsController extends Controller
         }
 
         NewsService::update($news, $inputs);
-        UserHistoriesService::log($request->user(), 'update', $news, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'update', $news, $request->getClientIp());
         return redirect()
-            ->route('admin.news.edit', $news->id)
+            ->route('admin.news.edit', $news->slug)
             ->with('notice', trans('news.notices.updated', ['title' => $news->title]));
     }
 
     public function destroy(Request $request, News $news)
     {
         NewsService::delete($news);
-        UserHistoriesService::log($request->user(), 'delete', $news, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'delete', $news, $request->getClientIp());
         return redirect()
             ->route('admin.news.index')
             ->with('notice', trans('news.notices.deleted', ['title' => $news->title]));
@@ -91,7 +91,7 @@ class NewsController extends Controller
     public function publish(Request $request, News $news)
     {
         NewsService::publish($news);
-        UserHistoriesService::log($request->user(), 'publish', $news, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'publish', $news, $request->getClientIp());
         return redirect($request->input('redirect_to', route('admin.news.edit', $news->slug)))
                 ->with('notice', trans('news.notices.published', ['title' => $news->title]));
     }
@@ -99,7 +99,7 @@ class NewsController extends Controller
     public function unpublish(Request $request, News $news)
     {
         NewsService::unpublish($news);
-        UserHistoriesService::log($request->user(), 'unpublish', $news, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'unpublish', $news, $request->getClientIp());
         return redirect($request->input('redirect_to', route('admin.news.edit', $news->slug)))
                 ->with('notice', trans('news.notices.unpublished', ['title' => $news->title]));
     }

@@ -6,6 +6,7 @@ return [
     'attributes' => [
         'title' => 'Title',
         'content' => 'Content',
+        'summary' => 'Summary',
         'category' => 'Category',
         'organization' => 'Organization',
         'status' => 'Status',
