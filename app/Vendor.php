@@ -104,9 +104,9 @@ class Vendor extends Model
         return $query->whereStatus('draft');
     }
 
-    public function scopeSuspended($query)
+    public function scopeInactive($query)
     {
-        return $query->whereStatus('suspended');
+        return $query->whereStatus('inactive');
     }
 
     public function scopeRejected($query)

@@ -1,6 +1,6 @@
 <ul class="navigation navigation-main navigation-accordion">
     <li class="{{ is_path_active('admin') }}">
-        <a href="{{ route('admin') }}"><i class="icon-home4"></i><span>{{ trans('menu.dashboard') }}</span></a>
+        <a href="{{ route('admin') }}"><i class="icon-home4"></i><span>{{ trans('menu.access.dashboard') }}</span></a>
     </li>
 
 

@@ -349,8 +349,6 @@ class AclSeeder extends Seeder
             ['vendor:reject', 'Reject vendor\'s applications'],
             ['vendor:activate', 'Activate suspended vendor'],
             ['vendor:suspend', 'Suspend existing vendor'],
-            ['vendor:blacklist', 'Blacklist existing vendor'],
-            ['vendor:unblacklist', 'Unblacklist existing vendor'],
             ['vendor:delete', 'Delete existing vendor'],
             ['vendor:revisions', 'View vendor revisions'],
             ['vendor:histories', 'View vendor histories'],

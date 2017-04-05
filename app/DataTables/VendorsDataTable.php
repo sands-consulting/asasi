@@ -11,20 +11,20 @@ class VendorsDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($vendor) {
-                return view('admin.vendors._index_actions', compact('vendor'));
+                return view('admin.vendors.index.actions', compact('vendor'));
             })
             ->editColumn('name', function($vendor) {
                 return link_to_route('admin.vendors.show', $vendor->name, $vendor->id);
             })
             ->editColumn('status', function($vendor) {
-                return view('admin.vendors._index_status', compact('vendor'));
+                return view('admin.vendors.index.status', compact('vendor'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Vendor::with('user');
+        $query = Vendor::query();
 
         if($this->datatables->request->input('q', null))
         {

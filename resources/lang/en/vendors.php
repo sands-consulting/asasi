@@ -94,6 +94,24 @@ return [
         'add-shareholder' => 'Add Shareholder',
     ],
 
+    'menu' => [
+        'details' => 'Details',
+        'contact-person' => 'Contact Person',
+        'qualifications' => 'Qualifications',
+        'shareholders' => 'Shareholders',
+        'employees' => 'Employees',
+        'accounts' => 'Accounts',
+        'files' => 'Files',
+
+        'users' => 'Users',
+        'subscriptions' => 'Subscriptions',
+        'transactions' => 'Transactions',
+
+        'invitations' => 'Invitations',
+        'eligibles' => 'Eligibles',
+        'purchases' => 'Purchases'
+    ],
+
     'notices' => [
         'public' => [
             'approved' => 'Your application already been approved. You cannot cancel your application.',
@@ -117,33 +135,32 @@ return [
     ],
 
 	'views' => [
-		'index' => [
-            'title' => 'Vendors',
-            'status'   => 'Status',
-            'keywords' => 'Keywords',
-		],
-        'show' => [
-            'title' => 'View',
-            'admin' => [
+        'admin'=> [
+            'index' => [
+                'title' => 'Vendors',
+                'status'   => 'Status',
+                'keywords' => 'Keywords',
+            ],
+            'show' => [
                 'title' => 'View',
-                'legend' => 'Vendor Details'
+                'legend' => 'Vendor Details',
             ],
-        ],
-        'create' => [
-            'title' => 'Create New Vendor',
-        ],
-        'edit' => [
-            'title' => 'Edit Vendor',
-
-            'application' => [
-                'title' => 'Company Application Form',
-                'description' => 'All fields are compulsary. The form can be save and update later for completion'
+            'create' => [
+                'title' => 'Create New Vendor',
             ],
+            'edit' => [
+                'title' => 'Edit Vendor',
 
-            'details' => [
-                'title' => 'Edit Company Details',
-                'description' => 'All fields are compulsary. The form can be save and update later for completion'
-            ]
+                'application' => [
+                    'title' => 'Company Application Form',
+                    'description' => 'All fields are compulsary. The form can be save and update later for completion'
+                ],
+
+                'details' => [
+                    'title' => 'Edit Company Details',
+                    'description' => 'All fields are compulsary. The form can be save and update later for completion'
+                ]
+            ],
         ],
         'pending' => [
             'title' => 'Vendor Application Pending Approval',
@@ -159,42 +176,8 @@ return [
         'submissions' => [
             'title' => 'Submissions'
         ],
-        '_show' => [
-            'nav' => [
-                'details' => 'Details',
-                'qualification_codes' => 'Qualification Codes',
-                'users' => 'Users',
-                'subscriptions' => 'Subscriptions',
-                'invitations' => 'Invitations',
-                'eligibles' => 'Eligibles',
-                'purchases' => 'Purchases',
-                'transactions' => 'Transactions',
-                'projects' => 'Projects',
-            ],
-        ],
-        '_show_details' => [
-            'shareholders' => [
-                'title' => 'Shareholders',
-                'empty' => 'No shareholder details'
-            ],
-
-            'employees' => [
-                'title' => 'Employees',
-                'empty' => 'No employee details'
-            ],
-
-            'accounts' => [
-                'title' => 'Accounts',
-                'empty' => 'No account details'
-            ],
-
-            'contact_person' => [
-                'title' => 'Contact Person'
-            ],
-
-            'capital' => [
-                'title' => 'Capital'
-            ]
+        'show' => [
+            'back' => 'Dashboard'
         ],
         '_form' => [
             'nav' => [

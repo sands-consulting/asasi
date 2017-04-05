@@ -65,44 +65,26 @@ class VendorPolicy
         return $auth->hasPermission('vendor:logs');
     }
 
-    public function approve(User $auth)
+    public function approve(User $auth, Vendor $vendor)
     {
-        return $auth->hasPermission('vendor:approve');
+        return $auth->hasPermission('vendor:approve') && $vendor->status == 'pending';
     }
 
-    public function reject(User $auth)
+    public function reject(User $auth, Vendor $vendor)
     {
-        return $auth->hasPermission('vendor:reject');
+        return $auth->hasPermission('vendor:reject') && $vendor->status == 'pending';
     }
 
     public function activate(User $auth, Vendor $vendor)
     {
-        return $auth->hasPermission('vendor:activate') && $vendor->canActivate($auth);
+        return $auth->hasPermission('vendor:activate')
+            && $vendor->status != 'active';
     }
 
     public function suspend(User $auth, Vendor $vendor)
     {
-        return $auth->hasPermission('vendor:suspend') && $vendor->canSuspend($auth);
-    }
-
-    public function blacklist(User $auth, Vendor $vendor)
-    {
-        return $auth->hasPermission('vendor:blacklist') && $vendor->canBlacklist($auth);
-    }
-
-    public function unblacklist(User $auth, Vendor $vendor)
-    {
-        return $auth->hasPermission('vendor:unblacklist') && $vendor->canUnblacklist($auth);
-    }
-
-    public function qualificationCodes(User $auth, Vendor $vendor)
-    {
-        return $this->show($auth, $vendor);
-    }
-
-    public function subscriptions(User $auth, Vendor $vendor)
-    {
-        return $this->show($auth, $vendor);
+        return $auth->hasPermission('vendor:suspend')
+            && $vendor->status != 'suspended';
     }
 
     public function pending(User $auth, Vendor $vendor)

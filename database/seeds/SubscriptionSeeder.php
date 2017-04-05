@@ -1,11 +1,9 @@
 <?php
 
-use App\Permission;
 use App\Subscription;
 use App\Transaction;
-use App\Vendor;
 use App\Services\SubscriptionService;
-use App\Services\PermissionService;
+use App\Services\TransactionService;
 use Illuminate\Database\Seeder;
 
 class SubscriptionSeeder extends Seeder

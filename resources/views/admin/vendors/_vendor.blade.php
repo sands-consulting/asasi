@@ -42,7 +42,9 @@
 			<ul>
 				<li>
 					<span class="header">{{ trans('vendors.attributes.address') }}</span>
-					{!! nl2br($vendor->address) !!}
+					{{ $vendor->address->line_one }}<br>
+					{{ $vendor->address->two }}<br>
+					{{ $vendor->address->postcode }}
 				</li>
 			</ul>
 		</div>

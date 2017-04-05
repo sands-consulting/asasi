@@ -1,9 +1,9 @@
 @if($vendor->status == 'active')
-<span class="label label-success">
+<span class="status label label-success">
 @elseif($vendor->status == 'rejected')
-<span class="label label-danger">
+<span class="status label label-danger">
 @else
-<span class="label label-default">
+<span class="status label label-default">
 @endif
 
 {{ trans('statuses.' . $vendor->status) }}
