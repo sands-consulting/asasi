@@ -3,11 +3,11 @@
 return [
     'site_admin'    => 'Site Admin',
     'language'      => 'Language',
-    'dashboard'     => 'Dashboard',
-    'portal'        => 'Portal',
 
     'access' => [
         'administration'    => 'Administration',
+        'dashboard'         => 'Dashboard',
+        'portal'            => 'Portal',
         'reports'           => 'Reports',
         'settings'          => 'Settings',
     ],

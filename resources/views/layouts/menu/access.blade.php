@@ -1,8 +1,9 @@
 @if(Auth::user())
+
 @if(is_path('admin*'))
 
     <li>
-        <a href="{{ route('root') }}"><i class="icon-atom2"></i> {{ trans('menu.portal') }}</a>
+        <a href="{{ route('root') }}"><i class="icon-atom2"></i> {{ trans('menu.access.portal') }}</a>
     </li>
 
     @if(Auth::user()->hasPermission('access:reports'))
@@ -26,11 +27,11 @@
     @if(Auth::user()->hasPermission('access:vendor'))
     @if(is_path(['vendors*', 'subscriptions*', 'transactions*']))
     <li>
-        <a href="{{ route('vendors.eligibles', Auth::user()->vendor->id) }}">{{ trans('menu.dashboard') }}</a>
+        <a href="{{ route('vendors.eligibles', Auth::user()->vendor->id) }}">{{ trans('menu.access.dashboard') }}</a>
     </li>
     @else
     <li>
-        <a href="{{ route('root') }}">{{ trans('menu.portal') }}</a>
+        <a href="{{ route('root') }}">{{ trans('menu.access.portal') }}</a>
     </li>
     @endif
     @endif
@@ -54,4 +55,5 @@
     @endif
 
 @endif
+
 @endif
