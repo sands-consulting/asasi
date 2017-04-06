@@ -41,13 +41,13 @@
 
     @can('index', App\Subscription::class)
     <li class="{{ is_path_active('admin/subscriptions*') }}">
-        <a href="{{ route('admin.subscriptions.index') }}"><i class="icon-envelope"></i> <span>{{ trans('menu.admin.subscriptions') }}</span></a>
+        <a href="{{ route('admin.subscriptions.index') }}"><i class="icon-hyperlink"></i> <span>{{ trans('menu.admin.subscriptions') }}</span></a>
     </li>
     @endcan
 
     @can('index', App\Transaction::class)
     <li class="{{ is_path_active('admin/transactions*') }}">
-        <a href="{{ route('admin.transactions.index') }}"><i class="icon-envelope"></i> <span>{{ trans('menu.admin.transactions') }}</span></a>
+        <a href="{{ route('admin.transactions.index') }}"><i class="icon-cash4"></i> <span>{{ trans('menu.admin.transactions') }}</span></a>
     </li>
     @endcan
 
