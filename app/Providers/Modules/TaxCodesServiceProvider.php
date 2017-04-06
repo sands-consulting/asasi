@@ -14,7 +14,7 @@ class TaxCodesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::policy('App\TaxCodePolicy', 'App\Policies\TaxCodePolicy');
+        Gate::policy('App\TaxCode', 'App\Policies\TaxCodePolicy');
 
         app('policy')->register('App\Http\Controllers\Admin\TaxCodesController', 'App\Policies\TaxCodePolicy');
     }
