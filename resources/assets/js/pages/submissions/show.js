@@ -28,8 +28,9 @@ const vm = new Vue({
     getDetailStatus: function (type) {
       return this.submission.details
     },
-    getFormUrl: function (type) {
-      return 'types/' + type;
+    getFormUrl: function (type, exists) {
+      let formUrl =  window.location.href + '/types/' + type;
+      return exists ? formUrl + '/edit' : formUrl + '/create';
     }
   }
 });

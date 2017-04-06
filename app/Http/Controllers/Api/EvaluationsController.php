@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\EvaluationType;
+use App\Services\SubmissionDetailService;
+use App\Submission;
+use App\SubmissionDetail;
 use Illuminate\Http\Request;
 use App\Services\AuthLogsService;
 use App\Http\Controllers\Controller;
