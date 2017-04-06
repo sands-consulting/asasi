@@ -9,6 +9,12 @@
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
+        @can('destroy', $noticeCategory)
+            <a href="{{ route('admin.notice-categories.destroy', $noticeCategory->id) }}" data-method="DELETE"
+               class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
+                <i class="icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
+            </a>
+        @endcan
         <a href="{{ route('admin.notice-categories.index') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
         </a>

@@ -67,7 +67,7 @@ class NoticeCategoryPolicy
      */
     public function update(User $auth, NoticeCategory $category)
     {
-        return $this->edit($category);
+        return $this->edit($auth, $category);
     }
 
     /**

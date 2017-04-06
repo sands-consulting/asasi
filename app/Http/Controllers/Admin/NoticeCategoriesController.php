@@ -6,7 +6,7 @@ use App\NoticeCategory;
 use App\DataTables\NoticeCategoriesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeCategoryRequest;
-use App\Services\NoticeCategoriesService;
+use App\Services\NoticeCategoryService;
 use Illuminate\Http\Request;
 
 class NoticeCategoriesController extends Controller
@@ -25,15 +25,10 @@ class NoticeCategoriesController extends Controller
     {
         $inputs = $request->only('name');
 
-        $noticeCategory  = NoticeCategoriesService::create(new NoticeCategory, $inputs);
+        $noticeCategory = NoticeCategoryService::create(new NoticeCategory, $inputs);
         return redirect()
-            ->route('admin.notice-categories.show', $noticeCategory->id)
+            ->route('admin.notice-categories.edit', $noticeCategory->id)
             ->with('notice', trans('notice-categories.notices.created', ['name' => $noticeCategory->name]));
-    }
-
-    public function show(NoticeCategory $noticeCategory)
-    {
-        return view('admin.notice-categories.show', compact('noticeCategory'));
     }
 
     public function edit(NoticeCategory $noticeCategory)
@@ -46,16 +41,16 @@ class NoticeCategoriesController extends Controller
         $inputs = $request->only(
             'name'
         );
-        
-        $noticeCategory  = NoticeCategoriesService::update($noticeCategory, $inputs);
+
+        $noticeCategory = NoticeCategoryService::update($noticeCategory, $inputs);
         return redirect()
-            ->route('admin.notice-categories.show', $noticeCategory->id)
+            ->route('admin.notice-categories.edit', $noticeCategory->id)
             ->with('notice', trans('notice-categories.notices.updated', ['name' => $noticeCategory->name]));
     }
 
     public function destroy(NoticeCategory $noticeCategory)
     {
-        NoticeCategoriesService::delete($noticeCategory);
+        NoticeCategoryService::delete($noticeCategory);
         return redirect()
             ->route('admin.notice-categories.index')
             ->with('notice', trans('notice-categories.notices.deleted', ['name' => $noticeCategory->name]));
@@ -75,7 +70,7 @@ class NoticeCategoriesController extends Controller
 
     public function activate(Request $request, NoticeCategory $noticeCategory)
     {
-        NoticeCategoriesService::activate($noticeCategory);
+        NoticeCategoryService::activate($noticeCategory);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notice-categories.show', $noticeCategory->id)))
             ->with('notice', trans('notice-categories.notices.activated', ['name' => $noticeCategory->name]));
@@ -83,7 +78,7 @@ class NoticeCategoriesController extends Controller
 
     public function deactivate(Request $request, NoticeCategory $noticeCategory)
     {
-        NoticeCategoriesService::deactivate($noticeCategory);
+        NoticeCategoryService::deactivate($noticeCategory);
         return redirect()
             ->to($request->input('redirect_to', route('admin.notice-categories.show', $noticeCategory->id)))
             ->with('notice', trans('notice-categories.notices.deactivated', ['name' => $noticeCategory->name]));
