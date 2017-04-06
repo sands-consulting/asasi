@@ -2,6 +2,8 @@
 
 namespace App\Providers\Modules;
 
+use App\NoticeCategory;
+use App\NoticeType;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,13 +23,13 @@ class NoticesServiceProvider extends ServiceProvider
     public function register()
     {
         app('router')->group([
-            'namespace' => 'App\Http\Controllers',
+            'namespace'  => 'App\Http\Controllers',
             'middleware' => 'web'
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
+                'prefix'    => 'admin',
+                'as'        => 'admin.'
             ], function ($router) {
                 $router->put('notices/{notice}/restore', 'NoticesController@restore')
                     ->name('notices.restore');
@@ -51,6 +53,8 @@ class NoticesServiceProvider extends ServiceProvider
 
 
                 // Notice Category
+                $router->model('notice_category', NoticeCategory::class);
+
                 $router->put('notice-categories/{notice_category}/restore', 'NoticeCategoriesController@restore')
                     ->name('notice-categories.restore');
                 $router->get('notice-categories/{notice_category}/revisions', 'NoticeCategoriesController@revisions')
@@ -65,6 +69,7 @@ class NoticesServiceProvider extends ServiceProvider
                 $router->resource('notice-categories', 'NoticeCategoriesController');
 
                 // Notice Type
+                $router->model('notice_type', NoticeType::class);
                 $router->put('notice-types/{notice_type}/restore', 'NoticeTypesController@restore')
                     ->name('notice-types.restore');
                 $router->get('notice-types/{notice_type}/revisions', 'NoticeTypesController@revisions')
