@@ -3,9 +3,11 @@
 use App\Organization;
 use App\Place;
 use App\Role;
+use App\TaxCode;
 use App\User;
 use App\Services\OrganizationService;
 use App\Services\PlaceService;
+use App\Services\TaxCodeService;
 use App\Services\UserService;
 use Illuminate\Database\Seeder;
 
@@ -41,7 +43,8 @@ class AsasiSeeder extends Seeder
             ]
         ];
 
-        foreach($users as $userData) {
+        foreach($users as $userData)
+        {
             $roles  = $userData['roles'];
             unset($userData['roles']);
 
@@ -78,7 +81,8 @@ class AsasiSeeder extends Seeder
             ['Shah Alam',       null,   null,   'city', 16]
         ];
 
-        foreach($places as $place) {
+        foreach($places as $place)
+        {
             PlaceService::create(new Place(), [
                 'name'      => $place[0],
                 'code_2'    => $place[1],
@@ -86,6 +90,32 @@ class AsasiSeeder extends Seeder
                 'type'      => $place[3],
                 'parent_id' => $place[4]
             ]);
+        }
+
+        $taxes = [
+            [
+                'name' => 'Standard Rated',
+                'code' => 'SR',
+                'rate' => 6.00,
+                'status' => 'active'
+            ],
+            [
+                'name' => 'Zero Rated',
+                'code' => 'ZR',
+                'rate' => 0.00,
+                'status' => 'active'
+            ],
+            [
+                'name' => 'Exempt',
+                'code' => 'EX',
+                'rate' => 0.00,
+                'status' => 'active'
+            ]
+        ];
+
+        foreach($taxes as $tax)
+        {
+            TaxCodeService::create(new TaxCode, $tax);
         }
     }
 }

@@ -18,7 +18,10 @@ class NoticePurchasesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers'], function ($router) {
+         app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
             $router->get('cart', [
                 'uses' => 'CartController@index',
                 'as' => 'cart'
