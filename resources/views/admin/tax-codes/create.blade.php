@@ -25,8 +25,8 @@
 @section('secondary-header')
     <ul class="breadcrumb breadcrumb-caret">
         <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-        <li><a href="{{ route('admin.tax-codes.create') }}">{{ trans('tax-codes.title') }}</a></li>
-        <li class="active">{{ trans('tax-codes.views.create.title') }}</li>
+        <li><a href="{{ route('admin.tax-codes.create') }}">{{ trans('tax-codes.views.index.breadcrumb') }}</a></li>
+        <li class="active">{{ trans('tax-codes.views.create.breadcrumb') }}</li>
     </ul>
 @endsection
 
