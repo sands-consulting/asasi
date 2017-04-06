@@ -2,6 +2,7 @@
 
 namespace App\Providers\Asasi;
 
+use App\NewsCategory;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,13 +21,13 @@ class NewsServiceProvider extends ServiceProvider
     public function register()
     {
         app('router')->group([
-            'namespace' => 'App\Http\Controllers',
+            'namespace'  => 'App\Http\Controllers',
             'middleware' => 'web'
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
+                'prefix'    => 'admin',
+                'as'        => 'admin.'
             ], function ($router) {
                 $router->put('news/{news}/restore', 'NewsController@restore')
                     ->name('news.restore');
@@ -47,6 +48,7 @@ class NewsServiceProvider extends ServiceProvider
                 $router->resource('news', 'NewsController');
 
                 // News Category
+                $router->model('news_category', NewsCategory::class);
                 $router->put('news-categories/{news_category}/restore', 'NewsCategoriesController@restore')
                     ->name('news-categories.restore');
                 $router->get('news-categories/{news_category}/revisions', 'NewsCategoriesController@revisions')
