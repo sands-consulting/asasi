@@ -8,7 +8,37 @@
             <h5 class="panel-title">Vendor Submission ({{ $type->name }})</h5>
         </div>
         <div class="panel-body">
-            @include('vendors.submissions._form')
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th colspan="2">
+                        <div class="text-size-sm">{{ $submission->notice->number }}</div>
+                        <div class="text-italic">{{ $submission->notice->name }}</div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($requirements as $requirement)
+                    <tr>
+                        <td> 
+                            @if ($requirement->field_type == 'file')
+
+                            @else
+                                <input type="checkbox" name="value[{{ $requirement->id }}]">
+                            @endif
+                        </td>
+                        <td>
+                            @if ($requirement->field_type == 'file')
+                                {!! Former::file('file['. $requirement->id .']')
+                                    ->label(false)
+                                    ->addClass('file-styled') !!}
+                            @endif
+                            {{ $requirement->title }}
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
             <hr>
             <div class="col-md-12">
                 <a href="{{ route('vendors.submissions.show', [ $submission->vendor->id, $submission->id ] ) }}"

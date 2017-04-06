@@ -131,7 +131,7 @@
                                         </small>
                                     </p>
                                     <div class="text-right">
-                                        <a :href="getFormUrl(evaluation.type_id)">
+                                        <a :href="getFormUrl(evaluation.type_id, evaluation.submission_exists)">
                                             <small>
                                                 {{ trans('submissions.buttons.public.commercial.view') }}
                                                 <i class="icon-arrow-right22"></i>

@@ -9,7 +9,7 @@ use App\Submission;
 use App\SubmissionDetail;
 use App\Services\NoticesService;
 use App\Services\SubmissionsService;
-use App\Services\SubmissionDetailsService;
+use App\Services\SubmissionDetailService;
 use App\Services\UserHistoriesService;
 use App\Vendor;
 use Illuminate\Http\Request;
@@ -36,24 +36,88 @@ class VendorSubmissionsController extends Controller
     public function create(Vendor $vendor, Submission $submission, EvaluationType $type)
     {
         $notice = $submission->notice;
-        return view('vendors.submissions.commercial', compact('vendor', 'submission'));
+        $requirements = $notice->submissionRequirements()->where('type_id', $type->id)->get();
+        return view('vendors.submissions.create', compact('vendor', 'requirements', 'submission', 'type'));
     }
 
-    public function store()
+    public function store(Vendor $vendor, Submission $submission)
     {
+        $input = $request->all();
 
+        $input['vendor_id'] = $vendor->id;
+        $input['notice_id'] = $submission->notice->id;
+
+        // check if submission exists
+
+        $submissionDetail = SubmissionDetailService::create(new SubmissionDetail, $input);
+
+        $requirements = $submission->notice
+            ->submissionRequirements()
+            ->where('type_id', $type->id)
+            ->get();
+
+        // Fixme: Temp solutions
+        $details = $requirements->reduce(function ($carry, $requirement) use ($input, $submission, $request) {
+
+            $carry['value'] = null;
+
+            if (isset($input['file'][$requirement->id])) {
+                $file = $input['file'][$requirement->id];
+                $carry['value'] = 1;
+            }
+
+            if ( ! $requirement->require_file) {
+                if (isset($input['value'][$requirement->id])) {
+                    $carry['value'] = $input['value'][$requirement->id];
+                }
+            }
+
+            $carry['user_id'] = $request->user()->id;
+
+            if ( ! isset($input['submission_detail_id'][$requirement->id])) {
+                $carry['requirement_id'] = $requirement->id;
+                $carry['submission_id'] = $submission->id;
+                $carry['type_id'] = $input['type_id'];
+
+                $submissionDetail = SubmissionDetailsService::create(new SubmissionDetail, $carry);
+                isset($file) ? $submissionDetail->attachFiles($file) : false;
+            } else {
+                $submissionDetail = SubmissionDetail::find($input['submission_detail_id'][$requirement->id]);
+                if ($requirement->require_file) {
+                    if (isset($file)) {
+                        if ($submissionDetail->files()) {
+                            $submissionDetail->detachFiles();
+                        }
+                        $carry['value'] = 1;
+                        $submissionDetail->attachFiles($file);
+                    } else {
+                        if ($submissionDetail->files()) {
+                            $carry['value'] = 1;
+                        }
+                    }
+                }
+
+                SubmissionDetailsService::update($submissionDetail, $carry);
+            }
+
+        }, null);
+
+        return redirect()
+            ->route('notices.submission', $notice->id)
+            ->with('notice', trans('notices.notices.submission_saved', ['number' => $notice->number]));
     }
 
     public function edit(Vendor $vendor, Submission $submission, EvaluationType $type)
     {
         $notice = $submission->notice;
-        $details = $submission->details($type->id)->get();
+        $details = $submission->details($type->id)->first();
+
         // Fixme: fix code to reduce query.
         $requirements = $notice->submissionRequirements()->where('type_id', $type->id)->get();
-
-        if ($details) {
-
-        }
+        $requirements->map(function ($requirement, $key) use ($details) {
+            $requirement->items = $details->items()->where('requirement_id', $requirement->id)->first();
+            return $requirement;
+        });
 
         return view('vendors.submissions.edit', compact('notice', 'submission', 'type', 'requirements'));
     }
