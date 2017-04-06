@@ -16,6 +16,11 @@ class VendorsController extends Controller
 {
     public function show(Vendor $vendor)
     {
+        if(in_array($vendor->status, ['draft', 'pending', 'rejected']))
+        {
+            return redirect()->route('vendors.eligibles', $vendor->id);
+        }
+
         return view('vendors.show', compact('vendor'));
     }
 
