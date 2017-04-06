@@ -24,8 +24,8 @@ class PurchasesDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::whereHas('vendors', function($query) {
-                $query->where('vendors.id', $this->vendor_id);
+        $query = Notice::whereHas('purchases', function($query) {
+                $query->where('vendor_id', $this->vendor_id);
             })
             ->select([
                 'notices.id as notice_id',

@@ -177,8 +177,8 @@ return [
         'invitations' => [
             'title' => 'Invitations'
         ],
-        'submissions' => [
-            'title' => 'Submissions'
+        'purchases' => [
+            'title' => 'Purchases'
         ],
         'show' => [
             'back' => 'Dashboard'

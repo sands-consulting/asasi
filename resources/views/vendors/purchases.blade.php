@@ -4,8 +4,8 @@
 @include('layouts.portal.aheads.vendor')
 
 <div class="panel panel-notice">
-    <div class="panel-heading bg-blue-600">
-        <h1 class="panel-title">{{ trans('submissions.views.index.title') }}</h1>
+    <div class="panel-heading bg-info-600">
+        <h1 class="panel-title">{{ trans('vendors.views.purchases.title') }}</h1>
 
         <div class="heading-elements">
             <ul class="list-inline heading-text">
