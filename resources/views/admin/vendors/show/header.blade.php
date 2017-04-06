@@ -1,6 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="pull-left text-thin"><strong>{{ $vendor->type->label }}</strong> {{ $vendor->registration_number }}</div>
+        <div class="pull-left text-thin">
+        @if($vendor->type)<strong>{{ $vendor->type->label }}</strong> @endif{{ $vendor->registration_number }}</div>
         <div class="pull-right">
         	@if($vendor->active_subscription)
         	<span class="label bg-blue-700">{{ trans('subscriptions.attributes.expired_at') }}: {{ $vendor->active_subscription->expired_at->format('d/m/Y') }}</span>

@@ -33,7 +33,7 @@ return [
         'deactivated' => 'Subscription has been deactivated',
         'cancelled' => 'Subscription has been cancelled',
         'existed' => 'Other active subscription for :name already exists.',
-        'no-subscription' => 'No active subscription.'
+        'no-subscription' => 'No active subscription'
     ],
 
 	'views' => [
