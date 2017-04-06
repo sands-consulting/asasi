@@ -15,118 +15,129 @@ class OrganizationPolicy
     use HandlesAuthorization;
 
     /**
-     * @param User $user
+     * @param User $auth
      * @return bool
      */
-    public function index(User $user)
+    public function index(User $auth)
     {
-        return $user->hasPermission('organization:index');
+        return $auth->hasPermission('organization:index');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @return bool
      */
-    public function show(User $user)
+    public function show(User $auth)
     {
-        return $user->hasPermission('organization:show');
+        return $auth->hasPermission('organization:show');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @return bool
      */
-    public function create(User $user)
+    public function create(User $auth)
     {
-        return $user->hasPermission('organization:create');
+        return $auth->hasPermission('organization:create');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @return bool
      */
-    public function store(User $user)
+    public function store(User $auth)
     {
-        return $this->create($user);
+        return $this->create($auth);
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function edit(User $user, Organization $organization)
+    public function edit(User $auth, Organization $organization)
     {
-        return $user->hasPermission('organization:update');
+        return $auth->hasPermission('organization:update');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function update(User $user, Organization $organization)
+    public function update(User $auth, Organization $organization)
     {
-        return $this->edit($organization);
+        return $this->edit($auth, $organization);
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function destroy(User $user, Organization $organization)
+    public function destroy(User $auth, Organization $organization)
     {
-        return $user->hasPermission('organization:delete');
+        return $auth->hasPermission('organization:delete');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function restore(User $user, Organization $organization)
+    public function restore(User $auth, Organization $organization)
     {
-        return $user->hasPermission('organization:restore');
+        return $auth->hasPermission('organization:restore');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function revisions(User $user, Organization $organization)
+    public function revisions(User $auth, Organization $organization)
     {
-        return $user->hasPermission('organization:revisions');
+        return $auth->hasPermission('organization:revisions');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function histories(User $user, Organization $organization)
+    public function histories(User $auth, Organization $organization)
     {
-        return $user->hasPermission('organization:histories');
+        return $auth->hasPermission('organization:histories');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function archives(User $user, Organization $organization)
+    public function archives(User $auth, Organization $organization)
     {
-        return $user->hasPermission('organization:archives');
+        return $auth->hasPermission('organization:archives');
     }
 
     /**
-     * @param User $user
+     * @param User $auth
      * @param Organization $organization
      * @return bool
      */
-    public function duplicate(User $user, Organization $organization)
+    public function duplicate(User $auth, Organization $organization)
     {
-        return $user->hasPermission('organization:duplicate');
+        return $auth->hasPermission('organization:duplicate');
+    }
+
+    public function activate(User $auth, Organization $organization)
+    {
+        return $this->update($auth, $organization)
+            && $organization->status !== 'active';
+    }
+
+    public function deactivate(User $auth, Organization $organization)
+    {
+        return $this->update($auth, $organization);
     }
 }

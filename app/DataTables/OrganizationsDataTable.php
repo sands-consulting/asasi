@@ -13,9 +13,6 @@ class OrganizationsDataTable extends DataTable
             ->addColumn('action', function($organization) {
                 return view('admin.organizations._index_actions', compact('organization'));
             })
-            ->editColumn('name', function($organization) {
-                return link_to_route('admin.organizations.show', $organization->name, $organization->id);
-            })
             ->editColumn('status', function($organization) {
                 return view('admin.organizations._index_status', compact('organization'));
             })

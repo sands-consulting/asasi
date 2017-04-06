@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Organization;
-use Sands\Asasi\Service\Exceptions\ServiceException;
+use Sands\Asasi\Exceptions\ServiceException;
 
 class OrganizationService extends BaseService 
 {

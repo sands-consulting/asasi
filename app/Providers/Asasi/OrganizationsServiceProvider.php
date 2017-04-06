@@ -46,6 +46,8 @@ class OrganizationsServiceProvider extends ServiceProvider
                     ->name('organizations.archives');
                 $router->put('organizations/{organization}/duplicate', 'OrganizationsController@duplicate')
                     ->name('organizations.duplicate');
+                $router->put('organizations/{organization}/suspend', 'OrganizationsController@suspend')
+                    ->name('organizations.suspend');
                 $router->resource('organizations', 'OrganizationsController');
             });
         });
