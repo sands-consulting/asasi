@@ -7,8 +7,8 @@ use App\DataTables\AllocationTypesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\AllocationTypeRequest;
-use App\Services\AllocationTypesService;
-use App\Services\UserHistoriesService;
+use App\Services\AllocationTypeService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class AllocationTypesController extends Controller
@@ -27,8 +27,8 @@ class AllocationTypesController extends Controller
     public function store(AllocationTypeRequest $request)
     {
         $inputs = $request->only('name', 'status');
-        $type   = AllocationTypesService::create(new AllocationType, $inputs);
-        UserHistoriesService::log($request->user(), 'create', $type, $request->getClientIp());
+        $type = AllocationTypeService::create(new AllocationType, $inputs);
+        UserHistoryService::log($request->user(), 'create', $type, $request->getClientIp());
         return redirect()
             ->route('admin.allocation-types.index')
             ->with('notice', trans('allocation-types.notices.created', ['name' => $type->name]));
@@ -42,17 +42,17 @@ class AllocationTypesController extends Controller
     public function update(AllocationTypeRequest $request, AllocationType $type)
     {
         $inputs = $request->only('name', 'status');
-        AllocationTypesService::update($type, $inputs);
-        UserHistoriesService::log($request->user(), 'update', $type, $request->getClientIp());
+        $type = AllocationTypeService::update($type, $inputs);
+        UserHistoryService::log($request->user(), 'update', $type, $request->getClientIp());
         return redirect()
-            ->route('admin.allocation-types.index')
+            ->route('admin.allocation-types.edit', $type->id)
             ->with('notice', trans('allocation-types.notices.updated', ['name' => $type->name]));
     }
 
     public function destroy(Request $request, AllocationType $type)
     {
-        AllocationTypesService::delete($type);
-        UserHistoriesService::log($request->user(), 'delete', $type, $request->getClientIp());
+        AllocationTypeService::delete($type);
+        UserHistoryService::log($request->user(), 'delete', $type, $request->getClientIp());
         return redirect()
             ->route('admin.allocation-types.index')
             ->with('notice', trans('allocation-types.notices.deleted', ['name' => $type->name]));
