@@ -2,7 +2,7 @@
 
 @section('header')
 <div class="page-title">
-	<h4>{{ trans('vendors.views.index.title') }}</h4>
+	<h4>{{ trans('vendors.title') }}</h4>
 </div>
 <div class="heading-elements">
 	<div class="heading-btn-group">

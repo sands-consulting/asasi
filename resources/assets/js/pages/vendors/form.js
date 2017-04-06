@@ -50,27 +50,16 @@ const vmVendor = new Vue({
         } else {
           this.submit = false;
         }
-
-        $(tab).find('.vue-select2').each(function(index, element) {
-          $(element).select2();
-        });
-      });
-
-      $('a[data-toggle="tab"]').on('hidden.bs.tab', function (e) {
-        tab = $(this).attr('href');
-        $(tab).find('.vue-select2').each(function(index, element) {
-          $(element).select2('destroy');
-        });
       });
 
       if(!this.admin) {
-        $('.list-vendor[role="tablist"] > li').each(function(index, element) {
+        $(this.$el).find('.list-vendor[role="tablist"] > li').each(function(index, element) {
           if(index > 0) {
             $(element).find('a').addClass('disabled');
           }
         });
 
-        $('.list-vendor[role="tablist"] a').click(function(event) {
+        $(this.$el).find('.list-vendor[role="tablist"] a').click(function(event) {
           if($(this).hasClass('disabled')) {
             event.stopPropagation();
           }

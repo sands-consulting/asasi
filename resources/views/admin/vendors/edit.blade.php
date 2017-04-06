@@ -3,9 +3,9 @@
 @section('header')
 <div class="page-title">
 	<h4>
-		{{ link_to_route('admin.vendors.index', trans('vendors.views.index.title')) }} /
+		{{ link_to_route('admin.vendors.index', trans('vendors.title')) }} /
 		{{ link_to_route('admin.vendors.show', $vendor->name, $vendor->id) }} /
-		<span class="text-semibold">{{ trans('vendors.views.edit.title') }}</span>
+		<span class="text-semibold">{{ trans('vendors.views.admin.edit.title') }}</span>
 	</h4>
 </div>
 <div class="heading-elements">
@@ -18,16 +18,7 @@
 @endsection
 
 @section('content')
-{!! Former::open_vertical(route('admin.vendors.update', $vendor->id))->method('PUT')->addClass('panel form-vendor')->novalidate() !!}
-	{{ Former::populate($vendor) }}
-    @include('admin.vendors._form')
-	<div class="panel-footer">
-		<div class="row">
-			<div class="col-xs-12 col-md-9 col-md-offset-3">
-				<a href="#" class="btn btn-default pull-right" v-if="!last_tab" v-on:click="next">{{ trans('actions.next') }}</a>
-				<input type="submit" name="save" class="btn bg-blue-700 pull-right" value="{{ trans('actions.save') }}">
-			</div>
-		</div>
-	</div>
+{!! Former::open_vertical_for_files(route('admin.vendors.update', $vendor->id))->addClass('row admin')->id('form-vendor')->method('PUT')->novalidate() !!}
+	@include('admin.vendors.form')
 {!! Former::close() !!}
 @endsection

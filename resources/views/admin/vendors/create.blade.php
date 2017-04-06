@@ -3,7 +3,7 @@
 @section('header')
 <div class="page-title">
 	<h4>
-		{{ link_to_route('admin.vendors.index', trans('vendors.views.index.admin.title')) }} /
+		{{ link_to_route('admin.vendors.index', trans('vendors.title')) }} /
 		<span class="text-semibold">{{ trans('vendors.views.create.admin.title') }}</span>
 	</h4>
 </div>

@@ -15,7 +15,7 @@
 		<div class="col-xs-12 col-md-6">
 			{!! Former::select('type_id')
 				->label('vendors.attributes.type_id')
-				->options(App\VendorType::active()->get()->pluck('label', 'id'))
+				->options(['' => ''] + App\VendorType::active()->get()->pluck('label', 'id')->toArray())
 				->required()
 				->addClass('vue-select2') !!}
 		</div>
@@ -33,7 +33,7 @@
 		<div class="col-xs-12 col-md-6">
 			{!! Former::select('capital_currency')
 				->label('vendors.attributes.capital_currency')
-				->options(['MYR' => 'Malaysian Ringgit'])
+				->options(['' => ''] + ['MYR' => 'Malaysian Ringgit'])
 				->required()
 				->addClass('vue-select2') !!}
 		</div>

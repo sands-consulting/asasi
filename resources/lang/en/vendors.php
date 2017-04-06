@@ -146,7 +146,7 @@ return [
                 'title' => 'Create New Vendor',
             ],
             'edit' => [
-                'title' => 'Edit Vendor',
+                'title' => 'Edit',
 
                 'application' => [
                     'title' => 'Company Application Form',
