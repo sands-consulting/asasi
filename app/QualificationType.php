@@ -15,6 +15,9 @@ class QualificationType extends Node
         'status',
         'parent_id',
         'type',
+        'validity',
+        'reference_one',
+        'reference_two',
         'code'
     ];
 

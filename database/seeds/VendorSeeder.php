@@ -2,10 +2,12 @@
 
 use App\FileType;
 use App\Role;
+use App\QualificationType;
 use App\User;
 use App\Vendor;
 use App\VendorType;
 use App\Services\FileTypeService;
+use App\Services\QualificationTypeService;
 use App\Services\UserService;
 use App\Services\VendorService;
 use App\Services\VendorTypeService;
@@ -21,8 +23,16 @@ class VendorSeeder extends Seeder
     public function run()
     {
         DB::table('user_vendor')->truncate();
-        DB::table('vendor_types')->truncate();
+        DB::table('vendor_accounts')->truncate();
+        DB::table('vendor_employees')->truncate();
+        DB::table('vendor_files')->truncate();
+        DB::table('vendor_qualification_codes')->truncate();
+        DB::table('vendor_qualifications')->truncate();
+        DB::table('vendor_shareholders')->truncate();
         DB::table('vendors')->truncate();
+        DB::table('vendor_types')->truncate();
+        DB::table('file_types')->truncate();
+        DB::table('qualification_types')->truncate();
 
         $vendor_types = [
             ['SSM',     'Sole Proprietorship'],
@@ -95,6 +105,73 @@ class VendorSeeder extends Seeder
         foreach($files as $file)
         {
             FileTypeService::create(new FileType, $file);
+        }
+
+        $code_types = [
+            [
+                'name' => 'Ministry of Finance',
+                'code' => 'MOF',
+                'reference_one' => 'Certificate No.',
+                'type' => 'list',
+                'validity' => true
+            ],
+            [
+                'name' => 'Ministry of Finance - Bumiputera',
+                'code' => 'MOF-BUMI',
+                'reference_one' => 'Certificate No.',
+                'type' => 'boolean',
+            ],
+            [
+                'name' => 'Construction Industry Development Board',
+                'code' => 'CIDB-G',
+                'reference_one' => 'Certificate No.',
+                'type' => 'list',
+                'validity' => true,
+                'children' => [
+                    [
+                        'name' => 'CIDB - Building',
+                        'code' => 'CIDB-B',
+                        'type' => 'list'
+                    ],
+                    [
+                        'name' => 'CIDB - Civil Engineering',
+                        'code' => 'CIDB-CE',
+                        'type' => 'list'
+                    ],
+                    [
+                        'name' => 'CIDB - Mechanical & Electrical',
+                        'code' => 'CIDB-ME',
+                        'type' => 'list'
+                    ]
+                ]
+            ],
+            [
+                'name' => 'Construction Industry Development Board - Bumiputera',
+                'code' => 'CIDB-BUMI',
+                'reference_one' => 'Certificate No.',
+                'type' => 'boolean',
+            ],
+        ];
+
+        foreach($code_types as $type)
+        {
+
+            if(isset($type['children']))
+            {
+                $child = $type['children'];
+                unset($type['children']);
+            }
+
+            $parent = QualificationTypeService::create(new QualificationType, $type);
+
+            if(isset($type['children']))
+            {
+                foreach($type['children'] as $child)
+                {
+                    $child['parent_id'] = $parent->id;
+                    QualificationTypeService::create(new QualificationType, $child);
+                }
+            }
         }
 
         $vendor = VendorService::create(new Vendor, [
