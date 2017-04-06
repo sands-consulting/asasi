@@ -7,7 +7,7 @@ const vmVendor = new Vue({
     submit: false,
     admin: true,
     vendor: {},
-    qualifications: [],
+    qualifications: {},
     shareholders: [],
     employees: [],
     accounts: [],
@@ -45,18 +45,6 @@ const vmVendor = new Vue({
     initialize: function() {
       this.admin = $(this.$el).hasClass('admin');
 
-      var _vm = this;
-      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        length = $(this).parents('ul').children().length;
-        iteration = $(this).parents('li').index() + 1;
-
-        if( iteration == length ) {
-          _vm.$data.submit = true;
-        } else {
-          _vm.$data.submit = false;
-        }
-      });
-
       if(!this.admin) {
         $(this.$el).find('.list-vendor[role="tablist"] > li').each(function(index, element) {
           if(index > 0) {
@@ -69,6 +57,21 @@ const vmVendor = new Vue({
             event.stopPropagation();
           }
         });
+      }
+
+      var _vm = this;
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        length = $(this).parents('ul').children().length;
+        iteration = $(this).parents('li').index() + 1;
+
+        if( iteration == length ) {
+          _vm.$data.submit = true;
+        } else {
+          _vm.$data.submit = false;
+        }
+      });
+
+      for (var i = window.qualifications.length - 1; i >= 0; i--) {
       }
     },
     next: function() {

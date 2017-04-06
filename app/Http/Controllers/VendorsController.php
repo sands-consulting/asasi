@@ -11,6 +11,7 @@ use App\Services\VendorService;
 use App\Vendor;
 use Auth;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class VendorsController extends Controller
 {
@@ -33,6 +34,9 @@ class VendorsController extends Controller
 
     public function edit(Vendor $vendor)
     {
+        JavaScript::put([
+            'qualifications' => \App\QualificationType::with('codes')->active()->get()
+        ]);
         return view('vendors.edit', ['vendor' => $vendor]);
     }
 

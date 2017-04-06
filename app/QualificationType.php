@@ -41,11 +41,9 @@ class QualificationType extends Node
     }
 
 
-    public function scopeActiveCodes($query)
+    public function scopeActive($query)
     {
-        return $query->whereHas('codes', function($codes) {
-            return $codes->whereStatus('active');
-        });
+        return $query->whereStatus('active');
     }
 
     public static function getOptions($column, $key = null, $seperator = ' ') {

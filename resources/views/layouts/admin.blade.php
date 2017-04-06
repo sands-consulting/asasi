@@ -103,6 +103,7 @@
     </div>
 </div>
 
+@include('layouts._javascript')
 <script src="{{ elixir('assets/js/admin.js') }}"></script>
 <script src="{{ env('APP_SOCKET_URL') }}/socket.io/socket.io.js"></script>
 @yield('scripts')

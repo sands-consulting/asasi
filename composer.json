@@ -31,7 +31,8 @@
         "predis/predis": "^1.1",
         "dhtmlx/connector-php": "dev-custom",
         "maatwebsite/excel": "^2.1",
-        "barryvdh/laravel-ide-helper": "^2.3"
+        "barryvdh/laravel-ide-helper": "^2.3",
+        "laracasts/utilities": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

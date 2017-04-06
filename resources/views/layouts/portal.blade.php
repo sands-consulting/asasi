@@ -53,6 +53,7 @@
 	{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}
 </div>
 
+@include('layouts._javascript')
 <script src="{{ elixir('assets/js/portal.js') }}"></script>
 <script src="{{ env('APP_SOCKET_URL') }}/socket.io/socket.io.js"></script>
 @yield('scripts')

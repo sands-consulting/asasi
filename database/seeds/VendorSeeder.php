@@ -113,13 +113,19 @@ class VendorSeeder extends Seeder
                 'code' => 'MOF',
                 'reference_one' => 'Certificate No.',
                 'type' => 'list',
-                'validity' => true
+                'validity' => true,
+                'codes' => [
+                    ['code' => '010101', 'name' => 'Penerbitan Dan Penyiaran \ Penerbitan \ Bahan Bacaan Terbitan Luar Negara'],
+                    ['code' => '010102', 'name' => 'Penerbitan Dan Penyiaran \ Penerbitan \ Bahan Bacaan'],
+                    ['code' => '010103', 'name' => 'Penerbitan Dan Penyiaran \ Penerbitan \ Penerbitan Elektronik Atas Talian'],
+                    ['code' => '010104', 'name' => 'Penerbitan Dan Penyiaran \ Penerbitan \ Bahan Penerbitan Elektronik Dan Muzik / Lagu'],
+                ]
             ],
             [
                 'name' => 'Ministry of Finance - Bumiputera',
                 'code' => 'MOF-BUMI',
                 'reference_one' => 'Certificate No.',
-                'type' => 'boolean',
+                'type' => 'boolean'
             ],
             [
                 'name' => 'Construction Industry Development Board',
@@ -127,21 +133,46 @@ class VendorSeeder extends Seeder
                 'reference_one' => 'Certificate No.',
                 'type' => 'list',
                 'validity' => true,
+                'codes' => [
+                    ['code' => 'G1', 'name' => 'Tidak melebihi RM200,000.00'],
+                    ['code' => 'G2', 'name' => 'Tidak melebihi RM500,000.00'],
+                    ['code' => 'G3', 'name' => 'Tidak melebihi RM1,000,000.00'],
+                    ['code' => 'G4', 'name' => 'Tidak melebihi RM3,000,000.00'],
+                    ['code' => 'G5', 'name' => 'Tidak melebihi RM5,000,000.00'],
+                    ['code' => 'G6', 'name' => 'Tidak melebihi RM10,000,000.00'],
+                    ['code' => 'G7', 'name' => 'Tiada had'],
+                ],
                 'children' => [
                     [
                         'name' => 'CIDB - Building',
                         'code' => 'CIDB-B',
-                        'type' => 'list'
+                        'type' => 'list',
+                        'codes' => [
+                            ['code' => 'B01', 'name' => 'IBS: Prefabricated concrete system'],
+                            ['code' => 'B02', 'name' => 'IBS: Steel frame system'],
+                            ['code' => 'B03', 'name' => 'Restoration and conversation'],
+                            ['code' => 'B04', 'name' => 'Construction works on buildings'],
+                        ]
                     ],
                     [
                         'name' => 'CIDB - Civil Engineering',
                         'code' => 'CIDB-CE',
-                        'type' => 'list'
+                        'type' => 'list',
+                        'codes' => [
+                            ['code' => 'CE01', 'name' => 'Road and pavement construction'],
+                            ['code' => 'CE02', 'name' => 'Bridge and jetty construction'],
+                        ]
                     ],
                     [
                         'name' => 'CIDB - Mechanical & Electrical',
                         'code' => 'CIDB-ME',
-                        'type' => 'list'
+                        'type' => 'list',
+                        'codes' => [
+                            ['code' => 'M01', 'name' => 'Air conditioning and circulation systems'],
+                            ['code' => 'M02', 'name' => 'Fire prevention and protection systems'],
+                            ['code' => 'E01', 'name' => 'Sound systems'],
+                            ['code' => 'E02', 'name' => 'Surveillance and security systems'],
+                        ]
                     ]
                 ]
             ],
@@ -149,28 +180,57 @@ class VendorSeeder extends Seeder
                 'name' => 'Construction Industry Development Board - Bumiputera',
                 'code' => 'CIDB-BUMI',
                 'reference_one' => 'Certificate No.',
-                'type' => 'boolean',
+                'type' => 'boolean'
             ],
         ];
 
         foreach($code_types as $type)
         {
-
             if(isset($type['children']))
             {
-                $child = $type['children'];
+                $children = $type['children'];
                 unset($type['children']);
+            }
+
+            if(isset($type['codes']))
+            {
+                $codes = $type['codes'];
+                unset($type['codes']);
             }
 
             $parent = QualificationTypeService::create(new QualificationType, $type);
 
-            if(isset($type['children']))
+            if(isset($codes))
             {
-                foreach($type['children'] as $child)
+                foreach($codes as $code)
                 {
-                    $child['parent_id'] = $parent->id;
-                    QualificationTypeService::create(new QualificationType, $child);
+                    $parent->codes()->create($code);
                 }
+                unset($codes);
+            }
+
+            if(isset($children))
+            {
+                foreach($children as $child)
+                {
+                    if(isset($child['codes']))
+                    {
+                        $codes = $child['codes'];
+                        unset($child['codes']);
+                    }
+
+                    $child['parent_id'] = $parent->id;
+                    $in = QualificationTypeService::create(new QualificationType, $child);
+
+                    if(isset($codes))
+                    {
+                        foreach($codes as $code)
+                        {
+                            $in->codes()->create($code);
+                        }
+                    }
+                }
+                unset($children);
             }
         }
 

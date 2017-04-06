@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Qualification Code Types',
+    'title' => 'Qualification Types',
 
     'attributes' => [
         'name' => 'Name',
@@ -9,7 +9,9 @@ return [
         'created_at' => 'Created At',
         'parent' => 'Parent Type',
         'code' => 'Code',
-        'type' => 'Type'
+        'type' => 'Type',
+        'start_at' => 'Valid From',
+        'end_at' => 'Valid Until',
     ],
 
     'buttons' => [

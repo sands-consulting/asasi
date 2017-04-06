@@ -8,6 +8,7 @@
 		<div class="tab-content">
 			@include('admin.vendors.form.details')
 			@include('admin.vendors.form.contact-person')
+			@include('admin.vendors.form.qualifications')
 			@include('admin.vendors.form.shareholders')
 			@include('admin.vendors.form.employees')
 			@include('admin.vendors.form.accounts')
