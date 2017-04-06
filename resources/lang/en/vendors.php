@@ -62,7 +62,7 @@ return [
         ],
 
         'files' => [
-            'name' => 'Name',
+            'type' => 'Type',
             'file' => 'File'
         ],
 
@@ -93,6 +93,7 @@ return [
         'add-account' => 'Add Account',
         'add-employee' => 'Add Employee',
         'add-shareholder' => 'Add Shareholder',
+        'add-file' => 'Add File',
     ],
 
     'menu' => [

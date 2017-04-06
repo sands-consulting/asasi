@@ -17,12 +17,17 @@ class PaymentGateway extends Model
         'name',
         'label',
         'type',
-        'prefix',
         'status'
     ];
 
     protected $attributes = [
         'status' => 'active',
+    ];
+
+    public static $types = [
+        'billplz',
+        'ebpg',
+        'fpx'
     ];
 
     public function logs()
@@ -40,13 +45,8 @@ class PaymentGateway extends Model
         return $this->morphMany(Setting::class, 'item');
     }
 
-    public static function getOptions($label='name')
+    public static function getOptions($label='label')
     {
         return static::pluck($label, 'id')->toArray();
-    }
-
-    public static function boot()
-    {
-        parent::boot();
     }
 }

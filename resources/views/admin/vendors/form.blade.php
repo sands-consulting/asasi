@@ -11,6 +11,7 @@
 			@include('admin.vendors.form.shareholders')
 			@include('admin.vendors.form.employees')
 			@include('admin.vendors.form.accounts')
+			@include('admin.vendors.form.files')
 		</div>
 		<div class="panel-footer">
 			<a href="#" class="btn btn-default pull-right" v-if="!submit" v-on:click="next">{{ trans('actions.next') }}</a>

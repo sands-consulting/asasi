@@ -16,14 +16,14 @@
 				<td><input type="text" name="'employees[' + index + '][name]'" class="form-control" v-model="employee.name"></td>
 				<td><input type="text" name="'employees[' + index + '][designation]'" class="form-control" v-model="employee.designation"></td>
 				<td>
-					<select name="'employees[' + index + '][role]'" class="form-control vue-select2" v-model="employee.role">
+					<select name="'employees[' + index + '][role]'" class="form-control" v-model="employee.role">
 						@foreach(trans('vendors.attributes.employees.roles') as $key => $value)
 						<option value="{{ $key }}">{{ $value }}</option>
 						@endforeach
 					</select>
 				</td>
 				<td>
-					<select name="'employees[' + index + '][nationality_id]'" class="form-control vue-select2" v-model="employee.nationality_id">
+					<select name="'employees[' + index + '][nationality_id]'" class="form-control" v-model="employee.nationality_id">
 						@foreach(App\Place::type('country')->active()->pluck('name', 'id') as $key => $value)
 						<option value="{{ $key }}">{{ $value }}</option>
 						@endforeach

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class VendorQualification extends Model
+class VendorQualificationCode extends Model
 {
     use RevisionableTrait,
         SoftDeletes;
@@ -15,16 +15,29 @@ class VendorQualification extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'reference_one',
-        'reference_two',
-        'start_at',
-        'end_at',
-        'type_id'
+        'code_id',
+        'type_id',
+        'parent_id'
     ];
+
+    public function code()
+    {
+        return $this->belongsTo(QualificationCode::class);
+    }
 
     public function type()
     {
         return $this->belongsTo(QualificationType::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
     }
 
     public function vendor()

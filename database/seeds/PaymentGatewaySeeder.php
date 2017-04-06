@@ -20,7 +20,19 @@ class PaymentGatewaySeeder extends Seeder
         DB::table('organization_payment_gateway')->truncate();
         DB::table('payment_gateways')->truncate();
 
-        $gateway = PaymentGatewayService::create(new PaymentGateway, ['name' => 'Default eBPG', 'label' => 'eBPG', 'type' => 'Ebpg']);
+        $gateway = PaymentGatewayService::create(new PaymentGateway, [
+            'name' => 'Prompt Owner',
+            'label' => 'BPZ',
+            'type' => 'billplz'
+        ]);
         $gateway->organizations()->attach(Organization::first());
+        $gateway->settings()->create([
+            'key' => 'api-key',
+            'value' => 'asdf1234'
+        ]);
+        $gateway->settings()->create([
+            'key' => 'collection-id',
+            'value' => 'cid1234'
+        ]);
     }
 }

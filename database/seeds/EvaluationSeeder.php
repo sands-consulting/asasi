@@ -57,8 +57,8 @@ class EvaluationSeeder extends Seeder
 
         // Evaluation Type Data
         $evaluationTypeData = [
-            ['name' => 'Commercials'],
-            ['name' => 'Technicals'],
+            ['name' => 'Commercials', 'notes' => 'Commercial evaluation.'],
+            ['name' => 'Technicals', 'notes' => 'Technical evaluation.'],
         ];
 
         foreach ($evaluationTypeData as $evaluationType) {

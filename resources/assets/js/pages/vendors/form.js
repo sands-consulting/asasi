@@ -33,6 +33,11 @@ const vmVendor = new Vue({
         name: '',
         identity_number: '',
         nationality_id: null
+      },
+      file: {
+        id: null,
+        type_id: null,
+        file: null
       }
     }
   },
@@ -40,15 +45,15 @@ const vmVendor = new Vue({
     initialize: function() {
       this.admin = $(this.$el).hasClass('admin');
 
+      var _vm = this;
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        tab = $(this).attr('href');
         length = $(this).parents('ul').children().length;
-        iteration = parseInt($(this).parents('li').index()) + 1;
+        iteration = $(this).parents('li').index() + 1;
 
         if( iteration == length ) {
-          this.submit = true;
+          _vm.$data.submit = true;
         } else {
-          this.submit = false;
+          _vm.$data.submit = false;
         }
       });
 
@@ -76,13 +81,16 @@ const vmVendor = new Vue({
       trigger.trigger('click');
     },
     addShareholder: function() {
-      this.shareholders.push(this.placeholders.shareholder);
+      this.shareholders.push(jQuery.extend(true, {}, this.placeholders.shareholder));
     },
     addEmployee: function() {
-      this.employees.push(this.placeholders.employee);
+      this.employees.push(jQuery.extend(true, {}, this.placeholders.employee));
     },
     addAccount: function() {
-      this.accounts.push(this.placeholders.account);
+      this.accounts.push(jQuery.extend(true, {}, this.placeholders.account));
+    },
+    addFile: function() {
+      this.files.push(jQuery.extend(true, {}, this.placeholders.files));
     },
     deleteShareholder: function(index) {
       this.shareholders.splice(index, 1);
@@ -92,6 +100,9 @@ const vmVendor = new Vue({
     },
     deleteAccount: function(index) {
       this.accounts.splice(index, 1);
+    },
+    deleteFile: function(index) {
+      this.files.splice(index, 1);
     }
   },
   mounted: function() {

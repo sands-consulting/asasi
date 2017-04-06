@@ -1,12 +1,11 @@
 <?php
 
-use App\Permission;
+use App\FileType;
 use App\Role;
 use App\User;
 use App\Vendor;
 use App\VendorType;
-use App\Services\PermissionService;
-use App\Services\RoleService;
+use App\Services\FileTypeService;
 use App\Services\UserService;
 use App\Services\VendorService;
 use App\Services\VendorTypeService;
@@ -48,6 +47,54 @@ class VendorSeeder extends Seeder
                 'incorporation_authority' => $type[0],
                 'incorporation_type' => $type[1]
             ]);
+        }
+
+        $files = [
+            [
+                'name' => 'ssm-form-9',
+                'display_name' => 'SSM Form 9',
+                'description' => 'SSM Form 9',
+            ],
+            [
+                'name' => 'ssm-form-d',
+                'display_name' => 'SSM Form D',
+                'description' => 'SSM Form D',
+            ],
+            [
+                'name' => 'mof-cert',
+                'display_name' => 'MOF Certificate',
+                'description' => 'MOF Certificate',
+            ],
+            [
+                'name' => 'mof-bumi-cert',
+                'display_name' => 'MOF Bumiputera Certificate',
+                'description' => 'MOF Bumiputera Certificate',
+            ],
+            [
+                'name' => 'cidb-cert',
+                'display_name' => 'CIDB Certificate',
+                'description' => 'CIDB Certificate',
+            ],
+            [
+                'name' => 'cidb-bumi-cert',
+                'display_name' => 'CIDB Bumiputera Certificate',
+                'description' => 'CIDB Bumiputera Certificate',
+            ],
+            [
+                'name' => 'local-license',
+                'display_name' => 'Local Authority License / Certificate',
+                'description' => 'Local Authority License / Certificate',
+            ],
+            [
+                'name' => 'professional-license',
+                'display_name' => 'Professional Body License / Certificate',
+                'description' => 'Professional Body License / Certificate',
+            ],
+        ];
+
+        foreach($files as $file)
+        {
+            FileTypeService::create(new FileType, $file);
         }
 
         $vendor = VendorService::create(new Vendor, [
