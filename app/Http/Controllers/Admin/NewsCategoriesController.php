@@ -7,8 +7,8 @@ use App\DataTables\NewsCategoriesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\NewsCategoryRequest;
-use App\Services\NewsCategoriesService;
-use App\Services\UserHistoriesService;
+use App\Services\NewsCategoryService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class NewsCategoriesController extends Controller
@@ -26,8 +26,8 @@ class NewsCategoriesController extends Controller
     public function store(NewsCategoryRequest $request)
     {
         $inputs     = $request->only('name', 'status');
-        $category   = NewsCategoriesService::create(new NewsCategory, $inputs);
-        UserHistoriesService::log($request->user(), 'create', $category, $request->getClientIp());
+        $category = NewsCategoryService::create(new NewsCategory, $inputs);
+        UserHistoryService::log($request->user(), 'create', $category, $request->getClientIp());
         return redirect()
             ->route('admin.news-categories.edit', $category->slug)
             ->with('notice', trans('news-categories.notices.created', ['name' => $category->name]));
@@ -41,8 +41,8 @@ class NewsCategoriesController extends Controller
     public function update(NewsCategoryRequest $request, NewsCategory $category)
     {
         $inputs = $request->only('name', 'status');
-        NewsCategoriesService::update($category, $inputs);
-        UserHistoriesService::log($request->user(), 'update', $category, $request->getClientIp());
+        NewsCategoryService::update($category, $inputs);
+        UserHistoryService::log($request->user(), 'update', $category, $request->getClientIp());
         return redirect()
             ->route('admin.news-categories.edit', $category->slug)
             ->with('notice', trans('news-categories.notices.updated', ['name' => $category->name]));
@@ -50,8 +50,8 @@ class NewsCategoriesController extends Controller
 
     public function destroy(Request $request, NewsCategory $category)
     {
-        NewsCategoriesService::delete($category);
-        UserHistoriesService::log($request->user(), 'delete', $category, $request->getClientIp());
+        NewsCategoryService::delete($category);
+        UserHistoryService::log($request->user(), 'delete', $category, $request->getClientIp());
         return redirect()
             ->route('admin.news-categories.index')
             ->with('notice', trans('news-categories.notices.deleted', ['name' => $category->name]));

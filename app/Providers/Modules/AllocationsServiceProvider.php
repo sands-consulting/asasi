@@ -2,8 +2,8 @@
 
 namespace App\Providers\Modules;
 
+use App\AllocationType;
 use Gate;
-use App\News;
 use Illuminate\Support\ServiceProvider;
 
 class AllocationsServiceProvider extends ServiceProvider
@@ -20,14 +20,17 @@ class AllocationsServiceProvider extends ServiceProvider
     public function register()
     {
         app('router')->group([
-            'namespace' => 'App\Http\Controllers',
+            'namespace'  => 'App\Http\Controllers',
             'middleware' => 'web'
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
+                'prefix'    => 'admin',
+                'as'        => 'admin.'
             ], function ($router) {
+                //Fixme: to fix model binding
+                $router->model('allocation_type', AllocationType::class);
+
                 $router->put('allocations/{allocation}/restore', 'AllocationsController@restore')
                     ->name('allocations.restore');
                 $router->get('allocations/{allocation}/revisions', 'AllocationsController@revisions')

@@ -67,7 +67,7 @@ class AllocationTypePolicy
      */
     public function update(User $auth, AllocationType $type)
     {
-        return $this->edit($type);
+        return $this->edit($auth, $type);
     }
 
     /**
