@@ -49,11 +49,9 @@ class VendorsController extends Controller
         else
         {
             return redirect()
-                ->route('vendors.show', $vendor->id)
+                ->route('vendors.eligibles', $vendor->id)
                 ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
         }
-
-
     }
 
     public function eligibles(VendorEligiblesDataTable $table, Vendor $vendor)
