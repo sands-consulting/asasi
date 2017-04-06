@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Notice;
+use App\DataTables\Portal\AwardsDataTable;
 use App\DataTables\Portal\NoticesDataTable;
+use App\DataTables\Portal\SubmissionsDataTable;
 use Illuminate\Http\Request;
 
 class NoticesController extends Controller
@@ -11,6 +13,16 @@ class NoticesController extends Controller
     public function index(Request $request, NoticesDataTable $table)
     {
         return $table->render('notices.index');
+    }
+
+    public function submissions(Request $request, SubmissionsDataTable $table)
+    {
+        return $table->render('notices.submissions');
+    }
+
+    public function awards(Request $request, AwardsDataTable $table)
+    {
+        return $table->render('notices.awards');
     }
 
     public function show(Notice $notice)

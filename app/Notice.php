@@ -97,14 +97,14 @@ class Notice extends Model
         return $query->where('status', 'published');
     }
 
-    public function scopeAwarded($query)
+    public function scopeSubmissionPublished($query)
     {
-        return $query->where('status', 'awarded');
+        return $query->where('status_submission', 'published');
     }
 
-    public function scopeLimited($query)
+    public function scopeAwarded($query)
     {
-        return $query->where('status', 'limited');
+        return $query->where('status_award', 'awarded');
     }
 
     /*
@@ -235,10 +235,6 @@ class Notice extends Model
         return static::where('status', 'published');
     }
 
-    public static function limited()
-    {
-        return static::where('status', 'limited');
-    }
 
     public function getSummary()
     {
