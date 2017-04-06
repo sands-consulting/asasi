@@ -27,15 +27,6 @@ class PackagePolicy
      * @param User $auth
      * @return bool
      */
-    public function show(User $auth)
-    {
-        return $auth->hasPermission('package:show');
-    }
-
-    /**
-     * @param User $auth
-     * @return bool
-     */
     public function create(User $auth)
     {
         return $auth->hasPermission('package:create');
@@ -67,7 +58,7 @@ class PackagePolicy
      */
     public function update(User $auth, Package $package)
     {
-        return $this->edit($package);
+        return $this->edit($auth, $package);
     }
 
     /**

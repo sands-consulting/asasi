@@ -2,6 +2,8 @@
 
 namespace App\Providers\Asasi;
 
+use App\Package;
+use App\Subscription;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,14 +22,15 @@ class SubscriptionsServiceProvider extends ServiceProvider
     public function register()
     {
         app('router')->group([
-            'namespace' => 'App\Http\Controllers',
+            'namespace'  => 'App\Http\Controllers',
             'middleware' => 'web'
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
+                'prefix'    => 'admin',
+                'as'        => 'admin.'
             ], function ($router) {
+                $router->model('subscription', Subscription::class);
                 $router->put('subscriptions/{subscription}/restore', 'SubscriptionsController@restore')
                     ->name('subscriptions.restore');
                 $router->get('subscriptions/{subscription}/revisions', 'SubscriptionsController@revisions')
@@ -47,6 +50,7 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 $router->resource('subscriptions', 'SubscriptionsController');
 
                 // Package
+                $router->model('package', Package::class);
                 $router->put('packages/{package}/restore', 'PackagesController@restore')
                     ->name('packages.restore');
                 $router->get('packages/{package}/revisions', 'PackagesController@revisions')

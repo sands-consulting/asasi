@@ -24,28 +24,30 @@ class PackageRequest extends FormRequest
     public function storeRules()
     {
         return [
-            'name' => 'required',
-            'validity_type' => 'required',
+            'name'              => 'required',
+            'label_color'       => 'required',
+            'validity_type'     => 'required',
             'validity_quantity' => 'required',
-            'meta' => '',
-            'fee_amount' => 'required',
-            'fee_tax_code' => 'required',
-            'fee_tax_rate' => 'required',
-            'status' => '',
+            'meta'              => '',
+            'fee_amount'        => 'required',
+            'fee_tax_code'      => 'required',
+            'fee_tax_rate'      => 'required',
+            'status'            => '',
         ];
     }
 
     public function updateRules()
     {
         return [
-            'name' => 'required',
-            'validity_type' => 'required',
+            'name'              => 'required',
+            'label_color'       => 'required',
+            'validity_type'     => 'required',
             'validity_quantity' => 'required',
-            'meta' => '',
-            'fee_amount' => 'required',
-            'fee_tax_code' => 'required',
-            'fee_tax_rate' => 'required',
-            'status' => '',
+            'meta'              => '',
+            'fee_amount'        => 'required',
+            'fee_tax_code'      => 'required',
+            'fee_tax_rate'      => 'required',
+            'status'            => '',
         ];
     }
 }
