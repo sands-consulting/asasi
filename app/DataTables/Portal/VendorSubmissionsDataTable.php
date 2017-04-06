@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Portal;
 
 use App\Libraries\Carbon;
 use App\NoticePurchase;

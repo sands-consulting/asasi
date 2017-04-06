@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\VendorSubmissionsDataTable;
+use App\DataTables\Portal\VendorSubmissionsDataTable;
 use App\EvaluationType;
 use App\Notice;
 use App\Submission;

@@ -3,30 +3,42 @@
 namespace App\DataTables\Portal;
 
 use App\Notice;
+use Auth;
 
-class EligiblesDataTable extends DataTable
+class NoticeSubmissionsDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function ($notice) {
-                return view('notices.index.actions', compact('notice'));
-            })
-            ->editColumn('name', function ($notice) {
+            ->editColumn('name', function($notice) {
                 return view('notices.index.name', compact('notice'));
+            })
+            ->editColumn('purchased_at', function($notice) {
+                return $notice->purchased_at->formatDateFromSetting();
+            })
+            ->editColumn('expired_at', function($notice) {
+                return $notice->expired_at->formatDateFromSetting();
+            })
+            ->editColumn('price', function($notice) {
+                return sprintf('%s %.2f', 'MYR', $notice->price);
+            })
+            ->editColumn('action', function($notice) {
+                return view('notices.index.actions', compact('notice'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Notice::published();
-        $query = $query->whereHas('eligibles', function($query) {
-            $query->where('vendor_id', $this->vendor_id);
-        });
+        $query = Notice::with('organization')->published()->submissionPublished();
+        
+        if (isset($this->type))
+        {
+            $query->where('notice_type_id', $this->type);
+        }
 
-        if ($this->datatables->request->input('q', null))
+        if($this->datatables->request->input('q', null))
         {
             $query->search($this->datatables->request->input('q', []));
         }
@@ -39,7 +51,7 @@ class EligiblesDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
+                    ->addAction(['width' => '20%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -75,14 +87,22 @@ class EligiblesDataTable extends DataTable
 
     protected function filename()
     {
-        return 'portal_eligibles_dt_' . time();
+        return 'notices_dt_' . time();
     }
 
     protected function getBuilderParameters()
     {
         $data = parent::getBuilderParameters();
-        $data['dom'] = '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>';
+        $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
+
         return $data;
+    }
+
+    public function forType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

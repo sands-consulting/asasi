@@ -3,40 +3,28 @@
 namespace App\DataTables\Portal;
 
 use App\Notice;
-use Auth;
 
-class SubmissionsDataTable extends DataTable
+class VendorInvitationsDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
+            ->addColumn('action', function($notice) {
+                return view('notices.index.actions', compact('notice'));
+            })
             ->editColumn('name', function($notice) {
                 return view('notices.index.name', compact('notice'));
-            })
-            ->editColumn('purchased_at', function($notice) {
-                return $notice->purchased_at->formatDateFromSetting();
-            })
-            ->editColumn('expired_at', function($notice) {
-                return $notice->expired_at->formatDateFromSetting();
-            })
-            ->editColumn('price', function($notice) {
-                return sprintf('%s %.2f', 'MYR', $notice->price);
-            })
-            ->editColumn('action', function($notice) {
-                return view('notices.index.actions', compact('notice'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Notice::with('organization')->published()->submissionPublished();
-        
-        if (isset($this->type))
-        {
-            $query->where('notice_type_id', $this->type);
-        }
+        $query = Notice::published();
+        $query = $query->whereHas('invitations', function($query) {
+            $query->where('vendor_id', $this->vendor_id);
+        });
 
         if($this->datatables->request->input('q', null))
         {
@@ -51,7 +39,7 @@ class SubmissionsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '20%', 'class' => 'text-center'])
+                    ->addAction(['width' => '5%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -87,7 +75,7 @@ class SubmissionsDataTable extends DataTable
 
     protected function filename()
     {
-        return 'notices_dt_' . time();
+        return 'portal_invitations_dt_' . time();
     }
 
     protected function getBuilderParameters()
@@ -95,14 +83,12 @@ class SubmissionsDataTable extends DataTable
         $data = parent::getBuilderParameters();
         $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
-
         return $data;
     }
 
-    public function forType($type)
+    public function forVendor($vendorId)
     {
-        $this->type = $type;
-
+        $this->vendor_id = $vendorId;
         return $this;
     }
 }

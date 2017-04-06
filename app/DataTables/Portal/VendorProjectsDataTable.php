@@ -4,7 +4,7 @@ namespace App\DataTables\Portal;
 
 use App\Project;
 
-class ProjectsDataTable extends DataTable
+class VendorProjectsDataTable extends DataTable
 {
     public function ajax()
     {

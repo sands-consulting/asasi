@@ -4,27 +4,36 @@ namespace App\DataTables\Portal;
 
 use App\Notice;
 
-class InvitationsDataTable extends DataTable
+class VendorPurchasesDataTable extends DataTable
 {
     public function ajax()
     {
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                return view('notices.index.actions', compact('notice'));
+                return view('dashboard._purchases_index_actions', compact('notice'));
             })
-            ->editColumn('name', function($notice) {
-                return view('notices.index.name', compact('notice'));
+            ->editColumn('notice_name', function($notice) {
+                return link_to_route('notices.show', $notice->notice_name, $notice->notice_id);
+            })
+            ->editColumn('status', function($notice) {
+                return view('notices._index_status', compact('notice'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Notice::published();
-        $query = $query->whereHas('invitations', function($query) {
-            $query->where('vendor_id', $this->vendor_id);
-        });
+        $query = Notice::whereHas('purchases', function($query) {
+                $query->where('vendor_id', $this->vendor_id);
+            })
+            ->select([
+                'notices.id as notice_id',
+                'notices.name as notice_name',
+                'notices.number as notice_number',
+                'notices.expired_at',
+                'notices.status'
+            ]);
 
         if($this->datatables->request->input('q', null))
         {
@@ -47,15 +56,15 @@ class InvitationsDataTable extends DataTable
     {
         return [
             [
-                'data' => 'name',
-                'name' => 'name',
+                'data' => 'notice_name',
+                'name' => 'notice_name',
                 'title' => trans('notices.attributes.name'),
-                'width' => '30%'
+                'width' => '40%'
             ],
             [
-                'data' => 'purchased_at',
-                'name' => 'purchased_at',
-                'title' => trans('notices.attributes.purchased_at'),
+                'data' => 'notice_number',
+                'name' => 'notice_number',
+                'title' => trans('notices.attributes.number'),
                 'width' => '15%'
             ],
             [
@@ -65,23 +74,23 @@ class InvitationsDataTable extends DataTable
                 'width' => '15%'
             ],
             [
-                'data' => 'price',
-                'name' => 'price',
-                'title' => trans('notices.attributes.price'),
-                'width' => '10%'
-            ]
+                'data' => 'status',
+                'name' => 'status',
+                'title' => trans('notices.attributes.status'),
+                'width' => '15%'
+            ],
         ];
     }
 
     protected function filename()
     {
-        return 'portal_invitations_dt_' . time();
+        return 'notices_dt_' . time();
     }
 
     protected function getBuilderParameters()
     {
         $data = parent::getBuilderParameters();
-        $data['dom'] = '<"datatable-header"lf><"datatable-scroll"t><"datatable-footer"ip>';
+        $data['dom'] = '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>';
         $data['autoWidth'] = false;
         return $data;
     }

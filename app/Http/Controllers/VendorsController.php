@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\Portal\EligiblesDataTable;
-use App\DataTables\Portal\InvitationsDataTable;
-use App\DataTables\Portal\PurchasesDataTable;
-use App\DataTables\SubmissionsDataTable;
+use App\DataTables\Portal\VendorEligiblesDataTable;
+use App\DataTables\Portal\VendorInvitationsDataTable;
+use App\DataTables\Portal\VendorPurchasesDataTable;
 use App\Events\VendorApplied;
 use App\Http\Requests\VendorRequest;
 use App\Services\VendorService;
@@ -57,19 +56,19 @@ class VendorsController extends Controller
 
     }
 
-    public function eligibles(EligiblesDataTable $table, Vendor $vendor)
+    public function eligibles(VendorEligiblesDataTable $table, Vendor $vendor)
     {
         $table->vendor_id = $vendor->id;
         return $table->render('vendors.eligibles', compact('vendor'));
     }
 
-    public function invitations(InvitationsDataTable $table, Vendor $vendor)
+    public function invitations(VendorInvitationsDataTable $table, Vendor $vendor)
     {
         $table->vendor_id = $vendor->id;
         return $table->render('vendors.invitations', compact('vendor'));
     }
 
-    public function purchases(PurchasesDataTable $table, Vendor $vendor)
+    public function purchases(VendorPurchasesDataTable $table, Vendor $vendor)
     {
         $table->vendor_id = $vendor->id;
         return $table->render('vendors.purchases', compact('vendor'));

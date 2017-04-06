@@ -44,6 +44,15 @@ class LoginController extends Controller
         return route('login');
     }
 
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->route('login')
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([
+                $this->username() => trans('auth.failed'),
+            ]);
+    }
+
     protected function authenticated(Request $request, $user)
     {
         if(!in_array($user->status, ['active', 'blacklisted']))
@@ -53,7 +62,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()
-                ->back()
+                ->route('login')
                 ->with('alert', trans('auth.notices.' . $user->status));
         }
 
