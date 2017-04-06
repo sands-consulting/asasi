@@ -30,10 +30,14 @@ class Notice extends Model
         'notice_category_id',
         'organization_id',
         'status',
+        'status_submission',
+        'status_award'
     ];
 
     protected $attributes = [
-        'status' => 'draft'
+        'status' => 'draft',
+        'status_submission' => 'pending',
+        'status_award' => 'pending'
     ];
 
     protected $searchable = [
