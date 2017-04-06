@@ -157,7 +157,7 @@ class VendorService extends BaseService
         
     }
 
-    public static function qualificationCodes(Vendor $vendor, $data)
+    public static function qualifications(Vendor $vendor, $data)
     {
         $types  = QualificationType::whereStatus('active')->get();
         $exists = [];
@@ -170,7 +170,7 @@ class VendorService extends BaseService
 
                 if(!empty($codeId))
                 {
-                    $code       = $vendor->qualificationCodes()->firstOrCreate([
+                    $code       = $vendor->qualifications()->firstOrCreate([
                         'type_id' => $type->id,
                         'code_id' => $codeId
                     ]);
@@ -184,7 +184,7 @@ class VendorService extends BaseService
 
                 foreach($codes as $id => $value)
                 {
-                    $code = $vendor->qualificationCodes()->firstOrCreate([
+                    $code = $vendor->qualifications()->firstOrCreate([
                         'type_id' => $type->id,
                         'code_id' => $id
                     ]);
@@ -197,7 +197,7 @@ class VendorService extends BaseService
                         {
                             $reference = QualificationCode::find($child);
                             if(empty($reference)) continue;
-                            $childCode = $vendor->qualificationCodes()->firstOrCreate([
+                            $childCode = $vendor->qualifications()->firstOrCreate([
                                 'type_id' => $reference->type_id,
                                 'code_id' => $reference->id,
                                 'parent_id' => $code->id
@@ -209,7 +209,7 @@ class VendorService extends BaseService
             }
         }
 
-        $vendor->qualificationCodes()->whereNotIn('id', $exists)->delete();
+        $vendor->qualifications()->whereNotIn('id', $exists)->delete();
     }
 
     public static function shareholders(Vendor $vendor, $shareholders)

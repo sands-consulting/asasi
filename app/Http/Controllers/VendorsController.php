@@ -14,13 +14,13 @@ use Illuminate\Http\Request;
 
 class VendorsController extends Controller
 {
+    public function __construct()
+    {
+
+    }
+
     public function show(Vendor $vendor)
     {
-        if(in_array($vendor->status, ['draft', 'pending', 'rejected']))
-        {
-            return redirect()->route('vendors.eligibles', $vendor->id);
-        }
-
         return view('vendors.show', compact('vendor'));
     }
 
@@ -40,7 +40,7 @@ class VendorsController extends Controller
         $vendor = VendorService::update($vendor, $inputs, ['status' => 'draft']);
         VendorService::accounts($vendor, $request->input('accounts', []));
         VendorService::employees($vendor, $request->input('employees', []));
-        VendorService::qualificationCodes($vendor, $request->input('qualification_codes', []));
+        VendorService::qualifications($vendor, $request->input('qualifications', []));
         VendorService::shareholders($vendor, $request->input('shareholders', []));
 
         if (isset($inputs['submit']))

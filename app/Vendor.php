@@ -158,9 +158,9 @@ class Vendor extends Model
         return $this->hasMany(VendorShareholder::class);
     }
 
-    public function qualificationCodes()
+    public function qualifications()
     {
-        return $this->hasMany(VendorQualificationCode::class);
+        return $this->hasMany(VendorQualification::class);
     }
 
     public function transactions()
