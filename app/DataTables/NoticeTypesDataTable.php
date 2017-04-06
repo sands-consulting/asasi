@@ -13,9 +13,6 @@ class NoticeTypesDataTable extends DataTable
             ->addColumn('action', function($noticeType) {
                 return view('admin.notice-types._index_actions', compact('noticeType'));
             })
-            ->editColumn('name', function($noticeType) {
-                return link_to_route('admin.notice-types.show', $noticeType->name, $noticeType->id);
-            })
             ->editColumn('status', function($noticeType) {
                 return view('admin.notice-types._index_status', compact('noticeType'));
             })

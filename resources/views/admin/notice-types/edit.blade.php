@@ -9,8 +9,8 @@
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
-        @can('notice-type:delete')
-            <a href="{{ route('admin.notice-types.destroy', $category->slug) }}" data-method="DELETE"
+        @can('destroy', $noticeType)
+            <a href="{{ route('admin.notice-types.destroy', $noticeType->id) }}" data-method="DELETE"
                class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
                 <i class="icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
             </a>

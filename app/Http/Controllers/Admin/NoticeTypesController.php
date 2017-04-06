@@ -6,7 +6,8 @@ use App\NoticeType;
 use App\DataTables\NoticeTypesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\NoticeTypeRequest;
-use App\Services\NoticeTypesService;
+use App\Services\NoticeTypeService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class NoticeTypesController extends Controller
@@ -25,15 +26,11 @@ class NoticeTypesController extends Controller
     {
         $inputs = $request->only('name');
 
-        $noticeType  = NoticeTypesService::create(new NoticeType, $inputs);
+        $noticeType = NoticeTypeService::create(new NoticeType, $inputs);
+        UserHistoryService::log($request->user(), 'create', $noticeType, $request->getClientIp());
         return redirect()
-            ->route('admin.notice-types.show', $noticeType->id)
+            ->route('admin.notice-types.edit', $noticeType->id)
             ->with('notice', trans('notice-types.notices.created', ['name' => $noticeType->name]));
-    }
-
-    public function show(NoticeType $noticeType)
-    {
-        return view('admin.notice-types.show', compact('noticeType'));
     }
 
     public function edit(NoticeType $noticeType)
@@ -46,16 +43,18 @@ class NoticeTypesController extends Controller
         $inputs = $request->only(
             'name'
         );
-        
-        $noticeType  = NoticeTypesService::update($noticeType, $inputs);
+
+        $noticeType = NoticeTypeService::update($noticeType, $inputs);
+        UserHistoryService::log($request->user(), 'update', $noticeType, $request->getClientIp());
         return redirect()
-            ->route('admin.notice-types.show', $noticeType->id)
+            ->route('admin.notice-types.edit', $noticeType->id)
             ->with('notice', trans('notice-types.notices.updated', ['name' => $noticeType->name]));
     }
 
-    public function destroy(NoticeType $noticeType)
+    public function destroy(Request $request, NoticeType $noticeType)
     {
-        NoticeTypesService::delete($noticeType);
+        NoticeTypeService::delete($noticeType);
+        UserHistoryService::log($request->user(), 'delete', $noticeType, $request->getClientIp());
         return redirect()
             ->route('admin.notice-types.index')
             ->with('notice', trans('notice-types.notices.deleted', ['name' => $noticeType->name]));
@@ -75,17 +74,19 @@ class NoticeTypesController extends Controller
 
     public function activate(Request $request, NoticeType $noticeType)
     {
-        NoticeTypesService::activate($noticeType);
+        NoticeTypeService::activate($noticeType);
+        UserHistoryService::log($request->user(), 'activate', $noticeType, $request->getClientIp());
         return redirect()
-            ->to($request->input('redirect_to', route('admin.notice-types.show', $noticeType->id)))
+            ->to($request->input('redirect_to', route('admin.notice-types.edit', $noticeType->id)))
             ->with('notice', trans('notice-types.notices.activated', ['name' => $noticeType->name]));
     }
 
     public function deactivate(Request $request, NoticeType $noticeType)
     {
-        NoticeTypesService::deactivate($noticeType);
+        NoticeTypeService::deactivate($noticeType);
+        UserHistoryService::log($request->user(), 'deactivate', $noticeType, $request->getClientIp());
         return redirect()
-            ->to($request->input('redirect_to', route('admin.notice-types.show', $noticeType->id)))
+            ->to($request->input('redirect_to', route('admin.notice-types.edit', $noticeType->id)))
             ->with('notice', trans('notice-types.notices.deactivated', ['name' => $noticeType->name]));
     }
 }
