@@ -61,7 +61,7 @@ class VendorSeeder extends Seeder
             'contact_email' => 'support@my-sands.com',
             'contact_website' => 'www.sands.consulting',
             'contact_person_name' => 'Amin Adha',
-            'contact_person_designation' => 'Mr',
+            'contact_person_title' => 'mr',
             'contact_person_telephone' => '+60123456788',
             'contact_person_email' => 'amin@my-sands.com',
             'capital_currency' => 'MYR',

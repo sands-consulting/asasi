@@ -1,6 +1,7 @@
 @extends('layouts.portal')
 
 @section('content')
+@include('layouts.portal.widgets.wizard')
 @include('layouts.portal.aheads.vendor')
 
 <div class="panel panel-notice">

@@ -45,8 +45,8 @@ elixir(function(mix) {
         'vendor/pnotify.js',
         'vendor/nicescroll.js',
         'vendor/jquery-news-box/jquery.bootstrap.newsbox.js',
+        'pages/vendors/form.js',
         'notification.js',
-        'vendor.js',
         'portal.js',
     ], 'public/assets/js/portal.js')
 
@@ -82,8 +82,8 @@ elixir(function(mix) {
         'vendor/form_select2.js',
         'vendor/picker_date.js',
         'vendor/stepy.js',
+        'pages/vendors/form.js',
         'notification.js',
-        'vendor.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
 

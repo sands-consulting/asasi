@@ -6,6 +6,12 @@
     </li>
 
     <li role="presentation">
+        <a href="#tab-vendor-contact-person" aria-controls="tab-vendor-contact-person" role="tab" data-toggle="tab" class="list-group-item">
+            <i class="icon-user-tie"></i> {{ trans('vendors.menu.contact-person') }}
+        </a>
+    </li>
+
+    <li role="presentation">
         <a href="#tab-vendor-qualifications" aria-controls="tab-vendor-qualifications" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-folder-check"></i> {{ trans('vendors.menu.qualifications') }}
         </a>
@@ -33,48 +39,4 @@
             <i class="icon-stack"></i> {{ trans('vendors.menu.files') }}
         </a>
     </li>
-
-
-    @if(Auth::check() && is_path('admin*') && !Auth::user()->hasPermission('access:vendor'))
-
-
-    <li class="list-group-divider"></li>
-
-
-    <li role="presentation">    
-        <a href="#tab-vendor-users" aria-controls="tab-vendor-users" role="tab" data-toggle="tab" class="list-group-item">
-            <i class="icon-basket"></i> {{ trans('vendors.menu.users') }}
-        </a>
-    </li>
-
-    <li role="presentation">    
-        <a href="#tab-vendor-subscriptions" aria-controls="tab-vendor-subscriptions" role="tab" data-toggle="tab" class="list-group-item">
-            <i class="icon-file-presentation"></i> {{ trans('vendors.menu.subscriptions') }}
-        </a>
-    </li>
-
-
-    <li class="list-group-divider"></li>
-
-
-    <li role="presentation">
-        <a href="#tab-vendor-eligibles" aria-controls="tab-vendor-eligibles" role="tab" data-toggle="tab" class="list-group-item">
-            <i class="icon-clipboard2"></i> {{ trans('vendors.menu.eligibles') }}
-        </a>
-    </li>
-
-    <li role="presentation">
-        <a href="#tab-vendor-invitations" aria-controls="tab-vendor-sinvitations" role="tab" data-toggle="tab" class="list-group-item">
-            <i class="icon-list-numbered"></i> {{ trans('vendors.menu.invitations') }}
-        </a>
-    </li>
-
-    <li role="presentation">
-        <a href="#tab-vendor-purchases" aria-controls="tab-vendor-purchases" role="tab" data-toggle="tab" class="list-group-item">
-            <i class="icon-cash4"></i> {{ trans('vendors.menu.purchases') }}
-        </a>
-    </li>
-
-
-    @endif
 </ul>

@@ -1,26 +1,30 @@
 @extends('layouts.portal')
 
 @section('content')
-	{!! Former::open_vertical_for_files(route('vendors.update', $vendor->id))
-		->method('PUT')
-		->addClass('panel form-vendor')
-		->novalidate() !!}
-		{{ Former::populate($vendor) }}
-        <div class="panel-heading">
-            <h4 class="panel-title">{{ trans($vendor->status == 'pending' ? 'vendors.views.edit.application.title' : 'vendors.views.edit.details.title') }}</h4>
-            @if($vendor->status == 'pending')<p class="text-muted">{{ trans('vendors.views.edit.application.description') }}</p>@endif
-        </div>
-        @include('admin.vendors._form')
-		<div class="panel-footer">
-			<div class="row">
-				<div class="col-xs-12 col-md-9 col-md-offset-3">
-					<a href="{{ route('contact') }}" class="btn btn-danger">{{ trans('actions.cancel') }}</a>
+@include('layouts.portal.widgets.wizard')
 
-					<a href="#" class="btn btn-default pull-right" v-if="!last_tab" v-on:click="next">{{ trans('actions.next') }}</a>
-					<input name="submit" type="submit" class="btn bg-success pull-right" value="{{ trans('vendors.views._form.submit_application') }}" v-show="last_tab">
-					<input type="submit" name="save" class="btn bg-blue-700 pull-right" value="{{ trans('actions.save') }}">
-				</div>
+{!! Former::open_vertical_for_files(route('vendors.update', $vendor->id))->addClass('row vendor')->id('form-vendor')->method('PUT')->novalidate() !!}
+	{{ Former::populate($vendor) }}
+	<div class="col-xs-12 col-md-3">
+        @include('admin.vendors.form.menu')
+        <a href="{{ route('vendors.eligibles', Auth::user()->vendor->id) }}" class="btn btn-danger btn-block mt-10">{{ trans('actions.cancel') }}</a>
+	</div>
+
+	<div class="col-xs-12 col-md-9">
+		<div class="panel panel-flat">
+			<div class="tab-content">
+				@include('admin.vendors.form.details')
+				@include('admin.vendors.form.contact-person')
+				@include('admin.vendors.form.shareholders')
+				@include('admin.vendors.form.employees')
+				@include('admin.vendors.form.accounts')
+			</div>
+			<div class="panel-footer">
+				<a href="#" class="btn btn-default pull-right" v-if="!submit" v-on:click="next">{{ trans('actions.next') }}</a>
+				<input name="submit" type="submit" class="btn bg-success pull-right" value="{{ trans('vendors.views._form.submit_application') }}" v-show="submit">
+				<input type="submit" name="save" class="btn bg-blue-700 pull-right" value="{{ trans('actions.save') }}">
 			</div>
 		</div>
-    {!! Former::close() !!}
+	</div>
+{!! Former::close() !!}
 @endsection

@@ -69,13 +69,17 @@ class UsersServiceProvider extends ServiceProvider
                 ->name('me.resume');
             $router->get('me/bookmarks', 'MeController@bookmarks')
                 ->name('me.bookmarks');
+
+            $router->resource('users', 'UsersController', [
+                'except' => 'destroy']);
         });
 
         // API Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers\Api',
             'prefix' => 'api',
-            'middleware' => 'api'
+            'middleware' => 'api',
+            'as' => 'api.'
         ], function ($router) {
             $router->resource('users', 'UsersController', [
                 'only' => 'index']);

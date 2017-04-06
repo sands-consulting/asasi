@@ -43,8 +43,6 @@
 @yield('ahead')
 @endif
 
-@include('layouts.portal.widgets.wizard')
-
 <div class="page-container">
 	<div class="page-content">
     	@yield('content')

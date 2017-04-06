@@ -22,7 +22,7 @@ class Vendor extends Model
         'contact_fax',
         'contact_email',
         'contact_website',
-        'contact_person_designation',
+        'contact_person_title',
         'contact_person_name',
         'contact_person_telephone',
         'contact_person_email',

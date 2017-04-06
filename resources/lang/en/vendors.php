@@ -20,7 +20,7 @@ return [
         'contact_email' => 'Contact Email',
         'contact_website' => 'Website',
         'contact_telephone' => 'Telephone Number',
-        'contact_person_designation' => 'Designation',
+        'contact_person_title' => 'Title',
         'contact_person_name' => 'Contact Person Name',
         'contact_person_telephone' => 'Contact Person Telephone',
         'contact_person_email' => 'Contact Person Email',

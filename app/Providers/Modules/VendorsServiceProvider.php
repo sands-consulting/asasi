@@ -69,8 +69,6 @@ class VendorsServiceProvider extends ServiceProvider
 
             $router->resource('vendors', 'VendorsController', [
                 'except' => ['index', 'destroy']]);
-            $router->resource('vendors.users', 'VendorUsersController', [
-                'except' => 'destroy']);
         });
     }
 }
