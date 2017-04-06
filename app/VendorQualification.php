@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class VendorQualificationv extends Model
+class VendorQualification extends Model
 {
     use RevisionableTrait,
         SoftDeletes;

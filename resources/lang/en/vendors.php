@@ -45,14 +45,14 @@ return [
             'account_name' => 'Account Name',
             'account_number' => 'Account Number',
             'bank_name' => 'Bank Name',
-            'bank_iban' => 'Bank IBAN',
-            'bank_address' => 'Bank Address'
+            'bank_iban' => 'Bank IBAN'
         ],
 
         'employees' => [
             'name' => 'Name',
             'designation' => 'Designation',
             'role' => 'Role',
+            'nationality' => 'Nationality',
 
             'roles' => [
                 'management' => 'Management',
@@ -70,6 +70,7 @@ return [
             'name' => 'Name',
             'identity_number' => 'Identity Number',
             'nationality' => 'Nationality',
+            'percentage' => 'Percentage'
         ]
     ],
 

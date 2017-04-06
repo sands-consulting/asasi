@@ -6,28 +6,30 @@
 				<th>{{ trans('vendors.attributes.shareholders.name') }}</th>
 				<th>{{ trans('vendors.attributes.shareholders.identity_number') }}</th>
 				<th>{{ trans('vendors.attributes.shareholders.nationality') }}</th>
+				<th>{{ trans('vendors.attributes.shareholders.percentage') }}</th>
 				<th width="40">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for="shareholder in shareholders">
-				<td>@{{ $index + 1}}</td>
-				<td><input type="text" name="shareholders[@{{ $index }}][name]" class="form-control" v-model="shareholder.name"></td>
-				<td><input type="text" name="shareholders[@{{ $index }}][identity_number]" class="form-control" v-model="shareholder.identity_number"></td>
+			<tr v-for="(shareholder, index) in shareholders">
+				<td>@{{ index + 1}}</td>
+				<td><input type="text" name="'shareholders[' + index + '][name]'" class="form-control" v-model="shareholder.name"></td>
+				<td><input type="text" name="'shareholders[' + index + '][identity_number]'" class="form-control" v-model="shareholder.identity_number"></td>
 				<td>
-					<select name="shareholders[@{{ $index }}][nationality_id]" class="form-control select2" v-model="shareholder.nationality_id">
+					<select name="'shareholders[' + index + '][nationality_id]'" class="form-control vue-select2" v-model="shareholder.nationality_id">
 						@foreach(App\Place::type('country')->active()->pluck('name', 'id') as $key => $value)
 						<option value="{{ $key }}">{{ $value }}</option>
 						@endforeach
 					</select>
 				</td>
+				<td><input type="text" name="'shareholders[' + index + '][percentage]'" class="form-control" v-model="shareholder.percentage"></td>
 				<td>
-					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteItem(shareholders, $index)"><i class="icon-cross2"></i></a>
-					<input type="hidden" name="shareholders[@{{ $index }}][id]" class="form-control" v-model="shareholder.id">
+					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteShareholder(index)"><i class="icon-cross2"></i></a>
+					<input type="hidden" name="'shareholders[' + index + '][id]'" class="form-control" v-model="shareholder.id">
 				</td>
 			</tr>
 			<tr>
-				<td colspan="5" align="center"><a href="#" @click.prevent="addShareholder"><i class="icon-plus-circle2"></i> {{ trans('vendors.buttons.add-shareholder') }}</a></td>
+				<td colspan="6" align="center"><a href="#" @click.prevent="addShareholder"><i class="icon-plus-circle2"></i> {{ trans('vendors.buttons.add-shareholder') }}</a></td>
 			</tr>
 		</tbody>
 	</table>

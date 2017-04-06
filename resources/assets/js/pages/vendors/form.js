@@ -85,6 +85,24 @@ const vmVendor = new Vue({
       }
 
       trigger.trigger('click');
+    },
+    addShareholder: function() {
+      this.shareholders.push(this.placeholders.shareholder);
+    },
+    addEmployee: function() {
+      this.employees.push(this.placeholders.employee);
+    },
+    addAccount: function() {
+      this.accounts.push(this.placeholders.account);
+    },
+    deleteShareholder: function(index) {
+      this.shareholders.splice(index, 1);
+    },
+    deleteEmployee: function(index) {
+      this.employees.splice(index, 1);
+    },
+    deleteAccount: function(index) {
+      this.accounts.splice(index, 1);
     }
   },
   mounted: function() {

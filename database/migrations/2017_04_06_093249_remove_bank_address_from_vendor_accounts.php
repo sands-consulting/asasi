@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVendorFileTypes extends Migration
+class RemoveBankAddressFromVendorAccounts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class CreateVendorFileTypes extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('vendor_accounts', function (Blueprint $table) {
+            $table->dropColumn('bank_address');
+        });
     }
 
     /**
@@ -23,6 +25,8 @@ class CreateVendorFileTypes extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('vendor_accounts', function (Blueprint $table) {
+            $table->text('bank_address')->after('bank_iban');
+        });
     }
 }
