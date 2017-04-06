@@ -13,9 +13,6 @@ class PlacesDataTable extends DataTable
             ->addColumn('action', function($place) {
                 return view('admin.places._index_actions', compact('place'));
             })
-            ->editColumn('name', function($place) {
-                return link_to_route('admin.places.show', $place->name, $place->id);
-            })
             ->editColumn('status', function($place) {
                 return view('admin.places._index_status', compact('place'));
             })

@@ -18,9 +18,13 @@
 	->options(\App\Place::getNestedList('name', 'id', '-'), null)
 	->placeholder(trans('places.views.form.select_parent'))
 	->addClass('select2') !!}
+{!! Former::select('status')
+	->label('places.attributes.status')
+	->options(['' => 'Select Status', 'active' => 'Active', 'inactive' => 'Inactive'])
+	->required() !!}
 <div class="form-group">
 	<div class="col-lg-10 col-sm-8 col-lg-offset-2 col-sm-offset-4">
 		{!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
-		{!! link_to_route('admin.places.show', trans('actions.cancel'), $place->id, ['class' => 'btn btn-default']) !!}
+		{!! link_to_route('admin.places.index', trans('actions.cancel'), null, ['class' => 'btn btn-default']) !!}
 	</div>
 </div>

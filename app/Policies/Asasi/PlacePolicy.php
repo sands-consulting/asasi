@@ -67,7 +67,7 @@ class PlacePolicy
      */
     public function update(User $auth, Place $place)
     {
-        return $this->edit($place);
+        return $this->edit($auth, $place);
     }
 
     /**
