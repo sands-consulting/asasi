@@ -67,7 +67,7 @@ class QualificationTypePolicy
      */
     public function update(User $auth, QualificationType $type)
     {
-        return $this->edit($type);
+        return $this->edit($auth, $type);
     }
 
     /**
