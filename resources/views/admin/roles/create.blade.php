@@ -24,7 +24,7 @@
 @section('content')
 <div class="panel panel-flat">
 	<div class="panel-body">
-		{!! Former::vertical_open(route('admin.roles.index'))->method('POST') !!}
+        {!! Former::vertical_open(route('admin.roles.store'))->method('POST') !!}
 			{!! Former::populate($role) !!}
 			@include('admin.roles.form')
 		{!! Former::close() !!}

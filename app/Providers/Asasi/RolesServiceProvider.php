@@ -17,7 +17,7 @@ class RolesServiceProvider extends ServiceProvider
     {
         Gate::policy('App\Role', 'App\Policies\Asasi\RolePolicy');
 
-        app('policy')->register('App\Http\Controllers\Admin\RolesController', 'App\Policies\RolePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\RolesController', 'App\Policies\Asasi\RolePolicy');
     }
 
     /**
