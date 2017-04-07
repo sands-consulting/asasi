@@ -12,18 +12,16 @@ class AllocationNoticeDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->editColumn('name', function($notice) {
-                return link_to_route('admin.notices.show', $notice->name, $notice->id);
+                return link_to_route('admin.allocations.show', $notice->name, $notice->id);
             })
             ->editColumn('status', function($notice) {
-                return view('admin.notices._index_status', compact('notice'));
+                return view('admin.allocations._show_status', compact('notice'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        
-
         switch ($this->datatables->request->input('filter', null)) {
             case 'allocated':
                 $query = Project::query();
@@ -69,9 +67,10 @@ class AllocationNoticeDataTable extends DataTable
                 'title' => trans('notices.attributes.name')
             ],
             [
-                'data' => 'number',
-                'name' => 'number',
-                'title' => trans('notices.attributes.number')
+                'data'    => 'number',
+                'name'    => 'number',
+                'title'   => trans('notices.attributes.number'),
+                'visible' => false,
             ],
             [
                 'data' => 'status',
