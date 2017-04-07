@@ -83,12 +83,19 @@ const vmVendor = new Vue({
         depth = window.qualifications[i].depth;
         code = window.qualifications[i].code;
 
-        if(type == 'list' && depth == 0) {
+        if(depth == 0) {
           newType = {};
           newType[code] = {
             id: id,
-            codes: []
+            start_at: null,
+            end_at: null,
+            reference_one: null,
+            reference_two: null
           };
+
+          if(type == 'list') {
+            newType[code]['codes'] = [];
+          }
           this.qualifications = Object.assign({}, this.qualifications, newType);
         }
       }
