@@ -35,7 +35,13 @@ class VendorsController extends Controller
     public function edit(Vendor $vendor)
     {
         JavaScript::put([
-            'qualifications' => \App\QualificationType::with('codes')->active()->get()
+            'qualifications' => \App\QualificationType::with('codes')->active()->get(),
+            'vendor' => [
+                'accounts' => $vendor->accounts,
+                'employees' => $vendor->employees,
+                'qualifications' => $vendor->qualifications()->with('codes')->get(),
+                'shareholders' => $vendor->shareholders,
+            ]
         ]);
         return view('vendors.edit', ['vendor' => $vendor]);
     }
@@ -43,25 +49,26 @@ class VendorsController extends Controller
     public function update(VendorRequest $request, Vendor $vendor)
     {
         $inputs = $request->all();
-        $vendor = VendorService::update($vendor, $inputs, ['status' => 'draft']);
+        $status = isset($inputs['submit']) ? 'pending' : 'draft';
+        
+        VendorService::update($vendor, $inputs, ['status' => $status]);
+        VendorService::address($vendor, $request->input('address', []));
         VendorService::accounts($vendor, $request->input('accounts', []));
         VendorService::employees($vendor, $request->input('employees', []));
         VendorService::qualifications($vendor, $request->input('qualifications', []));
         VendorService::shareholders($vendor, $request->input('shareholders', []));
 
-        if (isset($inputs['submit']))
+        if ('pending' == $status)
         {
-            $vendor = VendorService::update($vendor, $inputs, ['status' => 'pending']);
             event(new VendorApplied($vendor));
-
             return redirect()
                 ->route('vendors.pending', $vendor->id);
         }
         else
         {
             return redirect()
-                ->route('vendors.eligibles', $vendor->id)
-                ->with('notice', trans('vendors.notices.public.saved', ['name' => $vendor->name]));
+                ->back()
+                ->with('notice', trans('vendors.notices.saved', ['name' => $vendor->name]));
         }
     }
 

@@ -17,7 +17,8 @@ class VendorEmployee extends Model
     protected $fillable = [
     	'name',
     	'designation',
-    	'role'
+    	'role',
+        'nationality_id'
     ];
 
     public static $roles = [

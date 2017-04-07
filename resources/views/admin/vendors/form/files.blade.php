@@ -12,16 +12,16 @@
 			<tr v-for="(file, index) in files">
 				<td>@{{ index + 1}}</td>
 				<td>
-					<select bind:name="'files[' + index + '][type_id]'" class="form-control" v-model="file.type_id">
+					<select v-bind:bind:name="'files[' + index + '][type_id]'" class="form-control" v-model="file.type_id">
 						@foreach(App\FileType::getOptions() as $key => $value)
 						<option value="{{ $key }}">{{ $value }}</option>
 						@endforeach
 					</select>
 				</td>
-				<td><input type="file" name="'files[' + index '][file]'" class="form-control" v-on:change="file.file"></td>
+				<td><input type="file" v-bind:name="'files[' + index + '][file]'" class="form-control" v-on:change="file.file"></td>
 				<td>
 					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteFile(index)"><i class="icon-cross2"></i></a>
-					<input type="hidden" name="'files[' + index '][id]'" class="form-control" v-model="file.id">
+					<input type="hidden" v-bind:name="'files[' + index + '][id]'" class="form-control" v-model="file.id">
 				</td>
 			</tr>
 			<tr>

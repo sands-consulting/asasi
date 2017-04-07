@@ -18,24 +18,6 @@ use Sands\Asasi\Service\Exceptions\ServiceException;
 
 class VendorService extends BaseService 
 {
-    public static function create(Model $model, $data, $params = [])
-    {
-        if(isset($data['address']))
-        {
-            $address = $data['address'];
-            unset($data['address']);
-        }
-
-        $model = parent::create($model, $data, $params);
-        
-        if(isset($address))
-        {
-            $model->address()->save(new Address($address));
-        }
-
-        return $model;
-    }
-
     public static function activate(Vendor $vendor)
     {
         if($vendor->status == 'active')
@@ -47,7 +29,7 @@ class VendorService extends BaseService
         $vendor->save();
     }
 
-    public static function deactivate(Vendor $vendor)
+    public static function suspend(Vendor $vendor)
     {
         if($vendor->status == 'suspended')
         {
@@ -56,6 +38,18 @@ class VendorService extends BaseService
 
         $vendor->status = 'inactive';
         $vendor->save();
+    }
+
+    public static function address(Vendor $vendor, $inputs)
+    {
+        if($vendor->address)
+        {
+            $vendor->address()->update($inputs);
+        }
+        else
+        {
+            $vendor->address()->save(new Address($inputs));
+        }
     }
 
     public static function subscribe(Vendor $vendor, Package $package)

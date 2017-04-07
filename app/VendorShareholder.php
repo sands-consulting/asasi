@@ -18,7 +18,8 @@ class VendorShareholder extends Model
     	'name',
     	'identity_number',
         'designation',
-    	'nationality_id'
+    	'nationality_id',
+        'percentage'
     ];
 
     public function vendor()

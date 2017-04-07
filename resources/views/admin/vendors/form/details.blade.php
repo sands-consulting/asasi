@@ -34,37 +34,34 @@
 			{!! Former::select('capital_currency')
 				->label('vendors.attributes.capital_currency')
 				->options(['' => ''] + ['MYR' => 'Malaysian Ringgit'])
-				->required()
 				->addClass('vue-select2') !!}
 		</div>
 		<div class="col-xs-12 col-md-3">
 			{!! Former::text('capital_authorized')
-				->label('vendors.attributes.capital_authorized')
-				->required() !!}
+				->label('vendors.attributes.capital_authorized') !!}
 		</div>
 		<div class="col-xs-12 col-md-3">
 			{!! Former::text('capital_paid_up')
-				->label('vendors.attributes.capital_paid_up')
-				->required() !!}
+				->label('vendors.attributes.capital_paid_up') !!}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-xs-12 col-md-6 address">
-			{!! Former::text('address_1')
+			{!! Former::text('address[line_one]')
 				->label('vendors.attributes.address')
 				->placeholder('vendors.attributes.address_1') !!}
-			{!! Former::text('address_2')
+			{!! Former::text('address[line_two]')
 				->label(null)
 				->placeholder('vendors.attributes.address_2') !!}
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
-					{!! Former::text('address_postcode')
+					{!! Former::text('address[postcode]')
 						->label(null)
 						->placeholder('vendors.attributes.address_postcode') !!}
 				</div>
 				<div class="col-xs-12 col-md-8">
-					{!! Former::select('address_city_id')
+					{!! Former::select('address[city_id]')
 						->label(null)
 						->placeholder('vendors.attributes.address_city_id')
 						->options(App\Place::type('city')->active()->pluck('name', 'id'))
@@ -73,14 +70,14 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					{!! Former::select('address_state_id')
+					{!! Former::select('address[state_id]')
 						->label(null)
 						->placeholder('vendors.attributes.address_state_id')
 						->options(App\Place::type('state')->active()->pluck('name', 'id'))
 						->addClass('vue-select2') !!}
 				</div>
 				<div class="col-xs-12 col-md-6">
-					{!! Former::select('address_country_id')
+					{!! Former::select('address[country_id]')
 						->label(null)
 						->placeholder('vendors.attributes.address_country_id')
 						->options(App\Place::type('country')->active()->pluck('name', 'id'))
@@ -99,8 +96,7 @@
 
 				<div class="col-xs-12 col-md-6">
 					{!! Former::text('contact_fax')
-						->label('vendors.attributes.contact_fax')
-						->required() !!}
+						->label('vendors.attributes.contact_fax') !!}
 				</div>
 			</div>
 
@@ -108,8 +104,7 @@
 				->label('vendors.attributes.contact_email')
 				->required() !!}
 			{!! Former::text('contact_website')
-				->label('vendors.attributes.contact_website')
-				->required() !!}
+				->label('vendors.attributes.contact_website') !!}
 		</div>
 	</div>
 </div>

@@ -11,32 +11,32 @@
 		@if($type->reference_one)
 		<tr>
 			<th class="col-xs-3">{{ $type->reference_one }}</th>
-			<td><input type="text" class="form-control"></td>
+			<td><input type="text" class="form-control" name"qualifications[{{ $type->id }}]['reference_one']" v-model="qualifications.{{ $type->code }}.reference_one"></td>
 		</tr>
 		@endif
 
 		@if($type->reference_two)
 		<tr>
 			<th class="col-xs-3">{{ $type->reference_two }}</th>
-			<td><input type="text" class="form-control"></td>
+			<td><input type="text" class="form-control" name"qualifications[{{ $type->id }}]['reference_two']" v-model="qualifications.{{ $type->code }}.reference_two"></td>
 		</tr>
 		@endif
 
 		@if($type->validity)
 		<tr>
 			<th class="col-xs-3">{{ trans('qualification-types.attributes.start_at') }}</th>
-			<td><input type="text" class="form-control"></td>
+			<td><input type="text" class="form-control" name"qualifications[{{ $type->id }}]['start_at']" v-model="qualifications.{{ $type->code }}.start_at"></td>
 		</tr>
 		<tr>
 			<th class="col-xs-3">{{ trans('qualification-types.attributes.end_at') }}</th>
-			<td><input type="text" class="form-control"></td>
+			<td><input type="text" class="form-control" name"qualifications[{{ $type->id }}]['end_at']" v-model="qualifications.{{ $type->code }}.end_at"></td>
 		</tr>
 		@endif
 		@if($type->type == 'list')
 		<tr>
 			<th>{{ trans('qualification-types.attributes.codes') }}</th>
 			<td class="qualification-codes">
-				<template v-for="(code, index1) in qualifications.{{ $type->code }}">
+				<template v-for="(code, index1) in qualifications.{{ $type->code }}.codes">
 				<div class="input-group">
 					<select v-bind:name="'qualifications[{{ $type->id }}][' + index1 + '][code_id]'" class="form-control" v-model="code.code_id">
 						<option value=""></option>
@@ -63,7 +63,7 @@
 						</span>
 					</div>
 					</template>
-					<a href="#" class="btn btn-xs bg-blue-700 btn-add" @click.prevent="addChildCode('{{ $type->code }}', index1)">{{ trans('actions.add') }}</a>
+					<a href="#" class="btn btn-xs bg-blue-700 btn-add" @click.prevent="addChildCode('{{ $type->code }}', index1)">{{ trans('actions.add-child') }}</a>
 				</div>
 				@endif
 				</template>

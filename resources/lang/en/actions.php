@@ -4,6 +4,7 @@ return [
 	'activate' => 'Activate',
 	'archive' => 'Archive',
 	'add' => 'Add',
+	'add-child' => 'Add Child',
 	'assign' => 'Assign',
 	'evaluate' => 'Evaluate',
 	'back' => 'Back',
