@@ -2,70 +2,70 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\NewsCategory;
-use App\DataTables\NewsCategoriesDataTable;
+use App\DataTables\VendorTypesDataTable;
+use App\VendorType;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
-use App\Http\Requests\NewsCategoryRequest;
-use App\Services\NewsCategoriesService;
-use App\Services\UserHistoriesService;
+use App\Http\Requests\VendorTypeRequest;
+use App\Services\VendorTypeService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class VendorTypesController extends Controller
 {
-    public function index(Request $request, NewsCategoriesDataTable $table)
+    public function index(Request $request, VendorTypesDataTable $table)
     {
-        return $table->render('admin.news-categories.index');
+        return $table->render('admin.vendor-types.index');
     }
 
     public function create(Request $request)
     {
-        return view('admin.news-categories.create', ['category' => new NewsCategory]);
+        return view('admin.vendor-types.create', ['type' => new VendorType]);
     }
 
-    public function store(NewsCategoryRequest $request)
+    public function store(VendorTypeRequest $request)
     {
-        $inputs     = $request->only('name', 'status');
-        $category   = NewsCategoriesService::create(new NewsCategory, $inputs);
-        UserHistoriesService::log($request->user(), 'create', $category, $request->getClientIp());
+        $inputs = $request->only('incorporation_authority', 'incorporation_type', 'status');
+        $type = VendorTypeService::create(new VendorType, $inputs);
+        UserHistoryService::log($request->user(), 'create', $type, $request->getClientIp());
         return redirect()
-            ->route('admin.news-categories.edit', $category->slug)
-            ->with('notice', trans('news-categories.notices.created', ['name' => $category->name]));
+            ->route('admin.vendor-types.edit', $type->id)
+            ->with('notice', trans('vendor-types.notices.created', ['name' => $type->incorporation_authority]));
     }
 
-    public function edit(NewsCategory $category)
+    public function edit(VendorType $type)
     {
-        return view('admin.news-categories.edit', compact('category'));
+        return view('admin.vendor-types.edit', compact('type'));
     }
 
-    public function update(NewsCategoryRequest $request, NewsCategory $category)
+    public function update(VendorTypeRequest $request, VendorType $type)
     {
-        $inputs = $request->only('name', 'status');
-        NewsCategoriesService::update($category, $inputs);
-        UserHistoriesService::log($request->user(), 'update', $category, $request->getClientIp());
+        $inputs = $request->only('incorporation_authority', 'incorporation_type', 'status');
+        VendorTypeService::update($type, $inputs);
+        UserHistoryService::log($request->user(), 'update', $type, $request->getClientIp());
         return redirect()
-            ->route('admin.news-categories.edit', $category->slug)
-            ->with('notice', trans('news-categories.notices.updated', ['name' => $category->name]));
+            ->route('admin.vendor-types.edit', $type->id)
+            ->with('notice', trans('vendor-types.notices.updated', ['name' => $type->incorporation_authority]));
     }
 
-    public function destroy(Request $request, NewsCategory $category)
+    public function destroy(Request $request, VendorType $type)
     {
-        NewsCategoriesService::delete($category);
-        UserHistoriesService::log($request->user(), 'delete', $category, $request->getClientIp());
+        VendorTypeService::delete($type);
+        UserHistoryService::log($request->user(), 'delete', $type, $request->getClientIp());
         return redirect()
-            ->route('admin.news-categories.index')
-            ->with('notice', trans('news-categories.notices.deleted', ['name' => $category->name]));
+            ->route('admin.vendor-types.index')
+            ->with('notice', trans('vendor-types.notices.deleted', ['name' => $type->incorporation_authority]));
     }
 
-    public function histories(NewsCategory $category, UserHistoriesDataTable $table)
+    public function histories(VendorType $type, UserHistoriesDataTable $table)
     {
-        $table->setActionable($category);
-        return $table->render('admin.news-categories.histories', compact('category'));
+        $table->setActionable($type);
+        return $table->render('admin.vendor-types.histories', compact('type'));
     }
 
-    public function revisions(NewsCategory $category, RevisionsDataTable $table)
+    public function revisions(VendorType $type, RevisionsDataTable $table)
     {
-        $table->setRevisionable($category);
-        return $table->render('admin.news-categories.revisions', compact('category'));
+        $table->setRevisionable($type);
+        return $table->render('admin.vendor-types.revisions', compact('type'));
     }
 }
