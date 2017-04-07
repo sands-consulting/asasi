@@ -12,7 +12,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6 p-20">
-                    <h5>Why Regitering with Us</h5>
+                    <h5>Why Registering with Us</h5>
                     <p class="text-justify">
                         Welcome to Procurement Management for Tender & Project System (PROMPT).
                         By joining PROMPT you will receive priority information before it’s released to the public
