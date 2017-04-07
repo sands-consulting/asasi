@@ -5,6 +5,7 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
+    "axios": "^0.16.0",
     "bootstrap-less": "^3.3.5",
     "c3": "^0.4.11",
     "ckeditor": "^4.6.2",
@@ -25,6 +26,7 @@
     "laravel-elixir": "^6.0.0-15",
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.10",
+    "legitRipple.js": "git+https://github.com/matthias-vogt/legitRipple.js.git#gh-pages",
     "lodash": "^4.16.2",
     "moment": "^2.17.1",
     "pace-progress": "^1.0.2",
@@ -32,12 +34,10 @@
     "select2": "^4.0.3",
     "socket.io": "^1.5.1",
     "switchery": "0.0.2",
-    "vue": "^2.0.1",
+    "vue": "^2.2.6",
     "vue-resource": "^1.0.3",
     "x-editable": "^1.5.1"
   },
   "dependencies": {
-    "axios": "^0.16.0",
-    "legitRipple.js": "git+https://github.com/matthias-vogt/legitRipple.js.git#gh-pages"
   }
 }

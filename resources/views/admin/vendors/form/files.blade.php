@@ -18,7 +18,7 @@
 						@endforeach
 					</select>
 				</td>
-				<td><input type="file" name="'files[' + index '][file]'" class="form-control" v-model="file.file"></td>
+				<td><input type="file" name="'files[' + index '][file]'" class="form-control" v-on:change="file.file"></td>
 				<td>
 					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteFile(index)"><i class="icon-cross2"></i></a>
 					<input type="hidden" name="'files[' + index '][id]'" class="form-control" v-model="file.id">

@@ -38,6 +38,11 @@ const vmVendor = new Vue({
         id: null,
         type_id: null,
         file: null
+      },
+      code: {
+        id: null,
+        code_id: null,
+        children: []
       }
     }
   },
@@ -72,6 +77,15 @@ const vmVendor = new Vue({
       });
 
       for (var i = window.qualifications.length - 1; i >= 0; i--) {
+        type = window.qualifications[i].type;
+        depth = window.qualifications[i].depth;
+        code = window.qualifications[i].code;
+
+        if(type == 'list' && depth == 0) {
+          newType = {};
+          newType[code] = [];
+          this.qualifications = Object.assign({}, this.qualifications, newType);
+        }
       }
     },
     next: function() {
@@ -93,7 +107,13 @@ const vmVendor = new Vue({
       this.accounts.push(jQuery.extend(true, {}, this.placeholders.account));
     },
     addFile: function() {
-      this.files.push(jQuery.extend(true, {}, this.placeholders.files));
+      this.files.push(jQuery.extend(true, {}, this.placeholders.code));
+    },
+    addCode: function(code) {
+      this.qualifications[code].push(jQuery.extend(true, {}, this.placeholders.code));
+    },
+    addChildCode: function(code, index) {
+      this.qualifications[code][index]['children'].push(jQuery.extend(true, {}, this.placeholders.code));
     },
     deleteShareholder: function(index) {
       this.shareholders.splice(index, 1);
@@ -106,6 +126,12 @@ const vmVendor = new Vue({
     },
     deleteFile: function(index) {
       this.files.splice(index, 1);
+    },
+    deleteCode: function(code, index) {
+      this.qualifications[code].splice(index, 1);
+    },
+    deleteChildCode: function(code, index, childIndex) {
+      this.qualifications[code][index]['children'].splice(childIndex, 1);
     }
   },
   mounted: function() {

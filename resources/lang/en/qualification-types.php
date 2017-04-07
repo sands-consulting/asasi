@@ -12,6 +12,7 @@ return [
         'type' => 'Type',
         'start_at' => 'Valid From',
         'end_at' => 'Valid Until',
+        'codes' => 'Codes',
     ],
 
     'buttons' => [

@@ -36,7 +36,7 @@ class QualificationCode extends Model
         return $this->morphMany(UserHistory::class, 'actionable');
     }
 
-    public function getFullNameAttribute()
+    public function getLabelAttribute()
     {
         return sprintf('%s - %s', $this->code, $this->name);
     }
@@ -59,5 +59,10 @@ class QualificationCode extends Model
             }
             $query->where("{$this->getTable()}.{$key}", $value);
         }
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus('active');
     }
 }
