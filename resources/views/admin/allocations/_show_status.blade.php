@@ -7,7 +7,5 @@
 @else
                             <span class="label label-default">
 @endif
-
                                 {{ trans('statuses.' . $notice->status) }}
-
 </span>
