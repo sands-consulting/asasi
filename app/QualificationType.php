@@ -62,6 +62,6 @@ class QualificationType extends Node
             }, $nodes)
         );
 
-        return ['' => ''] + $options;
+        return ['' => 'No Parent Type'] + $options;
   }
 }

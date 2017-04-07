@@ -13,9 +13,6 @@ class PackagesDataTable extends DataTable
             ->addColumn('action', function($package) {
                 return view('admin.packages._index_actions', compact('package'));
             })
-            ->editColumn('name', function($package) {
-                return link_to_route('admin.packages.show', $package->name, $package->id);
-            })
             ->editColumn('status', function($package) {
                 return view('admin.packages._index_status', compact('package'));
             })

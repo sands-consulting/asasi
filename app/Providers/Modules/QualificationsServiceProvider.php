@@ -2,6 +2,7 @@
 
 namespace App\Providers\Modules;
 
+use App\QualificationType;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,13 +20,13 @@ class QualificationsServiceProvider extends ServiceProvider
     public function register()
     {
         app('router')->group([
-            'namespace' => 'App\Http\Controllers',
+            'namespace'  => 'App\Http\Controllers',
             'middleware' => 'web'
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
+                'prefix'    => 'admin',
+                'as'        => 'admin.'
             ], function ($router) {
                 $router->put('qualification-codes/{qualification_code}/restore', 'QualificationCodesControllers@restore')
                     ->name('qualification-codes.restore');
@@ -38,7 +39,8 @@ class QualificationsServiceProvider extends ServiceProvider
                 $router->put('qualification-codes/{qualification_code}/duplicate', 'QualificationCodesControllers@duplicate')
                     ->name('qualification-codes.duplicate');
                 $router->resource('qualification-codes', 'QualificationCodesController');
-
+                // Qualification Types
+                $router->model('qualification_type', QualificationType::class);
                 $router->put('qualification-types/{qualification_type}/restore', 'QualificationTypesControllers@restore')
                     ->name('qualification-types.restore');
                 $router->get('qualification-types/{qualification_type}/revisions', 'QualificationTypesControllers@revisions')

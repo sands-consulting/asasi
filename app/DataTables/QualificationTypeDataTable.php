@@ -10,23 +10,22 @@ class QualificationTypeDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', function($type) {
-                return view('admin.qualification-code-types._index_actions', compact('type'));
+            ->addColumn('action', function ($type) {
+                return view('admin.qualification-types._index_actions', compact('type'));
             })
-            ->editColumn('name', function($type) {
+            ->editColumn('name', function ($type) {
                 $names = [];
 
-                foreach($type->getAncestorsAndSelf() as $type)
-                {
+                foreach ($type->getAncestorsAndSelf() as $type) {
                     $names[] = $type->name;
                 }
 
-                return implode(' > ' , $names);
+                return implode(' > ', $names);
             })
-            ->editColumn('status', function($type) {
-                return view('admin.qualification-code-types._index_status', compact('type'));
+            ->editColumn('status', function ($type) {
+                return view('admin.qualification-types._index_status', compact('type'));
             })
-            ->editColumn('created_at', function($type) {
+            ->editColumn('created_at', function ($type) {
                 return $type->created_at->format('d/m/Y H:i:s');
             })
             ->make(true);
@@ -36,8 +35,7 @@ class QualificationTypeDataTable extends DataTable
     {
         $query = QualificationType::query();
 
-        if($this->datatables->request->input('q', null))
-        {
+        if ($this->datatables->request->input('q', null)) {
             $query->search($this->datatables->request->input('q', []));
         }
 
@@ -47,10 +45,10 @@ class QualificationTypeDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
-                    ->ajax('')
-                    ->addAction(['width' => '80', 'class' => 'text-center'])
-                    ->parameters($this->getBuilderParameters());
+            ->columns($this->getColumns())
+            ->ajax('')
+            ->addAction(['width' => '80', 'class' => 'text-center'])
+            ->parameters($this->getBuilderParameters());
     }
 
     protected function getColumns()
@@ -58,24 +56,24 @@ class QualificationTypeDataTable extends DataTable
         return [
             [
                 'data'  => 'name',
-                'name'  => 'qualification_code_types.name',
-                'title' => trans('qualification-code-types.attributes.name'),
+                'name'  => 'qualification_types.name',
+                'title' => trans('qualification-types.attributes.name'),
             ],
             [
                 'data'  => 'status',
-                'name'  => 'qualification_code_types.status',
-                'title' => trans('qualification-code-types.attributes.status'),
+                'name'  => 'qualification_types.status',
+                'title' => trans('qualification-types.attributes.status'),
             ],
             [
                 'data'  => 'created_at',
-                'name'  => 'qualification_code_types.created_at',
-                'title' => trans('qualification-code-types.attributes.created_at')
-            ]
+                'name'  => 'qualification_types.created_at',
+                'title' => trans('qualification-types.attributes.created_at'),
+            ],
         ];
     }
 
     protected function filename()
     {
-        return 'qualification_code_types_dt_' . time();
+        return 'qualification_types_dt_' . time();
     }
 }

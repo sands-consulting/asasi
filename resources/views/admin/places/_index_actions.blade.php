@@ -4,21 +4,15 @@
 			<i class="icon-menu9"></i>
 		</a>
 		<ul class="dropdown-menu dropdown-menu-right">
-			@if(Auth::user()->hasPermission('place:show'))
-			<li><a href="{{ route('admin.places.show', $place->id) }}">{{ trans('actions.view') }}</a></li>
-			@endif
-
-			@if(Auth::user()->hasPermission('place:update'))
+			@can('update', $place)
 			<li><a href="{{ route('admin.places.edit', $place->id) }}">{{ trans('actions.edit') }}</a></li>
-			@endif
+			@endcan
 
-			@if($place->canActivate() && Auth::user()->hasPermission('place:activate'))
-			<li><a href="{{ route('admin.places.activate', [$place->id, 'redirect_to' => route('admin.places.index')]) }}" data-method="PUT">{{ trans('actions.activate') }}</a></li>
-			@endif
-
-			@if($place->canDeactivate() && Auth::user()->hasPermission('place:deactivate'))
-			<li><a href="{{ route('admin.places.deactivate', [$place->id, 'redirect_to' => route('admin.places.index')]) }}" data-method="PUT">{{ trans('actions.deactivate') }}</a></li>
-			@endif
+			@can('destroy', $place)
+				<li>
+					<a href="{{ route('admin.places.destroy', [$place->id, 'redirect_to' => route('admin.places.index')]) }}"
+					   data-method="DELETE">{{ trans('actions.delete') }}</a></li>
+			@endcan
 		</ul>
 	</li>
 </ul>

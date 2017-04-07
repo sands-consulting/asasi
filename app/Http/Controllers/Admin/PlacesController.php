@@ -6,7 +6,7 @@ use App\Place;
 use App\DataTables\PlacesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\Http\Requests\PlaceRequest;
-use App\Services\PlacesService;
+use App\Services\PlaceService;
 use Illuminate\Http\Request;
 
 class PlacesController extends Controller
@@ -23,16 +23,11 @@ class PlacesController extends Controller
 
     public function store(PlaceRequest $request)
     {
-        $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id');
-        $place  = PlacesService::create(new Place, $inputs);
+        $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id', 'status');
+        $place = PlaceService::create(new Place, $inputs);
         return redirect()
-            ->route('admin.places.show', $place->id)
+            ->route('admin.places.edit', $place->id)
             ->with('notice', trans('places.notices.created', ['name' => $place->name]));
-    }
-
-    public function show(Place $place)
-    {
-        return view('admin.places.show', compact('place'));
     }
 
     public function edit(Place $place)
@@ -42,16 +37,16 @@ class PlacesController extends Controller
 
     public function update(PlaceRequest $request, Place $place)
     {
-        $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id');
-        $place  = PlacesService::update($place, $inputs);
+        $inputs = $request->only('name', 'code_2', 'code_3', 'type', 'parent_id', 'status');
+        $place = PlaceService::update($place, $inputs);
         return redirect()
-            ->route('admin.places.show', $place->id)
+            ->route('admin.places.edit', $place->id)
             ->with('notice', trans('places.notices.updated', ['name' => $place->name]));
     }
 
     public function destroy(Place $place)
     {
-        PlacesService::delete($place);
+        PlaceService::delete($place);
         return redirect()
             ->route('admin.places.index')
             ->with('notice', trans('places.notices.deleted', ['name' => $place->name]));
@@ -67,21 +62,5 @@ class PlacesController extends Controller
     {
         $table->setRevisionable($place);
         return $table->render('admin.places.revisions', compact('place'));
-    }
-
-    public function activate(Request $request, Place $place)
-    {
-        PlacesService::activate($place);
-        return redirect()
-            ->to($request->input('redirect_to', route('admin.places.show', $place->id)))
-            ->with('notice', trans('places.notices.activated', ['name' => $place->name]));
-    }
-
-    public function deactivate(Request $request, Place $place)
-    {
-        PlacesService::deactivate($place);
-        return redirect()
-            ->to($request->input('redirect_to', route('admin.places.show', $place->id)))
-            ->with('notice', trans('places.notices.deactivated', ['name' => $place->name]));
     }
 }

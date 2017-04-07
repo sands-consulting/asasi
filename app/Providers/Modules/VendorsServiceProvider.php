@@ -2,6 +2,7 @@
 
 namespace App\Providers\Modules;
 
+use App\VendorType;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,7 @@ class VendorsServiceProvider extends ServiceProvider
 
         app('policy')->register('App\Http\Controllers\Admin\VendorsController', 'App\Policies\VendorPolicy');
         app('policy')->register('App\Http\Controllers\VendorsController', 'App\Policies\VendorPolicy');
-        app('policy')->register('App\Http\Controllers\VendorTypesController', 'App\Policies\VendorTypePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\VendorTypesController', 'App\Policies\VendorTypePolicy');
     }
 
     public function register()
@@ -40,10 +41,11 @@ class VendorsServiceProvider extends ServiceProvider
                     ->name('vendors.activate');
                 $router->put('vendors/{vendor}/suspend', 'VendorsController@suspend')
                     ->name('vendors.suspend');
-                
+
                 $router->resource('vendors', 'VendorsController');
 
                 // Vendor Type
+                $router->model('vendor_type', VendorType::class);
                 $router->put('vendor-types{vendor_type}/restore', 'VendorTypesController@restore')
                     ->name('vendor-types.restore');
                 $router->get('vendor-types{vendor_type}/revisions', 'VendorTypesController@revisions')
@@ -59,7 +61,7 @@ class VendorsServiceProvider extends ServiceProvider
 
             $router->get('vendors/{vendor}/pending', 'VendorsController@pending')
                 ->name('vendors.pending');
-            
+
             $router->get('vendors/{vendor}/eligibles', 'VendorsController@eligibles')
                 ->name('vendors.eligibles');
             $router->get('vendors/{vendor}/invitations', 'VendorsController@invitations')

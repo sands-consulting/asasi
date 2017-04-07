@@ -27,6 +27,10 @@ return [
         'deleted' => 'Qualification Type :name deleted'
     ],
 
+    'placeholders' => [
+        'parent' => 'Select parent code if applicable',
+    ],
+
     'types' => [
         'list' => 'List',
         'boolean' => 'Boolean'

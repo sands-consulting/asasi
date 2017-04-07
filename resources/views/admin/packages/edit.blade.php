@@ -9,6 +9,12 @@
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
+        @can('destroy', $package)
+            <a href="{{ route('admin.packages.destroy', $package->id) }}"
+               class="btn btn-link btn-float text-size-small has-text legitRipple text-danger" data-method="DELETE">
+                <i class=" icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
+            </a>
+        @endcan
         <a href="{{ route('admin.packages.index') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
             <i class=" icon-undo2"></i> <span>{{ trans('actions.back') }}</span>
         </a>
@@ -22,7 +28,7 @@
         <h5 class="panel-title">{{ $package->name }}</h5>
     </div>
     <div class="panel-body">
-        {!! Former::open_vertical(route('admin.packages.show', $package->id))->method('PUT') !!}
+        {!! Former::open_vertical(route('admin.packages.update', $package->id))->method('PUT') !!}
             {!! Former::populate($package) !!}
             @include('admin.packages.form')
             <div class="row">

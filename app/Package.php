@@ -17,6 +17,8 @@ class Package extends Model
 
     protected $fillable = [
         'name',
+        'description',
+        'label_color',
         'validity_type',
         'validity_quantity',
         'meta',

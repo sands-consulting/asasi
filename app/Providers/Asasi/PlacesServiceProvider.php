@@ -17,7 +17,7 @@ class PlacesServiceProvider extends ServiceProvider
     {
         Gate::policy('App\Place', 'App\Policies\Asasi\PlacePolicy');
 
-        app('policy')->register('App\Http\Controllers\Admin\PlacesController', 'App\Policies\PlacePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\PlacesController', 'App\Policies\Asasi\PlacePolicy');
     }
 
     /**

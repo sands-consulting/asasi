@@ -67,7 +67,7 @@ class NoticeTypePolicy
      */
     public function update(User $auth, NoticeType $type)
     {
-        return $this->edit($type);
+        return $this->edit($auth, $type);
     }
 
     /**

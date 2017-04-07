@@ -4,12 +4,12 @@
         {{ trans('packages.views.edit.legend') }}
     </legend>
     <div class="row">
-        <div class="col-sm-4"> 
+        <div class="col-sm-6">
             {!! Former::text('name')
                 ->label('packages.attributes.name')
                 ->required() !!}
         </div>
-        <div class="col-sm-4"> 
+        <div class="col-sm-6">
             {!! Former::select('label_color')
                 ->options([
                     '' => 'Select',
@@ -22,13 +22,18 @@
                 ->addClass('select')
                 ->required() !!}
         </div>
-        <div class="col-sm-4"> 
+        <div class="col-md-12">
+            {!! Former::textarea('description')
+                ->label('packages.attributes.description')
+                ->required() !!}
+        </div>
+        <div class="col-sm-4">
             {!! Former::select('validity_type')
                 ->options([
                     '' => 'Select',
-                    'days' => 'Days',
-                    'months' => 'Months',
-                    'years' => 'Years',
+                    'day' => 'Day',
+                    'month' => 'Month',
+                    'year' => 'Year',
                 ])
                 ->label('packages.attributes.validity_type')
                 ->required() !!}
@@ -51,6 +56,12 @@
         <div class="col-sm-4">
             {!! Former::text('fee_tax_rate')
                 ->label('packages.attributes.fee_tax_rate')
+                ->required() !!}
+        </div>
+        <div class="col-sm-4">
+            {!! Former::select('status')
+                ->label('packages.attributes.status')
+                ->options(['' => 'Select Status', 'active' => 'Active', 'inactive' => 'Inactive'])
                 ->required() !!}
         </div>
     </div>

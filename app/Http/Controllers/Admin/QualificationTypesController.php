@@ -8,7 +8,7 @@ use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\QualificationTypeRequest;
 use App\Services\QualificationTypeService;
-use App\Services\UserHistoriesService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class QualificationTypesController extends Controller
@@ -36,7 +36,7 @@ class QualificationTypesController extends Controller
             $type->makeRoot();
         }
 
-        UserHistoriesService::log($request->user(), 'create', $type, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'create', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-types.index')
             ->with('notice', trans('qualification-types.notices.created', ['name' => $type->name]));
@@ -60,7 +60,7 @@ class QualificationTypesController extends Controller
             $type->makeRoot();
         }
 
-        UserHistoriesService::log($request->user(), 'update', $type, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'update', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-types.index')
             ->with('notice', trans('qualification-types.notices.updated', ['name' => $type->name]));
@@ -69,7 +69,7 @@ class QualificationTypesController extends Controller
     public function destroy(Request $request, QualificationType $type)
     {
         QualificationTypeService::delete($type);
-        UserHistoriesService::log($request->user(), 'delete', $type, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'delete', $type, $request->getClientIp());
         return redirect()
             ->route('admin.qualification-types.index')
             ->with('alert', trans('qualification-types.notices.deleted', ['name' => $type->name]));

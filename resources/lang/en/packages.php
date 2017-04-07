@@ -4,17 +4,18 @@ return [
     'title' => 'Packages',
 
     'attributes' => [
-        'name' => 'Name',
-        'validity_type' => 'Validity Type',
+        'name'              => 'Name',
+        'description'       => 'Description',
+        'validity_type'     => 'Validity Type',
         'validity_quantity' => 'Validity Quantity',
-        'meta' => 'Meta',
-        'fee_amount' => 'Fee Amount',
-        'fee_tax_code' => 'Fee Tax Code',
-        'fee_tax_rate' => 'Fee Tax Rate',
-        'label_color' => 'Label Color',
-        'status' => 'Status',
-        'created_at' => 'Created At',
-        'updated_at' => 'Last Updated At',
+        'meta'              => 'Meta',
+        'fee_amount'        => 'Fee Amount',
+        'fee_tax_code'      => 'Fee Tax Code',
+        'fee_tax_rate'      => 'Fee Tax Rate',
+        'label_color'       => 'Label Color',
+        'status'            => 'Status',
+        'created_at'        => 'Created At',
+        'updated_at'        => 'Last Updated At',
     ],
 
     'buttons' => [

@@ -26,7 +26,7 @@ class PlaceRequest extends FormRequest
         return [
             'name'      => 'required',
             'type'      => 'required|in:' . implode(',', Place::$types),
-            'parent_id' => 'exists:places,id,id,!' . $this->route('places')->id
+            'parent_id' => 'exists:places,id,id,!' . $this->route('place')->id,
         ];
     }
 }
