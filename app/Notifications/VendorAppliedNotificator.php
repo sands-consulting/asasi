@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Notificators;
+namespace App\Notifications;
 
 use App\Permission;
 use App\Vendor;
