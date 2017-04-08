@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Mailers;
+namespace App\Notifications;
 
 use App\User;
 use App\Vendor;
