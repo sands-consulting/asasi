@@ -17,28 +17,19 @@ class VendorFile extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-    	'file_id',
+        'type_id',
     	'upload_id',
     	'vendor_id'
     ];
 
-    protected $uploadableConfig = [
-        'file' => [
-            'custom-save', // saves the image prefixed wth "original"
-        ]
-    ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function file()
+    public function type()
     {
     	return $this->belongsTo(FileType::class);
     }
 
     public function upload()
     {
-    	// return $this->belongsTo(Upload::class);
+    	return $this->belongsTo(Upload::class);
     }
 
     public function vendor()

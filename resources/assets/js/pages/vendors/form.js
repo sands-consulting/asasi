@@ -40,7 +40,8 @@ const vmVendor = new Vue({
       file: {
         id: null,
         type_id: null,
-        file: null
+        file: null,
+        upload: null
       },
       code: {
         id: null,
@@ -139,6 +140,17 @@ const vmVendor = new Vue({
           }
         }
 
+        if('files' in window.vendor) {
+          for (var i = window.vendor.files.length - 1; i >= 0; i--) {
+            this.files.push({
+              id: window.vendor.files[i].id,
+              type_id: window.vendor.files[i].type_id,
+              file: null,
+              upload: window.vendor.files[i].upload
+            });
+          }
+        }
+
         if('qualifications' in window.vendor) {
           for (var i = window.vendor.qualifications.length - 1; i >= 0; i--) {
             code = window.vendor.qualifications[i].type.code;
@@ -152,25 +164,28 @@ const vmVendor = new Vue({
 
         if('qualification_codes' in window.vendor) {
           for (var i = window.vendor.qualification_codes.length - 1; i >= 0; i--) {
+            type = window.vendor.qualification_codes[i].type.type
             code = window.vendor.qualification_codes[i].type.code;
             id = window.vendor.qualification_codes[i].id;
             codeId = window.vendor.qualification_codes[i].code_id;
             children = [];
 
-            if('children' in window.vendor.qualification_codes[i]) {
-              for (var ii = window.vendor.qualification_codes[i].children.length - 1; ii >= 0; ii--) {
-                children.push({
-                  id: window.vendor.qualification_codes[i].children[ii].id,
-                  code_id: window.vendor.qualification_codes[i].children[ii].code_id
-                });
+            if(type == 'list') {
+              if('children' in window.vendor.qualification_codes[i]) {
+                for (var ii = window.vendor.qualification_codes[i].children.length - 1; ii >= 0; ii--) {
+                  children.push({
+                    id: window.vendor.qualification_codes[i].children[ii].id,
+                    code_id: window.vendor.qualification_codes[i].children[ii].code_id
+                  });
+                }
               }
-            }
 
-            this.qualifications[code].codes.push({
-              id: id,
-              code_id: codeId,
-              children: children
-            });
+              this.qualifications[code].codes.push({
+                id: id,
+                code_id: codeId,
+                children: children
+              });
+            }
           }
         }
       }

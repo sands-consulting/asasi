@@ -40,6 +40,7 @@ class VendorsController extends Controller
             'vendor' => [
                 'accounts' => $vendor->accounts,
                 'employees' => $vendor->employees,
+                'files' => $vendor->files()->with('upload')->get(),
                 'qualifications' => $vendor->qualifications()->with('type')->get(),
                 'qualification_codes' => $vendor->codes()->whereNull('parent_id')->with('type', 'children')->get(),
                 'shareholders' => $vendor->shareholders,
@@ -57,6 +58,7 @@ class VendorsController extends Controller
         VendorService::address($vendor, $request->input('address', []));
         VendorService::accounts($vendor, $request->input('accounts', []));
         VendorService::employees($vendor, $request->input('employees', []));
+        VendorService::files($vendor, $request->input('files', []), $request->file('files'));
         VendorService::qualifications($vendor, $request->input('qualifications', []));
         VendorService::shareholders($vendor, $request->input('shareholders', []));
 

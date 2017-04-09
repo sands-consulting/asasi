@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
 use App\Address;
 use App\Package;
 use App\QualificationCode;
@@ -12,7 +11,10 @@ use App\Vendor;
 use App\VendorAccount;
 use App\VendorEmployee;
 use App\VendorShareholder;
+use App\Upload;
 use App\User;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
@@ -144,6 +146,54 @@ class VendorService extends BaseService
         }
 
         $vendor->employees()->whereNotIn('id', $exists)->delete();
+    }
+
+    public static function files(Vendor $vendor, $files, $uploads)
+    {
+        $exists = [];
+
+        foreach($files as $index => $data)
+        {
+            if(isset($uploads[$index]))
+            {
+                unset($data['id']);
+
+                $file   = $uploads[$index]['file'];
+                $name   = sprintf('%s.%s', md5($file->getClientOriginalName()), $file->extension());
+                $token  = md5(time());
+                $file->storeAs($token, $name, 'uploads');
+
+                $upload = Upload::create([
+                    'name' => $file->getClientOriginalName(),
+                    'token' => $token,
+                    'path' => public_path(sprintf('%s/%s', $token, $name)),
+                    'url' => url(sprintf('%s/%s/%s', 'uploads', $token, $name)),
+                    'size' => $file->getSize(),
+                    'mime_type' => $file->getMimeType(),
+                    'uploadable_type' => 'App\Vendor',
+                    'uploadable_id' => $vendor->id,
+                    'user_id' => Auth::check() ? Auth::user()->id : null,
+                ]);
+            }
+
+            if(empty($data['id']))
+            {
+                $vendorFile = $vendor->files()->create([
+                    'type_id' => $data['type_id'],
+                    'upload_id' => $upload->id
+                ]);
+
+                $exists[] = $vendorFile->id;
+            }
+            else
+            {
+                $vendorFile = $vendor->files()->find($data['id']);
+                $vendorFile->update(['type_id' => $data['type_id']]);
+                $exists[] = $vendorFile->id;
+            }
+        }
+
+        $vendor->files()->whereNotIn('id', $exists)->delete();
     }
 
     public static function qualifications(Vendor $vendor, $data)
