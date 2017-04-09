@@ -200,8 +200,12 @@ return [
 	],
 
     'emails' => [
-        'applied' => [
-            'subject' => 'Vendor Application For Approval.',
+        'submitted' => [
+            'subject' => 'Vendor Application For Approval',
+            'greeting' => 'Hi, :name!',
+            'line-1' => 'Vendor :vendor is currently pending for review',
+            'line-2' => 'Please login to review the vendor for approval / rejection.',
+            'action' => 'View Vendor'
         ],
         'approved' => [
             'subject' => 'Vendor Application Approved.',
@@ -212,9 +216,7 @@ return [
     ], 
 
     'notifications' => [
-        'applied' => [
-            'content' => ':vendor_name needs your approval.'
-        ],
+        'submitted' => ':vendor needs your approval',
         'approved' => [
             'content' => ':vendor_name vendor application has been approved.'
         ],

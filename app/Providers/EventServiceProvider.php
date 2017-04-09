@@ -45,8 +45,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EmailSubscriptionExpireReminder',
         ],
 
-        'App\Events\VendorApplied' => [
-            'App\Listeners\VendorAppliedListener',
+        'App\Events\VendorApplicationSubmitted' => [
+            'App\Listeners\NotifyVendorApprover',
         ],
 
         'App\Events\VendorApproved' => [

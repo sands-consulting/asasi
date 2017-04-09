@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\Portal\VendorEligiblesDataTable;
 use App\DataTables\Portal\VendorInvitationsDataTable;
 use App\DataTables\Portal\VendorPurchasesDataTable;
-use App\Events\VendorApplied;
+use App\Events\VendorApplicationSubmitted;
 use App\Http\Requests\VendorRequest;
 use App\Services\VendorService;
 use App\Vendor;
@@ -29,7 +29,6 @@ class VendorsController extends Controller
 
     public function pending(Vendor $vendor)
     {
-        dd($vendor);
         return view('vendors.pending', compact('vendor'));
     }
 
@@ -64,7 +63,7 @@ class VendorsController extends Controller
 
         if ('pending' == $status)
         {
-            event(new VendorApplied($vendor));
+            event(new VendorApplicationSubmitted($vendor));
             return redirect()
                 ->route('vendors.pending', $vendor->id);
         }

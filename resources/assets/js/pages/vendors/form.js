@@ -68,22 +68,6 @@ const vmVendor = new Vue({
         });
       }
 
-      var _vm = this;
-      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        length = $(this).parents('ul').children().length;
-        iteration = $(this).parents('li').index() + 1;
-
-        if( iteration == length ) {
-          _vm.$data.submit = true;
-        } else {
-          _vm.$data.submit = false;
-        }
-
-        console.log(length);
-        console.log(iteration);
-        console.log(_vm.$data.submit);
-      });
-
       for (var i = window.qualifications.length - 1; i >= 0; i--) {
         id = window.qualifications[i].id;
         type = window.qualifications[i].type;
@@ -202,6 +186,12 @@ const vmVendor = new Vue({
       }
 
       trigger.trigger('click');
+
+      if(trigger.attr('href') == '#tab-vendor-files') {
+        this.enableSubmit();
+      } else {
+        this.disableSubmit();
+      }
     },
     addShareholder: function() {
       this.shareholders.push(jQuery.extend(true, {}, this.placeholders.shareholder));
@@ -238,6 +228,12 @@ const vmVendor = new Vue({
     },
     deleteChildCode: function(code, index, childIndex) {
       this.qualifications[code]['codes'][index]['children'].splice(childIndex, 1);
+    },
+    enableSubmit: function() {
+      this.submit = true;
+    },
+    disableSubmit: function() {
+      this.submit = false;
     }
   },
   mounted: function() {

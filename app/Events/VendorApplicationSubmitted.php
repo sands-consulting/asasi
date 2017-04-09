@@ -8,7 +8,7 @@ use App\Vendor;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class VendorApplied extends Event implements ShouldBroadcast
+class VendorApplicationSubmitted extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
@@ -31,6 +31,6 @@ class VendorApplied extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['notifications'];
+        return [];
     }
 }
