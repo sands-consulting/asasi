@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\VendorApplied;
-use App\Mailers\VendorAppliedMailer;
-use App\Notificators\VendorAppliedNotificator;
+use App\Notifications\VendorAppliedMailer;
+use App\Notifications\VendorAppliedNotificator;
 use App\Permission;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +20,8 @@ class VendorAppliedListener
     /**
      * Create the event listener.
      *
-     * @return void
+     * @param VendorAppliedMailer $mailer
+     * @param VendorAppliedNotificator $notificator
      */
     public function __construct(VendorAppliedMailer $mailer, VendorAppliedNotificator $notificator)
     {
