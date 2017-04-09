@@ -101,6 +101,10 @@
                     <td>{{ $subscription->number }}</td>
                 </tr>
                 <tr>
+                    <th>{{ trans('subscriptions.attributes.status') }}</th>
+                    <td>@include('admin.subscriptions.index.status')</td>
+                </tr>
+                <tr>
                     <th>{{ trans('subscriptions.attributes.start_at') }}</th>
                     <td>{{ $subscription->start_at->format('d/m/Y') }}</td>
                 </tr>
@@ -109,8 +113,8 @@
                     <td>{{ $subscription->end_at->format('d/m/Y') }}</td>
                 </tr>
                 <tr>
-                    <th>{{ trans('subscriptions.attributes.status') }}</th>
-                    <td>@include('admin.subscriptions.index.status')</td>
+                    <th>{{ trans('subscriptions.attributes.fee') }}</th>
+                    <td>{{ setting('currency') }} {{ $subscription->end_at->format('d/m/Y') }}</td>
                 </tr>
             </table>
         </div>

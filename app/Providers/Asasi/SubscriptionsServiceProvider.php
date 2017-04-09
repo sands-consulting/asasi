@@ -23,7 +23,7 @@ class SubscriptionsServiceProvider extends ServiceProvider
     {
         app('router')->group([
             'namespace'  => 'App\Http\Controllers',
-            'middleware' => 'web'
+            'middleware' => ['web', 'auth']
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',

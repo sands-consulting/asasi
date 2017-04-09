@@ -13,27 +13,7 @@
     
 <div class="row">
     <div class="col-xs-12 col-md-3">
-        @include('admin.vendors.show.menu')
-
-        @if(Auth::user()->hasPermissions(['user:index', 'subscription:index']))
-        <ul class="list-group list-vendor list-prompt-side-tab panel panel-flat mt-20" role="tablist">
-            @can('index', App\User::class)
-            <li role="presentation">
-                <a href="{{ route('users.index') }}" class="list-group-item">
-                    <i class="icon-basket"></i> {{ trans('vendors.menu.users') }}
-                </a>
-            </li>
-            @endcan
-
-            @can('index', App\Subscription::class)
-            <li role="presentation">    
-                <a href="{{ route('subscriptions.index') }}" class="list-group-item">
-                    <i class="icon-file-presentation"></i> {{ trans('vendors.menu.subscriptions') }}
-                </a>
-            </li>
-            @endcan
-        </ul>
-        @endif
+        @include('vendors.menu')
     </div>
 
     <div class="col-xs-12 col-md-9">

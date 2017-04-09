@@ -16,7 +16,7 @@ return [
         'updated_at'        => 'Last Updated At',
         'validity'          => 'Validity',
         'tax_code'          => 'Tax Code',
-        'validity' => [
+        'validities' => [
             'days' => 'One day|:count days',
             'months' => 'One month|:count months',
             'years' => 'One year|:count years'

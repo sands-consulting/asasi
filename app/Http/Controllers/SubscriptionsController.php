@@ -42,7 +42,7 @@ class SubscriptionsController extends Controller
 
         JavaScript::put([
             'startDate' => $startDate,
-            'packages' => Package::with('taxCode')->whereStatus('active')->orderBy('fee')->get(),
+            'packages' => Package::with('taxCode')->whereStatus('active')->orderBy('name')->get(),
             'gateways' => PaymentGateway::whereStatus('active')->whereDefault(1)->orderBy('label')->get()
         ]);
 

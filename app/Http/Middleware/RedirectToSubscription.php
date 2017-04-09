@@ -19,7 +19,7 @@ class RedirectToSubscription
     {
         $vendor = Auth::guard($guard)->user()->vendor;
 
-        if($vendor->status == 'inactive' && $vendor->subscriptions()->count() == 0)
+        if($vendor->status == 'inactive' && $vendor->subscriptions()->whereIn('status', ['active', 'expired'])->count() == 0)
         {
             return redirect()->route('subscriptions.create');
         }

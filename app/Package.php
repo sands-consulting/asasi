@@ -94,7 +94,7 @@ class Package extends Model
 
     public function getValidityAttribute()
     {
-        return trans_choice('packages.attributes.validity.' . $this->validity_type, $this->validity_quantity);
+        return trans_choice('packages.attributes.validities.' . $this->validity_type, $this->validity_quantity);
     }
 
     public function taxCode()

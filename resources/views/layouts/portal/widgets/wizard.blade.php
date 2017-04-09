@@ -1,4 +1,4 @@
-@if(Auth::check() && Auth::user()->hasPermission('access:vendor') && !in_array(Auth::user()->vendor->status, ['active', 'blacklisted']) && Auth::user()->vendor->subscriptions()->count() == 0)
+@if(Auth::check() && Auth::user()->hasPermission('access:vendor') && !in_array(Auth::user()->vendor->status, ['active', 'blacklisted']) && Auth::user()->vendor->subscriptions()->whereIn('status', ['active', 'expired'])->count() == 0)
 <div class="panel panel-flat"><div class="wizard">
     <div class="steps clearfix">
         <ul>

@@ -34,10 +34,6 @@
         </a>
     </li>
 
-
-    @if(Auth::check() && is_path('admin*') && !Auth::user()->hasPermission('access:vendor'))
-
-
     <li class="list-group-divider"></li>
 
 
@@ -74,7 +70,4 @@
             <i class="icon-cash4"></i> {{ trans('vendors.menu.purchases') }}
         </a>
     </li>
-
-
-    @endif
 </ul>

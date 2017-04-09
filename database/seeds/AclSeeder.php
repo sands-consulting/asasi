@@ -448,7 +448,10 @@ class AclSeeder extends Seeder
             'user:histories',
             'user:activate',
             'user:suspend',
-            'user:assume'
+            'user:assume',
+            'subscription:index',
+            'subscription:create',
+            'subscription:show'
         ])->pluck('id')->toArray());
 
         $vendor = Role::whereName('vendor-user')->first();

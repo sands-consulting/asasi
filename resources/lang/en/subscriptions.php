@@ -4,7 +4,6 @@ return [
     'title' => 'Subscriptions',
 
     'attributes' => [
-        'name' => 'Subscription Name',
         'start_at' => 'Started At',
         'end_at' => 'Expired At',
         'package_id' => 'Package',
@@ -15,6 +14,7 @@ return [
         'updated_at' => 'Updated At',
         'deleted_at' => 'Deleted At',
         'number' => 'Number',
+        'package' => 'Package',
     ],
 
     'buttons' => [
