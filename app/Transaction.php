@@ -24,7 +24,10 @@ class Transaction extends Model
         'total',
         'payee_type',
         'payee_id',
-        'user_id'
+        'user_id',
+        'gateway_id',
+        'status',
+        'paid_at'
     ];
 
     protected $hidden = [
@@ -40,9 +43,6 @@ class Transaction extends Model
     protected $sortable = [
     ];
 
-    /*
-     * Relationships
-     */
     public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
@@ -66,5 +66,26 @@ class Transaction extends Model
     public function gateway()
     {
         return $this->belongsTo(PaymentGateway::class, 'gateway_id');
+    }
+
+    public function calculate()
+    {
+        $this->sub_total = $this->lines()->sum('sub_total');
+        $this->tax       = $this->lines()->sum('tax');
+        $this->total     = $this->lines()->sum('total');
+        return $this;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($transaction)
+        {
+            $transaction->transaction_number    = strtoupper(str_random(12));
+            $transaction->sub_total             = 0.00;
+            $transaction->tax                   = 0.00;
+            $transaction->total                 = 0.00;
+        });
     }
 }

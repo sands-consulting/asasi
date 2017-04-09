@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Package;
 use App\Subscription;
+use App\Transaction;
+use App\TransactionLine;
 use App\User;
 use App\Vendor;
 use Carbon\Carbon;
@@ -56,34 +58,29 @@ class SubscriptionService extends BaseService
             $startDate  = Carbon::now()->startOfDay();
         }
 
+        $subscription           = new Subscription;
+        $subscription->start_at = $startDate;
 
-        switch ($package->validity_type) {
-            case 'days':
-                $endDate    = $startDate->copy()->addDays($package->validity_quantity);
-                break;
+        $subscription->package()->associate($package);
+        $subscription->subscriber()->associate($vendor);
+        $subscription->user()->associate($user);
+        $subscription->save();
 
-            case 'months':
-                $endDate    = $startDate->copy()->addMonths($package->validity_quantity);
-                break;
+        $transaction    = new Transaction;
+        $transaction->payer()->associate($vendor);
+        $transaction->user()->associate($user);
+        $transaction->save();
 
-            case 'years':
-                $endDate    = $startDate->copy()->addYears($package->validity_quantity);
-                break;
+        $line               = new TransactionLine;
+        $line->description  = $subscription->transaction_line_description;
+        $line->price        = $subscription->package->fee;
+        $line->quantity     = 1;
+        $line->item()->associate($subscription);
+        $line->taxCode()->associate($subscription->package->taxCode);
+        $line->transaction()->associate($transaction);
+        $line->save();
+        $line->transaction->calculate()->save();
 
-            default:
-                break;
-        }
-
-        $endDate = $endDate->endOfDay();
-
-        $subscription = Subscription::create([
-            'number' => strtoupper(str_random(8)),
-            'start_at' => $startDate,
-            'end_at' => $endDate,
-            'package_id' => $package->id,
-            'subscriber_type' => 'App\Vendor',
-            'subscriber_id' => $vendor->id,
-            'user_id' => $user->id
-        ]);
+        return $subscription;
     }
 }

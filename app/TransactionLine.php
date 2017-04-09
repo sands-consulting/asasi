@@ -2,7 +2,6 @@
 
 namespace App;
 
-//use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -15,33 +14,25 @@ class TransactionLine extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        // TransactionDetail fields
+        'description',
+        'price',
+        'quantity',
+        'sub_total',
+        'tax_code',
+        'tax_rate',
+        'tax',
+        'total',
+        'item_type',
+        'item_id',
+        'tax_id',
+        'transaction_id'
     ];
 
     protected $hidden = [
-        // hidden column
     ];
 
     protected $attributes = [
-        // default attributes value
     ];
-
-    protected $searchacble = [
-        // fields
-    ];
-
-    protected $sortable = [
-        // fields
-    ];
-
-    /*
-     * Relationship
-     */
-    
-    public function logs()
-    {
-        return $this->morphMany(UserHistory::class, 'actionable');
-    }
 
     public function transaction()
     {
@@ -53,57 +44,22 @@ class TransactionLine extends Model
         return $this->morphTo();
     }
 
-    /*
-     * Search scopes
-     */
-
-    public function scopeSearch($query, $queries = [])
+    public function taxCode()
     {
-        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
-            $keywords = $queries['keywords'];
-            $query->where(function($query) use($keywords) {
-                foreach ($this->searchable as $column) {
-                    $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
-                }
-            });
-            unset($queries['keywords']);
-        }
-
-        foreach ($queries as $key => $value) {
-            if (empty($value)) {
-                continue;
-            }
-            $query->where("{$this->getTable()}.{$key}", $value);
-        }
+        return $this->belongsTo(TaxCode::class);
     }
-
-    public function scopeSort($query, $column, $direction)
-    {
-        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
-            $query->orderBy($column, $direction);
-        }
-    }
-
-    /* 
-     * State controls 
-     */
-
-    // public function sluggable()
-    // {
-    //     return [
-    //         'slug' => [
-    //             'source' => 'name'
-    //         ]
-    //     ];
-    // }
-
-    /*
-     * Helpers 
-     */
 
     public static function boot()
     {
         parent::boot();
-    }
 
+        static::creating(function($line)
+        {
+            $line->tax_code     = $line->taxCode->code;
+            $line->tax_rate     = $line->taxCode->rate;
+            $line->sub_total    = $line->quantity * $line->price;
+            $line->tax          = $line->tax_rate * $line->sub_total / 100;
+            $line->total        = $line->sub_total + $line->tax;
+        });
+    }
 }

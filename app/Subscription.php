@@ -48,17 +48,16 @@ class Subscription extends Authenticatable
         'end_at'
     ];
 
-    /*
-     * Scopes
-     */
     public function scopeActive($query)
     {
         return $query->where('status', 'active');
     }
 
-    /*
-     * Relationship
-     */
+    public function scopeValid($query)
+    {
+        return $queyr->whereIn('status', ['active', 'expired']);
+    }
+
     public function package()
     {
         return $this->belongsTo(Package::class);
@@ -74,15 +73,52 @@ class Subscription extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
+    public function transactionLine()
+    {
+        return $this->morphOne(TransactionLine::class, 'item');
+    }
+
     public function getExpiringAttribute()
     {
-        $compare = $this->expired_at->subMonths(3);
+        $compare = $this->end_at->subMonths(3);
         return $compare->freshTimestamp()->gte($compare);
     }
 
     public function getExpiredAttribute()
     {
-        return $compare->freshTimestamp()->gt($this->expired_at);
+        return $compare->freshTimestamp()->gt($this->end_at);
     }
 
+    public function getTransactionLineDescriptionAttribute()
+    {
+        return sprintf("%s\n%s - %s (%s)\n%s", $this->package->name, $this->start_at->format('d/m/Y'), $this->end_at->format('d/m/Y'), $this->package->validity, $this->number);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($subscription)
+        {
+            switch ($subscription->package->validity_type) {
+                case 'days':
+                    $endDate    = $subscription->start_at->copy()->addDays($subscription->package->validity_quantity);
+                    break;
+
+                case 'months':
+                    $endDate    = $subscription->start_at->copy()->addMonths($subscription->package->validity_quantity);
+                    break;
+
+                case 'years':
+                    $endDate    = $subscription->start_at->copy()->addYears($subscription->package->validity_quantity);
+                    break;
+
+                default:
+                    break;
+            }
+
+            $subscription->end_at   = $endDate->endOfDay();
+            $subscription->number   = strtoupper(strtoupper(str_random(8)));
+        });
+    }
 }
