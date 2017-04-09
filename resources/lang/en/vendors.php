@@ -187,6 +187,7 @@ return [
                     'empty' => 'No codes recorded.'
                 ],
                 'subscriptions' => [
+                    'empty' => 'No subscription created.',
                     'certificate' => 'Certificate'
                 ]
             ],

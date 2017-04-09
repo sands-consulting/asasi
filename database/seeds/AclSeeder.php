@@ -88,6 +88,18 @@ class AclSeeder extends Seeder
             ['package:archives', 'List delete packages'],
             ['package:duplicate', 'Duplicate existing package'],
 
+            // Payment Gateways
+            ['payment-gateway:index', 'List all payment gateways'],
+            ['payment-gateway:show', 'View a payment gateway'],
+            ['payment-gateway:create', 'Create new payment gateway'],
+            ['payment-gateway:update', 'Update existing payment gateway'],
+            ['payment-gateway:delete', 'Delete existing payment gateway'],
+            ['payment-gateway:restore', 'Restore deleted payment gateway'],
+            ['payment-gateway:revisions', 'View payment gateway revisions'],
+            ['payment-gateway:histories', 'View payment gateway histories'],
+            ['payment-gateway:archives', 'List all deleted payment gateways'],
+            ['payment-gateway:duplicate', 'Duplicate existing payment gateway'],
+
             // Permission
             ['permission:index', 'List all permissions'],
             ['permission:show', 'View permission details'],

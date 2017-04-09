@@ -8,7 +8,7 @@ use App\Services\PackageService;
 use App\Services\PermissionService;
 use Illuminate\Database\Seeder;
 
-class PackageSeeder extends Seeder
+class SubscriptionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,6 +17,7 @@ class PackageSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('subscriptions')->truncate();
         DB::table('packages')->truncate();
 
         $packageData = [

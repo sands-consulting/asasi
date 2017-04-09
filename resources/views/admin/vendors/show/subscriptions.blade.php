@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($vendor->subscriptions()->get() as $subscription)
+            @forelse($vendor->subscriptions()->get() as $subscription)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $subscription->number }}</td>
@@ -33,8 +33,11 @@
                         @endif
                     </td>
                 </tr>
-            </tbody>
-            @endforeach
+            @empty
+                <tr>
+                    <td class="text-center" colspan="7">{{ trans('vendors.views.admin.show.subscriptions.empty') }}</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
     </div>

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NoticeEventSeeder::class);
         $this->call(NoticeEventTypeSeeder::class);
         $this->call(SubmissionSeeder::class);
-        $this->call(PackageSeeder::class);
+        $this->call(SubscriptionSeeder::class);
         $this->call(VendorSeeder::class);
         $this->call(PaymentGatewaySeeder::class);
         $this->call(EvaluationSeeder::class);

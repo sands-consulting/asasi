@@ -10,15 +10,13 @@
                 </tr>
             </thead>
             <tbody>
-            <?php $index = 1; ?>
             @forelse($vendor->shareholders()->get() as $shareholder)
                 <tr>
-                    <td>{{ $index }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $shareholder->name }}</td>
                     <td>{{ $shareholder->identity_number }}</td>
                     <td>{{ $shareholder->nationality->name }}</td>
                 </tr>
-                <?php $index++; ?>
             @empty
                 <tr>
                     <td colspan="4" class="text-center">{{ trans('vendors.views.show.details.shareholders.empty') }}</td>

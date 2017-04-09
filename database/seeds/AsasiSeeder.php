@@ -30,6 +30,7 @@ class AsasiSeeder extends Seeder
         DB::table('revisions')->truncate();
         DB::table('places')->truncate();
         DB::table('users')->truncate();
+        DB::table('tax_codes')->truncate();
 
         $users = [
             [

@@ -1,4 +1,4 @@
-@if(Auth::check() && Auth::user()->hasPermission('access:vendor') && in_array(Auth::user()->vendor->status, ['active', 'inactive']))
+@if(Auth::check() && Auth::user()->hasPermission('access:vendor') && Auth::user()->vendor->status == 'active')
 <li class="dropdown">
 	<a href="#" class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false">
 		<i class="icon-cart4"></i>
