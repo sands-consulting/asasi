@@ -15,13 +15,18 @@ return [
         'created_at'        => 'Created At',
         'updated_at'        => 'Last Updated At',
         'validity'          => 'Validity',
-        'tax_code'          => 'Tax Code'
+        'tax_code'          => 'Tax Code',
+        'validity' => [
+            'days' => 'One day|:count days',
+            'months' => 'One month|:count months',
+            'years' => 'One year|:count years'
+        ],
     ],
 
-    'validity' => [
-        'days' => 'One day|:count days',
-        'months' => 'One month|:count months',
-        'years' => 'One year|:count years'
+    'validities' => [
+        'days' => 'Day',
+        'months' => 'Months',
+        'years' => 'Years'
     ],
 
     'buttons' => [

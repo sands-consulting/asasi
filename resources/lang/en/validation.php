@@ -121,6 +121,7 @@ return [
         'password_confirmation' => 'Confirm Password',
         'remember_me' => 'Remember Me',
         'title' => 'Title',
+        'tax_code_id' => 'Tax Code',
     ],
 
 ];

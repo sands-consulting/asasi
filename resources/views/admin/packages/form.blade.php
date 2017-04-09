@@ -1,68 +1,8 @@
-<fieldset>
-    <legend class="text-semibold">
-        <i class="icon-file-text2 position-left"></i>
-        {{ trans('packages.views.edit.legend') }}
-    </legend>
-    <div class="row">
-        <div class="col-sm-6">
-            {!! Former::text('name')
-                ->label('packages.attributes.name')
-                ->required() !!}
-        </div>
-        <div class="col-sm-6">
-            {!! Former::select('label_color')
-                ->options([
-                    '' => 'Select',
-                    'blue-800' => '<span class="label bg-blue-800">Blue</span>',
-                    'indigo-800' => '<span class="label bg-indigo-800">Indigo</span>',
-                    'green-800' => '<span class="label bg-green-800">Green</span>',
-                    'pink-800' => '<span class="label bg-pink-800">Pink</span>',
-                ])
-                ->label('packages.attributes.label_color')
-                ->addClass('select')
-                ->required() !!}
-        </div>
-        <div class="col-md-12">
-            {!! Former::textarea('description')
-                ->label('packages.attributes.description')
-                ->required() !!}
-        </div>
-        <div class="col-sm-4">
-            {!! Former::select('validity_type')
-                ->options([
-                    '' => 'Select',
-                    'day' => 'Day',
-                    'month' => 'Month',
-                    'year' => 'Year',
-                ])
-                ->label('packages.attributes.validity_type')
-                ->required() !!}
-        </div>
-        <div class="col-sm-4">
-            {!! Former::text('validity_quantity')
-                ->label('packages.attributes.validity_quantity')
-                ->required() !!}
-        </div>
-        <div class="col-sm-4">
-            {!! Former::text('fee_amount')
-                ->label('packages.attributes.fee_amount')
-                ->required() !!}
-        </div>
-        <div class="col-sm-4">
-            {!! Former::text('fee_tax_code')
-                ->label('packages.attributes.fee_tax_code')
-                ->required() !!}
-        </div>
-        <div class="col-sm-4">
-            {!! Former::text('fee_tax_rate')
-                ->label('packages.attributes.fee_tax_rate')
-                ->required() !!}
-        </div>
-        <div class="col-sm-4">
-            {!! Former::select('status')
-                ->label('packages.attributes.status')
-                ->options(['' => 'Select Status', 'active' => 'Active', 'inactive' => 'Inactive'])
-                ->required() !!}
-        </div>
-    </div>
-</fieldset>
+{!! Former::text('name')->label('packages.attributes.name')->required() !!}
+{!! Former::textarea('description')->label('packages.attributes.description')->required()->rows(5) !!}
+{!! Former::select('validity_type')->options(trans('packages.validities'))->label('packages.attributes.validity_type')->required() !!}
+{!! Former::text('validity_quantity')->label('packages.attributes.validity_quantity')->required() !!}
+{!! Former::text('fee')->label('packages.attributes.fee')->required() !!}
+{!! Former::select('tax_code_id')->options(App\TaxCode::options())->label('packages.attributes.tax_code')->required() !!}
+{!! Former::select('color')->options(App\Package::colorOptions())->label('packages.attributes.color')->required() !!}
+{!! Former::select('status')->label('packages.attributes.status')->options(collect(trans('statuses'))->only('active', 'inactive'))->required() !!}

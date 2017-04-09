@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Package;
 use App\PaymentGateway;
+use App\Subscription;
 use App\Vendor;
+use App\DataTables\Portal\VendorSubscriptionsDataTable;
 use App\Services\SubscriptionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,12 +15,13 @@ use JavaScript;
 
 class SubscriptionsController extends Controller
 {
-    public function index()
+    public function index(VendorSubscriptionsDataTable $table)
     {
-        return view('subscriptions.index');
+        $vendor = Auth::user()->vendor;
+        return $table->render('subscriptions.index', compact('vendor'));
     }
 
-    public function show(Vendor $vendor, Subscription $subscription)
+    public function show(Subscription $subscription)
     {
         return view('subscriptions.show', compact('vendor'));
     }

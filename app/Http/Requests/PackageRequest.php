@@ -25,14 +25,12 @@ class PackageRequest extends FormRequest
     {
         return [
             'name'              => 'required',
-            'label_color'       => 'required',
+            'color'             => 'required',
             'validity_type'     => 'required',
             'validity_quantity' => 'required',
-            'meta'              => '',
-            'fee_amount'        => 'required',
-            'fee_tax_code'      => 'required',
-            'fee_tax_rate'      => 'required',
-            'status'            => '',
+            'fee'               => 'required',
+            'tax_code_id'       => 'required',
+            'status'            => 'required',
         ];
     }
 
@@ -40,14 +38,12 @@ class PackageRequest extends FormRequest
     {
         return [
             'name'              => 'required',
-            'label_color'       => 'required',
+            'color'             => 'required',
             'validity_type'     => 'required',
             'validity_quantity' => 'required',
-            'meta'              => '',
-            'fee_amount'        => 'required',
-            'fee_tax_code'      => 'required',
-            'fee_tax_rate'      => 'required',
-            'status'            => '',
+            'fee'               => 'required',
+            'tax_code_id'       => 'required',
+            'status'            => 'required',
         ];
     }
 }

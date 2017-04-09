@@ -22,7 +22,7 @@
         {!! Former::open_vertical(route('admin.packages.index'))->method('POST') !!}
             @include('admin.packages.form')
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 col-md-8 col-md-offset-4">
                     {!! Former::submit(trans('actions.save'))->addClass('bg-blue')->data_confirm(trans('app.confirmation')) !!}
                     {!! link_to_route('admin.packages.index', trans('actions.cancel'), [], ['class' => 'btn btn-default']) !!}
                 </div>

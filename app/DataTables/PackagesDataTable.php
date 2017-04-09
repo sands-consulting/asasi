@@ -49,14 +49,9 @@ class PackagesDataTable extends DataTable
                 'title' => trans('packages.attributes.name')
             ],
             [
-                'data' => 'fee_amount',
-                'name' => 'fee_amount',
-                'title' => trans('packages.attributes.fee_amount')
-            ],
-            [
-                'data' => 'fee_tax_rate',
-                'name' => 'fee_tax_rate',
-                'title' => trans('packages.attributes.fee_tax_rate')
+                'data' => 'fee',
+                'name' => 'fee',
+                'title' => trans('packages.attributes.fee')
             ],
             [
                 'data' => 'status',

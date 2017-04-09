@@ -18,12 +18,11 @@ class Package extends Model
     protected $fillable = [
         'name',
         'description',
-        'label_color',
         'validity_type',
         'validity_quantity',
-        'meta',
         'fee',
         'tax_code_id',
+        'color',
         'status',
     ];
 
@@ -42,23 +41,22 @@ class Package extends Model
 
     protected $searchacble = [
         'name',
+        'description',
         'validity_type',
         'validity_quantity',
-        'meta',
         'fee',
         'status',
     ];
 
     protected $sortable = [
         'name',
-        'validity_type',
-        'validity_quantity',
-        'meta',
         'fee',
         'status',
+        'color',
+        'tax_code_id'
     ];
 
-    public function logs()
+    public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
@@ -96,7 +94,7 @@ class Package extends Model
 
     public function getValidityAttribute()
     {
-        return trans_choice('packages.validity.' . $this->validity_type, $this->validity_quantity);
+        return trans_choice('packages.attributes.validity.' . $this->validity_type, $this->validity_quantity);
     }
 
     public function taxCode()
@@ -120,5 +118,15 @@ class Package extends Model
     public static function options()
     {
         return Package::pluck('name', 'id')->toArray();
+    }
+
+    public static function colorOptions()
+    {
+        return [
+            'blue-800' => 'Blue',
+            'indigo-800' => 'Indigo',
+            'green-800' => 'Green',
+            'pink-800' => 'Pink'
+        ];
     }
 }
