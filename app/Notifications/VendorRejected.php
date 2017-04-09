@@ -5,16 +5,17 @@ namespace App\Notifications;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class VendorPending extends Notification
+class VendorRejected extends Notification
 {
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($vendor, $remarks)
     {
-        //
+        $this->vendor   = $vendor;
+        $this->remarks  = $remarks;
     }
 
     /**
@@ -37,11 +38,12 @@ class VendorPending extends Notification
     public function toMail($notifiable)
     {
         $message = new MailMessage;
-        $message->subject(trans('vendors.'))
-        $message->subject(trans('auth.confirmation'));
-        $message->greeting(sprintf('Hi, %s!', $notifiable->name));
-        $message->line('Click the button below to complete your account registration.');
-        $message->action('Activate Account', route('confirmation', $notifiable->confirmation_token));
+        $message->subject(trans('vendors.emails.rejected.subject'));
+        $message->greeting(trans('vendors.emails.rejected.greeting', ['name' => $notifiable->name]));
+        $message->line(trans('vendors.emails.rejected.line-1', ['vendor' => $this->vendor->name]));
+        $message->line(trans('vendors.emails.rejected.line-2', ['remarks' => $this->remarks]));
+        $message->line(trans('vendors.emails.rejected.line-3'));
+        $message->action(trans('vendors.emails.rejected.action'), route('vendors.edit', $this->vendor->id));
 
         return $message;
     } 

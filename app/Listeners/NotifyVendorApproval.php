@@ -2,48 +2,33 @@
 
 namespace App\Listeners;
 
-use App\Events\VendorApproved;
-use App\Mailers\VendorApprovedMailer;
-use App\Notificators\VendorApprovedNotificator;
-use App\Services\UserHistoriesService;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Http\Request;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\VendorApproved;
 
-class VendorApprovedListener
+class NotifyVendorApproval
 {
-    public $mailer;
-
     /**
      * Create the event listener.
      *
      * @return void
      */
-    
-    /**
-     * [__construct description]
-     * @param Request                   $request     [description]
-     * @param VendorApprovedMailer      $mailer      [description]
-     * @param VendorApprovedNotificator $notificator [description]
-     */
-    public function __construct(Request $request, VendorApprovedMailer $mailer, VendorApprovedNotificator $notificator)
+    public function __construct()
     {
-        $this->request = $request;
-        $this->mailer = $mailer;
-        $this->notificator = $notificator;
+        //
     }
 
     /**
      * Handle the event.
      *
-     * @param  VendorApproved  $event
+     * @param  UserRegistered  $event
      * @return void
      */
-    public function handle(VendorApproved $event)
+    public function handle($event)
     {
-        $this->notificator->notify($event->vendor);
-        foreach ($event->users as $user) {
-            $this->mailer->send($user, $event->vendor);
+        $users = $event->vendor->users()->get();
+
+        foreach($users as $user)
+        {
+            $user->notify(new VendorApproved($event->vendor));
         }
     }
 }

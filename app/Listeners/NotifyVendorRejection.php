@@ -28,13 +28,7 @@ class NotifyVendorRejection
 
         foreach($users as $user)
         {
-            $user->notify(new VendorApprover($event->vendor));
-            $user->notifications()->create([
-                'content' => trans('vendors.notifications.rejected', ['vendor' => $event->vendor->name]),
-                'link' => route('admin.vendors.show', $event->vendor->id),
-                'item_type' => 'App\Vendor',
-                'item_id' => $event->vendor->id
-            ]);
+            $user->notify(new VendorRejected($event->vendor, $event->remarks));
         }
     }
 }

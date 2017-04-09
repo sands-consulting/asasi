@@ -11,17 +11,17 @@ class SubscriptionsController extends Controller
 {
     public function index(Vendor $vendor)
     {
-        return view('vendors.users.index');
+        return view('subscriptions.index');
     }
 
     public function show(Vendor $vendor, Subscription $subscription)
     {
-        return view('vendors.users.show', compact('vendor'));
+        return view('subscriptions.show', compact('vendor'));
     }
 
     public function create(Vendor $vendor)
     {
         $packages = Package::whereStatus('active')->orderBy('fee_amount')->get();
-        return view('vendors.subscriptions.create', compact('packages'));
+        return view('subscriptions.create', compact('packages'));
     }
 }

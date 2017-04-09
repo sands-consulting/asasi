@@ -32,7 +32,7 @@
     </li>
     @endunless
     
-    @unless(is_path(['vendors*', 'me/bookmarks']))
+    @unless(is_path(['vendors*', 'users*', 'subscriptions*', 'me/bookmarks']))
     <li>
         <a href="{{ route('vendors.eligibles', Auth::user()->vendor->id) }}">{{ trans('menu.access.dashboard') }}</a>
     </li>

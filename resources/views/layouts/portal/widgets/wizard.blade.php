@@ -43,7 +43,7 @@
 
             @if(Auth::user()->vendor->status == 'inactive')
             <li role="tab" class="last current" aria-disabled="false" aria-selected="true">
-                <a href="{{ route('vendors.subscriptions.create', Auth::user()->vendor->id) }}">
+                <a href="{{ route('subscriptions.create') }}">
                     <span class="number">3</span>
                     {{ trans('app.widgets.portal.wizard.subscription') }}
                 </a>
