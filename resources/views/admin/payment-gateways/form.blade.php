@@ -4,7 +4,8 @@
 		{!! Former::select('type')->label('payment-gateways.attributes.type')->options(trans('payment-gateways.types'))->required() !!}
 		{!! Former::text('label')->label('payment-gateways.attributes.label')->required() !!}
 		{!! Former::text('prefix')->label('payment-gateways.attributes.prefix')->required() !!}
-		{!! Former::checkbox('default')->label('payment-gateways.attributes.default')->required() !!}
+		{!! Former::checkbox('default')->label('payment-gateways.attributes.default') !!}
+		{!! Former::hidden('default')->forceValue(0) !!}
 		{!! Former::select('status')->label('payment-gateways.attributes.status')->options(collect(trans('statuses'))->only('active', 'inactive'))->required() !!}
 	</div>
 

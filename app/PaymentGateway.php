@@ -18,7 +18,8 @@ class PaymentGateway extends Model
         'label',
         'type',
         'prefix',
-        'status'
+        'status',
+        'default'
     ];
 
     protected $attributes = [
