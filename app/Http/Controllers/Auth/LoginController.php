@@ -75,20 +75,7 @@ class LoginController extends Controller
 
         if($user->hasPermission('access:vendor'))
         {
-            if(in_array($user->vendor->status, ['draft', 'rejected']))
-            {
-                return redirect(route('vendors.edit', $user->vendor->id));
-            }
-
-            if($user->vendor->status == 'pending')
-            {
-                return redirect(route('vendors.pending', $user->vendor->id));
-            }
-
-            if($user->vendor->status == 'inactive' && $user->vendor->subscriptions()->count() == 0)
-            {
-                return redirect(route('vendors.subscriptions.create', $user->vendor->id));
-            }
+            return redirect()->intended(route('vendors.eligibles', $user->vendor->id));
         }
     }
 

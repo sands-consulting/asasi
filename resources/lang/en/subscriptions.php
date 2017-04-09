@@ -2,6 +2,7 @@
 
 return [
     'title' => 'Subscriptions',
+
     'attributes' => [
         'name' => 'Subscription Name',
         'start_at' => 'Started At',
@@ -13,6 +14,7 @@ return [
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
         'deleted_at' => 'Deleted At',
+        'number' => 'Number',
     ],
 
     'buttons' => [
@@ -23,17 +25,17 @@ return [
     ],
 
     'notices' => [
-        'public' => [
-            'subscribed' => 'You have been subscribed.',
-        ],
         'created' => 'Subscription :name created',
         'updated' => 'Subscription :name updated',
         'deleted' => 'Subscription :name deleted',
         'activated' => 'Subscription has been activated',
         'deactivated' => 'Subscription has been deactivated',
-        'cancelled' => 'Subscription has been cancelled',
-        'existed' => 'Other active subscription for :name already exists.',
-        'no-subscription' => 'No active subscription'
+        'cancelled' => 'Subscription has been cancelled',        
+
+        'no-subscription' => 'No active subscription',
+
+        'x1' => 'Unable to process your subscription request',
+        'x2' => 'Unable to process your payment',
     ],
 
 	'views' => [
@@ -42,15 +44,23 @@ return [
                 'title'    => 'Subscriptions',
                 'status'   => 'Status',
                 'keywords' => 'Keywords',
+                'package' => 'Package'
             ],
             'show' => [
-                'title' => 'View Subscription',
-                'admin' => [
-                    'title' => 'View Subscription'
+                'subscriber' => [
+                    'title' => 'Subscriber',
+                    'name' => 'Name',
+                    'address' => 'Address'
                 ],
+                'subscription' => [
+                    'title' => 'Subscription Information',
+                ],
+                'package' => [
+                    'title' => 'Package Information'
+                ]
             ],
             'create' => [
-                'title' => 'Select Package',
+                'title' => 'Create New Subscription',
                 'package' => [
                     'name' => 'Name',
                     'fee' => 'Fee'
@@ -58,6 +68,12 @@ return [
             ],
             'edit' => [
                 'title' => 'Edit',
+            ],
+            'form' => [
+                'subscriber' => 'Subscriber',
+                'package' => 'Package',
+                'select-subscriber' => 'Select Subscriber',
+                'select-package' => 'Select Package'
             ]
         ],
         'create' => [
@@ -74,5 +90,12 @@ return [
                 'pay-now' => 'Proceed to Payment'
             ],
         ]
-	]
+	],
+
+    'modals' => [
+        'cancel' => [
+            'title' => 'Subscription Cancellation',
+            'submit' => 'Cancel This Subscription'
+        ]
+    ]
 ];

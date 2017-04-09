@@ -86,6 +86,7 @@ elixir(function(mix) {
         'vendor/picker_date.js',
         'vendor/stepy.js',
         'components/datepicker.js',
+        'components/search.js',
         'pages/vendors/form.js',
         'notification.js',
         'admin.js',

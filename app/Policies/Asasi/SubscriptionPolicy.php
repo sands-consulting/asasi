@@ -3,11 +3,11 @@
 namespace App\Policies\Asasi;
 
 use App\User;
-use App\Place;
+use App\Subscription;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
- * Class PlacePolicy
+ * Class SubscriptionPolicy
  * @package App\Policies
  */
 class SubscriptionPolicy
@@ -20,7 +20,7 @@ class SubscriptionPolicy
      */
     public function index(User $auth)
     {
-        return $auth->hasPermission('place:index');
+        return $auth->hasPermission('subscription:index');
     }
 
     /**
@@ -29,7 +29,7 @@ class SubscriptionPolicy
      */
     public function show(User $auth)
     {
-        return $auth->hasPermission('place:show');
+        return $auth->hasPermission('subscription:show');
     }
 
     /**
@@ -38,7 +38,7 @@ class SubscriptionPolicy
      */
     public function create(User $auth)
     {
-        return $auth->hasPermission('place:create');
+        return $auth->hasPermission('subscription:create');
     }
 
     /**
@@ -52,81 +52,101 @@ class SubscriptionPolicy
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function edit(User $auth, Place $place)
+    public function edit(User $auth, Subscription $subscription)
     {
-        return $auth->hasPermission('place:update');
+        return $auth->hasPermission('subscription:update');
     }
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function update(User $auth, Place $place)
+    public function update(User $auth, Subscription $subscription)
     {
-        return $this->edit($place);
+        return $this->edit($subscription);
     }
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function destroy(User $auth, Place $place)
+    public function destroy(User $auth, Subscription $subscription)
     {
-        return $auth->hasPermission('place:delete');
+        return $auth->hasPermission('subscription:delete');
     }
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function restore(User $auth, Place $place)
+    public function restore(User $auth, Subscription $subscription)
     {
-        return $auth->hasPermission('place:restore');
+        return $auth->hasPermission('subscription:restore');
     }
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function revisions(User $auth, Place $place)
+    public function revisions(User $auth, Subscription $subscription)
     {
-        return $auth->hasPermission('place:revisions');
+        return $auth->hasPermission('subscription:revisions');
     }
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function histories(User $auth, Place $place)
+    public function histories(User $auth, Subscription $subscription)
     {
-        return $auth->hasPermission('place:histories');
+        return $auth->hasPermission('subscription:histories');
     }
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function archives(User $auth, Place $place)
+    public function archives(User $auth, Subscription $subscription)
     {
-        return $auth->hasPermission('place:archives');
+        return $auth->hasPermission('subscription:archives');
     }
 
     /**
      * @param User $auth
-     * @param Place $place
+     * @param Subscription $subscription
      * @return bool
      */
-    public function duplicate(User $auth, Place $place)
+    public function duplicate(User $auth, Subscription $subscription)
     {
-        return $auth->hasPermission('place:duplicate');
+        return $auth->hasPermission('subscription:duplicate');
+    }
+
+    /**
+     * @param User $auth
+     * @param Subscription $subscription
+     * @return bool
+     */
+    public function activate(User $auth, Subscription $subscription)
+    {
+        return $auth->hasPermission('subscription:activate');
+    }
+
+    /**
+     * @param User $auth
+     * @param Subscription $subscription
+     * @return bool
+     */
+    public function cancel(User $auth, Subscription $subscription)
+    {
+        return $auth->hasPermission('subscription:cancel');
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
-use App\DataTables\VendorSubscriptionsDataTable;
 use App\DataTables\VendorsDataTable;
 use App\Events\VendorApproved;
 use App\Events\VendorRejected;
@@ -195,11 +194,5 @@ class VendorsController extends Controller
     public function qualificationCodes(Vendor $vendor)
     {
         return view('admin.vendors.subscriptions', compact('vendor'));
-    }
-
-    public function subscriptions(Vendor $vendor, VendorSubscriptionsDataTable $table)
-    {
-        $table->vendor = $vendor;
-        return $table->render('admin.vendors.subscriptions', compact('vendor'));
     }
 }

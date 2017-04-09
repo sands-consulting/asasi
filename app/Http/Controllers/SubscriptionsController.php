@@ -6,6 +6,7 @@ use Auth;
 use App\Package;
 use App\PaymentGateway;
 use App\Vendor;
+use App\Services\SubscriptionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use JavaScript;
@@ -43,5 +44,22 @@ class SubscriptionsController extends Controller
         ]);
 
         return view('subscriptions.create', compact('package'));
+    }
+
+    public function store(Request $request)
+    {
+        $vendor     = Auth::user()->vendor;
+        $package    = Package::whereStatus('active')->find($request->input('package_id'));
+        $gateway    = PaymentGateway::whereStatus('active')->find($request->input('gateway_id'));
+
+        if(!$package || !$gateway)
+        {
+            return redirect()->back()->with('alert', trans('subscriptions.notices.x1'));
+        }
+
+        $subscription = SubscriptionService::subscribe($vendor, $package, Auth::user());
+        //$request->session()->put('transaction', $subscription->transaction->id);
+        //$request->session()->put('gateway', $gateway->id);
+        //return redirect(action(ucfirst($package->type)) . 'Controller@connect');
     }
 }

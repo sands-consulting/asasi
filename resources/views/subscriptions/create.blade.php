@@ -77,7 +77,7 @@
                 </td>
             </tr>
             <tr v-if="gateway_id">
-                <th>&nbpsp;</th>
+                <th>&nbsp;</th>
                 <td>
                     <form method="POST" action="{{ route('subscriptions.store') }}">
                         {{ csrf_field() }}

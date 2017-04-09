@@ -119,6 +119,6 @@ class Package extends Model
 
     public static function options()
     {
-        return ['' => 'Select One'] + Package::pluck('name', 'id')->toArray();
+        return Package::pluck('name', 'id')->toArray();
     }
 }

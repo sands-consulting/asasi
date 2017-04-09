@@ -2,12 +2,12 @@
 
 @section('header')
 <div class="page-title">
-    <h4>{{ trans('subscriptions.views.index.title') }}</h4>
+    <h4>{{ trans('subscriptions.title') }}</h4>
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
         <a href="{{ route('admin.subscriptions.create') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
-            <i class=" icon-user-plus"></i> <span>{{ trans('subscriptions.buttons.create') }}</span>
+            <i class=" icon-plus-circle2"></i> <span>{{ trans('subscriptions.buttons.create') }}</span>
         </a>
     </div>
 </div>
@@ -16,9 +16,9 @@
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-body form-datatable-search form-inline">
-        <input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('subscriptions.views.index.keywords') }}" v-model="q.keywords">
+        <input type="text" name="q[keywords]" class="form-control input-sm" placeholder="{{ trans('subscriptions.views.admin.index.keywords') }}" v-model="q.keywords">
         <select name="q[status]" class="form-control input-sm" v-model="q.status">
-            <option value="" selected="selected">{{ trans('subscriptions.views.index.status') }}</option>
+            <option value="" selected="selected">{{ trans('subscriptions.views.admin.index.status') }}</option>
             @foreach(collect(trans('statuses'))->only('active', 'inactive') as $key => $value)<option value="{{ $key }}">{{ $value }}</option>@endforeach
         </select>
         <a href="#" class="btn btn-sm btn-primary" v-on:click="perform_search">{{ trans('actions.search') }}</a>

@@ -11,31 +11,26 @@ class SubscriptionsDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($subscription) {
-                return view('admin.subscriptions._index_actions', compact('subscription'));
-            })
-            ->editColumn('vendor_name', function($subscription) {
-                return link_to_route('admin.subscriptions.show', $subscription->vendor_name, $subscription->id);
+                return view('admin.subscriptions.index.actions', compact('subscription'));
             })
             ->editColumn('package_name', function($subscription) {
-                return view('admin.subscriptions._index_package', compact('subscription'));
+                return view('admin.subscriptions.index.package', compact('subscription'));
             })
             ->editColumn('status', function($subscription) {
-                return view('admin.subscriptions._index_status', compact('subscription'));
+                return view('admin.subscriptions.index.status', compact('subscription'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = Subscription::leftJoin('vendors', 'vendors.id', '=', 'subscriptions.vendor_id')
-            ->leftJoin('packages', 'packages.id', '=', 'subscriptions.package_id')
+        $query = Subscription::leftJoin('packages', 'packages.id', '=', 'subscriptions.package_id')
             ->select(
                 'subscriptions.id',
-                'vendors.name as vendor_name', 
+                'subscriptions.number',
                 'packages.name as package_name',
-                'packages.label_color',
-                'subscriptions.started_at',
-                'subscriptions.expired_at',
+                'subscriptions.start_at',
+                'subscriptions.end_at',
                 'subscriptions.status'
             );
 
@@ -60,24 +55,24 @@ class SubscriptionsDataTable extends DataTable
     {
         return [
             [
-                'data' => 'vendor_name',
-                'name' => 'vendor_name',
-                'title' => trans('vendors.attributes.name')
+                'data' => 'number',
+                'name' => 'number',
+                'title' => trans('subscriptions.attributes.number')
             ],
             [
                 'data' => 'package_name',
-                'name' => 'package_name',
-                'title' => trans('packages.attributes.name')
+                'name' => 'package.name',
+                'title' => trans('subscriptions.views.admin.index.package')
             ],
             [
-                'data' => 'started_at',
-                'name' => 'started_at',
-                'title' => trans('subscriptions.attributes.started_at')
+                'data' => 'start_at',
+                'name' => 'start_at',
+                'title' => trans('subscriptions.attributes.start_at')
             ],
             [
-                'data' => 'expired_at',
-                'name' => 'expired_at',
-                'title' => trans('subscriptions.attributes.expired_at')
+                'data' => 'end_at',
+                'name' => 'end_at',
+                'title' => trans('subscriptions.attributes.end_at')
             ],
             [
                 'data' => 'status',

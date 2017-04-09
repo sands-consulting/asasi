@@ -19,13 +19,14 @@ class Subscription extends Authenticatable
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
-        'started_at',
-        'expired_at',
+        'number',
+        'start_at',
+        'end_at',
         'package_id',
         'user_id',
         'subscriber_type',
         'subscriber_id',
-        'status',
+        'status'
     ];
 
     protected $attributes = [
@@ -33,6 +34,7 @@ class Subscription extends Authenticatable
     ];
 
     protected $searchable = [
+        'number',
     ];
 
     protected $sortable = [
@@ -41,7 +43,10 @@ class Subscription extends Authenticatable
         'status'
     ];
 
-    protected $dates = ['started_at', 'expired_at'];
+    protected $dates = [
+        'start_at',
+        'end_at'
+    ];
 
     /*
      * Scopes
