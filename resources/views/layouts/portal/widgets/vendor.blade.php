@@ -13,7 +13,7 @@
 	</span>
 	<p class="text-muted expiry">
 		@if(Auth::user()->vendor->active_subscription)
-		{{ trans('app.widgets.portal.vendor.expiry') }}: {{ Auth::user()->vendor->active_subscription->expired_at->format('d/m/Y') }}
+		{{ trans('app.widgets.portal.vendor.expiry') }}: {{ Auth::user()->vendor->active_subscription->end_at->format('d/m/Y') }}
 		@else
 		{{ trans('app.widgets.portal.vendor.no_subscription') }}
 		@endif

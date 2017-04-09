@@ -185,6 +185,9 @@ return [
                 ],
                 'qualifications' => [
                     'empty' => 'No codes recorded.'
+                ],
+                'subscriptions' => [
+                    'certificate' => 'Certificate'
                 ]
             ],
             'form' => [

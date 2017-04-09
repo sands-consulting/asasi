@@ -50,6 +50,9 @@
     </li>
 
 
+    @if(is_path('admin*'))
+
+
     <li class="list-group-divider"></li>
 
 
@@ -70,4 +73,6 @@
             <i class="icon-cash4"></i> {{ trans('vendors.menu.purchases') }}
         </a>
     </li>
+
+    @endif
 </ul>

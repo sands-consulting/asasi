@@ -18,12 +18,22 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <ul class="list-unstyled m-0">
+                        <ul class="list-unstyled no-margin">
                         @foreach($user->roles as $role)<li>{{ $role->display_name }}</li>@endforeach
                         </ul>
                     </td>
                     <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
-                    <td><a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-xs bg-blue-700" target="new"><i class="icon-user"></i></a></td>
+                    <td>
+                        @if(is_path('admin*'))
+                            @can('show', $user)
+                            <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-xs bg-blue-700" target="_blank"><i class="icon-user"></i></a>
+                            @endcan
+                        @else
+                            @can('show', $user)
+                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs bg-blue-700"><i class="icon-user"></i></a>
+                            @endcan
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>
