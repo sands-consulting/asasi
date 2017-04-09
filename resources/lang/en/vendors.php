@@ -63,7 +63,8 @@ return [
 
         'files' => [
             'type' => 'Type',
-            'file' => 'File'
+            'file' => 'File',
+            'size' => 'Size',
         ],
 
         'shareholders' => [
@@ -71,7 +72,7 @@ return [
             'identity_number' => 'Identity Number',
             'nationality' => 'Nationality',
             'percentage' => 'Percentage'
-        ]
+        ],
     ],
 
     'buttons' => [
@@ -176,7 +177,19 @@ return [
                 'employees' => [
                     'empty' => 'No employee recorded.'
                 ],
+                'shareholders' => [
+                    'empty' => 'No shareholder recorded.'
+                ],
+                'files' => [
+                    'empty' => 'No files uploaded.'
+                ],
+                'qualifications' => [
+                    'empty' => 'No codes recorded.'
+                ]
             ],
+            'form' => [
+                'submit' => 'Submit Application'
+            ]
         ],
         'pending' => [
             'title' => 'Vendor Application Pending Approval',

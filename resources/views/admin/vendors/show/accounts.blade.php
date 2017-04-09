@@ -23,7 +23,7 @@
                 <?php $index++; ?>
             @empty
                 <tr>
-                    <td colspan="6" class="text-center">{{ trans('vendors.views.admin.show.accounts.empty') }}</td>
+                    <td colspan="5" class="text-center">{{ trans('vendors.views.admin.show.accounts.empty') }}</td>
                 </tr>
             @endforelse
             </tbody>

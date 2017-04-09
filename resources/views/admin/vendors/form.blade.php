@@ -16,7 +16,7 @@
 		</div>
 		<div class="panel-footer">
 			<a href="#" class="btn btn-default pull-right" v-if="!submit" v-on:click="next">{{ trans('actions.next') }}</a>
-			<input name="submit" type="submit" class="btn bg-success pull-right" value="{{ trans('vendors.views._form.submit_application') }}" v-show="submit && !admin">
+			<input name="submit" type="submit" class="btn bg-success pull-right" value="{{ trans('vendors.views.admin.form.submit') }}" v-show="submit && !admin">
 			<input type="submit" name="save" class="btn bg-blue-700 pull-right" value="{{ trans('actions.save') }}">
 		</div>
 	</div>
