@@ -39,5 +39,6 @@
     "x-editable": "^1.5.1"
   },
   "dependencies": {
+    "vue-select": "^2.2.0"
   }
 }

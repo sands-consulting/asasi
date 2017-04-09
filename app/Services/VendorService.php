@@ -146,64 +146,101 @@ class VendorService extends BaseService
         $vendor->employees()->whereNotIn('id', $exists)->delete();
     }
 
-    public static function files(Vendor $vendor, $files)
-    {
-        
-    }
-
     public static function qualifications(Vendor $vendor, $data)
     {
         $types  = QualificationType::whereStatus('active')->get();
         $exists = [];
 
-        foreach($types as $type)
+        foreach($data as $typeId => $data)
         {
-            if($type->type == 'boolean')
-            {
-                $codeId = array_get($data, $type->code, null);
+            $type = QualificationType::whereStatus('active')->find($typeId);
 
-                if(!empty($codeId))
-                {
-                    $code       = $vendor->qualifications()->firstOrCreate([
-                        'type_id' => $type->id,
-                        'code_id' => $codeId
-                    ]);
-                    $exists[]   = $code->id;
-                }
+            if(!$type)
+            {
+                continue;
             }
 
-            if($type->type == 'list')
+            if(isset($data['codes']))
             {
-                $codes  = array_get($data, $type->code, []);
+                $codes = $data['codes'];
+                unset($data['codes']);
+            }
 
-                foreach($codes as $id => $value)
-                {
-                    $code = $vendor->qualifications()->firstOrCreate([
-                        'type_id' => $type->id,
-                        'code_id' => $id
+            $dataToSave = [];
+
+            if(!empty($type->reference_one) && isset($data['reference_one']) && !empty($data['reference_one']))
+            {
+                $dataToSave['reference_one'] = $data['reference_one'];
+            }
+
+            if(!empty($type->reference_two) && isset($data['reference_two']) && !empty($data['reference_two']))
+            {
+                $dataToSave['reference_two'] = $data['reference_two'];
+            }
+
+            if($type->validity
+                && isset($data['start_at']) && !empty($data['start_at'])
+                && isset($data['end_at']) && !empty($data['end_at']) )
+            {
+                $dataToSave['start_at'] = $data['start_at'];
+                $dataToSave['end_at'] = $data['end_at'];
+            }
+
+            if(count($dataToSave) == 0)
+            {
+                $vendor->qualifications()->whereTypeId($type->id)->delete();
+                $vendor->codes()->whereTypeId($type->id)->delete();
+                continue;
+            }
+
+            $qualification = $vendor->qualifications()->firstOrCreate(['type_id' => $typeId ]);
+            $qualification->update($dataToSave);
+
+            if($type->type == 'boolean')
+            {
+                $code = $type->codes()->first();
+
+                $vendor->codes()->firstOrCreate([
+                    'type_id' => $type->id,
+                    'code_id' => $code->id,
+                ]);
+            }
+
+            if($type->type == 'list' && isset($codes))
+            {
+                $exists = [];
+                foreach($codes as $data) {
+                    $code = QualificationCode::whereId($data['code_id'])->first();
+
+                    if(!$code)
+                    {
+                        continue;
+                    }
+
+                    $parent = $vendor->codes()->firstOrCreate([
+                        'type_id' => $code->type_id,
+                        'code_id' => $code->id
                     ]);
 
-                    $exists[] = $code->id;
+                    $exists[] = $parent->id;
 
-                    if(is_array($value))
+                    if(isset($data['children']))
                     {
-                        foreach($value as $child => $boolean)
-                        {
-                            $reference = QualificationCode::find($child);
-                            if(empty($reference)) continue;
-                            $childCode = $vendor->qualifications()->firstOrCreate([
-                                'type_id' => $reference->type_id,
-                                'code_id' => $reference->id,
-                                'parent_id' => $code->id
+                        foreach($data['children'] as $childData) {
+                            $childCode = QualificationCode::whereId($childData['code_id'])->first();
+                            $child = $vendor->codeS()->firstOrCreate([
+                                'type_id' => $childCode->type_id,
+                                'code_id' => $childCode->id,
+                                'parent_id' => $parent->id
                             ]);
-                            $exists[] = $childCode->id;
+                            $exists[] = $child->id;
                         }
                     }
                 }
+
+                $vendor->codes()->whereNotIn('id', $exists)->delete();
             }
         }
-
-        $vendor->qualifications()->whereNotIn('id', $exists)->delete();
     }
 
     public static function shareholders(Vendor $vendor, $shareholders)

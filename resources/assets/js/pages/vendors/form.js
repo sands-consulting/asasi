@@ -1,5 +1,7 @@
 $(function() {
-  vmVendor.$mount('#form-vendor');
+  if( $('#form-vendor').length > 0 ) {
+    vmVendor.$mount('#form-vendor');
+  }
 });
 
 const vmVendor = new Vue({
@@ -87,10 +89,10 @@ const vmVendor = new Vue({
           newType = {};
           newType[code] = {
             id: id,
-            start_at: null,
-            end_at: null,
-            reference_one: null,
-            reference_two: null
+            start_at: '',
+            end_at: '',
+            reference_one: '',
+            reference_two: ''
           };
 
           if(type == 'list') {
@@ -136,6 +138,41 @@ const vmVendor = new Vue({
             });
           }
         }
+
+        if('qualifications' in window.vendor) {
+          for (var i = window.vendor.qualifications.length - 1; i >= 0; i--) {
+            code = window.vendor.qualifications[i].type.code;
+
+            this.qualifications[code].reference_one = window.vendor.qualifications[i].reference_one;
+            this.qualifications[code].reference_two = window.vendor.qualifications[i].reference_two;
+            this.qualifications[code].start_at = window.vendor.qualifications[i].start_at;
+            this.qualifications[code].end_at = window.vendor.qualifications[i].end_at;
+          }
+        }
+
+        if('qualification_codes' in window.vendor) {
+          for (var i = window.vendor.qualification_codes.length - 1; i >= 0; i--) {
+            code = window.vendor.qualification_codes[i].type.code;
+            id = window.vendor.qualification_codes[i].id;
+            codeId = window.vendor.qualification_codes[i].code_id;
+            children = [];
+
+            if('children' in window.vendor.qualification_codes[i]) {
+              for (var ii = window.vendor.qualification_codes[i].children.length - 1; ii >= 0; ii--) {
+                children.push({
+                  id: window.vendor.qualification_codes[i].children[ii].id,
+                  code_id: window.vendor.qualification_codes[i].children[ii].code_id
+                });
+              }
+            }
+
+            this.qualifications[code].codes.push({
+              id: id,
+              code_id: codeId,
+              children: children
+            });
+          }
+        }
       }
     },
     next: function() {
@@ -160,7 +197,7 @@ const vmVendor = new Vue({
       this.files.push(jQuery.extend(true, {}, this.placeholders.code));
     },
     addCode: function(code) {
-      this.qualifications[code].push(jQuery.extend(true, {}, this.placeholders.code));
+      this.qualifications[code]['codes'].push(jQuery.extend(true, {}, this.placeholders.code));
     },
     addChildCode: function(code, index) {
       this.qualifications[code]['codes'][index]['children'].push(jQuery.extend(true, {}, this.placeholders.code));
@@ -178,7 +215,7 @@ const vmVendor = new Vue({
       this.files.splice(index, 1);
     },
     deleteCode: function(code, index) {
-      this.qualifications[code].splice(index, 1);
+      this.qualifications[code]['codes'].splice(index, 1);
     },
     deleteChildCode: function(code, index, childIndex) {
       this.qualifications[code]['codes'][index]['children'].splice(childIndex, 1);

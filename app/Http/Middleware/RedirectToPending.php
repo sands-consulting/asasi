@@ -19,7 +19,7 @@ class RedirectToPending
     {
         $vendor = Auth::guard($guard)->user()->vendor;
 
-        if($vendor->status == 'pending')
+        if($vendor->status == 'pending' && !$request->is('vendors/*/pending'))
         {
             return redirect()->route('vendors.pending', $vendor->id);
         }

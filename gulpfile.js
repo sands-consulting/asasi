@@ -45,6 +45,7 @@ elixir(function(mix) {
         'vendor/pnotify.js',
         'vendor/nicescroll.js',
         'vendor/jquery-news-box/jquery.bootstrap.newsbox.js',
+        'components/datepicker.js',
         'pages/vendors/form.js',
         'notification.js',
         'portal.js',

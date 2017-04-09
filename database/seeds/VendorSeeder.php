@@ -123,13 +123,13 @@ class VendorSeeder extends Seeder
             ],
             [
                 'name' => 'Ministry of Finance - Bumiputera',
-                'code' => 'MOF-BUMI',
+                'code' => 'MOFBUMI',
                 'reference_one' => 'Certificate No.',
                 'type' => 'boolean'
             ],
             [
                 'name' => 'Construction Industry Development Board',
-                'code' => 'CIDB-G',
+                'code' => 'CIDBG',
                 'reference_one' => 'Certificate No.',
                 'type' => 'list',
                 'validity' => true,
@@ -145,7 +145,7 @@ class VendorSeeder extends Seeder
                 'children' => [
                     [
                         'name' => 'CIDB - Building',
-                        'code' => 'CIDB-B',
+                        'code' => 'CIDBB',
                         'type' => 'list',
                         'codes' => [
                             ['code' => 'B01', 'name' => 'IBS: Prefabricated concrete system'],
@@ -156,7 +156,7 @@ class VendorSeeder extends Seeder
                     ],
                     [
                         'name' => 'CIDB - Civil Engineering',
-                        'code' => 'CIDB-CE',
+                        'code' => 'CIDBCE',
                         'type' => 'list',
                         'codes' => [
                             ['code' => 'CE01', 'name' => 'Road and pavement construction'],
@@ -165,7 +165,7 @@ class VendorSeeder extends Seeder
                     ],
                     [
                         'name' => 'CIDB - Mechanical & Electrical',
-                        'code' => 'CIDB-ME',
+                        'code' => 'CIDBME',
                         'type' => 'list',
                         'codes' => [
                             ['code' => 'M01', 'name' => 'Air conditioning and circulation systems'],
@@ -178,7 +178,7 @@ class VendorSeeder extends Seeder
             ],
             [
                 'name' => 'Construction Industry Development Board - Bumiputera',
-                'code' => 'CIDB-BUMI',
+                'code' => 'CIDBBUMI',
                 'reference_one' => 'Certificate No.',
                 'type' => 'boolean'
             ],
@@ -199,6 +199,14 @@ class VendorSeeder extends Seeder
             }
 
             $parent = QualificationTypeService::create(new QualificationType, $type);
+
+            if($parent->type == 'boolean')
+            {
+                $parent->codes()->create([
+                    'code' => $parent->code,
+                    'name' => $parent->name
+                ]);
+            }
 
             if(isset($codes))
             {
@@ -233,47 +241,5 @@ class VendorSeeder extends Seeder
                 unset($children);
             }
         }
-
-        $vendor = VendorService::create(new Vendor, [
-            'name' => 'Thera Future Inc.',
-            'registration_number' => '123456-TF',
-            'normalized_registration_number' => '123456TF',
-            'tax_1_number' => '123456',
-            'tax_2_number' => '789012',
-            'contact_telephone' => '+60123456789',
-            'contact_fax' => '+60323456788',
-            'contact_email' => 'support@my-sands.com',
-            'contact_website' => 'www.sands.consulting',
-            'contact_person_name' => 'Amin Adha',
-            'contact_person_title' => 'mr',
-            'contact_person_telephone' => '+60123456788',
-            'contact_person_email' => 'amin@my-sands.com',
-            'capital_currency' => 'MYR',
-            'capital_authorized' => '500000',
-            'capital_paid_up' => '250000',
-            'type_id' => 4,
-            'status' => 'active',
-            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'address' => [
-                'line_one' => '11-2-2A, Jalan Pusat Bandar 2A',
-                'line_two' => 'Seksyen 9',
-                'postcode' => '43650',
-                'city_id' => 18,
-                'state_id' => 5,
-                'country_id' => 1,
-            ]
-        ]);
-
-        
-        $user = UserService::create(new User(), [
-            'name'      => 'Amin Adha',
-            'email'     => 'amin@my-sands.com',
-            'password'  => app()->make('hash')->make('amin1234'),
-            'status'    => 'active',
-        ]);
-
-        $user->roles()->sync(Role::whereIn('name', ['vendor', 'vendor-admin'])->pluck('id')->toArray());
-        $vendor->users()->attach($user, ['status' => 'active']);
     }
 }

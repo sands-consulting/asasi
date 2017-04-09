@@ -29,6 +29,7 @@ class VendorsController extends Controller
 
     public function pending(Vendor $vendor)
     {
+        dd($vendor);
         return view('vendors.pending', compact('vendor'));
     }
 
@@ -39,7 +40,8 @@ class VendorsController extends Controller
             'vendor' => [
                 'accounts' => $vendor->accounts,
                 'employees' => $vendor->employees,
-                'qualifications' => $vendor->qualifications()->with('codes')->get(),
+                'qualifications' => $vendor->qualifications()->with('type')->get(),
+                'qualification_codes' => $vendor->codes()->whereNull('parent_id')->with('type', 'children')->get(),
                 'shareholders' => $vendor->shareholders,
             ]
         ]);

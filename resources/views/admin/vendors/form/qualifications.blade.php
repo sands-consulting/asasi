@@ -11,25 +11,25 @@
 		@if($type->reference_one)
 		<tr>
 			<th class="col-xs-3">{{ $type->reference_one }}</th>
-			<td><input type="text" class="form-control" name="qualifications[{{ $type->id }}]['reference_one']" v-model="qualifications.{{ $type->code }}.reference_one"></td>
+			<td><input type="text" class="form-control" name="qualifications[{{ $type->id }}][reference_one]" v-model="qualifications.{{ $type->code }}.reference_one"></td>
 		</tr>
 		@endif
 
 		@if($type->reference_two)
 		<tr>
 			<th class="col-xs-3">{{ $type->reference_two }}</th>
-			<td><input type="text" class="form-control" name="qualifications[{{ $type->id }}]['reference_two']" v-model="qualifications.{{ $type->code }}.reference_two"></td>
+			<td><input type="text" class="form-control" name="qualifications[{{ $type->id }}][reference_two]" v-model="qualifications.{{ $type->code }}.reference_two"></td>
 		</tr>
 		@endif
 
 		@if($type->validity)
 		<tr>
 			<th class="col-xs-3">{{ trans('qualification-types.attributes.start_at') }}</th>
-			<td><input type="text" class="form-control" nam="qualifications[{{ $type->id }}]['start_at']" v-model="qualifications.{{ $type->code }}.start_at"></td>
+			<td><datepicker-single klass="form-control" name="qualifications[{{ $type->id }}][start_at]" :date="qualifications.{{ $type->code }}.start_at"></datepicker></td>
 		</tr>
 		<tr>
 			<th class="col-xs-3">{{ trans('qualification-types.attributes.end_at') }}</th>
-			<td><input type="text" class="form-control" name="qualifications[{{ $type->id }}]['end_at']" v-model="qualifications.{{ $type->code }}.end_at"></td>
+			<td><datepicker-single klass="form-control" name="qualifications[{{ $type->id }}][end_at]" :date="qualifications.{{ $type->code }}.end_at"></datepicker></td>
 		</tr>
 		@endif
 		@if($type->type == 'list')
@@ -50,7 +50,7 @@
 				<div class="children">
 					<template v-for="(child, index2) in code.children">
 					<div class="input-group">
-						<select v-bind:name="'qualifications[{{ $type->id }}][codes][' + index1 + '][code_id][children][' + index2 + '][code_id]'" class="form-control" v-model="child.code_id">
+						<select v-bind:name="'qualifications[{{ $type->id }}][codes][' + index1 + '][children][' + index2 + '][code_id]'" class="form-control" v-model="child.code_id">
 							<option value=""></option>
 							@foreach($type->children()->active()->get() as $child)
 								<optgroup label="{{ $child->name }}">

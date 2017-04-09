@@ -163,6 +163,11 @@ class Vendor extends Model
         return $this->hasMany(VendorQualification::class);
     }
 
+    public function codes()
+    {
+        return $this->hasMany(VendorQualificationCode::class);
+    }
+
     public function transactions()
     {
         return $this->morphMany(Subscription::class, 'payer');
