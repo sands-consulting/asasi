@@ -25,12 +25,12 @@
 
     <li role="presentation">
         <a href="#tab-vendor-employees" aria-controls="tab-vendor-employees" role="tab" data-toggle="tab" class="list-group-item" @click="disableSubmit">
-            <i class="icon-users4"></i> {{ trans('vendors.views._form.nav.employees') }}
+            <i class="icon-users4"></i> {{ trans('vendors.menu.employees') }}
         </a>
     </li>
     <li role="presentation">
         <a href="#tab-vendor-accounts" aria-controls="tab-vendor-accounts" role="tab" data-toggle="tab" class="list-group-item" @click="disableSubmit">
-            <i class="icon-database4"></i> {{ trans('vendors.views._form.nav.accounts') }}
+            <i class="icon-database4"></i> {{ trans('vendors.menu.accounts') }}
         </a>
     </li>
 

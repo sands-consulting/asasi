@@ -160,6 +160,16 @@ return [
                 ]
             ],
             'show' => [
+                'details' => [
+                    'address' => [
+                        'title' => 'Address',
+                        'empty' => 'No address information'
+                    ],
+                    'contact' => 'Contact Information',
+                    'contact-person' => 'Contact Person',
+                    'capital' => 'Capital Information',
+                    'tax' => 'Tax Information'
+                ],
                 'accounts' => [
                     'empty' => 'No account recorded.'
                 ],
@@ -184,18 +194,6 @@ return [
         ],
         'show' => [
             'back' => 'Dashboard'
-        ],
-        '_form' => [
-            'nav' => [
-                'details' => 'Company Details',
-                'contact' => 'Contact Person',
-                'qualification_codes' => 'Qualification Codes',
-                'shareholders' => 'Shareholders',
-                'employees' => 'Employees',
-                'accounts' => 'Accounts',
-                'files' => 'Files'
-            ],
-            'submit_application' => 'Submit Application'
         ]
 	],
 
