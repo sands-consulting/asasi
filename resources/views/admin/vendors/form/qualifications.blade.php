@@ -7,7 +7,8 @@
 		</tr>
 	</thead>
 	<tbody>
-	@if($type->validity || $type->reference_one || $type->reference_two)
+		@if($type->validity || $type->reference_one || $type->reference_two)
+		
 		@if($type->reference_one)
 		<tr>
 			<th class="col-xs-3">{{ $type->reference_one }}</th>
@@ -32,6 +33,9 @@
 			<td><datepicker-single klass="form-control" name="qualifications[{{ $type->id }}][end_at]" :date="qualifications.{{ $type->code }}.end_at"></datepicker></td>
 		</tr>
 		@endif
+	
+		@endif
+		
 		@if($type->type == 'list')
 		<tr>
 			<th>{{ trans('qualification-types.attributes.codes') }}</th>
@@ -71,7 +75,6 @@
 			</td>
 		</tr>
 		@endif
-	@endif
 	</tbody>
 @endforeach
 </table>

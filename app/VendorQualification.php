@@ -22,6 +22,11 @@ class VendorQualification extends Model
         'type_id'
     ];
 
+    protected $dates = [
+        'start_at',
+        'end_at'
+    ];
+
     public function type()
     {
         return $this->belongsTo(QualificationType::class);

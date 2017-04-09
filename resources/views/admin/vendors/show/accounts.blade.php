@@ -8,7 +8,6 @@
                     <th>{{ trans('vendors.attributes.accounts.account_number') }}</th>
                     <th>{{ trans('vendors.attributes.accounts.bank_name') }}</th>
                     <th>{{ trans('vendors.attributes.accounts.bank_iban') }}</th>
-                    <th>{{ trans('vendors.attributes.accounts.bank_address') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +19,6 @@
                     <td>{{ $account->account_number }}</td>
                     <td>{{ $account->bank_name }}</td>
                     <td>{{ $account->bank_iban }}</td>
-                    <td>{{ $account->bank_address }}</td>
                 </tr>
                 <?php $index++; ?>
             @empty
