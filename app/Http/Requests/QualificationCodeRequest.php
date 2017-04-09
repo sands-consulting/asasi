@@ -24,7 +24,7 @@ class QualificationCodeRequest extends FormRequest
     public function updateRules()
     {
         return [
-            'code'      => 'required|unique:qualification_codes,id,' . $this->route('qualification_codes')->id,
+            'code'      => 'required|unique:qualification_codes,id,' . $this->route('qualification_code')->id,
             'name'      => 'required',
             'type_id'   => 'required|exists:qualification_code_types,id',
             'status'    => 'required|in:active,inactive'
