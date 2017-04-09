@@ -12,10 +12,6 @@ class VendorApproved extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
-    public $users;
-
-    public $vendor;
-    
     /**
      * Create a new event instance.
      *
@@ -23,7 +19,6 @@ class VendorApproved extends Event implements ShouldBroadcast
      */
     public function __construct(Vendor $vendor)
     {
-        $this->users = $vendor->users;
         $this->vendor = $vendor;
     }
 
@@ -34,6 +29,6 @@ class VendorApproved extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['notifications'];
+        return [];
     }
 }

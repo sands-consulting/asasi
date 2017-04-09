@@ -210,6 +210,13 @@ return [
         ]
 	],
 
+    'modals' => [
+        'reject' => [
+            'title' => 'Reject Vendor Application',
+            'submit' => 'Notify Rejection'
+        ]
+    ],
+
     'emails' => [
         'submitted' => [
             'subject' => 'Vendor Application For Approval',

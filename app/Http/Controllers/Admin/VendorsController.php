@@ -19,6 +19,7 @@ use App\User;
 use App\Vendor;
 use Event;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class VendorsController extends Controller
 {
@@ -34,7 +35,11 @@ class VendorsController extends Controller
     
     public function create()
     {
-        return view('admin.vendors.create');
+        JavaScript::put([
+            'qualifications' => \App\QualificationType::with('codes')->active()->get(),
+        ]);
+        $vendor = new Vendor;
+        return view('admin.vendors.create', compact('vendor'));
     }
 
     public function store(VendorRequest $request)
@@ -49,6 +54,17 @@ class VendorsController extends Controller
 
     public function edit(Vendor $vendor)
     {
+        JavaScript::put([
+            'qualifications' => \App\QualificationType::with('codes')->active()->get(),
+            'vendor' => [
+                'accounts' => $vendor->accounts,
+                'employees' => $vendor->employees,
+                'files' => $vendor->files()->with('upload')->get(),
+                'qualifications' => $vendor->qualifications()->with('type')->get(),
+                'qualification_codes' => $vendor->codes()->whereNull('parent_id')->with('type', 'children')->get(),
+                'shareholders' => $vendor->shareholders,
+            ]
+        ]);
         return view('admin.vendors.edit', compact('vendor'));
     }
 
@@ -94,7 +110,7 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to']);
         VendorService::update($vendor, $inputs, ['status' => 'inactive']);
-        UserHistoryService::log($request->user(), 'Approve', $vendor, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'approve', $vendor, $request->getClientIp());
 
         Event::fire(new VendorApproved($vendor));
 
@@ -107,7 +123,7 @@ class VendorsController extends Controller
     {
         $inputs = $request->only(['redirect_to', 'remarks']);
         VendorService::update($vendor, $inputs, ['status' => 'rejected']);
-        UserHistoryService::log($request->user(), 'Reject', $vendor, $request->getClientIp(), $inputs['remarks']);
+        UserHistoryService::log($request->user(), 'reject', $vendor, $request->getClientIp(), $inputs['remarks']);
 
         Event::fire(new VendorRejected($vendor, $inputs['remarks']));
         
@@ -128,7 +144,7 @@ class VendorsController extends Controller
             }
         }
 
-        UserHistoryService::log($request->user(), 'Suspend', $vendor, $request->getClientIp(), $inputs['remarks']);
+        UserHistoryService::log($request->user(), 'suspend', $vendor, $request->getClientIp(), $inputs['remarks']);
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -145,7 +161,7 @@ class VendorsController extends Controller
             UserService::activate($user);
         }
 
-        UserHistoryService::log($request->user(), 'Activate Vendor', $vendor, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'activate', $vendor, $request->getClientIp());
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -157,7 +173,7 @@ class VendorsController extends Controller
         $inputs = $request->only(['redirect_to', 'remarks']);
         
         VendorService::update($vendor, $inputs, ['status' => 'blacklisted']);
-        UserHistoryService::log($request->user(), 'Blacklist', $vendor, $request->getClientIp(), $inputs['remarks']);
+        UserHistoryService::log($request->user(), 'blacklist', $vendor, $request->getClientIp(), $inputs['remarks']);
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
@@ -169,7 +185,7 @@ class VendorsController extends Controller
         $inputs = $request->only(['redirect_to']);
         
         VendorService::update($vendor, $inputs, ['status' => 'active']);
-        UserHistoryService::log($request->user(), 'Unblacklist', $vendor, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'unblacklist', $vendor, $request->getClientIp());
         
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))

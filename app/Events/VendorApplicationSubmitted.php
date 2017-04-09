@@ -12,8 +12,6 @@ class VendorApplicationSubmitted extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
-    public $vendor;
-
     /**
      * Create a new event instance.
      *

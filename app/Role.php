@@ -17,7 +17,7 @@ class Role extends Model
         'name', 'display_name', 'description'
     ];
 
-    public function logs()
+    public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }

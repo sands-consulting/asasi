@@ -51,7 +51,7 @@ class VendorsController extends Controller
     public function update(VendorRequest $request, Vendor $vendor)
     {
         $inputs = $request->all();
-        $status = isset($inputs['submit']) ? 'pending' : 'draft';
+        $status = isset($inputs['submit']) ? 'pending' : $vendor->status;
         
         VendorService::update($vendor, $inputs, ['status' => $status]);
         VendorService::address($vendor, $request->input('address', []));

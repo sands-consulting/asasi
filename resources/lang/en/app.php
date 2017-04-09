@@ -45,7 +45,8 @@ return [
             'wizard' => [
                 'application' => 'Vendor Application',
                 'approval' => 'Vendor Approval',
-                'subscription' => 'Pacakge Subscription'
+                'subscription' => 'Pacakge Subscription',
+                'rejection' => 'Your approval was rejected due to:'
             ]
         ]
     ]

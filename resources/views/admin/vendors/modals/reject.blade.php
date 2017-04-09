@@ -1,9 +1,9 @@
-<div id="reject-modal" class="modal fade">
+<div id="modal-reject" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
-                <h5 class="modal-title">Reject Form</h5>
+                <h5 class="modal-title">{{ trans('vendors.modals.reject.title') }}</h5>
             </div>
 
             {!! Former::open_vertical(route('admin.vendors.reject', $vendor->id))->method('PUT') !!}
@@ -21,8 +21,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link legitRipple" data-dismiss="modal">Close<span class="legitRipple-ripple"></span><span class="legitRipple-ripple"></span></button>
-                    <button type="submit" class="btn btn-primary legitRipple">Submit form</button>
+                    <button type="button" class="btn btn-link legitRipple" data-dismiss="modal">{{ trans('actions.cancel') }}<span class="legitRipple-ripple"></span><span class="legitRipple-ripple"></span></button>
+                    <button type="submit" class="btn btn-danger legitRipple">{{ trans('vendors.modals.reject.submit') }}</button>
                 </div>
             {!! Former::close() !!}
         </div>

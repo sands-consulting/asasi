@@ -50,11 +50,11 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'App\Events\VendorApproved' => [
-            'App\Listeners\VendorApprovedListener',
+            'App\Listeners\NotifyVendorApproval',
         ],
 
         'App\Events\VendorRejected' => [
-            'App\Listeners\VendorRejectedListener',
+            'App\Listeners\NotifyVendorRejection',
         ],
 
         'App\Events\EvaluatorAssigned' => [

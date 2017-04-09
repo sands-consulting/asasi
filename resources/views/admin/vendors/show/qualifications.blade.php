@@ -26,11 +26,11 @@
         @if($qualification->type->validity)
         <tr>
             <th class="col-xs-3">{{ trans('qualification-types.attributes.start_at') }}</th>
-            <td>{{ $qualification->start_at->format('d/m/Y') }}</td>
+            <td>{{ $qualification->start_at ? Carbon\Carbon::parse($qualification->start_at)->format('d/m/Y') : blank_icon(null) }}</td>
         </tr>
         <tr>
             <th class="col-xs-3">{{ trans('qualification-types.attributes.end_at') }}</th>
-            <td>{{ $qualification->end_at->format('d/m/Y') }}</td>
+            <td>{{ $qualification->end_at ? Carbon\Carbon::parse($qualification->end_at)->format('d/m/Y') : blank_icon(null) }}</td>
         </tr>
         @endif
     

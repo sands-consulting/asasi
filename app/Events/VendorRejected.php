@@ -30,6 +30,6 @@ class VendorRejected extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['notifications'];
+        return [];
     }
 }

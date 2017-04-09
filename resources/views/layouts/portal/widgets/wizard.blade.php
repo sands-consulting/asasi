@@ -59,4 +59,14 @@
         </ul>
     </div>
 </div></div>
+
+@if(Auth::user()->vendor->status == 'rejected')
+<div class="panel bg-warning">
+    <div class="panel-body">
+        {{ trans('app.widgets.portal.wizard.rejection') }}
+        <br>
+        <strong>{{ Auth::user()->vendor->histories()->whereAction('reject')->orderBy('created_at', 'desc')->first()->remarks }}</strong>
+    </div>
+</div>
+@endif
 @endif

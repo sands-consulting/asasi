@@ -16,7 +16,7 @@
         @endcan
         
         @can('reject', $vendor)
-        <a href="{{ route('admin.vendors.reject', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#reject-modal">
+        <a href="{{ route('admin.vendors.reject', $vendor->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#modal-reject">
             <i class=" icon-cross2"></i> <span>{{ trans('vendors.buttons.reject') }}</span>
         </a>
         @endcan
@@ -93,4 +93,6 @@
         </div>
     </div>
 </div>
+
+@include('admin.vendors.modals.reject')
 @endsection

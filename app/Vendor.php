@@ -118,7 +118,7 @@ class Vendor extends Model
      * Relationship
      */
 
-    public function logs()
+    public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
