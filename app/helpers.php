@@ -54,6 +54,11 @@ function blank_icon($value = null)
     return empty($value) ? '<i class="icon-cross2"></i>' : $value;
 }
 
+function boolean_icon($value = false)
+{
+    return '<i class="icon-' . ($value ? 'checkmark3' : 'cross2') . '"></i>';
+}
+
 function body_classes($additional)
 {
     $current_route      = Route::getCurrentRoute()->getAction();

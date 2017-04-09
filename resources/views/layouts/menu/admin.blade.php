@@ -106,7 +106,7 @@
 
     @can('index', App\PaymentGateway::class)
     <li class="{{ is_path_active('admin/payment-gateways*') }}">
-        <a href="{{ route('admin.payment-gateways.index') }}"><i class="icon-cog3"></i> <span>{{ trans('menu.admin.payment-gateways') }}</span></a>
+        <a href="{{ route('admin.payment-gateways.index') }}"><i class="icon-wallet"></i> <span>{{ trans('menu.admin.payment-gateways') }}</span></a>
     </li>
     @endcan
 

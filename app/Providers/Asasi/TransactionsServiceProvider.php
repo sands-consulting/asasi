@@ -19,9 +19,9 @@ class TransactionsServiceProvider extends ServiceProvider
         Gate::policy('App\TaxCode', 'App\Policies\Asasi\TaxCodePolicy');
         Gate::policy('App\Transaction', 'App\Policies\Asasi\TransactionPolicy');
 
-        app('policy')->register('App\Http\Controllers\Admin\PaymentGatewaysController', 'App\Policies\PaymentGatewayPolicy');
-        app('policy')->register('App\Http\Controllers\Admin\TaxCodesController', 'App\Policies\TaxCodePolicy');
-        app('policy')->register('App\Http\Controllers\Admin\TransactionsController', 'App\Policies\TransactionPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\PaymentGatewaysController', 'App\Policies\Asasi\PaymentGatewayPolicy');
+        app('policy')->register('App\Http\Controllers\Admin\TaxCodesController', 'App\Policies\Asasi\TaxCodePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\TransactionsController', 'App\Policies\Asasi\TransactionPolicy');
     }
 
     /**

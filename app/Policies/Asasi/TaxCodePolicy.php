@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace App\Policies\Asasi;
 
 use App\TaxCode;
 use App\User;
