@@ -20,6 +20,10 @@ class SettingSeeder extends Seeder
 
         $settings = [
             [
+                'key' => 'app_name',
+                'value' => 'PROMPT',
+            ],
+            [
                 'key' => 'currency',
                 'value' => 'MYR'
             ],

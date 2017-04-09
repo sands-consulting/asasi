@@ -30,8 +30,8 @@
 			</tbody>
 		</table>
 
-		{!! Former::checkbox('default')->label('payment-gateways.attributes.default') !!}
 		{!! Former::hidden('default')->forceValue(0) !!}
+		{!! Former::checkbox('default')->label('payment-gateways.attributes.default') !!}
 
 		<div class="form-group">
 			<label class="control-label col-md-4 col-xs-12">{{ trans('payment-gateways.attributes.organizations')}}</label>

@@ -27,7 +27,7 @@ class PaymentGatewaysController extends Controller
         $inputs  = $request->except('settings', 'organizations');
         $gateway = PaymentGatewayService::create(new PaymentGateway, $inputs);
         PaymentGatewayService::settings($gateway, $request->input('settings'));
-        PaymentGatewayService::organizations($gateway, $request->input('organizations'));
+        PaymentGatewayService::organizations($gateway, $request->input('organizations', []));
 
         return redirect()
             ->route('admin.payment-gateways.index')
@@ -47,7 +47,7 @@ class PaymentGatewaysController extends Controller
         $inputs  = $request->except('settings', 'organizations');
         $gateway = PaymentGatewayService::create($gateway, $inputs);
         PaymentGatewayService::settings($gateway, $request->input('settings'));
-        PaymentGatewayService::organizations($gateway, $request->input('organizations'));
+        PaymentGatewayService::organizations($gateway, $request->input('organizations', []));
 
         return redirect()
             ->route('admin.payment-gateways.index')

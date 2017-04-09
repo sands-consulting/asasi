@@ -34,7 +34,7 @@ class Transaction extends Model
     ];
 
     protected $attributes = [
-        'status' => 'new'
+        'status' => 'pending'
     ];
 
     protected $searchable = [
@@ -74,6 +74,11 @@ class Transaction extends Model
         $this->tax       = $this->lines()->sum('tax');
         $this->total     = $this->lines()->sum('total');
         return $this;
+    }
+
+    public function scopePending($query)
+    {
+        return $query->whereStatus('pending');
     }
 
     public static function boot()

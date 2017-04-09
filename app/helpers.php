@@ -122,9 +122,16 @@ function get_initial($str, $length = 2)
     return $initial;
 }
 
-function setting($key, $default=null)
+function setting($key, $default=null, $context=null)
 {
-    $row = \App\Setting::whereKey($key)->first();
+    if($context)
+    {
+        $row = $context->settings()->whereKey($key)->first();
+    }
+    else
+    {
+        $row = \App\Setting::whereKey($key)->first();
+    }
 
     if($row)
     {

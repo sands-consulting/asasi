@@ -29,8 +29,12 @@ class PaymentGatewaySeeder extends Seeder
         ]);
         $gateway->organizations()->attach(Organization::first());
         $gateway->settings()->create([
-            'key' => 'api-key',
+            'key' => 'api_key',
             'value' => 'asdf1234'
+        ]);
+        $gateway->settings()->create([
+            'key' => 'collection_id',
+            'value' => 'cid'
         ]);
     }
 }

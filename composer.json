@@ -32,7 +32,9 @@
         "dhtmlx/connector-php": "dev-custom",
         "maatwebsite/excel": "^2.1",
         "barryvdh/laravel-ide-helper": "^2.3",
-        "laracasts/utilities": "~2.0"
+        "laracasts/utilities": "~2.0",
+        "php-http/guzzle6-adapter": "^1.1",
+        "jomweb/billplz": "~0.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

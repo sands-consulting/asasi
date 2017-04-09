@@ -54,8 +54,8 @@ class SubscriptionsController extends Controller
         }
 
         $subscription = SubscriptionService::subscribe($vendor, $package, Auth::user());
-        //$request->session()->put('transaction', $subscription->transaction->id);
-        //$request->session()->put('gateway', $gateway->id);
-        //return redirect(action(ucfirst($package->type)) . 'Controller@connect');
+        $request->session()->put('transaction', $subscription->transactionLine->transaction_id);
+        $request->session()->put('gateway', $gateway->id);
+        return redirect()->route('payments.' . $gateway->type);
     }
 }

@@ -96,6 +96,15 @@ class TransactionsServiceProvider extends ServiceProvider
 
             $router->resource('transactions', 'TransactionsController', [
                 'only' => ['index', 'show']]);
+
+            $router->group([
+                'namespace' => 'Payments',
+                'prefix' => 'payments',
+                'as' => 'payments.'
+            ], function($router) {
+                $router->get('billplz/connect', 'BillplzController@connect')->name('billplz');
+                $router->any('billplz/respond', 'BillplzController@respond')->name('billplz.response');
+            });
         });
     }
 }
