@@ -88,6 +88,7 @@ elixir(function(mix) {
         'components/datepicker.js',
         'components/search.js',
         'pages/vendors/form.js',
+        'pages/payment-gateways/form.js',
         'notification.js',
         'admin.js',
     ], 'public/assets/js/admin.js')

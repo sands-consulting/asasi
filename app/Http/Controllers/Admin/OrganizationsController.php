@@ -28,7 +28,7 @@ class OrganizationsController extends Controller
         $organization = OrganizationService::create(new Organization, $inputs);
         UserHistoryService::log($request->user(), 'create', $organization, $request->getClientIp());
         return redirect()
-            ->route('admin.organizations.edit', $organization->id)
+            ->route('admin.organizations.index')
             ->with('notice', trans('organizations.notices.created', ['name' => $organization->name]));
     }
 
@@ -43,7 +43,7 @@ class OrganizationsController extends Controller
         $organization = OrganizationService::update($organization, $inputs);
         UserHistoryService::log($request->user(), 'update', $organization, $request->getClientIp());
         return redirect()
-            ->route('admin.organizations.edit', $organization->id)
+            ->route('admin.organizations.index')
             ->with('notice', trans('organizations.notices.updated', ['name' => $organization->name]));
     }
 

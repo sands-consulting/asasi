@@ -2,7 +2,7 @@
 
 namespace App\Providers\Asasi;
 
-use App\Organization;
+use App\PaymentGateway;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -61,6 +61,9 @@ class TransactionsServiceProvider extends ServiceProvider
                     ->name('transactions.query');
 
                 $router->resource('transactions', 'TransactionsController');
+
+                //Fixme: to fix model binding
+                $router->model('payment_gateway', PaymentGateway::class);
 
                 // Payment Gateway
                 $router->put('payment-gateways/{payment_gateway}/restore', 'PaymentGatewaysController@restore')

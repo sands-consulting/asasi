@@ -54,7 +54,7 @@ class PaymentGatewaysDataTable extends DataTable
             [
                 'data' => 'type',
                 'name' => 'type',
-                'title' => trans('payment-gateways.attributes.fee')
+                'title' => trans('payment-gateways.attributes.type')
             ],
             [
                 'data' => 'prefix',

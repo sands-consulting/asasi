@@ -8,6 +8,7 @@ use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\PaymentGatewayRequest;
 use App\Services\PaymentGatewayService;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class PaymentGatewaysController extends Controller
 {
@@ -23,28 +24,33 @@ class PaymentGatewaysController extends Controller
 
     public function store(PaymentGatewayRequest $request)
     {
-        $inputs  = $request->input()->except('settings');
+        $inputs  = $request->except('settings', 'organizations');
         $gateway = PaymentGatewayService::create(new PaymentGateway, $inputs);
-        PaymentGateway::setting($gateway, $request->input()->only('settings'));
+        PaymentGatewayService::settings($gateway, $request->input('settings'));
+        PaymentGatewayService::organizations($gateway, $request->input('organizations'));
 
         return redirect()
-            ->route('admin.payment-gateways.edit', $gateway->id)
+            ->route('admin.payment-gateways.index')
             ->with('notice', trans('payment-gateways.notices.created', ['name' => $gateway->name]));
     }
 
     public function edit(PaymentGateway $gateway)
     {
+        JavaScript::put([
+            'settings' => $gateway->settings()->get()
+        ]);
         return view('admin.payment-gateways.edit', compact('gateway'));
     }
 
     public function update(PaymentGatewayRequest $request, PaymentGateway $gateway)
     {
-        $inputs  = $request->input()->except('settings');
+        $inputs  = $request->except('settings', 'organizations');
         $gateway = PaymentGatewayService::create($gateway, $inputs);
-        PaymentGateway::setting($gateway, $request->input()->only('settings'));
+        PaymentGatewayService::settings($gateway, $request->input('settings'));
+        PaymentGatewayService::organizations($gateway, $request->input('organizations'));
 
         return redirect()
-            ->route('admin.payment-gateways.edit', $gateway->id)
+            ->route('admin.payment-gateways.index')
             ->with('notice', trans('payment-gateways.notices.updated', ['name' => $gateway->name]));
     }
 
@@ -53,7 +59,7 @@ class PaymentGatewaysController extends Controller
         $gateway->name = $gateway->name . '-' . str_random(4);
         $gateway = PaymentGatewayService::duplicate($gateway);
         return redirect()
-            ->action('PaymentGatewaysController@edit', $gateway->getSlug())
+            ->route('admin.payment-gateways.index')
             ->with('success', trans('payment-gateways.created', ['name' => $gateway->name]));
     }
 

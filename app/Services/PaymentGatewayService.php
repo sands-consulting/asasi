@@ -7,21 +7,23 @@ use Sands\Asasi\Service\Exceptions\ServiceException;
 
 class PaymentGatewayService extends BaseService 
 {
-	public static function activate(PaymentGateway $gateway)
+	public static function settings(PaymentGateway $gateway, $settings)
     {
-        if($gateway->status == 'active')
-        {
-            throw new ServiceException('Activating ' . PaymentGateway::class, $gateway);
+        $exists = [];
+
+        foreach($settings as $data)
+        {  
+            $setting = $gateway->settings()->firstOrNew(['key' => $data['key']]);
+            $setting->value = $data['value'];
+            $setting->save();
+            $exists[] = $setting->id;
         }
-        $news->update(['status' => 'published']);
+
+        $gateway->settings()->whereNotIn('id', $exists)->delete();
     }
 
-    public static function deactivate(PaymentGateway $gateway)
+    public static function organizations(PaymentGateway $gateway, $organizations)
     {
-        if($gateway->status == 'inactive')
-        {
-            throw new ServiceException('Deactivating ' . PaymentGateway::class, $gateway);
-        }
-        $news->update(['status' => 'inactive']);
+        $gateway->organizations()->sync($organizations);
     }
 }

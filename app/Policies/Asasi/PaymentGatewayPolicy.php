@@ -67,7 +67,7 @@ class PaymentGatewayPolicy
      */
     public function update(User $auth, PaymentGateway $gateway)
     {
-        return $this->edit($gateway);
+        return $this->edit($auth, $gateway);
     }
 
     /**
@@ -128,45 +128,5 @@ class PaymentGatewayPolicy
     public function duplicate(User $auth, PaymentGateway $gateway)
     {
         return $auth->hasPermission('payment-gateway:duplicate');
-    }
-
-    /**
-     * @param User $auth
-     * @param PaymentGateway $gateway
-     * @return bool
-     */
-    public function paid(User $auth, PaymentGateway $gateway)
-    {
-        return $auth->hasPermission('payment-gateway:paid') && empty($gateway->invoice_number);
-    }
-
-    /**
-     * @param User $auth
-     * @param PaymentGateway $gateway
-     * @return bool
-     */
-    public function cancel(User $auth, PaymentGateway $gateway)
-    {
-        return $auth->hasPermission('payment-gateway:cancel');
-    }
-
-    /**
-     * @param User $auth
-     * @param PaymentGateway $gateway
-     * @return bool
-     */
-    public function refund(User $auth, PaymentGateway $gateway)
-    {
-        return $auth->hasPermission('payment-gateway:refund');
-    }
-
-    /**
-     * @param User $auth
-     * @param PaymentGateway $gateway
-     * @return bool
-     */
-    public function query(User $auth, PaymentGateway $gateway)
-    {
-        return $auth->hasPermission('payment-gateway:query');
     }
 }
