@@ -183,7 +183,22 @@ return [
             'title' => 'Purchases'
         ],
         'show' => [
-            'back' => 'Dashboard'
+            'back' => 'Dashboard',
+            'details' => [
+                'details' => [
+                    'title' =>  'Details',
+                ],
+                'capital' => [
+                    'title' =>'Capital',
+                ],
+                'contact_person' => [
+                    'title' => 'Contact Person',
+                ],
+                'address' => [
+                    'title' => 'Address'
+                ]
+
+            ]
         ],
         '_form' => [
             'nav' => [
