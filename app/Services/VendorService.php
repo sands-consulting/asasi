@@ -250,15 +250,17 @@ class VendorService extends BaseService
             {
                 $code = $type->codes()->first();
 
-                $vendor->codes()->firstOrCreate([
+                $vendorCode = $vendor->codes()->firstOrCreate([
                     'type_id' => $type->id,
                     'code_id' => $code->id,
                 ]);
+
+                $exists[] = $vendorCode->id;
             }
 
             if($type->type == 'list' && isset($codes))
             {
-                $exists = [];
+                
                 foreach($codes as $data) {
                     $code = QualificationCode::whereId($data['code_id'])->first();
 
@@ -287,10 +289,10 @@ class VendorService extends BaseService
                         }
                     }
                 }
-
-                $vendor->codes()->whereNotIn('id', $exists)->delete();
             }
         }
+
+        $vendor->codes()->whereNotIn('id', $exists)->delete();
     }
 
     public static function shareholders(Vendor $vendor, $shareholders)

@@ -78,6 +78,10 @@ const vmVendor = new Vue({
         } else {
           _vm.$data.submit = false;
         }
+
+        console.log(length);
+        console.log(iteration);
+        console.log(_vm.$data.submit);
       });
 
       for (var i = window.qualifications.length - 1; i >= 0; i--) {
