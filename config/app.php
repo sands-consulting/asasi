@@ -218,7 +218,6 @@ return [
         App\Providers\Modules\ProjectsServiceProvider::class,
         App\Providers\Modules\ReportsServiceProvider::class,
         App\Providers\Modules\QualificationsServiceProvider::class,
-        App\Providers\Modules\TaxCodesServiceProvider::class,
         App\Providers\Modules\VendorsServiceProvider::class,
 
         /*
