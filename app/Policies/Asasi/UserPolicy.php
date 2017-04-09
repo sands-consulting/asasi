@@ -66,7 +66,7 @@ class UserPolicy
      */
     public function update(User $auth, User $user)
     {
-        return $this->edit($user);
+        return $this->edit($auth, $user);
     }
 
     /**
