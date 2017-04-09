@@ -22,14 +22,17 @@ class Package extends Model
         'validity_type',
         'validity_quantity',
         'meta',
-        'fee_amount',
-        'fee_tax_code',
-        'fee_tax_rate',
+        'fee',
+        'tax_code_id',
         'status',
     ];
 
     protected $hidden = [
         // hidden column
+    ];
+
+    protected $appends = [
+        'validity'
     ];
 
     protected $attributes = [
@@ -42,9 +45,7 @@ class Package extends Model
         'validity_type',
         'validity_quantity',
         'meta',
-        'fee_amount',
-        'fee_tax_code',
-        'fee_tax_rate',
+        'fee',
         'status',
     ];
 
@@ -53,9 +54,7 @@ class Package extends Model
         'validity_type',
         'validity_quantity',
         'meta',
-        'fee_amount',
-        'fee_tax_code',
-        'fee_tax_rate',
+        'fee',
         'status',
     ];
 
@@ -95,17 +94,14 @@ class Package extends Model
         }
     }
 
-    /* 
-     * State controls 
-     */
-    public function canActivate()
+    public function getValidityAttribute()
     {
-        return $this->status != 'active';
+        return trans_choice('packages.validity.' . $this->validity_type, $this->validity_quantity);
     }
 
-    public function canDeactivate()
+    public function taxCode()
     {
-        return $this->status != 'inactive';
+        return $this->belongsTo(TaxCode::class);
     }
 
     public function sluggable()
@@ -125,10 +121,4 @@ class Package extends Model
     {
         return ['' => 'Select One'] + Package::pluck('name', 'id')->toArray();
     }
-
-    public static function boot()
-    {
-        parent::boot();
-    }
-
 }

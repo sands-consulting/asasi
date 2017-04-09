@@ -22,17 +22,15 @@ class PaymentGatewaySeeder extends Seeder
 
         $gateway = PaymentGatewayService::create(new PaymentGateway, [
             'name' => 'Prompt Owner',
-            'label' => 'BPZ',
-            'type' => 'billplz'
+            'label' => 'Online Banking by BillPlz',
+            'type' => 'billplz',
+            'prefix' => 'PRMPT',
+            'default' => true,
         ]);
         $gateway->organizations()->attach(Organization::first());
         $gateway->settings()->create([
             'key' => 'api-key',
             'value' => 'asdf1234'
-        ]);
-        $gateway->settings()->create([
-            'key' => 'collection-id',
-            'value' => 'cid1234'
         ]);
     }
 }

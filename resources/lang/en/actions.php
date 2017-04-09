@@ -27,6 +27,7 @@ return [
 	'save' => 'Save',
 	'search' => 'Search',
 	'send' => 'Send',
+	'select' => 'Select',
 	'show' => 'Show',
 	'submit' => 'Submit',
 	'suspend' => 'Suspend',

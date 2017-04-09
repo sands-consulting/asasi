@@ -4,8 +4,8 @@ return [
     'title' => 'Subscriptions',
     'attributes' => [
         'name' => 'Subscription Name',
-        'started_at' => 'Started At',
-        'expired_at' => 'Expired At',
+        'start_at' => 'Started At',
+        'end_at' => 'Expired At',
         'package_id' => 'Package',
         'vendor_id' => 'Vendor',
         'remarks' => 'Remarks',
@@ -37,42 +37,42 @@ return [
     ],
 
 	'views' => [
-		'index' => [
-            'title'    => 'Subscriptions',
-            'status'   => 'Status',
-            'keywords' => 'Keywords',
-            
-            'public' => [
-                'title' => 'Subscription Packages',
-                'details' => 'Subscription Details',
-            ]
-		],
-        'show' => [
-            'title' => 'View Subscription',
-            'admin' => [
-                'title' => 'View Subscription'
+        'admin' => [
+    		'index' => [
+                'title'    => 'Subscriptions',
+                'status'   => 'Status',
+                'keywords' => 'Keywords',
             ],
+            'show' => [
+                'title' => 'View Subscription',
+                'admin' => [
+                    'title' => 'View Subscription'
+                ],
+            ],
+            'create' => [
+                'title' => 'Select Package',
+                'package' => [
+                    'name' => 'Name',
+                    'fee' => 'Fee'
+                ]
+            ],
+            'edit' => [
+                'title' => 'Edit',
+            ]
         ],
         'create' => [
-            'title' => 'Select Package',
-            'package' => [
-                'name' => 'Name',
-                'fee' => 'Fee'
-            ]
-        ],
-        'edit' => [
-            'title' => 'Edit',
-        ],
-        'apply' => [
-            'title' => 'Subscription Application Form',
-        ],
-        'current' => [
-            'title' => 'Your Subscription',
-            'no-subscription' => 'You have not subscribed to any package yet.'
-        ],
-        'history' => [ 
-            'title' => 'Subscriptions history',
-            'list'  => 'List of Subscription History'
+            'packages' => [
+                'title' => 'Select Package'
+            ],
+            'confirmation' => [
+                'title' => 'Subscription Confirmation',
+                'fee' => 'Fee',
+                'tax' => 'Tax',
+                'amount' => 'Amount',
+                'gateway' => 'Payment Gateway',
+                'please-select' => 'Please select',
+                'pay-now' => 'Proceed to Payment'
+            ],
         ]
 	]
 ];

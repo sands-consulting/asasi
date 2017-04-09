@@ -9,13 +9,19 @@ return [
         'validity_type'     => 'Validity Type',
         'validity_quantity' => 'Validity Quantity',
         'meta'              => 'Meta',
-        'fee_amount'        => 'Fee Amount',
-        'fee_tax_code'      => 'Fee Tax Code',
-        'fee_tax_rate'      => 'Fee Tax Rate',
-        'label_color'       => 'Label Color',
+        'fee'               => 'Fee',
+        'color'             => 'Color',
         'status'            => 'Status',
         'created_at'        => 'Created At',
         'updated_at'        => 'Last Updated At',
+        'validity'          => 'Validity',
+        'tax_code'          => 'Tax Code'
+    ],
+
+    'validity' => [
+        'days' => 'One day|:count days',
+        'months' => 'One month|:count months',
+        'years' => 'One year|:count years'
     ],
 
     'buttons' => [

@@ -17,6 +17,7 @@ class PaymentGateway extends Model
         'name',
         'label',
         'type',
+        'prefix',
         'status'
     ];
 
