@@ -44,8 +44,16 @@ class VendorsController extends Controller
     public function store(VendorRequest $request)
     {
         $inputs = $request->all();
+        
         $vendor = VendorService::create(new Vendor, $inputs);
+        VendorService::address($vendor, $request->input('address', []));
+        VendorService::accounts($vendor, $request->input('accounts', []));
+        VendorService::employees($vendor, $request->input('employees', []));
+        VendorService::files($vendor, $request->input('files', []), $request->file('files'));
+        VendorService::qualifications($vendor, $request->input('qualifications', []));
+        VendorService::shareholders($vendor, $request->input('shareholders', []));
 
+        UserHistoryService::log($request->user(), 'create', $vendor, $request->getClientIp());
         return redirect()
             ->route('vendors.pending', $vendor->id)
             ->with('notice', trans('vendors.notices.created', ['name' => $vendor->name]));
@@ -70,9 +78,17 @@ class VendorsController extends Controller
     public function update(VendorRequest $request, Vendor $vendor)
     {
         $inputs = $request->all();
+        $status = isset($inputs['submit']) ? 'pending' : $vendor->status;
+        
+        VendorService::update($vendor, $inputs, ['status' => $status]);
+        VendorService::address($vendor, $request->input('address', []));
+        VendorService::accounts($vendor, $request->input('accounts', []));
+        VendorService::employees($vendor, $request->input('employees', []));
+        VendorService::files($vendor, $request->input('files', []), $request->file('files'));
+        VendorService::qualifications($vendor, $request->input('qualifications', []));
+        VendorService::shareholders($vendor, $request->input('shareholders', []));
 
-        $vendor = VendorService::update($vendor, $inputs);
-        UserHistoryService::log($request->user(), 'Update', $vendor, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'update', $vendor, $request->getClientIp());
         return redirect()
             ->route('admin.vendors.edit', $vendor->id)
             ->with('notice', trans('vendors.notices.updated', ['name' => $vendor->name]));
