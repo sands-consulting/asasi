@@ -71,7 +71,7 @@ return [
             'name' => 'Name',
             'identity_number' => 'Identity Number',
             'nationality' => 'Nationality',
-            'percentage' => 'Percentage'
+            'percentage' => 'Percentage (%)'
         ],
     ],
 
