@@ -94,11 +94,11 @@
 				<div class="panel-body">
 					<p>{{ trans('vendors.attributes.tax_1_number') }}
 						<br>
-						<span class="text-muted">{{ blank_icon($vendor->tax_1_number) }}</span>
+						<span class="text-muted">{!! blank_icon($vendor->tax_1_number) !!}</span>
 					</p>
 					<p>{{ trans('vendors.attributes.tax_2_number') }}
 						<br>
-						<span class="text-muted">{{ blank_icon($vendor->tax_2_number) }}</span>
+						<span class="text-muted">{!! blank_icon($vendor->tax_2_number) !!}</span>
 					</p>
 				</div>
 			</div>
