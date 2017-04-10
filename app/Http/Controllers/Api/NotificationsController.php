@@ -13,6 +13,7 @@ class NotificationsController extends Controller
     {
         $notifications = Notification::whereUserId($request->user()->id)
             ->status($request->input('status'))
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $notifications = $notifications->each(function($notification) {

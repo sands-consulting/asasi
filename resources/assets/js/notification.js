@@ -23,7 +23,6 @@ $(function () {
               this.count = response.data.length;
           });
         },
-
         listen() {
           socket.on('notifications', function() {
             this.getNotification(this.source);
