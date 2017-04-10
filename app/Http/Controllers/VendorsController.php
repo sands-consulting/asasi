@@ -18,6 +18,7 @@ class VendorsController extends Controller
     public function __construct()
     {
         $this->middleware('redirect.application')->except(['edit', 'update']);
+        $this->middleware('redirect.pending')->except('show');
         $this->middleware('redirect.subscription');
     }
 
@@ -59,7 +60,7 @@ class VendorsController extends Controller
         {
             event(new VendorApplicationSubmitted($vendor));
             return redirect()
-                ->route('vendors.pending', $vendor->id);
+                ->route('vendors.show', $vendor->id);
         }
         else
         {

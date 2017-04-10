@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'policy' => \Sands\Asasi\Policy\Middleware\AuthorizeControllerAccess::class,
         'redirect.application' => \App\Http\Middleware\RedirectToApplication::class,
+        'redirect.pending' => \App\Http\Middleware\RedirectToPending::class,
         'redirect.subscription' => \App\Http\Middleware\RedirectToSubscription::class,
     ];
 }
