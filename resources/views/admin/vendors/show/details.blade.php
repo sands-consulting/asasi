@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane active" id="tab-vendor-details">
 	<div class="row">
-		<div class="col-xs-12 col-md-6">
+		<div class="col-xs-12 col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h6 class="panel-title">{{ trans('vendors.views.admin.show.details.address.title') }}</h6>
@@ -24,33 +24,9 @@
 					@endif
 				</div>
 			</div>
+        </div>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h6 class="panel-title">{{ trans('vendors.views.admin.show.details.contact') }}</h6>
-				</div>
-				<table class="table">
-					<tr>
-						<th>{{ trans('vendors.attributes.contact_telephone') }}</th>
-						<td>{!! blank_icon($vendor->contact_telephone) !!}</td>
-					</tr>
-					<tr>
-						<th>{{ trans('vendors.attributes.contact_fax') }}</th>
-						<td>{!! blank_icon($vendor->contact_fax) !!}</td>
-					</tr>
-					<tr>
-						<th>{{ trans('vendors.attributes.contact_email') }}</th>
-						<td>{!! blank_icon($vendor->contact_email) !!}</td>
-					</tr>
-					<tr>
-						<th>{{ trans('vendors.attributes.contact_website') }}</th>
-						<td>{!! blank_icon($vendor->contact_website) !!}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-md-3">
+		<div class="col-xs-12 col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h6 class="panel-title">{{ trans('vendors.views.admin.show.details.contact-person') }}</h6>
@@ -65,7 +41,8 @@
 					</p>
 				</div>
 			</div>
-
+        </div>
+        <div class="col-xs-12 col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h6 class="panel-title">{{ trans('vendors.views.admin.show.details.capital') }}</h6>
@@ -82,8 +59,34 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="col-xs-12 col-md-3">
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="panel-title">{{ trans('vendors.views.admin.show.details.contact') }}</h6>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>{{ trans('vendors.attributes.contact_telephone') }}</th>
+                        <td>{!! blank_icon($vendor->contact_telephone) !!}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ trans('vendors.attributes.contact_fax') }}</th>
+                        <td>{!! blank_icon($vendor->contact_fax) !!}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ trans('vendors.attributes.contact_email') }}</th>
+                        <td>{!! blank_icon($vendor->contact_email) !!}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ trans('vendors.attributes.contact_website') }}</th>
+                        <td>{!! blank_icon($vendor->contact_website) !!}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+		<div class="col-xs-12 col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h6 class="panel-title">{{ trans('vendors.views.admin.show.details.tax') }}</h6>

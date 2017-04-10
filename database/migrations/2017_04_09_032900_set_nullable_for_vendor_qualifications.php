@@ -29,10 +29,10 @@ class SetNullableForVendorQualifications extends Migration
     public function down()
     {
         Schema::table('vendor_qualifications', function (Blueprint $table) {
-            $table->string('reference_one')->nullable(false)->change();
-            $table->string('reference_two')->nullable(false)->change();
-            $table->date('start_at')->nullable(false)->change();
-            $table->date('end_at')->nullable(false)->change();
+            $table->string('reference_one')->change();
+            $table->string('reference_two')->change();
+            $table->date('start_at')->change();
+            $table->date('end_at')->change();
         });
     }
 }

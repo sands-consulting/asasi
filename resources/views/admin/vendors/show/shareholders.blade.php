@@ -7,6 +7,7 @@
                     <th>{{ trans('vendors.attributes.shareholders.name') }}</th>
                     <th>{{ trans('vendors.attributes.shareholders.identity_number') }}</th>
                     <th>{{ trans('vendors.attributes.shareholders.nationality') }}</th>
+                    <th>{{ trans('vendors.attributes.shareholders.percentage') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <td>{{ $shareholder->name }}</td>
                     <td>{{ $shareholder->identity_number }}</td>
                     <td>{{ $shareholder->nationality->name }}</td>
+                    <td>{{ $shareholder->percentage }}</td>
                 </tr>
             @empty
                 <tr>
