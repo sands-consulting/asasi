@@ -18,20 +18,20 @@ class NotificationsServiceProvider extends ServiceProvider
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web'
         ], function ($router) {
-            $router->resource('notifications', 'NotificationsController',
-                ['only' => ['index', 'show']]);
+            $router->resource('notifications', 'NotificationsController', ['only' => ['index', 'show']]);
         });
 
         // API Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers\Api',
             'middleware' => 'web',
-            'prefix' => 'api'
+            'prefix' => 'api',
+            'as' => 'api.',
         ], function ($router) {
-            $router->get('notifications', [
-                'as' => 'api.notifications',
-                'uses' => 'NotificationsController@index'
-            ]);
+            $router->get('notifications', 'NotificationsController@index')
+                ->name('notifications.index');
+            $router->put('notifications/read', 'NotificationsController@read')
+                ->name('notifications.read');
         });
     }
 }
