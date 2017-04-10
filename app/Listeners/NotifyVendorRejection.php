@@ -29,6 +29,12 @@ class NotifyVendorRejection
         foreach($users as $user)
         {
             $user->notify(new VendorRejected($event->vendor, $event->remarks));
+            $user->notifications()->create([
+                'content' => trans('vendors.notifications.rejected', ['vendor' => $event->vendor->name]),
+                'link' => '#',
+                'item_type' => 'App\Vendor',
+                'item_id' => $event->vendor->id
+            ]);
         }
     }
 }
