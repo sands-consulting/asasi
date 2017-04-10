@@ -94,6 +94,8 @@ class TransactionsServiceProvider extends ServiceProvider
                 $router->resource('tax-codes', 'TaxCodesController');
             });
 
+            $router->get('transactions/{transaction}/invoice', 'TransactionsController@invoice')->name('transactions.invoice');
+            $router->get('transactions/{transaction}/statement', 'TransactionsController@statement')->name('transactions.statement');
             $router->resource('transactions', 'TransactionsController', [
                 'only' => ['index', 'show']]);
 
@@ -102,8 +104,8 @@ class TransactionsServiceProvider extends ServiceProvider
                 'prefix' => 'payments',
                 'as' => 'payments.'
             ], function($router) {
-                $router->get('billplz/connect', 'BillplzController@connect')->name('billplz');
-                $router->any('billplz/respond', 'BillplzController@respond')->name('billplz.response');
+                $router->get('billplz/connect',     'BillplzController@connect')->name('billplz');
+                $router->any('billplz/response',    'BillplzController@response')->name('billplz.response');
             });
         });
     }

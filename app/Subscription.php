@@ -94,6 +94,14 @@ class Subscription extends Authenticatable
         return sprintf("%s\n%s - %s (%s)\n%s", $this->package->name, $this->start_at->format('d/m/Y'), $this->end_at->format('d/m/Y'), $this->package->validity, $this->number);
     }
 
+    public function paid()
+    {
+        $this->subscriber->update(['status' => 'active']);
+        $this->status = 'active';
+
+        return $this;
+    }
+
     public static function boot()
     {
         parent::boot();

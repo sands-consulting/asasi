@@ -188,7 +188,9 @@ return [
                 ],
                 'subscriptions' => [
                     'empty' => 'No subscription created.',
-                    'certificate' => 'Certificate'
+                    'certificate' => 'Certificate',
+                    'invoice' => 'Invoice',
+                    'statement' => 'Statement'
                 ]
             ],
             'form' => [

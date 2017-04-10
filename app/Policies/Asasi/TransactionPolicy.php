@@ -27,9 +27,16 @@ class TransactionPolicy
      * @param User $auth
      * @return bool
      */
-    public function show(User $auth)
+    public function show(User $auth, Transaction $transaction)
     {
-        return $auth->hasPermission('transaction:show');
+        if($auth->hasPermission('access:admin'))
+        {
+            return $auth->hasPermission('transaction:show');
+        }
+        else
+        {
+            return $auth->hasPermission('transaction:show') && $auth->vendor == $transaction->payer;
+        }
     }
 
     /**
@@ -168,5 +175,10 @@ class TransactionPolicy
     public function query(User $auth, Transaction $txn)
     {
         return $auth->hasPermission('transaction:query');
+    }
+
+    public function invoice(User $auth, Transaction $transaction)
+    {
+        $this->show($auth, $transaction);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App;
 
-//use Cviebrock\EloquentSluggable\Sluggable;
+use App\Traits\DateAccessor;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
-use App\Traits\DateAccessor;
 
 class Transaction extends Model
 {
@@ -31,16 +31,15 @@ class Transaction extends Model
     ];
 
     protected $hidden = [
+        //
     ];
 
     protected $attributes = [
         'status' => 'pending'
     ];
 
-    protected $searchable = [
-    ];
-
-    protected $sortable = [
+    protected $dates = [
+        'paid_at'
     ];
 
     public function histories()
@@ -73,6 +72,27 @@ class Transaction extends Model
         $this->sub_total = $this->lines()->sum('sub_total');
         $this->tax       = $this->lines()->sum('tax');
         $this->total     = $this->lines()->sum('total');
+
+        return $this;
+    }
+
+    public function paid()
+    {
+        $running = Setting::whereKey('invoice.' . date('Y'))->first();
+
+        if($running)
+        {
+            $running->update(['value' => (int) $running->value + 1]);
+        }
+        else
+        {
+            $running = Setting::create(['key' => 'invoice.' . date('Y'), 'value' => 1]);
+        }
+
+        $this->invoice_number   = sprintf('%d-%08d', date('Y'), $running->value);
+        $this->status           = 'paid';
+        $this->paid_at          = Carbon::now();
+
         return $this;
     }
 

@@ -6,6 +6,7 @@ use App\PaymentGateway;
 use App\Transaction;
 use App\Http\Controllers\Controller;
 use Billplz\Client;
+use Carbon\Carbon;
 use Http\Adapter\Guzzle6\Client as GuzzleHttpClient;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
@@ -37,7 +38,7 @@ class BillplzController extends Controller
 			$transaction->user->email,
 			null,
 			$transaction->user->name,
-			Money::MYR($transaction->total),
+			Money::MYR(intval($transaction->total * 100)),
 			route('payments.billplz.response'),
 			trans('transactions.description', ['name' => setting('app-name')]),
 			[
@@ -60,6 +61,58 @@ class BillplzController extends Controller
         	$transaction->gateway_request_message	= json_encode($data);
         	return redirect()->back()->with('alert', trans('transactions.notices.e3'));
         }
+	}
+
+	public function response(Request $request)
+	{
+		$transaction 	= Transaction::pending()->find($request->session()->get('transaction'));
+
+		if(empty($transaction))
+		{
+			return view('transactions.error')->with('message', trans('transaction.notices.x1'));
+		}
+
+		$gateway		= PaymentGateway::whereStatus('active')->whereType('billplz')->find($request->session()->get('gateway'));
+
+		if(empty($gateway))
+		{
+			return redirect()->route('transactions.show', $transaction->id)->with('message', trans('transaction.notices.x2'));
+		}
+
+		if($request->input('billplz.id') != $transaction->gateway_reference_one)
+		{
+			return vredirect()->route('transactions.show', $transaction->id)->with('message', trans('transaction.notices.x3'));
+		}
+
+		$billplz	= $this->billplz($gateway);
+		$response	= $billplz->bill()->show($transaction->gateway_reference_one);
+		$data		= json_decode($response->getBody());
+
+		if(empty($data))
+		{
+			return redirect()->route('transactions.show', $transaction->id)->with('message', trans('transaction.notices.x4'));
+		}
+
+		if($data->id != $transaction->gateway_reference_one)
+		{
+			return redirect()->route('transactions.show', $transaction->id)->with('message', trans('transaction.notices.x4'));
+		}
+
+        if ($transaction->status == 'pending' && $data->state == "paid") {
+        	$transaction->gateway_response_message	= json_encode($data);
+        	$transaction->gateway_response_code		= 'paid';
+        	$transaction->paid()->save();
+
+            foreach($transaction->lines as $line)
+            {
+            	$line->item->paid()->save();
+            }
+        }
+
+        $request->session()->forget('transaction');
+        $request->session()->forget('gateway');
+
+        return redirect()->route('transactions.show', $transaction->id);
 	}
 
 	protected function billplz(PaymentGateway $gateway)

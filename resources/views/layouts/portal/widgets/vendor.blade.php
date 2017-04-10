@@ -1,7 +1,7 @@
 <div class="prompt-box bg-white panel-vendor">
 	<h1 class="title">{{ Auth::user()->vendor->name }}</h1>
 	@if(Auth::user()->vendor->status == 'active')
-	<span class="label label-warning">
+	<span class="label label-success">
 	@elseif(Auth::user()->vendor->status == 'pending')
 	<span class="label label-warning">
 	@elseif(Auth::user()->vendor->status == 'draft')

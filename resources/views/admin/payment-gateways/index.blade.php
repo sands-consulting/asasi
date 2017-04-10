@@ -7,7 +7,7 @@
 <div class="heading-elements">
     <div class="heading-btn-group">
         <a href="{{ route('admin.payment-gateways.create') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
-            <i class=" icon-plus-circle2"></i> <span>{{ trans('gateways.buttons.create') }}</span>
+            <i class=" icon-plus-circle2"></i> <span>{{ trans('payment-gateways.buttons.create') }}</span>
         </a>
     </div>
 </div>

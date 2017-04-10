@@ -28,7 +28,7 @@
                             @endcan
                         @else
                             @if($subscription->status != 'pending')
-                            {!! link_to_route('subscriptions.show', trans('vendors.views.admin.show.subscriptions.certificate'), $subscription->id, ['class' => 'btn btn-xs bg-blue-700']) !!}
+                            {!! link_to_route('transactions.invoice', trans('vendors.views.admin.show.subscriptions.invoice'), $subscription->transactionLine->transaction_id, ['class' => 'btn btn-xs bg-blue-700', 'target' => '_blank']) !!}
                             @endif
                         @endif
                     </td>
