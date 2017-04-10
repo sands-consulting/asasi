@@ -27,8 +27,10 @@
                             <a href="{{ route('admin.subscriptions.show', $subscription->id) }}" class="btn btn-xs bg-blue-700" target="_blank"><i class="icon-file-text2"></i></a>
                             @endcan
                         @else
-                            @if($subscription->status != 'pending')
+                            @if($subscription->status == 'active')
                             {!! link_to_route('transactions.invoice', trans('vendors.views.admin.show.subscriptions.invoice'), $subscription->transactionLine->transaction_id, ['class' => 'btn btn-xs bg-blue-700', 'target' => '_blank']) !!}
+                            @else
+                            {!! link_to_route('transactions.statement', trans('vendors.views.admin.show.subscriptions.statement'), $subscription->transactionLine->transaction_id, ['class' => 'btn btn-xs bg-blue-700', 'target' => '_blank']) !!}
                             @endif
                         @endif
                     </td>

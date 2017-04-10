@@ -181,4 +181,9 @@ class TransactionPolicy
     {
         $this->show($auth, $transaction);
     }
+
+    public function statement(User $auth, Transaction $transaction)
+    {
+        $this->show($auth, $transaction);
+    }
 }

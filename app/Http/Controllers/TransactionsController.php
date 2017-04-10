@@ -14,8 +14,13 @@ class TransactionsController extends Controller
         return view('transactions.show', compact('transaction'));
     }
 
-    public function invoice(Transaction $transaction, Request $request)
+    public function invoice(Transaction $transaction)
     {
         return view('transactions.invoice', compact('transaction'));
+    }
+
+    public function statement(Transaction $transaction)
+    {
+        return view('transactions.statement', compact('transaction'));
     }
 }

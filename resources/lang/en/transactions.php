@@ -14,7 +14,7 @@ return [
         'price' => 'Price',
         'tax' => 'Tax',
         'total' => 'Total',
-        'sub_total' => 'Sub Total'
+        'sub_total' => 'Sub Total',
     ],
 
     'buttons' => [
@@ -37,6 +37,14 @@ return [
 
     'views' => [
         'admin' => [
+            'invoice' => [
+                'title' => 'Invoice',
+                'payer' => 'Invoice To'
+            ],
+            'statement' => [
+                'title' => 'Statement',
+                'payer' => 'Statement For'
+            ]
         ],
         'show' => [
             'title' => 'Transaction Status',
