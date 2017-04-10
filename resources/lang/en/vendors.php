@@ -250,7 +250,7 @@ return [
 
     'notifications' => [
         'submitted' => ':vendor needs your approval',
-        'approved' => ':vendor application has been approved.'
+        'approved' => ':vendor application has been approved.',
         'rejected' => ':vendor application has been rejected.'
     ],
 ];
