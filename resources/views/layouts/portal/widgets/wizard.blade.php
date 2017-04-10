@@ -69,4 +69,12 @@
     </div>
 </div>
 @endif
+
+@if(Auth::user()->vendor->status == 'pending')
+<div class="panel panel-flat">
+    <div class="panel-body">
+        {{ trans('app.widgets.portal.wizard.pending', ['vendor' => Auth::user()->vendor->name]) }}
+    </div>
+</div>
+@endif
 @endif

@@ -86,9 +86,4 @@ class VendorPolicy
         return $auth->hasPermission('vendor:suspend')
             && $vendor->status == ['active', 'inactive'];
     }
-
-    public function pending(User $auth, Vendor $vendor)
-    {
-        return $auth->hasPermission('access:vendor') && $vendor->status == 'pending';
-    }
 }

@@ -19,7 +19,7 @@ class RedirectToApplication
     {
         $vendor = Auth::guard($guard)->user()->vendor;
 
-        if(in_array($vendor->status, ['draft', 'rejected']))
+        if(in_array($vendor->status, ['draft', 'pending', 'rejected']))
         {
             return redirect()->route('vendors.edit', $vendor->id);
         }
