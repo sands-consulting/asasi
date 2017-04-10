@@ -1,7 +1,7 @@
 @extends('layouts.portal')
 
 @section('content')
-@if(in_array(Auth::user()->vendor, ['draft', 'pending', 'rejected']))
+@if(in_array(Auth::user()->vendor->status, ['draft', 'pending', 'rejected']))
 @include('layouts.portal.widgets.wizard')
 @else
 <div class="row mb-20">
