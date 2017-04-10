@@ -44,7 +44,7 @@
                     @forelse($vendor->codes()->whereTypeId($qualification->type_id)->whereNull('parent_id')->get() as $vendorCode)
                     <?php $childCount = $vendorCode->children()->count(); ?>
                     <tr>
-                        <th colspan="{{ $childCount }}">{{ $vendorCode->code->label }}</th>
+                        <th colspan="2">{{ $vendorCode->code->label }}</th>
                     </tr>
                     @if($childCount > 0)
                     @foreach($vendorCode->children()->get() as $child)
