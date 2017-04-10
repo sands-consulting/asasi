@@ -113,8 +113,16 @@
                     <td>{{ $subscription->end_at->format('d/m/Y') }}</td>
                 </tr>
                 <tr>
-                    <th>{{ trans('subscriptions.attributes.fee') }}</th>
-                    <td>{{ setting('currency') }} {{ $subscription->end_at->format('d/m/Y') }}</td>
+                    <th>{{ trans('packages.attributes.fee') }}</th>
+                    <td>{{ setting('currency') }} {{ $subscription->transactionLine->price }}</td>
+                </tr>
+                <tr>
+                    <th>{{ trans('transactions.attributes.tax') }}</th>
+                    <td>{{ setting('currency') }} {{ $subscription->transactionLine->tax }}<br><small>{{ $subscription->transactionLine->tax_rate }}% ({{ $subscription->transactionLine->tax_code }})</small></td>
+                </tr>
+                <tr>
+                    <th>{{ trans('transactions.attributes.total') }}</th>
+                    <td>{{ setting('currency') }} {{ $subscription->transactionLine->total }}</small></td>
                 </tr>
             </table>
         </div>
