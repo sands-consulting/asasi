@@ -6,17 +6,9 @@ use App\DataTables\TaxCodesDataTable;
 use App\Services\TaxCodeService;
 use App\TaxCode;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class TaxCodesController extends Controller
 {
-    protected $taxCode;
-
-    public function __construct(TaxCodeService $taxCode)
-    {
-        $this->taxCode = $taxCode;
-    }
-
     public function index(TaxCodesDataTable $table)
     {
         return $table->render('admin.tax-codes.index');
@@ -53,6 +45,4 @@ class TaxCodesController extends Controller
             ->back()
             ->with('notice', trans('tax-codes.notices.updated'));
     }
-
-
 }

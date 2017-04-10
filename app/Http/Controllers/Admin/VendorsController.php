@@ -43,7 +43,7 @@ class VendorsController extends Controller
 
     public function store(VendorRequest $request)
     {
-        $inputs = $request->all();
+        $inputs = $request->except('address', 'accounts', 'employees', 'files', 'qualifications', 'shareholders');
         
         $vendor = VendorService::create(new Vendor, $inputs);
         VendorService::address($vendor, $request->input('address', []));
@@ -55,7 +55,7 @@ class VendorsController extends Controller
 
         UserHistoryService::log($request->user(), 'create', $vendor, $request->getClientIp());
         return redirect()
-            ->route('vendors.pending', $vendor->id)
+            ->route('admin.vendors.show', $vendor->id)
             ->with('notice', trans('vendors.notices.created', ['name' => $vendor->name]));
     }
 
@@ -77,10 +77,9 @@ class VendorsController extends Controller
 
     public function update(VendorRequest $request, Vendor $vendor)
     {
-        $inputs = $request->all();
-        $status = isset($inputs['submit']) ? 'pending' : $vendor->status;
+        $inputs = $request->except('address', 'accounts', 'employees', 'files', 'qualifications', 'shareholders');
         
-        VendorService::update($vendor, $inputs, ['status' => $status]);
+        VendorService::update($vendor, $inputs);
         VendorService::address($vendor, $request->input('address', []));
         VendorService::accounts($vendor, $request->input('accounts', []));
         VendorService::employees($vendor, $request->input('employees', []));
@@ -90,7 +89,7 @@ class VendorsController extends Controller
 
         UserHistoryService::log($request->user(), 'update', $vendor, $request->getClientIp());
         return redirect()
-            ->route('admin.vendors.edit', $vendor->id)
+            ->route('admin.vendors.show', $vendor->id)
             ->with('notice', trans('vendors.notices.updated', ['name' => $vendor->name]));
     }
 
@@ -181,34 +180,5 @@ class VendorsController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
             ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
-    }
-
-    public function blacklist(Request $request, Vendor $vendor)
-    {
-        $inputs = $request->only(['redirect_to', 'remarks']);
-        
-        VendorService::update($vendor, $inputs, ['status' => 'blacklisted']);
-        UserHistoryService::log($request->user(), 'blacklist', $vendor, $request->getClientIp(), $inputs['remarks']);
-        
-        return redirect()
-            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
-            ->with('notice', trans('vendors.notices.blacklisted', ['name' => $vendor->name]));
-    }
-
-    public function unblacklist(Request $request, Vendor $vendor)
-    {
-        $inputs = $request->only(['redirect_to']);
-        
-        VendorService::update($vendor, $inputs, ['status' => 'active']);
-        UserHistoryService::log($request->user(), 'unblacklist', $vendor, $request->getClientIp());
-        
-        return redirect()
-            ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
-            ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
-    }
-
-    public function qualificationCodes(Vendor $vendor)
-    {
-        return view('admin.vendors.subscriptions', compact('vendor'));
     }
 }

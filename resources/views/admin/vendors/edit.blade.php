@@ -18,7 +18,8 @@
 @endsection
 
 @section('content')
-{!! Former::open_vertical_for_files(route('admin.vendors.update', $vendor->id))->addClass('row admin')->id('form-vendor')->method('PUT')->novalidate() !!}
+{!! Former::open_vertical_for_files(route('admin.vendors.show', $vendor->id))->addClass('row admin')->id('form-vendor')->novalidate() !!}
+	{{ method_field('PUT') }}
 	@include('admin.vendors.form')
 {!! Former::close() !!}
 @endsection
