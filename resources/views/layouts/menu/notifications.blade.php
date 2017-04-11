@@ -19,12 +19,15 @@
             <template v-if="notifications.length > 0">
                 <li class="media" v-for="notification in notifications">
                     <div class="media-left">
-                        <a :href="notification.link" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm" v-on:click="read(notification.id)"><i class="icon-user-plus"></i></a>
+                        <a :href="notification.link" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm" @click="read(notification.id)"><i class="icon-user-plus"></i></a>
                     </div>
 
                     <div class="media-body">
+                        <span class="media-annotation pull-right">
+                            <a href="#" @click="read(notification.id)"><span class="icon-cross text-muted"></span></a>
+                        </span>
                         @{{ notification.content }}
-                        <div class="media-annotation" v-text="notification.created_at_human "></div>
+                        <div class="media-annotation" v-text="notification.created_at_human"></div>
                     </div>
                 </li>
             </template>

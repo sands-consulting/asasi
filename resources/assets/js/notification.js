@@ -28,12 +28,14 @@ $(function () {
           });
       },
       read(notificationId) {
+        let self = this;
         // use variable instead of hardcode for url.
         axios.put('/api/notifications/read', {
           id: notificationId
         })
           .then(function (response) {
             console.log(response);
+            self.getNotification();
           })
           .catch(function (error) {
             console.log(error);
