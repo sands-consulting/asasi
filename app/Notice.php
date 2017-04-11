@@ -26,6 +26,7 @@ class Notice extends Model
         'purchased_at',
         'submission_at',
         'submission_address',
+        'tax_code_id',
         'notice_type_id',
         'notice_category_id',
         'organization_id',
@@ -128,7 +129,12 @@ class Notice extends Model
 
     public function organization()
     {
-        return $this->belongsTo(Organization::class, 'organization_id');
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function taxCode()
+    {
+        return $this->belongsTo(TaxCode::class);
     }
 
     public function events()
@@ -163,7 +169,6 @@ class Notice extends Model
     {
         return $this->hasMany(EvaluationRequirement::class);
     }
-
 
     public function activities()
     {
