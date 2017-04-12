@@ -168,6 +168,5 @@
 @stop
 
 @section('scripts')
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/js/pages/submissions/show.js') }}"></script>
 @endsection

@@ -20,9 +20,9 @@ class CreateNotificationsTable extends Migration
             $table->string('item_id');
             $table->unsignedInteger('user_id');
             $table->string('status')->index();
+            $table->timestamp('read_at')->nullable();
             $table->nullableTimestamps();
             $table->softDeletes();
-            $table->timestamp('read_at')->nullable();
 
             $table->foreign('user_id')
                 ->references('id')
