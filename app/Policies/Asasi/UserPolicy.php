@@ -114,7 +114,7 @@ class UserPolicy
      * @param User $user
      * @return bool
      */
-    public function archives(User $auth, User $user)
+    public function archives(User $auth)
     {
         return $auth->hasPermission('user:archives');
     }
