@@ -39,7 +39,7 @@ class Package extends Model
         'status' => 'active'
     ];
 
-    protected $searchacble = [
+    protected $searchable = [
         'name',
         'description',
         'validity_type',

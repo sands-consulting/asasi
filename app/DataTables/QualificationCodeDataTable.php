@@ -61,7 +61,7 @@ class QualificationCodeDataTable extends DataTable
             ],
             [
                 'data'  => 'type',
-                'name'  => 'qualification_code_types.name',
+                'name'  => 'type.name',
                 'title' => trans('qualification-codes.attributes.type'),
             ],
             [
