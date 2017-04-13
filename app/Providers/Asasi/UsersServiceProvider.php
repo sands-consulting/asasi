@@ -79,10 +79,11 @@ class UsersServiceProvider extends ServiceProvider
         });
 
         // API Routing
+        // Todo: fix request data not available when using api middleware
         app('router')->group([
             'namespace' => 'App\Http\Controllers\Api',
             'prefix' => 'api',
-            'middleware' => 'api',
+            'middleware' => 'web',
             'as' => 'api.'
         ], function ($router) {
             $router->resource('users', 'UsersController', [

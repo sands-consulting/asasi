@@ -1,19 +1,19 @@
 $(function () {
-  var url = $('meta[name="socket-url"]').attr('content');
-  var socket = io(url);
-  Vue.config.debug = true;
-  vm_notifications = new Vue({
+  // Vue.config.debug = true;
+  let vm_notifications = new Vue({
     el: '#notifications',
     data: {
       notifications: [],
       count: null,
-      source: null
+      source: null,
+      user: null
     },
     mounted: function (ev) {
       this.source = $(this.$el).data('source');
-      this.listen();
+      // fixme: find better solution to get user object
+      this.user = $(this.$el).data('user');
       this.getNotification();
-
+      this.listen();
     },
     methods: {
       getNotification() {
@@ -42,9 +42,10 @@ $(function () {
           });
       },
       listen() {
-        socket.on('notifications', function () {
-          this.getNotification(this.source);
-        }.bind(this));
+        Echo.private('App.User.' + this.user.id)
+          .notification((notification) => {
+            this.getNotification();
+          });
       }
     }
   });

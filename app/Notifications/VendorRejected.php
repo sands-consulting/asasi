@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Notifications;
 
@@ -7,10 +7,15 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class VendorRejected extends Notification
 {
+    public $vendor;
+
+    public $remarks;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $vendor
+     * @param $remarks
      */
     public function __construct($vendor, $remarks)
     {
@@ -26,7 +31,7 @@ class VendorRejected extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**
@@ -46,5 +51,15 @@ class VendorRejected extends Notification
         $message->action(trans('vendors.emails.rejected.action'), route('vendors.edit', $this->vendor->id));
 
         return $message;
-    } 
+    }
+
+    public function toArray($notifiable)
+    {
+        return [
+            'vendor' => $this->vendor,
+            'content' => trans('vendors.notifications.rejected', ['vendor' => $this->vendor->name]),
+            'link' => route('vendors.show', $this->vendor->id),
+        ];
+    }
+
 }

@@ -10,7 +10,7 @@ class VendorApproved extends Notification
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $vendor
      */
     public function __construct($vendor)
     {
@@ -25,7 +25,7 @@ class VendorApproved extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**
@@ -44,5 +44,15 @@ class VendorApproved extends Notification
         $message->action(trans('vendors.emails.approved.action'), route('subscriptions.create'));
 
         return $message;
-    } 
+    }
+
+    public function toArray($notifiable)
+    {
+        return [
+            'vendor' => $this->vendor,
+            'content' => trans('vendors.notifications.approved', ['vendor' => $this->vendor->name]),
+            'link' => route('vendors.show', $this->vendor->id),
+        ];
+    }
+
 }

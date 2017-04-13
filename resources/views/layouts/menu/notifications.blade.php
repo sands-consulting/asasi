@@ -1,5 +1,5 @@
 @if(Auth::check())
-<li id="notifications" class="dropdown" data-source="{{ route('api.notifications.index') }}">
+<li id="notifications" class="dropdown" data-source="{{ route('api.notifications.index') }}" data-user="{{ auth()->user() }}">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="icon-bubble-dots4"></i>
         <span class="visible-xs-inline-block position-right">{{ trans('app.notifications.title') }}</span>
@@ -19,14 +19,14 @@
             <template v-if="notifications.length > 0">
                 <li class="media" v-for="notification in notifications">
                     <div class="media-left">
-                        <a :href="notification.link" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm" @click="read(notification.id)"><i class="icon-bubble-notification"></i></a>
+                        <a :href="notification.data.link" class="btn border-success text-success btn-flat btn-rounded btn-icon btn-sm" @click="read(notification.id)"><i class="icon-bubble-notification"></i></a>
                     </div>
 
                     <div class="media-body">
                         <span class="media-annotation pull-right">
                             <a href="#" @click="read(notification.id)"><span class="icon-cross text-muted"></span></a>
                         </span>
-                        @{{ notification.content }}
+                        @{{ notification.data.content }}
                         <div class="media-annotation" v-text="notification.created_at_human"></div>
                     </div>
                 </li>
@@ -41,7 +41,7 @@
         </ul>
 
         <div class="dropdown-content-footer">
-            <a href="{{ route('notifications.index') }}" data-popup="tooltip" title="{{ trans('app.notifications.view') }}"><i class="icon-menu display-block"></i></a>
+            <a href="#" data-popup="tooltip" title="{{ trans('app.notifications.view') }}"><i class="icon-menu display-block"></i></a>
         </div>
     </div>
 </li>
