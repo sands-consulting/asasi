@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotificationsTable extends Migration
+class ReCreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,6 +12,7 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('notifications');
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('type');
