@@ -32,6 +32,7 @@ class VendorSeeder extends Seeder
         DB::table('vendors')->truncate();
         DB::table('vendor_types')->truncate();
         DB::table('file_types')->truncate();
+        DB::table('qualification_codes')->truncate();
         DB::table('qualification_types')->truncate();
 
         $vendor_types = [
@@ -207,38 +208,44 @@ class VendorSeeder extends Seeder
                     'name' => $parent->name
                 ]);
             }
-
-            if(isset($codes))
+            else
             {
-                foreach($codes as $code)
+                if(isset($codes))
                 {
-                    $parent->codes()->create($code);
-                }
-                unset($codes);
-            }
-
-            if(isset($children))
-            {
-                foreach($children as $child)
-                {
-                    if(isset($child['codes']))
+                    foreach($codes as $code)
                     {
-                        $codes = $child['codes'];
-                        unset($child['codes']);
+                        $parent->codes()->create($code);
                     }
+                    
+                    unset($codes);
+                }
 
-                    $child['parent_id'] = $parent->id;
-                    $in = QualificationTypeService::create(new QualificationType, $child);
-
-                    if(isset($codes))
+                if(isset($children))
+                {
+                    foreach($children as $child)
                     {
-                        foreach($codes as $code)
+                        if(isset($child['codes']))
                         {
-                            $in->codes()->create($code);
+                            $codes = $child['codes'];
+                            unset($child['codes']);
                         }
+
+                        $child['parent_id'] = $parent->id;
+                        $in = QualificationTypeService::create(new QualificationType, $child);
+
+                        if(isset($codes))
+                        {
+                            foreach($codes as $code)
+                            {
+                                $in->codes()->create($code);
+                            }
+                        }
+
+                        unset($codes);
                     }
+                    
+                    unset($children);
                 }
-                unset($children);
             }
         }
     }
