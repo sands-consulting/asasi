@@ -1520,157 +1520,157 @@ class PlaceSeeder extends Seeder
             /*
              * === batu pahat
              */
-            ['BAGAN', null, null, 'city', '1'],
-            ['CHAAH BAHRU', null, null, 'city', '1'],
-            ['KAMPONG BAHRU', null, null, 'city', '1'],
-            ['LINAU', null, null, 'city', '1'],
-            ['LUBOK', null, null, 'city', '1'],
-            ['MINYAK BEKU', null, null, 'city', '1'],
-            ['PESERAI', null, null, 'city', '1'],
-            ['SIMPANG KANAN', null, null, 'city', '1'],
-            ['SIMPANG KIRI', null, null, 'city', '1'],
-            ['SRI GADING', null, null, 'city', '1'],
-            ['SRI MEDAN', null, null, 'city', '1'],
-            ['SUNGAI KLUANG', null, null, 'city', '1'],
-            ['SUNGAI PUNGGOR', null, null, 'city', '1'],
-            ['TANJONG SEMBRONG', null, null, 'city', '1'],
+            ['BAGAN', null, null, 'city', '2'],
+            ['CHAAH BAHRU', null, null, 'city', '2'],
+            ['KAMPONG BAHRU', null, null, 'city', '2'],
+            ['LINAU', null, null, 'city', '2'],
+            ['LUBOK', null, null, 'city', '2'],
+            ['MINYAK BEKU', null, null, 'city', '2'],
+            ['PESERAI', null, null, 'city', '2'],
+            ['SIMPANG KANAN', null, null, 'city', '2'],
+            ['SIMPANG KIRI', null, null, 'city', '2'],
+            ['SRI GADING', null, null, 'city', '2'],
+            ['SRI MEDAN', null, null, 'city', '2'],
+            ['SUNGAI KLUANG', null, null, 'city', '2'],
+            ['SUNGAI PUNGGOR', null, null, 'city', '2'],
+            ['TANJONG SEMBRONG', null, null, 'city', '2'],
 
 
             /*
              * === johor bahru
              */
-            ['JELUTONG', null, null, 'city', '1'],
-            ['PLENTONG', null, null, 'city', '1'],
-            ['PULAI', null, null, 'city', '1'],
-            // ['SEDENAK', null, null, 'city', '1'], //change to kulaijaya since 2008
-            // ['SENAI / KULAI', null, null, 'city', '1'], //change to kulaijaya since 2008
-            ['SUNGAI TIRAM', null, null, 'city', '1'],
-            ['TANJUNG KUPANG', null, null, 'city', '1'],
-            ['TEMBRAU', null, null, 'city', '1'],
-            // ['BANDAR JOHOR BAHRU', null, null, 'city', '1'],
+            ['JELUTONG', null, null, 'city', '2'],
+            ['PLENTONG', null, null, 'city', '2'],
+            ['PULAI', null, null, 'city', '2'],
+            // ['SEDENAK', null, null, 'city', '2'], //change to kulaijaya since 2008
+            // ['SENAI / KULAI', null, null, 'city', '2'], //change to kulaijaya since 2008
+            ['SUNGAI TIRAM', null, null, 'city', '2'],
+            ['TANJUNG KUPANG', null, null, 'city', '2'],
+            ['TEMBRAU', null, null, 'city', '2'],
+            // ['BANDAR JOHOR BAHRU', null, null, 'city', '2'],
 
 
             /*
              * === kluang
              */
-            ['ULU BENUT', null, null, 'city', '1'],
-            ['KAHANG', null, null, 'city', '1'],
-            ['KLUANG', null, null, 'city', '1'],
-            ['LAYANG-LAYANG', null, null, 'city', '1'],
-            ['MACHAP', null, null, 'city', '1'],
-            ['NIYOR', null, null, 'city', '1'],
-            ['PALOH', null, null, 'city', '1'],
-            ['RENGAM', null, null, 'city', '1'],
+            ['ULU BENUT', null, null, 'city', '2'],
+            ['KAHANG', null, null, 'city', '2'],
+            ['KLUANG', null, null, 'city', '2'],
+            ['LAYANG-LAYANG', null, null, 'city', '2'],
+            ['MACHAP', null, null, 'city', '2'],
+            ['NIYOR', null, null, 'city', '2'],
+            ['PALOH', null, null, 'city', '2'],
+            ['RENGAM', null, null, 'city', '2'],
 
 
             /*
              * === kota tinggi
              */
-            ['ULU SUNGAI JOHOR', null, null, 'city', '1'],
-            ['ULU SUNGAI SELIDI BESAR', null, null, 'city', '1'],
-            ['JOHOR LAMA', null, null, 'city', '1'],
-            ['KAMBAU', null, null, 'city', '1'],
-            ['KOTA TINGGI', null, null, 'city', '1'],
-            ['PANTAI TIMUR', null, null, 'city', '1'],
-            ['PENGGERANG', null, null, 'city', '1'],
-            ['SELIDI BESAR', null, null, 'city', '1'],
-            ['SELIDI KECHIL', null, null, 'city', '1'],
-            ['TANJUNG SURAT', null, null, 'city', '1'],
+            ['ULU SUNGAI JOHOR', null, null, 'city', '2'],
+            ['ULU SUNGAI SELIDI BESAR', null, null, 'city', '2'],
+            ['JOHOR LAMA', null, null, 'city', '2'],
+            ['KAMBAU', null, null, 'city', '2'],
+            ['KOTA TINGGI', null, null, 'city', '2'],
+            ['PANTAI TIMUR', null, null, 'city', '2'],
+            ['PENGGERANG', null, null, 'city', '2'],
+            ['SELIDI BESAR', null, null, 'city', '2'],
+            ['SELIDI KECHIL', null, null, 'city', '2'],
+            ['TANJUNG SURAT', null, null, 'city', '2'],
 
 
             /*
              * === mersing
              */
-            ['JEMALUANG', null, null, 'city', '1'],
-            ['LENGGOR', null, null, 'city', '1'],
-            ['MERSING', null, null, 'city', '1'],
-            ['PADANG ENDAU', null, null, 'city', '1'],
-            ['PENYABONG', null, null, 'city', '1'],
-            ['PULAU AUR', null, null, 'city', '1'],
-            ['PULAU BABI', null, null, 'city', '1'],
-            ['PULAU PEMANGGIL', null, null, 'city', '1'],
-            ['PULAU SIBU', null, null, 'city', '1'],
-            ['PULAU TINGGI', null, null, 'city', '1'],
-            ['SEMBRONG', null, null, 'city', '1'],
-            ['TENGGAROH', null, null, 'city', '1'],
-            ['TENGLU', null, null, 'city', '1'],
-            ['TRIANG', null, null, 'city', '1'],
+            ['JEMALUANG', null, null, 'city', '2'],
+            ['LENGGOR', null, null, 'city', '2'],
+            ['MERSING', null, null, 'city', '2'],
+            ['PADANG ENDAU', null, null, 'city', '2'],
+            ['PENYABONG', null, null, 'city', '2'],
+            ['PULAU AUR', null, null, 'city', '2'],
+            ['PULAU BABI', null, null, 'city', '2'],
+            ['PULAU PEMANGGIL', null, null, 'city', '2'],
+            ['PULAU SIBU', null, null, 'city', '2'],
+            ['PULAU TINGGI', null, null, 'city', '2'],
+            ['SEMBRONG', null, null, 'city', '2'],
+            ['TENGGAROH', null, null, 'city', '2'],
+            ['TENGLU', null, null, 'city', '2'],
+            ['TRIANG', null, null, 'city', '2'],
 
 
             /*
              * === muar
              */
-            ['AYER HITAM', null, null, 'city', '1'],
-            ['BANDAR', null, null, 'city', '1'],
-            ['BUKIT KEPONG', null, null, 'city', '1'],
-            // ['BUKIT SERAMPANG', null, null, 'city', '1'], //ledang since 2008
-            // ['GRISEK', null, null, 'city', '1'], //ledang since 2008
-            ['JALAN BAKRI', null, null, 'city', '1'],
-            ['JORAK', null, null, 'city', '1'],
-            // ['KESANG', null, null, 'city', '1'], //ledang since 2008
-            // ['KUNDANG', null, null, 'city', '1'], //ledang since 2008
-            ['LENGA', null, null, 'city', '1'],
-            ['PARIT BAKAR', null, null, 'city', '1'],
-            ['PARIT JAWA', null, null, 'city', '1'],
-            // ['SEROM', null, null, 'city', '1'], //ledang since 2008
-            ['SRI MERANTI', null, null, 'city', '1'],
-            ['SUNGAI BALANG', null, null, 'city', '1'],
-            ['SUNGAI RAYA & KAMPUNG BUKIT PASIR', null, null, 'city', '1'],
-            ['SUNGAI TERAP', null, null, 'city', '1'],
-            // ['TANGKAK', null, null, 'city', '1'], //ledang since 2008
+            ['AYER HITAM', null, null, 'city', '2'],
+            ['BANDAR', null, null, 'city', '2'],
+            ['BUKIT KEPONG', null, null, 'city', '2'],
+            // ['BUKIT SERAMPANG', null, null, 'city', '2'], //ledang since 2008
+            // ['GRISEK', null, null, 'city', '2'], //ledang since 2008
+            ['JALAN BAKRI', null, null, 'city', '2'],
+            ['JORAK', null, null, 'city', '2'],
+            // ['KESANG', null, null, 'city', '2'], //ledang since 2008
+            // ['KUNDANG', null, null, 'city', '2'], //ledang since 2008
+            ['LENGA', null, null, 'city', '2'],
+            ['PARIT BAKAR', null, null, 'city', '2'],
+            ['PARIT JAWA', null, null, 'city', '2'],
+            // ['SEROM', null, null, 'city', '2'], //ledang since 2008
+            ['SRI MERANTI', null, null, 'city', '2'],
+            ['SUNGAI BALANG', null, null, 'city', '2'],
+            ['SUNGAI RAYA & KAMPUNG BUKIT PASIR', null, null, 'city', '2'],
+            ['SUNGAI TERAP', null, null, 'city', '2'],
+            // ['TANGKAK', null, null, 'city', '2'], //ledang since 2008
 
 
             /*
              * === pontian
              */
-            ['AYER BALOI', null, null, 'city', '1'],
-            ['AIR MASIN', null, null, 'city', '1'],
-            ['API-API', null, null, 'city', '1'],
-            ['BENUT', null, null, 'city', '1'],
-            ['JERAM BATU', null, null, 'city', '1'],
-            ['PENGKALAN RAJA', null, null, 'city', '1'],
-            ['PONTIAN', null, null, 'city', '1'],
-            ['RIMBA TERJUN', null, null, 'city', '1'],
-            ['SERKAT', null, null, 'city', '1'],
-            ['SUNGAI KARANG', null, null, 'city', '1'],
-            ['SUNGEI PINGGAN', null, null, 'city', '1'],
+            ['AYER BALOI', null, null, 'city', '2'],
+            ['AIR MASIN', null, null, 'city', '2'],
+            ['API-API', null, null, 'city', '2'],
+            ['BENUT', null, null, 'city', '2'],
+            ['JERAM BATU', null, null, 'city', '2'],
+            ['PENGKALAN RAJA', null, null, 'city', '2'],
+            ['PONTIAN', null, null, 'city', '2'],
+            ['RIMBA TERJUN', null, null, 'city', '2'],
+            ['SERKAT', null, null, 'city', '2'],
+            ['SUNGAI KARANG', null, null, 'city', '2'],
+            ['SUNGEI PINGGAN', null, null, 'city', '2'],
 
 
             /*
              * === segamat
              */
-            ['BEKOK', null, null, 'city', '1'],
-            ['BULOH KASAP', null, null, 'city', '1'],
-            ['CHAAH', null, null, 'city', '1'],
-            ['GEMAS', null, null, 'city', '1'],
-            ['GEMEREH', null, null, 'city', '1'],
-            ['JABI', null, null, 'city', '1'],
-            ['JEMENTAH', null, null, 'city', '1'],
-            ['LABIS', null, null, 'city', '1'],
-            ['POGOH', null, null, 'city', '1'],
-            ['SERMIN', null, null, 'city', '1'],
-            ['SUNGAI SEGAMAT', null, null, 'city', '1'],
-            // ['BANDAR SEGAMAT', null, null, 'city', '1'],
+            ['BEKOK', null, null, 'city', '2'],
+            ['BULOH KASAP', null, null, 'city', '2'],
+            ['CHAAH', null, null, 'city', '2'],
+            ['GEMAS', null, null, 'city', '2'],
+            ['GEMEREH', null, null, 'city', '2'],
+            ['JABI', null, null, 'city', '2'],
+            ['JEMENTAH', null, null, 'city', '2'],
+            ['LABIS', null, null, 'city', '2'],
+            ['POGOH', null, null, 'city', '2'],
+            ['SERMIN', null, null, 'city', '2'],
+            ['SUNGAI SEGAMAT', null, null, 'city', '2'],
+            // ['BANDAR SEGAMAT', null, null, 'city', '2'],
 
 
             /*
              * === kulaijaya // upgrade from kulai since 2008 - http://www.utusan.com.my/utusan/info.asp?y=2008&dt=0622&pub=Utusan_Malaysia&sec=Johor&pg=wj_01.htm
              */
-            ['KULAI', null, null, 'city', '1'],
-            ['SENAI', null, null, 'city', '1'],
-            ['SEDENAK', null, null, 'city', '1'],
-            ['BUKIT BATU', null, null, 'city', '1'],
+            ['KULAI', null, null, 'city', '2'],
+            ['SENAI', null, null, 'city', '2'],
+            ['SEDENAK', null, null, 'city', '2'],
+            ['BUKIT BATU', null, null, 'city', '2'],
 
 
             /*
              * === ledang // upgrade since 2008
              */
-            ['TANGKAK', null, null, 'city', '1'],
-            ['BUKIT SERAMPANG', null, null, 'city', '1'],
-            ['GERSIK', null, null, 'city', '1'],
-            ['SEROM', null, null, 'city', '1'],
-            ['KUNDANG', null, null, 'city', '1'],
-            ['KESANG', null, null, 'city', '1'],
+            ['TANGKAK', null, null, 'city', '2'],
+            ['BUKIT SERAMPANG', null, null, 'city', '2'],
+            ['GERSIK', null, null, 'city', '2'],
+            ['SEROM', null, null, 'city', '2'],
+            ['KUNDANG', null, null, 'city', '2'],
+            ['KESANG', null, null, 'city', '2'],
 
 
             /*
