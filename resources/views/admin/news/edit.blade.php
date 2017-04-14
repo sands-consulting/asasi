@@ -20,7 +20,7 @@
 		</a>
 		@endcan
 
-		@can('publish', $news)
+		@can('unpublish', $news)
 		<a href="{{ route('admin.news.unpublish', $news->slug) }}" data-method="PUT" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple">
 			<i class="icon-blocked"></i> <span>{{ trans('actions.unpublish') }}</span>
 		</a>
