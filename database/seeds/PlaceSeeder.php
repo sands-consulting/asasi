@@ -59,7 +59,6 @@ class PlaceSeeder extends Seeder
             ['TITI TINGGI', null, null, 'city', '13'],
             ['WANG BINTONG', null, null, 'city', '13'],
 
-
             /*
              * kedah
              */
@@ -67,41 +66,24 @@ class PlaceSeeder extends Seeder
              * === KOTA SETAR
              */
             ['ALOR MALAI', null, null, 'city', '3'],
-            // ['ALOR MERAH', null, null, 'city', '3'], // deprecated?
             ['ANAK BUKIT', null, null, 'city', '3'],
-            // ['BUKIT LADA', null, null, 'city', '3'], // 021206
-            // ['BUKIT PINANG', null, null, 'city', '3'], // deprecated?
-            // ['DERANG', null, null, 'city', '3'], // 021201
             ['DERGA', null, null, 'city', '3'],
-            // ['GAJAH MATI', null, null, 'city', '3'], // deprecated?
             ['GUNONG', null, null, 'city', '3'],
-            // ['HUTAN KAMPONG', null, null, 'city', '3'], // deprecated?
-            // ['JABI', null, null, 'city', '3'], // deprecated?
             ['KANGKONG', null, null, 'city', '3'],
-            // ['KOTA SETAR', null, null, 'city', '3'], // deprecated?
-            // ['KUALA KEDAH', null, null, 'city', '3'], // bandar:020142?
             ['KUBANG ROTAN', null, null, 'city', '3'],
             ['LANGGAR', null, null, 'city', '3'],
             ['LENGKUAS', null, null, 'city', '3'],
             ['LEPAI', null, null, 'city', '3'],
-            // ['LESONG', null, null, 'city', '3'], // 021202
             ['LIMBONG', null, null, 'city', '3'],
-            // ['MERGONG', null, null, 'city', '3'], // deprecated?
             ['PADANG HANG', null, null, 'city', '3'],
             ['PADANG LALANG', null, null, 'city', '3'],
             ['PENGKALAN KUNDOR', null, null, 'city', '3'],
-            // ['PUMPONG', null, null, 'city', '3'], // deprecated?
             ['SALA KECHIL', null, null, 'city', '3'],
             ['SUNGAI BAHARU', null, null, 'city', '3'],
             ['TAJAR', null, null, 'city', '3'],
             ['TEBENGAU', null, null, 'city', '3'],
             ['TELAGA MAS', null, null, 'city', '3'],
-            // ['TELOK CHENGAI', null, null, 'city', '3'], // deprecated?
             ['TITI GAJAH', null, null, 'city', '3'],
-            // ['TELOK KECHAI', null, null, 'city', '3'], // deprecated?
-            // ['TITI GAJAH', null, null, 'city', '3'], // 020131
-            // ['TUALANG', null, null, 'city', '3'], // 021203
-
 
             /*
              * === KUBANG PASU
@@ -794,111 +776,39 @@ class PlaceSeeder extends Seeder
             /*
              * === SEBERANG PRAI TENGAH
              */
-            ['MUKIM 1', null, null, 'city', '10'],
-            // ['BANDAR PRAI (MUKIM 1A)', null, null, 'city', '10'],
-            ['MUKIM 2', null, null, 'city', '10'],
-            ['MUKIM 3', null, null, 'city', '10'],
-            ['MUKIM 4', null, null, 'city', '10'],
-            ['MUKIM 5', null, null, 'city', '10'],
-            ['MUKIM 6', null, null, 'city', '10'],
-            ['MUKIM 7', null, null, 'city', '10'],
-            ['MUKIM 8', null, null, 'city', '10'],
-            ['MUKIM 9', null, null, 'city', '10'],
-            ['MUKIM 10', null, null, 'city', '10'],
-            ['MUKIM 11', null, null, 'city', '10'],
-            ['MUKIM 12', null, null, 'city', '10'],
-            ['MUKIM 13', null, null, 'city', '10'],
-            ['MUKIM 14', null, null, 'city', '10'],
-            ['MUKIM 15', null, null, 'city', '10'],
-            ['MUKIM 16', null, null, 'city', '10'],
-            ['MUKIM 17', null, null, 'city', '10'],
-            ['MUKIM 18', null, null, 'city', '10'],
-            ['MUKIM 19', null, null, 'city', '10'],
-            ['MUKIM 20', null, null, 'city', '10'],
-            ['MUKIM 21', null, null, 'city', '10'],
-
+            ['BUKIT MERTAJAM', null, null, 'city', '10'],
+            ['PRAI', null, null, 'city', '10'],
 
             /*
              * === SEBERANG PRAI UTARA
              */
-            ['MUKIM 1', null, null, 'city', '10'],
-            ['MUKIM 2', null, null, 'city', '10'],
-            ['MUKIM 3', null, null, 'city', '10'],
-            ['MUKIM 4', null, null, 'city', '10'],
-            ['MUKIM 5', null, null, 'city', '10'],
-            ['MUKIM 6', null, null, 'city', '10'],
-            ['MUKIM 7', null, null, 'city', '10'],
-            ['MUKIM 8', null, null, 'city', '10'],
-            ['MUKIM 9', null, null, 'city', '10'],
-            ['MUKIM 10', null, null, 'city', '10'],
-            ['MUKIM 11', null, null, 'city', '10'],
-            ['MUKIM 12', null, null, 'city', '10'],
-            ['MUKIM 13', null, null, 'city', '10'],
-            ['MUKIM 14', null, null, 'city', '10'],
-            ['MUKIM 15', null, null, 'city', '10'],
-            ['MUKIM 16', null, null, 'city', '10'],
-
+            ['BUTTERWORTH', null, null, 'city', '10'],
+            ['KEPALA BATAS', null, null, 'city', '10'],
 
             /*
              * === SEBERANG PRAI SELATAN
              */
-            ['MUKIM 1', null, null, 'city', '10'],
-            ['MUKIM 2', null, null, 'city', '10'],
-            ['MUKIM 3', null, null, 'city', '10'],
-            ['MUKIM 4', null, null, 'city', '10'],
-            ['MUKIM 5', null, null, 'city', '10'],
-            ['MUKIM 6', null, null, 'city', '10'],
-            ['MUKIM 7', null, null, 'city', '10'],
-            ['MUKIM 8', null, null, 'city', '10'],
-            ['MUKIM 9', null, null, 'city', '10'],
-            ['MUKIM 10', null, null, 'city', '10'],
-            ['MUKIM 11', null, null, 'city', '10'],
-            ['MUKIM 12', null, null, 'city', '10'],
-            ['MUKIM 13', null, null, 'city', '10'],
-            ['MUKIM 14', null, null, 'city', '10'],
-            ['MUKIM 15', null, null, 'city', '10'],
-            ['MUKIM 16', null, null, 'city', '10'],
-
+            ['NIBONG TEBAL', null, null, 'city', '10'],
+            ['SUNGAI BAKAP', null, null, 'city', '10'],
 
             /*
              * === TIMUR LAUT
              */
-            ['MUKIM 13', null, null, 'city', '10'],
-            ['MUKIM 14', null, null, 'city', '10'],
-            // ['MUKIM 15 (BUKIT AYER ITAM)', null, null, 'city', '10'],
-            ['MUKIM 16', null, null, 'city', '10'],
-            ['MUKIM 17', null, null, 'city', '10'],
-            ['MUKIM 18', null, null, 'city', '10'],
-            // ['BANDARAYA GEORGE TOWN', null, null, 'city', '10'], - 070444
-
+            ['AYER ITAM', null, null, 'city', '10'],
+            ['BATU FERRINGGI', null, null, 'city', '10'],
+            ['BUKIT BENDERA', null, null, 'city', '10'],
+            ['GLUGOR', null, null, 'city', '10'],
+            ['GEORGE TOWN', null, null, 'city', '10'],
+            ['JELUTONG', null, null, 'city', '10'],
+            ['TANJONG BUNGAH', null, null, 'city', '10'],
+            ['TANJONG TOKONG', null, null, 'city', '10'],
+            ['TANJONG PINANG', null, null, 'city', '10'],
 
             /*
              * === BARAT DAYA
              */
-            ['MUKIM 1', null, null, 'city', '10'],
-            ['MUKIM 2', null, null, 'city', '10'],
-            ['MUKIM 3', null, null, 'city', '10'],
-            ['MUKIM 4', null, null, 'city', '10'],
-            ['MUKIM 5', null, null, 'city', '10'],
-            ['MUKIM 6', null, null, 'city', '10'],
-            ['MUKIM 7', null, null, 'city', '10'],
-            ['MUKIM 8', null, null, 'city', '10'],
-            ['MUKIM 9', null, null, 'city', '10'],
-            ['MUKIM 10', null, null, 'city', '10'],
-            ['MUKIM 11', null, null, 'city', '10'],
-            ['MUKIM 12', null, null, 'city', '10'],
-            ['MUKIM A', null, null, 'city', '10'],
-            // serius shit? clash with mukim A, mukim B
-            ['MUKIM B', null, null, 'city', '10'],
-            ['MUKIM C', null, null, 'city', '10'],
-            ['MUKIM D', null, null, 'city', '10'],
-            ['MUKIM E', null, null, 'city', '10'],
-            ['MUKIM F', null, null, 'city', '10'],
-            ['MUKIM G', null, null, 'city', '10'],
-            ['MUKIM H', null, null, 'city', '10'],
-            ['MUKIM I', null, null, 'city', '10'],
-            ['MUKIM J', null, null, 'city', '10'],
-
+            ['BALIK PULAU', null, null, 'city', '10'],
+            ['BAYAN LEPAS', null, null, 'city', '10'],
 
             /*
              * perak
@@ -911,7 +821,6 @@ class PlaceSeeder extends Seeder
             ['CHENDERIANG', null, null, 'city', '12'],
             ['HULU BERNAM BARAT', null, null, 'city', '12'],
             ['HULU BERNAM TIMOR', null, null, 'city', '12'],
-            // ['ULU BERNAM TIMOR & BARAT', null, null, 'city', '12'],
             ['SLIM', null, null, 'city', '12'],
             ['SUNGKAI', null, null, 'city', '12'],
 
@@ -930,11 +839,9 @@ class PlaceSeeder extends Seeder
              * === KINTA
              */
             ['BELANJA', null, null, 'city', '12'],
-            // ['KAMPAR', null, null, 'city', '12'],
             ['HULU KINTA', null, null, 'city', '12'],
             ['SUNGAI RAIA', null, null, 'city', '12'],
             ['SUNGAI TERAP', null, null, 'city', '12'],
-            // ['TEJA', null, null, 'city', '12'],
             ['TANJONG TUALANG', null, null, 'city', '12'],
 
 
