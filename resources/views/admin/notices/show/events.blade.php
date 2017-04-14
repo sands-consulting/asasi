@@ -3,20 +3,22 @@
         <table class="table">
             <thead>
                 <th width="5%">#</th>
-                <th class="col-xs-1">{{ trans('notices.views.admin.events.table.type') }}</th>
-                <th class="col-xs-2">{{ trans('notices.views.admin.events.table.datetime') }}</th>
-                <th>{{ trans('notices.views.admin.events.table.details') }}</th>
+                <th class="col-xs-1">{{ trans('notices.attributes.events.type') }}</th>
+                <th class="col-xs-2">{{ trans('notices.attributes.events.schedule_at') }}</th>
+                <th>{{ trans('notices.attributes.events.details') }}</th>
+                <th>{{ trans('notices.attributes.events.required') }}</th>
             </thead>
             <tbody>
                 @forelse ($notice->events as $event)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $event->type->name }}</td>
-                    <td>{{ $event->event_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ $event->schedule_at->format('d/m/Y H:i') }}</td>
                     <td>
                         <strong>{{ $event->name }}</strong><br>
                         {!! nl2br($event->location) !!}
                     </td>
+                    <td>{!! boolean_icon($event->required) !!}</td>
                 </tr>
                 @empty
                 <tr>

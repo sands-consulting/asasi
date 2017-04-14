@@ -1,65 +1,46 @@
-<div role="tabpanel" class="tab-pane active form-horizonal" id="tab-notice-settings">
-	<div class="panel panel-flat">
-		<table class="table">
-			<tr>
-				<th width="5%">1</th>
-				<td>{{ trans('notices.views.admin.form.settings.type') }}</td>
-				<td class="col-xs-2">
-					{!! Former::select('type_id')->label(false)->options(App\NoticeType::options()) !!}
-				</td>
-			</tr>
+<div role="tabpanel" class="tab-pane active panel-body" id="tab-notice-settings">
+	<div class="row">
+		<div class="col-xs-12 col-md-6">
+			{!! Former::select('type_id')->label('notices.views.admin.form.settings.type')->options(App\NoticeType::options()) !!}
+			{!! Former::select('category_id')->label('notices.views.admin.form.settings.category')->options(App\NoticeCategory::options()) !!}
+			@unless(Auth::user()->hasPermission('notice:organziation'))
+			{!! Former::select('organization_id')->label('notices.views.admin.form.settings.organization')->options(App\Organization::options()) !!}
+			@endunless
+			{!! Former::checkbox('invitation')->label('notices.views.admin.form.settings.invitation')->inline()->addClass('pull-right') !!}
+		</div>
 
-			<tr>
-				<th>2</th>
-				<td>{{ trans('notices.views.admin.form.settings.category') }}</td>
-				<td>
-					{!! Former::select('category_id')->label(false)->options(App\NoticeCategory::options()) !!}
-				</td>
-			</tr>
+		<div class="col-xs-12 col-md-6">
+			{!! Former::hidden('setting[purchase]')->value(0) !!}
+			{!! Former::checkbox('settings[purchase]')->label('notices.views.admin.form.settings.purchase')->inline()->addClass('pull-right') !!}
+			{!! Former::hidden('setting[submission]')->value(0) !!}
+			{!! Former::checkbox('settings[submission]')->label('notices.views.admin.form.settings.submission')->inline()->addClass('pull-right') !!}
+			{!! Former::hidden('setting[award]')->value(0) !!}
+			{!! Former::checkbox('settings[award]')->label('notices.views.admin.form.settings.award')->inline()->addClass('pull-right') !!}
+			{!! Former::hidden('setting[evaluation]')->value(0) !!}
+			{!! Former::checkbox('settings[evaluation]')->label('notices.views.admin.form.settings.evaluation')->inline()->addClass('pull-right')->setAttribute('v-model', 'settings.evaluation') !!}
 
-			<tr>
-				<th>3</th>
-				<td>{{ trans('notices.views.admin.form.settings.organization') }}</td>
-				<td>
-					{!! Former::select('organization_id')->label(false)->options(App\Organization::options()) !!}
-				</td>
-			</tr>
-
-			<tr>
-				<th>4</th>
-				<td>{{ trans('notices.views.admin.form.settings.purchase') }}</td>
-				<td><input type="checkbox" name="purchase" class="pull-right"></td>
-			</tr>
-
-			<tr>
-				<th>5</th>
-				<td>{{ trans('notices.views.admin.form.settings.submission') }}</td>
-				<td><input type="checkbox" name="submission" class="pull-right"></td>
-			</tr>
-
-			<tr>
-				<th>6</th>
-				<td>{{ trans('notices.views.admin.form.settings.evaluation') }}</td>
-				<td><input type="checkbox" name="evaluation" class="pull-right"></td>
-			</tr>
-
-			<tr>
-				<th>7</th>
-				<td>{{ trans('notices.views.admin.form.settings.award') }}</td>
-				<td><input type="checkbox" name="award" class="pull-right"></td>
-			</tr>
-
-			<tr>
-				<th rowspan="{{ App\EvaluationType::whereStatus('active')->count() + 1 }}">8</th>
-				<td colspan="2">{{ trans('notices.views.admin.form.settings.evaluation-order') }}</td>
-			</tr>
-
-			@foreach(App\EvaluationType::whereStatus('active')->get() as $type)
-			<tr>
-				<td>{{ $loop->iteration }}. {{ $type->name }}</td>
-				<td><input type="text" name="evaluation.{{ $type->slug }}" class="form-control"></td>
-			</tr>
-			@endforeach
-		</table>
+			<table class="table table-bordered mt-5" v-if="settings.evaluation">
+				<thead>
+					<tr class="bg-blue-700">
+						<th colspan="3">{{ trans('notices.views.admin.form.settings.evaluation-settings') }}</th>
+					</tr>
+					<tr>
+						<th>{{ trans('notices.attributes.evaluation-types.type') }}</th>
+						<th>{{ trans('notices.attributes.evaluation-types.start_at') }}</th>
+						<th>{{ trans('notices.attributes.evaluation-types.end_at') }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="type in evaluationTypes">
+						<td>
+							@{{ type.name }}
+							<input type="hidden" v-bind:name="'notice-evaluations[' + type.slug + '][type_id]'" v-model="noticeEvaluations[type.slug].type_id">
+						</td>
+						<td><datepicker-single klass="form-control" v-bind:name="'notice-evaluations[' + type.slug + '][start_at]'" :date="noticeEvaluations[type.slug].start_at"></datepicker-single></td>
+						<td><datepicker-single klass="form-control" v-bind:name="'notice-evaluations[' + type.slug + '][end_at]'" :date="noticeEvaluations[type.slug].end_at"></datepicker-single></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

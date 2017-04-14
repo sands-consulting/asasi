@@ -32,6 +32,13 @@ class NoticesController extends Controller
 
     public function create(Request $request)
     {
+        JavaScript::put([
+            'evaluationTypes' => EvaluationType::active()->get(),
+            'notice' => new Notice,
+            'events' => $notice->events,
+            'noticeEvaluations' => $notice->evaluationSettings
+        ]);
+
         return view('admin.notices.create', ['notice' => new Notice]);
     }
 

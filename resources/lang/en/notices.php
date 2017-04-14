@@ -22,6 +22,21 @@ return [
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
+
+        'evaluation-types' => [
+            'type' => 'Type',
+            'start_at' => 'Start Date',
+            'end_at' => 'End Date'
+        ],
+
+        'events' => [
+            'type' => 'Type',
+            'name' => 'Name',
+            'location' => 'Location',
+            'required' => 'Required',
+            'schedule_at' => 'Date & Time',
+            'details' => 'Details'
+        ]
     ],
 
     'buttons' => [
@@ -33,6 +48,8 @@ return [
         'submission' => 'Submission',
         'invoice' => 'Invoice',
         'receipt' => 'Receipt',
+
+        'add-event' => 'Add Event',
     ],
 
     'menu' => [
@@ -42,8 +59,8 @@ return [
         'files' => 'Files',
 
         'allocations' => 'Allocations',
-        'evaluation-criterias' => 'Evaluation Criterias',
-        'submission-criterias' => 'Submission Criterias',
+        'evaluation-requirements' => 'Evaluation Requirements',
+        'submission-requirements' => 'Submission Requirements',
 
         'invitations' => 'Invitatis',
         'eligibles' => 'Eligibles',
@@ -102,9 +119,6 @@ return [
 
             'create' => [
                 'title' => 'New Notice',
-                'table' => [
-                    'empty' => 'No record created.'
-                ],
             ],
 
             'edit' => [
@@ -116,10 +130,11 @@ return [
                     'type' => 'Please select notice type',
                     'category' => 'Please select notice category',
                     'organization' => 'Please select organization for this notice',
+                    'invitation' => 'Invite only selected vendors',
                     'purchase' => 'Allow notice purchase via system',
                     'submission' => 'Allow notice submission via system',
                     'evaluation' => 'Allow notice evaluation via system',
-                    'evaluation-order' => 'Assign notice evaluation order',
+                    'evaluation-settings' => 'Notice Evaluation Settings',
                     'award' => 'Allow notice award via system',
                 ]
             ],
@@ -143,11 +158,6 @@ return [
 
             'events' => [
                 'empty' => 'No event information.',
-                'table' => [
-                    'type' => 'Type',
-                    'datetime' => 'Date & Time',
-                    'details' => 'Details'
-                ]
             ],
 
             'files' => [

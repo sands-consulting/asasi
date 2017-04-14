@@ -1,9 +1,10 @@
-<div class="row">
-    <div class="col-xs-12 col-md-2">
-        @include('admin.notices.form.menu')
-    </div>
+{{ Former::populate($notice) }}
+<div class="col-xs-12 col-md-3">
+    @include('admin.notices.form.menu')
+</div>
 
-    <div class="col-xs-12 col-md-10">
+<div class="col-xs-12 col-md-9">
+    <div class="panel panel-flat panel-form">
         <div class="tab-content">
             @include('admin.notices.form.settings')
             @include('admin.notices.form.details')
@@ -14,11 +15,9 @@
             @include('admin.notices.form.submission-criterias')
             @include('admin.notices.form.evaluation-criterias')
         </div>
-
-        <div class="btn-group pull-right">
-            <a href="#" class="btn bg-blue-700">Save</a>
-            <a href="#" class="btn bg-slate-300">Next</a>
-            <a href="#" class="btn bg-blue-700">Submit Application</a>
+        <div class="panel-footer">
+            <a href="#" class="btn btn-default pull-right" v-if="!submit" v-on:click="next">{{ trans('actions.next') }}</a>
+            <input type="submit" name="save" class="btn bg-blue-700 pull-right" value="{{ trans('actions.save') }}">
         </div>
     </div>
 </div>

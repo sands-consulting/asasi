@@ -4,7 +4,10 @@
 
 @section('header')
 <div class="page-title">
-    <h4>{{ $notice->number }}</h4>
+    <h4>
+        {{ link_to_route('admin.notices.index', trans('notices.title')) }} /
+        {{ $notice->number }}
+    </h4>
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">

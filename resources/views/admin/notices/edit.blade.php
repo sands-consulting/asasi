@@ -1,10 +1,14 @@
 @extends('layouts.admin')
 
-@section('page-title', implode(' | ', [trans('revisions.title'), $notice->number, trans('notices.title')]))
+@section('page-title', implode(' | ', [trans('notices.views.admin.edit.title'), $notice->number, trans('notices.title')]))
 
 @section('header')
 <div class="page-title">
-    <h4>{{ trans('notices.views.admin.edit.title') }}</h4>
+    <h4>
+        {{ link_to_route('admin.notices.index', trans('notices.title')) }} /
+        {{ link_to_route('admin.notices.show', $notice->number, $notice->id) }} /
+        <span class="text-semibold">{{ trans('notices.views.admin.edit.title') }}</span>
+    </h4>
 </div>
 <div class="heading-elements">
     <div class="heading-btn-group">
@@ -24,7 +28,7 @@
 @endsection
 
 @section('content')
-{!! Former::vertical_open(route('admin.notices.show', $notice->id)) !!}
+{!! Former::vertical_open(route('admin.notices.show', $notice->id))->id('form-notice') !!}
 	@include('admin.notices.form')
 {!! Former::close() !!}
 @endsection

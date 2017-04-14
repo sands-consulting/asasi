@@ -39,4 +39,24 @@ class NoticeService extends BaseService
         $notice->status = 'cancelled';
         $notice->save();
     }
+
+    public static function settings(Notice $notice, $settings)
+    {
+        foreach($settings as $key => $value)
+        {
+            $setting = $notice->settings()->firstOrNew(['key' => $key]);
+            $setting->value = $value;
+            $setting->save();
+        }
+    }
+
+    public static function evaluations(Notice $notice, $evaluations)
+    {
+        foreach($evaluations as $typeId => $data)
+        {
+            $evaluation = $notice->evaluationSettings()->firstOrNew(['type_id' => $typeId]);
+            $evaluation->fill($data);
+            $evaluation->save();
+        }
+    }
 }
