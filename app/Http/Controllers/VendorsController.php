@@ -8,6 +8,8 @@ use App\DataTables\Portal\VendorPurchasesDataTable;
 use App\Events\VendorApplicationSubmitted;
 use App\Http\Requests\VendorRequest;
 use App\Services\VendorService;
+use App\Place;
+use App\QualificationType;
 use App\Vendor;
 use Auth;
 use Illuminate\Http\Request;
@@ -30,9 +32,11 @@ class VendorsController extends Controller
     public function edit(Vendor $vendor)
     {
         JavaScript::put([
-            'qualifications' => \App\QualificationType::with('codes')->active()->get(),
+            'qualifications' => QualificationType::with('codes')->active()->get(),
+            'places' => Place::active()->get(),
             'vendor' => [
                 'accounts' => $vendor->accounts,
+                'address' => $vendor->address,
                 'employees' => $vendor->employees,
                 'files' => $vendor->files()->with('upload')->get(),
                 'qualifications' => $vendor->qualifications()->with('type')->get(),

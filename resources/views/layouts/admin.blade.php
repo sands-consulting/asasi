@@ -105,7 +105,7 @@
 @include('layouts._javascript')
 <script src="{{ elixir('assets/js/admin.js') }}"></script>
 <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ elixir('js/app.js') }}"></script>
 @yield('scripts')
 {!! flash_messages() !!}
 </body>

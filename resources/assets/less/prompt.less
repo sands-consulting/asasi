@@ -239,6 +239,18 @@ a {
   }
 }
 
+.panel-form {
+  .panel-footer {
+    padding-left: 20px;
+
+    .btn {
+      &.pull-right {
+        margin-left: 2px;
+      }
+    }
+  }
+}
+
 #form-vendor {
   .panel-body {
     .address {
@@ -246,16 +258,6 @@ a {
 
       .row, .form-group {
         margin-bottom: 0;
-      }
-    }
-  }
-
-  .panel-footer {
-    padding-left: 20px;
-
-    .btn {
-      &.pull-right {
-        margin-left: 2px;
       }
     }
   }
@@ -438,18 +440,6 @@ a {
 
   .table-lines {
     margin-bottom: 20px;
-
-    thead {
-      th {
-        vertical-align: top;
-      }
-    }
-
-    tbody {
-      td {
-        vertical-align: top;
-      }
-    }
   }
 
   .list-transaction {
@@ -460,6 +450,20 @@ a {
       color: #999;
       background-color: transparent;
       padding: 10px 20px 0;
+    }
+  }
+}
+
+.table-vtop {
+  thead {
+    th {
+      vertical-align: top !important;
+    }
+  }
+
+  tbody {
+    td {
+      vertical-align: top !important;
     }
   }
 }

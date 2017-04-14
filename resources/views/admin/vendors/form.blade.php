@@ -4,7 +4,7 @@
 </div>
 
 <div class="col-xs-12 col-md-9">
-	<div class="panel panel-flat">
+	<div class="panel panel-flat panel-form">
 		<div class="tab-content">
 			@include('admin.vendors.form.details')
 			@include('admin.vendors.form.contact-person')

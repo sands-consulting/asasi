@@ -1,11 +1,19 @@
-$(function() {
-  if( $('#form-vendor').length > 0 ) {
+
+  var formEl = '#form-vendor';
     const vmVendor = new Vue({
-      el: '#form-vendor',
+      el: formEl,
       data: {
         submit: false,
         admin: true,
         vendor: {},
+        address: {
+          line_one: '',
+          line_two: '',
+          postcode: '',
+          city_id: "",
+          state_id: "",
+          country_id: ""
+        },
         qualifications: {},
         shareholders: [],
         employees: [],
@@ -47,11 +55,42 @@ $(function() {
           }
         }
       },
+      computed: {
+        countries: function() {
+          return window.places.filter(function(place) {
+            return place.type == 'country';
+          }).sort(function(p0, p1) {
+            return p0.name.localeCompare(p1.name);
+          });
+        },
+        states: function() {
+          var _vm = this;
+          if(!this.address.country_id || this.address.country_id.length == 0) {
+            return [];
+          } else {
+            return window.places.filter(function(place) {
+              return place.type == 'state' && place.parent_id == _vm.address.country_id;
+            }).sort(function(p0, p1) {
+              return p0.name.localeCompare(p1.name);
+            });
+          }
+        },
+        cities: function() {
+          var _vm = this;
+          if(!this.address.state_id || this.address.state_id.length == 0) {
+            return [];
+          } else {
+            return window.places.filter(function(place) {
+              return place.type == 'city' && place.parent_id == _vm.address.state_id;
+            }).sort(function(p0, p1) {
+              return p0.name.localeCompare(p1.name);
+            });
+          }
+        }
+      },
       methods: {
         initialize: function() {
           this.admin = $(this.$el).hasClass('admin');
-
-          console.log(this.$el);
 
           if(!this.admin) {
             $(this.$el).find('.list-vendor[role="tablist"] > li').each(function(index, element) {
@@ -100,6 +139,12 @@ $(function() {
                   bank_name: window.vendor.accounts[i].bank_name,
                   bank_iban: window.vendor.accounts[i].bank_iban
                 });
+              }
+            }
+
+            if('address' in window.vendor) {
+              for(key in this.address) {
+                this.address[key] = window.vendor.address[key];
               }
             }
 
@@ -239,5 +284,3 @@ $(function() {
         this.initialize();
       },
     });
-  }
-});

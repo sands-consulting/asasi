@@ -50,38 +50,38 @@
 		<div class="col-xs-12 col-md-6 address">
 			{!! Former::text('address[line_one]')
 				->label('vendors.attributes.address')
-				->placeholder('vendors.attributes.address_1') !!}
+				->placeholder('vendors.attributes.address_1')
+				->addAttribute('v-model', 'address.line_one') !!}
 			{!! Former::text('address[line_two]')
 				->label(null)
-				->placeholder('vendors.attributes.address_2') !!}
+				->placeholder('vendors.attributes.address_2')
+				->addAttribute('v-model', 'address.line_two') !!}
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<select id="address[country_id]" name="address[country_id]" class="form-control" v-model="address.country_id">
+						<option value="" selected="selected" disabled>{{ trans('vendors.attributes.address_country_id') }}</option>
+						<option v-for="option in countries" v-bind:value="option.id">@{{ option.name }}</option>
+					</select>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<select id="address[state_id]" name="address[state_id]" class="form-control" v-model="address.state_id">
+						<option value="" selected="selected" disabled>{{ trans('vendors.attributes.address_state_id') }}</option>
+						<option v-for="option in states" v-bind:value="option.id">@{{ option.name }}</option>
+					</select>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
 					{!! Former::text('address[postcode]')
 						->label(null)
-						->placeholder('vendors.attributes.address_postcode') !!}
+						->placeholder('vendors.attributes.address_postcode')
+						->addAttribute('v-model', 'address.postcode') !!}
 				</div>
 				<div class="col-xs-12 col-md-8">
-					{!! Former::select('address[city_id]')
-						->label(null)
-						->placeholder('vendors.attributes.address_city_id')
-						->options(App\Place::type('city')->active()->pluck('name', 'id'))
-						->addClass('vue-select2') !!}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					{!! Former::select('address[state_id]')
-						->label(null)
-						->placeholder('vendors.attributes.address_state_id')
-						->options(App\Place::type('state')->active()->pluck('name', 'id'))
-						->addClass('vue-select2') !!}
-				</div>
-				<div class="col-xs-12 col-md-6">
-					{!! Former::select('address[country_id]')
-						->label(null)
-						->placeholder('vendors.attributes.address_country_id')
-						->options(App\Place::type('country')->active()->pluck('name', 'id'))
-						->addClass('vue-select2') !!}
+					<select id="address[city_id]" name="address[city_id]" class="form-control" v-model="address.city_id">
+						<option value="" selected="selected" disabled>{{ trans('vendors.attributes.address_city_id') }}</option>
+						<option v-for="option in cities" v-bind:value="option.id">@{{ option.name }}</option>
+					</select>
 				</div>
 			</div>
 		</div>

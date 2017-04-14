@@ -13,6 +13,7 @@ use App\Notificators\VendorRejectedNotificator;
 use App\Services\VendorService;
 use App\Services\UserService;
 use App\Services\UserHistoryService;
+use App\Place;
 use App\Setting;
 use App\User;
 use App\Vendor;
@@ -36,6 +37,7 @@ class VendorsController extends Controller
     {
         JavaScript::put([
             'qualifications' => \App\QualificationType::with('codes')->active()->get(),
+            'places' => Place::active()->get(),
         ]);
         $vendor = new Vendor;
         return view('admin.vendors.create', compact('vendor'));
@@ -63,8 +65,10 @@ class VendorsController extends Controller
     {
         JavaScript::put([
             'qualifications' => \App\QualificationType::with('codes')->active()->get(),
+            'places' => Place::active()->get(),
             'vendor' => [
                 'accounts' => $vendor->accounts,
+                'address' => $vendor->address,
                 'employees' => $vendor->employees,
                 'files' => $vendor->files()->with('upload')->get(),
                 'qualifications' => $vendor->qualifications()->with('type')->get(),
