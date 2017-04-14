@@ -27,8 +27,9 @@ class Payment extends Model
         // default attributes value
     ];
 
-    protected $searchacble = [
-        // fields
+    protected $searchable = [
+        'name',
+        'status'
     ];
 
     protected $sortable = [

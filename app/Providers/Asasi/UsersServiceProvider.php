@@ -38,6 +38,10 @@ class UsersServiceProvider extends ServiceProvider
                 'prefix' => 'admin',
                 'as' => 'admin.'
             ], function ($router) {
+                $router->bind('user', function ($id) {
+                    return User::withTrashed()->where('id', $id)->first();
+                });
+
                 $router->put('users/{user}/restore', 'UsersController@restore')
                     ->name('users.restore');
                 $router->get('users/{user}/revisions', 'UsersController@revisions')
@@ -75,10 +79,11 @@ class UsersServiceProvider extends ServiceProvider
         });
 
         // API Routing
+        // Todo: fix request data not available when using api middleware
         app('router')->group([
             'namespace' => 'App\Http\Controllers\Api',
             'prefix' => 'api',
-            'middleware' => 'api',
+            'middleware' => 'web',
             'as' => 'api.'
         ], function ($router) {
             $router->resource('users', 'UsersController', [

@@ -29,12 +29,6 @@ class NotifyVendorApproval
         foreach($users as $user)
         {
             $user->notify(new VendorApproved($event->vendor));
-            $user->notifications()->create([
-                'content' => trans('vendors.notifications.approved', ['vendor' => $event->vendor->name]),
-                'link' => '#',
-                'item_type' => 'App\Vendor',
-                'item_id' => $event->vendor->id
-            ]);
         }
     }
 }

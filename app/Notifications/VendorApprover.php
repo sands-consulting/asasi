@@ -7,10 +7,12 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class VendorApprover extends Notification
 {
+    protected $vendor;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $vendor
      */
     public function __construct($vendor)
     {
@@ -25,7 +27,7 @@ class VendorApprover extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**
@@ -44,5 +46,14 @@ class VendorApprover extends Notification
         $message->action(trans('vendors.emails.submitted.action'), route('admin.vendors.show', $this->vendor->id));
 
         return $message;
-    } 
+    }
+
+    public function toArray($notifiable)
+    {
+        return [
+            'vendor' => $this->vendor,
+            'content' => trans('vendors.notifications.submitted', ['vendor' => $this->vendor->name]),
+            'link' => route('admin.vendors.show', $this->vendor->id),
+        ];
+    }
 }

@@ -47,7 +47,7 @@ return [
                 'approval' => 'Vendor Approval',
                 'subscription' => 'Pacakge Subscription',
                 'rejection' => 'Your approval was rejected due to:',
-                'pending' => 'Application for <strong>:vendor</strong> is pending for approval by PROMPT adminstrator.<br><br>If have any enquiry, please contact us via contact form made available in PROMPT'
+                'pending' => 'Application for <strong>:vendor</strong> is pending for approval by PROMPT adminstrator. If have any enquiry, please contact us via contact form made available in PROMPT'
             ]
         ]
     ]

@@ -15,7 +15,7 @@ class VendorApproved extends Event implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Vendor $vendor
      */
     public function __construct(Vendor $vendor)
     {
