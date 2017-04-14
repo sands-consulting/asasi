@@ -12,8 +12,8 @@
             @include('admin.notices.form.qualifications')
             @include('admin.notices.form.files')
             @include('admin.notices.form.allocations')
-            @include('admin.notices.form.submission-criterias')
-            @include('admin.notices.form.evaluation-criterias')
+            @include('admin.notices.form.submission-requirements')
+            @include('admin.notices.form.evaluation-requirements')
         </div>
         <div class="panel-footer">
             <a href="#" class="btn btn-default pull-right" v-if="!submit" v-on:click="next">{{ trans('actions.next') }}</a>

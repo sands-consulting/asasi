@@ -15,12 +15,6 @@
 @endcan
 @endsection
 
-@section('secondary-header')
-<ul class="breadcrumb breadcrumb-caret">
-    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> {{ trans('app.admin') }}</a></li>
-</ul>
-@endsection
-
 @section('content')
 <div class="panel panel-flat">
     <div class="panel-body form-datatable-search form-inline">

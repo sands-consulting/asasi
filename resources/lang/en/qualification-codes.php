@@ -23,6 +23,16 @@ return [
         'deleted' => 'Qualification :code - :name deleted'
     ],
 
+    'join-rules' => [
+        'and' => 'AND',
+        'or' => 'OR'
+    ],
+
+    'inner-rules' => [
+        'and' => 'ALL',
+        'or' => 'EITHER ONE'
+    ],
+
     'views' => [
         'index' => [
             'keywords' => 'Search Code or Name',

@@ -51,10 +51,6 @@
 @endsection
 
 @section('secondary-header')
-<ul class="breadcrumb breadcrumb-caret">
-    <li><a href="{{ route('admin') }}"><i class="icon-home2 position-left"></i> {{ trans('app.admin') }}</a></li>
-    <li><a href="{{ route('admin.notices.index') }}">{{ trans('notices.title') }}</a></li>
-</ul>
 <ul class="breadcrumb-elements">
     @can('histories', $notice)
     <li>

@@ -33,6 +33,10 @@
 				<td>
 					<textarea v-bind:name="'events[' + index + '][location]'" class="form-control" v-model="event.location" rows="5"></textarea>
 				</td>
+				<td>
+					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteEvent(index)"><i class="icon-cross2"></i></a>
+					<input type="hidden" v-bind:name="'events[' + index + '][id]'" class="form-control" v-model="event.id">
+				</td>
 			</tr>
 			<tr>
 				<td colspan="6" align="center"><a href="#" @click.prevent="addEvent"><i class="icon-plus-circle2"></i> {{ trans('notices.buttons.add-event') }}</a></td>

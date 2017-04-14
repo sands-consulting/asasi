@@ -81,7 +81,8 @@ class NoticesController extends Controller
             'evaluationTypes' => EvaluationType::active()->get(),
             'notice' => $notice,
             'events' => $notice->events,
-            'noticeEvaluations' => $notice->evaluationSettings
+            'noticeEvaluations' => $notice->evaluationSettings,
+            'allocations' => $notice->allocations,
         ]);
 
         return view('admin.notices.edit', compact('notice'));

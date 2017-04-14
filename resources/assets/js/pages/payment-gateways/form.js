@@ -18,7 +18,7 @@ $(function() {
           }
         },
         addSetting: function() {
-          this.settings.push(this.placeholder)
+          this.settings.push(this.placeholder);
         },
         deleteSetting: function(index) {
           this.settings.splice(index, 1);

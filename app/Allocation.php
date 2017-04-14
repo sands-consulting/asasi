@@ -35,24 +35,10 @@ class Allocation extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function logs()
+    public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
     }
-
-    public function canActivate()
-    {
-        return $this->status != 'active';
-    }
-
-    public function canDeactivate()
-    {
-        return $this->status != 'inactive';
-    }
-
-    /*
-     * Relationship
-     */
     
     public function notices()
     {
@@ -65,18 +51,9 @@ class Allocation extends Model
     {
         return $this->belongsToMany(Project::class);
     }
-
-    /*
-     * Mutators
-     */
-    
-
-    /*
-     * Helpers
-     */
     
     public static function options()
     {
-        return static::pluck('name', 'id');
+        return static::pluck('id', 'name');
     }
 }

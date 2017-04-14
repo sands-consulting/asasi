@@ -18,8 +18,8 @@ $(function() {
         qualifications: [],
         files: [],
         allocations: [],
-        submissionRequirements: [],
-        evaluationRequirements: [],
+        submissionRequirements: {},
+        evaluationRequirements: {},
         placeholders: {
           event: {
             id: null,
@@ -29,31 +29,38 @@ $(function() {
             required: false,
             type_id: null
           },
+          file: {
+            id: null,
+            name: '',
+            type: '',
+            file: null,
+          },
+          allocation: {
+            id: "",
+            amount: null,
+          },
           evaluationRequirement: {
             id: null,
             required: false,
             title: '',
-            full_score: '',
-            type_id: '',
+            full_score: ''
           },
           submissionRequirement: {
             id: null,
             title: '',
             field_required: false,
-            field_type: '',
-            type_id: null
+            field_type: ''
           },
           qualification: {
-            group: '',
-            join_rule: '',
-            inner_rule: '',
+            id: null,
+            join_rule: 'and',
+            inner_rule: 'and',
             codes: []
           },
-          file: {
+          qualificationCode: {
             id: null,
-            file: null,
-            upload: null
-          },
+            code_id: ''
+          }
         }
       },
       methods: {
@@ -63,7 +70,17 @@ $(function() {
           }
 
           if ( 'evaluationTypes' in window ) {
-            this.evaluationTypes = window.evaluationTypes
+            this.evaluationTypes = window.evaluationTypes;
+
+            for (var i = 0; i < this.evaluationTypes.length; i++) {
+              slug = this.evaluationTypes[i].slug;
+              this.$set(this.submissionRequirements, slug, []);
+              this.$set(this.evaluationRequirements, slug, []);
+            }
+          }
+
+          if ( 'notice' in window ) {
+            this.notice = window.notice;
           }
 
           if( 'noticeEvaluations' in window ) {
@@ -76,10 +93,6 @@ $(function() {
                 this.noticeEvaluations[type.slug] = window.noticeEvaluations[i];
               }
             }
-          }
-
-          if ( 'vendor' in window ) {
-            this.vendor = window.vendor;
           }
 
           if( 'events' in window ) {
@@ -109,38 +122,43 @@ $(function() {
         addAllocation: function() {
           this.allocations.push(jQuery.extend(true, {}, this.placeholders.allocation))
         },
-        addEvaluationRequirement: function() {
-          this.evaluationRequirements.push(jQuery.extend(true, {}, this.placeholders.evaluationRequirement));
+        addEvaluationRequirement: function(type) {
+          this.evaluationRequirements[type].push(jQuery.extend(true, {}, this.placeholders.evaluationRequirement));
         },
-        addSubmissionRequirement: function() {
-          this.submissionRequirements.push(jQuery.extend(true, {}, this.placeholders.submissionRequirement));
+        addSubmissionRequirement: function(type) {
+          this.submissionRequirements[type].push(jQuery.extend(true, {}, this.placeholders.submissionRequirement));
         },
         addFile: function() {
           this.files.push(jQuery.extend(true, {}, this.placeholders.file));
         },
         addQualification: function() {
-          this.qualifications.push(jQuery.extend(true, {}, this.placeholders.qualification));
+          qualification = jQuery.extend(true, {}, this.placeholders.qualification);
+          qualification.codes.push(jQuery.extend(true, {}, this.placeholders.qualificationCode))
+          this.qualifications.push(qualification);
         },
-        addQualificationCode: function(index, codeId) {
-          this.qualifications[index]['codes'].push(codeId);
+        addQualificationCode: function(index) {
+          this.qualifications[index]['codes'].push(jQuery.extend(true, {}, this.placeholders.qualificationCode));
         },
-        deleteShareholder: function(index) {
-          this.shareholders.splice(index, 1);
-        },
-        deleteEmployee: function(index) {
-          this.employees.splice(index, 1);
-        },
-        deleteAccount: function(index) {
-          this.accounts.splice(index, 1);
+        deleteEvent: function(index) {
+          this.events.splice(index, 1);
         },
         deleteFile: function(index) {
           this.files.splice(index, 1);
         },
-        deleteCode: function(code, index) {
-          this.qualifications[code]['codes'].splice(index, 1);
+        deleteAllocation: function(index) {
+          this.allocations.splice(index, 1);
         },
-        deleteChildCode: function(code, index, childIndex) {
-          this.qualifications[code]['codes'][index]['children'].splice(childIndex, 1);
+        deleteEvaluationRequirement: function(type, index) {
+          this.evaluationRequirements[type].splice(index, 1);
+        },
+        deleteSubmissionRequirement: function(type, index) {
+          this.submissionRequirements[type].splice(index, 1);
+        },
+        deleteQualification: function(index) {
+          this.qualifications.splice(index, 1);
+        },
+        deleteQualificationCode: function(index, codeIndex) {
+          this.qualifications[index].codes.splice(codeIndex, 1);
         }
       },
       mounted: function() {

@@ -36,6 +36,29 @@ return [
             'required' => 'Required',
             'schedule_at' => 'Date & Time',
             'details' => 'Details'
+        ],
+
+        'files' => [
+            'name' => 'Name',
+            'file' => 'File',
+            'type' => 'Type',
+        ],
+
+        'allocations' => [
+            'allocation' => 'Allocation',
+            'amount' => 'Amount'
+        ],
+
+        'submission-requirements' => [
+            'title' => 'Title',
+            'field' => 'Field',
+            'required' => 'Required'
+        ],
+
+        'evaluation-requirements' => [
+            'title' => 'Title',
+            'full_score' => 'Full Score',
+            'required' => 'Required'
         ]
     ],
 
@@ -50,6 +73,10 @@ return [
         'receipt' => 'Receipt',
 
         'add-event' => 'Add Event',
+        'add-file' => 'Add File',
+        'add-allocation' => 'Add Allocation',
+        'add-requirement' => 'Add Requirement',
+        'add-qualification' => 'Add Qualification'
     ],
 
     'menu' => [
@@ -87,10 +114,15 @@ return [
         'submission_submitted' => 'Your submission for Notice :number successfully submitted.',
     ],
 
-    'file_types' => [
+    'file-types' => [
         'internal' => 'Internal Use Only',
         'public' => 'For Public View',
         'purchase' => 'For Purchase Only',
+    ],
+
+    'field-types' => [
+        'checkbox' => 'Checkbox',
+        'file' => 'File'
     ],
 
     'settings' => [
@@ -136,16 +168,14 @@ return [
                     'evaluation' => 'Allow notice evaluation via system',
                     'evaluation-settings' => 'Notice Evaluation Settings',
                     'award' => 'Allow notice award via system',
+                ],
+                'allocations' => [
+                    'select' => 'Please select allocation'
                 ]
             ],
 
             'allocations' => [
                 'empty' => 'No allocation information.',
-                'table' => [
-                    'type' => 'Type',
-                    'name' => 'Name',
-                    'amount' => 'Amount'
-                ]
             ],
 
             'evaluation-criterias' => [
