@@ -1,7 +1,7 @@
 <div class="panel-body panel-transaction">
 	<div class="row">
 		<div class="col-xs-12 col-md-8">
-			<table class="table table-bordered table-lines">
+			<table class="table table-bordered table-lines table-vtop">
 				<thead>
 					<th>#</th>
 					<th>{{ trans('transactions.attributes.item') }}</th>

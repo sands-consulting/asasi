@@ -33,7 +33,7 @@
 			</div>
 		</div>
 
-		<table class="table table-bordered table-lines">
+		<table class="table table-bordered table-lines table-vtop">
 			<thead>
 				<th>#</th>
 				<th>{{ trans('transactions.attributes.item') }}</th>
