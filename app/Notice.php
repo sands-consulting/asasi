@@ -180,7 +180,7 @@ class Notice extends Model
         return $this->hasMany(Submission::class);
     }
 
-    public function evaluations()
+    public function evaluationSettings()
     {
         return $this->hasMany(NoticeEvaluation::class);
     }

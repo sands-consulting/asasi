@@ -21,6 +21,7 @@ use App\Services\ProjectService;
 use App\Services\UserHistoryService;
 use Auth;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class NoticesController extends Controller
 {
@@ -54,7 +55,9 @@ class NoticesController extends Controller
         $allocations = $request->only('allocations');
 
         $notice  = NoticeService::create(new Notice, $inputs);
-        UserHistoryService::log(Auth::user(), 'Create', $notice, $request->getClientIp());
+
+        UserHistoryService::log(Auth::user(), 'create', $notice, $request->getClientIp());
+
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.created', ['name' => $notice->name]));
@@ -67,10 +70,14 @@ class NoticesController extends Controller
 
     public function edit(Notice $notice)
     {
-        $requirementTechnicals = $notice->requirementTechnicals;
-        $requirementCommercials = $notice->requirementCommercials;
-        $noticeEvents = $notice->events;
-        return view('admin.notices.edit', compact('notice', 'noticeEvents', 'requirementCommercials', 'requirementTechnicals'));
+        JavaScript::put([
+            'evaluationTypes' => EvaluationType::active()->get(),
+            'notice' => $notice,
+            'events' => $notice->events,
+            'noticeEvaluations' => $notice->evaluationSettings
+        ]);
+
+        return view('admin.notices.edit', compact('notice'));
     }
 
     public function update(NoticeRequest $request, Notice $notice)

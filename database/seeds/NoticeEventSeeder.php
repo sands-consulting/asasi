@@ -21,14 +21,14 @@ class NoticeEventSeeder extends Seeder
         $noticeEventTypeData = [
             [
                 'name' => 'Briefing',
-                'event_at' => Carbon\Carbon::now()->addMonth(),
+                'schedule_at' => Carbon\Carbon::now()->addMonth(),
                 'location' => 'PEJABAT SETIAUSAHA KERAJAAN NEGERI SELANGOR,
 BANGUNAN SULTAN SALAHUDDIN ABDUL AZIZ SHAH,
 40503 SHAH ALAM,
 SELANGOR DARUL EHSAN.',
                 'required' => true,
                 'notice_id' => 1,
-                'notice_event_type_id' => 1,
+                'type_id' => 1,
                 'status' => 'active'
             ]
         ];
