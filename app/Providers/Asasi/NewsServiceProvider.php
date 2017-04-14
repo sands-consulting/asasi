@@ -40,7 +40,7 @@ class NewsServiceProvider extends ServiceProvider
                 $router->put('news/{news}/duplicate', 'NewsController@duplicate')
                     ->name('news.duplicate');
 
-                $router->put('news/{news}/restore', 'NewsController@publish')
+                $router->put('news/{news}/publish', 'NewsController@publish')
                     ->name('news.publish');
                 $router->put('news/{news}/restore', 'NewsController@unpublish')
                     ->name('news.unpublish');
