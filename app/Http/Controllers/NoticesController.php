@@ -27,6 +27,11 @@ class NoticesController extends Controller
 
     public function show(Notice $notice)
     {
+        if($notice->invitation || $notice->status != 'published')
+        {
+            return redirect()->route('root');
+        }
+       
         return view('notices.show', compact('notice'));
     }
 
