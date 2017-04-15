@@ -30,6 +30,11 @@ class NoticeEvent extends Model
         'schedule_at'
     ];
 
+    public function notice()
+    {
+        return $this->belongsTo(Notice::class);
+    }
+
     public function activities()
     {
         return $this->morphMany(NoticeActivity::class, 'activitable');
