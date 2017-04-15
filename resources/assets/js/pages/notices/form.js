@@ -1,6 +1,6 @@
-
+$(document).ready(function(){
   var formEl = '#form-notice';
-
+  if($(formEl).length > 0) {
     const vmNotice = new Vue({
       el: formEl,
       data: {
@@ -175,8 +175,8 @@
                 
                 for(var i = 0; i < data.length; i++) {
                   if(i == 0) {
-                    qualification.inner_rule = data.inner_rule;
-                    qualification.join_rule = data.join_rule;
+                    qualification.group_rule = data[i].group_rule;
+                    qualification.join_rule = data[i].join_rule;
                   }
 
                   qualification.codes.push(jQuery.extend(true, {}, {
@@ -254,3 +254,5 @@
         this.initialize();
       },
     });
+  }
+});
