@@ -89,7 +89,12 @@
             @include('admin.notices.show.submission-requirements')
             @include('admin.notices.show.evaluation-requirements')
 
+            @if($notice->invitation)
+            @include('admin.notices.show.invitations')
+            @else
             @include('admin.notices.show.eligibles')
+            @endif
+
             @include('admin.notices.show.purchases')
             @include('admin.notices.show.submissions')
 
@@ -101,4 +106,5 @@
 
 @include('admin.notices.modals.cancel')
 @include('admin.notices.modals.delete')
+@include('admin.notices.modals.eligible')
 @endsection

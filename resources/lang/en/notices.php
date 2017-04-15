@@ -61,6 +61,12 @@ return [
             'title' => 'Requirement',
             'full_score' => 'Full Score',
             'required' => 'Required'
+        ],
+
+        'eligibles' => [
+            'name' => 'Vendor',
+            'exception' => 'Exception',
+            'notified_at' => 'Notification Date & Time',
         ]
     ],
 
@@ -78,7 +84,9 @@ return [
         'add-file' => 'Add File',
         'add-allocation' => 'Add Allocation',
         'add-requirement' => 'Add Requirement',
-        'add-qualification' => 'Add Qualification'
+        'add-qualification' => 'Add Qualification',
+
+        'add-eligible' => 'Add Eligible Vendor',
     ],
 
     'menu' => [
@@ -200,6 +208,9 @@ return [
                         'and' => 'AND',
                         'or' => 'OR'
                     ]
+                ],
+                'eligibles' => [
+                    'empty' => 'No eligible vendors.'
                 ]
             ],
 
@@ -211,6 +222,10 @@ return [
                 'delete' => [
                     'title' => 'Notice Deletion',
                     'submit' => 'Delete This Notice',
+                ],
+                'eligible' => [
+                    'title' => 'Add Eligible Vendor',
+                    'submit' => 'Submit'
                 ]
             ]
         ],

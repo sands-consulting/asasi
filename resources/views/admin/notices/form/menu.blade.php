@@ -35,13 +35,13 @@
         </a>
     </li>
 
-    <li role="presentation">
+    <li role="presentation" v-if="settings.submission">
         <a href="#tab-notice-submission-requirements" aria-controls="tab-notice-submission-requirements" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-list-numbered"></i> {{ trans('notices.menu.submission-requirements') }}
         </a>
     </li>
 
-    <li role="presentation">
+    <li role="presentation" v-if="settings.evaluation">
         <a href="#tab-notice-evaluation-requirements" aria-controls="tab-notice-evaluation-requirements" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-clipboard2"></i> {{ trans('notices.menu.evaluation-requirements') }}
         </a>

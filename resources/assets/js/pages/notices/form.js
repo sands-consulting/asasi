@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
   var formEl = '#form-notice';
   if($(formEl).length > 0) {
     const vmNotice = new Vue({
@@ -84,8 +84,10 @@ $(document).ready(function(){
           }
 
           if( 'settings' in window ) {
-            for (var i = 0; i < window.settings.length; i++) {
-              this.$set(this.settings, window.settings[i].key, window.settings[i].value);
+            for(var key in window.settings) {
+              if(window.settings.hasOwnProperty(key)) {
+                this.$set(this.settings, key, window.settings[key]);
+              }
             }
           }
 
@@ -106,16 +108,16 @@ $(document).ready(function(){
             }
           }
 
-          if( 'noticeEvaluations' in window ) {
-            for (var i = 0; i < this.noticeEvaluations.length; i++) {
-              var evaluation = this.noticeEvaluations[i];
+          if( 'evaluationSettings' in window ) {
+            for (var i = 0; i < window.evaluationSettings.length; i++) {
+              var evaluation = window.evaluationSettings[i];
               type = this.evaluationTypes.filter(function(item) {
                 return item.id == evaluation.type_id;
               });
 
-              if ( type ) {
-                this.$set(this.noticeEvaluations[type.slug], 'start_at', window.noticeEvaluations[i].start_at);
-                this.$set(this.noticeEvaluations[type.slug], 'end_at', window.noticeEvaluations[i].end_at);
+              if ( type.length > 0 ) {
+                this.$set(this.noticeEvaluations[type[0].slug], 'start_at', moment(evaluation.start_at).format('YYYY-MM-DD'));
+                this.$set(this.noticeEvaluations[type[0].slug], 'end_at', moment(evaluation.end_at).format('YYYY-MM-DD'));
               }
             }
           }

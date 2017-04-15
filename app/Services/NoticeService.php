@@ -62,6 +62,7 @@ class NoticeService extends BaseService
     {
         foreach($evaluations as $type => $inputs)
         {
+
             $data   = [];
             $typeId = $inputs['type_id'];
             unset($inputs['type_id']);
@@ -76,7 +77,7 @@ class NoticeService extends BaseService
                 $data['end_at'] = $inputs['end_at'];
             }
 
-            $evaluation = $notice->evaluationSettings()->firstOrNew(['type_id' => $data['type_id']]);
+            $evaluation = $notice->evaluationSettings()->firstOrNew(['type_id' => $typeId]);
 
             if(count($data) == 2)
             {

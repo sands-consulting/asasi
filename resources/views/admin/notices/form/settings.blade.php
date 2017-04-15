@@ -6,7 +6,7 @@
 			@unless(Auth::user()->hasPermission('notice:organziation'))
 			{!! Former::select('organization_id')->label('notices.views.admin.form.settings.organization')->options(App\Organization::options()) !!}
 			@endunless
-			{!! Former::hidden('invitation')->value(0) !!}
+			{!! Former::hidden('invitation')->forceValue(0) !!}
 			{!! Former::checkbox('invitation')->label('notices.views.admin.form.settings.invitation')->inline()->addClass('pull-right')->forceValue(1)->vModel('notice.invitation') !!}
 		</div>
 
@@ -14,13 +14,11 @@
 			{!! Former::hidden('settings[purchase]')->value(0) !!}
 			{!! Former::checkbox('settings[purchase]')->label('notices.views.admin.form.settings.purchase')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.purchase') !!}
 			{!! Former::hidden('settings[submission]')->value(0) !!}
-			{!! Former::checkbox('settings[submission]')->label('notices.views.admin.form.settings.submission')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.submission') !!}
-			{!! Former::hidden('settings[award]')->value(0) !!}
-			{!! Former::checkbox('settings[award]')->label('notices.views.admin.form.settings.award')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.award') !!}
+			{!! Former::checkbox('settings[submission]')->label('notices.views.admin.form.settings.submission')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.submission')->setAttribute('v-bind:checked', 'settings.submission') !!}
 			{!! Former::hidden('settings[evaluation]')->value(0) !!}
 			{!! Former::checkbox('settings[evaluation]')->label('notices.views.admin.form.settings.evaluation')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.evaluation') !!}
 
-			<table class="table table-bordered mt-5" v-if="settings.evaluation">
+			<table class="table table-bordered mb-10" v-if="settings.evaluation">
 				<thead>
 					<tr class="bg-blue-700">
 						<th colspan="3">{{ trans('notices.views.admin.form.settings.evaluation-settings') }}</th>
@@ -42,6 +40,9 @@
 					</tr>
 				</tbody>
 			</table>
+
+			{!! Former::hidden('settings[award]')->value(0) !!}
+			{!! Former::checkbox('settings[award]')->label('notices.views.admin.form.settings.award')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.award') !!}
 		</div>
 	</div>
 </div>

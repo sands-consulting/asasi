@@ -92,9 +92,9 @@ class NoticesController extends Controller
             'evaluationTypes' => EvaluationType::active()->get(),
             'notice' => $notice,
             'events' => $notice->events,
-            'noticeEvaluations' => $notice->noticeEvaluations,
+            'evaluationSettings' => $notice->evaluationSettings,
             'allocations' => $notice->allocations,
-            'settings' => $notice->settings()->pluck('key', 'value'),
+            'settings' => $notice->settings()->pluck('value', 'key'),
             'qualificationCodes' => $notice->qualificationCodes()->orderBy('group')->orderBy('sequence')->get()->groupBy('group'),
             'files' => $notice->files()->with('upload')->get(),
             'submissionRequirements' => $notice
