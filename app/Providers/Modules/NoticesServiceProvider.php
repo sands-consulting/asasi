@@ -90,6 +90,8 @@ class NoticesServiceProvider extends ServiceProvider
             });
 
             $router->resource('notices', 'NoticesController', ['only' => ['index', 'show']]);
+            $router->post('notices/{notice}/bookarm', 'NoticesController@bookmark')
+                ->name('notices.bookmark');
         });
     }
 }

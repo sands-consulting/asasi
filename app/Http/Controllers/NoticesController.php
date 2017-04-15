@@ -6,6 +6,7 @@ use App\Notice;
 use App\DataTables\Portal\NoticeAwardsDataTable;
 use App\DataTables\Portal\NoticesDataTable;
 use App\DataTables\Portal\NoticeSubmissionsDataTable;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class NoticesController extends Controller
@@ -25,13 +26,17 @@ class NoticesController extends Controller
         return $table->render('notices.awards');
     }
 
-    public function show(Notice $notice)
+    public function show(Request $request, Notice $notice)
     {
-        if($notice->invitation || $notice->status != 'published')
+        if(
+            ($notice->invitation && $request->user() && $notice->invitations()->whereVendorId($request->user()->vendor->id)->count() == 0) ||
+            ($notice->status != 'published') || 
+            ($notice->published_at->gt(Carbon::now()))
+        )
         {
             return redirect()->route('root');
         }
-       
+
         return view('notices.show', compact('notice'));
     }
 

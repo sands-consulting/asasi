@@ -31,7 +31,7 @@ class NoticesDataTable extends DataTable
 
     public function query()
     {
-        $query = Notice::with('organization')->published();
+        $query = Notice::with('organization')->published()->whereInvitation(0);
         
         if (isset($this->type))
         {

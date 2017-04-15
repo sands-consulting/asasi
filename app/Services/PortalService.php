@@ -25,7 +25,7 @@ class PortalService
 
     public static function invitations(User $user)
     {
-        return Notice::published()->whereHas('invitations', function($query) use($user) {
+        return Notice::published()->whereInvitation(1)->whereHas('invitations', function($query) use($user) {
             $query->where('vendor_id', $user->vendor->id);
         })->count();
     }

@@ -22,7 +22,7 @@ class VendorInvitationsDataTable extends DataTable
     public function query()
     {
         $query = Notice::published();
-        $query = $query->whereHas('invitations', function($query) {
+        $query = $query->whereInvitation(1)->whereHas('invitations', function($query) {
             $query->where('vendor_id', $this->vendor_id);
         });
 

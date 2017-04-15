@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Notice;
 use App\User;
 use Carbon\Carbon;
+use Cart;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class NoticePolicy
@@ -96,6 +97,75 @@ class NoticePolicy
         return $this->show($auth, $notice);
     }
 
+    public function bookmark(User $auth, Notice $notice)
+    {
+        return $auth->hasPermission('access:vendor');
+    }
+
+    public function purchase(User $auth, Notice $notice)
+    {
+        if(!$auth->hasPermission('access:vendor'))
+        {
+            return false;
+        }
+
+        // Already Purchased
+        if($notice->purchases()->whereVendorId($auth->vendor->id)->count() > 0)
+        {
+            return false;
+        }
+
+        // Already in Cart
+        $items = Cart::search(function ($item, $rowId) {
+                return $item->id === $notice->id;
+        });
+
+        if($items->count() > 0)
+        {
+            return false;
+        }
+
+        if($notice->status != 'published')
+        {
+            return false;
+        }
+
+        if($notice->published_at->gt(Carbon::now()))
+        {
+            return false;
+        }
+
+        if($notice->purchased_at->gt(Carbon::now()))
+        {
+            return false;
+        }
+
+        if($notice->expired_at->lte(Carbon::now()))
+        {
+            return false;
+        }
+
+        // Invitation
+        if($notice->invitation)
+        {
+            return $notice->invitations()->whereVendorId($auth->vendor->id)->count() > 0;
+        }
+
+        // Qualification
+        if($notice->qualificationCodes()->count() > 0 && $notice->eligibles()->whereVendorId($auth->vendor->id)->count() == 0)
+        {
+            return false;
+        }
+
+        //
+        if($notice->eligibles()->count() > 0 && $notice->eligibles()->whereVendorId($auth->vendor->id)->count() == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public function checkOrganization(User $auth, Notice $notice, $perm)
     {
         if ( ! $auth->hasPermission($perm)) {
@@ -107,50 +177,5 @@ class NoticePolicy
         }
 
         return true;
-    }
-
-    // tD
-
-    public function summaryByType(User $auth, Notice $notice)
-    {
-        return $this->show($auth, $notice);
-    }
-
-    public function summaryEvaluators(User $auth, Notice $notice)
-    {
-        return $this->show($auth, $notice);
-    }
-
-    public function award(User $auth, Notice $notice)
-    {
-        return $this->show($auth, $notice);
-    }
-
-    public function storeAward(User $auth, Notice $notice)
-    {
-        return $this->award($auth, $notice);
-    }
-
-    public function purchase(User $auth, Notice $notice)
-    {
-    	if($auth->hasAllPermissions(['access:vendor', 'access:cart']))
-    	{
-    		$eligibles = $notice->eligibles()->get();
-
-    		if($notice->eligibles()->count() == 0 || $notice->eligibles()->whereVendorId($auth->vendor->id)->first())
-    		{
-    			$now = Carbon::now();
-    			
-    			// if($notice->)
-    		}
-    		else
-    		{
-    			return false;
-    		}
-    	}
-    	else
-    	{
-    		return false;
-    	}
     }
 }

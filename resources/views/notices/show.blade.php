@@ -15,11 +15,13 @@
         </a>
     </div>
 
+    @can('purchase', $notice)
     <div class="col-xs-12 col-md-2 col-md-offset-8">
-        <a href="{{ route('cart.add', $notice->id) }}" class="btn btn-danger btn-block btn-raised legitRipple">
-            {{ trans('notices.views.show.purchase') }} <i class=" icon-cart-add2 position-right"></i>
+        <a href="{{ route('cart.add', $notice->id) }}" class="btn btn-danger btn-block btn-raised legitRipple" data-method="PUT">
+            {{ trans('notices.views.show.purchase') }} <i class="icon-cart-add2 position-right"></i>
         </a>
     </div>
+    @endcan
 </div>
 
 @include('admin.notices.show.header')

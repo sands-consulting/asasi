@@ -30,19 +30,20 @@
                 @if($errors->has('published_at'))<span class="help-block">{{ $errors->first('published_at') }}</span>@endif
             </div>
 
-            <div class="form-group required{{ $errors->has('expired_at') ? ' has-error' : '' }}">
-                <label for="number" class="control-label">{{ trans('notices.attributes.expired_at') }}<sup>*</sup></label>
-                <datetimepicker-single klass="form-control" name="expired_at" :date="notice.expired_at"></datetimepicker-single>
-                @if($errors->has('expired_at'))<span class="help-block">{{ $errors->first('expired_at') }}</span>@endif
-            </div>
-
             <div class="form-group required{{ $errors->has('purchased_at') ? ' has-error' : '' }}">
                 <label for="number" class="control-label">{{ trans('notices.attributes.purchased_at') }}<sup>*</sup></label>
                 <datetimepicker-single klass="form-control" name="purchased_at" :date="notice.purchased_at"></datetimepicker-single>
                 @if($errors->has('purchased_at'))<span class="help-block">{{ $errors->first('purchased_at') }}</span>@endif
             </div>
 
-             <div class="form-group required{{ $errors->has('submission_at') ? ' has-error' : '' }}">
+            <div class="form-group required{{ $errors->has('expired_at') ? ' has-error' : '' }}">
+                <label for="number" class="control-label">{{ trans('notices.attributes.expired_at') }}<sup>*</sup></label>
+                <datetimepicker-single klass="form-control" name="expired_at" :date="notice.expired_at"></datetimepicker-single>
+                @if($errors->has('expired_at'))<span class="help-block">{{ $errors->first('expired_at') }}</span>@endif
+            </div>
+
+
+            <div class="form-group required{{ $errors->has('submission_at') ? ' has-error' : '' }}">
                 <label for="number" class="control-label">{{ trans('notices.attributes.submission_at') }}<sup>*</sup></label>
                 <datetimepicker-single klass="form-control" name="submission_at" :date="notice.submission_at"></datetimepicker-single>
                 @if($errors->has('submission_at'))<span class="help-block">{{ $errors->first('submission_at') }}</span>@endif
