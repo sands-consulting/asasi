@@ -6,16 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class GanttTask extends Model
 {
-    protected $table = "gantt_tasks";
-    public $primaryKey = "id";
+    protected $dates = [
+        'start',
+        'end',
+    ];
 
     /*
      * Relationship
      */
-    
-    public function ganttLinks()
+
+    public function links()
     {
-        return $this->hasMany(GanttLink::class);
+        return $this->hasMany(GanttDependency::class, 'task_id');
     }
 
     public function project()

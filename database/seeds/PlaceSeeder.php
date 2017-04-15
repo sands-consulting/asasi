@@ -13,7 +13,6 @@ class PlaceSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('places')->truncate();
         $places = [
             ['MALAYSIA', 'MY', 'MAS', 'country', null], #1
@@ -1935,7 +1934,5 @@ class PlaceSeeder extends Seeder
                 'parent_id' => $place[4],
             ]);
         }
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

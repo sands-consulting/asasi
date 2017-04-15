@@ -14,19 +14,20 @@ class ProjectsServiceProvider extends ServiceProvider
 
         app('policy')->register('App\Http\Controllers\VendorProjectsController', 'App\Policies\ProjectPolicy');
         app('policy')->register('App\Http\Controllers\Admin\ProjectsController', 'App\Policies\ProjectPolicy');
-        app('policy')->register('App\Http\Controllers\Admin\ProjectMilestonesController', 'App\Policies\ProjectMilestonePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\ProjectMilestonesController',
+            'App\Policies\ProjectMilestonePolicy');
     }
 
     public function register()
     {
         app('router')->group([
-            'namespace' => 'App\Http\Controllers',
-            'middleware' => 'web'
+            'namespace'  => 'App\Http\Controllers',
+            'middleware' => 'web',
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
+                'prefix'    => 'admin',
+                'as'        => 'admin.',
             ], function ($router) {
                 $router->put('projects/{project}/restore', 'ProjectsController@restore')
                     ->name('projects.restore');
@@ -45,26 +46,38 @@ class ProjectsServiceProvider extends ServiceProvider
                     ->name('projects.suspend');
 
                 $router->resource('projects', 'ProjectsController');
-                
+
                 # To Remove
 
                 $router->post('projects/create-by-notice', [
-                    'as'    => 'projects.create-by-notice',
-                    'uses'  => 'ProjectsController@createByNotice'
+                    'as'   => 'projects.create-by-notice',
+                    'uses' => 'ProjectsController@createByNotice',
                 ]);
 
                 $router->post('projects/store-by-notice', [
-                    'as'    => 'projects.store-by-notice',
-                    'uses'  => 'ProjectsController@storeByNotice'
+                    'as'   => 'projects.store-by-notice',
+                    'uses' => 'ProjectsController@storeByNotice',
                 ]);
 
                 // Project Milestone
-                $router->match(['get', 'post'], 'projects/{projects}/milestones/gantt_data', "ProjectMilestonesController@ganttData");
+                $router->match(['get', 'post'], 'projects/{project}/milestones/gantt_data',
+                    "ProjectMilestonesController@ganttData");
                 $router->resource('projects.milestones', 'ProjectMilestonesController');
             });
 
             $router->resource('vendors.projects', 'VendorProjectsController', [
-                'only' => ['index', 'show']]);
+                'only' => ['index', 'show'],
+            ]);
+        });
+
+        app('router')->group([
+            'namespace'  => 'App\Http\Controllers\Api',
+            'middleware' => 'api',
+            'prefix'     => 'api',
+            'as'         => 'api.',
+        ], function ($router) {
+            $router->get('projects/{project}/milestones/gantt-tasks', 'ProjectMilestonesController@getGanttTasks')
+                ->name('projects.milestones.gantt-tasks');
         });
     }
 }
