@@ -16,7 +16,7 @@ class CreateAllocationNoticeTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('allocation_id');
             $table->unsignedInteger('notice_id');
-            $table->decimal('amount');
+            $table->decimal('amount', 20, 2);
             $table->nullableTimestamps();
             $table->softDeletes();
 
