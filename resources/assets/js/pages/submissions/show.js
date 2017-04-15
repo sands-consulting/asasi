@@ -9,13 +9,14 @@ const vm = new Vue({
     submitted: false
   },
   mounted: function () {
+    this.submission_id = $(this.$el).data('submission');
     this.getNotice();
     this.loading = true;
   },
   methods: {
     getNotice: function () {
       var self = this;
-      axios.get('/api/vendor-submissions/' + 1 + '/notice')
+      axios.get('/api/vendor-submissions/' + this.submission_id + '/notice')
         .then(function (response) {
           console.log(response.data);
           self.loading = false;
@@ -29,8 +30,9 @@ const vm = new Vue({
       return this.submission.details
     },
     getFormUrl: function (type, exists) {
-      let formUrl = window.location.href + '/details/' + type;
-      return exists ? formUrl + '/edit' : formUrl + '/create';
+      let formUrl = window.location.href + '/details/' + type + '/edit';
+      return formUrl;
+      // return exists ? formUrl + '/edit' : formUrl + '/create';
     }
   }
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\Portal\VendorSubmissionsDataTable;
 use App\EvaluationType;
+use App\Libraries\Carbon;
 use App\Notice;
 use App\Services\SubmissionItemService;
 use App\Submission;
@@ -60,6 +61,7 @@ class VendorSubmissionsController extends Controller
 
     public function update(Request $request, Vendor $vendor, Submission $submission, SubmissionDetail $detail)
     {
+        $incomplete = false;
         $input = $request->all();
         $input['vendor_id'] = $vendor->id;
         $input['notice_id'] = $submission->notice->id;
@@ -71,24 +73,22 @@ class VendorSubmissionsController extends Controller
             ->get();
 
         // Fixme: Temp solutions
-        $requirements->reduce(function ($carry, $requirement) use ($input, $detail, $request) {
-            $carry['value'] = null;
-
-
-            if (! $requirement->require_file) {
-                if (isset($input['value'][$requirement->id])) {
-                    $carry['value'] = $input['value'][$requirement->id];
-                }
-            }
+        $requirements->map(function ($requirement) use ($input, $detail, $request) {
+            $data['value'] = null;
 
             $item = SubmissionItem::where('requirement_id', $requirement->id)->first();
 
+            if (! $requirement->require_file) {
+                if (isset($input['value'][$requirement->id])) {
+                    $data['value'] = $input['value'][$requirement->id];
+                }
+            }
+
             if (! $item) {
-                $carry['requirement_id'] = $requirement->id;
-                $carry['detail_id'] = $detail->id;
+                $data['requirement_id'] = $requirement->id;
+                $data['detail_id'] = $detail->id;
 
-                $item = SubmissionItemService::create(new SubmissionItem, $carry);
-
+                $item = SubmissionItemService::create(new SubmissionItem, $data);
             } else {
                 if ($requirement->field_type == 'file') {
                     if ($request->hasFile('file.' . $requirement->id)) {
@@ -96,76 +96,32 @@ class VendorSubmissionsController extends Controller
                             $item,
                             $request->file('file.' . $requirement->id)
                         );
-                        $carry['value'] = 1;
+                        $data['value'] = 1;
                     }
                 }
+                $item = SubmissionItemService::update($item, $data);
+            }
 
-                SubmissionItemService::update($item, $carry);
+            if ($requirement->field_required == 1 && $item->value == null) {
+                $requirement->incomplete = true;
             }
 
         }, null);
 
+        foreach ($requirements as $requirement) {
+            if (! $requirement->incomplete) {
+                SubmissionDetailService::update($detail, [
+                    'completed_at' => Carbon::now(),
+                    'status'       => 'completed',
+                ]);
+            }
+        }
+        // update submission detail status
+
+
         return redirect()
             ->route('vendors.submissions.show', [$vendor->id, $submission->id])
             ->with('notice', trans('notices.notices.submission_saved', ['number' => $submission->notice->number]));
-    }
-
-    public function myNotices(Request $request)
-    {
-        $vendor = $request->user()->vendor->first();
-        $myNotices = $vendor->notices;
-
-        return view('notices.my-notices', compact('vendor', 'myNotices'));
-    }
-
-    public function submission(Request $request, Notice $notice)
-    {
-        $vendor = $request->user()->vendor;
-        // check if submission exists
-        $submission = SubmissionItem::firstOrNew([
-            'vendor_id' => $vendor->id,
-            'notice_id' => $notice->id,
-        ]);
-
-        return view('notices.submission', compact('notice', 'submission'));
-    }
-
-    public function commercial(Notice $notice)
-    {
-        $requirements = $notice->requirementCommercials;
-        return view('notices.commercial', compact('notice', 'requirements'));
-    }
-
-    public function commercialEdit(Notice $notice, Submission $submission)
-    {
-        $details = $submission->details(1)->get();
-        // Fixme: fix code to reduce query.
-        $requirements = $notice->requirementCommercials->map(function ($requirement, $key) use ($details) {
-            $requirement->details = $details->where('requirement_id', $requirement->id)->first();
-            return $requirement;
-        });
-
-        return view('notices.commercial-edit', compact('notice', 'submission', 'requirements'));
-    }
-
-
-    public function technical(Notice $notice)
-    {
-        $requirements = $notice->requirementTechnicals;
-        return view('notices.technical', compact('notice', 'requirements'));
-    }
-
-    public function technicalEdit(Notice $notice, Submission $submission)
-    {
-        $details = $submission->details(2)->get();
-        // Fixme: fix code to reduce query.
-        $requirements = $notice->requirementTechnicals->map(function ($requirement, $key) use ($details) {
-            $requirement->details = $details->where('requirement_id', $requirement->id)->first();
-            return $requirement;
-        });
-        // return $requirements;
-
-        return view('notices.technical-edit', compact('notice', 'submission', 'requirements'));
     }
 
     public function saveSubmission(Request $request, Notice $notice)
