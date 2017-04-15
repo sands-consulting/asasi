@@ -86,7 +86,7 @@ $(document).ready(function() {
           if( 'settings' in window ) {
             for(var key in window.settings) {
               if(window.settings.hasOwnProperty(key)) {
-                this.$set(this.settings, key, window.settings[key]);
+                this.$set(this.settings, key, window.settings[key] == "1");
               }
             }
           }
