@@ -22,7 +22,7 @@ class VendorSubmissionsDataTable extends DataTable
                     : '<span class="icon-cross3"></span>';
             })
             ->addColumn('action', function ($notice) {
-                return view('vendors.submissions._index_action', compact('notice'));
+                return view('vendors.submissions.index.actions', compact('notice'));
             })
             ->make(true);
     }

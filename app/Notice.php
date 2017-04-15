@@ -252,7 +252,15 @@ class Notice extends Model
 
     public function paid($payer)
     {
-        $this->purchases()->firstOrCreate(['vendor_id' => $payer->id]);
+        $purchase   = $this->purchases()->firstOrCreate(['vendor_id' => $payer->id]);
+        $submission = $this->settings()->whereKey('submissions')->first();
+
+        if($submission && !!$submission->value)
+        {
+            $submission = $this->submissions()->firstOrCreate(['vendor_id' => $payer->id]);
+            $submission->purchase_id = $purchase->id;
+            $submission->save();
+        }
 
         return $this;
     }
