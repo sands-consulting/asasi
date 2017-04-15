@@ -51,6 +51,7 @@ elixir(function(mix) {
         'components/datepicker.js',
         'pages/vendors/form.js',
         'pages/subscriptions/form.js',
+        'pages/cart.js',
         'notification.js',
         'portal.js',
     ], 'public/assets/js/portal.js')

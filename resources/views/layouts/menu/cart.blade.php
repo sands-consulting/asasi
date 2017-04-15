@@ -13,16 +13,17 @@
 		</div>
 		
 		<ul class="media-list dropdown-content-body width-350">
-			@forelse(Cart::content() as $cart)
+			@forelse(Cart::content() as $item)
 			<li class="media">
-				<div class="media-left"><i class="icon-cart-remove"></i></div>
+				<div class="media-left">
+					<a href="{{ route('cart.remove', $item->rowId) }}" class="text-danger" data-method="DELETE" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross3"></i></a>
+				</div>
 				<div class="media-body">
-					<a href="#" class="media-heading">
-						<span class="text-semibold">{{ $cart->name }}</span>
-						<span class="media-annotation pull-right">MYR {{ $cart->price }}</span>
+					<a href="{{ route('cart') }}" class="media-heading">
+						<span class="text-default text-light">{{ $item->model->number }}</span><br>
+						<span class="text-default text-semibold">{{ $item->name }}</span>
 					</a>
 
-					{{-- <span class="text-muted">{{ str_limit($cart->options->description, 30) }}</span> --}}
 				</div>
 			</li>
 			@empty

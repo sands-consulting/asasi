@@ -19,7 +19,7 @@ class CartPolicy
 
     public function destroy(User $auth)
     {
-        return $auth->hasPermission('access:vendor') && Cart::count() > 0
+        return $auth->hasPermission('access:vendor') && Cart::count() > 0;
     }
 
     public function add(User $auth)

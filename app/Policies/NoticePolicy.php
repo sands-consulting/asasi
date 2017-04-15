@@ -116,11 +116,11 @@ class NoticePolicy
         }
 
         // Already in Cart
-        $items = Cart::search(function ($item, $rowId) {
+        $items = Cart::search(function ($item, $rowId) use($notice) {
             return $item->id === $notice->id;
         });
 
-        if($items->count() > 0)
+        if(count($items) > 0)
         {
             return false;
         }

@@ -27,13 +27,13 @@ class NoticePurchasesServiceProvider extends ServiceProvider
                 'as' => 'cart'
             ]);
             $router->post('cart', 'CartController@checkout');
-            $router->delete('cart', ['CartController@destroy']);
+            $router->delete('cart', 'CartController@destroy');
 
             $router->put('cart/add/{notice}', [
                 'uses' => 'CartController@add',
                 'as' => 'cart.add'
             ]);
-            $router->delete('cart/remove/{notice}', [
+            $router->delete('cart/remove/{id}', [
                 'uses' => 'CartController@remove',
                 'as' => 'cart.remove'
             ]);

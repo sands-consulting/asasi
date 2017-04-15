@@ -44,6 +44,18 @@ class Notice extends Model
         'status_award' => 'pending'
     ];
 
+    protected $dates = [
+        'published_at',
+        'expired_at',
+        'purchased_at',
+        'submission_at',
+    ];
+
+    protected $appends = [
+        'tax',
+        'total'
+    ];
+
     protected $searchable = [
         'name',
         'number',
@@ -56,13 +68,6 @@ class Notice extends Model
         'number',
         'published_at',
         'status',
-    ];
-
-    protected $dates = [
-        'published_at',
-        'expired_at',
-        'purchased_at',
-        'submission_at',
     ];
 
     /*
@@ -214,6 +219,23 @@ class Notice extends Model
     {
         return $this->hasMany(NoticePurchase::class);
     }
+
+    public function getTaxAttribute()
+    {
+        if($this->taxCode)
+        {
+            return $this->price * $this->taxCode->rate / 100;
+        }
+        else
+        {
+            return 0.00;
+        }
+    }
+
+    public function getTotalAttribute()
+    {
+        return $this->price + $this->tax;
+    }
     
     /*
      * Helpers
@@ -232,46 +254,5 @@ class Notice extends Model
     public static function published()
     {
         return static::where('status', 'published');
-    }
-
-
-    public function getSummary()
-    {
-        // Fixme: try to create dynamic query for evaluation type other than commercial and technical.
-        $this->type_id = [
-            ['id' => '1', 'name' => 'Commercials'],
-            ['id' => '2', 'name' => 'Technicals']
-        ];
-
-        $vendors = Vendor::leftJoin('submissions', 'submissions.vendor_id', '=', 'vendors.id')
-            ->where('submissions.notice_id', $this->id)
-            ->select([
-                'vendors.id',
-                'vendors.name',
-                'submissions.price as offered_price',
-                \DB::raw("'None' as offered_duration")
-            ])
-            ->groupBy('vendors.id')
-            ->get();
-
-        foreach ($vendors as $vendor) {
-            foreach ($this->type_id as $type) {
-                $score = EvaluationRequirement::where('notice_id', $this->id)
-                    ->where('evaluation_requirements.evaluation_type_id', $type['id'])
-                    ->leftJoin('evaluation_scores', 'evaluation_scores.evaluation_requirement_id', '=', 'evaluation_requirements.id')
-                    ->select(
-                        \DB::raw("FORMAT((SUM(evaluation_scores.score) / SUM(evaluation_requirements.full_score)) * 100, 2) as value")
-                    )
-                    ->first();
-
-                $vendor->{$type['name']} = $score['value'];
-                $types[] = $type['name'];
-            }
-        }
-
-        $summary['data'] = $vendors->sortBy('Commercials'); // Fixme: create dynamic sorting
-        $summary['types'] = $types;
-
-        return $summary;
     }
 }
