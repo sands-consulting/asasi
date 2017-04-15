@@ -14,7 +14,7 @@ class SubmissionItem extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $uploadableConfig = [
-        'file' => [
+        'file.*' => [
             'custom-save', // saves the image prefixed wth "original"
         ],
     ];
@@ -82,6 +82,11 @@ class SubmissionItem extends Model
     public function detail()
     {
         return $this->belongsTo(SubmissionDetail::class);
+    }
+
+    public function upload()
+    {
+        return $this->belongsTo(Upload::class);
     }
 
     /*

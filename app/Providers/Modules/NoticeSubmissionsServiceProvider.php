@@ -3,6 +3,7 @@
 namespace App\Providers\Modules;
 
 use App\Filters\CustomSave;
+use App\SubmissionDetail;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,14 +30,21 @@ class NoticeSubmissionsServiceProvider extends ServiceProvider
                     $router->resource('submissions', 'SubmissionsController');
                 });
 
+                // vendor submissions
+                $router->model('submission_detail', SubmissionDetail::class);
                 $router->get('vendors/{vendor}/submissions/{submission}/slip', 'VendorSubmissionsController@slip')
                     ->name('vendors.submissions.slip');
-                $router->get('vendors/{vendor}/submissions/{submission}/types/{type}/create', 'VendorSubmissionsController@create')
+                $router->get('vendors/{vendor}/submissions/{submission}/details/{submission_detail}/create',
+                    'VendorSubmissionsController@create')
                     ->name('vendors.submissions.create');
-                $router->get('vendors/{vendor}/submissions/{submission}/types/{type}', 'VendorSubmissionsController@edit')
+                $router->get('vendors/{vendor}/submissions/{submission}/details/{submission_detail}/edit',
+                    'VendorSubmissionsController@edit')
                     ->name('vendors.submissions.edit');
+                $router->put('vendors/{vendor}/submissions/{submission}/details/{submission_detail}',
+                    'VendorSubmissionsController@update')
+                    ->name('vendors.submissions.update');
                 $router->resource('vendors.submissions', 'VendorSubmissionsController', [
-                    'except' => 'destroy',
+                    'except' => ['destroy', 'update'],
                 ]);
 
                 $router->get('submissions', 'NoticesController@submissions')

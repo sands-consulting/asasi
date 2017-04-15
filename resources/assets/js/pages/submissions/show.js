@@ -25,11 +25,11 @@ const vm = new Vue({
           console.log(error);
         });
     },
-    getDetailStatus: function (type) {
+    getDetailStatus: function () {
       return this.submission.details
     },
     getFormUrl: function (type, exists) {
-      let formUrl =  window.location.href + '/types/' + type;
+      let formUrl = window.location.href + '/details/' + type;
       return exists ? formUrl + '/edit' : formUrl + '/create';
     }
   }
