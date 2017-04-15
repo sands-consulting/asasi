@@ -10,6 +10,9 @@ class TransactionsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
+            ->editColumn('transaction_number', function($transaction) {
+                return link_to_route('admin.transactions.show', $transaction->transaction_number, $transaction->id);
+            })
             ->addColumn('action', function($transaction) {
                 return view('admin.transactions.index.actions', compact('transaction'));
             })

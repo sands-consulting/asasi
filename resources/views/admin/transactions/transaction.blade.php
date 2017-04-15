@@ -5,33 +5,33 @@
 				<thead>
 					<th>#</th>
 					<th>{{ trans('transactions.attributes.item') }}</th>
-					<th>{{ trans('transactions.attributes.price') }}<br>({{ setting('currency') }})</th>
-					<th>{{ trans('transactions.attributes.tax') }}<br>({{ setting('currency') }})</th>
-					<th>{{ trans('transactions.attributes.total') }}<br>({{ setting('currency') }})</th>
+					<th class="text-right">{{ trans('transactions.attributes.price') }}<br>({{ setting('currency') }})</th>
+					<th class="text-right">{{ trans('transactions.attributes.tax') }}<br>({{ setting('currency') }})</th>
+					<th class="text-right">{{ trans('transactions.attributes.total') }}<br>({{ setting('currency') }})</th>
 				</thead>
 				<tbody>
 					@foreach($transaction->lines as $line)
 					<tr>
 						<td>{{ $loop->iteration }}</td>
 						<td>{!! nl2br($line->description) !!}</td>
-						<td>{{ $line->price }}</td>
-						<td>{{ $line->tax }}<br><small>{{ $line->tax_rate }}% ({{ $line->tax_code }})</small></td>
-						<td>{{ $line->total }}</td>
+						<td class="text-right">{{ $line->price }}</td>
+						<td class="text-right">{{ $line->tax }}<br><small>{{ $line->tax_rate }}% ({{ $line->tax_code }})</small></td>
+						<td class="text-right">{{ $line->total }}</td>
 					</tr>
 					@endforeach
 				</tbody>
 				<tfoot>
 					<tr>
 						<th class="text-right" colspan="4">{{ trans('transactions.attributes.sub_total') }}</th>
-						<td>{{ $transaction->sub_total }}</td>
+						<td class="text-right">{{ $transaction->sub_total }}</td>
 					</tr>
 					<tr>
 						<th class="text-right" colspan="4">{{ trans('transactions.attributes.tax') }}</th>
-						<td>{{ $transaction->sub_total }}</td>
+						<td class="text-right">{{ $transaction->tax }}</td>
 					</tr>
 					<tr>
 						<th class="text-right" colspan="4">{{ trans('transactions.attributes.total') }}</th>
-						<td>{{ $transaction->sub_total }}</td>
+						<td class="text-right">{{ $transaction->total }}</td>
 					</tr>
 				</tfoot>
 			</table>
