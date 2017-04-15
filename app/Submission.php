@@ -73,28 +73,6 @@ class Submission extends Model
         }
     }
 
-    /* 
-     * State controls 
-     */
-    public function canActivate()
-    {
-        return $this->status != 'active';
-    }
-
-    public function canDeactivate()
-    {
-        return $this->status != 'inactive';
-    }
-    
-    public function canSubmit()
-    {
-        return $this->status === 'completed';
-    }
-
-    /*
-     * Relationship
-     */
-
     public function details($type = null)
     {
         $details = $this->hasMany(SubmissionDetail::class);
@@ -118,7 +96,6 @@ class Submission extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
-
 
     public function scores()
     {

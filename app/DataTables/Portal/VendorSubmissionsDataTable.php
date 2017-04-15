@@ -13,35 +13,24 @@ class VendorSubmissionsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->editColumn('submission_at', function ($notice) {
-                return Carbon::parse($notice->submission_at)->formatDateFromSetting();
+            ->editColumn('notice', function($submission) {
+                $notice = $submission->notice;
+                return view('notices.index.name', compact('notice'));
             })
-            ->editColumn('submitted_at', function ($notice) {
-                return ! is_null($notice->submitted_at)
-                    ? Carbon::parse($notice->submitted_at)->formatDateFromSetting()
+            ->editColumn('submitted_at', function ($submission) {
+                return ! is_null($submission->submitted_at)
+                    ? Carbon::parse($submission->submitted_at)->formatDateFromSetting()
                     : '<span class="icon-cross3"></span>';
             })
-            ->addColumn('action', function ($notice) {
-                return view('vendors.submissions.index.actions', compact('notice'));
+            ->addColumn('action', function ($submission) {
+                return view('vendors.submissions.index.actions', compact('submission'));
             })
             ->make(true);
     }
 
     public function query()
     {
-        $query = NoticePurchase::query()
-            ->select([
-                'notices.name',
-                'submissions.submitted_at as submitted_at',
-                'notices.submission_at',
-                'submissions.id as submission_id',
-                'notices.id as notice_id',
-                'vendors.id as vendor_id',
-            ])
-            ->leftJoin('vendors', 'vendors.id', '=', 'notice_purchases.id')
-            ->leftJoin('notices', 'notices.id', '=', 'notice_purchases.notice_id')
-            ->leftJoin('submissions', 'submissions.purchase_id', '=', 'notice_purchases.id')
-            ->where('notice_purchases.vendor_id', $this->vendor->id);
+        $query = $this->vendor->submissions()->with('notice')->leftJoin('notices', 'notices.id', '=', 'submissions.notice_id')->select('submissions.*');
 
         if ($this->datatables->request->input('q', null)) {
             $query->search($this->datatables->request->input('q', []));
@@ -63,23 +52,17 @@ class VendorSubmissionsDataTable extends DataTable
     {
         return [
             [
-                'data'  => 'name',
+                'data'  => 'notice',
                 'name'  => 'notices.name',
                 'title' => trans('notices.attributes.name'),
                 'width' => '40%',
-            ],
-            [
-                'data'  => 'submission_at',
-                'name'  => 'notices.submission_at',
-                'title' => trans('notices.attributes.submission_at'),
-                'class' => 'text-center',
             ],
             [
                 'data'  => 'submitted_at',
                 'name'  => 'submissions.submitted_at',
                 'title' => trans('submissions.attributes.submitted_at'),
                 'class' => 'text-center',
-            ],
+            ]
         ];
     }
 

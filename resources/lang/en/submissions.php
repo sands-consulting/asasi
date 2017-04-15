@@ -4,14 +4,16 @@ return [
     'title' => 'Submission',
 
     'attributes' => [
-        'id'           => 'Submission Id',
+        'number'       => 'Number',
+        'label'        => 'Label',
         'price'        => 'Price',
         'total_score'  => 'Total Score',
         'avg_score'    => 'Average Score',
         'notice_id'    => 'Notice',
         'vendor_id'    => 'Vendor',
+        'vendor'       => 'Vendor',
         'status'       => 'Status',
-        'submitted_at' => 'Submitted At',
+        'submitted_at' => 'Submitted Date & Time',
         'created_at'   => 'Created At',
         'updated_at'   => 'Last Updated At',
         'deleted_at'   => 'Deleted At',

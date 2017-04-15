@@ -1,6 +1,1 @@
-@if (! $notice->submitted_at)
-    <a href="{{ route('vendors.submissions.show', [$notice->vendor_id, $notice->submission_id]) }}"
-       class="btn btn-default btn-sm">
-        View
-    </a>
-@endif
+<a href="{{ route('vendors.submissions.show', [$submission->vendor_id, $submission->id]) }}" class="btn btn-default btn-sm">{{ trans('actions.view') }}</a>
