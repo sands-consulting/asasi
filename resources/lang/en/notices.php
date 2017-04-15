@@ -52,13 +52,13 @@ return [
         ],
 
         'submission-requirements' => [
-            'title' => 'Title',
+            'title' => 'Requirement',
             'field' => 'Field',
             'required' => 'Required'
         ],
 
         'evaluation-requirements' => [
-            'title' => 'Title',
+            'title' => 'Requirement',
             'full_score' => 'Full Score',
             'required' => 'Required'
         ]
@@ -202,6 +202,17 @@ return [
                     ]
                 ]
             ],
-        ]
+
+            'modals' => [
+                'cancel' => [
+                    'title' => 'Notice Cancellation',
+                    'submit' => 'Cancel This Notice',
+                ],
+                'delete' => [
+                    'title' => 'Notice Deletion',
+                    'submit' => 'Delete This Notice',
+                ]
+            ]
+        ],
     ],
 ];

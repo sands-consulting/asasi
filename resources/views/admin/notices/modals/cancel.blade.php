@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
-                <h5 class="modal-title">{{ trans('notices.modals.cancel.title') }}</h5>
+                <h5 class="modal-title">{{ trans('notices.views.admin.modals.cancel.title') }}</h5>
             </div>
 
             {!! Former::open_vertical(route('admin.notices.cancel', $notice->id))->method('DELETE') !!}
@@ -22,7 +22,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link legitRipple" data-dismiss="modal">{{ trans('actions.dismiss') }}<span class="legitRipple-ripple"></span><span class="legitRipple-ripple"></span></button>
-                    <button type="submit" class="btn btn-warning legitRipple">{{ trans('notices.modals.cancel.submit') }}</button>
+                    <button type="submit" class="btn btn-warning legitRipple">{{ trans('notices.views.admin.modals.cancel.submit') }}</button>
                 </div>
             {!! Former::close() !!}
         </div>
