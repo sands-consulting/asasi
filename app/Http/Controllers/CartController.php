@@ -34,7 +34,7 @@ class CartController extends Controller
     public function remove(Request $request)
     {
         $noticeId = $request->route('id');
-        $item = Cart::first(function($item, $rowId) use($noticeId) {
+        $item = Cart::content()->first(function($item, $rowId) use($noticeId) {
             return $item->id == $noticeId;
         });
         Cart::remove($item->rowId);
