@@ -29,7 +29,7 @@ class TransactionPolicy
      */
     public function show(User $auth, Transaction $transaction)
     {
-        if($auth->hasPermission('access:admin'))
+        if($auth->hasPermission('access:administration'))
         {
             return $auth->hasPermission('transaction:show');
         }

@@ -30,7 +30,6 @@ class SubscriptionsServiceProvider extends ServiceProvider
                 'prefix'    => 'admin',
                 'as'        => 'admin.'
             ], function ($router) {
-                $router->model('subscription', Subscription::class);
                 $router->put('subscriptions/{subscription}/restore', 'SubscriptionsController@restore')
                     ->name('subscriptions.restore');
                 $router->get('subscriptions/{subscription}/revisions', 'SubscriptionsController@revisions')
