@@ -65,7 +65,7 @@
 					<th class="text-right" colspan="4">{{ trans('transactions.attributes.tax') }}</th>
 					<td class="text-right">{{ $transaction->tax }}</td>
 				</tr>
-				<tr?
+				<tr>
 					<th class="text-right" colspan="4">{{ trans('transactions.attributes.total') }}</th>
 					<td class="text-right">{{ $transaction->total }}</td>
 				</tr>
