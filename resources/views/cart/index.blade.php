@@ -14,7 +14,7 @@
         <thead>
             <tr>
                 <th class="col-xs-1"></th>
-                <th class="col-xs-2 text-right">{{ trans('cart.attributes.item') }}</th>
+                <th class="col-xs-2 text-left">{{ trans('cart.attributes.item') }}</th>
                 <th class="col-xs-2 text-right">{{ trans('cart.attributes.price') }}</th>
                 <th class="col-xs-2 text-right">{{ trans('cart.attributes.tax') }}</th>
                 <th class="col-xs-2 text-right">{{ trans('cart.attributes.total') }}</th>

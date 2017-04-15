@@ -75,19 +75,7 @@
 	<div class="col-md-3">
 		<div class="thumbnail">
 			<div class="thumb thumb-rounded thumb-slide">
-				{{-- <a class="btn bg-primary-400 btn-rounded btn-icon legitRipple">
-					<span class="letter-icon">{{ get_initial($user->name) }}</span>
-				</a> --}}
-				<img src="{{ Gravatar::src($user->email, 100) }}"
-					class="img-circle"
-					alt="{{ $user->name }}">
-
-				<div class="caption">
-					<span>
-						<a href="#" class="btn bg-success-400 btn-icon btn-xs legitRipple" data-popup="lightbox"><i class="icon-plus2"></i></a>
-						<a href="user_pages_profile.html" class="btn bg-success-400 btn-icon btn-xs legitRipple"><i class="icon-link"></i></a>
-					</span>
-				</div>
+				<img src="{{ Gravatar::src($user->email, 100) }}" class="img-circle"alt="{{ $user->name }}">
 			</div>
 
 	    	<div class="caption text-center">
