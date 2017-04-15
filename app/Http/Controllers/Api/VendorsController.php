@@ -10,8 +10,9 @@ class VendorsController extends Controller
 {
     public function index(Request $request)
     {
-        $vendors = Vendor::where('name', 'LIKE', "%{$request->input('q')}%")
-                    ->orWhere('registration_number', 'LIKE', "%{$request->input('q')}%");
+        $vendors = Vendor::orWhere('name', 'LIKE', "%{$request->input('q')}%")
+                    ->orWhere('registration_number', 'LIKE', "%{$request->input('q')}%")
+                    ->get();
 
         return response()->json($vendors);
     }

@@ -11,128 +11,128 @@ class NoticePolicy
 {
     use HandlesAuthorization;
 
-    public function index(User $user)
+    public function index(User $auth)
     {
-        return $user->hasPermission('notice:index');
+        return $auth->hasPermission('notice:index');
     }
 
-    public function show(User $user)
+    public function create(User $auth)
     {
-        return $user->hasPermission('notice:show');
+        return $auth->hasPermission('notice:create');
     }
 
-    public function create(User $user)
+    public function store(User $auth)
     {
-        return $user->hasPermission('notice:create');
+        return $this->create($auth);
     }
 
-    public function store(User $user)
+    public function show(User $auth, Notice $notice)
     {
-        return $this->create($user);
+        return $this->checkOrganization($auth, $notice, 'notice:show');
     }
 
-    public function edit(User $user, Notice $notice)
+    public function edit(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:update');
+        return $auth->hasPermission('notice:update');
     }
 
-    public function update(User $user, Notice $notice)
+    public function update(User $auth, Notice $notice)
     {
-        return $this->edit($user, $notice);
+        return $this->edit($auth, $notice);
     }
 
-    public function duplicate(User $user, Notice $notice)
+    public function duplicate(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:duplicate');
+        return $auth->hasPermission('notice:duplicate');
     }
 
-    public function revisions(User $user, Notice $notice)
+    public function revisions(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:revisions');
+        return $auth->hasPermission('notice:revisions');
     }
 
-    public function histories(User $user, Notice $notice)
+    public function histories(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:histories');
+        return $auth->hasPermission('notice:histories');
     }
 
-    public function destroy(User $user, Notice $notice)
+    public function destroy(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:delete');
+        return $auth->hasPermission('notice:delete');
     }
 
-    public function publish(User $user, Notice $notice)
+    public function publish(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:publish') && !in_array($notice->status, ['published', 'cancelled']);
+        return $auth->hasPermission('notice:publish') && !in_array($notice->status, ['published', 'cancelled']);
     }
 
-    public function unpublish(User $user, Notice $notice)
+    public function unpublish(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:unpublish') && $notice->status == 'published';
+        return $auth->hasPermission('notice:unpublish') && $notice->status == 'published';
     }
 
-    public function cancel(User $user, Notice $notice)
+    public function cancel(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:cancel') && !in_array($notice->status, ['draft', 'cancelled']);
+        return $auth->hasPermission('notice:cancel') && !in_array($notice->status, ['draft', 'cancelled']);
     }
 
-    public function saveEvaluator(User $user, Notice $notice)
+    public function saveEvaluator(User $auth, Notice $notice)
     {
-        return $user->hasPermission('notice:create');
+        return $auth->hasPermission('notice:create');
     }
 
-    public function summary(User $user, Notice $notice)
+    public function summary(User $auth, Notice $notice)
     {
-        return $this->show($user, $notice);
+        return $this->show($auth, $notice);
     }
 
-    public function summaryByType(User $user, Notice $notice)
+    public function eligible(User $auth, Notice $notice)
     {
-        return $this->show($user, $notice);
+        return $this->show($auth, $notice);
     }
 
-    public function summaryEvaluators(User $user, Notice $notice)
+    public function checkOrganization(User $auth, Notice $notice, $perm)
     {
-        return $this->show($user, $notice);
+        if ( ! $auth->hasPermission($perm)) {
+            return false;
+        }
+
+        if ($auth->hasPermission('notice:organization')) {
+            return $auth->organizations->pluck('id')->has($notice->organization_id);
+        }
+
+        return true;
     }
 
-    public function award(User $user, Notice $notice)
+    // tD
+
+    public function summaryByType(User $auth, Notice $notice)
     {
-        return $this->show($user, $notice);
+        return $this->show($auth, $notice);
     }
 
-    public function storeAward(User $user, Notice $notice)
+    public function summaryEvaluators(User $auth, Notice $notice)
     {
-        return $this->award($user, $notice);
+        return $this->show($auth, $notice);
     }
 
-    public function events(User $user, Notice $notice)
+    public function award(User $auth, Notice $notice)
     {
-        return $this->show($user, $notice);
+        return $this->show($auth, $notice);
     }
 
-    public function settings(User $user, Notice $notice)
+    public function storeAward(User $auth, Notice $notice)
     {
-        return $this->show($user, $notice);
+        return $this->award($auth, $notice);
     }
 
-    public function qualificationCodes(User $user, Notice $notice)
+    public function purchase(User $auth, Notice $notice)
     {
-        return $this->show($user, $notice);
-    }
-
-    public function files(User $user, Notice $notice)
-    {
-        return $this->show($user, $notice);
-    }
-
-    public function purchase(User $user, Notice $notice)
-    {
-    	if($user->hasAllPermissions(['access:vendor', 'access:cart']))
+    	if($auth->hasAllPermissions(['access:vendor', 'access:cart']))
     	{
     		$eligibles = $notice->eligibles()->get();
 
-    		if($notice->eligibles()->count() == 0 || $notice->eligibles()->whereVendorId($user->vendor->id)->first())
+    		if($notice->eligibles()->count() == 0 || $notice->eligibles()->whereVendorId($auth->vendor->id)->first())
     		{
     			$now = Carbon::now();
     			

@@ -4,7 +4,7 @@
         <div class="panel-heading">
             <h6 class="panel-title">{{ trans('notices.attributes.description') }}</h6>
         </div>
-        <div class="panel-body">{{ nl2br($notice->description) }}</div>
+        <div class="panel-body">{!! nl2br($notice->description) !!}</div>
     </div>
     @endif
 

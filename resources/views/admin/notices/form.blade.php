@@ -1,4 +1,4 @@
-@if(count($errors) > 0)<div class="alert alert-danger">{{ trans('notices.notices.validation') }}</div>@endif
+@if(count($errors) > 0)<div class="alert alert-danger">{{ trans('notices.alerts.validation') }}</div>@endif
 {{ Former::populate($notice) }}
 
 <div class="row">

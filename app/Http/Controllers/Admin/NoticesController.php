@@ -208,6 +208,27 @@ class NoticesController extends Controller
             ->with('notice', trans('notices.notices.cancelled', ['name' => $notice->name]));
     }
 
+    public function eligible(Request $request, Notice $notice)
+    {
+        $inputs = $request->only('vendor_id', 'remarks');
+        $inputs['exception'] = 1;
+
+        if($notice->eligibles()->whereVendorId($inputs['vendor_id'])->count() > 0)
+        {
+            return redirect()
+                ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)) . '#tab-notice-eligibles')
+                ->with('notice', trans('notices.alerts.eligible'));
+        }
+
+        $eligible = $notice->eligibles()->create($inputs);
+
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)) . '#tab-notice-eligibles')
+            ->with('notice', trans('notices.notices.eligible', ['name' => $eligible->vendor->name]));
+    }
+
+// Todo
+
     public function summary(Notice $notice, EvaluationSummaryDataTable $table)
     {
         $types = EvaluationType::all();

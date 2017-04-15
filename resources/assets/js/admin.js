@@ -26,4 +26,9 @@ $(function () {
     }).get()
     var maxHeight = Math.max.apply(null, heights);
     $(".row-eq-height .eq-element").height(maxHeight);
+
+    var url = document.location.toString();
+    if(url.match('#')) {
+        $('a[href="#' + url.split('#')[1] + '"]').tab('show');
+    }
 });

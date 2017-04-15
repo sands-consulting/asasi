@@ -120,9 +120,14 @@ return [
         'published' => 'Notice :name published.',
         'unpublished' => 'Notice :name unpublished.',
         'cancelled' => 'Notice :name cancelled.',
-        'validation' => 'Please verify all required fields are filled.',
         'submission_saved' => 'Your submission for Notice :number successfully saved.',
         'submission_submitted' => 'Your submission for Notice :number successfully submitted.',
+        'eligible' => ':name successfully added to eligible vendors.'
+    ],
+
+    'alerts' => [
+        'validation' => 'Please verify all required fields are filled.',
+        'eligible' => 'Unable to add vendor as eligible.',
     ],
 
     'file-types' => [

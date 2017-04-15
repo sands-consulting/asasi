@@ -15,9 +15,11 @@ class NoticeEligible extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
+        'exception',
+        'remarks',
         'notice_id',
         'vendor_id',
-        'sent_at'
+        'notified_at'
     ];
 
     public function notice()

@@ -48,7 +48,7 @@ class NoticesServiceProvider extends ServiceProvider
                     ->name('notices.unpublish');
                 $router->put('notices/{notice}/cancel', 'NoticesController@cancel')
                     ->name('notices.cancel');
-                $router->post('notices/{notice}/eligible', 'NoticesController@eligibles')
+                $router->post('notices/{notice}/eligible', 'NoticesController@eligible')
                     ->name('notices.eligible');
 
                 $router->resource('notices', 'NoticesController');

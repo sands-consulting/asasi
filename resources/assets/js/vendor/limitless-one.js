@@ -591,9 +591,6 @@ $(function() {
         }, 100);
     }).resize();
 
-    // Select2
-    $('.select2').select2();
-
     // Popover
     $('[data-popup="popover"]').popover();
 
