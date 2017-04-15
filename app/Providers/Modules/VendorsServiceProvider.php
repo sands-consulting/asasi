@@ -20,7 +20,10 @@ class VendorsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        app('router')->group(['namespace' => 'App\Http\Controllers', 'middleware' => 'web'], function ($router) {
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers',
+            'middleware' => 'web'
+        ], function ($router) {
             $router->group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function ($router) {
                 $router->put('vendors/{subscription}/restore', 'VendorsController@restore')
                     ->name('vendors.restore');
@@ -71,6 +74,14 @@ class VendorsServiceProvider extends ServiceProvider
 
             $router->resource('vendors', 'VendorsController', [
                 'except' => ['index', 'destroy']]);
+        });
+
+        app('router')->group([
+            'namespace' => 'App\Http\Controllers\Api',
+            'prefix' => 'api',
+            'middleware' => 'api'
+        ], function ($router) {
+            $router->resource('vendors', 'VendorsController', ['only' => 'index']);
         });
     }
 }

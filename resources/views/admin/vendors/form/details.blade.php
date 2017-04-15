@@ -3,7 +3,7 @@
 		<div class="col-xs-12 col-md-3">
 			{!! Former::text('registration_number')
 				->label('vendors.attributes.registration_number')
-				->disabled() !!}
+				->setAttribute('v-bind:disabled', '!admin') !!}
 		</div>
 		<div class="col-xs-12 col-md-9">
 			{!! Former::text('name')

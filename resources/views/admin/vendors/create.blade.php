@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-{!! Former::open_vertical_for_files(route('admin.vendors.create'))->addClass('row admin')->id('form-vendor')->novalidate() !!}
+{!! Former::open_vertical_for_files(route('admin.vendors.store'))->addClass('row admin')->id('form-vendor')->novalidate() !!}
 	@include('admin.vendors.form')
 {!! Former::close() !!}
 @endsection

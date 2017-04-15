@@ -13,40 +13,40 @@ use Auth;
 use Illuminate\Http\Request;
 use Route;
 
-class VendorUsersController extends Controller
+class UsersController extends Controller
 {
-    public function index(Vendor $vendor, Request $request)
+    public function index(Request $request)
     {
-        return view('vendors.users.index');
+        return view('users.index');
     }
 
-    public function create(Vendor $vendor)
+    public function create()
     {
-        return view('vendors.users.create', compact('vendor'));
+        return view('users.create');
     }
 
-    public function store(Vendor $vendor)
+    public function store()
     {
-        return view('vendors.users.create', compact('vendor'));
+        return view('users.create');
     }
 
-    public function show(Vendor $vendor, User $user)
+    public function show(User $user)
     {
-        return view('vendors.users.show', compact('vendor'));
+        return view('users.show', compact($user));
     }
 
-    public function edit(Vendor $vendor, User $user)
+    public function edit(User $user)
     {
-        return view('vendors.users.edit', compact('vendor'));
+        return view('users.edit', compact($user));
     }
 
-    public function update(Vendor $vendor, User $user)
+    public function update(User $user)
     {
-        return view('vendors.users.edit', compact('vendor'));
+        return view('users.edit');
     }
 
-    public function destroy(Vendor $vendor, User $user)
+    public function destroy(User $user)
     {
-        return view('vendors.users.edit', compact('vendor'));
+        return view('users.edit');
     }
 }

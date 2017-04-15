@@ -225,6 +225,7 @@ return [
                 ],
                 'eligible' => [
                     'title' => 'Add Eligible Vendor',
+                    'vendor_id' => 'Select Vendor',
                     'submit' => 'Submit'
                 ]
             ]

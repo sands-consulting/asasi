@@ -36,6 +36,7 @@ class VendorsController extends Controller
     public function create()
     {
         JavaScript::put([
+            'admin' => true,
             'qualifications' => \App\QualificationType::with('codes')->active()->get(),
             'places' => Place::active()->get(),
         ]);
@@ -64,6 +65,7 @@ class VendorsController extends Controller
     public function edit(Vendor $vendor)
     {
         JavaScript::put([
+            'admin' => true,
             'qualifications' => \App\QualificationType::with('codes')->active()->get(),
             'places' => Place::active()->get(),
             'vendor' => [

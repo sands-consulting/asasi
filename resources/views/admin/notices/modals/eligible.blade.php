@@ -8,13 +8,13 @@
 
             {!! Former::open_vertical(route('admin.notices.eligible', $notice->id))->method('POST') !!}
                 <div class="modal-body">
-                    {!! Former::select('vendor_id')->label('notices.attributes.eligibles.name')->options(App\Vendor::options())->required() !!}
-                    {!! Former::textarea('remarks')->label('notices.attributes.remarks')->rows(5)->required() !!}
+                    {!! Former::select('vendor_id')->label('notices.attributes.eligibles.name')->options(['' => trans('notices.views.admin.modals.eligible.vendor_id')] + App\Vendor::options())->required()->vModel('vendorId') !!}
+                    {!! Former::textarea('remarks')->label('notices.attributes.remarks')->rows(5)->required()->vModel('remarks') !!}
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link legitRipple" data-dismiss="modal">{{ trans('actions.dismiss') }}<span class="legitRipple-ripple"></span><span class="legitRipple-ripple"></span></button>
-                    <button type="submit" class="btn btn-warning legitRipple">{{ trans('notices.views.admin.modals.eligible.submit') }}</button>
+                    <button type="submit" class="btn btn-warning legitRipple" v-if="vendorId.length > 0 && remarks.length > 0">{{ trans('notices.views.admin.modals.eligible.submit') }}</button>
                 </div>
             {!! Former::close() !!}
         </div>

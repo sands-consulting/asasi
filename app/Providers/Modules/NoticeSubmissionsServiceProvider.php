@@ -26,7 +26,7 @@ class NoticeSubmissionsServiceProvider extends ServiceProvider
             ],
             function ($router) {
                 $router->group(['namespace' => 'Admin', 'prefix' => 'admin.'], function ($router) {
-                    $router->resource('notices.submissions', 'NoticeSubmissionsController');
+                    $router->resource('submissions', 'SubmissionsController');
                 });
 
                 $router->get('vendors/{vendor}/submissions/{submission}/slip', 'VendorSubmissionsController@slip')

@@ -5,7 +5,7 @@ $(function() {
       el: formEl,
       data: {
         submit: false,
-        admin: true,
+        admin: false,
         vendor: {},
         address: {
           line_one: '',
@@ -91,16 +91,18 @@ $(function() {
       },
       methods: {
         initialize: function() {
-          this.admin = $(this.$el).hasClass('admin');
+          if( 'admin' in window ) {
+            this.admin = window.admin;
+          }
 
           if(!this.admin) {
-            $(this.$el).find('.list-vendor[role="tablist"] > li').each(function(index, element) {
+            $(formEl).find('.list-vendor[role="tablist"] > li').each(function(index, element) {
               if(index > 0) {
                 $(element).find('a').addClass('disabled');
               }
             });
 
-            $(this.$el).find('.list-vendor[role="tablist"] a').click(function(event) {
+            $(formEl).find('.list-vendor[role="tablist"] a').click(function(event) {
               if($(this).hasClass('disabled')) {
                 event.stopPropagation();
               }

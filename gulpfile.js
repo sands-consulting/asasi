@@ -89,6 +89,7 @@ elixir(function(mix) {
         'components/search.js',
         'pages/vendors/form.js',
         'pages/notices/form.js',
+        'pages/notices/show.js',
         'pages/payment-gateways/form.js',
         'notification.js',
         'admin.js',

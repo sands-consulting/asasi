@@ -14,10 +14,10 @@ class ReportsServiceProvider extends ServiceProvider
     public function register()
     {
          app('router')->group([
-            'namespace' => 'App\Http\Controllers',
+            'namespace' => 'App\Http\Controllers\Reports',
             'middleware' => 'web'
         ], function ($router) {
-            $router->get('reports', 'ReportsController@index')
+            $router->get('reports', 'HomeController@index')
                 ->name('reports');
         });
     }
