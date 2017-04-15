@@ -256,6 +256,7 @@ class AclSeeder extends Seeder
             ['notice:revisions', 'View notice revisions'],
             ['notice:histories', 'View notice histories'],
             ['notice:purchase', 'Can purchase notice'],
+            ['notice:award', 'Award a notice'],
 
             // Notice Category
             ['notice-category:index', 'List all notice categories'],
@@ -446,6 +447,19 @@ class AclSeeder extends Seeder
             'project:organization',
             'project-milestone:organization',
             'submission:organization'
+        ])->pluck('id')->toArray());
+
+        $noticeStaff = Role::whereName('notice-staff')->first();
+        $noticeStaff->permissions()->attach(Permission::whereIn('name', [
+            'notice:index',
+            'notice:create',
+            'notice:show',
+            'notice:update',
+            'notice:publish',
+            'notice:cancel',
+            'notice:award',
+            'submission:index',
+            'submission:show'
         ])->pluck('id')->toArray());
 
         $vendorAdmin = Role::whereName('vendor-admin')->first();

@@ -15,6 +15,8 @@ class Submission extends Model
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
+        'number',
+        'label',
         'price',
         'notice_id',
         'vendor_id',
@@ -194,5 +196,18 @@ class Submission extends Model
             $progress = $completed/$evaluators * 100;
         }
         return $progress;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function($submission)
+        {
+            if($submission->status == 'submitted' && empty($submission->number))
+            {
+                $submission->number = strtoupper(strtoupper(str_random(8)));
+            }
+        });
     }
 }

@@ -4,9 +4,8 @@
             <thead>
                 <th width="5%">#</th>
                 <th>{{ trans('notices.attributes.eligibles.name') }}</th>
-                <th class="col-xs-3">{{ trans('notices.attributes.eligibles.exception') }}</th>
+                <th class="col-xs-2">{{ trans('notices.attributes.eligibles.exception') }}</th>
                 <th class="col-xs-2">{{ trans('notices.attributes.eligibles.notified_at') }}</th>
-                <th class="col-xs-1">&nbsp;</th>
             </thead>
             <tbody>
                 @forelse($notice->eligibles()->get() as $eligible)

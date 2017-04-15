@@ -83,7 +83,7 @@
 
     @endif
 
-    @if(setting('submission', false, $notice))
+    @if(setting('submission', false, $notice) && Auth::user()->hasPermission('submission:index'))
 
     <li class="list-group-divider"></li>
 
@@ -95,7 +95,7 @@
 
     @endif
 
-    @if(setting('evaluation', false, $notice))
+    @if(setting('evaluation', false, $notice) && Auth::user()->hasPermission('evaluation:index'))
 
     <li class="list-group-divider"></li>
 
@@ -105,21 +105,13 @@
         </a>
     </li>
 
+    @endif
+
+    @if(setting('award', false, $notice) && Auth::user()->hasPermission('notice:award'))
+
     <li role="presentation">
         <a href="#tab-notice-award" aria-controls="tab-notice-award" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-medal2"></i> {{ trans('notices.menu.award') }}
-        </a>
-    </li>
-
-    @endif
-
-    @if(setting('award', false, $notice))
-
-    <li class="list-group-divider"></li>
-
-    <li role="presentation">
-        <a href="#tab-notice-settings" aria-controls="tab-notice-settings" role="tab" data-toggle="tab" class="list-group-item">
-            <i class="icon-cogs"></i> {{ trans('notices.menu.settings') }}
         </a>
     </li>
 
