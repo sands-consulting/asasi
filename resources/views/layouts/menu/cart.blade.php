@@ -16,7 +16,7 @@
 			@forelse(Cart::content() as $item)
 			<li class="media">
 				<div class="media-left">
-					<a href="{{ route('cart.remove', $item->rowId) }}" class="text-danger" data-method="DELETE" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross3"></i></a>
+					<a href="{{ route('cart.remove', $item->id) }}" class="text-danger" data-method="DELETE" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross3"></i></a>
 				</div>
 				<div class="media-body">
 					<a href="{{ route('cart') }}" class="media-heading">
