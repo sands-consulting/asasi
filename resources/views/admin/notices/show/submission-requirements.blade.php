@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="tab-notice-submission-criterias">
+<div role="tabpanel" class="tab-pane" id="tab-notice-submission-requirements">
     @foreach(App\EvaluationType::active()->get() as $type)
 
     <div class="panel panel-default">

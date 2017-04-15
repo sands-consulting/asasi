@@ -47,7 +47,8 @@ return [
 
         'allocations' => [
             'allocation' => 'Allocation',
-            'amount' => 'Amount'
+            'amount' => 'Amount',
+            'name' => 'Name',
         ],
 
         'submission-requirements' => [

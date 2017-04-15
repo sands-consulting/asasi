@@ -86,8 +86,8 @@
             @include('admin.notices.show.files')
 
             @include('admin.notices.show.allocations')
-            @include('admin.notices.show.submission-criterias')
-            @include('admin.notices.show.evaluation-criterias')
+            @include('admin.notices.show.submission-requirements')
+            @include('admin.notices.show.evaluation-requirements')
 
             @include('admin.notices.show.eligibles')
             @include('admin.notices.show.purchases')
