@@ -3,10 +3,13 @@
 namespace App\Services;
 
 use Auth;
+use App\EvaluationRequirement;
+use App\EvaluationType;
 use App\Notice;
 use App\NoticeEvent;
 use App\NoticeQualificationCode;
 use App\QualificationCode;
+use App\SubmissionRequirement;
 use App\Upload;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
@@ -235,4 +238,85 @@ class NoticeService extends BaseService
         $notice->files()->whereNotIn('id', $exists)->delete();
     }
 
+    public static function evaluationRequirements(Notice $notice, $inputs)
+    {
+        $exists = [];
+
+        foreach($inputs as $slug => $data)
+        {
+            $type = EvaluationType::whereSlug($slug)->first();
+
+            if(!$type)
+            {
+                continue;
+            }
+
+            foreach($data as $index => $datum)
+            {
+                $datum['type_id']   = $type->id;
+                $datum['sequence']  = $index + 1;
+
+                if(isset($datum['id']) && !empty($datum['id']))
+                {
+                    $requirement = $notice->evaluationRequirements()->find($datum['id']);
+                }
+                unset($datum['id']);
+
+                if(!isset($requirement))
+                {
+                    $requirement = new EvaluationRequirement;
+                    $requirement->notice()->associate($notice);
+                }
+
+                $requirement->fill($datum);
+                $requirement->save();
+
+                $exists[] = $requirement->id;
+                unset($requirement);
+            }
+        }
+
+        $notice->evaluationRequirements()->whereNotIn('id', $exists)->delete();
+    }
+
+    public static function submissionRequirements(Notice $notice, $inputs)
+    {
+        $exists = [];
+
+        foreach($inputs as $slug => $data)
+        {
+            $type = EvaluationType::whereSlug($slug)->first();
+
+            if(!$type)
+            {
+                continue;
+            }
+
+            foreach($data as $index => $datum)
+            {
+                $datum['type_id']   = $type->id;
+                $datum['sequence']  = $index + 1;
+
+                if(isset($datum['id']) && !empty($datum['id']))
+                {
+                    $requirement = $notice->submissionRequirements()->find($datum['id']);
+                }
+                unset($datum['id']);
+
+                if(!isset($requirement))
+                {
+                    $requirement = new SubmissionRequirement;
+                    $requirement->notice()->associate($notice);
+                }
+
+                $requirement->fill($datum);
+                $requirement->save();
+
+                $exists[] = $requirement->id;
+                unset($requirement);
+            }
+        }
+
+        $notice->submissionRequirements()->whereNotIn('id', $exists)->delete();
+    }
 }

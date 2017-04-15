@@ -132,6 +132,8 @@ class NoticesController extends Controller
         NoticeService::allocations($notice, $request->input('allocations', []));
         NoticeService::qualificationCodes($notice, $request->input('qualification-codes', []));
         NoticeService::files($notice, $request->input('files', []), $request->file('files'));
+        NoticeService::submissionRequirements($notice, $request->input('submission-requirements', []));
+        NoticeService::evaluationRequirements($notice, $request->input('evaluation-requirements', []));
         
         UserHistoryService::log(Auth::user(), 'Update', $notice, $request->getClientIp());
 

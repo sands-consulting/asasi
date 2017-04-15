@@ -20,7 +20,8 @@ class SubmissionRequirement extends Model
         'title',
         'field_required',
         'field_type',
-        'notice_id'
+        'notice_id',
+        'sequence'
     ];
 
     protected $attributes = [
