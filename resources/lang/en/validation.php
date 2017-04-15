@@ -122,6 +122,9 @@ return [
         'remember_me' => 'Remember Me',
         'title' => 'Title',
         'tax_code_id' => 'Tax Code',
+        'submission_id' => 'Submission',
+        'period' => 'Period',
+        'price' => 'Price'
     ],
 
 ];

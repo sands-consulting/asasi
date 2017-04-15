@@ -6,6 +6,7 @@ use Auth;
 use App\EvaluationRequirement;
 use App\EvaluationType;
 use App\Notice;
+use App\NoticeAward;
 use App\NoticeEvent;
 use App\NoticeQualificationCode;
 use App\QualificationCode;
@@ -46,6 +47,16 @@ class NoticeService extends BaseService
 
         $notice->status = 'cancelled';
         $notice->save();
+    }
+
+    public static function award(Notice $notice, $inputs)
+    {
+        $award = $notice->award || new NoticeAward;
+        $award->fill($inputs);
+        $award->notice()->associate($notice);
+        $award->save();
+
+        return $award;
     }
 
     public static function settings(Notice $notice, $settings)

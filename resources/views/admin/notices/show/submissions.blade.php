@@ -3,25 +3,42 @@
         <table class="table">
             <thead>
                 <th width="5%">#</th>
-                <th>{{ trans('notices.attributes.submissions.name') }}</th>
-                <th>{{ trans('notices.attributes.submissions.number') }}</th>
-                <th>{{ trans('notices.attributes.submissions.created_at') }}</th>
+                <th>{{ trans('submissions.attributes.label') }}</th>
+                <th>{{ trans('submissions.attributes.vendor') }}</th>
+                <th>{{ trans('submissions.attributes.number') }}</th>
+                <th>{{ trans('submissions.attributes.price') }}</th>
+                <th>{{ trans('submissions.attributes.submitted_at') }}</th>
             </thead>
             <tbody>
-                @forelse($notice->submissions()->whereStatus('submitted')->get() as $submission)
+                <template v-for="(submission, index) in submissions">
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $submission->vendor->name }}</td>
-                    <td>{{ $submission->number }}</td>
-                    <td>{{ $submission->submitted_at->format('d/m/Y H:i:s') }}</td>
+                    <td>@{{ index+ 1 }}</td>
+                    <td><input type="text" class="form-control" v-bind:name="'submissions[' + index + '][label]"></td>
+                    <td>@{{ submission.vendor.name }}</td>
+                    <td>@{{ submission.number }}</td>
+                    <td>{{ setting('currency') }} @{{ numeral(submission.price).format('0,0.00') }}</td>
+                    <td>@{{ moment(submission.submitted_at).format('DD/MM/YYYY HH:mm:ss') }}</td>
                 </tr>
-                @empty
+                @foreach(App\EvaluationType::active()->get() as $type)
                 <tr>
-                    <td colspan="4" align="center">
+                    @if($loop->first)<td rowspan="{{ $loop->count }}">&nbsp;</td>@endif
+                    <td>{{ $type->name }}</td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                @endforeach
+                </template>
+                <tr v-if="submissions.length == 0">
+                    <td colspan="6" align="center">
+                        <a href="#" @click.prevent="save"><i class="icon-floppy-disk"></i> {{ trans('actions.save') }}</a>
+                    </td>
+                </tr>
+                <tr v-if="submissions.length == 0">
+                    <td colspan="6" align="center">
                         {{ trans('notices.views.admin.show.submissions.empty') }}
                     </td>
                 </tr>
-                @endforelse
             </tbody>
         </table>
     </div>

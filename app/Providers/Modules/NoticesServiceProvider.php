@@ -53,6 +53,8 @@ class NoticesServiceProvider extends ServiceProvider
                     ->name('notices.eligible');
                 $router->post('notices/{notice}/invitation', 'NoticesController@invitation')
                     ->name('notices.invitation');
+                $router->post('notices/{notice}/award', 'NoticesController@award')
+                    ->name('notices.award');
 
                 $router->resource('notices', 'NoticesController');
 

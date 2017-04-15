@@ -102,6 +102,11 @@ class NoticePolicy
         return $auth->hasPermission('access:vendor');
     }
 
+    public function award(User $auth, Notice $notice)
+    {
+        return $auth->hasPermission('notice:award');
+    }
+
     public function purchase(User $auth, Notice $notice)
     {
         if(!$auth->hasPermission('access:vendor'))

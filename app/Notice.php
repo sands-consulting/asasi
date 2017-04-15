@@ -220,6 +220,11 @@ class Notice extends Model
         return $this->hasMany(NoticePurchase::class);
     }
 
+    public function award()
+    {
+        return $this->hasOne(NoticeAward::class);
+    }
+
     public function getTaxAttribute()
     {
         if($this->taxCode)

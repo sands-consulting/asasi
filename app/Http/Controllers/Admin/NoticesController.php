@@ -16,6 +16,7 @@ use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\NoticeRequest;
+use App\Http\Requests\NoticeAwardRequest;
 use App\Services\NoticeService;
 use App\Services\ProjectService;
 use App\Services\UserHistoryService;
@@ -84,6 +85,9 @@ class NoticesController extends Controller
 
     public function show(Notice $notice)
     {
+        JavaScript::put([
+            'submissions' => $notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('submitted_at')->get()
+        ]);
         return view('admin.notices.show', compact('notice'));
     }
 
@@ -250,83 +254,10 @@ class NoticesController extends Controller
             ->with('notice', trans('notices.notices.invitation'));
     }
 
-// Todo
-
-    public function summary(Notice $notice, EvaluationSummaryDataTable $table)
+    public function award(NoticeAwardRequest $request, Notice $notice)
     {
-        $types = EvaluationType::all();
-
-        return $table
-            ->forNotice($notice->id)
-            ->forType($types)
-            ->render('admin.notices.evaluation-summary', compact('notice'));
-    }
-
-    public function summaryByType(Notice $notice, EvaluationType $type, EvaluationSummaryDataTable $table)
-    {
-        return $table
-            ->forNotice($notice->id)
-            ->forType([$type])
-            ->render('admin.notices.evaluation-summary-type', compact('notice', 'type'));
-    }
-
-    public function summaryEvaluators(Notice $notice, 
-        Submission $submission, EvaluationType $type, EvaluatorSummaryDataTable $table)
-    {
-        return $table
-            ->forNotice($notice)
-            ->forType($type)
-            ->forSubmission($submission)
-            ->render('admin.notices.evaluation-summary-evaluators', compact('notice'));
-    }
-
-    public function award(Notice $notice, Vendor $vendor)
-    {
-        return view('admin.notices.award', compact('notice', 'vendor'));
-    }
-
-    public function storeAward(Request $request, Notice $notice)
-    {
-        $input = $request->only(['vendor_id', 'allocations', 'duration']);
-        $vendor = Vendor::find($input['vendor_id']);
-
-        $allocations = [];
-        $cost = null;
-        if (count($input['allocations']) > 0 ) {
-            foreach($input['allocations'] as $allocation_id => $amount) {
-                $allocations[$allocation_id] = [
-                    'amount' => $amount,
-                    'status' => 'active'
-                ];
-
-                $cost += $amount;
-            }
-        }
-
-        $project = ProjectsService::create(new Project(), [
-            'name'            => $notice->name,
-            'slug'            => null,
-            'number'          => $notice->number,
-            'description'     => $notice->description,
-            'duration'        => $input['duration'],
-            'cost'            => $cost,
-            'contact_name'    => $vendor->contact_person_name,
-            'contact_phone'   => $vendor->contact_person_telephone,
-            'contact_email'   => $vendor->contact_person_email,
-            'contact_fax'     => $vendor->contact_fax,
-            'organization_id' => $notice->organization_id,
-            'vendor_id'       => $vendor->id,
-            'notice_id'       => $notice->id,
-        ]);
-
-        $project->allocations()->sync($allocations);
-        
-        NoticeService::update($notice, ['status', 'awarded']);
-        
-        event(new NoticeAwarded($notice, $vendor));
-
-        return redirect()
-            ->route('admin.projects.edit', $project->id)
-            ->with('notices', trans('projects.notices.create', ['number' => $project->number]));
+        $award = NoticeService::award($notice, $request->only('submission_id', 'price', 'period'));
+        return redirect(route('admin.notices.show', $notice->id) . '#tab-notice-award')
+            ->with('notice', trans('notices.notices.awarded', ['name' => $award->vendor->name]));
     }
 }

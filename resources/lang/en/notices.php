@@ -235,6 +235,15 @@ return [
                 ],
                 'purchases' => [
                     'empty' => 'No notice purchase.'
+                ],
+                'submissions' => [
+                    'empty' => 'No submission recorded.'
+                ],
+                'award' => [
+                    'select-submission' => 'Please select submission',
+                    'submission' => 'Submission',
+                    'period' => 'Please enter project period',
+                    'price' => 'Please enter the awarded price'
                 ]
             ],
 
