@@ -105,7 +105,7 @@ class NoticeService extends BaseService
                 $event = $notice->events()->find($data['id']);
             }
 
-            if(!$event)
+            if(!isset($event))
             {
                 $event = new NoticeEvent;
                 $event->notice()->associate($notice);
@@ -117,6 +117,7 @@ class NoticeService extends BaseService
             $event->save();
 
             $exists[] = $event->id;
+            unset($event)
         }
 
         $notice->events()->whereNotIn('id', $exists)->delete();
