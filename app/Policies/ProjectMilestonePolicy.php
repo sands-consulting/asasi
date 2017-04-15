@@ -4,92 +4,96 @@ namespace App\Policies;
 
 use App\Project;
 use App\ProjectMilestone;
+use App\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProjectMilestonePolicy
 {
-    public function index()
-    {
-        return $this->user->hasPermission('project-milestone:index');
-    }
+    use HandlesAuthorization;
 
-    public function show(Project $project, ProjectMilestone $projectMilestone)
+    public function show(User $user, Project $project, ProjectMilestone $projectMilestone)
     {
         return $this->checkOrganization($projectMilestone, 'project-milestone:show');
     }
 
-    public function create()
+    protected function checkOrganization(User $auth, ProjectMilestone $projectMilestone, $permission)
     {
-        return $this->user->hasPermission('project-milestone:create');
+        if (! $auth->hasPermission($permission)) {
+            return false;
+        }
+
+        if ($auth->hasPermission('project-milestone:organization')) {
+            return $auth->organizations->pluck('id')->has($projectMilestone->organization_id);
+        }
+
+        return true;
     }
 
-    public function createByNotice()
+    public function createByNotice(User $auth)
     {
-        return $this->create();
+        return $this->create($auth);
     }
 
-    public function store()
+    public function create(User $auth)
     {
-        return $this->create();
+        return $auth->hasPermission('project-milestone:create');
     }
 
-    public function edit(ProjectMilestone $projectMilestone)
+    public function store(User $auth)
+    {
+        return $this->create($auth);
+    }
+
+    public function update(User $auth, ProjectMilestone $projectMilestone)
+    {
+        return $this->edit($auth, $projectMilestone);
+    }
+
+    public function edit(User $auth, ProjectMilestone $projectMilestone)
     {
         return $this->checkOrganization($projectMilestone, 'project-milestone:update');
     }
 
-    public function update(ProjectMilestone $projectMilestone)
-    {
-        return $this->edit($projectMilestone);
-    }
-
-    public function destroy(ProjectMilestone $projectMilestone)
+    public function destroy(User $auth, ProjectMilestone $projectMilestone)
     {
         return $this->checkOrganization($projectMilestone, 'project-milestone:delete');
     }
 
-    public function duplicate(ProjectMilestone $projectMilestone)
+    public function duplicate(User $auth, ProjectMilestone $projectMilestone)
     {
         return $this->checkOrganization($projectMilestone, 'project-milestone:duplicate');
     }
 
-    public function revisions(ProjectMilestone $projectMilestone)
+    public function revisions(User $auth, ProjectMilestone $projectMilestone)
     {
         return $this->checkOrganization($projectMilestone, 'project-milestone:revisions');
     }
 
-    public function logs(ProjectMilestone $projectMilestone)
+    public function logs(User $auth, ProjectMilestone $projectMilestone)
     {
         return $this->checkOrganization($projectMilestone, 'project-milestone:logs');
     }
 
-    public function activate(ProjectMilestone $projectMilestone)
+    public function activate(User $auth, ProjectMilestone $projectMilestone)
     {
-        return $this->checkOrganization($projectMilestone, 'project-milestone:activate') && $projectMilestone->canActivate();
+        return $this->checkOrganization($projectMilestone,
+                'project-milestone:activate') && $projectMilestone->canActivate();
     }
 
-    public function deactivate(ProjectMilestone $projectMilestone)
+    public function deactivate(User $auth, ProjectMilestone $projectMilestone)
     {
-        return $this->checkOrganization($projectMilestone, 'project-milestone:deactivate') && $projectMilestone->canDeactivate();
+        return $this->checkOrganization($projectMilestone,
+                'project-milestone:deactivate') && $projectMilestone->canDeactivate();
     }
 
-    protected function checkOrganization(ProjectMilestone $projectMilestone, $permission)
-    {
-        if(!$this->user->hasPermission($permission))
-        {
-            return false;
-        }
-
-        if($this->user->hasPermission('project-milestone:organization'))
-        {
-            return $this->user->organizations->pluck('id')->has($projectMilestone->organization_id);
-        }
-
-        return true;
-    }
-
-    public function ganttData()
+    public function ganttData(User $auth)
     {
         return true;
-        return $this->index();
+        return $this->index($auth);
+    }
+
+    public function index(User $auth)
+    {
+        return $auth->hasPermission('project-milestone:index');
     }
 }

@@ -16,48 +16,53 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-    <div class="panel-body">
-        <span><small>{{ $project->number }}</small> <br> {{ $project->name }}</span>
-    </div> 
-</div>
-<div class="panel panel-flat">
-    <div id="gantt_here" style='width:100%; min-height:500px;'></div>
-    <div class="panel-body">
-        <div class="text-right">
-            <button class="btn btn-default" onclick="exportGantt('pdf')"><i class="icon-file-pdf"></i>  Export to PDF</button>
+    <div id="project-milestones">
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <span><small>{{ $project->number }}</small> <br> {{ $project->name }}</span>
+            </div>
+        </div>
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="gantt-container">
+                            <svg id="gantt"></svg>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-default btn-block btnMode"
+                                        @click="view_mode('Half Day')">Half Day
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-default btn-block btnMode"
+                                        @click="view_mode('Day')"> Day
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-default btn-block btnMode"
+                                        @click="view_mode('Week')">Week
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-default btn-block btnMode"
+                                        @click="view_mode('Month')">Month
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('scripts')
-<link rel="stylesheet" href="/assets/dhtmlxGantt/codebase/dhtmlxgantt.css" type="text/css" media="screen">
-<script src="/assets/dhtmlxGantt/codebase/dhtmlxgantt.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://export.dhtmlx.com/gantt/api.js"></script> 
-
-<script type="text/javascript">
-    var project_id = {{ $project->id }};
-
-    gantt.config.xml_date = "%Y-%m-%d %H:%i:%s";
-    gantt.config.step = 1;
-    gantt.config.scale_unit= "day";
-    gantt.config.order_branch = true;
-    gantt.init("gantt_here");
-    gantt.load("./milestones/gantt_data", "xml");
-
-    gantt.attachEvent("onBeforeTaskAdd", function (id, task) {
-        task.project_id = project_id;
-    });
-
-    var dp = new dataProcessor("./milestones/gantt_data");
-    dp.init(gantt);
-
-    function exportGantt(mode){
-        if (mode == "png")
-            gantt.exportToPNG();
-        else if (mode == "pdf")
-            gantt.exportToPDF();
-    }
-</script>
+    <script src="{{ asset('assets/js/pages/project-milestones/index.js') }}" type="application/javascript"></script>
 @endsection

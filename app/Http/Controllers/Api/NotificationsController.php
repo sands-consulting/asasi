@@ -11,7 +11,6 @@ class NotificationsController extends Controller
 {
     public function index(Request $request)
     {
-
         $notifications = $request->user()->unreadNotifications;
 
         if (! empty($notifications)) {

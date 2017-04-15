@@ -45,7 +45,7 @@ class ProjectMilestonesController extends Controller
     {
         $inputs = $request->only('name', 'value', 'status', 'type_id');
 
-        if($request->user()->hasPermission('milestone:organization')) {
+        if ($request->user()->hasPermission('milestone:organization')) {
             $inputs['organization_id'] = $request->user()->organizations()->first()->id;
         } else {
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
@@ -70,24 +70,21 @@ class ProjectMilestonesController extends Controller
             'name',
             'number',
             'description',
-            'contact_name', 
-            'contact_position', 
-            'contact_phone', 
-            'contact_fax', 
-            'contact_email', 
-            'managers', 
-            'vendor_id', 
-            'cost', 
-            'progress', 
+            'contact_name',
+            'contact_position',
+            'contact_phone',
+            'contact_fax',
+            'contact_email',
+            'managers',
+            'vendor_id',
+            'cost',
+            'progress',
             'status'
         );
 
-        if($request->user()->hasPermission('milestone:organization'))
-        {
+        if ($request->user()->hasPermission('milestone:organization')) {
             $inputs['organization_id'] = $request->user()->organizations()->first()->id;
-        }
-        else
-        {
+        } else {
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
@@ -98,7 +95,7 @@ class ProjectMilestonesController extends Controller
             foreach ($inputs['managers'] as $manager) {
                 $managers[$manager] = [
                     'position' => 'manager',
-                    'status' => 'active'
+                    'status'   => 'active',
                 ];
             }
         }
@@ -110,7 +107,7 @@ class ProjectMilestonesController extends Controller
             ->with('notice', trans('milestones.notices.updated', ['number' => $milestone->number]));
     }
 
-    public function destroy(ProjectMilestone $milestone)
+    public function destroy(Request $request, ProjectMilestone $milestone)
     {
         ProjectMilestonesService::delete($milestone);
         UserHistoriesService::log($request->user(), 'delete', $milestone, $request->getClientIp());
@@ -131,21 +128,21 @@ class ProjectMilestonesController extends Controller
         return $table->render('admin.project-milestones.revisions', compact('milestone'));
     }
 
-    public function ganttData(Request $request, Project $project) 
+    public function ganttData(Request $request, Project $project)
     {
         if ($request->isMethod('post')) {
-            // return $request->all();
+            return $request->all();
         }
 
         $ganttLink = GanttLink::where('project_id', $project->id)->get();
         $ganttTask = GanttTask::where('project_id', $project->id)->get();
 
-        $ganttLink = $ganttLink->count() > 0 ?  $ganttLink : new GanttLink();
+        $ganttLink = $ganttLink->count() > 0 ? $ganttLink : new GanttLink();
         $ganttTask = $ganttTask->count() > 0 ? $ganttTask : new GanttTask();
 
         $connector = new GanttConnector(null, "PHPLaravel");
-        $connector->render_links($ganttLink, 
-            "id", 
+        $connector->render_links($ganttLink,
+            "id",
             "source,target,type, project_id",
             false,
             $project->id

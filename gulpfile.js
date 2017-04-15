@@ -19,6 +19,8 @@ elixir(function(mix) {
     .less('admin.less', 'public/assets/css/admin.css')
     .less('print.less', 'public/assets/css/print.css')
 
+    .sass('../../../node_modules/frappe-gantt/src/gantt.scss', 'public/assets/css/gantt.css')
+
     .webpack('app.js')
 
     .scripts([
@@ -69,6 +71,8 @@ elixir(function(mix) {
         '../../../node_modules/moment/moment.js',
         '../../../node_modules/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
         '../../../node_modules/select2/dist/js/select2.full.js',
+        '../../../node_modules/frappe-gantt/dist/frappe-gantt.min.js',
+        '../../../node_modules/snapsvg/dist/snap.svg-min.js',
         'vendor/d3.min.js',
         'vendor/c3.min.js',
         'vendor/switchery.min.js',

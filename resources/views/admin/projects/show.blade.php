@@ -167,7 +167,8 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class="text-muted">Company Type</label>
-                            <div class="form-control-static">{{ $project->vendor->type->incorporation_authority }} - {{ $project->vendor->type->incorporation_type }}</div>
+                            <div class="form-control-static">{{ $project->vendor->type->incorporation_authority or null }}
+                                - {{ $project->vendor->type->incorporation_type or null }}</div>
                         </div>
                     </div>
                 </div>

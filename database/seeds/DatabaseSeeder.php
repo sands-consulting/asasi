@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentGatewaySeeder::class);
         $this->call(EvaluationSeeder::class);
         $this->call(ProjectSeeder::class);
+        $this->call(PlaceSeeder::class);
 
         try {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
