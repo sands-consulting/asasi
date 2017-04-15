@@ -15,6 +15,8 @@ return [
         'tax' => 'Tax',
         'total' => 'Total',
         'sub_total' => 'Sub Total',
+        'user' => 'User',
+        'payer' => 'Payer'
     ],
 
     'buttons' => [
@@ -37,6 +39,12 @@ return [
 
     'views' => [
         'admin' => [
+            'index' => [
+                'search' => [
+                    'keywords' => 'Keywords',
+                    'status' => 'Status',
+                ]
+            ],
             'invoice' => [
                 'title' => 'Invoice',
                 'payer' => 'Invoice To'
