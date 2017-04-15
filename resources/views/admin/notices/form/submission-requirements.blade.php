@@ -24,7 +24,7 @@
 				</td>
 				<td>
 					<input type="hidden" v-bind:name="'submission-requirements[{{ $type->slug }}][' + index + '][field_required]'" value="0">
-					<input type="checkbox" v-bind:name="'submission-requirements[{{ $type->slug }}][' + index + '][field_required]'" v-bind:checked="requirement.field_required" value="1">
+					<input type="checkbox" v-bind:name="'submission-requirements[{{ $type->slug }}][' + index + '][field_required]'" v-model="requirement.field_required" value="1">
 				</td>
 				<td>
 					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteSubmissionRequirement('{{ $type->slug }}', index)"><i class="icon-cross2"></i></a>

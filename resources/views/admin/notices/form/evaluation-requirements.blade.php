@@ -20,7 +20,7 @@
 				<td><input type="text" v-bind:name="'evaluation-requirements[{{ $type->slug }}][' + index + '][full_score]'" class="form-control" v-model="requirement.full_score"></td>
 				<td>
 					<input type="hidden" v-bind:name="'evaluation-requirements[{{ $type->slug }}][' + index + '][required]'" value="0">
-					<input type="checkbox" v-bind:name="'evaluation-requirements[{{ $type->slug }}][' + index + '][required]'" v-bind:checked="requirement.required" value="1">
+					<input type="checkbox" v-bind:name="'evaluation-requirements[{{ $type->slug }}][' + index + '][required]'" v-model="requirement.required" value="1">
 				</td>
 				<td>
 					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteEvaluationRequirement('{{ $type->slug }}', index)"><i class="icon-cross2"></i></a>

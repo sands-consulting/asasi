@@ -18,7 +18,7 @@
 					<br>
 					<input type="hidden" v-bind:name="'events[' + index + '][required]'" value="0">
 					<label>
-						<input type="checkbox" v-bind:name="'events[' + index + '][required]'" v-bind:checked="event.required" value="1">
+						<input type="checkbox" v-bind:name="'events[' + index + '][required]'" v-model="event.required" value="1">
 						{{ trans('notices.attributes.events.required') }}
 					</label>
 				</td>
