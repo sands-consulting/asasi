@@ -114,7 +114,7 @@
                             </div>
 
                             {{-- submission requirement --}}
-                            <div class="row" v-for="evaluation in notice.evaluations">
+                            <div class="row" v-for="evaluation in notice.evaluation_settings">
                                 <hr>
                                 <div class="col-md-12 mb-5">
                                     @{{ evaluation.type.name }}

@@ -1,13 +1,13 @@
 @extends('layouts.portal')
 
 @section('content')
-    {!! Former::open_for_files(route('vendors.submissions.store', [$submission->vendor->id, $submission->id])) !!}
+    {!! Former::open_for_files(route('vendors.submissions.update', [$submission->vendor->id, $submission->id, $detail->id]))->method('PUT') !!}
     {!! Former::populate($submission) !!}
 
 
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">Vendor Submission ({{ $type->name }})</h5>
+            <h5 class="panel-title">Vendor Submission ({{ $detail->type->name }})</h5>
         </div>
         <div class="panel-body">
             <table class="table table-striped">
@@ -24,12 +24,15 @@
                     <tr>
                         <td>
                             @if ($requirement->field_type == 'file')
-
+                                @if ($requirement->items->files()->first())
+                                    <a href="{{ $requirement->items->files()->orderBy('id', 'desc')->first()->url }}"
+                                       target="_blank"><span class="icon-file-download2"></span></a>
+                                @endif
                             @else
                                 @php
                                     $checked = $requirement->items->value == 1 ? 'checked="checked"' : false;
                                 @endphp
-                                <input type="checkbox" name="value[{{ $requirement->id }}]" {{ $checked }}>
+                                <input type="checkbox" name="value[{{ $requirement->id }}]" value="1" {{ $checked }}>
                             @endif
                         </td>
                         <td>

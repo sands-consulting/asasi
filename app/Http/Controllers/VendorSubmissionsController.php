@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\DataTables\Portal\VendorSubmissionsDataTable;
 use App\EvaluationType;
 use App\Notice;
+use App\Services\SubmissionItemService;
 use App\Submission;
 use App\SubmissionDetail;
 use App\Services\NoticesService;
 use App\Services\SubmissionsService;
 use App\Services\SubmissionDetailService;
 use App\Services\UserHistoriesService;
+use App\SubmissionItem;
 use App\Vendor;
 use Illuminate\Http\Request;
 
@@ -33,97 +35,79 @@ class VendorSubmissionsController extends Controller
         return view('vendors.submissions.show', compact('notice', 'vendor', 'submission'));
     }
 
-    public function create(Vendor $vendor, Submission $submission, EvaluationType $type)
+    public function create(Vendor $vendor, Submission $submission, SubmissionDetail $details)
     {
         $notice = $submission->notice;
-        $requirements = $notice->submissionRequirements()->where('type_id', $type->id)->get();
+        $requirements = $notice->submissionRequirements()->where('type_id', $details->type_id)->get();
         return view('vendors.submissions.create', compact('vendor', 'requirements', 'submission', 'type'));
     }
 
-    public function store(Vendor $vendor, Submission $submission)
+    public function edit(Vendor $vendor, Submission $submission, SubmissionDetail $detail)
+    {
+        $notice = $submission->notice;
+        $items = $detail->items;
+        $items->load('files');
+
+        // Fixme: fix code to reduce query.
+        $requirements = $notice->submissionRequirements()->where('type_id', $detail->type_id)->get();
+        $requirements->map(function ($requirement) use ($items) {
+            $requirement->items = $items->where('requirement_id', $requirement->id)->first();
+            return $requirement;
+        });
+
+        return view('vendors.submissions.edit', compact('notice', 'submission', 'detail', 'requirements'));
+    }
+
+    public function update(Request $request, Vendor $vendor, Submission $submission, SubmissionDetail $detail)
     {
         $input = $request->all();
-
         $input['vendor_id'] = $vendor->id;
         $input['notice_id'] = $submission->notice->id;
 
         // check if submission exists
-
-        $submissionDetail = SubmissionDetailService::create(new SubmissionDetail, $input);
-
         $requirements = $submission->notice
             ->submissionRequirements()
-            ->where('type_id', $type->id)
+            ->where('type_id', $detail->type_id)
             ->get();
 
         // Fixme: Temp solutions
-        $details = $requirements->reduce(function ($carry, $requirement) use ($input, $submission, $request) {
-
+        $requirements->reduce(function ($carry, $requirement) use ($input, $detail, $request) {
             $carry['value'] = null;
 
-            if (isset($input['file'][$requirement->id])) {
-                $file = $input['file'][$requirement->id];
-                $carry['value'] = 1;
-            }
 
-            if ( ! $requirement->require_file) {
+            if (! $requirement->require_file) {
                 if (isset($input['value'][$requirement->id])) {
                     $carry['value'] = $input['value'][$requirement->id];
                 }
             }
 
-            $carry['user_id'] = $request->user()->id;
+            $item = SubmissionItem::where('requirement_id', $requirement->id)->first();
 
-            if ( ! isset($input['submission_detail_id'][$requirement->id])) {
+            if (! $item) {
                 $carry['requirement_id'] = $requirement->id;
-                $carry['submission_id'] = $submission->id;
-                $carry['type_id'] = $input['type_id'];
+                $carry['detail_id'] = $detail->id;
 
-                $submissionDetail = SubmissionDetailsService::create(new SubmissionDetail, $carry);
-                isset($file) ? $submissionDetail->attachFiles($file) : false;
+                $item = SubmissionItemService::create(new SubmissionItem, $carry);
+
             } else {
-                $submissionDetail = SubmissionDetail::find($input['submission_detail_id'][$requirement->id]);
-                if ($requirement->require_file) {
-                    if (isset($file)) {
-                        if ($submissionDetail->files()) {
-                            $submissionDetail->detachFiles();
-                        }
+                if ($requirement->field_type == 'file') {
+                    if ($request->hasFile('file.' . $requirement->id)) {
+                        SubmissionItemService::files(
+                            $item,
+                            $request->file('file.' . $requirement->id)
+                        );
                         $carry['value'] = 1;
-                        $submissionDetail->attachFiles($file);
-                    } else {
-                        if ($submissionDetail->files()) {
-                            $carry['value'] = 1;
-                        }
                     }
                 }
 
-                SubmissionDetailsService::update($submissionDetail, $carry);
+                SubmissionItemService::update($item, $carry);
             }
 
         }, null);
 
         return redirect()
-            ->route('notices.submission', $notice->id)
-            ->with('notice', trans('notices.notices.submission_saved', ['number' => $notice->number]));
-    }
-
-    public function edit(Vendor $vendor, Submission $submission, EvaluationType $type)
-    {
-        $notice = $submission->notice;
-        $details = $submission->details($type->id)->first();
-
-        // Fixme: fix code to reduce query.
-        $requirements = $notice->submissionRequirements()->where('type_id', $type->id)->get();
-        $requirements->map(function ($requirement, $key) use ($details) {
-            $requirement->items = $details->items()->where('requirement_id', $requirement->id)->first();
-            return $requirement;
-        });
-
-        return view('vendors.submissions.edit', compact('notice', 'submission', 'type', 'requirements'));
-    }
-
-    public function update()
-    {
+            ->route('vendors.submissions.show', [$vendor->id, $submission->id])
+            ->with('notice', trans('notices.notices.submission_saved', ['number' => $submission->notice->number]));
     }
 
     public function myNotices(Request $request)
@@ -138,7 +122,7 @@ class VendorSubmissionsController extends Controller
     {
         $vendor = $request->user()->vendor;
         // check if submission exists
-        $submission = SubmissionDetail::firstOrNew([
+        $submission = SubmissionItem::firstOrNew([
             'vendor_id' => $vendor->id,
             'notice_id' => $notice->id,
         ]);
