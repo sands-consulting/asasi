@@ -1,7 +1,7 @@
 @extends('layouts.portal')
 
 @section('content')
-    <div id="submission-wrapper">
+    <div id="submission-wrapper" data-submission="{{ $submission->id or null }}">
         <div class="panel panel-flat">
             <div class="panel-body">
                 <div class="row row-eq-height">

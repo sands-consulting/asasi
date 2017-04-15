@@ -16,6 +16,7 @@ class SubmissionDetail extends Model
         'type_id',
         'user_id',
         'completed_at',
+        'status',
     ];
 
     protected $attributes = [
