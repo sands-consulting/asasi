@@ -21,7 +21,7 @@
                 </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">{{ trans('notices.views.admin.files.empty') }}</td>
+                        <td colspan="5" class="text-center">{{ trans('notices.views.admin.show.files.empty') }}</td>
                     </tr>
                 @endforelse
             </tbody>

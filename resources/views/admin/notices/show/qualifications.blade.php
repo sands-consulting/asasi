@@ -23,7 +23,7 @@
 		
 			<div class="qualification-rule qualification-rule-{{ $group->first()->group_rule }}">
 				<span>
-					{{ trans('notices.views.admin.qualifications.rules.' . $group->first()->group_rule) }}
+					{{ trans('notices.views.admin.show.qualifications.rules.' . $group->first()->group_rule) }}
 				</span>
 			</div>
 		
@@ -37,7 +37,7 @@
 
 		<div class="qualification-rule qualification-rule-{{ $group->first()->join_rule }}">
 			<span>
-				{{ trans('notices.views.admin.qualifications.rules.' . $group->first()->join_rule) }}
+				{{ trans('notices.views.admin.show.qualifications.rules.' . $group->first()->join_rule) }}
 			</span>
 		</div>
 
@@ -47,7 +47,7 @@
 
 	<div class="panel panel-flat">
 		<div class="panel-body">
-			{{ trans('notices.views.admin.qualifications.empty') }}
+			{{ trans('notices.views.admin.show.qualifications.empty') }}
 		</div>
 	</div>
 

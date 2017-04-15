@@ -178,45 +178,30 @@ return [
             ],
 
             'show' => [
-                'invitation' => 'Only By Invitation'
-            ],
-
-            'allocations' => [
-                'empty' => 'No allocation information.',
-            ],
-
-            'evaluation-criterias' => [
-                'empty' => 'No criteria defined.',
-                'table' => [
-                    'title' => 'Title',
-                    'full-score' => 'Full Score'
+                'invitation' => 'Only By Invitation',
+                'allocations' => [
+                    'empty' => 'No allocation recorded.'
+                ],
+                'evaluation-requirements' => [
+                    'empty' => 'No requirement defined.'
+                ],
+                'submission-requirements' => [
+                    'empty' => 'No requirement defined.'
+                ],
+                'events' => [
+                    'empty' => 'No event recorded.'
+                ],
+                'files' => [
+                    'empty' => 'No file uploaded.'
+                ],
+                'qualifications' => [
+                    'empty' => 'No qualification defined.',
+                    'rules' => [
+                        'and' => 'AND',
+                        'or' => 'OR'
+                    ]
                 ]
             ],
-
-            'events' => [
-                'empty' => 'No event information.',
-            ],
-
-            'files' => [
-                'empty' => 'No file uploaded.',
-                'table' => [
-                    'type' => 'Type',
-                    'name' => 'Name',
-                    'size' => 'File Size'
-                ]
-            ],
-
-            'submission-criterias' => [
-                'empty' => 'No criteria defined.',
-            ],
-
-            'qualifications' => [
-                'empty' => 'No qualification information.',
-                'rules' => [
-                    'and' => 'AND',
-                    'or' => 'OR'
-                ]
-            ]
         ]
     ],
 ];

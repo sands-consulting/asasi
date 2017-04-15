@@ -9,20 +9,22 @@
             <thead>
                 <tr>
                     <th width="5%">#</th>
-                    <th>{{ trans('notices.views.admin.evaluation-criterias.table.title') }}</th>
-                    <th class="col-xs-2 text-right">{{ trans('notices.views.admin.evaluation-criterias.table.full-score') }}</th>
+                    <th>{{ trans('notices.attributes.evaluation-requirements.title') }}</th>
+                    <th class="col-xs-1 text-right">{{ trans('notices.attributes.evaluation-requirements.full_score') }}</th>
+                    <th class="col-xs-1 text-right">{{ trans('notices.attributes.evaluation-requirements.required') }}</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($notice->evaluationRequirements()->whereTypeId($type->id)->orderBy('sequence')->get() as $requirement)
-                    <tr class="{{ $requirement->required ? " danger" : "" }}">
+                    <tr>
                         <td width="5%">{{ $requirement->sequence }}</td>
                         <td>{{ $requirement->title }}</td>
                         <td class="text-right">{{ $requirement->full_score }}</td>
+                        <td class="text-right">{!! boolean_icon($requirement->required) !!}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3" class="text-center">{{ trans('notices.views.admin.evaluation-criterias.empty') }}</td>
+                        <td colspan="3" class="text-center">{{ trans('notices.views.admin.show.evaluation-requirements.empty') }}</td>
                     </tr>
                 @endforelse
             </tbody>

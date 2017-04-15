@@ -22,7 +22,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center">{{ trans('notices.views.admin.events.empty') }}</td>
+                    <td colspan="5" class="text-center">{{ trans('notices.views.admin.show.events.empty') }}</td>
                 </tr>
                 @endforelse
             </tbody>

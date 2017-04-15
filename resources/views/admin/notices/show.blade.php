@@ -24,13 +24,13 @@
         @endcan
         
         @can('cancel', $notice)
-        <a href="{{ route('admin.notices.cancel', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#cancel-modal">
+        <a href="{{ route('admin.notices.cancel', $notice->id) }}" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#modal-cancel">
             <i class=" icon-cancel-circle2"></i> <span>{{ trans('actions.cancel') }}</span>
         </a>
         @endcan
 
         @can('destroy', $notice)
-        <a href="#" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#delete-modal">
+        <a href="#" class="btn btn-link btn-float text-size-small has-text text-danger legitRipple" data-toggle="modal" data-target="#modal-delete">
             <i class=" icon-trash"></i> <span>{{ trans('actions.delete') }}</span>
         </a>
         @endif
@@ -99,6 +99,6 @@
     </div>
 </div>
 
-@include('admin.notices.show.modals.cancel')
-@include('admin.notices.show.modals.delete')
+@include('admin.notices.modals.cancel')
+@include('admin.notices.modals.delete')
 @endsection

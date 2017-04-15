@@ -14,6 +14,7 @@ return [
 	'create' => 'Create',
 	'deactivate' => 'Deactivate',
 	'delete' => 'Delete',
+	'dismiss' => 'Dismiss',
 	'edit' => 'Edit',
 	'finish' => 'Finish',
 	'login' => 'Login',
