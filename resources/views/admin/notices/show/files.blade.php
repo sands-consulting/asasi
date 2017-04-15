@@ -9,7 +9,7 @@
                 <th class="col-xs-1">&nbsp;</th>
             </thead>
             <tbody>
-                @forelse($notice->files()->whereType($fileTypes)->get() as $file)
+                @forelse($notice->files()->whereIn('type', $fileTypes)->get() as $file)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ trans('notices.file-types.' . $file->type) }}</td>
