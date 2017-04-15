@@ -117,7 +117,7 @@ class NoticeService extends BaseService
             $event->save();
 
             $exists[] = $event->id;
-            unset($event)
+            unset($event);
         }
 
         $notice->events()->whereNotIn('id', $exists)->delete();
