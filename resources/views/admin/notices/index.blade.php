@@ -8,7 +8,7 @@
 <div class="heading-elements">
     <div class="heading-btn-group">
         <a href="{{ route('admin.notices.create') }}" class="btn btn-link btn-float text-size-small has-text legitRipple">
-            <i class=" icon-user-plus"></i> <span>{{ trans('notices.buttons.create') }}</span>
+            <i class=" icon-plus-circle2"></i> <span>{{ trans('notices.buttons.create') }}</span>
         </a>
     </div>
 </div>

@@ -55,18 +55,25 @@ class NoticesController extends Controller
             'type_id',
             'category_id',
             'organization_id',
+            'tax_code_id',
             'invitation'
         );
-
-        $allocations = $request->only('allocations');
-
+        
         $notice  = NoticeService::create(new Notice, $inputs);
-
+        NoticeService::settings($notice, $request->input('settings', []));
+        NoticeService::evaluationSettings($notice, $request->input('notice-evaluations', []));
+        NoticeService::events($notice, $request->input('events', []));
+        NoticeService::allocations($notice, $request->input('allocations', []));
+        NoticeService::qualificationCodes($notice, $request->input('qualification-codes', []));
+        NoticeService::files($notice, $request->input('files', []), $request->file('files'));
+        NoticeService::submissionRequirements($notice, $request->input('submission-requirements', []));
+        NoticeService::evaluationRequirements($notice, $request->input('evaluation-requirements', []));
+        
         UserHistoryService::log(Auth::user(), 'create', $notice, $request->getClientIp());
 
         return redirect()
             ->route('admin.notices.show', $notice->id)
-            ->with('notice', trans('notices.notices.created', ['name' => $notice->name]));
+            ->with('notice', trans('notices.notices.created', ['name' => $notice->number]));
     }
 
     public function show(Notice $notice)
@@ -106,7 +113,7 @@ class NoticesController extends Controller
         return view('admin.notices.edit', compact('notice'));
     }
 
-    public function update(Request $request, Notice $notice)
+    public function update(NoticeRequest $request, Notice $notice)
     {
         $inputs = $request->only(
             'name',
@@ -135,11 +142,11 @@ class NoticesController extends Controller
         NoticeService::submissionRequirements($notice, $request->input('submission-requirements', []));
         NoticeService::evaluationRequirements($notice, $request->input('evaluation-requirements', []));
         
-        UserHistoryService::log(Auth::user(), 'Update', $notice, $request->getClientIp());
+        UserHistoryService::log(Auth::user(), 'update', $notice, $request->getClientIp());
 
         return redirect()
             ->route('admin.notices.show', $notice->id)
-            ->with('notice', trans('notices.notices.updated', ['name' => $notice->name]));
+            ->with('notice', trans('notices.notices.updated', ['name' => $notice->number]));
     }
 
     public function destroy(Request $request, Notice $notice)

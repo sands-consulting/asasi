@@ -67,10 +67,9 @@ $(document).ready(function(){
         initialize: function() {
           $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             length = $(e.target).parents('ul').children().length;
-            iteration = $(e.target).parents('ul').index($(e.target).parents('li')) + 1;
+            iteration = $(e.target).parents('li').index() + 1;
             if( iteration == length ) {
               this.submit = true;
-              console.log(this.submit);
             } else {
               this.submit = false;
             }

@@ -25,21 +25,7 @@ class NoticeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'number' => 'required',
-            'description' => 'required',
-            'rules' => 'required',
-            'price' => 'required',
-            'published_at' => 'required',
-            'expired_at' => 'required',
-            'purchased_at' => 'required',
-            'submission_at' => '',
-            'submission_address' => 'required',
-            'notice_type_id' => 'required',
-            'organization_id' => 'required',
-            'status' => '',
-
-            'allocations.*.id' => 'required|exists:allocations,id',
-            'allocations.*.value' => 'required',
+            'number' => 'required'
         ];
     }
 
@@ -47,21 +33,7 @@ class NoticeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'number' => 'required',
-            'description' => 'required',
-            'rules' => 'required',
-            'price' => 'required',
-            'published_at' => 'required',
-            'expired_at' => 'required',
-            'purchased_at' => 'required',
-            'submission_at' => 'required',
-            'submission_address' => 'required',
-            'notice_type_id' => 'required',
-            'organization_id' => 'required',
-            'status' => '',
-
-            'allocations.*.id' => 'required|exists:allocations,id',
-            'allocations.*.value' => 'required',
+            'number' => 'required'
         ];
     }
 }

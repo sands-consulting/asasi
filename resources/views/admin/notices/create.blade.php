@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-{!! Former::open_vertical_for_files(route('admin.notices.store'))->id('form-notice')!!}
+{!! Former::open_vertical_for_files(route('admin.notices.store'))->id('form-notice')->novalidate() !!}
 	@include('admin.notices.form')
 {!! Former::close() !!}
 @endsection

@@ -3,6 +3,11 @@
 @section('page-title', implode(' | ', [$notice->number, trans('notices.title')]))
 
 @section('content')
+<?php if(Auth::check() && Auth::user()->vendor && Auth::user()->vendor->purchases()->find($notice->id)) : ?>
+    <?php $fileTypes = ['public', 'purchase']; ?>
+<?php else : ?>
+    <?php $fileTypes = ['public']; ?>
+<?php endif; ?>
 <div class="row mb-20">
     <div class="col-xs-12 col-md-2">
         <a href="{{ route('root') }}" class="btn btn-default btn-block btn-labeled btn-raised legitRipple">

@@ -20,7 +20,7 @@
 @endsection
 
 @section('content')
-{!! Former::open_vertical_for_files(route('admin.notices.show', $notice->id))->id('form-notice')->method('PUT') !!}
+{!! Former::open_vertical_for_files(route('admin.notices.show', $notice->id))->id('form-notice')->method('PUT')->novalidate() !!}
 	@include('admin.notices.form')
 {!! Former::close() !!}
 @endsection
