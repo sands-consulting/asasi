@@ -58,6 +58,11 @@ class NoticesController extends Controller
             'tax_code_id',
             'invitation'
         );
+
+        if($request->user()->hasPermission('notice:organization'))
+        {
+            $inputs['organization_id'] = $request->user()->organization->id;
+        }
         
         $notice  = NoticeService::create(new Notice, $inputs);
         NoticeService::settings($notice, $request->input('settings', []));
@@ -131,6 +136,11 @@ class NoticesController extends Controller
             'tax_code_id',
             'invitation'
         );
+
+        if($request->user()->hasPermission('notice:organization'))
+        {
+            $inputs['organization_id'] = $request->user()->organization->id;
+        }
         
         $notice  = NoticeService::update($notice, $inputs);
         NoticeService::settings($notice, $request->input('settings', []));
