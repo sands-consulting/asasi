@@ -11,13 +11,13 @@ class VendorPurchasesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                return view('notice.index.actions', compact('notice'));
+                return view('notices.index.actions', compact('notice'));
             })
-            ->editColumn('notice_name', function($notice) {
-                return link_to_route('notices.show', $notice->notice_name, $notice->notice_id);
+            ->editColumn('expired_at', function($notice) {
+                return $notice->expired_at->format('d/m/Y H:i:s');
             })
-            ->editColumn('status', function($notice) {
-                return view('notices._index_status', compact('notice'));
+            ->editColumn('name', function($notice) {
+                return view('notices.index.name', compact('notice'));
             })
             ->make(true);
     }
@@ -26,14 +26,7 @@ class VendorPurchasesDataTable extends DataTable
     {
         $query = Notice::whereHas('purchases', function($query) {
                 $query->where('vendor_id', $this->vendor_id);
-            })
-            ->select([
-                'notices.id as notice_id',
-                'notices.name as notice_name',
-                'notices.number as notice_number',
-                'notices.expired_at',
-                'notices.status'
-            ]);
+            })->with('organization');
 
         if($this->datatables->request->input('q', null))
         {
@@ -48,7 +41,7 @@ class VendorPurchasesDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
+                    ->addAction(['width' => '10%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -56,29 +49,17 @@ class VendorPurchasesDataTable extends DataTable
     {
         return [
             [
-                'data' => 'notice_name',
-                'name' => 'notice_name',
+                'data' => 'name',
+                'name' => 'name',
                 'title' => trans('notices.attributes.name'),
                 'width' => '40%'
-            ],
-            [
-                'data' => 'notice_number',
-                'name' => 'notice_number',
-                'title' => trans('notices.attributes.number'),
-                'width' => '15%'
             ],
             [
                 'data' => 'expired_at',
                 'name' => 'expired_at',
                 'title' => trans('notices.attributes.expired_at'),
                 'width' => '15%'
-            ],
-            [
-                'data' => 'status',
-                'name' => 'status',
-                'title' => trans('notices.attributes.status'),
-                'width' => '15%'
-            ],
+            ]
         ];
     }
 

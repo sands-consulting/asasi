@@ -23,7 +23,9 @@ return [
 
     'views' => [
         'index' => [
-            'empty' => 'No item in cart'
+            'empty' => 'No item in cart',
+            'pay-now' => 'Pay Now',
+            'select-gateway' => 'Select Paymeny Gateway'
         ]
     ]
 ];

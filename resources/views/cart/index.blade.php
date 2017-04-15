@@ -1,13 +1,13 @@
 @extends('layouts.portal')
 
 @section('content')
-<div id="cart" class="panel panel-default">
+<div id="cart" class="panel panel-default" v-cloak>
     <div class="panel-heading">
-        <div class="row">
-            <div class="col-sm-12">
-                <h5 class="panel-title">{{ trans('cart.title') }}</h5>
-            </div>
-        </div>
+        <h5 class="panel-title pull-left">{{ trans('cart.title') }}</h5>
+        <a href="{{ route('cart') }}" class="text-danger pull-right" data-method="DELETE" v-if="!payment">
+            <i class="icon-trash"></i>
+        </a>
+        <div class="clearfix"></div>
     </div>
 
     <table class="table">
@@ -23,7 +23,7 @@
         <tbody>
             <tr v-for="item in items">
                 <td width="5%">
-                    <a v-bind:href="'/cart/remove/' +item.id" class="text-danger" data-method="DELETE" data-confirm="{{ trans('app.confirmation') }}"><i class="icon-cross3"></i></a>
+                    <a v-bind:href="'/cart/remove/' +item.id" class="text-danger" data-method="DELETE" data-confirm="{{ trans('app.confirmation') }}" v-if="!payment"><i class="icon-cross3"></i></a>
                 </td>
                 <td width="20%">
                     <strong>@{{ item.organization.name }}</strong> <span class="text-light">@{{ item.number }}</span><br>
@@ -61,12 +61,22 @@
     </table>
 
     <div class="panel-footer">
-        <a href="{{ route('cart') }}" class="btn btn-link text-danger" data-method="DELETE">
-            <i class="icon-trash"></i>
+        <a href="#" class="btn btn-link text-danger" @click.prevent="cancelCheckout" v-if="payment">
+            {{ trans('actions.cancel') }}
         </a>
-        <a href="{{ route('cart') }}" class="btn bg-blue-700 pull-right" data-method="POST">
+
+        <a href="#" class="btn bg-blue-700 pull-right" @click.prevent="checkout" v-if="!payment">
             {{ trans('actions.checkout') }} <i class="icon-arrow-right14 position-right"></i>
-        </a> 
+        </a>
+
+        <form method="POST" action="{{ route('cart') }}" class="pull-right" v-if="payment">
+            {{ csrf_field() }}
+            <select name="gateway_id" class="form-control" v-model="gatewayId">
+                <option value="" selected="selected" disabled>{{ trans('cart.views.index.select-gateway') }}</option>
+                <option v-for="gateway in gateways" v-bind:value="gateway.id">@{{ gateway.label }}</option>
+            </select>
+            <input type="submit" value="{{ trans('cart.views.index.pay-now') }}" class="btn btn-block btn-sm bg-blue-700" v-if="gatewayId > 0">
+        </form>
     </div>
 </div>
 @stop

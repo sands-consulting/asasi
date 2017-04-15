@@ -105,7 +105,7 @@ class BillplzController extends Controller
 
             foreach($transaction->lines as $line)
             {
-            	$line->item->paid()->save();
+            	$line->item->paid($request->user()->vendor)->save();
             }
         }
 

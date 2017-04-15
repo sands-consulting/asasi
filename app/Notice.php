@@ -236,23 +236,24 @@ class Notice extends Model
     {
         return $this->price + $this->tax;
     }
+
+    public function getTransactionLineDescriptionAttribute()
+    {
+        return sprintf("%s - %s\n%s", $this->organization->name, $this->number, $this->name);
+    }
     
     /*
      * Helpers
      */
-
     public static function options()
     {
         return static::pluck('name','id');
     }
 
-    public function isExpired()
+    public function paid($payer)
     {
-        return Carbon::today()->toDateString() >= $this->expired_at;
-    }
+        $this->purchases()->firstOrCreate(['vendor_id' => $payer->id]);
 
-    public static function published()
-    {
-        return static::where('status', 'published');
+        return $this;
     }
 }

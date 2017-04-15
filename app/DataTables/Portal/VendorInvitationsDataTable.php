@@ -39,7 +39,7 @@ class VendorInvitationsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '5%', 'class' => 'text-center'])
+                    ->addAction(['width' => '15%', 'class' => 'text-center'])
                     ->parameters($this->getBuilderParameters());
     }
 

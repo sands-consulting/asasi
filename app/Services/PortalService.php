@@ -6,7 +6,10 @@ use App\Bookmark;
 use App\News;
 use App\Notice;
 use App\Project;
+use App\Transaction;
+use App\TransactionLine;
 use App\User;
+use App\Vendor;
 use Carbon\Carbon;
 
 class PortalService
@@ -60,5 +63,28 @@ class PortalService
     public static function banners()
     {
         return News::published()->orderBy('created_at', 'desc')->take(10)->get();
+    }
+
+    public static function checkout($items, Vendor $vendor, User $user)
+    {
+        $transaction    = new Transaction;
+        $transaction->payer()->associate($vendor);
+        $transaction->user()->associate($user);
+        $transaction->save();
+
+        foreach($items as $item)
+        {
+            $line               = new TransactionLine;
+            $line->description  = $item->transaction_line_description;
+            $line->price        = $item->price;
+            $line->quantity     = 1;
+            $line->item()->associate($item);
+            $line->taxCode()->associate($item->taxCode);
+            $line->transaction()->associate($transaction);
+            $line->save();
+            $line->transaction->calculate()->save();
+        }
+
+        return $transaction;
     }
 }

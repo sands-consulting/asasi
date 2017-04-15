@@ -6,7 +6,7 @@
 	    </a>
 		@endcan
 
-		<a href="{{ route('notices.show', $notice->id) }}" class="btn btn-xs legitRipple" data-method="POST">
+		<a href="{{ route('notices.show', $notice->id) }}" class="btn btn-xs legitRipple">
 			<i class="icon-file-text2"></i>
 		</a>
 

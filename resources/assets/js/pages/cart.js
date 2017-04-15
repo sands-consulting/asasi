@@ -1,16 +1,16 @@
-$(function() {
+$(document).ready(function() {
   var cartEl = '#cart';
-  if( $(cartEl).length > 0 ) {
+  if($(cartEl).length > 0) {
     const vmCart = new Vue({
       el: cartEl,
       data: {
         items: [],
-        checkout: false,
+        payment: false,
         subTotal: 0.00,
         tax: 0.00,
         total: 0.00,
         gateways: [],
-        gatewayId: null,
+        gatewayId: "",
       },
       methods: {
         initialize: function() {
@@ -26,9 +26,9 @@ $(function() {
               item.total = numeral(item.total);
               this.items.push(item);
 
-              this.subTotal = this.subTotal.add(item.price);
-              this.tax = this.tax.add(item.tax);
-              this.total = this.total.add(item.total);
+              this.subTotal = this.subTotal.add(item.price.format('0.00'));
+              this.tax = this.tax.add(item.tax.format('0.00'));
+              this.total = this.total.add(item.total.format('0.00'));
             }
           }
 
@@ -39,11 +39,11 @@ $(function() {
           }
         },
         checkout: function() {
-          this.checkout = true;
+          this.payment = true;
         },
         cancelCheckout: function() {
-          this.checkout = false;
-          this.gatewayId = null;
+          this.payment = false;
+          this.gatewayId = "";
         }
       },
       mounted: function() {

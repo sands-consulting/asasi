@@ -33,4 +33,13 @@ class NoticePurchase extends Model
     {
         return $this->hasOne(Submission::class, 'purchase_id');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($purchase) {
+            $purchase->number = strtoupper(str_random(8));
+        });
+    }
 }
