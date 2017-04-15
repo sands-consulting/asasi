@@ -30,7 +30,7 @@ class NoticeSeeder extends Seeder
                 'purchased_at' => '2016-10-01',
                 'submission_at' => '2016-12-01',
                 'submission_address' => 'Address 1',
-                'notice_type_id' => '1',
+                'type_id' => '1',
                 'organization_id' => '1',
                 'status' => 'published'
             ],
@@ -45,7 +45,7 @@ class NoticeSeeder extends Seeder
                 'purchased_at' => '2016-10-01',
                 'submission_at' => '2016-12-01',
                 'submission_address' => 'Address 2',
-                'notice_type_id' => '2',
+                'type_id' => '2',
                 'organization_id' => '1',
                 'status' => 'draft'
             ],

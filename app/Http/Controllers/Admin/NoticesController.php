@@ -34,9 +34,7 @@ class NoticesController extends Controller
     {
         JavaScript::put([
             'evaluationTypes' => EvaluationType::active()->get(),
-            'notice' => new Notice,
-            'events' => $notice->events,
-            'noticeEvaluations' => $notice->evaluationSettings
+            'notice' => new Notice
         ]);
 
         return view('admin.notices.create', ['notice' => new Notice]);
@@ -54,9 +52,10 @@ class NoticesController extends Controller
             'purchased_at',
             'submission_at',
             'submission_address',
-            'notice_type_id',
-            'notice_category_id',
-            'organization_id'
+            'type_id',
+            'category_id',
+            'organization_id',
+            'invitation'
         );
 
         $allocations = $request->only('allocations');
@@ -81,14 +80,32 @@ class NoticesController extends Controller
             'evaluationTypes' => EvaluationType::active()->get(),
             'notice' => $notice,
             'events' => $notice->events,
-            'noticeEvaluations' => $notice->evaluationSettings,
+            'noticeEvaluations' => $notice->noticeEvaluations,
             'allocations' => $notice->allocations,
+            'settings' => $notice->settings()->pluck('key', 'value'),
+            'qualificationCodes' => $notice->qualificationCodes()->orderBy('group')->orderBy('sequence')->get()->groupBy('group'),
+            'submissionRequirements' => $notice
+                ->submissionRequirements()
+                ->with('type')
+                ->orderBy('sequence')
+                ->get()
+                ->groupBy(function($item, $key) {
+                    return $item->type->slug;
+                })->toArray(),
+            'evaluationRequirements' => $notice
+                ->evaluationRequirements()
+                ->with('type')
+                ->orderBy('sequence')
+                ->get()
+                ->groupBy(function($item, $key) {
+                    return $item->type->slug;
+                })->toArray(),
         ]);
 
         return view('admin.notices.edit', compact('notice'));
     }
 
-    public function update(NoticeRequest $request, Notice $notice)
+    public function update(Request $request, Notice $notice)
     {
         $inputs = $request->only(
             'name',
@@ -100,14 +117,22 @@ class NoticesController extends Controller
             'purchased_at',
             'submission_at',
             'submission_address',
-            'notice_type_id',
-            'notice_category_id',
+            'type_id',
+            'category_id',
             'organization_id',
-            'status'
+            'tax_code_id',
+            'invitation'
         );
         
         $notice  = NoticeService::update($notice, $inputs);
+        NoticeService::settings($notice, $request->input('settings', []));
+        NoticeService::evaluationSettings($notice, $request->input('notice-evaluations', []));
+        NoticeService::events($notice, $request->input('events', []));
+        NoticeService::allocations($notice, $request->input('allocations', []));
+        NoticeService::qualificationCodes($notice, $request->input('qualification-codes', []));
+        
         UserHistoryService::log(Auth::user(), 'Update', $notice, $request->getClientIp());
+
         return redirect()
             ->route('admin.notices.show', $notice->id)
             ->with('notice', trans('notices.notices.updated', ['name' => $notice->name]));

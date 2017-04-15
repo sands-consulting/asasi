@@ -28,7 +28,7 @@ return [
         'or' => 'OR'
     ],
 
-    'inner-rules' => [
+    'group-rules' => [
         'and' => 'ALL',
         'or' => 'EITHER ONE'
     ],

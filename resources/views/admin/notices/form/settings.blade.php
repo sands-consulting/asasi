@@ -6,18 +6,19 @@
 			@unless(Auth::user()->hasPermission('notice:organziation'))
 			{!! Former::select('organization_id')->label('notices.views.admin.form.settings.organization')->options(App\Organization::options()) !!}
 			@endunless
-			{!! Former::checkbox('invitation')->label('notices.views.admin.form.settings.invitation')->inline()->addClass('pull-right') !!}
+			{!! Former::hidden('invitation')->value(0) !!}
+			{!! Former::checkbox('invitation')->label('notices.views.admin.form.settings.invitation')->inline()->addClass('pull-right')->forceValue(1)->vModel('notice.invitation') !!}
 		</div>
 
 		<div class="col-xs-12 col-md-6">
-			{!! Former::hidden('setting[purchase]')->value(0) !!}
-			{!! Former::checkbox('settings[purchase]')->label('notices.views.admin.form.settings.purchase')->inline()->addClass('pull-right') !!}
-			{!! Former::hidden('setting[submission]')->value(0) !!}
-			{!! Former::checkbox('settings[submission]')->label('notices.views.admin.form.settings.submission')->inline()->addClass('pull-right') !!}
-			{!! Former::hidden('setting[award]')->value(0) !!}
-			{!! Former::checkbox('settings[award]')->label('notices.views.admin.form.settings.award')->inline()->addClass('pull-right') !!}
-			{!! Former::hidden('setting[evaluation]')->value(0) !!}
-			{!! Former::checkbox('settings[evaluation]')->label('notices.views.admin.form.settings.evaluation')->inline()->addClass('pull-right')->setAttribute('v-model', 'settings.evaluation') !!}
+			{!! Former::hidden('settings[purchase]')->value(0) !!}
+			{!! Former::checkbox('settings[purchase]')->label('notices.views.admin.form.settings.purchase')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.purchase') !!}
+			{!! Former::hidden('settings[submission]')->value(0) !!}
+			{!! Former::checkbox('settings[submission]')->label('notices.views.admin.form.settings.submission')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.submission') !!}
+			{!! Former::hidden('settings[award]')->value(0) !!}
+			{!! Former::checkbox('settings[award]')->label('notices.views.admin.form.settings.award')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.award') !!}
+			{!! Former::hidden('settings[evaluation]')->value(0) !!}
+			{!! Former::checkbox('settings[evaluation]')->label('notices.views.admin.form.settings.evaluation')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.evaluation') !!}
 
 			<table class="table table-bordered mt-5" v-if="settings.evaluation">
 				<thead>

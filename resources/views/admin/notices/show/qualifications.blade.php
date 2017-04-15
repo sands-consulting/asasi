@@ -1,10 +1,9 @@
 <div role="tabpanel" class="tab-pane qualification-wrap" id="tab-notice-qualifications">
 
-@forelse($notice->qualifications->groupBy('group') as $group)
+@forelse($notice->qualificationCodes->groupBy('group') as $group)
 
 	@if($group->count() > 1)<div class="qualification-group">@endif
 
-	{{ dd($group) }}
 		@foreach($group as $code)
 		<div class="panel panel-default">
 			<div class="panel-heading">

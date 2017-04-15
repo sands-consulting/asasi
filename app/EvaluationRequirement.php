@@ -19,7 +19,7 @@ class EvaluationRequirement extends Model
         'sequence',
         'title',
         'full_score',
-        'mandatory',
+        'required',
         'type_id',
         'notice_id',
         'status'
@@ -64,35 +64,6 @@ class EvaluationRequirement extends Model
         }
     }
 
-    public function scopeCommercials($query)
-    {
-        // Fixme: find better solution and more flexible
-        return $query->where('evaluation_type_id', 1);
-    }
-
-    public function scopeTechnicals($query)
-    {
-        // Fixme: find better solution and more flexible
-        return $query->where('evaluation_type_id', 2);
-    }
-
-    /* 
-     * State controls 
-     */
-    public function canActivate()
-    {
-        return $this->status != 'active';
-    }
-
-    public function canDeactivate()
-    {
-        return $this->status == 'active';
-    }
-    
-    /*
-     * Relationship
-     */
-
     public function notice()
     {
         return $this->belongsTo(Notice::class);
@@ -111,7 +82,6 @@ class EvaluationRequirement extends Model
     public function submissions()
     {
         return $this->belongsToMany(Submission::class, 'evaluation_scores')
-            // ->whereNull(with(new Submission)->getTable() . '.deleted_at')
             ->wherePivot('deleted_at', null)
             ->withPivot(['score'])
             ->withTimestamps();

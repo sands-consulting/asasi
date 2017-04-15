@@ -27,7 +27,7 @@ Vue.component('datepicker-single', {
 });
 
 Vue.component('datetimepicker-single', {
-  template: '<input type="text" v-bind:class="klass" v-bind:name="name">',
+  template: '<input type="text" v-bind:class="klass" v-bind:name="name" v-model="date">',
   data: function() {
     return {
       options: {

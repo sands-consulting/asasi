@@ -1,6 +1,6 @@
-$(function() {
+
   var formEl = '#form-notice';
-  if( $(formEl).length > 0 ) {
+
     const vmNotice = new Vue({
       el: formEl,
       data: {
@@ -52,9 +52,8 @@ $(function() {
             field_type: ''
           },
           qualification: {
-            id: null,
             join_rule: 'and',
-            inner_rule: 'and',
+            group_rule: 'and',
             codes: []
           },
           qualificationCode: {
@@ -65,32 +64,58 @@ $(function() {
       },
       methods: {
         initialize: function() {
+          $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            length = $(e.target).parents('ul').children().length;
+            iteration = $(e.target).parents('ul').index($(e.target).parents('li')) + 1;
+            if( iteration == length ) {
+              this.submit = true;
+              console.log(this.submit);
+            } else {
+              this.submit = false;
+            }
+          });
+
           if( 'notice' in window ) {
-            this.notice = window.notice;
+            for(var key in window.notice) {
+              if(window.notice.hasOwnProperty(key)) {
+                this.$set(this.notice, key, window.notice[key]);
+              }
+            }
+          }
+
+          if( 'settings' in window ) {
+            for (var i = 0; i < window.settings.length; i++) {
+              this.$set(this.settings, window.settings[i].key, window.settings[i].value);
+            }
           }
 
           if ( 'evaluationTypes' in window ) {
             this.evaluationTypes = window.evaluationTypes;
 
             for (var i = 0; i < this.evaluationTypes.length; i++) {
+              id = this.evaluationTypes[i].id;
               slug = this.evaluationTypes[i].slug;
               this.$set(this.submissionRequirements, slug, []);
               this.$set(this.evaluationRequirements, slug, []);
+
+              this.$set(this.noticeEvaluations, slug, {
+                type_id: id,
+                start_at: '',
+                end_at: ''
+              });
             }
           }
 
-          if ( 'notice' in window ) {
-            this.notice = window.notice;
-          }
-
           if( 'noticeEvaluations' in window ) {
-            for (var i = 0; i < this.evaluationTypes.length; i++) {
+            for (var i = 0; i < this.noticeEvaluations.length; i++) {
+              var evaluation = this.noticeEvaluations[i];
               type = this.evaluationTypes.filter(function(item) {
-                return item.id == window.noticeEvaluations[i].type_id;
+                return item.id == evaluation.type_id;
               });
 
               if ( type ) {
-                this.noticeEvaluations[type.slug] = window.noticeEvaluations[i];
+                this.$set(this.noticeEvaluations[type.slug], 'start_at', window.noticeEvaluations[i].start_at);
+                this.$set(this.noticeEvaluations[type.slug], 'end_at', window.noticeEvaluations[i].end_at);
               }
             }
           }
@@ -98,6 +123,70 @@ $(function() {
           if( 'events' in window ) {
             for (var i = 0; i < window.events.length; i++) {
               this.events.push(window.events[i]);
+            }
+          }
+
+          if( 'allocations' in window ) {
+            for (var i = 0; i < window.allocations.length; i++) {
+              this.allocations.push({
+                id: window.allocations[i].id,
+                amount: window.allocations[i].pivot.amount
+              });
+            }
+          }
+
+          if( 'submissionRequirements' in window ) {
+            for(var slug in window.submissionRequirements) {
+              if(window.submissionRequirements.hasOwnProperty(slug)) {
+                data = window.submissionRequirements[slug];
+                for(var i = 0; i < data.length; i++) {
+                  this.submissionRequirements[slug].push({
+                    id: data[i].id,
+                    title: data[i].title,
+                    field_required: data[i].field_required,
+                    field_type: data[i].field_type
+                  });
+                }
+              }
+            }
+          }
+
+          if( 'evaluationRequirements' in window ) {
+            for(var slug in window.evaluationRequirements) {
+              if(window.evaluationRequirements.hasOwnProperty(slug)) {
+                data = window.evaluationRequirements[slug];
+                for(var i = 0; i < data.length; i++) {
+                  this.evaluationRequirements[slug].push({
+                    id: data[i].id,
+                    title: data[i].title,
+                    required: data[i].required,
+                    full_score: data[i].full_score
+                  });
+                }
+              }
+            }
+          }
+
+          if( 'qualificationCodes' in window ) {
+            for(var group in window.qualificationCodes ) {
+              if(window.qualificationCodes.hasOwnProperty(group)) {
+                qualification = jQuery.extend(true, {}, this.placeholders.qualification);
+                data = window.qualificationCodes[group];
+                
+                for(var i = 0; i < data.length; i++) {
+                  if(i == 0) {
+                    qualification.inner_rule = data.inner_rule;
+                    qualification.join_rule = data.join_rule;
+                  }
+
+                  qualification.codes.push(jQuery.extend(true, {}, {
+                    id: data[i].id,
+                    code_id: data[i].code_id
+                  }));
+                }
+
+                this.qualifications.push(qualification);
+              }
             }
           }
         },
@@ -165,5 +254,3 @@ $(function() {
         this.initialize();
       },
     });
-  }
-});

@@ -89,7 +89,7 @@ return [
         'evaluation-requirements' => 'Evaluation Requirements',
         'submission-requirements' => 'Submission Requirements',
 
-        'invitations' => 'Invitatis',
+        'invitations' => 'Invitations',
         'eligibles' => 'Eligibles',
         'purchases' => 'Purchases',
         'submissions' => 'Submissions',
@@ -174,6 +174,10 @@ return [
                 ]
             ],
 
+            'show' => [
+                'invitation' => 'Only By Invitation'
+            ],
+
             'allocations' => [
                 'empty' => 'No allocation information.',
             ],
@@ -206,8 +210,8 @@ return [
             'qualifications' => [
                 'empty' => 'No qualification information.',
                 'rules' => [
-                    'AND' => 'AND',
-                    'OR' => 'OR'
+                    'and' => 'AND',
+                    'or' => 'OR'
                 ]
             ]
         ]

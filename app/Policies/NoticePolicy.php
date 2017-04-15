@@ -38,7 +38,7 @@ class NoticePolicy
 
     public function update(User $user, Notice $notice)
     {
-        return $this->edit($notice);
+        return $this->edit($user, $notice);
     }
 
     public function duplicate(User $user, Notice $notice)
@@ -73,7 +73,7 @@ class NoticePolicy
 
     public function cancel(User $user, Notice $notice)
     {
-        return $user->hasPermission('notice:cancel') && $notice->status != 'cancelled';
+        return $user->hasPermission('notice:cancel') && !in_array($notice->status, ['draft', 'cancelled']);
     }
 
     public function saveEvaluator(User $user, Notice $notice)

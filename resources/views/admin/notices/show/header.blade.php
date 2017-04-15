@@ -4,8 +4,8 @@
         <div class="pull-right">
             <span class="label label-default">{{ $notice->type->name }}</span>
 
-            @if(($invitation = $notice->settings()->whereKey('invitation')->first()) && $invitation->value == 1)
-            <span class="label label-success">{{ trans('notices.views.admin.show.invitation') }}</span>
+            @if($notice->invitation)
+            <span class="label label-danger">{{ trans('notices.views.admin.show.invitation') }}</span>
             @endif
 
             @if(($advertise = $notice->settings()->whereKey('advertise')->first()) && $advertise->value == 1)

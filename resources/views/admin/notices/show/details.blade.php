@@ -31,7 +31,7 @@
                         <i class="icon-cash3"></i> {{ trans('notices.attributes.price') }}
                     </h6>
                     <p class="list-group-item-text">
-                        {{ \App\Setting::whereKey('currency')->first()->value }}
+                        {{ setting('currency') }}
                         {{ $notice->price }}
                     </p>
                 </li>

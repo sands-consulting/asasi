@@ -1,16 +1,18 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Carbon\Carbon;
 use App\Traits\DateAccessor;
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
 class Notice extends Model
 {
-    use RevisionableTrait,
-        DateAccessor,
+    use DateAccessor,
+        RevisionableTrait,
         SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
@@ -27,12 +29,13 @@ class Notice extends Model
         'submission_at',
         'submission_address',
         'tax_code_id',
-        'notice_type_id',
-        'notice_category_id',
+        'type_id',
+        'category_id',
         'organization_id',
         'status',
         'status_submission',
-        'status_award'
+        'status_award',
+        'invitation'
     ];
 
     protected $attributes = [
@@ -119,12 +122,12 @@ class Notice extends Model
 
     public function type()
     {
-        return $this->belongsTo(NoticeType::class, 'notice_type_id');
+        return $this->belongsTo(NoticeType::class);
     }
 
     public function category()
     {
-        return $this->belongsTo(NoticeCategory::class, 'notice_category_id');
+        return $this->belongsTo(NoticeCategory::class);
     }
 
     public function organization()
@@ -142,9 +145,9 @@ class Notice extends Model
         return $this->hasMany(NoticeEvent::class);
     }
 
-    public function qualifications()
+    public function qualificationCodes()
     {
-        return $this->hasMany(NoticeQualification::class);
+        return $this->hasMany(NoticeQualificationCode::class);
     }
 
     public function files()
@@ -219,15 +222,6 @@ class Notice extends Model
     public static function options()
     {
         return static::pluck('name','id');
-    }
-
-    /*
-     * Attributes
-    */
-    public function getInvitationAttribute()
-    {
-        $row = $this->settings()->whereKey('invitation')->first();
-        return $row && !!$row->value;
     }
 
     public function isExpired()

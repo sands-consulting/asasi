@@ -54,7 +54,7 @@ class NoticeRequest extends FormRequest
             'published_at' => 'required',
             'expired_at' => 'required',
             'purchased_at' => 'required',
-            'submission_at' => '',
+            'submission_at' => 'required',
             'submission_address' => 'required',
             'notice_type_id' => 'required',
             'organization_id' => 'required',

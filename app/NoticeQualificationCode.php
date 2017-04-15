@@ -1,15 +1,15 @@
-<?php namespace App;
+<?php
 
-use App\Traits\DateAccessor;
+namespace App;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class NoticeQualification extends Model
+class NoticeQualificationCode extends Model
 {
     use RevisionableTrait,
-        SoftDeletes,
-        DateAccessor;
+        SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
 
@@ -18,11 +18,13 @@ class NoticeQualification extends Model
         'sequence',
         'group_rule',
         'join_rule',
-        'code_id'
+        'code_id',
+        'type_id'
     ];
 
     protected $attributes = [
-        'group_rule' => 'OR'
+        'group_rule' => 'OR',
+        'join_rule' => 'OR'
     ];
 
     public function code()

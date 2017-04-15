@@ -20,11 +20,11 @@ class NoticeCategorySeeder extends Seeder
         
         $noticeEventTypeData = [
             [
-                'name' => 'Tender',
+                'name' => 'Information Technology',
                 'status' => 'active'
             ],
             [
-                'name' => 'Sebut Harga',
+                'name' => 'Public Infrastructure',
                 'status' => 'active'
             ]
         ];

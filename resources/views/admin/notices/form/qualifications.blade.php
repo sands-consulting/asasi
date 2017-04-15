@@ -2,26 +2,17 @@
 	<table class="table table-bordered table-striped table-vtop">
 		<tbody>
 			<template v-for="(qualification, index) in qualifications">
-				<tr v-if="index > 0" >
-					<td colspan="3" class="row">
-						<div class="col-xs-1 col-md-offset-4 col-md-4">
-							<select v-bind:name="'qualifications[' + index + '][join_rule]'" class="form-control" v-model="qualification.join_rule">
-								@foreach(trans('qualification-codes.join-rules') as $value => $label)<option value="{{ $value }}">{{ $label }}</option>@endforeach
-							</select>
-						</div>
-					</td>
-				</tr>
 				<tr>
 					<td class="col-xs-2">
-						<select v-bind:name="'qualifications[' + index + '][inner_rule]'" class="form-control" v-model="qualification.inner_rule">
-							@foreach(trans('qualification-codes.inner-rules') as $value => $label)<option value="{{ $value }}">{{ $label }}</option>@endforeach
+						<select v-bind:name="'qualification-codes[' + index + '][group_rule]'" class="form-control" v-model="qualification.group_rule">
+							@foreach(trans('qualification-codes.group-rules') as $value => $label)<option value="{{ $value }}">{{ $label }}</option>@endforeach
 						</select>
 					</td>
 					<td class="qualification-codes">
 						<template v-for="(code, index1) in qualification.codes">
 							<div class="input-group">
-								<input type="hidden" v-bind:name="'qualifications[' + index + '][codes][' + index1 + '][id]'" v-model="code.id">
-								<select v-bind:name="'qualifications[' + index + '][codes][' + index1 + '][code_id]'" class="form-control" v-model="code.code_id">
+								<input type="hidden" v-bind:name="'qualification-codes[' + index + '][codes][' + index1 + '][id]'" v-model="code.id">
+								<select v-bind:name="'qualification-codes[' + index + '][codes][' + index1 + '][code_id]'" class="form-control" v-model="code.code_id">
 									<option value=""></option>
 									@foreach(App\QualificationType::active()->get() as $type)
 										<optgroup label="{{ $type->name }}">
@@ -38,7 +29,15 @@
 					</td>
 					<td class="col-xs-1">
 						<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteQualification(index)"><i class="icon-cross2"></i></a>
-						<input type="hidden" v-bind:name="'qualifications[' + index + '][id]'" class="form-control" v-model="qualification.id">
+					</td>
+				</tr>
+				<tr v-if="qualifications.length > 1 && (index + 1) < qualifications.length" >
+					<td colspan="3" class="row">
+						<div class="col-xs-1 col-md-offset-4 col-md-4">
+							<select v-bind:name="'qualification-codes[' + index + '][join_rule]'" class="form-control" v-model="qualification.join_rule">
+								@foreach(trans('qualification-codes.join-rules') as $value => $label)<option value="{{ $value }}">{{ $label }}</option>@endforeach
+							</select>
+						</div>
 					</td>
 				</tr>
 			</template>

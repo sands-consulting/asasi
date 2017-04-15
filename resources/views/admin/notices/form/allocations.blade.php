@@ -20,7 +20,7 @@
 				<td>
 					<div class="input-group">
 						<span class="input-group-addon">{{ setting('currency') }}</span>
-						<input type="text" v-bind:name="'allocations[' + index + '][amount]'" class="form-control" v-model="allocation.name">
+						<input type="text" v-bind:name="'allocations[' + index + '][amount]'" class="form-control" v-model="allocation.amount">
 					</div>
 				</td>
 				<td><a href="#" class="btn btn-xs btn-default" @click.prevent="deleteAllocation(index)"><i class="icon-cross2"></i></a></td>

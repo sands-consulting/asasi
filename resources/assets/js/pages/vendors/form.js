@@ -1,5 +1,6 @@
-
+$(function() {
   var formEl = '#form-vendor';
+  if( $(formEl).length > 0 ) {
     const vmVendor = new Vue({
       el: formEl,
       data: {
@@ -284,3 +285,5 @@
         this.initialize();
       },
     });
+  }
+});
