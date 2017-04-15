@@ -84,6 +84,7 @@ class NoticesController extends Controller
             'allocations' => $notice->allocations,
             'settings' => $notice->settings()->pluck('key', 'value'),
             'qualificationCodes' => $notice->qualificationCodes()->orderBy('group')->orderBy('sequence')->get()->groupBy('group'),
+            'files' => $notice->files()->with('upload')->get(),
             'submissionRequirements' => $notice
                 ->submissionRequirements()
                 ->with('type')
@@ -130,6 +131,7 @@ class NoticesController extends Controller
         NoticeService::events($notice, $request->input('events', []));
         NoticeService::allocations($notice, $request->input('allocations', []));
         NoticeService::qualificationCodes($notice, $request->input('qualification-codes', []));
+        NoticeService::files($notice, $request->input('files', []), $request->file('files'));
         
         UserHistoryService::log(Auth::user(), 'Update', $notice, $request->getClientIp());
 

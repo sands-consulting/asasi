@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use Auth;
 use App\Notice;
 use App\NoticeEvent;
 use App\NoticeQualificationCode;
 use App\QualificationCode;
+use App\Upload;
 use Sands\Asasi\Service\Exceptions\ServiceException;
 
 class NoticeService extends BaseService 
@@ -180,4 +182,57 @@ class NoticeService extends BaseService
 
         $notice->qualificationCodes()->whereNotIn('id', $exists)->delete();
     }
+
+    public static function files(Notice $notice, $files, $uploads)
+    {
+        $exists = [];
+
+        foreach($files as $index => $data)
+        {
+            if(isset($uploads[$index]))
+            {
+                unset($data['id']);
+
+                $file   = $uploads[$index]['file'];
+                $name   = sprintf('%s.%s', md5($file->getClientOriginalName()), $file->extension());
+                $token  = md5(time());
+                $file->storeAs($token, $name, 'uploads');
+
+                $upload = Upload::create([
+                    'name' => $file->getClientOriginalName(),
+                    'token' => $token,
+                    'path' => public_path(sprintf('%s/%s', $token, $name)),
+                    'url' => url(sprintf('%s/%s/%s', 'uploads', $token, $name)),
+                    'size' => $file->getSize(),
+                    'mime_type' => $file->getMimeType(),
+                    'uploadable_type' => 'App\Notice',
+                    'uploadable_id' => $notice->id,
+                    'user_id' => Auth::check() ? Auth::user()->id : null,
+                ]);
+            }
+
+            if(empty($data['id']))
+            {
+                $noticeFile = $notice->files()->create([
+                    'name' => $data['name'],
+                    'type' => $data['type'],
+                    'upload_id' => $upload->id
+                ]);
+
+                $exists[] = $noticeFile->id;
+            }
+            else
+            {
+                $noticeFile = $notice->files()->find($data['id']);
+                $noticeFile->update([
+                    'name' => $data['name'],
+                    'type' => $data['type']
+                ]);
+                $exists[] = $noticeFile->id;
+            }
+        }
+
+        $notice->files()->whereNotIn('id', $exists)->delete();
+    }
+
 }

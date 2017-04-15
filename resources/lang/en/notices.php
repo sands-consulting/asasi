@@ -42,6 +42,7 @@ return [
             'name' => 'Name',
             'file' => 'File',
             'type' => 'Type',
+            'size' => 'Size',
         ],
 
         'allocations' => [

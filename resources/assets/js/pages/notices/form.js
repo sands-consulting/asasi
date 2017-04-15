@@ -34,6 +34,7 @@ $(document).ready(function(){
             name: '',
             type: '',
             file: null,
+            upload: null
           },
           allocation: {
             id: "",
@@ -187,6 +188,18 @@ $(document).ready(function(){
 
                 this.qualifications.push(qualification);
               }
+            }
+          }
+
+          if('files' in window) {
+            for (var i = window.files.length - 1; i >= 0; i--) {
+              this.files.push({
+                id: window.files[i].id,
+                name: window.files[i].name,
+                type: window.files[i].type,
+                file: null,
+                upload: window.files[i].upload
+              });
             }
           }
         },

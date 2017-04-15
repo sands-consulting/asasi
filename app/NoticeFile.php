@@ -25,4 +25,9 @@ class NoticeFile extends Model
     {
         return $this->belongsTo(Notice::class);
     }
+
+    public function upload()
+    {
+        return $this->belongsTo(Upload::class);
+    }
 }

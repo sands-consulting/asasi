@@ -19,5 +19,7 @@
 @endsection
 
 @section('content')
-@include('admin.notices.form')
+{!! Former::open_vertical_for_files(route('admin.notices.store'))->id('form-notice')!!}
+	@include('admin.notices.form')
+{!! Former::close() !!}
 @endsection

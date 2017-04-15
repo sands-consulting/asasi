@@ -6,7 +6,7 @@
 				<th>{{ trans('notices.attributes.files.name') }}</th>
 				<th>{{ trans('notices.attributes.files.type') }}</th>
 				<th>{{ trans('notices.attributes.files.file') }}</th>
-				<th width="40">&nbsp;</th>
+				<th width="140">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,7 +20,10 @@
 				</td>
 				<td><input type="file" v-bind:name="'files[' + index + '][file]'" class="form-control" v-on:change="file.file"></td>
 				<td>
-					<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteFile(index)"><i class="icon-cross2"></i></a>
+					<div class="btn-group">
+						<a href="#" class="btn btn-xs btn-default" @click.prevent="deleteFile(index)"><i class="icon-cross2"></i></a>
+						<a v-bind:href="file.upload.url" class="btn btn-xs bg-blue-700" target="_blank" v-if="file.upload"><i class="icon-file-download"></i></a>
+					</div>
 					<input type="hidden" v-bind:name="'files[' + index + '][id]'" class="form-control" v-model="file.id">
 				</td>
 			</tr>
