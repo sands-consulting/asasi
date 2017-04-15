@@ -67,6 +67,17 @@ return [
             'name' => 'Vendor',
             'exception' => 'Exception',
             'notified_at' => 'Notification Date & Time',
+        ],
+
+        'invitations' => [
+            'name' => 'Vendor',
+            'created_at' => 'Invitation Date & Time',
+        ],
+
+        'purchases' => [
+            'name' => 'Vendor',
+            'number' => 'Number',
+            'created_at' => 'Purchase Date & Time'
         ]
     ],
 
@@ -87,6 +98,7 @@ return [
         'add-qualification' => 'Add Qualification',
 
         'add-eligible' => 'Add Eligible Vendor',
+        'add-invitation' => 'Add Invitation',
     ],
 
     'menu' => [
@@ -122,12 +134,14 @@ return [
         'cancelled' => 'Notice :name cancelled.',
         'submission_saved' => 'Your submission for Notice :number successfully saved.',
         'submission_submitted' => 'Your submission for Notice :number successfully submitted.',
-        'eligible' => ':name successfully added to eligible vendors.'
+        'eligible' => ':name successfully added to eligible vendors.',
+        'invitation' => 'Vendor successfully invited.'
     ],
 
     'alerts' => [
         'validation' => 'Please verify all required fields are filled.',
         'eligible' => 'Unable to add vendor as eligible.',
+        'invitation' => 'Unable to invite vendor.'
     ],
 
     'file-types' => [
@@ -216,6 +230,9 @@ return [
                 ],
                 'eligibles' => [
                     'empty' => 'No eligible vendors.'
+                ],
+                'purchases' => [
+                    'empty' => 'No notice purchase.'
                 ]
             ],
 
@@ -232,6 +249,11 @@ return [
                     'title' => 'Add Eligible Vendor',
                     'vendor_id' => 'Select Vendor',
                     'submit' => 'Submit'
+                ],
+                'invitation' => [
+                    'title' => 'Invite Vendor',
+                    'vendor_id' => 'Select Vendor',
+                    'submit' => 'Invite'
                 ]
             ]
         ],

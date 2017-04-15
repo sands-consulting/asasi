@@ -3,8 +3,8 @@
         <table class="table">
             <thead>
                 <th width="5%">#</th>
-                <th>{{ trans('notices.attributes.eligibles.name') }}</th>
-                <th>{{ trans('notices.attributes.eligibles.created_at') }}</th>
+                <th>{{ trans('notices.attributes.invitations.name') }}</th>
+                <th class="col-xs-2">{{ trans('notices.attributes.invitations.created_at') }}</th>
                 <th class="col-xs-1">&nbsp;</th>
             </thead>
             <tbody>
@@ -18,7 +18,7 @@
                 @endforeach
                 <tr>
                     <td colspan="5" align="center">
-                        <a href="#" data-toggle="modal" data-target="#modal-eligble"><i class="icon-plus-circle2"></i> {{ trans('notices.buttons.add-eligible') }}</a>
+                        <a href="#" data-toggle="modal" data-target="#modal-invitation"><i class="icon-plus-circle2"></i> {{ trans('notices.buttons.add-invitation') }}</a>
                     </td>
                 </tr>
             </tbody>

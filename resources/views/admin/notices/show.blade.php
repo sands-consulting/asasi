@@ -106,5 +106,9 @@
 
 @include('admin.notices.modals.cancel')
 @include('admin.notices.modals.delete')
+@if($notice->invitation)
+@include('admin.notices.modals.invitation')
+@else
 @include('admin.notices.modals.eligible')
+@endif
 @endsection

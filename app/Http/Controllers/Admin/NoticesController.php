@@ -229,6 +229,27 @@ class NoticesController extends Controller
             ->with('notice', trans('notices.notices.eligible', ['name' => $eligible->vendor->name]));
     }
 
+    public function invitation(Request $request, Notice $notice)
+    {
+        $vendorIds = $request->input('vendor_ids', []);
+
+        if(count($vendorIds) == 0)
+        {
+            return redirect()
+                ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)) . '#tab-notice-invitations')
+                ->with('notice', trans('notices.alerts.invitation'));
+        }
+
+        foreach($vendorIds as $vendorId)
+        {
+            $notice->invitations()->firstOrCreate(['vendor_id' => $vendorId]);
+        }
+
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)) . '#tab-notice-invitations')
+            ->with('notice', trans('notices.notices.invitation'));
+    }
+
 // Todo
 
     public function summary(Notice $notice, EvaluationSummaryDataTable $table)

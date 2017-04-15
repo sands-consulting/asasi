@@ -91,6 +91,11 @@ class NoticePolicy
         return $this->show($auth, $notice);
     }
 
+    public function invitation(User $auth, Notice $notice)
+    {
+        return $this->show($auth, $notice);
+    }
+
     public function checkOrganization(User $auth, Notice $notice, $perm)
     {
         if ( ! $auth->hasPermission($perm)) {

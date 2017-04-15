@@ -35,17 +35,25 @@
         </a>
     </li>
 
+    @if(setting('submission', false, $notice))
+
     <li role="presentation">
         <a href="#tab-notice-submission-requirements" aria-controls="tab-notice-submission-requirements" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-list-numbered"></i> {{ trans('notices.menu.submission-requirements') }}
         </a>
     </li>
 
+    @endif
+
+    @if(setting('evaluation', false, $notice))
+
     <li role="presentation">
         <a href="#tab-notice-evaluation-requirements" aria-controls="tab-notice-evaluation-requirements" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-clipboard2"></i> {{ trans('notices.menu.evaluation-requirements') }}
         </a>
     </li>
+
+    @endif
 
 
     <li class="list-group-divider"></li>
@@ -65,11 +73,19 @@
     </li>
     @endif
 
+    @if(setting('purchase', false, $notice))
+
     <li role="presentation">    
         <a href="#tab-notice-purchases" aria-controls="tab-notice-purchases" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-basket"></i> {{ trans('notices.menu.purchases') }}
         </a>
     </li>
+
+    @endif
+
+    @if(setting('submission', false, $notice))
+
+    <li class="list-group-divider"></li>
 
     <li role="presentation">    
         <a href="#tab-notice-submissions" aria-controls="tab-notice-submissions" role="tab" data-toggle="tab" class="list-group-item">
@@ -77,15 +93,11 @@
         </a>
     </li>
 
+    @endif
+
+    @if(setting('evaluation', false, $notice))
 
     <li class="list-group-divider"></li>
-
-
-    <li role="presentation">
-        <a href="#tab-notice-evaluators" class="list-group-item">
-            <i class="icon-user-check"></i> {{ trans('notices.menu.evaluators') }}
-        </a>
-    </li>
 
     <li role="presentation">
         <a href="#tab-notice-evaluations" class="list-group-item">
@@ -99,6 +111,10 @@
         </a>
     </li>
 
+    @endif
+
+    @if(setting('award', false, $notice))
+
     <li class="list-group-divider"></li>
 
     <li role="presentation">
@@ -106,6 +122,8 @@
             <i class="icon-cogs"></i> {{ trans('notices.menu.settings') }}
         </a>
     </li>
+
+    @endif
 
     @endif
 </ul>
