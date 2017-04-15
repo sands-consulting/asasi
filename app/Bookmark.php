@@ -2,12 +2,14 @@
 
 namespace App;
 
-use App\Traits\DateAccessor;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Bookmark extends Model
 {
-    use DateAccessor;
+    use RevisionableTrait,
+        SoftDeletes;
 
     protected $fillable = [
         'bookmarkable_type',
@@ -23,10 +25,5 @@ class Bookmark extends Model
     public function bookmarkable()
     {
         return $this->morphTo();
-    }
-
-    public static function boot()
-    {
-        parent::boot();
     }
 }

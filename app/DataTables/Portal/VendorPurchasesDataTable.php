@@ -11,7 +11,7 @@ class VendorPurchasesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($notice) {
-                return view('dashboard._purchases_index_actions', compact('notice'));
+                return view('notice.index.actions', compact('notice'));
             })
             ->editColumn('notice_name', function($notice) {
                 return link_to_route('notices.show', $notice->notice_name, $notice->notice_id);

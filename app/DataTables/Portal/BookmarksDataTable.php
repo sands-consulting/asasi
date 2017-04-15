@@ -11,7 +11,7 @@ class BookmarksDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', function($bookmark) {
-                return view('dashboard._bookmarks_notice_actions', compact('bookmark'));
+                return '<a href="' . route('notices.show', $bookmark->notice_id) . '" class="btn btn-xs legitRipple"><i class="icon-file-text2"></i></a>';
             })
             ->editColumn('name', function($notice) {
                 return link_to_route('notices.show', $notice->name, $notice->id);
@@ -21,7 +21,7 @@ class BookmarksDataTable extends DataTable
 
     public function query()
     {
-        $query = Bookmark::leftJoin('notices', 'notices.id', '=', 'bookmarks.bookmarkable_id')
+        $query = Bookmark::with('bookmarkable')->leftJoin('notices', 'notices.id', '=', 'bookmarks.bookmarkable_id')
             ->where('bookmarks.user_id', $this->user_id)
             ->where('bookmarks.bookmarkable_type', 'App\Notice')
             ->select(

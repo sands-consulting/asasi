@@ -135,13 +135,15 @@ return [
         'submission_saved' => 'Your submission for Notice :number successfully saved.',
         'submission_submitted' => 'Your submission for Notice :number successfully submitted.',
         'eligible' => ':name successfully added to eligible vendors.',
-        'invitation' => 'Vendor successfully invited.'
+        'invitation' => 'Vendor successfully invited.',
+        'bookmarked' => 'Notice was successfully bookmarked.'
     ],
 
     'alerts' => [
         'validation' => 'Please verify all required fields are filled.',
         'eligible' => 'Unable to add vendor as eligible.',
-        'invitation' => 'Unable to invite vendor.'
+        'invitation' => 'Unable to invite vendor.',
+        'bookmark' => 'Unable to bookmark notice.'
     ],
 
     'file-types' => [

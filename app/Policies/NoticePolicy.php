@@ -117,7 +117,7 @@ class NoticePolicy
 
         // Already in Cart
         $items = Cart::search(function ($item, $rowId) {
-                return $item->id === $notice->id;
+            return $item->id === $notice->id;
         });
 
         if($items->count() > 0)
@@ -157,7 +157,6 @@ class NoticePolicy
             return false;
         }
 
-        //
         if($notice->eligibles()->count() > 0 && $notice->eligibles()->whereVendorId($auth->vendor->id)->count() == 0)
         {
             return false;

@@ -83,7 +83,7 @@ class User extends Authenticatable
      */
     public function bookmarks()
     {
-        return $this->morphMany(Bookmark::class, 'bookmarkable');
+        return $this->hasMany(Bookmark::class);
     }
 
     /**
