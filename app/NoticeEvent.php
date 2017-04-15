@@ -21,9 +21,7 @@ class NoticeEvent extends Model
         'schedule_at',
         'location',
         'required',
-        'notice_id',
-        'notice_event_type_id',
-        'status',
+        'type_id',
     ];
 
     protected $attributes = [
