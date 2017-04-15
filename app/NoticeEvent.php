@@ -26,6 +26,10 @@ class NoticeEvent extends Model
         'status',
     ];
 
+    protected $attributes = [
+        'status' => 'active'
+    ];
+
     protected $dates = [
         'schedule_at'
     ];
