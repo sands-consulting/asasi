@@ -12,8 +12,8 @@
                 @forelse($notice->files()->whereIn('type', $fileTypes)->get() as $file)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ trans('notices.file-types.' . $file->type) }}</td>
                     <td>{{ $file->name }}</td>
+                    <td>{{ trans('notices.file-types.' . $file->type) }}</td>
                     <td>{{ $file->upload->size }}</td>
                     <td>
                         <a href="{{ $file->upload->url }}" target="_blank"><i class="icon-file-download"></i></a>
