@@ -19,7 +19,7 @@ class VendorSubmissionsDataTable extends DataTable
             })
             ->editColumn('submitted_at', function ($submission) {
                 return ! is_null($submission->submitted_at)
-                    ? Carbon::parse($submission->submitted_at)->formatDateFromSetting()
+                    ? Carbon::parse($submission->submitted_at)->formatDateTimeFromSetting()
                     : '<span class="icon-cross3"></span>';
             })
             ->addColumn('action', function ($submission) {

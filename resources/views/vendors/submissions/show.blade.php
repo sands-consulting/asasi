@@ -131,7 +131,8 @@
                                         </small>
                                     </p>
                                     <div class="text-right">
-                                        <a :href="getFormUrl(evaluation.submission_details.id, evaluation.submission_exists)">
+                                        <a v-show="submission.status != 'submitted'"
+                                           :href="getFormUrl(evaluation.submission_details.id, evaluation.submission_exists)">
                                             <small>
                                                 {{ trans('submissions.buttons.public.commercial.view') }}
                                                 <i class="icon-arrow-right22"></i>
@@ -140,13 +141,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             <a v-show="submission.status == 'submitted'" href="#"
                                onclick="window.open('{{ route('vendors.submissions.slip', [$vendor->id, $submission->id]) }}', 'Submission Slip', 'location=30, status=1, resizable=1, titlebar=1, width=500, height=860'); return false;"
                                class="btn btn-default btn-block legitRipple submission-btn">
                                 <span class="text-thin">Print Slip</span>
                             </a>
-                            <a v-if="can_submit"
+                            <a v-if="submission.status == 'draft' && can_submit"
                                href="{{ route('vendors.submissions.submit', [$vendor->id, $submission->id]) }}"
                                target="_blank"
                                data-method="POST"
@@ -154,7 +154,8 @@
                                data-confirm="{{ trans('app.confirm-submission') }}">
                                 <span class="text-thin">Submit</span>
                             </a>
-                            <p v-if="! can_submit" class="submission-btn text-danger">Please complete requirement above
+                            <p v-if="submission.status == 'draft' && ! can_submit" class="submission-btn text-danger">
+                                Please complete requirement above
                                 and submit before proceed.</p>
                         </div>
                         <div v-show="loading" class="text-center">
