@@ -269,7 +269,7 @@ class NoticesController extends Controller
 
     public function award(NoticeAwardRequest $request, Notice $notice)
     {
-        $award = NoticeService::award($notice, $request->only('submission_id', 'price', 'period'));
+        $award = NoticeService::award($notice, $request->only('submission_id', 'price', 'period', 'status_award'));
         return redirect(route('admin.notices.show', $notice->id) . '#tab-notice-award')
             ->with('notice', trans('notices.notices.awarded', ['name' => $award->vendor->name]));
     }
