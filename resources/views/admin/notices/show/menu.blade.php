@@ -100,7 +100,7 @@
     <li class="list-group-divider"></li>
 
     <li role="presentation">
-        <a href="#tab-notice-evaluations" class="list-group-item">
+        <a href="#tab-notice-evaluations" class="list-group-item" role="tab" data-toggle="tab" class="list-group-item">
             <i class="icon-stack-check"></i> {{ trans('notices.menu.evaluations') }}
         </a>
     </li>

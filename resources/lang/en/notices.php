@@ -239,6 +239,9 @@ return [
                     'evaluators' => 'Evaluators',
                     'empty' => 'No submission recorded.'
                 ],
+                'evaluations' => [
+                    'empty' => 'No evaluator assigned.'
+                ],
                 'award' => [
                     'select-submission' => 'Please select submission',
                     'submission' => 'Submission',

@@ -26,7 +26,7 @@
                 </tr>
                 <tr v-if="submission.status == 'completed'">
                     <td rowspan="{{ App\EvaluationType::active()->count() + 1 }}" class="bg-slate-300">&nbsp;</td>
-                    <th>{{ trans('submissions.attributes.label') }}</th>
+                    <td>{{ trans('submissions.attributes.label') }}</td>
                     <td colspan="3"><input type="text" class="form-control" v-bind:name="'labels[' + submission.id + ']'" v-model="submission.label"></td>
                 </tr>
                 @foreach(App\EvaluationType::active()->get() as $type)

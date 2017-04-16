@@ -13,6 +13,7 @@ return [
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Last Updated At',
+        'evaluator' => 'Evaluator',
     ],
 
     'buttons' => [

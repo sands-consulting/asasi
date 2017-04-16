@@ -44,10 +44,6 @@ class Submission extends Model
         'submitted_at',
     ];
 
-    /*
-     * Search scopes
-     */
-
     public function scopeSearch($query, $queries = [])
     {
         if (isset($queries['keywords']) && !empty($queries['keywords'])) {
@@ -75,15 +71,6 @@ class Submission extends Model
         }
     }
 
-    public function details($type = null)
-    {
-        $details = $this->hasMany(SubmissionDetail::class);
-        if (!is_null($type))
-            $details->where('type_id', $type);
-
-        return $details;
-    }
-
     public function notice()
     {
         return $this->belongsTo(Notice::class);
@@ -99,75 +86,34 @@ class Submission extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-    public function scores()
-    {
-        return $this->hasMany(EvaluationScore::class)
-            ->where('submission_id', $this->id);
-    }
-
-    public function evaluators()
-    {
-        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluator', 'submission_id', 'evaluator_id')
-            ->withPivot(['status'])
-            ->withTimestamps();
-    }
-
-    public function scoreAverage()
-    {
-      return $this->hasOne(EvaluationScore::class)
-        ->selectRaw('submission_id, avg(score) as score_avg')
-        ->groupBy('submission_id');
-    }
-
-    public function requirements()
-    {
-        return $this->belongsToMany(EvaluationRequirement::class, 'evaluation_scores')
-            ->wherePivot('deleted_at', null)
-            ->withPivot(['score'])
-            ->withTimestamps();
-    }
-
     public function type()
     {
         return $this->belongsTo(EvaluationType::class);
     }
 
-
-    /*
-     * accessors
-     */
-    public function getScoreAvgAttribute()
+    public function evaluations()
     {
-        // if relation is not loaded already, let's do it first
-        if ( ! array_key_exists('scoreAverage', $this->relations)) 
-        $this->load('scoreAverage');
-
-        $related = $this->getRelation('scoreAverage');
-
-        // then return the count directly
-        return ($related) ? (int) $related->score_avg : 0;
+        return $this->hasMany(Evaluation::class);
     }
 
-    public function getNoticeAttribute()
+    public function details($type = null)
     {
-        if (! array_key_exists('purchase', $this->relations)) {
-            $this->load('purchase');
+        $details = $this->hasMany(SubmissionDetail::class);
+        
+        if (!is_null($type))
+        {
+            $details->where('type_id', $type);
         }
 
-        $related = $this->getRelation('purchase');
-
-        return $related ? $related->notice : false;
+        return $details;
     }
-    /**
-     * Helpers
-     */
 
-    public function submitted()
+    public function averageScore($typeId)
     {
-        return $this->status === 'submitted';
+        return (int) $this->evaluations()->whereTypeId($typeId)->avg('score');
     }
 
-    public function getProgress()
+    public function getProgressAttribute()
     {
         $progress = 0;
 
