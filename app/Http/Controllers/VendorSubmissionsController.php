@@ -137,7 +137,7 @@ class VendorSubmissionsController extends Controller
             ->with('notice', trans('notices.notices.submission_saved', ['number' => $submission->notice->number]));
     }
 
-    public function saveSubmission(Request $request, Notice $notice)
+    public function saveSubmission(Request $request, Submission $submission, Notice $notice)
     {
         $input = $request->all();
 
@@ -213,21 +213,21 @@ class VendorSubmissionsController extends Controller
             ->with('notice', trans('notices.notices.submission_saved', ['number' => $notice->number]));
     }
 
-    public function submissionSubmit(Request $request, Submission $submission)
+    public function submit(Request $request, Vendor $vendor, Submission $submission)
     {
-        $submission = SubmissionsService::update($submission, [
+        $submission = SubmissionService::update($submission, [
             'status'       => 'submitted',
             'submitted_at' => \Carbon\Carbon::now(),
         ]);
 
         return redirect()
-            ->route('notices.submission-slip', $submission)
+            ->route('vendors.submissions.slip', [$vendor, $submission])
             ->with('notices', trans('notices.notices.submission_submitted', ['number' => $submission->notice->number]));
     }
 
-    public function slip(Submission $submission)
+    public function slip(Vendor $vendor, Submission $submission)
     {
-        return view('notices.submission-slip', compact('submission'));
+        return view('vendors.submissions.submission-slip', compact('submission'));
     }
 
 }
