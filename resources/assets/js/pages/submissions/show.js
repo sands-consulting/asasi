@@ -1,8 +1,8 @@
 const vm = new Vue({
   el: '#submission-wrapper',
   data: {
+    can_submit: true,
     completed: false,
-    can_submit: false,
     notice: {},
     submission: {},
     loading: false,
@@ -11,12 +11,13 @@ const vm = new Vue({
   mounted: function () {
     this.submission_id = $(this.$el).data('submission');
     this.getNotice();
+    this.getCanSubmit();
     this.loading = true;
   },
   methods: {
     getNotice: function () {
       var self = this;
-      axios.get('/api/vendor-submissions/' + this.submission_id + '/notice')
+      axios.get('/api/vendor-submissions/' + self.submission_id + '/notice')
         .then(function (response) {
           console.log(response.data);
           self.loading = false;
@@ -33,6 +34,12 @@ const vm = new Vue({
       let formUrl = window.location.href + '/details/' + details + '/edit';
       return formUrl;
       // return exists ? formUrl + '/edit' : formUrl + '/create';
+    },
+    getCanSubmit: function () {
+      axios.get('/api/vendor-submissions/' + this.submission_id + '/can-submit')
+        .then(response => {
+          this.can_submit = response.data.status;
+        });
     }
   }
 });

@@ -30,9 +30,16 @@ class VendorSubmissionsController extends Controller
         return response()->json($notice);
     }
 
-    public function get()
+    public function canSubmit(Submission $submission)
     {
-        return;
+        $data['status'] = $submission->details->reduce(function ($carry, $detail) {
+            if ($detail->status != 'completed') {
+                $carry = false;
+            }
+            return $carry;
+        }, true);
+
+        return response()->json($data);
     }
 
     /**

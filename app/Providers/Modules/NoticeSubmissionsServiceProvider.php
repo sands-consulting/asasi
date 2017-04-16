@@ -40,6 +40,9 @@ class NoticeSubmissionsServiceProvider extends ServiceProvider
                 $router->put('vendors/{vendor}/submissions/{submission}/details/{submission_detail}',
                     'VendorSubmissionsController@update')
                     ->name('vendors.submissions.update');
+                $router->post('vendors/{vendor}/submissions/{submission}',
+                    'VendorSubmissionsController@submit')
+                    ->name('vendors.submissions.submit');
                 $router->resource('vendors.submissions', 'VendorSubmissionsController', [
                     'except' => ['destroy', 'update'],
                 ]);
@@ -57,6 +60,7 @@ class NoticeSubmissionsServiceProvider extends ServiceProvider
         ], function ($router) {
             $router->get('vendor-submissions/{submission}/notice', 'VendorSubmissionsController@getNotice');
             $router->get('vendor-submissions/{submission}/submission', 'VendorSubmissionsController@getSubmission');
+            $router->get('vendor-submissions/{submission}/can-submit', 'VendorSubmissionsController@canSubmit');
         });
     }
 }

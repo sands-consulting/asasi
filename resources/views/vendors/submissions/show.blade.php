@@ -146,14 +146,14 @@
                                class="btn btn-default btn-block legitRipple submission-btn">
                                 <span class="text-thin">Print Slip</span>
                             </a>
-                            {{--<a --}}
-                            {{--href="{{ route('vendors.submissions.submit', $submission->id) }}"--}}
-                            {{--target="_blank"--}}
-                            {{--data-method="POST"--}}
-                            {{--class="btn btn-primary btn-block legitRipple submission-btn"--}}
-                            {{--data-confirm="{{ trans('app.confirm-submission') }}" --}}
-                            {{--<span class="text-thin">Submit</span>--}}
-                            {{--</a>--}}
+                            <a v-if="can_submit"
+                               href="{{ route('vendors.submissions.submit', [$vendor->id, $submission->id]) }}"
+                               target="_blank"
+                               data-method="POST"
+                               class="btn btn-primary btn-block legitRipple submission-btn"
+                               data-confirm="{{ trans('app.confirm-submission') }}">
+                                <span class="text-thin">Submit</span>
+                            </a>
                             <p v-if="! can_submit" class="submission-btn text-danger">Please complete requirement above
                                 and submit before proceed.</p>
                         </div>
