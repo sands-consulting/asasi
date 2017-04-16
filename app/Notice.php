@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\DateAccessor;
 use Carbon\Carbon;
+use function Clue\StreamFilter\fun;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -259,12 +260,18 @@ class Notice extends Model
     {
         $purchase   = $this->purchases()->firstOrCreate(['vendor_id' => $payer->id]);
         $submission = $this->settings()->whereKey('submission')->first();
+        $evaluationSettings = $this->evaluationSettings;
 
         if($submission && !!$submission->value)
         {
-            $submission = $this->submissions()->firstOrCreate(['vendor_id' => $payer->id]);
+            $submission = $this->submissions()->firstOrNew(['vendor_id' => $payer->id]);
             $submission->purchase_id = $purchase->id;
             $submission->save();
+
+            foreach ($evaluationSettings as $settings) {
+                $details['type_id'] = $settings['type_id'];
+                $submission->details()->create($details);
+            }
         }
 
         return $this;

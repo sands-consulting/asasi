@@ -22,6 +22,7 @@ class Submission extends Model
         'price',
         'notice_id',
         'vendor_id',
+        'purchase_id',
         'status',
         'submitted_at',
     ];

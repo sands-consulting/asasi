@@ -34,9 +34,6 @@ class NoticeSubmissionsServiceProvider extends ServiceProvider
                 $router->model('submission_detail', SubmissionDetail::class);
                 $router->get('vendors/{vendor}/submissions/{submission}/slip', 'VendorSubmissionsController@slip')
                     ->name('vendors.submissions.slip');
-                $router->get('vendors/{vendor}/submissions/{submission}/details/{submission_detail}/create',
-                    'VendorSubmissionsController@create')
-                    ->name('vendors.submissions.create');
                 $router->get('vendors/{vendor}/submissions/{submission}/details/{submission_detail}/edit',
                     'VendorSubmissionsController@edit')
                     ->name('vendors.submissions.edit');

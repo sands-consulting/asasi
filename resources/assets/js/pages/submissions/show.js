@@ -29,8 +29,8 @@ const vm = new Vue({
     getDetailStatus: function () {
       return this.submission.details
     },
-    getFormUrl: function (type, exists) {
-      let formUrl = window.location.href + '/details/' + type + '/edit';
+    getFormUrl: function (details, exists) {
+      let formUrl = window.location.href + '/details/' + details + '/edit';
       return formUrl;
       // return exists ? formUrl + '/edit' : formUrl + '/create';
     }

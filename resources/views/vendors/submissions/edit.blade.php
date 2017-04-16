@@ -24,13 +24,16 @@
                     <tr>
                         <td>
                             @if ($requirement->field_type == 'file')
-                                @if ($requirement->items->files()->first())
+                                @if ($requirement->items && $requirement->items->files()->first())
                                     <a href="{{ $requirement->items->files()->orderBy('id', 'desc')->first()->url }}"
                                        target="_blank"><span class="icon-file-download2"></span></a>
                                 @endif
                             @else
                                 @php
-                                    $checked = $requirement->items->value == 1 ? 'checked="checked"' : false;
+                                    $checked = false;
+                                    if ($requirement->items) {
+                                        $checked = $requirement->items->value == 1 ? 'checked="checked"' : false;
+                                    }
                                 @endphp
                                 <input type="checkbox" name="value[{{ $requirement->id }}]" value="1" {{ $checked }}>
                             @endif
