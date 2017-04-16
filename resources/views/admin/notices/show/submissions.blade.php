@@ -39,7 +39,7 @@
                             })->whereHas('organizations', function($query) use($notice) {
                                 $query->whereId($notice->organization_id);
                             })->get() as $user)
-                            <option value="{{ $user->id }}" @if(in_array($user->id, $notice->evaluators)) selected="selected" @endif>{{ $user->name }}</option>
+                            <option value="{{ $user->id }}" @if(in_array($user->id, $notice->evaluators($type->id))) selected="selected" @endif>{{ $user->name }}</option>
                             @endforeach
                         </select>
                         </select>

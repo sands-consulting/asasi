@@ -246,9 +246,17 @@ class Notice extends Model
         return sprintf("%s - %s\n%s", $this->organization->name, $this->number, $this->name);
     }
 
-    public function getEvaluatorsAttribute()
+    public function evaluators($typeId=null)
     {
-        return $this->evaluations()->whereIn('status', ['pending', 'active', 'completed'])->pluck('user_id')->toArray();
+        $query = $this->evaluations()->whereIn('status', ['pending', 'active', 'completed']);
+
+        if($typeId)
+        {
+            $query = $query->whereTypeId($typeId);
+        }
+
+        $query = $query->pluck('user_id')->toArray();
+        return $query;
     }
     
     /*
