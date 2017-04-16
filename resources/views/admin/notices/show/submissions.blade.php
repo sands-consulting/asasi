@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="tab-notice-submissions">
-    <form action="{{ route('admin.notices.submissions', $notice->id) }}" method="POST" id="form-submissions" class="panel panel-flat" v-cloak>
+    <form action="{{ route('admin.notices.submissions', $notice->id) }}" method="POST" id="form-submissions" class="panel panel-flat panel-form" v-cloak>
         {{ csrf_field() }}
         <table class="table">
             <thead>
@@ -47,11 +47,6 @@
                 </tr>
                 @endforeach
                 </template>
-                <tr v-if="submissions.length > 0">
-                    <td colspan="6" align="center">
-                        <a href="#" @click.prevent="save"><i class="icon-floppy-disk"></i> {{ trans('actions.save') }}</a>
-                    </td>
-                </tr>
                 <tr v-if="submissions.length == 0">
                     <td colspan="6" align="center">
                         {{ trans('notices.views.admin.show.submissions.empty') }}
@@ -59,5 +54,13 @@
                 </tr>
             </tbody>
         </table>
+        <div class="panel-footer" v-if="submissions.length > 0">
+            <a href="#" @click.prevent="save" class="btn bg-blue-700 pull-right">{{ trans('actions.save') }}</a>
+            <select id="status_submission" name="status_submission" class="form-control pull-right">
+                <option selected="selected" disabled>{{ trans('notices.attributes.status') }}</option>
+                <option value="published" @if($notice->status_submission == 'published') selected="selected" @endif>{{ trans('statuses.published') }}</option>
+                <option value="pending" @if($notice->status_submission == 'pending') selected="selected" @endif>{{ trans('statuses.pending') }}</option>
+            </select>
+        </div>
     </form>
 </div>

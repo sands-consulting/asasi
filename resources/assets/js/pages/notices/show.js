@@ -156,6 +156,14 @@ $(document).ready(function(){
               width: '100%'
             });
           });
+
+          $(submissionsEl + ' #status_submission').each(function() {
+            $(this).select2({
+              containerCssClass: 'bg-blue-700',
+              dropdownCssClass: 'bg-blue-700',
+              width: '250px'
+            });
+          });
         });
       },
       methods: {

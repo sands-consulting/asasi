@@ -259,6 +259,8 @@ class NoticesController extends Controller
     {
         SubmissionService::labels($notice, $request->input('labels', []));
         SubmissionService::evaluators($notice, $request->input('evaluators', []));
+        $notice->status_submission = $request->input('status_submission', 'pending');
+        $notice->save();
 
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)) . '#tab-notice-submissions')
