@@ -9,12 +9,10 @@
         </div>
         <table class="table">
             <tr>
-                <td class="col-xs-3">{{ trans('submissions.attributes.number') }}</td>
-                <td>{{ $submission->number }}</td>
-            </tr>
-            <tr>
-                <td>{{ trans('submissions.attributes.price') }}</td>
-                <td>{{ setting('currency') }} {{ $submission->price }}</td>
+                <th class="col-xs-3">{{ trans('submissions.attributes.number') }}</td>
+                <td class="col-xs-3">{{ $submission->number }}</td>
+                <th class="col-xs-3">{{ trans('submissions.attributes.price') }}</th>
+                <td class="col-xs-3">{{ setting('currency') }} {{ $submission->price }}</td>
             </tr>
         </table>
         <table class="table">
