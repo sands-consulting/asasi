@@ -74,50 +74,53 @@ class VendorSubmissionsController extends Controller
 
         // Fixme: Temp solutions
         $requirements->map(function ($requirement) use ($input, $detail, $request) {
-            $data['value'] = null;
+            $requirement->incomplete = false;
 
-            $item = SubmissionItem::where('requirement_id', $requirement->id)->first();
+            $item = SubmissionItem::firstOrNew([
+                'requirement_id' => $requirement->id,
+                'detail_id'      => $detail->id,
+            ]);
 
-            if (! $requirement->require_file) {
+            if ($requirement->field_type == 'checkbox') {
                 if (isset($input['value'][$requirement->id])) {
-                    $data['value'] = $input['value'][$requirement->id];
+                    $item->value = $input['value'][$requirement->id];
+                } else {
+                    $item->value = null;
+                }
+            } elseif ($requirement->field_type == 'file') {
+                if ($request->hasFile('file.' . $requirement->id)) {
+                    SubmissionItemService::files(
+                        $item,
+                        $request->file('file.' . $requirement->id)
+                    );
+                    $item->value = 1;
+                } elseif ($item->upload) {
+                    $item->value = 1;
                 }
             }
 
-            if (! $item) {
-                $data['requirement_id'] = $requirement->id;
-                $data['detail_id'] = $detail->id;
+            $item->save();
 
-                $item = SubmissionItemService::create(new SubmissionItem, $data);
-            } else {
-                if ($requirement->field_type == 'file') {
-                    if ($request->hasFile('file.' . $requirement->id)) {
-                        SubmissionItemService::files(
-                            $item,
-                            $request->file('file.' . $requirement->id)
-                        );
-                        $data['value'] = 1;
-                    }
-                }
-                $item = SubmissionItemService::update($item, $data);
-            }
-
-            if ($requirement->field_required == 1 && $item->value == null) {
+            if ($requirement->field_required && $item->value != 1) {
                 $requirement->incomplete = true;
             }
 
         }, null);
 
-        foreach ($requirements as $requirement) {
-            if (! $requirement->incomplete) {
-                SubmissionDetailService::update($detail, [
-                    'completed_at' => Carbon::now(),
-                    'status'       => 'completed',
-                ]);
+        //Fixme: find better solutions
+        $completed = $requirements->reduce(function ($carry, $requirement) {
+            if ($requirement->incomplete) {
+                $carry = false;
             }
-        }
-        // update submission detail status
+            return $carry;
+        }, true);
 
+        $status = $completed ? 'completed' : 'incomplete';
+
+        SubmissionDetailService::update($detail, [
+            'completed_at' => Carbon::now(),
+            'status'       => $status,
+        ]);
 
         return redirect()
             ->route('vendors.submissions.show', [$vendor->id, $submission->id])

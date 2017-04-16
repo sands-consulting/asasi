@@ -90,9 +90,9 @@
                             <div class="col-md-12">
                                 <div class="text-muted">{{ trans('notices.attributes.description') }}</div>
                                 <div class="form-control-static">
-                                    {{ !empty($submission->notice->description)
+                                    {!! !empty($submission->notice->description)
                                         ? nl2br($submission->notice->description)
-                                        : 'N/A' }}
+                                        : 'N/A' !!}
                                 </div>
                             </div>
                             <div class="col-md-12">
