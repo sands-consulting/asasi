@@ -146,7 +146,7 @@
                                class="btn btn-default btn-block legitRipple submission-btn">
                                 <span class="text-thin">Print Slip</span>
                             </a>
-                            <a v-if="submission.status == 'pending' && can_submit"
+                            <a v-if="submission.status == 'draft' && can_submit"
                                href="{{ route('vendors.submissions.submit', [$vendor->id, $submission->id]) }}"
                                target="_blank"
                                data-method="POST"
@@ -154,7 +154,7 @@
                                data-confirm="{{ trans('app.confirm-submission') }}">
                                 <span class="text-thin">Submit</span>
                             </a>
-                            <p v-if="submission.status == 'pending' && ! can_submit" class="submission-btn text-danger">
+                            <p v-if="submission.status == 'draft' && ! can_submit" class="submission-btn text-danger">
                                 Please complete requirement above
                                 and submit before proceed.</p>
                         </div>
