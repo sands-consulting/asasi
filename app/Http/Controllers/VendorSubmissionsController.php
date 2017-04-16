@@ -7,6 +7,7 @@ use App\EvaluationType;
 use App\Libraries\Carbon;
 use App\Notice;
 use App\Services\SubmissionItemService;
+use App\Services\SubmissionService;
 use App\Submission;
 use App\SubmissionDetail;
 use App\Services\NoticesService;
@@ -107,7 +108,6 @@ class VendorSubmissionsController extends Controller
 
         }, null);
 
-        //Fixme: find better solutions
         $completed = $requirements->reduce(function ($carry, $requirement) {
             if ($requirement->incomplete) {
                 $carry = false;
@@ -116,6 +116,16 @@ class VendorSubmissionsController extends Controller
         }, true);
 
         $status = $completed ? 'completed' : 'incomplete';
+
+        if ($request->has('price')) {
+            $submissionData['price'] = $request->get('price');
+        }
+
+        if ($request->has('duration')) {
+            $submissionData['duration'] = $request->get('duration');
+        }
+
+        SubmissionService::update($submission, $submissionData);
 
         SubmissionDetailService::update($detail, [
             'completed_at' => Carbon::now(),

@@ -20,6 +20,7 @@ class Submission extends Model
         'number',
         'label',
         'price',
+        'duration',
         'notice_id',
         'vendor_id',
         'purchase_id',

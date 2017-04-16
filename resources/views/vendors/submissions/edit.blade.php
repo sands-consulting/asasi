@@ -20,9 +20,38 @@
                 </tr>
                 </thead>
                 <tbody>
+                {{-- Commercial --}}
+                @if ($detail->type_id == 1)
+                    <tr>
+                        <td style="width: 20%;">
+
+                        </td>
+                        <td>
+                            Price offer by {{ Auth::user()->vendor->name }} :
+                            {!! Former::inline_text('price')
+                                ->label(false)
+                                ->prepend(\App\Setting::whereKey('currency')->first()->value)
+                                ->required() !!}
+                        </td>
+                    </tr>
+                @endif
+                {{-- Technical --}}
+                @if ($detail->type_id == 2)
+                    <tr>
+                        <td style="width: 20%;">
+
+                        </td>
+                        <td>
+                            Project duration proposed by {{ Auth::user()->vendor->name }} :
+                            {!! Former::text('duration')
+                                ->label(false)
+                                ->required() !!}
+                        </td>
+                    </tr>
+                @endif
                 @foreach ($requirements as $requirement)
                     <tr>
-                        <td>
+                        <td class="text-center">
                             @if ($requirement->field_type == 'file')
                                 @if ($requirement->items && $requirement->items->files()->first())
                                     <a href="{{ $requirement->items->files()->orderBy('id', 'desc')->first()->url }}"

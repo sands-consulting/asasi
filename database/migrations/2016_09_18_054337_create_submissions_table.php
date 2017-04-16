@@ -15,7 +15,7 @@ class CreateSubmissionsTable extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
-            $table->decimal('price')->nullable();
+            $table->decimal('price', 22, 2)->nullable();
             $table->unsignedInteger('notice_id');
             $table->unsignedInteger('vendor_id');
             $table->string('status')->index();
