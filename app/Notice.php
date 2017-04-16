@@ -194,13 +194,6 @@ class Notice extends Model
         return $this->hasMany(NoticeEvaluation::class);
     }
 
-    public function evaluators()
-    {
-        return $this->belongsToMany(User::class, 'notice_evaluator')
-            ->withPivot(['type_id', 'status'])
-            ->withTimestamps();
-    }
-
     public function bookmarks()
     {
         return $this->morphMany(Bookmark::class, 'bookmarkable');
@@ -226,6 +219,11 @@ class Notice extends Model
         return $this->hasOne(NoticeAward::class);
     }
 
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
+
     public function getTaxAttribute()
     {
         if($this->taxCode)
@@ -246,6 +244,11 @@ class Notice extends Model
     public function getTransactionLineDescriptionAttribute()
     {
         return sprintf("%s - %s\n%s", $this->organization->name, $this->number, $this->name);
+    }
+
+    public function getEvaluatorsAttribute()
+    {
+        return $this->evaluations()->whereIn('status', ['pending', 'active', 'completed'])->pluck('user_id')->toArray();
     }
     
     /*

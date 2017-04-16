@@ -32,6 +32,11 @@ class AsasiSeeder extends Seeder
         DB::table('users')->truncate();
         DB::table('tax_codes')->truncate();
 
+        OrganizationService::create(new Organization, [
+            'name' => 'ACME Inc.',
+            'short_name' => 'ACME'
+        ]);
+
         $users = [
             [
                 'name'      => 'Super Admin',
@@ -51,12 +56,8 @@ class AsasiSeeder extends Seeder
 
             $user = UserService::create(new User(), $userData);
             $user->roles()->sync(Role::whereIn('name', $roles)->pluck('id')->toArray());
+            $user->organizations()->attach(Organization::first());
         }
-
-        OrganizationService::create(new Organization, [
-            'name' => 'ACME Inc.',
-            'short_name' => 'ACME'
-        ]);
 
         $taxes = [
             [

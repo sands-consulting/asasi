@@ -11,13 +11,11 @@ class Evaluation extends Model
     use RevisionableTrait,
         SoftDeletes;
 
-    protected $table = 'notice_evaluator';
-
     protected $revisionCreationsEnabled = true;
 
     protected $fillable = [
         'remarks',
-        'total_score'
+        'total_score',
         'notice_id',
         'submission_id',
         'type_id',

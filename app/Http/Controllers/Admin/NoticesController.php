@@ -19,6 +19,7 @@ use App\Http\Requests\NoticeRequest;
 use App\Http\Requests\NoticeAwardRequest;
 use App\Services\NoticeService;
 use App\Services\ProjectService;
+use App\Services\SubmissionService;
 use App\Services\UserHistoryService;
 use Auth;
 use Illuminate\Http\Request;
@@ -86,7 +87,7 @@ class NoticesController extends Controller
     public function show(Notice $notice)
     {
         JavaScript::put([
-            'submissions' => $notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('submitted_at')->get()
+            'submissions' => $notice->submissions()->with('vendor')->orderBy('label')->orderBy('submitted_at')->get()
         ]);
         return view('admin.notices.show', compact('notice'));
     }
@@ -252,6 +253,16 @@ class NoticesController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)) . '#tab-notice-invitations')
             ->with('notice', trans('notices.notices.invitation'));
+    }
+
+    public function submissions(Request $request, Notice $notice)
+    {
+        SubmissionService::labels($notice, $request->input('labels', []));
+        SubmissionService::evaluators($notice, $request->input('evaluators', []));
+
+        return redirect()
+            ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)) . '#tab-notice-submissions')
+            ->with('notice', trans('notices.notices.submissions'));
     }
 
     public function award(NoticeAwardRequest $request, Notice $notice)

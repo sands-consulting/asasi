@@ -116,11 +116,8 @@ return [
         'purchases' => 'Purchases',
         'submissions' => 'Submissions',
         
-        'evaluators' => 'Evaluators',
         'evaluations' => 'Evaluations',
         'award' => 'Award',
-
-        'settings' => 'Settings',
     ],
 
     'notices' => [
@@ -136,7 +133,9 @@ return [
         'submission_submitted' => 'Your submission for Notice :number successfully submitted.',
         'eligible' => ':name successfully added to eligible vendors.',
         'invitation' => 'Vendor successfully invited.',
-        'bookmarked' => 'Notice was successfully bookmarked.'
+        'bookmarked' => 'Notice was successfully bookmarked.',
+        'submissions' => 'Submissions was successfully saved.',
+        'awarded' => 'Award was successfully saved.'
     ],
 
     'alerts' => [
@@ -237,6 +236,7 @@ return [
                     'empty' => 'No notice purchase.'
                 ],
                 'submissions' => [
+                    'evaluators' => 'Evaluators',
                     'empty' => 'No submission recorded.'
                 ],
                 'award' => [

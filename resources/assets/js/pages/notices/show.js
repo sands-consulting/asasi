@@ -1,7 +1,8 @@
-
-
+$(document).ready(function(){
+  
   var eligibleEl = '#modal-eligible';
 
+  if($(eligibleEl).length > 0 ) {
     const vmEligible = new Vue({
       el: eligibleEl,
       data: {
@@ -51,23 +52,18 @@
               return $(selectField).data('placeholder');
             }
 
-            console.log(repo);
-
             return repo.registration_number + " - " + repo.name;
           }
         }).on('select2:select', function(event) {
           _vm.vendorId = event.params.data.id;
         });
-      },
-      methods: {
-        onFileChanged: function(event) {
-          console.log(event.target);
-        }
       }
     });
+  }
 
   var invitationEl = '#modal-invitation';
 
+  if($(invitationEl).length > 0) {
     const vmInvitation = new Vue({
       el: invitationEl,
       data: {
@@ -116,18 +112,56 @@
               return $(selectField).data('placeholder');
             }
 
-            console.log(repo);
-
             return repo.registration_number + " - " + repo.name;
           }
         }).on('select2:select', function(event) {
           _vm.vendorIds.push(event.params.data.id);
         });
+      }
+    });
+  }
+});
+
+
+
+ var submissionsEl = '#form-submissions';
+
+  if($(submissionsEl).length > 0 ) {
+    const vmSubmissions = new Vue({
+      el: submissionsEl,
+      data: {
+        submissions: []
+      },
+      mounted: function() {
+        if('submissions' in window) {
+          for(var i = 0; i < window.submissions.length; i++) {
+            data = window.submissions[i];
+            data.price = numeral(data.price);
+
+            if(data.submitted_at) {
+              data.submitted_at = moment(data.submitted_at);
+            } else {
+              data.submitted_at = null;
+            }
+
+            this.submissions.push(data);
+          }
+        }
+
+        this.$nextTick(function() {
+          $(submissionsEl + ' select.evaluators').each(function() {
+            $(this).select2({
+              containerCssClass: 'bg-slate-300',
+              dropdownCssClass: 'bg-slate-300',
+              width: '100%'
+            });
+          });
+        });
       },
       methods: {
-        onFileChanged: function(event) {
-          console.log(event.target);
+        save: function() {
+          $(this.$el).submit();
         }
       }
     });
-
+  }

@@ -25,4 +25,56 @@ class SubmissionService extends BaseService {
 
         return $requirementData->pluck('id') == $detailsData->pluck('requirement_id');
     }
+
+    public static function labels(Notice $notice, $inputs)
+    {
+        foreach($inputs as $submissionId => $label)
+        {
+            $submission = $notice->submissions()->find($submissionId);
+
+            if($submission)
+            {
+                $submission->label = $label;
+                $submission->save();
+            }
+        }
+    }
+
+    public static function evaluators(Notice $notice, $inputs)
+    {
+        $active = [];
+
+        foreach($inputs as $submissionId => $data)
+        {
+            $submission = $notice->submissions()->find($submissionId);
+
+            if(!$submission)
+            {
+                continue;
+            }
+
+            foreach($data as $typeId => $userIds)
+            {
+                foreach($userIds as $userId)
+                {
+                    $evaluation = $notice->evaluations()->firstOrCreate([
+                        'type_id' => $typeId,
+                        'user_id' => $userId,
+                        'submission_id' => $submissionId
+                    ]);
+
+                    if(!in_array($evaluation->status, ['pending', 'active']))
+                    {
+                        $evaluation->status = 'pending';
+                    }
+
+                    $evaluation->save();
+
+                    $active[] = $evaluation->id;
+                }
+            }
+        }
+
+        $notice->evaluations()->whereNotIn('id', $active)->update(['status' => 'cancelled']);
+    }
 }

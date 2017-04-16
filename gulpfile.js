@@ -74,6 +74,7 @@ elixir(function(mix) {
         '../../../node_modules/select2/dist/js/select2.full.js',
         '../../../node_modules/frappe-gantt/dist/frappe-gantt.min.js',
         '../../../node_modules/snapsvg/dist/snap.svg-min.js',
+        '../../../node_modules/numeral/numeral.js',
         'vendor/d3.min.js',
         'vendor/c3.min.js',
         'vendor/switchery.min.js',
