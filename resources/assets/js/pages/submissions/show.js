@@ -21,7 +21,8 @@ const vm = new Vue({
         .then(function (response) {
           console.log(response.data);
           self.loading = false;
-          self.notice = response.data;
+          self.notice = response.data.notice;
+          self.submission = response.data.submission;
         })
         .catch(function (error) {
           console.log(error);

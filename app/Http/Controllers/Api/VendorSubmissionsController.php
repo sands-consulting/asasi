@@ -27,7 +27,10 @@ class VendorSubmissionsController extends Controller
             return $evaluation;
         });
 
-        return response()->json($notice);
+        return response()->json([
+            'notice'     => $notice,
+            'submission' => $submission,
+        ]);
     }
 
     public function canSubmit(Submission $submission)
