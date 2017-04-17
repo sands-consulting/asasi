@@ -15,10 +15,18 @@ class ReportsServiceProvider extends ServiceProvider
     {
          app('router')->group([
             'namespace' => 'App\Http\Controllers\Reports',
-            'middleware' => 'web'
+            'middleware' => ['web', 'auth']
         ], function ($router) {
-            $router->get('reports', 'HomeController@index')
-                ->name('reports');
+            $router->get('reports', function() {
+                return view('reports.index');
+            })->name('reports');
+
+            $router->group([
+                'prefix' => 'reports',
+                'as' => 'reports.'
+            ], function($router) {
+
+            });
         });
     }
 }

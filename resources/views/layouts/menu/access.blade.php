@@ -1,6 +1,6 @@
 @if(Auth::user())
-@if(is_path('admin*'))
 
+@if(is_path('admin*'))
 
     <li>
         <a href="{{ route('root') }}"><i class="icon-atom2"></i> {{ trans('menu.access.portal') }}</a>
@@ -8,7 +8,7 @@
 
     @if(Auth::user()->hasPermission('access:reports'))
     <li>
-        <a href="{{ route('admin') }}"><i class="icon-file-text"></i> {{ trans('menu.access.reports') }}</a>
+        <a href="{{ route('reports') }}"><i class="icon-file-text"></i> {{ trans('menu.access.reports') }}</a>
     </li>
     @endif
 
@@ -20,7 +20,22 @@
 
 @elseif(is_path('reports*'))
 
+    <li>
+        <a href="{{ route('root') }}">{{ trans('menu.access.portal') }}</a>
+    </li>
+
     
+    @if(Auth::user()->hasPermission('access:administration'))
+    <li>
+        <a href="{{ route('admin') }}">{{ trans('menu.access.administration') }}</a>
+    </li>
+    @endif
+
+    @if(Auth::user()->hasPermission('access:settings'))
+    <li>
+        <a href="{{ route('settings') }}">{{ trans('menu.access.settings') }}</a>
+    </li>
+    @endif
 
 @else
     @if(Auth::user()->hasPermission('access:vendor'))
@@ -39,15 +54,15 @@
 
     @endif
 
-    @if(Auth::user()->hasPermission('access:administration'))
-    <li>
-        <a href="{{ route('admin') }}">{{ trans('menu.access.administration') }}</a>
-    </li>
-    @endif
-
     @if(Auth::user()->hasPermission('access:reports'))
     <li>
         <a href="{{ route('reports') }}">{{ trans('menu.access.reports') }}</a>
+    </li>
+    @endif
+
+    @if(Auth::user()->hasPermission('access:administration'))
+    <li>
+        <a href="{{ route('admin') }}">{{ trans('menu.access.administration') }}</a>
     </li>
     @endif
 
