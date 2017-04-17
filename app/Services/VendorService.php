@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Address;
+use App\NoticePurchase;
 use App\Package;
 use App\QualificationCode;
 use App\QualificationType;
@@ -318,5 +319,16 @@ class VendorService extends BaseService
         }
 
         $vendor->shareholders()->whereNotIn('id', $exists)->delete();
+    }
+
+    public static function purchaseCount($limit = null)
+    {
+        $purchases = \DB::table('notice_purchases')
+            ->selectRaw('vendors.name as vendor_name, count(notice_id) as purchases')
+            ->leftJoin('vendors', 'vendors.id', '=', 'notice_purchases.vendor_id')
+            ->groupBy('vendor_id', 'vendors.name')
+            ->get();
+
+        return $purchases->take($limit);
     }
 }
