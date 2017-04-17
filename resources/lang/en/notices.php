@@ -237,10 +237,11 @@ return [
                 ],
                 'submissions' => [
                     'evaluators' => 'Evaluators',
-                    'empty' => 'No submission recorded.'
+                    'empty' => 'No submission recorded.',
+                    'select-evaluator' => 'Search user to assign as evaluator'
                 ],
                 'evaluations' => [
-                    'empty' => 'No evaluator assigned.'
+                    'empty' => 'No evaluator assigned.',
                 ],
                 'award' => [
                     'select-submission' => 'Please select submission',

@@ -120,12 +120,8 @@ $(document).ready(function(){
       }
     });
   }
-});
 
-
-
- var submissionsEl = '#form-submissions';
-
+  var submissionsEl = '#form-submissions';
   if($(submissionsEl).length > 0 ) {
     const vmSubmissions = new Vue({
       el: submissionsEl,
@@ -173,3 +169,4 @@ $(document).ready(function(){
       }
     });
   }
+});

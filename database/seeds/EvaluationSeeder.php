@@ -3,6 +3,7 @@
 use App\Permission;
 use App\EvaluationType;
 use App\EvaluationRequirement;
+use App\Organization;
 use App\Role;
 use App\User;
 use App\Services\EvaluationTypeService;
@@ -53,6 +54,7 @@ class EvaluationSeeder extends Seeder
 
             $user = UserService::create(new User(), $userData);
             $user->roles()->sync(Role::whereIn('name', $roles)->pluck('id')->toArray());
+            $user->organizations()->attach(Organization::first());
         }
 
         // Evaluation Type Data
