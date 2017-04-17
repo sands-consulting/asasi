@@ -4,7 +4,7 @@
 
 <!-- start: vendor register & top purchaser -->
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h6 class="panel-title text-uppercase">{{ strtoupper(trans('dashboard.views.vendors.panels.registration_status')) }}</h6>
@@ -12,12 +12,12 @@
 
             <div class="panel-body">
                 <div class="chart-container">
-                    <div class="chart eq-element" id="c3-area-chart"></div>
+                    <div class="chart eq-element" id="c3-bar-chart"></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="panel panel-flat" style="height: 390px">
             <div class="panel-heading">
                 <h6 class="panel-title text-uppercase">{{ trans('dashboard.views.vendors.panels.top_purchaser') }}</h6>
@@ -35,14 +35,14 @@
                             <li class="media">
                                 <div class="media-left">
                                     <a href="#" class="btn bg-primary-400 btn-rounded btn-icon legitRipple">
-                                        <span class="letter-icon">{{ get_initial($topPurchaser->name) }}</span>
+                                        <span class="letter-icon">{{ get_initial($topPurchaser->vendor_name) }}</span>
                                     </a>
                                 </div>
 
                                 <div class="media-body">
                                     <div class="pt-10">
-                                        {{ $topPurchaser->name }}
-                                        <span class="label bg-grey-300 pull-right">{{ $topPurchaser->notices->count() }}</span>
+                                        {{ $topPurchaser->vendor_name }}
+                                        <span class="label bg-grey-300 pull-right">{{ $topPurchaser->purchases }}</span>
                                     </div>
                                 </div>
                             </li>
@@ -55,41 +55,41 @@
         </div>
     </div>
 </div>
-<!-- end: login activity & last login -->
+<!-- end: vendor register & top purchaser -->
 <div class="datatable-filter">
     <div class="row">
         <div class="col-xs-12 col-md-3">
-            <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box bg-white border border-bottom-primary" 
-                data-filter="all"
-                data-color="primary">
+            <a @click.prevent="handle_dashboard($event)"
+               class="prompt-box bg-white border border-bottom-primary"
+               data-filter="all"
+               data-color="primary">
                 <div class="title"><i class="icon-users"></i> All</div>
                 <div class="number text-primary">{{ App\Vendor::count() }}</div>
             </a>
         </div>
         <div class="col-xs-12 col-md-3">
-            <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box bg-white border border-bottom-success" 
-                data-filter="active"
-                data-color="success">
+            <a @click.prevent="handle_dashboard($event)"
+               class="prompt-box bg-white border border-bottom-success"
+               data-filter="active"
+               data-color="success">
                 <div class="title"><i class="icon-user"></i> Active</div>
                 <div class="number text-success">{{ App\Vendor::active()->count() }}</div>
             </a>
         </div>
         <div class="col-xs-12 col-md-3">
-            <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box bg-white border border-bottom-warning" 
-                data-filter="inactive"
-                data-color="warning">
+            <a @click.prevent="handle_dashboard($event)"
+               class="prompt-box bg-white border border-bottom-warning"
+               data-filter="inactive"
+               data-color="warning">
                 <div class="title"><i class="icon-user"></i> Inactive</div>
                 <div class="number text-warning">{{ App\Vendor::inactive()->count() }}</div>
             </a>
         </div>
         <div class="col-xs-12 col-md-3">
-            <a href="#" @click.prevent="handle_dashboard($event)" 
-                class="prompt-box bg-white border border-bottom-danger" 
-                data-filter="blacklisted"
-                data-color="danger">
+            <a @click.prevent="handle_dashboard($event)"
+               class="prompt-box bg-white border border-bottom-danger"
+               data-filter="blacklisted"
+               data-color="danger">
                 <div class="title"><i class="icon-user"></i> Blacklisted</div>
                 <div class="number text-danger">{{ App\Vendor::blacklisted()->count() }}</div>
             </a>
@@ -111,5 +111,6 @@
 @endsection
 
 @section('scripts')
-{!! $dataTable->scripts() !!}
+    {!! $dataTable->scripts() !!}
+    <script src="{{ asset('assets/js/pages/dashboard/vendor.js') }}"></script>
 @endsection

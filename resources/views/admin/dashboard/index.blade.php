@@ -14,25 +14,27 @@
             
             <div class="heading-elements">
                 <div class="heading-btn-group">
-                    @if(Auth::user() &&  Auth::user()->hasPermission('access:admin'))
-                    <a href="{{ route('admin.dashboard.user') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/user') }}">
+                    {{--@can('user')--}}
+                    <a href="{{ route('admin.dashboard.user') }}"
+                       class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/user') }}">
                         <i class="icon-user text-primary-700"></i> <span>USER</span>
                     </a>
-                    @endif
-                    @if(Auth::user() && (Auth::user()->hasPermission('access:vendor') || Auth::user()->hasPermission('access:admin')))
-                    <a href="{{ route('admin.dashboard.vendor') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/vendor') }}">
+                    {{--@endcan--}}
+                    {{--@can('vendor')--}}
+                    <a href="{{ route('admin.dashboard.vendor') }}"
+                       class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/vendor') }}">
                         <i class="icon-office text-primary-700"></i> <span>VENDOR</span>
                     </a>
-                    @endif
-                    <a href="{{ route('admin.dashboard.tender') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/tender') }}">
-                        <i class="icon-file-empty2 text-primary-700"></i> <span>TENDER</span>
-                    </a>
-                    <a href="{{ route('admin.dashboard.transaction') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/transaction') }}">
-                        <i class="icon-credit-card text-primary-700"></i> <span>TRANSACTION</span>
-                    </a>
-                    <a href="{{ route('admin.dashboard.portfolio') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/portfolio') }}">
-                        <i class="icon-folder2 text-primary-700"></i> <span>PORTFOLIO</span>
-                    </a>
+                    {{--@endcan--}}
+                    {{--<a href="{{ route('admin.dashboard.tender') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/tender') }}">--}}
+                    {{--<i class="icon-file-empty2 text-primary-700"></i> <span>TENDER</span>--}}
+                    {{--</a>--}}
+                    {{--<a href="{{ route('admin.dashboard.transaction') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/transaction') }}">--}}
+                    {{--<i class="icon-credit-card text-primary-700"></i> <span>TRANSACTION</span>--}}
+                    {{--</a>--}}
+                    {{--<a href="{{ route('admin.dashboard.portfolio') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/portfolio') }}">--}}
+                    {{--<i class="icon-folder2 text-primary-700"></i> <span>PORTFOLIO</span>--}}
+                    {{--</a>--}}
                 </div>
             </div>
         </div>

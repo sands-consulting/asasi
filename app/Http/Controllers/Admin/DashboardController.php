@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\NoticePurchase;
+use App\Services\VendorService;
 use App\UserHistory;
 use App\Notice;
 use App\Vendor;
@@ -18,19 +20,20 @@ class DashboardController extends Controller
             return redirect()->route('admin.evaluations.index');
         }
 
-        $lastLogins = UserHistory::lastLogin(5)->get();
+        $lastLogins = UserHistory::lastLogin(4)->get();
         return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
 
     public function user(DashboardUsersDataTable $table)
     {
-        $lastLogins = UserHistory::lastLogin(5)->get();
+        $lastLogins = UserHistory::lastLogin(4)->get();
         return $table->render('admin.dashboard.user', compact('lastLogins'));
     }
 
     public function vendor(DashboardVendorsDataTable $table)
     {
-        $topPurchasers = Vendor::purchaseCount(5);
+        // return NoticePurchase::groupBylimit(5)->get();
+        $topPurchasers = VendorService::purchaseCount(5);
         return $table->render('admin.dashboard.vendor', compact('topPurchasers'));
     }
 
