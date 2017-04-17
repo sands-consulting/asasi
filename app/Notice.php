@@ -120,6 +120,20 @@ class Notice extends Model
     /*
      * Relationships
      */
+    public function category()
+    {
+        return $this->belongsTo(NoticeCategory::class);
+    }
+
+    public function histories()
+    {
+        return $this->morphMany(UserHistory::class, 'actionable');
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     public function settings()
     {
@@ -129,16 +143,6 @@ class Notice extends Model
     public function type()
     {
         return $this->belongsTo(NoticeType::class);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(NoticeCategory::class);
-    }
-
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
     }
 
     public function taxCode()

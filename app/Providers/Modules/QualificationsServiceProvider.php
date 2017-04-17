@@ -13,8 +13,10 @@ class QualificationsServiceProvider extends ServiceProvider
         Gate::policy('App\QualificationCode', 'App\Policies\QualificationCodePolicy');
         Gate::policy('App\QualificationType', 'App\Policies\QualificationTypePolicy');
 
-        app('policy')->register('App\Http\Controller\Admin\QualificationCodesController', 'App\Policies\QualificationCodePolicy');
-        app('policy')->register('App\Http\Controller\Admin\QualificationTypesController', 'App\Policies\QualificationTypePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\QualificationCodesController',
+            'App\Policies\QualificationCodePolicy');
+        app('policy')->register('App\Http\Controllers\Admin\QualificationTypesController',
+            'App\Policies\QualificationTypePolicy');
     }
 
     public function register()

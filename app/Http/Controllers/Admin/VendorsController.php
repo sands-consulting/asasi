@@ -8,8 +8,6 @@ use App\DataTables\VendorsDataTable;
 use App\Events\VendorApproved;
 use App\Events\VendorRejected;
 use App\Http\Requests\VendorRequest;
-use App\Notificators\VendorApprovedNotificator;
-use App\Notificators\VendorRejectedNotificator;
 use App\Services\VendorService;
 use App\Services\UserService;
 use App\Services\UserHistoryService;
@@ -114,7 +112,7 @@ class VendorsController extends Controller
             ->with('notice', trans('vendors.notices.deleted', ['name' => $vendor->name]));
     }
 
-    public function histories(Vendor $vendor, UserHistoriesDataTable $table)
+    public function histories(UserHistoriesDataTable $table, Vendor $vendor)
     {
         $table->setActionable($vendor);
         return $table->render('admin.vendors.histories', compact('vendor'));

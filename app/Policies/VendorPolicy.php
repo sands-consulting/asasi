@@ -60,9 +60,9 @@ class VendorPolicy
         return $auth->hasPermission('vendor:revisions');
     }
 
-    public function logs(User $auth, Vendor $vendor)
+    public function histories(User $auth, Vendor $vendor)
     {
-        return $auth->hasPermission('vendor:logs');
+        return $auth->hasPermission('vendor:histories');
     }
 
     public function approve(User $auth, Vendor $vendor)
