@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
+<title>@hasSection('page-title')@yield('page-title') | @endif{{ setting('app_name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
 <body>

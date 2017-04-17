@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-param" content="_token">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@hasSection('page-title')@yield('page-title') | @endif{{ config('app.name') }}</title>
+<title>@hasSection('page-title')@yield('page-title') | @endif{{ setting('app_name') }}</title>
     <link href="{{ elixir('assets/css/portal.css') }}" rel="stylesheet"/>
     <script>
       window.Laravel = <?php echo json_encode([
@@ -19,7 +19,7 @@
 	<div class="navbar-boxed">
 		<div class="navbar-header">
 			<a class="navbar-brand prompt" href="{{ route('root') }}">
-                {{ config('app.name') }}
+                {{ setting('app_name') }}
             </a>
 
 			<ul class="nav navbar-nav visible-xs-block">
@@ -49,7 +49,7 @@
 </div>
 
 <div class="footer text-center text-muted">
-	{{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}
+	{{ trans('app.footer', ['year' => date('Y'), 'name' => setting('app_name')]) }}
 </div>
 
 @include('layouts._javascript')

@@ -7,7 +7,7 @@
 <meta name="csrf-param" content="_token">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="socket-url" content="{{ env('APP_SOCKET_URL') }}">
-<title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ config('app.name') }}</title>
+<title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ setting('app_name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
 </head>
 <body class="v-cloak">
@@ -38,7 +38,7 @@
                 @yield('content')
 
                 <div class="footer text-muted">
-                    {{ trans('app.footer', ['year' => date('Y'), 'name' => config('app.name')]) }}
+                    {{ trans('app.footer', ['year' => date('Y'), 'name' => setting('app_name')]) }}
                 </div>
             </div>
         </div>
