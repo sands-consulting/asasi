@@ -59,8 +59,4 @@
 
 @endif
 
-<li>
-    <a href="{{ route('docs') }}"><i class="icon-book"></i></a>
-</li>
-
 @endif

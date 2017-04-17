@@ -1,3 +1,7 @@
+<li>
+    <a href="{{ route('docs') }}"><i class="icon-book"></i></a>
+</li>
+
 @if(Auth::user())
 
 <li class="dropdown dropdown-user">
