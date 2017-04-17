@@ -14,12 +14,6 @@
 		<li><a href="{{ route('me.resume') }}" data-method="POST"><i class="icon-user-cancel"></i> {{ trans('menu.user.release_user') }}</a></li>
 		@endcan
 
-
-		<li>
-    		<a href="{{ route('docs') }}"><i class="icon-book"></i> {{ trans('menu.user.docs') }}</a>
-		</li>
-
-
 		<li>
 			<a href="{{ url('/logout') }}"
 				onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
