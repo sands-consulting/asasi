@@ -153,6 +153,11 @@ class Vendor extends Model
         return $this->hasMany(VendorFile::class);
     }
 
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
     public function shareholders()
     {
         return $this->hasMany(VendorShareholder::class);
