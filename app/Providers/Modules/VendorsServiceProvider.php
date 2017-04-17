@@ -2,6 +2,7 @@
 
 namespace App\Providers\Modules;
 
+use App\Vendor;
 use App\VendorType;
 use Gate;
 use Illuminate\Support\ServiceProvider;
@@ -21,23 +22,24 @@ class VendorsServiceProvider extends ServiceProvider
     public function register()
     {
         app('router')->group([
-            'namespace' => 'App\Http\Controllers',
+            'namespace'  => 'App\Http\Controllers',
             'middleware' => 'web'
         ], function ($router) {
             $router->group([
                 'namespace' => 'Admin',
-                'prefix' => 'admin',
-                'as' => 'admin.'
+                'prefix'    => 'admin',
+                'as'        => 'admin.',
             ], function ($router) {
+                $router->model('vendor', Vendor::class);
                 $router->put('vendors/{subscription}/restore', 'VendorsController@restore')
                     ->name('vendors.restore');
-                $router->get('vendors/{subscription}/revisions', 'VendorsController@revisions')
+                $router->get('vendors/{vendor}/revisions', 'VendorsController@revisions')
                     ->name('vendors.revisions');
-                $router->get('vendors/{subscription}/histories', 'VendorsController@histories')
+                $router->get('vendors/{vendor}/histories', 'VendorsController@histories')
                     ->name('vendors.histories');
                 $router->get('vendors/archives', 'VendorsController@archives')
                     ->name('vendors.archives');
-                $router->put('vendors/{subscription}/duplicate', 'VendorsController@duplicate')
+                $router->put('vendors/{vendor}/duplicate', 'VendorsController@duplicate')
                     ->name('vendors.duplicate');
 
                 $router->put('vendors/{vendor}/approve', 'VendorsController@approve')
@@ -81,10 +83,10 @@ class VendorsServiceProvider extends ServiceProvider
         });
 
         app('router')->group([
-            'namespace' => 'App\Http\Controllers\Api',
+            'namespace'  => 'App\Http\Controllers\Api',
             'middleware' => 'api',
-            'prefix' => 'api',
-            'as' => 'api.'
+            'prefix'     => 'api',
+            'as'         => 'api.',
         ], function ($router) {
             $router->resource('vendors', 'VendorsController', ['only' => 'index']);
         });
