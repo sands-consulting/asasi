@@ -146,3 +146,10 @@ function setting($key, $default=null, $context=null)
         return $default;
     }
 }
+
+function yearOptions()
+{
+    $first = \App\UserHistory::first()->created_at->format('Y');
+    $last = \App\UserHistory::orderBy('created_at', 'desc')->first()->created_at->format('Y');
+    return range($first, $last);
+}

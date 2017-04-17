@@ -6,6 +6,8 @@ return [
     'back' => 'All Reports',
 
     'attributes' => [
+        'year' => 'Year',
+        'month' => 'Month',
         'status' => 'Status',
         'vendor_type' => 'Vendor Type',
         'qualifications' => 'Qualifications'
