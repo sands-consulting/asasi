@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="tab-notice-evaluations">
-    @foreach($notice->submissions()->whereStatus('completed')->orderBy('label')->orderBy('submitted_at')->get() as $submission)
+    @foreach($notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('submitted_at')->get() as $submission)
     <div class="panel panel-default panel-form">
         <div class="panel-heading">
             <h4 class="panel-title">

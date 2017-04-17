@@ -39,10 +39,6 @@
                 </li>
             </template>
         </ul>
-
-        <div class="dropdown-content-footer">
-            <a href="#" data-popup="tooltip" title="{{ trans('app.notifications.view') }}"><i class="icon-menu display-block"></i></a>
-        </div>
     </div>
 </li>
 @endif
