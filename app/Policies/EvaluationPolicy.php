@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Evaluation;
+use App\Submission;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -35,9 +36,10 @@ class EvaluationPolicy
     /**
      * @param User $auth
      * @param Evaluation $evaluation
+     * @param Evaluation|Submission $evaluation
      * @return bool
      */
-    public function edit(User $auth, Evaluation $evaluation)
+    public function edit(User $auth, Evaluation $evaluation, Submission $evaluation)
     {
         return $auth->hasPermission('evaluation:update');
     }
@@ -47,9 +49,9 @@ class EvaluationPolicy
      * @param Evaluation $evaluation
      * @return bool
      */
-    public function update(User $auth, Evaluation $evaluation)
+    public function update(User $auth, Evaluation $evaluation, Submission $submission)
     {
-        return $this->edit($auth, $evaluation);
+        return $this->edit($auth, $evaluation, $submission);
     }
 
     /**

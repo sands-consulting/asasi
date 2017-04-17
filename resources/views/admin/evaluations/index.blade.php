@@ -1,4 +1,4 @@
-@extends('layouts.portal')
+@extends('layouts.admin')
 
 @section('page-title', trans('evaluations.title'))
 
@@ -13,7 +13,7 @@
 
 @section('content')
 
-@include('admin.evaluations._numbers')
+    {{--@include('admin.evaluations._numbers')--}}
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-flat">

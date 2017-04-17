@@ -72,6 +72,10 @@ class Evaluation extends Model
         return $this->belongsTo(EvaluationType::class, 'type_id');
     }
 
+    public function scores()
+    {
+        return $this->hasMany(EvaluationScore::class);
+    }
     /*
      * Helpers 
      */

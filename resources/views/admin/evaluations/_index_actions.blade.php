@@ -1,3 +1,3 @@
-<a href="{{ route('admin.evaluations.submission', [$evaluator->notice_id]) }}">
-    {{ trans('actions.view') }}
+<a href="{{ route('admin.evaluations.edit', [$evaluation->id, $evaluation->submission->id]) }}">
+    {{ trans('actions.evaluate') }}
 </a>

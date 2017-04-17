@@ -1,6 +1,6 @@
 @if(Auth::user())
-
 @if(is_path('admin*'))
+
 
     <li>
         <a href="{{ route('root') }}"><i class="icon-atom2"></i> {{ trans('menu.access.portal') }}</a>
@@ -23,7 +23,6 @@
     
 
 @else
-
     @if(Auth::user()->hasPermission('access:vendor'))
 
     @unless(is_path(['/', 'notices*', 'news*', 'submissions*', 'awards*', 'contact*']))

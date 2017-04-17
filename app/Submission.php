@@ -29,26 +29,37 @@ class Submission extends Model
     ];
 
     protected $attributes = [
-        'status' => 'draft'
+        'status' => 'draft',
     ];
 
     protected $searchable = [
-        'status'
+        'status',
     ];
 
     protected $sortable = [
-        'status'
+        'status',
     ];
 
     protected $dates = [
         'submitted_at',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($submission) {
+            if ($submission->status == 'submitted' && empty($submission->number)) {
+                $submission->number = strtoupper(strtoupper(str_random(8)));
+            }
+        });
+    }
+
     public function scopeSearch($query, $queries = [])
     {
-        if (isset($queries['keywords']) && !empty($queries['keywords'])) {
+        if (isset($queries['keywords']) && ! empty($queries['keywords'])) {
             $keywords = $queries['keywords'];
-            $query->where(function($query) use($keywords) {
+            $query->where(function ($query) use ($keywords) {
                 foreach ($this->searchable as $column) {
                     $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
                 }
@@ -86,22 +97,31 @@ class Submission extends Model
         return $this->belongsTo(Vendor::class);
     }
 
+    public function scoreAverage()
+    {
+        return $this->hasOne(EvaluationScore::class)
+            ->selectRaw('submission_id, avg(score) as score_avg')
+            ->groupBy('submission_id');
+    }
+
+    public function requirements()
+    {
+        return $this->belongsToMany(EvaluationRequirement::class, 'evaluation_scores')
+            ->wherePivot('deleted_at', null)
+            ->withPivot(['score'])
+            ->withTimestamps();
+    }
+
     public function type()
     {
         return $this->belongsTo(EvaluationType::class);
     }
 
-    public function evaluations()
-    {
-        return $this->hasMany(Evaluation::class);
-    }
-
     public function details($type = null)
     {
         $details = $this->hasMany(SubmissionDetail::class);
-        
-        if (!is_null($type))
-        {
+
+        if (! is_null($type)) {
             $details->where('type_id', $type);
         }
 
@@ -110,7 +130,12 @@ class Submission extends Model
 
     public function averageScore($typeId)
     {
-        return (int) $this->evaluations()->whereTypeId($typeId)->avg('score');
+        return (int)$this->evaluations()->whereTypeId($typeId)->avg('score');
+    }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
     }
 
     public function getProgressAttribute()
@@ -120,21 +145,15 @@ class Submission extends Model
         $evaluators = $this->evaluators()->count();
         $completed = $this->evaluators()->wherePivot('status', 'completed')->count();
         if ($evaluators > 0 && $completed > 0) {
-            $progress = $completed/$evaluators * 100;
+            $progress = $completed / $evaluators * 100;
         }
         return $progress;
     }
 
-    public static function boot()
+    public function evaluators()
     {
-        parent::boot();
-
-        static::saving(function($submission)
-        {
-            if($submission->status == 'submitted' && empty($submission->number))
-            {
-                $submission->number = strtoupper(strtoupper(str_random(8)));
-            }
-        });
+        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluator', 'submission_id', 'evaluator_id')
+            ->withPivot(['status'])
+            ->withTimestamps();
     }
 }
