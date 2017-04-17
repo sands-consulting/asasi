@@ -24,13 +24,13 @@
                         <span v-if="submission.submitted_at">@{{ submission.submitted_at.format('DD/MM/YYYY HH:mm:ss') }}</span>
                     </td>
                 </tr>
-                <tr v-if="submission.status == 'completed'">
+                <tr v-if="submission.status == 'submitted'">
                     <td rowspan="{{ App\EvaluationType::active()->count() + 1 }}" class="bg-slate-300">&nbsp;</td>
                     <td>{{ trans('submissions.attributes.label') }}</td>
                     <td colspan="3"><input type="text" class="form-control" v-bind:name="'labels[' + submission.id + ']'" v-model="submission.label"></td>
                 </tr>
                 @foreach(App\EvaluationType::active()->get() as $type)
-                <tr v-if="submission.status == 'completed'">
+                <tr v-if="submission.status == 'submitted'">
                     <td>{{ $type->name }} {{ trans('notices.views.admin.show.submissions.evaluators') }}</td>
                     <td colspan="3">
                         <select class="form-control evaluators" multiple="multiple" v-bind:name="'evaluators[' + submission.id + '][{{ $type->id }}][]'">
