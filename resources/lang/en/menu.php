@@ -26,7 +26,8 @@ return [
         'register'      => 'Register',
         'release_user'  => 'Release User',
         'my_profile'    => 'My Profile',
-        'sign_out'      => 'Sign Out'
+        'sign_out'      => 'Sign Out',
+        'docs'          => 'User Guide'
     ],
 
     'portal' => [

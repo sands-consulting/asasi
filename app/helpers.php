@@ -61,21 +61,25 @@ function boolean_icon($value = false)
 
 function body_classes($additional)
 {
-    $current_route      = Route::getCurrentRoute()->getAction();
-    $current_controller = explode(
-        '@',
-        str_replace($current_route['namespace']. "\\", '', $current_route['controller'])
-    )[0];
-
-    $current_action = explode(
-        '@',
-        str_replace($current_route['namespace']. "\\", '', $current_route['controller'])
-    )[1];
-
     $classes = is_array($additional) ? $additional : [$additional];
-    $classes[] = str_slug(snake_case($current_controller));
-    $classes[] = str_slug($current_action);
-    $classes[] = $current_route['as'];
+    $route   = Route::getCurrentRoute()->getAction();
+
+    if(isset($route['controller']))
+    {
+        $current_controller = explode(
+            '@',
+            str_replace($route['namespace']. "\\", '', $route['controller'])
+        )[0];
+        $classes[] = str_slug(snake_case($current_controller));
+
+        $current_action = explode(
+            '@',
+            str_replace($route['namespace']. "\\", '', $route['controller'])
+        )[1];
+        $classes[] = str_slug($current_action);
+    }
+
+    $classes[] = $route['as'];
     $classes[] = Auth::guest() ? 'guest' : 'logged-in';
 
     return implode(' ', $classes);

@@ -185,6 +185,7 @@ return [
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Sands\Uploadable\UploadableServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -48,6 +48,10 @@ class AsasiServiceProvider extends ServiceProvider
             $router->get('confirmation/{token}', 'Auth\LoginController@confirmation')
                 ->name('confirmation');
 
+            $router->get('docs', function(){
+                return view('docs.index');
+            })->name('docs');
+
             $router->get('/', 'NoticesController@index')
                 ->name('root');
         });
