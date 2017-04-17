@@ -9,6 +9,8 @@
             <li role="presentation"><a href="#" class="list-group-item disabled"><i class="icon-book"></i> User Guide</a></li>
             <li role="presentation" class="active"><a href="#docs-1" class="list-group-item" aria-controls="docs-1" role="tab" data-toggle="tab">Vendor Registration</a></li>
             <li role="presentation"><a href="#docs-2" class="list-group-item" aria-controls="docs-2" role="tab" data-toggle="tab">Complete Vendor Registration</a></li>
+            <li role="presentation"><a href="#docs-3" class="list-group-item" aria-controls="docs-3" role="tab" data-toggle="tab">Vendor Approval</a></li>
+            <li role="presentation"><a href="#docs-4" class="list-group-item" aria-controls="docs-4" role="tab" data-toggle="tab">Subscription</a></li>
         </ul>
     </div>
 
@@ -20,6 +22,14 @@
 
             <div role="tabpanel" class="tab-pane panel-body" id="docs-2">
                 @include('docs.2')
+            </div>
+
+            <div role="tabpanel" class="tab-pane panel-body" id="docs-3">
+                @include('docs.3')
+            </div>
+
+            <div role="tabpanel" class="tab-pane panel-body" id="docs-4">
+                @include('docs.4')
             </div>
         </div>
     </div>
