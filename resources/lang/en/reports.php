@@ -3,6 +3,12 @@
 return [
     'title' => 'Reports',
 
+    'back' => 'All Reports',
+
+    'attributes' => [
+        'status' => 'Status',
+        'vendor_type' => 'Vendor Type'
+    ],
 
     'titles' => [
         'vendor' => 'Vendor',
@@ -46,16 +52,15 @@ return [
         ],
 
         'transaction' => [
-            'rt1' => 'List of Transactions',
-            'rt2' => 'Summary of Transactions',
-            'rt3' => 'Daily Transactions',
-            'rt4' => 'Monthly Transactions'
+            'rt1' => 'Daily Transactions',
+            'rt2' => 'Monthly Transactions',
+            'rt3' => 'Summary of Transactions'
         ],
 
         'evaluation' => [
-            're1' => 'Summary of Notice & Evaluations',
-            're2' => 'Summary of Evaluator & Evaluations',
-            're3' => 'List of Evaluations'
+            're1' => 'List of Evaluations',
+            're2' => 'Summary of Notice & Evaluations',
+            're3' => 'Summary of Evaluator & Evaluations',
         ]
     ]
 ];

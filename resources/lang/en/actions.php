@@ -17,6 +17,7 @@ return [
 	'dismiss' => 'Dismiss',
 	'edit' => 'Edit',
 	'finish' => 'Finish',
+	'generate' => 'Generate',
 	'login' => 'Login',
 	'logout' => 'Logout',
 	'next' => 'Next',

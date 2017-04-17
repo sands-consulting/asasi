@@ -15,7 +15,14 @@ $(function() {
       cancelLabel: 'Clear',
       format: 'YYYY-MM-DD'
     }
-  }); 
+  });
+
+  $('.panel-report select').each(function() {
+    $(this).select2({
+        containerCssClass: 'bg-slate-300',
+        dropdownCssClass: 'bg-slate-300'    
+    });
+  });
 });
 
 // Equal Height

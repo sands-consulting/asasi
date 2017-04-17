@@ -26,6 +26,12 @@ class ReportsServiceProvider extends ServiceProvider
                 'as' => 'reports.'
             ], function($router) {
 
+                // Vendor - List all vendors
+                $router->get('rv1', 'Rv1Controller@create');
+                $router->get('rv1/view', 'Rv1Controller@show');
+                $router->get('rv1/excel', 'Rv1Controller@excel');
+                $router->get('rv1/print', 'Rv1Controller@print');
+
             });
         });
     }

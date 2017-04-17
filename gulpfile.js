@@ -36,7 +36,7 @@ elixir(function(mix) {
         '../../../node_modules/pnotify/dist/pnotify.js',
         '../../../node_modules/legitRipple.js/js/ripple.js',
         '../../../node_modules/moment/moment.js',
-        '../../../node_modules/select2/dist/js/select2.js',
+        '../../../node_modules/select2/dist/js/select2.full.js',
         '../../../node_modules/numeral/numeral.js',
         'vendor/d3.min.js',
         'vendor/c3.min.js',

@@ -5,6 +5,9 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">
+        <a href="{{ route('reports') }}" class="btn btn-danger btn-block btn-raised legitRipple" data-method="PUT">
+            <i class="icon-cart-add2"></i>
+        </a>
         <h4 class="panel-title">{{ trans('reports.title') }}</h4>
     </div>
     <table class="table">
