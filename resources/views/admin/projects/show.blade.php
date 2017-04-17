@@ -102,7 +102,7 @@
                 <p class="panel-title text-center"> Disbursement </p>
             </div>
             <div class="panel-body">
-                <div class="text-center text-size-xlarge text-orange"> RM 20,000 </div>
+                <div class="text-center text-size-xlarge text-orange"> RM 20000.00</div>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
                 <p class="panel-title text-center"> Balance </p>
             </div>
             <div class="panel-body">
-                <div class="text-center text-size-xlarge text-grey-300"> RM 1000,000 </div>
+                <div class="text-center text-size-xlarge text-grey-300"> RM 90000.00</div>
             </div>
         </div>
     </div>
@@ -172,46 +172,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-                
-        <div class="timeline timeline-left">
-            <div class="timeline-container">
-                
-                <!-- Milestone -->
-                
-                <!-- /Milestone -->
-
-                <!-- Gantt Task -->
-                @foreach($ganttTasks as $task)
-                <div class="timeline-row">
-                    <div class="timeline-icon">
-                        <div class="bg-info"><i class="icon-pencil5"></i></div>
-                    </div>
-
-                    <div class="panel panel-flat timeline-content">
-                        <div class="panel-heading">
-                            <h6 class="panel-title">{{ $task->title }}<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-                            <div class="heading-elements">
-                                <span class="heading-text"><i class="icon-history position-left text-success"></i> Updated {{ $task->created_at->diffForHumans() }}</span>
-                            </div>
-                        </div>
-
-                        <div class="panel-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis cupiditate mollitia eius, inventore unde suscipit!
-                            {{ str_limit($task->description, 45) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="text-muted">Project Gantt</label>
+                        <div class="form-control-static">
+                            <a href="{{ route('admin.projects.milestones.index', [$project->id]) }}"><i
+                                        class="icon-graph"></i></a>
                         </div>
                     </div>
                 </div>
-                @endforeach
-                <div class="timeline-date text-muted text-left">
-                    <a href="{{ route('admin.projects.milestones.index', $project->id) }}">Full Timeline</a>
-                </div>
-                <!-- /Gantt Task -->
-
-                
             </div>
         </div>
     </div>
