@@ -16,6 +16,10 @@
             ->label('reports.attributes.vendor_type')
             ->options(App\VendorType::options())
             ->multiple(true) !!}
+        {!! Former::select('qualifications[]')
+            ->label('reports.attributes.qualifications')
+            ->options(App\QualificationCode::groupedOptions())
+            ->multiple(true) !!}
     </div>
     <div class="panel-footer">
         {!! link_to_route('reports', trans('actions.cancel'), [], ['class' => 'btn btn-link text-danger']) !!}

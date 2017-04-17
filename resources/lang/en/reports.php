@@ -7,7 +7,8 @@ return [
 
     'attributes' => [
         'status' => 'Status',
-        'vendor_type' => 'Vendor Type'
+        'vendor_type' => 'Vendor Type',
+        'qualifications' => 'Qualifications'
     ],
 
     'titles' => [

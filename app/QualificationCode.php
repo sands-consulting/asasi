@@ -65,4 +65,11 @@ class QualificationCode extends Model
     {
         return $query->whereStatus('active');
     }
+
+    public static function groupedOptions($label='label', $group='type.name')
+    {
+        return static::with('type')->get()->groupBy($group)->transform(function($item, $key) {
+            return $item->pluck('label', 'id');
+        })->toArray();
+    }
 }
