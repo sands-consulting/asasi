@@ -32,6 +32,11 @@ class Role extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public static function options($label='display_name')
+    {
+        return static::pluck($label, 'id')->toArray();
+    }
+
     public static function boot()
     {
         parent::boot();

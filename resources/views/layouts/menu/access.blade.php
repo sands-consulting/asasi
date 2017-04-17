@@ -51,11 +51,11 @@
     </li>
     @endif
 
-     @if(Auth::user()->hasPermission('access:settings'))
+    @can('edit', App\Setting::class)
     <li>
         <a href="{{ route('settings') }}">{{ trans('menu.access.settings') }}</a>
     </li>
-    @endif
+    @endcan
 
 @endif
 

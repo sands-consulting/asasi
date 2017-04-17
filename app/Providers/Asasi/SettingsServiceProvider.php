@@ -2,13 +2,16 @@
 
 namespace App\Providers\Asasi;
 
+use Gate;
 use Illuminate\Support\ServiceProvider;
 
 class SettingsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        //
+        Gate::policy('App\Setting', 'App\Policies\Asasi\SettingPolicy');
+
+        app('policy')->register('App\Http\Controllers\Admin\SettingsController', 'App\Policies\Asasi\SettingPolicy');
     }
 
     /**
@@ -22,9 +25,16 @@ class SettingsServiceProvider extends ServiceProvider
             'namespace' => 'App\Http\Controllers',
             'middleware' => 'web',
         ], function ($router) {
-            $router->get('settings', 'SettingsController@edit')
-                ->name('settings');
-            $router->put('settings', 'SettingsController@update');
+            $router->group([
+                'namespace' => 'Admin',
+                'prefix' => 'admin',
+            ], function ($router) {
+                $router->get('settings', 'SettingsController@edit')
+                    ->name('settings');
+                $router->put('settings', 'SettingsController@update');
+                $router->put('license', 'SettingsController@license')
+                    ->name('license');
+            });
         });
     }
 }
