@@ -36,8 +36,8 @@ return [
             'rn4' => 'Notice Eligblities',
             'rn5' => 'Notice Invitations',
             'rn6' => 'Notice Purchases',
-            'rn7' => 'Submissions',
-            'rn8' => 'Evaluations'
+            'rn7' => 'Notice Submissions',
+            'rn8' => 'Notice Evaluations'
         ],
 
         'subscription' => [
