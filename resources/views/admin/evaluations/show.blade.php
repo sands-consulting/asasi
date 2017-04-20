@@ -31,7 +31,7 @@
 </ul>
 
 <div class="tab-content">
-    @include('admin.evaluations.form')
+    @include('admin.evaluations.evaluation')
     @include('admin.evaluations.submission')
 </div>
 @endsection
