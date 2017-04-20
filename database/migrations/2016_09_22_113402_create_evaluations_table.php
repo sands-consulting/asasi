@@ -37,8 +37,8 @@ class CreateEvaluationsTable extends Migration
 
         Schema::create('evaluation_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug');
             $table->string('name');
+            $table->string('slug');
             $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
