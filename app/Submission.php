@@ -149,11 +149,4 @@ class Submission extends Model
         }
         return $progress;
     }
-
-    public function evaluators()
-    {
-        return $this->belongsToMany(NoticeEvaluator::class, 'submission_evaluator', 'submission_id', 'evaluator_id')
-            ->withPivot(['status'])
-            ->withTimestamps();
-    }
 }

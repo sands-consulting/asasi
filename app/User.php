@@ -113,13 +113,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function submissions()
+    public function evalautions()
     {
-        return $this->belongsToMany(User::class, 'submission_evaluator', 'user_id', 'submission_id')
-            ->withPivot(['status'])
-            ->withTimestamps();
+        return $this->hasMany(NoticeEvlauation::class);
     }
 
     /**
@@ -244,8 +242,10 @@ class User extends Authenticatable
      */
     public function scopeEvaluators($query)
     {
-        $query->whereHas('roles', function ($roles) {
-            return $roles->whereName('evaluator');
+        $query->whereHas('roles', function ($role) {
+            return $role->whereHas('permissions', function($permission) {
+                return $permission->whereName('evaluation:index');
+            });
         });
     }
 

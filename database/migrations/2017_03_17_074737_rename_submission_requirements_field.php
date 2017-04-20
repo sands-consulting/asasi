@@ -22,7 +22,6 @@ class RenameSubmissionRequirementsField extends Migration
 
         Schema::table('evaluation_requirements', function (Blueprint $table) {
             $table->renameColumn('mandatory', 'required');
-            $table->renameColumn('evaluation_type_id', 'type_id');
         });
     }
 
@@ -41,7 +40,6 @@ class RenameSubmissionRequirementsField extends Migration
 
         Schema::table('evaluation_requirements', function (Blueprint $table) {
             $table->renameColumn('required', 'mandatory');
-            $table->renameColumn('type_id', 'evaluation_type_id');
         });
     }
 }
