@@ -55,5 +55,16 @@ class AsasiServiceProvider extends ServiceProvider
             $router->get('/', 'NoticesController@index')
                 ->name('root');
         });
+
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', function($api) {
+            $api->post('me', 'App\Http\Controllers\Api\MeController@create');
+
+            $api->group([
+                'middleware' => ['api.auth', 'bindings'],
+            ], function($api) {
+                $api->get('me', 'App\Http\Controllers\Api\MeController@show');
+            });
+        });
     }
 }
