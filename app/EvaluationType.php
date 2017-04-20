@@ -19,7 +19,9 @@ class EvaluationType extends Model
     protected $fillable = [
         'slug',
         'name',
-        'status'
+        'status',
+        'price',
+        'period'
     ];
 
     protected $attributes = [
