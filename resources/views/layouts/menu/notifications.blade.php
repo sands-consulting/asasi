@@ -1,5 +1,5 @@
 @if(Auth::check())
-<li id="notifications" class="dropdown" data-url="{{ route('api.notifications.index') }}" data-user-id="{{ auth()->user()->id }}">
+<li id="notifications" class="dropdown" data-url="/api/notifications" data-user-id="{{ auth()->user()->id }}">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="icon-bubble-dots4"></i>
         <span class="visible-xs-inline-block position-right">{{ trans('app.notifications.title') }}</span>

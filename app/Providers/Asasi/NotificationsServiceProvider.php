@@ -21,18 +21,16 @@ class NotificationsServiceProvider extends ServiceProvider
             $router->resource('notifications', 'NotificationsController', ['only' => ['index', 'show']]);
         });
 
-        
-        // API Routing
-        app('router')->group([
-            'namespace' => 'App\Http\Controllers\Api',
-            'middleware' => 'web',
-            'prefix' => 'api',
-            'as' => 'api.',
-        ], function ($router) {
-            $router->get('notifications', 'NotificationsController@index')
-                ->name('notifications.index');
-            $router->put('notifications/read', 'NotificationsController@read')
-                ->name('notifications.read');
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', function($api) {
+            $api->group([
+                'middleware' => ['api.auth', 'bindings'],
+            ], function($api) {
+                $api->get('notifications', 'App\Http\Controllers\Api\NotificationsController@index')
+                ->name('api.notifications.index');
+                $api->put('notifications/{notification}/read', 'App\Http\Controllers\Api\NotificationsController@read')
+                ->name('api.notifications.read');
+            });
         });
     }
 }

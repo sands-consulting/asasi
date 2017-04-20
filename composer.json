@@ -36,7 +36,8 @@
         "php-http/guzzle6-adapter": "^1.1",
         "jomweb/billplz": "~0.6",
         "graham-campbell/markdown": "^7.1",
-        "dingo/api": "1.0.x@dev"
+        "dingo/api": "1.0.x@dev",
+        "tymon/jwt-auth": "0.5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

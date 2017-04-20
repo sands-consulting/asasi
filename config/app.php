@@ -187,6 +187,7 @@ return [
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -286,7 +287,7 @@ return [
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth'
     ],
 
 ];

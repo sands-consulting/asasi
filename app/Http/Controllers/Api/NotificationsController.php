@@ -16,7 +16,8 @@ class NotificationsController extends Controller
     
     public function read(Request $request)
     {
-        return response()->json(DatabaseNotification::find($request->get('id'))->markAsRead());
+    	$notification = DatabaseNotification::find($request->route('notification'))->markAsRead();
+        return response()->json($notification);
     }
     
 }
