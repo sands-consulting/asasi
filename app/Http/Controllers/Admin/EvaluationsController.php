@@ -33,14 +33,15 @@ class EvaluationsController extends Controller
 
     public function update(Request $request, Evaluation $evaluation)
     {
-        $inputs = $request->only('scores');
+        $inputs = $request->only('evaluations');
 
-        foreach($inputs['score'] as $requirementId => $score)
+        foreach($inputs as $requirementId => $data)
         {
             $score = $evaluation->scores()->firstOrNew([
                 'requirement_id' => $requirementId
             ]);
-            $score->score = !empty($score) ? (int) $score : null;
+            $score->score = !empty($data['score']) ? (int) $data['score'] : null;
+            $score->remarks = !empty($data['remarks']) ? (int) $data['remarks'] : null;
             $score->save();
         }
 
@@ -57,6 +58,7 @@ class EvaluationsController extends Controller
         }
 
         $evaluation->score = $evaluation->scores()->whereIn('requirement_id', array_keys($inputs))->whereNotNull('score')->sum('score');
+        $evaluation->remarks = $request->input('remarks');
         $evaluation->save();
 
         return redirect()

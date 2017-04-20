@@ -16,8 +16,8 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $requirement->title }}</td>
                     <td class="text-right">{!! boolean_icon($requirement->required) !!}</td>
-                    <td><input type="number" name="scores[{{ $requirement->id }}][score]" min="0" max="{{ $requirement->full_score }}" class="form-control" value="{{ $evaluation->getScore($requirement->id) }}"></td>
-                    <td><textarea name="scores[{{ $requirement->id }}][remarks]" class="form-control" rows="5">{{ $evaluation->getRemarks($requirement->id) }}</textarea></td>
+                    <td><input type="number" name="evaluations[{{ $requirement->id }}][score]" min="0" max="{{ $requirement->full_score }}" class="form-control" value="{{ $evaluation->getScore($requirement->id) }}"></td>
+                    <td><textarea name="evaluations[{{ $requirement->id }}][remarks]" class="form-control" rows="5">{{ $evaluation->getRemarks($requirement->id) }}</textarea></td>
                 </tr>
             @endforeach
             </tbody>
