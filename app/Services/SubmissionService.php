@@ -42,7 +42,8 @@ class SubmissionService extends BaseService {
 
     public static function evaluators(Notice $notice, $inputs)
     {
-        $active = [];
+        $evaluators = [];
+        $evaluations = [];
 
         foreach($inputs as $submissionId => $data)
         {
@@ -70,11 +71,25 @@ class SubmissionService extends BaseService {
 
                     $evaluation->save();
 
-                    $active[] = $evaluation->id;
+                    $evaluations[] = $evaluation->id;
+                    $evaluators[] = $userId;
                 }
             }
         }
 
-        $notice->evaluations()->whereNotIn('id', $active)->update(['status' => 'cancelled']);
+        foreach($evaluators as $userId)
+        {
+            $evaluator = $notice->evaluators()->firstOrCreate(['user_id' => $userId]);
+
+            if($evaluator->status != 'accepted')
+            {
+                $evaluator->status == 'pending';
+            }
+
+            $evaluator->save();
+        }
+
+        $notice->evaluators()->whereNotIn('id', $evaluators)->delete();
+        $notice->evaluations()->whereNotIn('id', $evaluations)->update(['status' => 'cancelled']);
     }
 }

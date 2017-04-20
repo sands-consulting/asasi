@@ -223,6 +223,11 @@ class Notice extends Model
         return $this->hasOne(NoticeAward::class);
     }
 
+    public function evaluators()
+    {
+        return $this->hasMany(NoticeEvaluator::class);
+    }
+
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
