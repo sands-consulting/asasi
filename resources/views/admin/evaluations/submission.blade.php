@@ -10,15 +10,12 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($evaluation->notice->evaluationRequirements()->whereTypeId($evaluation->type_id)->whereStatus('active')->orderBy('sequence')->get() as $requirement)
+            @foreach($evaluation->notice->submissionRequirements()->type($evaluation->type_id)->whereStatus('active')->orderBy('sequence')->get() as $requirement)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $requirement->title }}</td>
-                    <td>
-                        <input type="number" name="scores[{{ $requirement->id }}][score]" max="{{ $requirement->full_score }}" class="form-control" value="{{ $evaluation->getScore($requirement->id) }}">
-                        @if($requirement->required)<br><span class="text-danger"><i class="icon-checkmark2"></i> {{ trans('evaluations.attributes.required') }}</span>@endif
-                    </td>
-                    <td><textarea name="scores[{{ $requirement->id }}][remarks]" class="form-control" rows="5">{{ $evauation->remarks }}</textarea></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             @endforeach
             </tbody>

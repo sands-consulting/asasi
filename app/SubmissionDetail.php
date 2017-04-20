@@ -27,41 +27,11 @@ class SubmissionDetail extends Model
 
     protected $sortable = [];
 
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-    /*
-     * Search scopes
-     */
-    public function scopeSearch($query, $queries = [])
-    {
-        if (isset($queries['keywords']) && ! empty($queries['keywords'])) {
-            $keywords = $queries['keywords'];
-            $query->where(function ($query) use ($keywords) {
-                foreach ($this->searchable as $column) {
-                    $query->orWhere("{$this->getTable()}.{$column}", 'LIKE', "%$keywords%");
-                }
-            });
-            unset($queries['keywords']);
-        }
-
-        foreach ($queries as $key => $value) {
-            if (empty($value)) {
-                continue;
-            }
-            $query->where("{$this->getTable()}.{$key}", $value);
-        }
-    }
-
-    public function scopeSort($query, $column, $direction)
-    {
-        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
-            $query->orderBy($column, $direction);
-        }
-    }
-
-    /*
-     * Relationship
-     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     public function submission()
     {
@@ -81,18 +51,5 @@ class SubmissionDetail extends Model
     public function items()
     {
         return $this->hasMany(SubmissionItem::class, 'detail_id');
-    }
-
-    /**
-     * Helpers
-     */
-
-
-    /*
-     * Boot
-     */
-    public static function boot()
-    {
-        parent::boot();
     }
 }

@@ -38,7 +38,8 @@ return [
         'index' => [
         ],
         'show' => [
-            'title' => 'View',
+            'evaluation' => 'Evaluation Details',
+            'submission' => 'Vendor Submission'
         ],
         'edit' => [
             'evaluation' => 'My Evaluation',

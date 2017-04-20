@@ -28,11 +28,9 @@ class SubmissionRequirement extends Model
         'status' => 'active'
     ];
 
-    public function scopeSort($query, $column, $direction)
+    public function scopeType($query, $typeId)
     {
-        if (in_array($column, $this->sortable) && in_array($direction, ['asc', 'desc'])) {
-            $query->orderBy($column, $direction);
-        }
+        return $query->whereTypeId($typeId);
     }
 
     public function notice()
