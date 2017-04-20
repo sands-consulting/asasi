@@ -24,29 +24,22 @@ class Evaluation extends Model
     ];
 
     protected $hidden = [
-        //
     ];
 
     protected $attributes = [
         'status' => 'pending'
     ];
 
-    protected $searchacble = [
-        //
-    ];
-
-    protected $sortable = [
-        //
-    ];
-
-    public function scopeType($query, $type)
+    public function scopeType($query, $typeId)
     {
-        return $query->where('type_id', $type);
+        return $query->whereTypeId($typeId);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus('active');
     }
     
-    /*
-     * Relationsip
-     */
     public function histories()
     {
         return $this->morphMany(UserHistory::class, 'actionable');
@@ -60,11 +53,6 @@ class Evaluation extends Model
     public function submission()
     {
         return $this->belongsTo(Submission::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function type()
@@ -81,9 +69,11 @@ class Evaluation extends Model
     {
         return $this->hasMany(EvaluationScore::class);
     }
-    /*
-     * Helpers 
-     */
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function getProgress($type)
     {
@@ -97,6 +87,33 @@ class Evaluation extends Model
             $progress = $completed/$total * 100;
 
         return $progress;
+    }
 
+    public function getScore($requirementId)
+    {
+        $score = $this->scores()->whereRequirementId($requirementId)->first();
+
+        if($score)
+        {
+            return $score->score;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getRemarks($requirementId)
+    {
+        $score = $this->scores()->whereRequirementId($requirementId)->first();
+
+        if($score)
+        {
+            return $score->remarks;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

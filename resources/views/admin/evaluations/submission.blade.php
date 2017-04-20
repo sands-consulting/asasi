@@ -15,10 +15,10 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $requirement->title }}</td>
                     <td>
-                        <input type="number" name="scores[{{ $requirement->id }}][score]" max="{{ $requirement->full_score }}" class="form-control">
+                        <input type="number" name="scores[{{ $requirement->id }}][score]" max="{{ $requirement->full_score }}" class="form-control" value="{{ $evaluation->getScore($requirement->id) }}">
                         @if($requirement->required)<br><span class="text-danger"><i class="icon-checkmark2"></i> {{ trans('evaluations.attributes.required') }}</span>@endif
                     </td>
-                    <td><textarea name="scores[{{ $requirement->id }}][remarks]" class="form-control" rows="5"></textarea></td>
+                    <td><textarea name="scores[{{ $requirement->id }}][remarks]" class="form-control" rows="5">{{ $evauation->remarks }}</textarea></td>
                 </tr>
             @endforeach
             </tbody>

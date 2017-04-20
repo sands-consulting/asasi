@@ -20,7 +20,10 @@ return [
         'notice_type'   => 'Notice Type',
         'remarks'       => 'Remarks',
         'required'      => 'Required',
-        'requirement'   => 'Requirement'
+        'requirement'   => 'Requirement',
+        'notice_number' => 'Notice No.',
+        'organization'  => 'Organization',
+        'submitted_at'  => 'Submission Date & Time'
     ],
 
     'buttons' => [

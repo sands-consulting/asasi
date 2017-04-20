@@ -19,25 +19,29 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="text-thin"><strong>{{ $evaluation->notice->organization->name }}</strong> {{ $evaluation->notice->number }}</div>
-                <h4 class="text-thin">{{ $evaluation->notice->name }}</h4>
-            </div>
-            <div class="box">
-                <div class="col-sm-2 text-center text-muted">
-                    <div class="text-size-mini">{{ trans('evaluations.attributes.notice_type') }}</div>
-                    <div>{{ $evaluation->notice ? $evaluation->notice->type->name : blank_icon(nil) }}</div>
-                </div>
-                <div class="col-sm-2 text-center text-muted">
-                    <div class="text-size-mini">{{ trans('evaluations.attributes.type') }}</div>
-                    <div>{{ $evaluation->type ? $evaluation->type->name : blank_icon(nil) }}</div>
-                </div>
-            </div>
-        </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">{{ $evaluation->notice->name }}</h4>
     </div>
+
+    <table class="table table-bordered table-condensed">
+        <tr>
+            <th class="col-xs-2">{{ trans('evaluations.attributes.notice_number') }}</th>
+            <td class="col-xs-2">{{ $evaluation->notice->number }}</td>
+            <th class="col-xs-2">{{ trans('evaluations.attributes.notice_type') }}</th>
+            <td class="col-xs-2">{{ $evaluation->notice ? $evaluation->notice->type->name : blank_icon(nil) }}</td>
+            <th class="col-xs-2">{{ trans('evaluations.attributes.organization') }}</th>
+            <td class="col-xs-2">{{ $evaluation->notice->organization->name }}</td>
+        </tr>
+        <tr>
+            <th class="col-xs-2">{{ trans('evaluations.attributes.submission') }}</th>
+            <td class="col-xs-2">{{ $evaluation->submission->number }}</td>
+            <th class="col-xs-2">{{ trans('evaluations.attributes.submitted_at') }}</th>
+            <td class="col-xs-2">{{ $evaluation->submission->submitted_at->format('d/m/Y H:i:s') }}</td>
+            <th class="col-xs-2">{{ trans('evaluations.attributes.type') }}</th>
+            <td class="col-xs-2">{{ $evaluation->type ? $evaluation->type->name : blank_icon(nil) }}</td>
+        </tr>
+    </table>
 </div>
 
 <ul class="nav nav-tabs nav-justified nav-tabs-component bg-blue-700">

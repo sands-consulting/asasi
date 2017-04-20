@@ -28,10 +28,7 @@ class EvaluationsController extends Controller
 
     public function edit(Request $request, Evaluation $evaluation)
     {
-        $requirements = $evaluation->requirements()->where('type_id', $evaluation->type->id)->whereStatus('active')->get();
-        $scores = $evaluation->scores()->whereIn('requirement_id', $requirements->pluck('id'))->pluck('score', 'requirement_id');
-
-        return view('admin.evaluations.edit', compact('evaluation', 'requirements', 'scores'));
+        return view('admin.evaluations.edit', compact('evaluation'));
     }
 
     public function update(Request $request, Evaluation $evaluation)
