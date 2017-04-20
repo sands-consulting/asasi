@@ -1,5 +1,5 @@
-<div class="tab-pane active" id="tab-evaluation">
-    <div class="panel panel-flat panel-form">
+<div class="tab-pane" id="tab-submission">
+    <div class="panel panel-flat">
         <table class="table table-vtop">
             <thead>
                 <tr>
@@ -23,8 +23,5 @@
             @endforeach
             </tbody>
         </table>
-        <div class="panel-footer">
-            <input type="submit" value="{{ trans('actions.save') }}" class="btn bg-blue-700 pull-right">
-        </div>
     </div>
 </div>

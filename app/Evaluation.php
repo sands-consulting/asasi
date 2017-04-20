@@ -69,7 +69,12 @@ class Evaluation extends Model
 
     public function type()
     {
-        return $this->belongsTo(EvaluationType::class, 'type_id');
+        return $this->belongsTo(EvaluationType::class);
+    }
+
+    public function requirements()
+    {
+        return $this->hasMany(EvaluationRequirement::class);
     }
 
     public function scores()

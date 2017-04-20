@@ -31,30 +31,13 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
                     ->name('evaluations.revisions');
                 $router->get('evaluations/{evaluation}/histories', 'EvaluationsController@histories')
                     ->name('evaluations.histories');
-
-                $router->get('evaluations/{evaluation}/submission/{submission}/edit', 'EvaluationsController@edit')
-                    ->name('evaluations.edit');
-                $router->put('evaluations/{evaluation}/submission/{submission}', 'EvaluationsController@update')
-                    ->name('evaluations.update');
-                $router->put('evaluations/{evaluation}/accept', 'EvaluationsController@accept')
-                    ->name('evalutions.accept');
-                $router->put('evaluations/{evaluation}/reject', 'EvaluationsController@reject')
-                    ->name('evalutions.accept');
+                $router->get('evaluations/accept', 'EvaluationsController@accept')
+                    ->name('evaluations.accept');
 
                 $router->resource('evaluations', 'EvaluationsController', [
-                    'only' => ['index', 'show'],
+                    'only' => ['index', 'show', 'edit', 'update'],
                 ]);
             });
-        });
-
-        // API Routing
-        app('router')->group([
-            'namespace'  => 'App\Http\Controllers\Api',
-            'prefix'     => 'api',
-            'middleware' => 'api'
-        ], function ($router) {
-            $router->resource('evaluations', 'EvaluationsController', [
-                'only' => ['index', 'store']]);
         });
     }
 }

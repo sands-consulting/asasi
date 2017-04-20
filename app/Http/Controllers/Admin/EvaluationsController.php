@@ -2,23 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-
-use App\DataTables\EvaluationDataTable;
 use App\Evaluation;
-use App\EvaluationRequirement;
-use App\EvaluationScore;
-use App\Submission;
-use App\Notice;
-use App\NoticeEvaluator;
-use App\User;
-use App\Vendor;
+use App\DataTables\EvaluationsDataTable;
 use App\Services\EvaluationScoresService;
 use Illuminate\Http\Request;
 
 class EvaluationsController extends Controller
 {
-    public function index(EvaluationDataTable $table)
+    public function index(Request $request, EvaluationsDataTable $table)
     {
+        $table->userId = $request->user()->id;
         return $table->render('admin.evaluations.index');
     }
 

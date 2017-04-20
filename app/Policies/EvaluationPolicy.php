@@ -39,7 +39,7 @@ class EvaluationPolicy
      * @param Evaluation|Submission $evaluation
      * @return bool
      */
-    public function edit(User $auth, Evaluation $evaluation, Submission $evaluation)
+    public function edit(User $auth, Evaluation $evaluation)
     {
         return $auth->hasPermission('evaluation:update');
     }
@@ -49,7 +49,7 @@ class EvaluationPolicy
      * @param Evaluation $evaluation
      * @return bool
      */
-    public function update(User $auth, Evaluation $evaluation, Submission $submission)
+    public function update(User $auth, Evaluation $evaluation)
     {
         return $this->edit($auth, $evaluation, $submission);
     }
@@ -72,5 +72,15 @@ class EvaluationPolicy
     public function histories(User $auth, Evaluation $evaluation)
     {
         return $auth->hasPermission('evaluation:histories');
+    }
+
+    /**
+     * @param User $auth
+     * @param Evaluation $evaluation
+     * @return bool
+     */
+    public function accept(User $auth)
+    {
+        return $auth->hasPermission('evaluation:index');
     }
 }
