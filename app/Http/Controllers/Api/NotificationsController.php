@@ -11,22 +11,12 @@ class NotificationsController extends Controller
 {
     public function index(Request $request)
     {
-        $notifications = $request->user()->unreadNotifications;
-
-        if (! empty($notifications)) {
-            $notifications->map(function($notification) {
-                $notification->created_at_human = $notification->created_at->diffForHumans();
-                return $notification;
-            });
-        }
-
-        return response()->json($notifications);
+        return response()->json($request->user()->unreadNotifications);
     }
     
     public function read(Request $request)
     {
-        $notification = DatabaseNotification::find($request->get('id'))->markAsRead();
-        return response()->json($notification);
+        return response()->json(DatabaseNotification::find($request->get('id'))->markAsRead());
     }
     
 }

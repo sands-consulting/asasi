@@ -3,48 +3,40 @@ $(function () {
   let vm_notifications = new Vue({
     el: '#notifications',
     data: {
+      url: null,
+      userId: null,
       notifications: [],
-      count: null,
-      source: null,
-      user: null
     },
     mounted: function (ev) {
-      this.source = $(this.$el).data('source');
-      // fixme: find better solution to get user object
-      this.user = $(this.$el).data('user');
-      this.getNotification();
+      this.url = $(this.$el).data('url');
+      this.userId = $(this.$el).data('user-id');
+      this.populate();
       this.listen();
     },
     methods: {
-      getNotification() {
-        axios.get(this.source, {
-          params: {
-            status: 'unread',
-          }
-        })
+      populate() {
+        axios.get(this.url)
           .then(response => {
-            this.notifications = response.data;
-            this.count = response.data.length;
-          });
-      },
-      read(notificationId) {
-        let self = this;
-        // use variable instead of hardcode for url.
-        axios.put('/api/notifications/read', {
-          id: notificationId
-        })
-          .then(function (response) {
-            console.log(response);
-            self.getNotification();
-          })
-          .catch(function (error) {
-            console.log(error);
+            for(var i = 0; i < response.data.length; i++) {
+              notification = response.data[i];
+              notification.created_at = moment(notification.created_at);
+              this.notifications.push(notification);
+            }
           });
       },
       listen() {
         Echo.private('App.User.' + this.user.id)
           .notification((notification) => {
             this.getNotification();
+          });
+      },
+      read(notificationId) {
+        axios.put(this.url + '/' + notificationId + '/read')
+          .then(response => {
+            this.populate();
+          })
+          .catch(error => {
+            console.log(error);
           });
       }
     }

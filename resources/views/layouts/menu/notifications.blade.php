@@ -1,10 +1,10 @@
 @if(Auth::check())
-<li id="notifications" class="dropdown" data-source="{{ route('api.notifications.index') }}" data-user="{{ auth()->user() }}">
+<li id="notifications" class="dropdown" data-url="{{ route('api.notifications.index') }}" data-user-id="{{ auth()->user()->id }}">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="icon-bubble-dots4"></i>
         <span class="visible-xs-inline-block position-right">{{ trans('app.notifications.title') }}</span>
-        <span class="badge bg-warning-400" v-cloak v-if="count > 0">@{{ count }}</span>
-        <span class="status-mark border-orange-400" v-cloak v-if="count == 0"></span>
+        <span class="badge bg-warning-400" v-cloak v-if="notifications.length > 0">@{{ notifications.length }}</span>
+        <span class="status-mark border-orange-400" v-cloak v-if="notifications.length == 0"></span>
     </a>
     
     <div class="dropdown-menu dropdown-content">
@@ -27,7 +27,7 @@
                             <a href="#" @click="read(notification.id)"><span class="icon-cross text-muted"></span></a>
                         </span>
                         @{{ notification.data.content }}
-                        <div class="media-annotation" v-text="notification.created_at_human"></div>
+                        <div class="media-annotation">@{{ notification.created_at.fromNow() }}</div>
                     </div>
                 </li>
             </template>

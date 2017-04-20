@@ -21,6 +21,7 @@ class NotificationsServiceProvider extends ServiceProvider
             $router->resource('notifications', 'NotificationsController', ['only' => ['index', 'show']]);
         });
 
+        
         // API Routing
         app('router')->group([
             'namespace' => 'App\Http\Controllers\Api',
