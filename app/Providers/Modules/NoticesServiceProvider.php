@@ -94,8 +94,17 @@ class NoticesServiceProvider extends ServiceProvider
             });
 
             $router->resource('notices', 'NoticesController', ['only' => ['index', 'show']]);
-            $router->post('notices/{notice}/bookarm', 'NoticesController@bookmark')
+            $router->post('notices/{notice}/bookmark', 'NoticesController@bookmark')
                 ->name('notices.bookmark');
+
+            $router->group([
+                'namespace' => 'api',
+                'prefix'    => 'api',
+                'as'        => 'api.',
+            ], function ($router) {
+                $router->get('notice/get-all', 'NoticesController@getAll');
+            });
         });
+
     }
 }

@@ -33,7 +33,7 @@ class SubmissionItem extends Model
 
     public function requirement()
     {
-        return $this->belongsTo(SubmissionRequirement::class)
+        return $this->belongsTo(SubmissionRequirement::class);
     }
 
     public function evaluation()
