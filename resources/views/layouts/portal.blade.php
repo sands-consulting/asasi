@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-param" content="_token">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="api-token" content="{{ JWTAuth::fromUser(Auth::user()) }}">
+<meta name="api-token" content="{{ !!Auth::user() && JWTAuth::fromUser(Auth::user()) }}">
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ setting('app_name') }}</title>
     <link href="{{ elixir('assets/css/portal.css') }}" rel="stylesheet"/>
     <script>
