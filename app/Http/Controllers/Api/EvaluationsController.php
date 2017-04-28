@@ -49,4 +49,14 @@ class EvaluationsController extends Controller
         SubmissionEvaluationsService::delete($evaluation);
         return response()->json($evaluation);
     }
+
+    public function accept(Request $request) 
+    {
+        return response()->json(true);
+    }
+
+    public function reject(Request $rrequest)
+    {
+        return response()->json(true);
+    }
 }

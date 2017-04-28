@@ -36,6 +36,7 @@ return [
 
     'views' => [
         'index' => [
+            'submissions' => 'Submissions',
         ],
         'show' => [
             'evaluation' => 'Evaluation Details',

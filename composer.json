@@ -37,7 +37,7 @@
         "jomweb/billplz": "~0.6",
         "graham-campbell/markdown": "^7.1",
         "dingo/api": "1.0.x@dev",
-        "tymon/jwt-auth": "0.5.*"
+        "tymon/jwt-auth": "^0.5.11"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

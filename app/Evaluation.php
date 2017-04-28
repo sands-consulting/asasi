@@ -116,4 +116,25 @@ class Evaluation extends Model
             return null;
         }
     }
+
+    
+    public function getStatusLabelAttribute()
+    {
+        switch ($this->status) {
+            case 'pending':
+                    $class = 'label label-warning';
+                break;
+            case 'accepted':
+                    $class = 'label label-success';
+                break;
+            case 'rejected':
+                    $class = 'label label-danger';
+                break;
+            default:
+                    $class = 'label label-default';
+                break;
+        }
+
+        return "<span class=\"{$class}\">$this->status</span>";
+    }
 }

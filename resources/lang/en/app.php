@@ -21,6 +21,10 @@ return [
     	'view'	=> 'View Cart'
     ],
 
+    'table' => [
+        'action' => 'Action'
+    ],
+
     'widgets' => [
         'portal' => [
             'numbers' => [

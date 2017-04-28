@@ -39,5 +39,16 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
                 ]);
             });
         });
+
+        // API Routing
+        app('router')->group([
+            'namespace'  => 'App\Http\Controllers\Api',
+            'prefix'     => 'api',
+            'middleware' => 'api',
+        ], function ($router) {
+            // Evaluations
+            $router->post('evaluations/accept', 'EvaluationsController@accept');
+            $router->post('evaluations/reject', 'EvaluationsController@reject');
+        });
     }
 }
