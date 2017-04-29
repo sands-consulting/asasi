@@ -11,17 +11,12 @@ $(function () {
     mounted: function (ev) {
       this.url = $(this.$el).data('url');
       this.userId = $(this.$el).data('user-id');
-      this.authToken = $('meta[name="api-token"]').attr('content');
       this.populate();
       this.listen();
     },
     methods: {
       populate() {
-        axios.get(this.url, {
-          headers: {
-            'Authorization': 'Bearer ' + this.authToken
-          }
-        })
+        axios.get(this.url)
           .then(response => {
             this.notifications = [];
             for(var i = 0; i < response.data.length; i++) {
