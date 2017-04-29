@@ -23,6 +23,11 @@ class Evaluation extends Model
         'status',
     ];
 
+    protected $appends = [
+        'url_edit',
+        'status_label',
+    ];
+
     protected $hidden = [
     ];
 
@@ -60,9 +65,9 @@ class Evaluation extends Model
         return $this->belongsTo(EvaluationType::class);
     }
 
-    public function requirements()
+    public function requirement()
     {
-        return $this->hasMany(EvaluationRequirement::class);
+        return $this->belongsTo(EvaluationRequirement::class);
     }
 
     public function scores()
@@ -136,5 +141,10 @@ class Evaluation extends Model
         }
 
         return "<span class=\"{$class}\">$this->status</span>";
+    }
+
+    public function getUrlEditAttribute()
+    {
+        return route('admin.evaluations.edit', $this->id);
     }
 }

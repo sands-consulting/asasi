@@ -13,7 +13,7 @@
 
 @section('content')
 
-<div id="evaluation-wrapper">
+<div id="evaluation-wrapper" data-url="/api/evaluations">
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
@@ -32,40 +32,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-if="evaluations.length > 0" v-for="evaluation in evaluations">
+                        <tr v-if="evaluations.length > 0" v-for="(evaluation, index) in evaluations">
                             <td v-text="evaluation.submission_number"></td>
                             <td v-text="evaluation.type"></td>
-                            <td v-text="evaluation.notice"></td>
-                            <td v-text="evaluation.status"></td>
-                            <td class="text-center">
-                                <div v-if="! loading" class="v-cloak">
-                                    <div v-if="! confirm" class="action">
-                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_accept">
-                                            Accept
-                                        </button>
-                                        <a href="#" class="btn btn-xs btn-danger" @click="confirmation('reject')">Reject</a>
+                            <td v-text="evaluation.notice_number"></td>
+                            <td v-html="evaluation.status_label"></td>
+                            <td>
+                                <div v-if="! loading">
+                                    <div v-if="evaluation.status == 'pending'" class="text-center v-cloak">
+                                        <div v-if="! evaluation.hasOwnProperty('confirm') || ! evaluation.confirm" class="action">
+                                            <button 
+                                                type="button" class="btn btn-primary btn-xs" data-toggle="modal" :data-target="'#modal_accept' + evaluation.id">
+                                                Accept
+                                            </button>
+                                            <a href="#" class="btn btn-xs btn-danger" @click="confirmation(index)">Reject</a>
+                                        </div>
+                                        <div v-else class="text-center">
+                                            <small>Are you sure you want to reject?</small> <br>
+                                            <a href="#" class="btn btn-xs btn-success" @click="reject(evaluation.id)">Yes</a>
+                                            <a href="#" class="btn btn-xs btn-danger" @click="cancel(index)">No</a>
+                                        </div>
                                     </div>
-                                    <div v-if="confirm">
-                                        <a href="#" class="btn btn-xs btn-success" @click="confirmed(evaluation.id, action)">Yes</a>
-                                        <a href="#" class="btn btn-xs btn-danger" @click="cancel()">No</a>
+                                    {{-- todo: refactor this code --}}
+                                    <div v-if="evaluation.status == 'accepted' || evaluation.status == 'incomplete' || evaluation.status == 'completed'" class="text-center">
+                                        <a :href="evaluation.url_edit" class="btn btn-default btn-xs">Evaluate</a>
                                     </div>
                                 </div>
-                                <div v-show="loading" class="text-center">
+                                <div v-else class="text-center">
                                     <i class="icon-spinner4 spin"></i>
                                 </div>
+                                <modal :modal-id="'modal_accept' + evaluation.id" :evaluation="evaluation"></modal>
                             </td>
                         </tr>
                         <tr v-if="evaluations.length == 0">
-                            <td colspan="5">Currently you have submission to evaluate.</td>
+                            <td colspan="5">Currently you do not have submission to evaluate.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 </div>
 
 @include('admin.evaluations.index.modal_accept')
+
 
 @endsection
 

@@ -41,14 +41,18 @@ class NoticeEvaluationsServiceProvider extends ServiceProvider
         });
 
         // API Routing
-        app('router')->group([
-            'namespace'  => 'App\Http\Controllers\Api',
-            'prefix'     => 'api',
-            'middleware' => 'api',
-        ], function ($router) {
-            // Evaluations
-            $router->post('evaluations/accept', 'EvaluationsController@accept');
-            $router->post('evaluations/reject', 'EvaluationsController@reject');
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', function($api) {
+            $api->group([
+                'middleware' => ['api.auth', 'bindings'],
+            ], function($api) {
+                $api->get('evaluations', 'App\Http\Controllers\Api\EvaluationsController@index')
+                    ->name('api.evaluations.index');
+                $api->put('evaluations/accept', 'App\Http\Controllers\Api\EvaluationsController@accept')
+                    ->name('api.evaluations.accept');
+                $api->put('evaluations/reject', 'App\Http\Controllers\Api\EvaluationsController@reject')
+                    ->name('api.evaluations.reject');
+            });
         });
     }
 }

@@ -25,7 +25,7 @@
         <div class="panel-footer">
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-                    <textarea name="remarks" class="form-control" rows="3" placeholder="{{ trans('evaluations.attributes.remarks') }}"></textarea>
+                    <textarea name="remarks" class="form-control" rows="3" placeholder="{{ trans('evaluations.attributes.remarks') }}">{{ $evaluation->remarks or null }}</textarea>
                 </div>
                 <div class="col-xs-12 col-md-2 col-md-offset-4">
                     <input type="submit" value="{{ trans('actions.save') }}" class="btn bg-blue-700 pull-right">

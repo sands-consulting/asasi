@@ -1,48 +1,77 @@
+Vue.component('modal', {
+  props: {
+    evaluation: {
+      type: Object
+    },
+    modalId: {
+      type: String
+    }
+  },
+  template: '#bs-modal',
+  methods: {
+    accept: function (id) {
+      this.loading = true
+      axios.put('/api/evaluations/accept', { id: id })
+        .then(response => {
+          vm.populate();
+          $('.modal').modal('hide');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      this.loading = false
+    },
+  }
+});
 
 let vm = new Vue({
   el: '#evaluation-wrapper',
   data: {
     loading: false,
-    action: null,
-    confirm: false,
-    evaluations: window.evaluations,
+    evaluations: [],
+    url: null,
+  },
+  mounted() {
+    this.url = $(this.$el).data('url');
+    this.populate();
   },
   methods: {
-    confirmation: function (action) {
-      this.loading = true;
-      // this.$set(this, 'loading', true);
-      this.confirm = true;
-      // this.$set(this, 'confirm', true);
-      this.$set(this, 'action', action);
-      this.loading = false;
-    },
-    confirmed: function (id, action) {
-      if (action === 'accept')
-        this.accept(id);
-      else
-        this.reject(id);
-    },
-    cancel: function () {
-      this.confirm = false;
-      this.action =  null;
-    },
-    accept: function (id) {
-      axios.post('/api/evaluations/accept', { id: id })
+    populate: function () {
+      this.loading = true
+      axios.get(this.url)
         .then(response => {
-          console.log(response);
+          this.evaluations = response.data
         })
         .catch(error => {
           console.log(error);
         });
+      this.loading = false
+    },
+    confirmation: function (index) {
+      this.$set(this.evaluations[index], 'confirm', true)
+      console.log(this.evaluations[index]);
+    },
+    cancel: function (index) {
+      this.$set(this.evaluations[index], 'confirm', false)
     },
     reject: function (id) {
-      axios.post('/api/evaluations/reject', { id: id })
+      this.loading = true
+      axios.put('/api/evaluations/reject', { id: id })
         .then(response => {
-          console.log(response);
+          this.populate();
         })
         .catch(error => {
           console.log(error);
         });
+      this.loading = false
+    },
+    confirm: function (evaluation) {
+      if (! evaluation.hasOwnProperty('confirm') 
+        && evaluation.status !== 'pending') {
+        return true;
+      }
+
+      return false;
     }
   }
 });

@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-param" content="_token">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="api-token" content="{{ JWTAuth::fromUser(Auth::user()) }}">
 <title>@hasSection('page-title')@yield('page-title') | @endif{{ trans('app.admin') }} | {{ setting('app_name') }}</title>
 <link href="{{ elixir('assets/css/admin.css') }}" rel="stylesheet">
     <script>
-      window.Laravel = <?php echo json_encode([
+        window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
+            'apiToken' => JWTAuth::fromUser(Auth::user()),
         ]); ?>
     </script>
 </head>

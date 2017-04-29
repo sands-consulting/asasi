@@ -2,24 +2,34 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Evaluation;
 use App\EvaluationType;
-use App\Services\SubmissionDetailService;
 use App\Submission;
 use App\SubmissionDetail;
-use Illuminate\Http\Request;
-use App\Services\AuthLogsService;
-use App\Http\Controllers\Controller;
 use App\SubmissionEvaluation;
+use App\Services\AuthLogsService;
+use App\Services\EvaluationService;
+use App\Services\SubmissionDetailService;
 use App\Services\SubmissionEvaluationsService;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class EvaluationsController extends Controller
 {
-    
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        if ($user->hasPermission('evaluation:list')) {
+            $evaluations = EvaluationService::getEvaluations($user->id);
+        } else {
+            $evaluations = EvaluationService::getEvaluations($user->id);
+        }
+        return response()->json($evaluations);
+    }
+
     public function store(Request $request, SubmissionEvaluation $evaluation)
     {
-        $inputs = $request->only(
-            'submission_evaluation'
-        );
+        $inputs = $request->only('submission_evaluation');
 
         $response = [];
         foreach ($inputs['submission_evaluation'] as $key => $value) {
@@ -52,11 +62,19 @@ class EvaluationsController extends Controller
 
     public function accept(Request $request) 
     {
-        return response()->json(true);
+        $user = $request->user();
+        $evaluation = Evaluation::find($request->get('id'));
+        $evaluation = EvaluationService::update($evaluation, ['status' => 'accepted']);
+
+        return response()->json($evaluation);
     }
 
-    public function reject(Request $rrequest)
+    public function reject(Request $request)
     {
-        return response()->json(true);
+        $user = $request->user();
+        $evaluation = Evaluation::find($request->get('id'));
+        $evaluation = EvaluationService::update($evaluation, ['status' => 'rejected']);
+
+        return response()->json($evaluation);
     }
 }

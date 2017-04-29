@@ -51,7 +51,7 @@ class EvaluationPolicy
      */
     public function update(User $auth, Evaluation $evaluation)
     {
-        return $this->edit($auth, $evaluation, $submission);
+        return $this->edit($auth, $evaluation);
     }
 
     /**

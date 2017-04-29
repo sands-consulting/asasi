@@ -18,7 +18,7 @@ return [
         'evaluator'     => 'Evaluator',
         'type'          => 'Evaluation Type',
         'notice_type'   => 'Notice Type',
-        'remarks'       => 'Remarks',
+        'remarks'       => 'Overall Remarks',
         'required'      => 'Required',
         'requirement'   => 'Requirement',
         'notice_number' => 'Notice No.',
