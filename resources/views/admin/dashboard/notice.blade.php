@@ -28,8 +28,8 @@
                class="prompt-box bg-primary-300"
                data-filter="all"
                data-color="primary">
-                <div class="title"><i class="icon-clipboard3"></i> All</div>
-                <div class="number">{{ App\Notice::count() }}</div>
+                <div class="title"><i class="icon-clipboard3"></i> Draft</div>
+                <div class="number">{{ App\Notice::draft()->count() }}</div>
             </a>
         </div>
         <div class="col-xs-12 col-md-3">

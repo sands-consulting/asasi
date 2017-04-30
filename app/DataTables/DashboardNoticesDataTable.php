@@ -16,7 +16,8 @@ class DashboardNoticesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->editColumn('number', function ($notice) {
-                return $notice->number . '<br>' . $notice->name;
+                return link_to_route('admin.notices.show', $notice->number, $notice->id)
+                    . '<br>' . $notice->name;
             })
             ->editColumn('published_at', function ($notice) {
                 return $notice->published_at->formatDateFromSetting();

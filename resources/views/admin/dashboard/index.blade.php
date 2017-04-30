@@ -28,7 +28,7 @@
                     @endif
                     @if(Auth::user()->hasPermission('dashboard:notice'))
                     <a href="{{ route('admin.dashboard.notice') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/notice') }}">
-                        <i class="icon-file-empty2 text-primary-700"></i> <span>Notice</span>
+                        <i class="icon-clipboard4 text-primary-700"></i> <span>Notice</span>
                     </a>
                     @endif
                     {{--<a href="{{ route('admin.dashboard.transaction') }}" class="btn btn-link btn-float has-text text-size-small legitRipple {{ is_path_active('admin/dashboard/transaction') }}">--}}
