@@ -21,7 +21,7 @@ class DashboardPolicy
 
     public function tender(User $user)
     {
-        return $user->hasPermission('dashboard:portfolio');
+        return $user->hasPermission('dashboard:tender');
     }
 
     public function transaction(User $user)
