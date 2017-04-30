@@ -1,4 +1,4 @@
-@extends('admin.dashboard.index')
+@extends('admin.dashboard.index', ['header' => 'User Dashboard'])
 
 @section('content')
 <!-- start: user status -->

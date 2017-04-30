@@ -102,6 +102,11 @@ class Notice extends Model
         }
     }
 
+    public function scopeDraft($query)
+    {
+        return $query->where('status', 'draft');
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'published')->where('published_at', '<=', Carbon::now());

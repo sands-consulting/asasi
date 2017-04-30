@@ -8,5 +8,12 @@ return [
                 'top_purchaser'       => 'Top Purchaser',
             ],
         ],
+        'notice' => [
+            'panels' => [
+                'graph' => [
+                    'title' => 'Notice Activity'
+                ]
+            ]
+        ],
     ],
 ];

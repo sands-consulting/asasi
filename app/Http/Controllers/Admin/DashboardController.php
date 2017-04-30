@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\DashboardNoticesDataTable;
+use App\DataTables\DashboardUsersDataTable;
+use App\DataTables\DashboardVendorsDataTable;
+use App\Notice;
 use App\NoticePurchase;
 use App\Services\VendorService;
 use App\UserHistory;
-use App\Notice;
-use App\Vendor;
-use App\DataTables\DashboardUsersDataTable;
-use App\DataTables\DashboardVendorsDataTable;
 use App\UserLog;
+use App\Vendor;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -37,10 +38,10 @@ class DashboardController extends Controller
         return $table->render('admin.dashboard.vendor', compact('topPurchasers'));
     }
 
-    public function tender()
+    public function notice(DashboardNoticesDataTable $table)
     {
         $notices = Notice::all();
-        return view('admin.dashboard.tender', compact('notices'));
+        return $table->render('admin.dashboard.notice', compact('notices'));
     }
 
     public function transaction()

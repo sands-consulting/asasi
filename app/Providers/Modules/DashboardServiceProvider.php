@@ -41,9 +41,9 @@ class DashboardServiceProvider extends ServiceProvider
                         'as'   => 'dashboard.portfolio',
                         'uses' => 'DashboardController@portfolio',
                     ]);
-                    $router->get('dashboard/tender', [
-                        'as'   => 'dashboard.tender',
-                        'uses' => 'DashboardController@tender',
+                    $router->get('dashboard/notice', [
+                        'as'   => 'dashboard.notice',
+                        'uses' => 'DashboardController@notice',
                     ]);
                 });
                 $router->get('/', [
@@ -64,6 +64,8 @@ class DashboardServiceProvider extends ServiceProvider
                 ->name('api.dashboard.chart-login-activity');
             $router->get('dashboard/chart-vendor-status', 'DashboardController@chartVendorStatus')
                 ->name('api.dashboard.chart-vendor-status');
+            $router->get('dashboard/chart-notice', 'DashboardController@chartNotice')
+                ->name('api.dashboard.chart-notice');
         });
     }
 }
