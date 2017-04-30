@@ -102,6 +102,16 @@ class UsersController extends Controller
     {
         UserService::assume($user);
 
+        if ($user->hasPermission('access:administration')) {
+            if($user->hasPermission('dashboard:user')) {
+                return redirect()->to(route('admin'));
+            }
+
+            if ($user->hasPermission('evaluation:index')) {
+                return redirect()->to(route('admin.evaluations.index'));
+            }
+        }
+
         return redirect()
             ->to('/')
             ->with('notice', trans('users.notices.assumed', ['name' => $user->name]));

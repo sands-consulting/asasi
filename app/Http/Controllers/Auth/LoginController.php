@@ -68,13 +68,17 @@ class LoginController extends Controller
 
         $user->cachePermissions();
 
-        if($user->hasPermission('access:administration'))
-        {
-            return redirect()->intended(route('admin'));
+        if ($user->hasPermission('access:administration')) {
+            if($user->hasPermission('dashboard:user')) {
+                return redirect()->intended(route('admin'));
+            }
+
+            if ($user->hasPermission('evaluation:index')) {
+                return redirect()->intended(route('admin.evaluations.index'));
+            }
         }
 
-        if($user->hasPermission('access:vendor'))
-        {
+        if ($user->hasPermission('access:vendor')) {
             return redirect()->intended(route('vendors.eligibles', $user->vendor->id));
         }
     }
