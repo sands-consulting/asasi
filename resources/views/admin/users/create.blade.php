@@ -30,12 +30,8 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-	<div class="panel-body">
-		{!! Former::open(action('Admin\UsersController@store'))->method('POST') !!}
-			{!! Former::populate($user) !!}
-			@include('admin.users.form')
-		{!! Former::close() !!}
-	</div>
-</div>
+{!! Former::open(route('admin.users.store'))->id('form-admin-user') !!}
+	{!! Former::populate($user) !!}
+	@include('admin.users.form')
+{!! Former::close() !!}
 @endsection
