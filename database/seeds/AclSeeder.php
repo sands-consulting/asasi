@@ -31,6 +31,11 @@ class AclSeeder extends Seeder
             ['access:settings', 'Access global settings'],
             ['access:vendor', 'Access vendor module'],
 
+
+            // Data Association
+            ['has:organization', 'User has an organization data'],
+            ['has:vendor', 'User has a vendor data'],
+
             /* 
              * Asasi Permissions
              */

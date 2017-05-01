@@ -140,6 +140,12 @@
 							<dt>{{ trans('users.attributes.updated_at') }}</dt>
 							<dd>{{ $user->updated_at->formatDateTimeFromSetting() }}</dd>
 						</div>
+						@if($user->organization)
+						<div class="col-md-6 mb-15">
+							<dt>{{ trans('users.attributes.organization') }}</dt>
+							<dd>{{ $user->organization->name }}</dd>
+						</div>
+						@endif
 					</dl>
 				</fieldset>
 
@@ -158,6 +164,9 @@
 						</dl>
 					</fieldset>
 				@endif
+
+
+
 			</div>
 		</div>
 	</div>

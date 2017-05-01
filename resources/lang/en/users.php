@@ -8,6 +8,8 @@ return [
         'email' => 'Email',
         'status' => 'Status',
         'roles' => 'Roles',
+        'organization' => 'Organization',
+        'vendor' => 'Vendor',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
         'created_at' => 'Created At',

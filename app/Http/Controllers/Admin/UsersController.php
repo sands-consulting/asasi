@@ -12,6 +12,7 @@ use App\Http\Requests\UserRequest;
 use App\Services\UserService;
 use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class UsersController extends Controller
 {
@@ -28,6 +29,13 @@ class UsersController extends Controller
     public function create(Request $request)
     {
         $user = new User;
+        JavaScript::put([
+            'roles' => \App\Role::with(['permissions' => function($q) {
+                    $q->whereGroup('has');
+                }])->get()->pluck('permissions', 'id')->transform(function($item, $key) {
+                    return $item->pluck('name')->toArray();
+                })->toArray()
+        ]);
         return view('admin.users.create', compact('user'));
     }
 
@@ -37,7 +45,9 @@ class UsersController extends Controller
         $inputs['password'] = bcrypt($request->input('password'));
         $user               = UserService::create(new User, $inputs);
 
+        $user->organizations()->sync($request->input('organizations', []));
         $user->roles()->sync($request->input('roles', []));
+        $user->vendors()->sync($request->input('vendors', []));
         UserHistoryService::log($request->user(), 'create', $user, $request->getClientIp());
 
         return redirect()
@@ -52,6 +62,13 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        JavaScript::put([
+            'roles' => \App\Role::with(['permissions' => function($q) {
+                    $q->whereGroup('has');
+                }])->get()->pluck('permissions', 'id')->transform(function($item, $key) {
+                    return $item->pluck('name')->toArray();
+                })->toArray()
+        ]);
         return view('admin.users.edit', compact('user'));
     }
 
@@ -64,15 +81,14 @@ class UsersController extends Controller
         }
 
         $user = UserService::update($user, $inputs);
-
-        if ($roles = $request->get('roles', [])) {
-            $user->roles()->sync($roles);
-        }
+        $user->organizations()->sync($request->input('organizations', []));
+        $user->roles()->sync($request->input('roles', []));
+        $user->vendors()->sync($request->input('vendors', []));
 
         UserHistoryService::log($request->user(), 'update', $user, $request->getClientIp());
 
         return redirect()
-            ->route('admin.users.edit', $user->id)
+            ->route('admin.users.show', $user->id)
             ->with('notice', trans('users.notices.updated', ['name' => $user->name]));
     }
 

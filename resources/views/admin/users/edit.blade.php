@@ -24,12 +24,8 @@
 @endsection
 
 @section('content')
-<div class="panel panel-flat">
-	<div class="panel-body">
-		{!! Former::open(action('Admin\UsersController@update', $user->id))->method('PUT') !!}
-			{!! Former::populate($user) !!}
-			@include('admin.users.form')
-		{!! Former::close() !!}
-	</div>
-</div>
+{!! Former::open_vertical(route('admin.users.update', $user->id))->method('PUT')->id('form-admin-user') !!}
+	{!! Former::populate($user) !!}
+	@include('admin.users.form')
+{!! Former::close() !!}
 @endsection

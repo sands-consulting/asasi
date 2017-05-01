@@ -23,6 +23,10 @@ class UsersDataTable extends DataTable
                     $string .= '<br><small>' . $user->vendors[0]->name . '</small>';
                 }
 
+                if(count($user->organizations) > 0) {
+                    $string .= '<br><small>' . $user->organizations[0]->name . '</small>';
+                }
+
                 return $string;
             })
             ->editColumn('status', function($user) {

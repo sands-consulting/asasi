@@ -51,5 +51,15 @@ class OrganizationsServiceProvider extends ServiceProvider
                 $router->resource('organizations', 'OrganizationsController');
             });
         });
+
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', function($api) {
+            $api->group([
+                'middleware' => ['api.auth', 'bindings'],
+            ], function($api) {
+                $api->get('organizations', 'App\Http\Controllers\Api\OrganizationsController@index')
+                    ->name('organizations.index');
+            });
+        });
     }
 }

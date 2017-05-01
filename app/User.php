@@ -130,17 +130,7 @@ class User extends Authenticatable
      */
     public function subscriptions()
     {
-        return $this->vendor->first()->subscriptions;
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function vendor()
-    {
-        return $this->belongsToMany(Vendor::class)
-            ->withPivot(['status'])
-            ->wherePivot('status', 'active');
+        return $this->vendor->first()->subscriptions();
     }
 
     /**
@@ -174,9 +164,17 @@ class User extends Authenticatable
     /**
      * @return mixed|null
      */
+    public function getOrganizationAttribute()
+    {
+        return $this->hasPermission('has:organization') ? $this->organizations()->first() : null;
+    }
+
+    /**
+     * @return mixed|null
+     */
     public function getVendorAttribute()
     {
-        return $this->hasPermission('access:vendor') ? $this->vendors()->first() : null;
+        return $this->hasPermission('has:vendor') ? $this->vendors()->first() : null;
     }
 
     /*

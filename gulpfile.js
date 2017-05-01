@@ -96,6 +96,7 @@ elixir(function(mix) {
         'pages/notices/form.js',
         'pages/notices/show.js',
         'pages/payment-gateways/form.js',
+        'pages/users/form.js',
         'notification.js',
         'admin.js',
     ], 'public/assets/js/admin.js')
