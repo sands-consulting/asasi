@@ -9,7 +9,7 @@
             {!! Former::open_vertical(route('admin.notices.eligible', $notice->id))->method('POST') !!}
                 <div class="modal-body">
                     {!! Former::select('vendor_id')->label('notices.attributes.eligibles.name')->required()->vModel('vendorId')
-                        ->dataUrl(route('api.vendors.index'))
+                        ->dataUrl(version('v1')->route('vendors.index'))
                         ->dataPlaceholder(trans('notices.views.admin.modals.eligible.vendor_id'))
                         ->options(['-1' => trans('notices.views.admin.modals.eligible.vendor_id')]) !!}
                     {!! Former::textarea('remarks')->label('notices.attributes.remarks')->rows(5)->required()->vModel('remarks') !!}

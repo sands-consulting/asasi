@@ -14,7 +14,7 @@
                         ->required()
                         ->multiple(true)
                         ->vModel('vendorIds')
-                        ->dataUrl(route('api.vendors.index'))
+                        ->dataUrl(version('v1')->route('vendors.index'))
                         ->dataPlaceholder(trans('notices.views.admin.modals.invitation.vendor_id'))
                         ->options(['-1' => trans('notices.views.admin.modals.invitation.vendor_id')]) !!}
                 </div>

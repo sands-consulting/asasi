@@ -15,6 +15,9 @@ $(document).ready(function(){
         $(selectField).select2({
           ajax: {
             url: $(selectField).data('url'),
+            headers: {
+              'Authorization': 'Bearer ' + window.Laravel.apiToken
+            },
             dataType: 'json',
             delay: 250,
             data: function(params) {
@@ -75,6 +78,9 @@ $(document).ready(function(){
         $(selectField).select2({
           ajax: {
             url: $(selectField).data('url'),
+            headers: {
+              'Authorization': 'Bearer ' + window.Laravel.apiToken
+            },
             dataType: 'json',
             delay: 250,
             data: function(params) {

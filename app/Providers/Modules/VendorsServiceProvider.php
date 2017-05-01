@@ -82,13 +82,14 @@ class VendorsServiceProvider extends ServiceProvider
                 'except' => ['index', 'destroy']]);
         });
 
-        app('router')->group([
-            'namespace'  => 'App\Http\Controllers\Api',
-            'middleware' => 'api',
-            'prefix'     => 'api',
-            'as'         => 'api.',
-        ], function ($router) {
-            $router->resource('vendors', 'VendorsController', ['only' => 'index']);
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', function($api) {
+            $api->group([
+                'middleware' => ['api.auth', 'bindings'],
+            ], function($api) {
+                $api->get('vendors', 'App\Http\Controllers\Api\VendorsController@index')
+                    ->name('vendors.index');
+            });
         });
     }
 }
