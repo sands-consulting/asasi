@@ -30,7 +30,7 @@
 @endsection
 
 @section('content')
-{!! Former::open(route('admin.users.store'))->id('form-admin-user') !!}
+{!! Former::open_vertical(route('admin.users.store'))->id('form-admin-user') !!}
 	{!! Former::populate($user) !!}
 	@include('admin.users.form')
 {!! Former::close() !!}
