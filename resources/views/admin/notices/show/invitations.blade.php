@@ -5,7 +5,8 @@
                 <th width="5%">#</th>
                 <th>{{ trans('notices.attributes.invitations.name') }}</th>
                 <th class="col-xs-2">{{ trans('notices.attributes.invitations.created_at') }}</th>
-                <th class="col-xs-1">&nbsp;</th>
+                <th class="col-xs-2">{{ trans('notices.attributes.invitations.sent_at') }}</th>
+                <th width="40">&nbsp;</th>
             </thead>
             <tbody>
                 @foreach($notice->invitations()->get() as $invitation)
@@ -14,6 +15,17 @@
                     <td>{{ $invitation->vendor->name }}</td>
                     <td>{{ $invitation->created_at->format('d/m/Y H:i:s') }}</td>
                     <td>
+                        @if($invitation->sent_at)
+                        {{ $invitation->sent_at->format('d/m/Y H:i:s') }}
+                        @else
+                        {!! blank_icon($invitation->sent_at) !!}
+                        @endif
+                    </td>
+                    <td>
+                        @can('show', $invitation->vendor)
+                        <a href="{{ route('admin.vendors.show', $invitation->vendor_id) }}" class="btn btn-xs bg-blue-700" target="_blank"><i class="icon-office"></i></a>
+                        @endcan
+                    </td>
                 </tr>
                 @endforeach
                 <tr>

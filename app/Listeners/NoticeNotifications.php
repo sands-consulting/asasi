@@ -3,7 +3,8 @@
 namespace App\Listeners;
 
 use App\Libraries\GenerateEligible;
-use App\Notifications\VendorApproved;
+use App\Notifications\NoticeInvitation;
+use Carbon\Carbon;
 
 class NoticeNotifications
 {
@@ -27,9 +28,22 @@ class NoticeNotifications
     {
         $notice = $event->notice;
 
-        if(setting('invitation', false, $notice))
+        if($notice->invitation)
         {
-            //
+            $invites = $notice->invitations()->get();
+
+            foreach($invites as $invite)
+            {
+                $users = $invite->vendor->users()->active()->get();
+
+                foreach($users as $user)
+                {
+                    $user->notify(new NoticeInvitation($notice, $invite->vendor));
+                }
+
+                $invite->sent_at = Carbon::now();
+                $invite->save();
+            }
         }
         else
         {

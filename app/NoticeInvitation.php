@@ -14,6 +14,10 @@ class NoticeInvitation extends Model
 
     protected $revisionCreationsEnabled = true;
 
+    protected $dates = [
+        'sent_at'
+    ];
+
     protected $fillable = [
         'notice_id',
         'vendor_id',

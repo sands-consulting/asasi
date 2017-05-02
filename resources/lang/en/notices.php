@@ -72,6 +72,7 @@ return [
         'invitations' => [
             'name' => 'Vendor',
             'created_at' => 'Invitation Date & Time',
+            'sent_at' => 'Sent Date & Time'
         ],
 
         'purchases' => [
@@ -283,10 +284,17 @@ return [
             'greeting' => 'Hi, :name!',
             'line-1' => 'Your company, :vendor is eligible to participate the following notice:',
             'action' => 'View Notice'
+        ],
+        'invitation' => [
+            'subject' => 'Notice Invitation',
+            'greeting' => 'Hi, :name!',
+            'line-1' => 'Your company, :vendor is invited to participate the following notice:',
+            'action' => 'View Notice'
         ]
     ], 
 
     'notifications' => [
         'eligible' => 'You are eligible for :notice.',
+        'invitation' => 'You are invited to participate in :notice.'
     ],
 ];
