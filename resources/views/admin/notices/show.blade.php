@@ -95,9 +95,7 @@
             @endif
 
             @include('admin.notices.show.purchases')
-            {{--
             @include('admin.notices.show.submissions')
-            --}}
             @include('admin.notices.show.evaluations')
             @include('admin.notices.show.award') 
         </div>

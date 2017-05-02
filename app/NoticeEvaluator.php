@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class NoticeEvaluation extends Model
+class NoticeEvaluator extends Model
 {
     use RevisionableTrait,
         SoftDeletes;

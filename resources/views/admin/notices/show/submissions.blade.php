@@ -40,7 +40,7 @@
                             })->whereHas('organizations', function($query) use($notice) {
                                 $query->whereId($notice->organization_id);
                             })->get() as $user)
-                            <option value="{{ $user->id }}" @if(in_array($user->id, $notice->evaluators($type->id))) selected="selected" @endif>{{ $user->name }}</option>
+                            <option value="{{ $user->id }}" @if(in_array($user->id, $notice->evaluations()->where('status', '!=', 'cancelled')->whereTypeId($type->id)->pluck('user_id')->toArray())) selected="selected" @endif>{{ $user->name }}</option>
                             @endforeach
                         </select>
                         <span class="help-block">{{ trans('notices.views.admin.show.submissions.select-evaluator') }}</span>
