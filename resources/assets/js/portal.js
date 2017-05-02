@@ -23,6 +23,11 @@ $(function() {
         dropdownCssClass: 'bg-slate-300'    
     });
   });
+
+  var url = document.location.toString();
+  if(url.match('#')) {
+    $('a[href="#' + url.split('#')[1] + '"]').tab('show');
+  }
 });
 
 // Equal Height

@@ -2,4 +2,4 @@
 
 <br>
 
-{!! link_to_route('notices.show', $notice->name, $notice->id) !!}
+{!! link_to_route('notices.show', $notice->name, [$notice->id, '#tab-notice-submissions']) !!}

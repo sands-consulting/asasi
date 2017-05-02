@@ -102,6 +102,8 @@ return [
     ],
 
     'menu' => [
+        'settings' => 'Settings',
+
         'details' => 'Details',
         'events' => 'Events',
         'qualifications' => 'Qualifications',
