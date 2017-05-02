@@ -276,4 +276,17 @@ return [
             ]
         ],
     ],
+
+    'emails' => [
+        'eligible' => [
+            'subject' => 'Notice Eligiblity',
+            'greeting' => 'Hi, :name!',
+            'line-1' => 'Your company, :vendor is eligible to participate the following notice:',
+            'action' => 'View Notice'
+        ]
+    ], 
+
+    'notifications' => [
+        'eligible' => 'You are eligible for :notice.',
+    ],
 ];

@@ -65,6 +65,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EvaluatorSubmissionAssignedListener',
         ],
 
+        'App\Events\NoticePublished' => [
+            'App\Listeners\NoticeNotifications'
+        ],
+
         'App\Events\NoticeAwarded' => [
             'App\Listeners\NoticeAwardedListener',
         ],

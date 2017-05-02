@@ -6,12 +6,17 @@
                 <th>{{ trans('notices.attributes.eligibles.name') }}</th>
                 <th class="col-xs-2">{{ trans('notices.attributes.eligibles.exception') }}</th>
                 <th class="col-xs-2">{{ trans('notices.attributes.eligibles.notified_at') }}</th>
+                <th width="40">&nbsp;</th>
             </thead>
             <tbody>
                 @forelse($notice->eligibles()->get() as $eligible)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $eligible->vendor->name }}</td>
+                    <td>
+                        {{ $eligible->vendor->name }}
+                        <?php $vendor = $eligible->vendor; ?>
+                        @include('admin.vendors.index.status')
+                    </td>
                     <td>
                         {!! boolean_icon($eligible->exception) !!}
                         @if($eligible->exception)
@@ -25,6 +30,11 @@
                         @else
                         {!! blank_icon($eligible->notified_at) !!}
                         @endif
+                    </td>
+                    <td>
+                        @can('show', $eligible->vendor)
+                        <a href="{{ route('admin.vendors.show', $eligible->vendor_id) }}" class="btn btn-xs bg-blue-700" target="_blank"><i class="icon-office"></i></a>
+                        @endcan
                     </td>
                 </tr>
                 @empty

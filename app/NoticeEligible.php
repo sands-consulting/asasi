@@ -10,9 +10,17 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class NoticeEligible extends Model
 {
     use RevisionableTrait,
-        DateAccessor;
+        SoftDeletes;
 
     protected $revisionCreationsEnabled = true;
+
+    protected $attributes = [
+        'exception' => false
+    ];
+
+    protected $dates = [
+        'notified_at'
+    ];
 
     protected $fillable = [
         'exception',

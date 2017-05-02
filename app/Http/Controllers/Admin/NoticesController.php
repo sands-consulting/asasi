@@ -9,9 +9,7 @@ use App\NoticeEvaluator;
 use App\Project;
 use App\Submission;
 use App\Vendor;
-use App\Events\NoticeAwarded;
-use App\DataTables\EvaluationSummaryDataTable;
-use App\DataTables\EvaluatorSummaryDataTable;
+use App\Events\NoticePublished;
 use App\DataTables\NoticesDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
@@ -190,7 +188,8 @@ class NoticesController extends Controller
     public function publish(Request $request, Notice $notice)
     {
         NoticeService::publish($notice);
-        UserHistoryService::log(Auth::user(), 'Publish', $notice, $request->getClientIp());
+        UserHistoryService::log(Auth::user(), 'publish', $notice, $request->getClientIp());
+        event(new NoticePublished($notice));
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.published', ['name' => $notice->name]));
@@ -199,7 +198,7 @@ class NoticesController extends Controller
     public function unpublish(Request $request, Notice $notice)
     {
         NoticeService::unpublish($notice);
-        UserHistoryService::log(Auth::user(), 'Unpublish', $notice, $request->getClientIp());
+        UserHistoryService::log(Auth::user(), 'unpublish', $notice, $request->getClientIp());
         return redirect()
             ->to($request->input('redirect_to', route('admin.notices.show', $notice->id)))
             ->with('notice', trans('notices.notices.unpublished', ['name' => $notice->name]));

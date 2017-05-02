@@ -3,7 +3,6 @@ $(function () {
   let vm_notifications = new Vue({
     el: '#notifications',
     data: {
-      authToken: null,
       notifications: [],
       url: null,
       userId: null,
@@ -33,11 +32,8 @@ $(function () {
           });
       },
       read(notificationId) {
-        axios.put(this.url + '/' + notificationId + '/read', null, {
-          headers: {
-            'Authorization': 'Bearer ' + this.authToken
-          }
-        }).then(response => {
+        axios.put(this.url + '/' + notificationId + '/read', null)
+        .then(response => {
             this.populate();
           })
           .catch(error => {
