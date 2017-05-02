@@ -30,7 +30,7 @@
                             Price offer by {{ Auth::user()->vendor->name }} :
                             {!! Former::inline_text('price')
                                 ->label(false)
-                                ->prepend(\App\Setting::whereKey('currency')->first()->value)
+                                ->prepend(setting('currency'))
                                 ->required() !!}
                         </td>
                     </tr>
@@ -45,6 +45,7 @@
                             Project duration proposed by {{ Auth::user()->vendor->name }} :
                             {!! Former::text('duration')
                                 ->label(false)
+                                ->append(trans('app.durations.' . setting('duration', 'days', $notice)))
                                 ->required() !!}
                         </td>
                     </tr>

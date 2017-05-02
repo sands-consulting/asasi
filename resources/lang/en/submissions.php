@@ -7,6 +7,7 @@ return [
         'number'       => 'Number',
         'label'        => 'Label',
         'price'        => 'Price',
+        'duration'     => 'Duration',
         'total_score'  => 'Total Score',
         'avg_score'    => 'Average Score',
         'notice_id'    => 'Notice',
@@ -32,6 +33,13 @@ return [
                 'view' => 'Edit Submission',
             ]
         ]
+    ],
+
+    'durations' => [
+        'days' => 'One day|:count days',
+        'weeks' => 'One week|:count weeks',
+        'months' => 'One month|:count months',
+        'years' => 'One year|:count years'
     ],
 
     'notices' => [

@@ -196,6 +196,7 @@ return [
                     'invitation' => 'Invite only selected vendors',
                     'purchase' => 'Allow notice purchase via system',
                     'submission' => 'Allow notice submission via system',
+                    'duration' => 'Unit for the duration of the notice submission',
                     'evaluation' => 'Allow notice evaluation via system',
                     'evaluation-settings' => 'Notice Evaluation Settings',
                     'award' => 'Allow notice award via system',

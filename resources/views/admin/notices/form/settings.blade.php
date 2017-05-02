@@ -15,6 +15,11 @@
 			{!! Former::checkbox('settings[purchase]')->label('notices.views.admin.form.settings.purchase')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.purchase') !!}
 			{!! Former::hidden('settings[submission]')->value(0) !!}
 			{!! Former::checkbox('settings[submission]')->label('notices.views.admin.form.settings.submission')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.submission')->setAttribute('v-bind:checked', 'settings.submission') !!}
+
+			<template v-if="settings.submission">
+			{!! Former::select('settings[duration]')->label('notices.views.admin.form.settings.duration')->options(trans('app.durations')) !!}
+			</template>
+			
 			{!! Former::hidden('settings[evaluation]')->value(0) !!}
 			{!! Former::checkbox('settings[evaluation]')->label('notices.views.admin.form.settings.evaluation')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.evaluation') !!}
 

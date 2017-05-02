@@ -28,7 +28,55 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-3">
-        @include('admin.notices.show.menu')
+        <ul class="list-group list-notice list-prompt-side-tab panel panel-flat" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#tab-notice-details" aria-controls="tab-notice-details" role="tab" data-toggle="tab" class="list-group-item">
+                    <i class="icon-clipboard3"></i> {{ trans('notices.menu.details') }}
+                </a>
+            </li>
+
+            <li role="presentation">
+                <a href="#tab-notice-events" aria-controls="tab-notice-events" role="tab" data-toggle="tab" class="list-group-item">
+                    <i class="icon-calendar3"></i> {{ trans('notices.menu.events') }}
+                </a>
+            </li>
+
+            <li role="presentation">
+                <a href="#tab-notice-qualifications" aria-controls="tab-notice-qualifications" role="tab" data-toggle="tab" class="list-group-item">
+                    <i class="icon-stack2"></i> {{ trans('notices.menu.qualifications') }}
+                </a>
+            </li>
+
+            <li role="presentation">
+                <a href="#tab-notice-files" aria-controls="tab-notice-files" role="tab" data-toggle="tab" class="list-group-item">
+                    <i class="icon-copy3"></i> {{ trans('notices.menu.files') }}
+                </a>
+            </li>
+
+            @if(setting('submission', false, $notice) && $notice->status_submission == 'published')
+
+            <li class="list-group-divider"></li>
+
+            <li role="presentation">    
+                <a href="#tab-notice-submissions" aria-controls="tab-notice-submissions" role="tab" data-toggle="tab" class="list-group-item">
+                    <i class="icon-file-presentation"></i> {{ trans('notices.menu.submissions') }}
+                </a>
+            </li>
+
+            @endif
+
+            @if(setting('award', false, $notice) && $notice->status_award == 'published')
+
+            <li class="list-group-divider"></li>
+
+            <li role="presentation">
+                <a href="#tab-notice-award" aria-controls="tab-notice-award" role="tab" data-toggle="tab" class="list-group-item">
+                    <i class="icon-medal2"></i> {{ trans('notices.menu.award') }}
+                </a>
+            </li>
+
+            @endif
+        </ul>
     </div>
 
     <div class="col-xs-12 col-md-9">
@@ -37,6 +85,18 @@
             @include('admin.notices.show.events')
             @include('admin.notices.show.qualifications')
             @include('admin.notices.show.files')
+
+            @if(setting('submission', false, $notice) && $notice->status_submission == 'published')
+
+            @include('notices.show.submissions')
+
+            @endif
+
+            @if(setting('award', false, $notice) && $notice->status_submission == 'published')
+
+            @include('notices.show.award')
+
+            @endif
         </div>
     </div>
 </div>

@@ -54,5 +54,12 @@ return [
                 'pending' => 'Application for <strong>:vendor</strong> is pending for approval by PROMPT adminstrator. If have any enquiry, please contact us via contact form made available in PROMPT'
             ]
         ]
+    ],
+
+    'durations' => [
+        'days' => 'day(s)',
+        'weeks' => 'week(s)',
+        'months' => 'month(s)',
+        'years' => 'year(s)'
     ]
 ];

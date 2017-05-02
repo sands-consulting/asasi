@@ -7,6 +7,7 @@
                 <th>{{ trans('submissions.attributes.vendor') }}</th>
                 <th>{{ trans('submissions.attributes.number') }}</th>
                 <th>{{ trans('submissions.attributes.price') }}</th>
+                <th>{{ trans('submissions.attributes.duration') }}</th>
                 <th>{{ trans('submissions.attributes.submitted_at') }}</th>
                 <th>{{ trans('submissions.attributes.label') }}</th>
             </thead>
@@ -20,6 +21,10 @@
                         <span v-if="submission.number">@{{ submission.number }}</span>
                     </td>
                     <td>{{ setting('currency') }} @{{ submission.price.format('0,0.00') }}</td>
+                    <td>
+                        <i class="icon-cross2" v-if="!submission.duration_in_text"></i>
+                        <span v-if="submission.duration_in_text">@{{ submission.duration_in_text }}</span>
+                    </td>
                     <td>
                         <i class="icon-cross2" v-if="!submission.submitted_at"></i>
                         <span v-if="submission.submitted_at">@{{ submission.submitted_at.format('DD/MM/YYYY HH:mm:ss') }}</span>

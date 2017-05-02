@@ -28,6 +28,10 @@ class Submission extends Model
         'submitted_at',
     ];
 
+    protected $appends = [
+        'duration_in_text'
+    ];
+
     protected $attributes = [
         'status' => 'draft',
     ];
@@ -148,5 +152,10 @@ class Submission extends Model
             $progress = $completed / $evaluators * 100;
         }
         return $progress;
+    }
+
+    public function getDurationInTextAttribute()
+    {
+        return $this->duration ? trans_choice('submissions.durations.' . setting('duration', 'days', $this->notice), $this->duration) : null;
     }
 }
