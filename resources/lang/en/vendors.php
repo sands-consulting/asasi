@@ -184,7 +184,7 @@ return [
                     'empty' => 'No files uploaded.'
                 ],
                 'qualifications' => [
-                    'empty' => 'No codes recorded.'
+                    'empty' => 'No qualification recorded.'
                 ],
                 'subscriptions' => [
                     'empty' => 'No subscription created.',

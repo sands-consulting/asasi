@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="tab-vendor-qualifications">
     <div class="panel"><table class="table table-bordered table-condensed ">
-    @foreach($vendor->qualifications()->with('type')->get() as $qualification)
+    @forelse($vendor->qualifications()->with('type')->get() as $qualification)
         <thead class="bg-blue-700">
             <tr>
                 <th colspan="2">{{ $qualification->type->name }}</th>
@@ -64,6 +64,10 @@
         </tr>
         @endif
         </tbody>
-    @endforeach
+    @empty
+        <tr>
+            <td class="text-center">{{ trans('vendors.views.admin.show.qualifications.empty') }}</td>
+        </tr>
+    @endforelse
     </table></div>
 </div>
