@@ -18,8 +18,21 @@
 @section('content')
     <div id="project-milestones">
         <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h6 class="panel-title">{{ $project->number }}
+                    <div class="heading-elements">
+                        @for ($i = 0; $i < 5; $i++)
+                            @if ($i < $project->ganttTasks()->whereNotNull('ratings')->get()->average('ratings'))
+                                <span class="icon-star-full2"></span>
+                            @else
+                                <span class="icon-star-empty3"></span>
+                            @endif
+                        @endfor
+                    </div>
+                </h6>
+            </div>
             <div class="panel-body">
-                <span><small>{{ $project->number }}</small> <br> {{ $project->name }}</span>
+                <p class="text-justify">{{ $project->name }}</p>
             </div>
         </div>
         <div class="panel panel-flat">
