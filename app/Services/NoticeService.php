@@ -108,6 +108,11 @@ class NoticeService extends BaseService
                 }
             }
         }
+
+        foreach($notice->submissions()->get() as $submission)
+        {
+            $submission->calculateOverallPercentage()->save();
+        }
     }
 
     public static function events(Notice $notice, $inputs)
