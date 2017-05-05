@@ -26,7 +26,8 @@ return [
         'evaluation-types' => [
             'type' => 'Type',
             'start_at' => 'Start Date',
-            'end_at' => 'End Date'
+            'end_at' => 'End Date',
+            'weightage' => 'Weightage'
         ],
 
         'events' => [

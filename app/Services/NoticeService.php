@@ -88,9 +88,14 @@ class NoticeService extends BaseService
                 $data['end_at'] = $inputs['end_at'];
             }
 
+            if(isset($inputs['weightage']) && !empty($inputs['weightage']))
+            {
+                $data['weightage'] = $inputs['weightage'];
+            }
+
             $evaluation = $notice->evaluationSettings()->firstOrNew(['type_id' => $typeId]);
 
-            if(count($data) == 2)
+            if(count($data) >= 2)
             {
                 $evaluation->fill($data);
                 $evaluation->save();

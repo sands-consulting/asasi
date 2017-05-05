@@ -17,6 +17,7 @@ class NoticeEvaluation extends Model
     protected $fillable = [
         'start_at',
         'end_at',
+        'weightage',
         'type_id',
         'notice_id',
     ];

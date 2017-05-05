@@ -23,7 +23,8 @@ return [
         'requirement'   => 'Requirement',
         'notice_number' => 'Notice No.',
         'organization'  => 'Organization',
-        'submitted_at'  => 'Submission Date & Time'
+        'submitted_at'  => 'Submission Date & Time',
+        'overall_percentage' => 'Overall Percentage',
     ],
 
     'buttons' => [

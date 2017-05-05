@@ -1,10 +1,42 @@
 <div role="tabpanel" class="tab-pane" id="tab-notice-evaluations">
+    <div class="panel panel-default">
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th width="50">#</th>
+                    <th width="100">&nbsp;</th>
+                    <th>Vendor</th>
+                    @foreach($notice->evaluationSettings()->with('type')->get() as $setting)<th class="text-right">{{ $setting->type->name }}</th>@endforeach
+                    <th width="200" class="text-right">{{ trans('evaluations.attributes.overall_percentage') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('submitted_at')->get() as $submission)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td class="text-right">@if($submission->label)<span class="label bg-blue-700">{{ $submission->label }}</span>@endif</td>
+                    <td>{{ $submission->vendor->name }}</td>
+                    @foreach($notice->evaluationSettings()->with('type')->get() as $setting)
+                    <td class="text-right">
+                        {{ $submission->averagePercentage($setting->type_id) }} %<br>
+                        <small>{{ $submission->averageScore($setting->type_id) }} / {{ $submission->totalScore($setting->type_id) }}</small>
+                    </td>
+                    @endforeach
+                    <td class="text-right">{{ $submission->overallPercentage() }} %</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
     @foreach($notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('submitted_at')->get() as $submission)
     <div class="panel panel-default panel-form">
         <div class="panel-heading">
             <h4 class="panel-title">
                 @if($submission->label)<span class="label bg-blue-700">{{ $submission->label }}</span>@endif
-                {{ $submission->vendor->name }}
+                
             </h4>
         </div>
         <table class="table">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
+use App\DataTables\VendorEligiblesDataTable;
 use App\DataTables\VendorsDataTable;
 use App\Events\VendorApproved;
 use App\Events\VendorRejected;
@@ -184,5 +185,12 @@ class VendorsController extends Controller
         return redirect()
             ->to($request->input('redirect_to', route('admin.vendors.show', $vendor->id)))
             ->with('notice', trans('vendors.notices.activated', ['name' => $vendor->name]));
+    }
+
+    public function eligibles(VendorEligiblesDataTable $table, Vendor $vendor)
+    {
+        $table->vendor_id = $vendor->id;
+        dd($table->html());
+        return $table->render('admin.vendors.eligibles', compact('vendor'));
     }
 }

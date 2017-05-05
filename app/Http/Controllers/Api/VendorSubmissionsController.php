@@ -19,7 +19,7 @@ class VendorSubmissionsController extends Controller
         ]);
 
         $notice->evaluationSettings->map(function ($evaluation) use ($submission) {
-            $detail = $submission->details($evaluation->type_id)->first();
+            $detail = $submission->details()->whereTypeId($evaluation->type_id)->first();
             $evaluation['submission_status'] = $detail ? $detail->status : 'incomplete';
             $evaluation['submission_exists'] = $detail ? true : false;
             $evaluation['submission_details'] = $detail;

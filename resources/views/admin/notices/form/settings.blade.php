@@ -23,15 +23,16 @@
 			{!! Former::hidden('settings[evaluation]')->value(0) !!}
 			{!! Former::checkbox('settings[evaluation]')->label('notices.views.admin.form.settings.evaluation')->inline()->addClass('pull-right')->forceValue(1)->vModel('settings.evaluation') !!}
 
-			<table class="table table-bordered mb-10" v-if="settings.evaluation">
+			<table class="table table-bordered table-condensed mb-10" v-if="settings.evaluation">
 				<thead>
 					<tr class="bg-blue-700">
-						<th colspan="3">{{ trans('notices.views.admin.form.settings.evaluation-settings') }}</th>
+						<th colspan="4">{{ trans('notices.views.admin.form.settings.evaluation-settings') }}</th>
 					</tr>
 					<tr>
 						<th>{{ trans('notices.attributes.evaluation-types.type') }}</th>
 						<th>{{ trans('notices.attributes.evaluation-types.start_at') }}</th>
 						<th>{{ trans('notices.attributes.evaluation-types.end_at') }}</th>
+						<th>{{ trans('notices.attributes.evaluation-types.weightage') }}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,6 +43,7 @@
 						</td>
 						<td><datepicker-single klass="form-control" v-bind:name="'notice-evaluations[' + type.slug + '][start_at]'" :date="noticeEvaluations[type.slug].start_at"></datepicker-single></td>
 						<td><datepicker-single klass="form-control" v-bind:name="'notice-evaluations[' + type.slug + '][end_at]'" :date="noticeEvaluations[type.slug].end_at"></datepicker-single></td>
+						<td><input type="text" v-bind:name="'notice-evaluations[' + type.slug + '][weightage]'" v-model="type.weightage" class="form-control"></td>
 					</tr>
 				</tbody>
 			</table>

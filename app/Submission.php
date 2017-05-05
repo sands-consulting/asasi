@@ -101,13 +101,6 @@ class Submission extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-    public function scoreAverage()
-    {
-        return $this->hasOne(EvaluationScore::class)
-            ->selectRaw('submission_id, avg(score) as score_avg')
-            ->groupBy('submission_id');
-    }
-
     public function requirements()
     {
         return $this->belongsToMany(EvaluationRequirement::class, 'evaluation_scores')
@@ -121,20 +114,9 @@ class Submission extends Model
         return $this->belongsTo(EvaluationType::class);
     }
 
-    public function details($type = null)
+    public function details()
     {
-        $details = $this->hasMany(SubmissionDetail::class);
-
-        if (! is_null($type)) {
-            $details->where('type_id', $type);
-        }
-
-        return $details;
-    }
-
-    public function averageScore($typeId)
-    {
-        return (int)$this->evaluations()->whereTypeId($typeId)->avg('score');
+        $this->hasMany(SubmissionDetail::class);
     }
 
     public function evaluations()
@@ -157,5 +139,41 @@ class Submission extends Model
     public function getDurationInTextAttribute()
     {
         return $this->duration ? trans_choice('submissions.durations.' . setting('duration', 'days', $this->notice), $this->duration) : null;
+    }
+
+    public function averageScore($typeId)
+    {
+        return (int) $this->evaluations()->whereStatus('completed')->whereTypeId($typeId)->avg('score');
+    }
+
+    public function totalScore($typeId)
+    {
+        return (int) $this->notice->evaluationRequirements()->whereStatus('active')->whereTypeId($typeId)->sum('full_score');
+    }
+
+    public function averagePercentage($typeId)
+    {
+        $count = $this->evaluations()->whereStatus('completed')->whereTypeId($typeId)->count();
+
+        if($count > 0)
+        {
+            return $this->averageScore($typeId) / $this->evaluations()->whereStatus('completed')->whereTypeId($typeId)->count();
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function overallPercentage()
+    {
+        $percentage = 0.00;
+
+        foreach($this->notice->evaluationSettings()->get() as $setting)
+        {
+            $percentage = $percentage + ($this->averagePercentage($setting->type_id) * $setting->weightage);
+        }
+
+        return $percentage;
     }
 }
