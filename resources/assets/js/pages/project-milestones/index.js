@@ -62,6 +62,7 @@ var vm = new Vue({
         ratings: rate
       }).then(response => {
         console.log(response)
+        location = location
       }).catch(error => {
         console.log(error)
       })
