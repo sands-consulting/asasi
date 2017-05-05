@@ -153,7 +153,7 @@ class Submission extends Model
 
     public function averagePercentage($typeId)
     {
-        $setting    = $this->notice->evaluationSettings()->whereTypeId($typeId)->get();
+        $setting    = $this->notice->evaluationSettings()->whereTypeId($typeId)->first();
         $count      = $this->evaluations()->whereStatus('completed')->whereTypeId($typeId)->count();
 
         if($setting && $count > 0)
