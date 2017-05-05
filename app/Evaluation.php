@@ -147,4 +147,13 @@ class Evaluation extends Model
     {
         return route('admin.evaluations.edit', $this->id);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::saving(function($evaluation) {
+            $this->submission->calculateOverallPercentage()->save();
+        });
+    }
 }

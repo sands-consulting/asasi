@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('submitted_at')->get() as $submission)
+            @foreach($notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('overall_percentage')->get() as $submission)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td class="text-right">@if($submission->label)<span class="label bg-blue-700">{{ $submission->label }}</span>@endif</td>
@@ -22,7 +22,7 @@
                         <small>{{ $submission->averageScore($setting->type_id) }} / {{ $submission->totalScore($setting->type_id) }}</small>
                     </td>
                     @endforeach
-                    <td class="text-right">{{ $submission->overallPercentage() }} %</td>
+                    <td class="text-right">{{ $submission->overall_percentage }} %</td>
                 </tr>
             @endforeach
             </tbody>
