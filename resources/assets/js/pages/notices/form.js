@@ -119,7 +119,7 @@ $(document).ready(function() {
               if ( type.length > 0 ) {
                 this.$set(this.noticeEvaluations[type[0].slug], 'start_at', moment(evaluation.start_at).format('YYYY-MM-DD'));
                 this.$set(this.noticeEvaluations[type[0].slug], 'end_at', moment(evaluation.end_at).format('YYYY-MM-DD'));
-                this.$set(this.noticeEvaluations[type[0].slug], 'end_at', moment(evaluation.end_at).format('YYYY-MM-DD'));
+                this.$set(this.noticeEvaluations[type[0].slug], 'weightage', evaluation.weightage);
               }
             }
           }
