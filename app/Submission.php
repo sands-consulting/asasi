@@ -151,9 +151,8 @@ class Submission extends Model
         return (int) $this->notice->evaluationRequirements()->whereStatus('active')->whereTypeId($typeId)->sum('full_score');
     }
 
-    public function calculateAveragePercentage($typeId)
+    public function averagePercentage($typeId)
     {
-        $value      = 0;
         $setting    = $this->notice->evaluationSettings()->whereTypeId($typeId)->first();
         $count      = $this->evaluations()->whereStatus('completed')->whereTypeId($typeId)->count();
 
@@ -163,9 +162,24 @@ class Submission extends Model
             $value = $value / $count;
             $value = $value * ($setting->weightage / 100);
             $value = $value * 100;
+            return $value;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function calculateOverallPercentage()
+    {
+        $percentage = 0.00;
+
+        foreach($this->notice->evaluationSettings()->get() as $setting)
+        {
+            $percentage = $percentage + $this->averagePercentage($setting->type_id);
         }
 
-        $this->overall_percentage = $value;
+        $this->overall_percentage = $percentage;
 
         return $this;
     }
