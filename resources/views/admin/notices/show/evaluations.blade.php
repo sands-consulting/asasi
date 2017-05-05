@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('overall_percentage')->get() as $submission)
+            @foreach($notice->submissions()->whereStatus('submitted')->orderBy('label')->orderBy('overall_percentage', 'desc')->get() as $submission)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td class="text-right">@if($submission->label)<span class="label bg-blue-700">{{ $submission->label }}</span>@endif</td>
