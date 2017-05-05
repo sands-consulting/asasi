@@ -26,6 +26,7 @@ class Project extends Model
         'contact_fax',
         'cost',
         'progress',
+        'notification',
         'notice_id',
         'organization_id',
         'vendor_id',

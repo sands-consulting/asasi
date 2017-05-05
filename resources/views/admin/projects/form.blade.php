@@ -55,6 +55,11 @@
 			->required() !!}
 	</div>
 	<div class="col-sm-6"> 
+		{!! Former::text('contact_position')
+			->label('projects.attributes.contact_position')
+			->required() !!}
+	</div>
+	<div class="col-sm-6"> 
 		{!! Former::text('contact_phone')
 			->label('projects.attributes.contact_phone')
 			->required() !!}
@@ -83,7 +88,18 @@
 			->required() !!}
 	</div>
 </div>
-<div class="row"> 
+<div class="row">
+	<div class="col-sm-6"> 
+		{!! Former::select('notification')
+			->options([
+				'' => 'Select Notification', 
+				'none' => 'Dont send notification',
+				'project_complete' => 'Send upon project completion',
+				'milestone_complete' => 'Send upon milestone completion'
+			])
+			->label('Notifications')
+			->required() !!}
+	</div>
 	<div class="col-sm-6"> 
 		{!! Former::select('status')
 			->label('allocations.attributes.status')
@@ -92,7 +108,6 @@
 			->required() !!}
 	</div>
 </div>
-
 <div class="col-sm-12">
 	<div class="text-right"> 
 		{!! link_to_route('admin.projects.index', trans('actions.cancel'), [], ['class' => 'btn btn-default']) !!}
