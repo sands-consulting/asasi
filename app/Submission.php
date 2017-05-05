@@ -160,8 +160,7 @@ class Submission extends Model
         {
             $value = $this->averageScore($typeId);
             $value = $value / $count;
-            $value = $value * ($setting->weightage / 100);
-            $value = $value * 100;
+            $value = $value * $setting->weightage;
             return $value;
         }
         else
