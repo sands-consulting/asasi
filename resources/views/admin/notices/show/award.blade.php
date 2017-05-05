@@ -4,7 +4,7 @@
 		<div class="panel-body">
             {!! Former::select('submission_id')
                 ->label('notices.views.admin.show.award.submission')
-                ->options($notice->submissions()->whereStatus('submitted')->pluck('number', 'id'))
+                ->options($notice->submissions()->whereStatus('submitted')->with('vendor')->get()->pluck('vendor.name', 'id'))
                 ->placeholder('notices.views.admin.show.award.select-submission')
                 ->required() !!}
 			{!! Former::text('period')->required()->placeholder('notices.views.admin.show.award.period') !!}
