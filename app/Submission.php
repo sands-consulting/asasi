@@ -159,9 +159,8 @@ class Submission extends Model
         if($setting && $count > 0)
         {
             $value = $this->averageScore($typeId);
-            $value = $value / $count;
-            $value = $value * ($setting->weightage / 100);
-            $value = $value * 100;
+            $value = $value / $count
+            $value = $value * $setting->weightage;
             return $value;
         }
         else
