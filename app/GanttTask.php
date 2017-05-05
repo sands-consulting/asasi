@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\DateAccessor;
 use Illuminate\Database\Eloquent\Model;
 
 class GanttTask extends Model
 {
+    use DateAccessor;
+
     protected $dates = [
         'start',
         'end',

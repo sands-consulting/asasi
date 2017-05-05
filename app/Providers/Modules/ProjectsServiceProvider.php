@@ -78,6 +78,10 @@ class ProjectsServiceProvider extends ServiceProvider
         ], function ($router) {
             $router->get('projects/{project}/milestones/gantt-tasks', 'ProjectMilestonesController@getGanttTasks')
                 ->name('projects.milestones.gantt-tasks');
+            $router->put('projects/{project}/milestones/update-task', 'ProjectMilestonesController@updateTask')
+                ->name('projects.milestones.update-task');
+            $router->put('projects/{project}/milestones/update-rating', 'ProjectMilestonesController@updateRating')
+                ->name('projects.milestones.update-rating');
         });
     }
 }

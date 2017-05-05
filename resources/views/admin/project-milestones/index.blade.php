@@ -60,6 +60,41 @@
                 </div>
             </div>
         </div>
+        <div class="panel panel-flat">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Milestones</th>
+                        <th>Duration</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>%</th>
+                        <th class="text-center">Ratings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(task, index) in gantt.tasks">
+                        <td v-text="index + 1"></td>
+                        <td v-text="task.name"></td>
+                        <td v-text="task.duration"></td>
+                        <td v-text="task.start"></td>
+                        <td v-text="task.end"></td>
+                        <td v-text="task.progress"></td>
+                        <td class="text-center">
+                            <button 
+                                class="btn btn-link btn-icon btn-xs"
+                                style="padding: 5px"
+                                v-if="task.progress == 100" 
+                                v-for="n in 5" @click="updateRating(n, task.id)"
+                            >
+                                <span v-bind:class="getRated(n, task.ratings)"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 

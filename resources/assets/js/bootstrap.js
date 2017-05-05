@@ -47,3 +47,6 @@ window.Echo = new Echo({
 
 /* gantt */
 window.Gantt = require('frappe-gantt');
+
+/* moment */
+window.moment = require('moment');

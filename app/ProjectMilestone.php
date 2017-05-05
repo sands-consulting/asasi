@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\DateAccessor;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,8 @@ use Venturecraft\Revisionable\RevisionableTrait;
 
 class ProjectMilestone extends Model
 {
-    use RevisionableTrait,
+    use DateAccessor,
+        RevisionableTrait,
         Sluggable,
         SoftDeletes;
 
