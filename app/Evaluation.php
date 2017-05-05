@@ -153,7 +153,7 @@ class Evaluation extends Model
         parent::boot();
 
         self::saving(function($evaluation) {
-            $this->submission->calculateOverallPercentage()->save();
+            $evaluation->submission->calculateOverallPercentage()->save();
         });
     }
 }
