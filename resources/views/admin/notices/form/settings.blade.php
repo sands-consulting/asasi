@@ -43,7 +43,7 @@
 						</td>
 						<td><datepicker-single klass="form-control" v-bind:name="'notice-evaluations[' + type.slug + '][start_at]'" :date="noticeEvaluations[type.slug].start_at"></datepicker-single></td>
 						<td><datepicker-single klass="form-control" v-bind:name="'notice-evaluations[' + type.slug + '][end_at]'" :date="noticeEvaluations[type.slug].end_at"></datepicker-single></td>
-						<td><input type="text" v-bind:name="'notice-evaluations[' + type.slug + '][weightage]'" v-model="type.weightage" class="form-control"></td>
+						<td><input type="text" v-bind:name="'notice-evaluations[' + type.slug + '][weightage]'" v-model="noticeEvaluations[type.slug].weightage" class="form-control"></td>
 					</tr>
 				</tbody>
 			</table>
