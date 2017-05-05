@@ -10,7 +10,7 @@
             <h5 class="panel-title">Vendor Submission ({{ $detail->type->name }})</h5>
         </div>
         <div class="panel-body">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th colspan="2">
@@ -65,7 +65,12 @@
                                         $checked = $requirement->items->value == 1 ? 'checked="checked"' : false;
                                     }
                                 @endphp
-                                <input type="checkbox" name="value[{{ $requirement->id }}]" value="1" {{ $checked }}>
+                                <input 
+                                    type="checkbox" 
+                                    name="value[{{ $requirement->id }}]" 
+                                    value="1" {{ $checked }}
+                                    class="styled" 
+                                >
                             @endif
                         </td>
                         <td>
