@@ -10,8 +10,8 @@ use App\DataTables\ProjectNoticeDataTable;
 use App\DataTables\RevisionsDataTable;
 use App\DataTables\UserHistoriesDataTable;
 use App\Http\Requests\ProjectRequest;
-use App\Services\ProjectsService;
-use App\Services\UserHistoriesService;
+use App\Services\ProjectService;
+use App\Services\UserHistoryService;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -50,8 +50,8 @@ class ProjectsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        $project = ProjectsService::create(new Project, $inputs);
-        UserHistoriesService::log($request->user(), 'create', $project, $request->getClientIp());
+        $project = ProjectService::create(new Project, $inputs);
+        UserHistoryService::log($request->user(), 'create', $project, $request->getClientIp());
         return redirect()
             ->route('admin.projects.show', $project->id)
             ->with('notice', trans('projects.notices.created', ['name' => $project->name]));
@@ -77,7 +77,8 @@ class ProjectsController extends Controller
             'managers', 
             'vendor_id', 
             'cost', 
-            'progress', 
+            'progress',
+            'notification',
             'status'
         );
 
@@ -90,7 +91,7 @@ class ProjectsController extends Controller
             $inputs['organization_id'] = $request->input('organization_id', Organization::first()->id);
         }
 
-        ProjectsService::update($project, $inputs);
+        ProjectService::update($project, $inputs);
 
         $managers = [];
         if (count($inputs['managers']) > 0) {
@@ -103,7 +104,7 @@ class ProjectsController extends Controller
         }
         $project->users()->sync($managers);
 
-        UserHistoriesService::log($request->user(), 'update', $project, $request->getClientIp());
+        UserHistoryService::log($request->user(), 'update', $project, $request->getClientIp());
         return redirect()
             ->route('admin.projects.show', $project->id)
             ->with('notice', trans('projects.notices.updated', ['number' => $project->number]));
@@ -111,8 +112,8 @@ class ProjectsController extends Controller
 
     public function destroy(Project $project)
     {
-        ProjectsService::delete($project);
-        UserHistoriesService::log($request->user(), 'delete', $project, $request->getClientIp());
+        ProjectService::delete($project);
+        UserHistoryService::log($request->user(), 'delete', $project, $request->getClientIp());
         return redirect()
             ->route('admin.projects.index')
             ->with('notice', trans('projects.notices.deleted', ['name' => $project->name]));
