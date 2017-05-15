@@ -96,13 +96,19 @@ class NoticesServiceProvider extends ServiceProvider
             $router->resource('notices', 'NoticesController', ['only' => ['index', 'show']]);
             $router->post('notices/{notice}/bookmark', 'NoticesController@bookmark')
                 ->name('notices.bookmark');
+        });
 
-            $router->group([
-                'namespace' => 'api',
-                'prefix'    => 'api',
-                'as'        => 'api.',
-            ], function ($router) {
-                $router->get('notice/get-all', 'NoticesController@getAll');
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', function($api) {
+            $api->group([
+                'middleware' => ['api.auth', 'bindings'],
+            ], function($api) {
+                $api->post('notices', 'App\Http\Controllers\Api\NoticesController@index')
+                    ->name('api.notices.index');
+                $api->get('eligibles', 'App\Http\Controllers\Api\NoticesController@eligibles')
+                    ->name('api.notices.eligibles');
+                $api->get('purchases', 'App\Http\Controllers\Api\NoticesController@purchases')
+                    ->name('api.notices.purchases');
             });
         });
 

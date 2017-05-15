@@ -54,7 +54,8 @@ class Notice extends Model
 
     protected $appends = [
         'tax',
-        'total'
+        'total',
+        'qualification_types',
     ];
 
     protected $searchable = [
@@ -260,6 +261,15 @@ class Notice extends Model
         return sprintf("%s - %s\n%s", $this->organization->name, $this->number, $this->name);
     }
 
+    public function getQualificationTypesAttribute()
+    {
+        return $this->qualificationCodes->reduce(function ($carry, $code) {
+            if (!in_array($code->type->code, $carry)) {
+                $carry[] = $code->type->code;
+            }
+            return $carry;
+        }, []);
+    }
     /*
      * Helpers
      */

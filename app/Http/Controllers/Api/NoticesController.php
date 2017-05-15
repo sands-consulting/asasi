@@ -10,7 +10,51 @@ use App\Services\NoticesService;
 
 class NoticesController extends Controller
 {
-    
+    public function index(Request $request)
+    {
+        if ($request->has('data')) {
+            $data = $request->get('data');
+
+            if (isset($data['id'])) {
+                $notices = Notice::whereId($data['id'])->get();
+            } else {
+                $notices = Notice::published()->get();
+            }
+
+            if (isset($data['columns'])) {
+                $notices = $notices->select($data['columns']);   
+            }
+        } else {
+            $notices = Notice::published()->get();
+        }
+
+        return response()->json($notices);
+    }
+
+    public function eligibles(Request $request)
+    {
+        $user = $request->user();
+        $notices = Notice::published()
+            ->whereHas('eligibles', function($query) use ($user) {
+                $query->where('vendor_id', $user->vendor->id);
+            })->get();
+
+        return response()->json($notices);
+    }
+
+    public function purchases(Request $request)
+    {
+        $user = $request->user();
+        $notices = Notice::published()
+            ->whereHas('purchases', function($query) use ($user) {
+                $query->where('vendor_id', $user->vendor->id);
+            })
+            ->with('organization')
+            ->get();
+
+        return response()->json($notices);
+    }
+
     public function save(Request $request, Notice $notice)
     {
         $input = $request->only(
