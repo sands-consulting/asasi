@@ -37,18 +37,18 @@ class NewsSeeder extends Seeder
         }
 
         $news1 = NewsService::create(new News, [
-            'title' => 'PROMPT 1.0',
-            'content' => "<p>PROMPT is Project Management for Procurement & Tenders.</p><p>PROMPT 1.0 was developed by Sands Consulting.</p>",
-            'summary' => 'PROMPT is released to the world.',
+            'title' => 'ASASI 1.0',
+            'content' => "<p>ASASI 1.0 was developed by Sands Consulting.</p>",
+            'summary' => 'ASASI is released to the world.',
             'category_id' => NewsCategory::first()->id,
             'organization_id' => Organization::first()->id,
             'status' => 'published'
         ]);
 
         $news2 = NewsService::create(new News, [
-            'title' => 'PROMPT 1.1',
-            'content' => '<p>PROMPT 1.1 was released to address some bugs and adding new features.</p>',
-            'summary' => 'PROMPT 1.1 seen the lights.',
+            'title' => 'ASASI 1.1',
+            'content' => '<p>ASASI 1.1 was released to address some bugs and adding new features.</p>',
+            'summary' => 'ASASI 1.1 seen the lights.',
             'category_id' => NewsCategory::first()->id,
             'organization_id' => Organization::first()->id,
             'status' => 'published'

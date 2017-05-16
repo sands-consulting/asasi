@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'PROMPT',
+    'name' => 'ASASI',
 
     /*
     |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'description' => 'Procurement Management For Projects and Tenders',
+    'description' => 'Laravel boilerplate',
 
     /*
     |--------------------------------------------------------------------------
@@ -214,23 +214,9 @@ return [
         App\Providers\Asasi\UsersServiceProvider::class,
 
         /*
-         * Prompt Service Providers
+         * Modules Service Providers
          */
-        App\Providers\Modules\AllocationsServiceProvider::class,
-        App\Providers\Modules\DashboardServiceProvider::class,
-        App\Providers\Modules\ProjectsServiceProvider::class,
-        App\Providers\Modules\ReportsServiceProvider::class,
-        App\Providers\Modules\QualificationsServiceProvider::class,
-        App\Providers\Modules\VendorsServiceProvider::class,
 
-        /*
-         * Notice Service Providers
-         */
-        App\Providers\Modules\NoticesServiceProvider::class,
-        App\Providers\Modules\NoticeAwardsServiceProvider::class,
-        App\Providers\Modules\NoticeEvaluationsServiceProvider::class,
-        App\Providers\Modules\NoticePurchasesServiceProvider::class,
-        App\Providers\Modules\NoticeSubmissionsServiceProvider::class,
     ],
 
     /*

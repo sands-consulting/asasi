@@ -21,7 +21,7 @@ class SettingSeeder extends Seeder
         $settings = [
             [
                 'key' => 'app_name',
-                'value' => 'PROMPT',
+                'value' => 'ASASI',
             ],
             [
                 'key' => 'currency',
@@ -34,10 +34,6 @@ class SettingSeeder extends Seeder
             [
                 'key' => 'datetime_format',
                 'value' => 'd/m/Y H:i'
-            ],
-            [
-                'key' => 'vendor_role_id',
-                'value' =>  '2'
             ]
         ];
 

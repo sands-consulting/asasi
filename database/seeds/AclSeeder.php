@@ -29,12 +29,11 @@ class AclSeeder extends Seeder
             ['access:administration', 'Access administration area'],
             ['access:reports', 'Access reporting module'],
             ['access:settings', 'Access global settings'],
-            ['access:vendor', 'Access vendor module'],
+            ['access:portal', 'Access portal'],
 
 
             // Data Association
             ['has:organization', 'User has an organization data'],
-            ['has:vendor', 'User has a vendor data'],
 
             /* 
              * Asasi Permissions
@@ -217,171 +216,6 @@ class AclSeeder extends Seeder
              * Application Permissions
              */
 
-            // Allocation
-            ['allocation:index', 'List all allocations'],
-            ['allocation:show', 'View allocation details'],
-            ['allocation:create', 'Create new allocation'],
-            ['allocation:update', 'Update existing allocation'],
-            ['allocation:delete', 'Delete existing allocation'],
-            ['allocation:restore', 'Restore deleted allocation'],
-            ['allocation:revisions', 'View allocation revisions'],
-            ['allocation:histories', 'View allocation histories'],
-            ['allocation:archives', 'List all deleted allocations'],
-            
-            ['allocation:organization', 'Allow to manage allocation with organization'],
-
-            // Allocation Type
-            ['allocation-type:index', 'List all allocation types'],
-            ['allocation-type:show', 'View allocation type details'],
-            ['allocation-type:create', 'Create new allocation type'],
-            ['allocation-type:update', 'Update existing allocation type'],
-            ['allocation-type:delete', 'Delete existing allocation type'],
-            ['allocation-type:activate', 'Activate allocation type'],
-            ['allocation-type:deactivate', 'Deactivate allocation type'],
-            ['allocation-type:revisions', 'View allocation type revisions'],
-            ['allocation-type:histories', 'View allocation type histories'],
-
-            // Evaluation
-            ['evaluation:index', 'View list of notices assigned.'],
-            ['evaluation:show', 'View evaluation details'],
-            ['evaluation:update', 'Update evaluation details'],
-
-            // Notice
-            ['notice:index', 'List all notices'],
-            ['notice:show', 'View a notice'],
-            ['notice:create', 'Create new notice'],
-            ['notice:update', 'Update existing notice'],
-            ['notice:duplicate', 'Duplicate existing notice'],
-            ['notice:activate', 'Activate existing notice'],
-            ['notice:deactivate', 'Deactivate existing notice'],
-            ['notice:cancel', 'Cancel existing notice'],
-            ['notice:publish', 'Publish existing notice'],
-            ['notice:unpublish', 'Unpublish existing notice'],
-            ['notice:delete', 'Delete existing notice'],
-            ['notice:revisions', 'View notice revisions'],
-            ['notice:histories', 'View notice histories'],
-            ['notice:purchase', 'Can purchase notice'],
-            ['notice:award', 'Award a notice'],
-
-            // Notice Category
-            ['notice-category:index', 'List all notice categories'],
-            ['notice-category:show', 'View a notice category'],
-            ['notice-category:create', 'Create new notice category'],
-            ['notice-category:update', 'Update existing notice category'],
-            ['notice-category:duplicate', 'Duplicate existing notice category'],
-            ['notice-category:activate', 'Activate existing notice category'],
-            ['notice-category:deactivate', 'Deactivate existing notice category'],
-            ['notice-category:delete', 'Delete existing notice category'],
-            ['notice-category:revisions', 'View notice category revisions'],
-            ['notice-category:histories', 'View notice category histories'],
-
-            // Notice Event
-            ['notice-event:index', 'List all notice events'],
-            ['notice-event:show', 'View a notice event'],
-            ['notice-event:create', 'Create new notice event'],
-            ['notice-event:update', 'Update existing notice event'],
-            ['notice-event:duplicate', 'Duplicate existing notice event'],
-            ['notice-event:activate', 'Activate existing notice event'],
-            ['notice-event:deactivate', 'Deactivate existing notice event'],
-            ['notice-event:delete', 'Delete existing notice event'],
-            ['notice-event:revisions', 'View notice event revisions'],
-            ['notice-event:histories', 'View notice event histories'],
-
-            // Notice Type
-            ['notice-type:index', 'List all notice types'],
-            ['notice-type:show', 'View a notice type'],
-            ['notice-type:create', 'Create new notice type'],
-            ['notice-type:update', 'Update existing notice type'],
-            ['notice-type:duplicate', 'Duplicate existing notice type'],
-            ['notice-type:activate', 'Activate existing notice type'],
-            ['notice-type:deactivate', 'Deactivate existing notice type'],
-            ['notice-type:delete', 'Delete existing notice type'],
-            ['notice-type:revisions', 'View notice type revisions'],
-            ['notice-type:histories', 'View notice type histories'],
-
-            // Project
-            ['project:index', 'List all projects'],
-            ['project:show', 'View project details'],
-            ['project:create', 'Create new project'],
-            ['project:update', 'Update existing project'],
-            ['project:delete', 'Delete existing project'],
-            ['project:restore', 'Restore deleted project'],
-            ['project:revisions', 'View project revisions'],
-            ['project:histories', 'View project histories'],
-            ['project:archives', 'List all deleted projects'],
-            ['project:activate', 'Activate project'],
-            ['project:suspend', 'Suspend project'],
-            ['project:organization', 'Allow to manage project with organization'],
-
-            // Project Milestone
-            ['project-milestone:index', 'List all project milstones'],
-            ['project-milestone:show', 'View project milstone details'],
-            ['project-milestone:create', 'Create new project milstone'],
-            ['project-milestone:update', 'Update existing project milstone'],
-            ['project-milestone:delete', 'Delete existing project milstone'],
-            ['project-milestone:activate', 'Activate project milstone'],
-            ['project-milestone:deactivate', 'Deactivate project milstone'],
-            ['project-milestone:revisions', 'View project milstone revisions'],
-            ['project-milestone:histories', 'View project milstone histories'],
-            ['project-milestone:organization', 'Allow to manage project milstone with organization'],
-
-            // Qualification Code
-            ['qualification-code:index', 'List all qualification codes'],
-            ['qualification-code:show', 'View qualification code details'],
-            ['qualification-code:create', 'Create new qualification code'],
-            ['qualification-code:update', 'Update existing qualification code'],
-            ['qualification-code:delete', 'Delete existing qualification code'],
-            ['qualification-code:activate', 'Activate qualification code'],
-            ['qualification-code:deactivate', 'Deactivate qualification code'],
-            ['qualification-code:revisions', 'View qualification code revisions'],
-            ['qualification-code:histories', 'View qualification code histories'],
-
-            // Qualification Type
-            ['qualification-type:index', 'List all qualification code types'],
-            ['qualification-type:show', 'View qualification code type details'],
-            ['qualification-type:create', 'Create new qualification code type'],
-            ['qualification-type:update', 'Update existing qualification code type'],
-            ['qualification-type:delete', 'Delete existing qualification code type'],
-            ['qualification-type:activate', 'Activate qualification code type'],
-            ['qualification-type:deactivate', 'Deactivate qualification code type'],
-            ['qualification-type:revisions', 'View qualification code type revisions'],
-            ['qualification-type:histories', 'View qualification code type histories'],
-
-            // Submission
-            ['submission:index', 'List all submissions'],
-            ['submission:show', 'View submission details'],
-            ['submission:create', 'Create new submission'],
-            ['submission:update', 'Update existing submission'],
-            ['submission:delete', 'Delete existing submission'],
-            ['submission:revisions', 'View submission revisions'],
-            ['submission:histories', 'View submission histories'],
-            ['submission:organization', 'Allow to manage submission with organization'],
-
-            // Vendor
-            ['vendor:index', 'List all vendors'],
-            ['vendor:show', 'View vendor details'],
-            ['vendor:create', 'Create new vendor'],
-            ['vendor:update', 'Update existing vendor'],
-            ['vendor:duplicate', 'Duplicate existing vendor'],
-            ['vendor:approve', 'Approve vendor\'s applications'],
-            ['vendor:reject', 'Reject vendor\'s applications'],
-            ['vendor:activate', 'Activate suspended vendor'],
-            ['vendor:suspend', 'Suspend existing vendor'],
-            ['vendor:delete', 'Delete existing vendor'],
-            ['vendor:revisions', 'View vendor revisions'],
-            ['vendor:histories', 'View vendor histories'],
-
-            // Vendor Type
-            ['vendor-type:index', 'List all vendor types'],
-            ['vendor-type:show', 'View vendor type details'],
-            ['vendor-type:create', 'Create new vendor type'],
-            ['vendor-type:update', 'Update existing vendor type'],
-            ['vendor-type:duplicate', 'Duplicate existing vendor type'],
-            ['vendor-type:activate', 'Activate existing vendor type'],
-            ['vendor-type:deactivate', 'Deactivate existing vendor type'],
-            ['vendor-type:delete', 'Delete existing vendor type'],
-            ['vendor-type:revisions', 'View vendor type revisions'],
-            ['vendor-type:histories', 'View vendor type histories'],
         ];
 
         foreach($permissions as $perm)
@@ -400,41 +234,10 @@ class AclSeeder extends Seeder
             ],
 
             [
-                'name'         => 'vendor-user',
-                'display_name' => 'Vendor',
-                'description'  => 'Access vendor portal.',
+                'name'         => 'user',
+                'display_name' => 'User',
+                'description'  => 'Normal user.',
             ],
-            [
-                'name'         => 'vendor-admin',
-                'display_name' => 'Vendor Admin',
-                'description'  => 'Access vendor portal and manage vendor user',
-            ],
-
-            [
-                'name'          => 'organization-admin',
-                'display_name'  => 'Organization Admin',
-                'description'   => 'Able to manage organization allocations, notices, projects and users.'
-            ],
-            [
-                'name'          => 'notice-staff',
-                'display_name'  => 'Notice Staff',
-                'description'   => 'Manage organization notices.'
-            ],
-            [
-                'name'          => 'finance-staff',
-                'display_name'  => 'Finance Staff',
-                'description'   => 'Manage organization allocations.'
-            ],
-            [
-                'name'          => 'project-manager',
-                'display_name'  => 'Project Manager',
-                'description'   => 'Manage organization projects.'
-            ],
-            [
-                'name'          => 'submission-evaluator',
-                'display_name'  => 'Submission Evaluator',
-                'description'   => 'Evaluation vendor notice submissions.',
-            ]
         ];
 
         foreach ($roles as $roleData) {
@@ -454,49 +257,9 @@ class AclSeeder extends Seeder
             'submission:organization'
         ])->pluck('id')->toArray());
 
-        $noticeStaff = Role::whereName('notice-staff')->first();
-        $noticeStaff->permissions()->attach(Permission::whereIn('name', [
-            'notice:index',
-            'notice:create',
-            'notice:show',
-            'notice:update',
-            'notice:publish',
-            'notice:cancel',
-            'notice:award',
-            'submission:index',
-            'submission:show'
-        ])->pluck('id')->toArray());
-
-        $vendorAdmin = Role::whereName('vendor-admin')->first();
-        $vendorAdmin->permissions()->attach(Permission::whereIn('name', [
-            'access:vendor',
-            'access:cart',
-            'user:index',
-            'user:show',
-            'user:create',
-            'user:update',
-            'user:revisions',
-            'user:histories',
-            'user:activate',
-            'user:suspend',
-            'user:assume',
-            'subscription:index',
-            'subscription:create',
-            'subscription:show'
-        ])->pluck('id')->toArray());
-
-        $vendor = Role::whereName('vendor-user')->first();
+        $vendor = Role::whereName('user')->first();
         $vendor->permissions()->attach(Permission::whereIn('name', [
-            'access:vendor',
-            'access:cart',
-        ])->pluck('id')->toArray());
-
-        $evaluator = Role::whereName('submission-evaluator')->first();
-        $evaluator->permissions()->attach(Permission::whereIn('name', [
-            'access:admin',
-            'evaluation:index',
-            'evaluation:create',
-            'evaluation:update'
+            'access:portal',
         ])->pluck('id')->toArray());
     }
 }

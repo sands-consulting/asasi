@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'subtype' => env('API_SUBTYPE', 'PROMPT'),
+    'subtype' => env('API_SUBTYPE', 'ASASI'),
 
     /*
     |--------------------------------------------------------------------------
