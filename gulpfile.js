@@ -1,5 +1,7 @@
 const elixir = require('laravel-elixir');
 
+require('laravel-elixir-vue-2');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -11,137 +13,7 @@ const elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-
-  mix
-    .less('portal.less', 'public/assets/css/portal.css')
-    .less('window.less', 'public/assets/css/window.css')
-    .less('admin.less', 'public/assets/css/admin.css')
-    .less('print.less', 'public/assets/css/print.css')
-
-    .sass('../../../node_modules/frappe-gantt/src/gantt.scss', 'public/assets/css/gantt.css')
-
-    .webpack('app.js')
-
-    .scripts([
-        '../../../node_modules/jquery/dist/jquery.js',
-        '../../../node_modules/bootstrap-less/js/bootstrap.js',
-        '../../../node_modules/pace-progress/pace.js',
-        '../../../node_modules/jquery-ujs/src/rails.js',
-        '../../../node_modules/datatables.net/js/jquery.dataTables.js',
-        '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
-        '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
-        '../../../node_modules/vue/dist/vue.js',
-        '../../../node_modules/vue-resource/dist/vue-resource.min.js',
-        '../../../node_modules/pnotify/dist/pnotify.js',
-        '../../../node_modules/legitRipple.js/js/ripple.js',
-        '../../../node_modules/moment/moment.js',
-        '../../../node_modules/select2/dist/js/select2.full.js',
-        '../../../node_modules/numeral/numeral.js',
-        'vendor/d3.min.js',
-        'vendor/c3.min.js',
-        'vendor/pnotify.min.js',
-        'vendor/pickers/daterangepicker.js',
-        'vendor/uniform.min.js',
-        'vendor/buttons.server-side.js',
-        'vendor/limitless-four.js',
-        'vendor/pnotify.js',
-        'vendor/nicescroll.js',
-        'vendor/jquery-news-box/jquery.bootstrap.newsbox.js',
-        'components/datepicker.js',
-        'pages/vendors/form.js',
-        'pages/subscriptions/form.js',
-        'pages/cart.js',
-        'notification.js',
-        'portal.js',
-    ], 'public/assets/js/portal.js')
-
-    .scripts([
-        '../../../node_modules/jquery/dist/jquery.js',
-        '../../../node_modules/bootstrap-less/js/bootstrap.js',
-        '../../../node_modules/pace-progress/pace.js',
-        '../../../node_modules/jquery-ujs/src/rails.js',
-        '../../../node_modules/datatables.net/js/jquery.dataTables.js',
-        '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
-        '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
-        '../../../node_modules/vue/dist/vue.js',
-        '../../../node_modules/vue-resource/dist/vue-resource.min.js',
-        '../../../node_modules/c3/c3.js',
-        '../../../node_modules/pnotify/dist/pnotify.js',
-        '../../../node_modules/legitRipple.js/js/ripple.js',
-        '../../../node_modules/moment/moment.js',
-        '../../../node_modules/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js',
-        '../../../node_modules/select2/dist/js/select2.full.js',
-        '../../../node_modules/frappe-gantt/dist/frappe-gantt.min.js',
-        '../../../node_modules/snapsvg/dist/snap.svg-min.js',
-        '../../../node_modules/numeral/numeral.js',
-        'vendor/d3.min.js',
-        'vendor/c3.min.js',
-        'vendor/switchery.min.js',
-        'vendor/limitless-one.js',
-        'vendor/pnotify.min.js',
-        'vendor/pnotify.js',
-        'vendor/nicescroll.js',
-        'vendor/uniform.min.js',
-        'vendor/validate.min.js',
-        'vendor/pickers/daterangepicker.js',
-        'vendor/x-editable/input-ext/single-switchery.js',
-        'vendor/x-editable/input-ext/daterangepicker.js',
-        'vendor/notice_wizard.js',
-        'vendor/picker_date.js',
-        'vendor/stepy.js',
-        'components/datepicker.js',
-        'components/search.js',
-        'pages/vendors/form.js',
-        'pages/notices/form.js',
-        'pages/notices/show.js',
-        'pages/payment-gateways/form.js',
-        'pages/users/form.js',
-        'notification.js',
-        'admin.js',
-    ], 'public/assets/js/admin.js')
-
-    .scripts([
-        '../../../node_modules/jquery/dist/jquery.js',
-        '../../../node_modules/bootstrap-less/js/bootstrap.js',
-        '../../../node_modules/pace-progress/pace.js',
-        '../../../node_modules/jquery-ujs/src/rails.js',
-        '../../../node_modules/datatables.net/js/jquery.dataTables.js',
-        '../../../node_modules/datatables.net-buttons/js/dataTables.buttons.js',
-        '../../../node_modules/jquery.nicescroll/jquery.nicescroll.js',
-        '../../../node_modules/vue/dist/vue.js',
-        '../../../node_modules/vue-resource/dist/vue-resource.min.js',
-        '../../../node_modules/pnotify/dist/pnotify.js',
-        '../../../node_modules/legitRipple.js/js/ripple.js',
-        '../../../node_modules/moment/moment.js',
-        '../../../node_modules/select2/dist/js/select2.full.js',
-        'vendor/pnotify.min.js',
-        'vendor/pickers/daterangepicker.js',
-        'vendor/uniform.min.js',
-        'vendor/buttons.server-side.js',
-        'vendor/limitless-four.js',
-        'vendor/pnotify.js',
-        'vendor/nicescroll.js',
-        'window.js',
-    ], 'public/assets/js/window.js')
-
-    .version([
-        'assets/css/portal.css',
-        'assets/css/window.css',
-        'assets/css/admin.css',
-        'assets/css/print.css',
-        'assets/js/portal.js',
-        'assets/js/window.js',
-        'assets/js/admin.js',
-    ])
-
-    .copy([
-      'resources/assets/fonts',
-      'resources/assets/vendor/bootstrap/fonts'
-    ], 'public/assets/fonts')
-    .copy('resources/assets/docs', 'public/assets/docs')
-    .copy('resources/assets/images', 'public/assets/images')
-    .copy('resources/assets/js/pages', 'public/assets/js/pages')
-    .copy('resources/assets/vendor/ckeditor', 'public/assets/ckeditor')
-    .copy('resources/assets/js/vendor/dhtmlxGantt', 'public/assets/dhtmlxGantt');
+elixir((mix) => {
+    mix.sass('app.scss')
+       .webpack('app.js');
 });

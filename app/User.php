@@ -4,7 +4,6 @@ namespace App;
 
 use App\Traits\Roleable;
 use App\Traits\DateAccessor;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +19,6 @@ class User extends Authenticatable
         Notifiable,
         RevisionableTrait,
         Roleable,
-        Sluggable,
         SoftDeletes;
 
     /**

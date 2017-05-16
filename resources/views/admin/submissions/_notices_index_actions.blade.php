@@ -1,1 +1,0 @@
-<a href="{{ route('admin.submissions.pluck', $notice->id) }}" class="btn btn-primary btn-xs">Submissions</a>

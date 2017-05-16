@@ -21,19 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AclSeeder::class);
         $this->call(AsasiSeeder::class);
 
-        $this->call(AllocationSeeder::class);
         $this->call(NewsSeeder::class);
-        $this->call(NoticeSeeder::class);
-        $this->call(NoticeCategorySeeder::class);
-        $this->call(NoticeTypeSeeder::class);
-        $this->call(NoticeEventSeeder::class);
-        $this->call(NoticeEventTypeSeeder::class);
-        $this->call(SubmissionSeeder::class);
         $this->call(SubscriptionSeeder::class);
-        $this->call(VendorSeeder::class);
         $this->call(PaymentGatewaySeeder::class);
-        $this->call(EvaluationSeeder::class);
-        $this->call(ProjectSeeder::class);
         $this->call(PlaceSeeder::class);
 
         try {

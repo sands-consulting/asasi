@@ -1,3 +1,4 @@
+
 window._ = require('lodash');
 
 /**
@@ -6,8 +7,8 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-// window.$ = window.jQuery = require('jquery');
-// require('bootstrap-sass');
+window.$ = window.jQuery = require('jquery');
+require('bootstrap-sass');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -15,8 +16,8 @@ window._ = require('lodash');
  * and simple, leaving you to focus on building your next great project.
  */
 
-// window.Vue = require('vue/dist/vue');
-// require('vue-resource');
+window.Vue = require('vue');
+require('vue-resource');
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -24,13 +25,11 @@ window._ = require('lodash');
  * included with Laravel will automatically verify the header's value.
  */
 
-window.axios = require('axios');
+Vue.http.interceptors.push((request, next) => {
+    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
 
-window.axios.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest',
-  'X-CSRF-TOKEN': Laravel.csrfToken,
-  'Authorization': 'Bearer ' + Laravel.apiToken
-};
+    next();
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -38,15 +37,9 @@ window.axios.defaults.headers.common = {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from "laravel-echo"
+// import Echo from "laravel-echo"
 
-window.Echo = new Echo({
-  broadcaster: 'socket.io',
-  host: window.location.hostname + ':6001'
-});
-
-/* gantt */
-window.Gantt = require('frappe-gantt');
-
-/* moment */
-window.moment = require('moment');
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'your-pusher-key'
+// });
