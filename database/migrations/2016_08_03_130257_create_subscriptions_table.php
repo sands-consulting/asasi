@@ -16,16 +16,13 @@ class CreateSubscriptionsTable extends Migration
             $table->increments('id');
             $table->timestamp('started_at')->nullable();
             $table->timestamp('expired_at')->nullable();
-            $table->unsignedInteger('vendor_id');
             $table->unsignedInteger('package_id');
+            $table->unsignedInteger('user_id')->nullable()->index();
+            $table->string('subscriber_type')->nullable()->index();
+            $table->unsignedInteger('subscriber_id')->nullable()->index();
             $table->string('status');
             $table->nullableTimestamps();
             $table->softDeletes();
-
-            $table->foreign('vendor_id')
-                ->references('id')
-                ->on('vendors')
-                ->onDelete('cascade');
 
             $table->foreign('package_id')
                 ->references('id')
@@ -41,8 +38,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::drop('subscriptions');
-        Schema::enableForeignKeyConstraints();
     }
 }

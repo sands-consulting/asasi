@@ -17,22 +17,6 @@ class AddSubscriberToSubscriptionsTable extends Migration
             $table->renameColumn('payee_id', 'payer_id');
             $table->renameColumn('payee_type', 'payer_type');
         });
-
-        Schema::table('subscriptions', function (Blueprint $table) {
-            $table->dropForeign(['vendor_id']);
-            $table->dropColumn('vendor_id');
-
-            $table->string('subscriber_type')->after('package_id')->nullable()->index();
-            $table->unsignedInteger('subscriber_id')->after('subscriber_type')->nullable()->index();
-            $table->unsignedInteger('user_id')->nullable()->after('subscriber_id');
-            
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete(null);
-        });
-
     }
 
     /**
@@ -53,11 +37,6 @@ class AddSubscriberToSubscriptionsTable extends Migration
                 ->on('vendors')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-        });
-
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->renameColumn('payer_id', 'payee_id');
-            $table->renameColumn('payer_type', 'payee_type');
         });
     }
 }
