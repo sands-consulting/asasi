@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('page-title', implode(' | ', [ trans('actions.edit'), $tax_code->name, trans('tax-codes.title') ]))
 

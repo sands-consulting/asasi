@@ -1,7 +1,7 @@
-@extends('layouts.portal')
+@extends('layouts.app')
 
 @section('content')
-@include('layouts.portal.widgets.wizard')
+@include('layouts.app.widgets.wizard')
 
 <section id="form-subscription" v-cloak>
     <div class="panel panel-default" v-if="!selectedPackage">

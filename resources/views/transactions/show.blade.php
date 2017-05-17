@@ -1,7 +1,7 @@
-@extends('layouts.portal')
+@extends('layouts.app')
 
 @section('content')
-@include('layouts.portal.widgets.wizard')
+@include('layouts.app.widgets.wizard')
 
 <div class="panel {{ $transaction->status == 'paid' ? 'panel-success' : 'panel-warning' }}">
     <div class="panel-heading">

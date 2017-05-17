@@ -3,6 +3,7 @@
 return [
     'site_admin'    => 'Site Admin',
     'language'      => 'Language',
+    'toggle'        => 'Toggle Navigation',
 
     'access' => [
         'administration'    => 'Administration',
@@ -26,7 +27,7 @@ return [
         'register'      => 'Register',
         'release_user'  => 'Release User',
         'my_profile'    => 'My Profile',
-        'sign_out'      => 'Sign Out'
+        'logout'        => 'Logout'
     ],
 
     'portal' => [

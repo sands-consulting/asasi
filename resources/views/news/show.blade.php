@@ -1,7 +1,7 @@
-@extends('layouts.portal')
+@extends('layouts.app')
 
 @section('ahead')
-    @include('layouts.portal.aheads.public')
+    @include('layouts.app.aheads.public')
 @endsection
 
 @section('content')

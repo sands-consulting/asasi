@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('page-title', implode(' | ', [
 	trans('news.views.create.title'),

@@ -1,4 +1,4 @@
-@extends('layouts.portal')
+@extends('layouts.app')
 
 @section('page-title', implode(' | ', [trans('reports.reports.vendor.rv2'), trans('reports.title')]))
 

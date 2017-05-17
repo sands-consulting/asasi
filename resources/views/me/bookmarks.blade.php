@@ -1,7 +1,7 @@
-@extends('layouts.portal')
+@extends('layouts.app')
 
 @section('content')
-@include('layouts.portal.aheads.vendor')
+@include('layouts.app.aheads.vendor')
 
 <div class="panel panel-notice">
     <div class="panel-heading bg-violet-600">
